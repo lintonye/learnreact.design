@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>React Navigation: Shared element transition 1/3 (overview) &mdash; Linton's React Native Diary</title>
+  <title>React Navigation: Shared element transition 1/3 (overview) &mdash; Backstage</title>
   <!--[if lt IE 9]><script src='https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js'></script><![endif]-->
   
   <link rel="stylesheet" href="/assets/app.css">
@@ -45,19 +45,19 @@
 
 
   <link rel="shortcut icon" href="/favicon.ico?v2" type="image/x-icon" />
-  <link rel="alternate" type="application/atom+xml" title="Linton's React Native Diary" href="/atom.xml" />
+  <link rel="alternate" type="application/atom+xml" title="Backstage" href="/atom.xml" />
   <meta name="title" content="React Navigation: Shared element transition 1/3 (overview) ">
-  <link rel="canonical" href="http://lintonye.github.io/2017/01/23/react-navigation-shared-element-transition-1.html">
+  <link rel="canonical" href="http://learnreact.design/2017/01/23/react-navigation-shared-element-transition-1/">
   
   
   <meta property="og:title" content="React Navigation: Shared element transition 1/3 (overview)"/>
-  <meta property="og:url" content="http://lintonye.github.io/2017/01/23/react-navigation-shared-element-transition-1.html"/>
+  <meta property="og:url" content="http://learnreact.design/2017/01/23/react-navigation-shared-element-transition-1/"/>
   
   
   <meta property="og:description" content="Blog series: creating custom transitions using Transitioner in React Nativigation. This post covers an overview of shared element transition."/>
   <meta name="description" content="Blog series: creating custom transitions using Transitioner in React Nativigation. This post covers an overview of shared element transition."/>
   
-  <meta property="og:site_name" content="Linton's React Native Diary">
+  <meta property="og:site_name" content="Backstage">
 </head>
 <body>
 
@@ -66,9 +66,8 @@
       <a class="brand" href="/">
         <img src="/images/logo.png" alt="Inc">
       </a>
-      <a href="/react-course-for-designers.html">React course for designers</a>
-      <a href="/">Blog</a>
-      <a href="/about.html">About</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
     </nav>
   </header>
 
@@ -94,11 +93,11 @@
       <p><em>This is a series of posts about how to create custom transition “views” using the <code class="highlighter-rouge">Transitioner</code> in <a href="https://reactnavigation.org/">React Navigation</a> (based on “NavigationExperiemental”):</em></p>
 
 <ul>
-  <li><em><a href="/2016/12/20/navigation-experimental-custom-transition-1.html">An overview of Transitioner and CardStack</a></em></li>
-  <li><em><a href="/2016/12/22/navigation-experimental-custom-transition-2.html">Simple transitions: cross fade and Android default</a></em></li>
+  <li><em><a href="/2016/12/20/navigation-experimental-custom-transition-1">An overview of Transitioner and CardStack</a></em></li>
+  <li><em><a href="/2016/12/22/navigation-experimental-custom-transition-2">Simple transitions: cross fade and Android default</a></em></li>
   <li><em>Shared element transition 1/3: overview (this post)</em></li>
-  <li><em><a href="/2017/01/25/react-navigation-shared-element-transition-2.html">Shared element transition 2/3: bounding boxes</a></em></li>
-  <li><em><a href="/2017/04/22/react-navigation-shared-element-transition-3.html">Shared element transition 3/3: the animation</a></em></li>
+  <li><em><a href="/2017/01/25/react-navigation-shared-element-transition-2">Shared element transition 2/3: bounding boxes</a></em></li>
+  <li><em><a href="/2017/04/22/react-navigation-shared-element-transition-3">Shared element transition 3/3: the animation</a></em></li>
 </ul>
 
 <hr />
@@ -201,7 +200,7 @@
 
 <h2 id="creating-animated-styles-for-scenes-and-overlay">Creating animated styles for scenes and overlay</h2>
 
-<p>In order to ensure the overlay to be visible only during transition, we can use the “0.99-cliff” trick discussed in <a href="/2016/12/22/navigation-experimental-custom-transition-2.html#0.99-cliff">the previous post</a>:</p>
+<p>In order to ensure the overlay to be visible only during transition, we can use the “0.99-cliff” trick discussed in <a href="/2016/12/22/navigation-experimental-custom-transition-2#0.99-cliff">the previous post</a>:</p>
 
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// in _renderOverlay()    //_</span>
   <span class="kr">const</span> <span class="nx">left</span> <span class="o">=</span> <span class="nx">transitionProps</span><span class="p">.</span><span class="nx">progress</span><span class="p">.</span><span class="nx">interpolate</span><span class="p">({</span>
@@ -233,7 +232,7 @@
 <h2 id="conclusion">Conclusion</h2>
 <p>OK, let’s take a break for now. We have discussed a high-level plan on how the shared element transition might work: the overlay is the key to create the shared element effect. We also covered some simpler aspects in its implementation: the <code class="highlighter-rouge">render*</code> methods, and how to show/hide scenes and the overlay at the right times.</p>
 
-<p>In the <a href="/2017/01/25/react-navigation-shared-element-transition-2.html">next post</a>, we’ll look into how to actually animate the shared views on the overlay. Bear with me, the fun is still ahead!</p>
+<p>In the <a href="/2017/01/25/react-navigation-shared-element-transition-2">next post</a>, we’ll look into how to actually animate the shared views on the overlay. Bear with me, the fun is still ahead!</p>
 
       
 <div class="social">
@@ -259,7 +258,7 @@
 
   
   <div class='reddit'>
-    <a href="//www.reddit.com/submit" onclick="window.open('//www.reddit.com/submit?url=http://lintonye.github.io/2017/01/23/react-navigation-shared-element-transition-1.html&title=React+Navigation%3A+Shared+element+transition+1%2F3+%28overview%29'); return false"> <img src="//www.redditstatic.com/spreddit7.gif" alt="submit to reddit" border="0" /> </a>
+    <a href="//www.reddit.com/submit" onclick="window.open('//www.reddit.com/submit?url=http://learnreact.design/2017/01/23/react-navigation-shared-element-transition-1/&title=React+Navigation%3A+Shared+element+transition+1%2F3+%28overview%29'); return false"> <img src="//www.redditstatic.com/spreddit7.gif" alt="submit to reddit" border="0" /> </a>
   </div>
   
 </div>
@@ -277,7 +276,7 @@
       
       
       <section class="post_summary">
-        <h3 class="title">Next up: <a href="/2017/01/25/react-navigation-shared-element-transition-2.html" rel="prefetch">React Navigation: Shared element transition 2/3 (bounding boxes)</a></h3>
+        <h3 class="title">Next up: <a href="/2017/01/25/react-navigation-shared-element-transition-2/" rel="prefetch">React Navigation: Shared element transition 2/3 (bounding boxes)</a></h3>
         <p>Blog series: creating custom transitions using NavigationExperimental. This post covers key challenges in the implementation.</p>
         <hr>
       </section>
@@ -285,7 +284,7 @@
       
       
       <section class="post_summary">
-        <h3 class="title">Previous story: <a href="/2016/12/22/navigation-experimental-custom-transition-2.html" rel="prefetch">React Navigation: Cross Fade and Android Default Transitions</a></h3>
+        <h3 class="title">Previous story: <a href="/2016/12/22/navigation-experimental-custom-transition-2/" rel="prefetch">React Navigation: Cross Fade and Android Default Transitions</a></h3>
         <p>Blog series: creating custom transitions using React Navigation. This post covers inputRange and a couple of simple custom transitions.</p>
         <hr>
       </section>
@@ -314,8 +313,8 @@
       &copy; 2017 Linton Ye
 
       <nav>
-        <a href="/">Blog</a> &middot;
-        <a href="/about.html">About</a>
+        <a href="/blog">Blog</a> &middot;
+        <a href="/about">About</a>
       </nav>
 
       <nav class="social">

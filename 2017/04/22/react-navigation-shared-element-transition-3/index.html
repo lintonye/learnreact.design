@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>React Navigation: Shared element transition 3/3 (the animation) &mdash; Linton's React Native Diary</title>
+  <title>React Navigation: Shared element transition 3/3 (the animation) &mdash; Backstage</title>
   <!--[if lt IE 9]><script src='https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js'></script><![endif]-->
   
   <link rel="stylesheet" href="/assets/app.css">
@@ -45,19 +45,19 @@
 
 
   <link rel="shortcut icon" href="/favicon.ico?v2" type="image/x-icon" />
-  <link rel="alternate" type="application/atom+xml" title="Linton's React Native Diary" href="/atom.xml" />
+  <link rel="alternate" type="application/atom+xml" title="Backstage" href="/atom.xml" />
   <meta name="title" content="React Navigation: Shared element transition 3/3 (the animation) ">
-  <link rel="canonical" href="http://lintonye.github.io/2017/04/22/react-navigation-shared-element-transition-3.html">
+  <link rel="canonical" href="http://learnreact.design/2017/04/22/react-navigation-shared-element-transition-3/">
   
   
   <meta property="og:title" content="React Navigation: Shared element transition 3/3 (the animation)"/>
-  <meta property="og:url" content="http://lintonye.github.io/2017/04/22/react-navigation-shared-element-transition-3.html"/>
+  <meta property="og:url" content="http://learnreact.design/2017/04/22/react-navigation-shared-element-transition-3/"/>
   
   
   <meta property="og:description" content="Blog series: creating custom transitions using NavigationExperimental. This post covers the creation of animations using Animated."/>
   <meta name="description" content="Blog series: creating custom transitions using NavigationExperimental. This post covers the creation of animations using Animated."/>
   
-  <meta property="og:site_name" content="Linton's React Native Diary">
+  <meta property="og:site_name" content="Backstage">
 </head>
 <body>
 
@@ -66,9 +66,8 @@
       <a class="brand" href="/">
         <img src="/images/logo.png" alt="Inc">
       </a>
-      <a href="/react-course-for-designers.html">React course for designers</a>
-      <a href="/">Blog</a>
-      <a href="/about.html">About</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
     </nav>
   </header>
 
@@ -94,10 +93,10 @@
       <p><em>This is a series of posts about how to create custom transition “views” using the <code class="highlighter-rouge">Transitioner</code> in <a href="https://reactnavigation.org/">React Navigation</a> (based on “NavigationExperiemental”):</em></p>
 
 <ul>
-  <li><em><a href="/2016/12/20/navigation-experimental-custom-transition-1.html">An overview of Transitioner and CardStack</a></em></li>
-  <li><em><a href="/2016/12/22/navigation-experimental-custom-transition-2.html">Simple transitions: cross fade and Android default</a></em></li>
-  <li><em><a href="/2017/01/23/react-navigation-shared-element-transition-1.html">Shared element transition 1/3: overview</a></em></li>
-  <li><em><a href="/2017/01/25/react-navigation-shared-element-transition-2.html">Shared element transition 2/3: bounding boxes</a></em></li>
+  <li><em><a href="/2016/12/20/navigation-experimental-custom-transition-1">An overview of Transitioner and CardStack</a></em></li>
+  <li><em><a href="/2016/12/22/navigation-experimental-custom-transition-2">Simple transitions: cross fade and Android default</a></em></li>
+  <li><em><a href="/2017/01/23/react-navigation-shared-element-transition-1">Shared element transition 1/3: overview</a></em></li>
+  <li><em><a href="/2017/01/25/react-navigation-shared-element-transition-2">Shared element transition 2/3: bounding boxes</a></em></li>
   <li><em>Shared element transition 3/3: the animation (this post)</em></li>
 </ul>
 
@@ -111,7 +110,7 @@
   <li>A couple of courses about React Native (more on that in future posts).</li>
 </ol>
 
-<p>Alright, enough excuses. :) Let’s continue our adventure about shared element transition. In the <a href="/2017/01/25/react-navigation-shared-element-transition-2.html">last post</a>, we’ve discussed the core challenges in implementing shared element transition. Once we get the bounding boxes of the shared elements on both from and to scenes, we’ll be ready to animate them. Let’s finally look at that in this post!</p>
+<p>Alright, enough excuses. :) Let’s continue our adventure about shared element transition. In the <a href="/2017/01/25/react-navigation-shared-element-transition-2">last post</a>, we’ve discussed the core challenges in implementing shared element transition. Once we get the bounding boxes of the shared elements on both from and to scenes, we’ll be ready to animate them. Let’s finally look at that in this post!</p>
 
 <p>You can find the full source code in <a href="https://github.com/lintonye/react-native-diary/tree/master/transitions">this repo</a>. However, I’ve generalized the core ideas and implemented a generic way to create custom transitions in <a href="https://github.com/react-community/react-navigation/pull/941">this pull request</a>. Feel free to compare the two and you’ll find the connection. Of course the latter should be considered more mature, and it’s still evolving as you can tell from the comments on GitHub.</p>
 
@@ -157,7 +156,7 @@
   <span class="na">key</span><span class="p">:</span> <span class="s2">`clone-</span><span class="p">${</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span>
 <span class="p">},</span> <span class="p">[]);</span></code></pre></div>
 
-<p>In the code above, <code class="highlighter-rouge">item.reactElement</code> is a React element (the result of <code class="highlighter-rouge">render()</code>) saved when the shared element registers itself (this is covered in detail in the <a href="/2017/01/25/react-navigation-shared-element-transition-2.html">previous post</a>). <code class="highlighter-rouge">animatedStyle</code> is the style that we are going to create soon to actually animate the cloned views.</p>
+<p>In the code above, <code class="highlighter-rouge">item.reactElement</code> is a React element (the result of <code class="highlighter-rouge">render()</code>) saved when the shared element registers itself (this is covered in detail in the <a href="/2017/01/25/react-navigation-shared-element-transition-2">previous post</a>). <code class="highlighter-rouge">animatedStyle</code> is the style that we are going to create soon to actually animate the cloned views.</p>
 
 <p>To make the transition more realistic, we also want to hide the original views during the transition. This is fairly similar to how we show/hide the overlay:</p>
 
@@ -318,13 +317,13 @@
 <p>After we know the font size of both “from” and “to” items, it is a cakewalk to animate them.</p>
 
 <h2 id="revisiting-goals">Revisiting goals</h2>
-<p>OK Great! By far we’ve covered all aspects of creating a shared element transition. At the <a href="/2017/01/23/react-navigation-shared-element-transition-1.html">beginning</a>, we set three goals for this experiment. Let’s revisit them to see how well we are doing:</p>
+<p>OK Great! By far we’ve covered all aspects of creating a shared element transition. At the <a href="/2017/01/23/react-navigation-shared-element-transition-1">beginning</a>, we set three goals for this experiment. Let’s revisit them to see how well we are doing:</p>
 
 <h3 id="1-pure-javascript">1. Pure JavaScript</h3>
 <p>This one is apparent, I’ve never written a line of Java or Objective-C or Swift in the posts, right?</p>
 
 <h3 id="2-minimal-api">2. Minimal API</h3>
-<p>In the second <a href="/2017/01/25/react-navigation-shared-element-transition-2.html">post</a>, I presented an API like this:</p>
+<p>In the second <a href="/2017/01/25/react-navigation-shared-element-transition-2">post</a>, I presented an API like this:</p>
 
 <div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// on photo grid screen</span>
 <span class="p">&lt;</span><span class="nc">SharedView</span> <span class="na">name=</span><span class="s1">'photo1'</span> <span class="na">containerRouteName=</span><span class="s1">'PhotoGrid'</span><span class="p">&gt;</span>
@@ -417,7 +416,7 @@
 
   
   <div class='reddit'>
-    <a href="//www.reddit.com/submit" onclick="window.open('//www.reddit.com/submit?url=http://lintonye.github.io/2017/04/22/react-navigation-shared-element-transition-3.html&title=React+Navigation%3A+Shared+element+transition+3%2F3+%28the+animation%29'); return false"> <img src="//www.redditstatic.com/spreddit7.gif" alt="submit to reddit" border="0" /> </a>
+    <a href="//www.reddit.com/submit" onclick="window.open('//www.reddit.com/submit?url=http://learnreact.design/2017/04/22/react-navigation-shared-element-transition-3/&title=React+Navigation%3A+Shared+element+transition+3%2F3+%28the+animation%29'); return false"> <img src="//www.redditstatic.com/spreddit7.gif" alt="submit to reddit" border="0" /> </a>
   </div>
   
 </div>
@@ -435,7 +434,7 @@
       
       
       <section class="post_summary">
-        <h3 class="title">Next up: <a href="/2017/05/09/react-for-designers-interviews.html" rel="prefetch">React Course for Designers, Anyone?</a></h3>
+        <h3 class="title">Next up: <a href="/2017/05/09/react-for-designers-interviews/" rel="prefetch">React Course for Designers, Anyone?</a></h3>
         <p>Should designers code? This is an eternal question.</p>
         <hr>
       </section>
@@ -443,7 +442,7 @@
       
       
       <section class="post_summary">
-        <h3 class="title">Previous story: <a href="/2017/01/25/react-navigation-shared-element-transition-2.html" rel="prefetch">React Navigation: Shared element transition 2/3 (bounding boxes)</a></h3>
+        <h3 class="title">Previous story: <a href="/2017/01/25/react-navigation-shared-element-transition-2/" rel="prefetch">React Navigation: Shared element transition 2/3 (bounding boxes)</a></h3>
         <p>Blog series: creating custom transitions using NavigationExperimental. This post covers key challenges in the implementation.</p>
         <hr>
       </section>
@@ -472,8 +471,8 @@
       &copy; 2017 Linton Ye
 
       <nav>
-        <a href="/">Blog</a> &middot;
-        <a href="/about.html">About</a>
+        <a href="/blog">Blog</a> &middot;
+        <a href="/about">About</a>
       </nav>
 
       <nav class="social">

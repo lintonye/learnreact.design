@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>React Navigation: An Overview of Transitioner and CardStack &mdash; Linton's React Native Diary</title>
+  <title>React Navigation: An Overview of Transitioner and CardStack &mdash; Backstage</title>
   <!--[if lt IE 9]><script src='https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js'></script><![endif]-->
   
   <link rel="stylesheet" href="/assets/app.css">
@@ -45,19 +45,19 @@
 
 
   <link rel="shortcut icon" href="/favicon.ico?v2" type="image/x-icon" />
-  <link rel="alternate" type="application/atom+xml" title="Linton's React Native Diary" href="/atom.xml" />
+  <link rel="alternate" type="application/atom+xml" title="Backstage" href="/atom.xml" />
   <meta name="title" content="React Navigation: An Overview of Transitioner and CardStack ">
-  <link rel="canonical" href="http://lintonye.github.io/2016/12/20/navigation-experimental-custom-transition-1.html">
+  <link rel="canonical" href="http://learnreact.design/2016/12/20/navigation-experimental-custom-transition-1/">
   
   
   <meta property="og:title" content="React Navigation: An Overview of Transitioner and CardStack"/>
-  <meta property="og:url" content="http://lintonye.github.io/2016/12/20/navigation-experimental-custom-transition-1.html"/>
+  <meta property="og:url" content="http://learnreact.design/2016/12/20/navigation-experimental-custom-transition-1/"/>
   
   
   <meta property="og:description" content="Blog series: creating custom transitions using React Navigation. This post covers an overview of Transitioner and CardStack."/>
   <meta name="description" content="Blog series: creating custom transitions using React Navigation. This post covers an overview of Transitioner and CardStack."/>
   
-  <meta property="og:site_name" content="Linton's React Native Diary">
+  <meta property="og:site_name" content="Backstage">
 </head>
 <body>
 
@@ -66,9 +66,8 @@
       <a class="brand" href="/">
         <img src="/images/logo.png" alt="Inc">
       </a>
-      <a href="/react-course-for-designers.html">React course for designers</a>
-      <a href="/">Blog</a>
-      <a href="/about.html">About</a>
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
     </nav>
   </header>
 
@@ -95,10 +94,10 @@
 
 <ul>
   <li><em>An overview of Transitioner and CardStack (this post)</em></li>
-  <li><em><a href="/2016/12/22/navigation-experimental-custom-transition-2.html">Simple transitions: cross fade and Android default</a></em></li>
-  <li><em><a href="/2017/01/23/react-navigation-shared-element-transition-1.html">Shared element transition 1/3: overview</a></em></li>
-  <li><em><a href="/2017/01/25/react-navigation-shared-element-transition-2.html">Shared element transition 2/3: bounding boxes</a></em></li>
-  <li><em><a href="/2017/04/22/react-navigation-shared-element-transition-3.html">Shared element transition 3/3: the animation</a></em></li>
+  <li><em><a href="/2016/12/22/navigation-experimental-custom-transition-2">Simple transitions: cross fade and Android default</a></em></li>
+  <li><em><a href="/2017/01/23/react-navigation-shared-element-transition-1">Shared element transition 1/3: overview</a></em></li>
+  <li><em><a href="/2017/01/25/react-navigation-shared-element-transition-2">Shared element transition 2/3: bounding boxes</a></em></li>
+  <li><em><a href="/2017/04/22/react-navigation-shared-element-transition-3">Shared element transition 3/3: the animation</a></em></li>
 </ul>
 
 <hr />
@@ -130,7 +129,7 @@
   </div>
 </div>
 
-<p>Before jumping into it though, let’s first study the built-in container <code class="highlighter-rouge">NavigationCardStack</code> and see how its transition is implemented. If you are not familiar with <code class="highlighter-rouge">NavigationCardStack</code>, see <a href="/2016/06/23/navigation-examples-1.html">my previous post</a> for a simple tutorial on how to use it.</p>
+<p>Before jumping into it though, let’s first study the built-in container <code class="highlighter-rouge">NavigationCardStack</code> and see how its transition is implemented. If you are not familiar with <code class="highlighter-rouge">NavigationCardStack</code>, see <a href="/2016/06/23/navigation-examples-1">my previous post</a> for a simple tutorial on how to use it.</p>
 
 <h1 id="navigationcardstack-in-a-nutshell"><code class="highlighter-rouge">NavigationCardStack</code> in a nutshell</h1>
 
@@ -385,7 +384,7 @@
 
 <p>We can see that <code class="highlighter-rouge">opacity</code>, <code class="highlighter-rouge">scale</code> and <code class="highlighter-rouge">translateX</code> are all interpolations of <code class="highlighter-rouge">position</code> – they’ll change as <code class="highlighter-rouge">position</code> changes. This effectively creates the sliding card animation that we’ve seen earlier.</p>
 
-<p>You probably have questions about how the input/output ranges are set up in this function, but let’s leave them to the <a href="/2016/12/22/navigation-experimental-custom-transition-2.html">next post</a>, where we’ll also start creating our own transitions soon!</p>
+<p>You probably have questions about how the input/output ranges are set up in this function, but let’s leave them to the <a href="/2016/12/22/navigation-experimental-custom-transition-2">next post</a>, where we’ll also start creating our own transitions soon!</p>
 
 <h1 id="summary">Summary</h1>
 <p>Just to repeat a few key points on how the transition animation works in the built-in <code class="highlighter-rouge">NavigationCardStack</code>:</p>
@@ -423,7 +422,7 @@
 
   
   <div class='reddit'>
-    <a href="//www.reddit.com/submit" onclick="window.open('//www.reddit.com/submit?url=http://lintonye.github.io/2016/12/20/navigation-experimental-custom-transition-1.html&title=React+Navigation%3A+An+Overview+of+Transitioner+and+CardStack'); return false"> <img src="//www.redditstatic.com/spreddit7.gif" alt="submit to reddit" border="0" /> </a>
+    <a href="//www.reddit.com/submit" onclick="window.open('//www.reddit.com/submit?url=http://learnreact.design/2016/12/20/navigation-experimental-custom-transition-1/&title=React+Navigation%3A+An+Overview+of+Transitioner+and+CardStack'); return false"> <img src="//www.redditstatic.com/spreddit7.gif" alt="submit to reddit" border="0" /> </a>
   </div>
   
 </div>
@@ -441,7 +440,7 @@
       
       
       <section class="post_summary">
-        <h3 class="title">Next up: <a href="/2016/12/22/navigation-experimental-custom-transition-2.html" rel="prefetch">React Navigation: Cross Fade and Android Default Transitions</a></h3>
+        <h3 class="title">Next up: <a href="/2016/12/22/navigation-experimental-custom-transition-2/" rel="prefetch">React Navigation: Cross Fade and Android Default Transitions</a></h3>
         <p>Blog series: creating custom transitions using React Navigation. This post covers inputRange and a couple of simple custom transitions.</p>
         <hr>
       </section>
@@ -449,7 +448,7 @@
       
       
       <section class="post_summary">
-        <h3 class="title">Previous story: <a href="/2016/06/27/github-pages-custom-domain.html" rel="prefetch">Custom Domains with GitHub Pages</a></h3>
+        <h3 class="title">Previous story: <a href="/2016/06/27/github-pages-custom-domain/" rel="prefetch">Custom Domains with GitHub Pages</a></h3>
         <p>A sane step-by-step guide on using custom domains with GitHub Pages</p>
         <hr>
       </section>
@@ -478,8 +477,8 @@
       &copy; 2017 Linton Ye
 
       <nav>
-        <a href="/">Blog</a> &middot;
-        <a href="/about.html">About</a>
+        <a href="/blog">Blog</a> &middot;
+        <a href="/about">About</a>
       </nav>
 
       <nav class="social">
