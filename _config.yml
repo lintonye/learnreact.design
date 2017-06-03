@@ -19,10 +19,10 @@ info:
   # Comments
   disqus:
     # Eg. "exampleblog" Set to false to disable comments
-    shortname:  linton-react-native-diary
+    shortname:  learnreact.design
 
   # Google Analytics tracking ID. Leave blank to disable tracking
-  google-analytics-id: UA-79925561-1
+  google-analytics-id: UA-100434258-1
 
   # Sharing settings
   sharing:
