@@ -4,7 +4,7 @@
  <title>Backstage</title>
  <link href="http://learnreact.design/atom.xml" rel="self"/>
  <link href="http://learnreact.design"/>
- <updated>2017-06-03T11:05:07-07:00</updated>
+ <updated>2017-06-03T11:47:03-07:00</updated>
  <id>http://learnreact.design/atom.xml</id>
  <author>
    <name>Linton Ye</name>
@@ -22,7 +22,7 @@
 
 &lt;p&gt;I believe designers and developers should both learn a bit about the profession of the other side. Armed with a holistic understanding of how design and engineering fit together to create great products, we will become better designers and better developers.&lt;/p&gt;
 
-&lt;p&gt;As a developer who’s benefited from learning design, I’m convinced that designers want to learn some coding as well. That is why I got so excited about creating a React course tailored for designers (excited about the course too? Sign up &lt;a href=&quot;/react-course-for-designers.html&quot;&gt;here&lt;/a&gt; and I’ll keep you in the loop).&lt;/p&gt;
+&lt;p&gt;As a developer who’s benefited from learning design, I’m convinced that designers want to learn some coding as well. That is why I got so excited about creating a React course tailored for designers (excited about the course too? Sign up &lt;a href=&quot;http://learnreact.design&quot;&gt;here&lt;/a&gt; and I’ll keep you in the loop).&lt;/p&gt;
 
 &lt;p&gt;Wait a second. Am I just thinking in the vacuum though? I decided to &lt;a href=&quot;https://www.designernews.co/stories/82837-react-native-course-for-designers-anyone&quot;&gt;ask Designer News&lt;/a&gt;. The result? I was totally blown away! The post has been the top story for more than a day and stayed on the front page for more than a week. Shortly after the post, 13 designers booked a call with me and wished to offer help. Wow! 13 real people were willing to spare 30 minutes out of their busy schedules to talk to a complete stranger – me. There must be something that resonates with them!&lt;/p&gt;
 
@@ -217,7 +217,7 @@
 &lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
 &lt;p&gt;I am thrilled! I think many designers are motivated to learn coding. React is one of their favorite topics.&lt;/p&gt;
 
-&lt;p&gt;Are you inspired to pick up some React as well? Sign up &lt;a href=&quot;/react-course-for-designers.html&quot;&gt;here&lt;/a&gt;, and I’ll send you an email when something is ready.&lt;/p&gt;
+&lt;p&gt;Are you inspired to pick up some React as well? Sign up &lt;a href=&quot;http://learnreact.design&quot;&gt;here&lt;/a&gt;, and I’ll send you an email when something is ready.&lt;/p&gt;
 
 &lt;h1 id=&quot;acknowledgements&quot;&gt;Acknowledgements&lt;/h1&gt;
 &lt;p&gt;I’d like to thank everyone who spent your precious time to chat with me, made a comment or upvoted my post. Your insights will really have a huge influence on the course. Together, let’s create something truly useful for designers!&lt;/p&gt;
