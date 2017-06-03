@@ -17,15 +17,15 @@ author:
 
 *This is a series of posts about how to create custom transition "views" using the `Transitioner` in [React Navigation](https://reactnavigation.org/) (based on “NavigationExperiemental”):*
 
-- *[An overview of Transitioner and CardStack](/2016/12/20/navigation-experimental-custom-transition-1.html)*
-- *[Simple transitions: cross fade and Android default](/2016/12/22/navigation-experimental-custom-transition-2.html)*
-- *[Shared element transition 1/3: overview](/2017/01/23/react-navigation-shared-element-transition-1.html)*
+- *[An overview of Transitioner and CardStack](/2016/12/20/navigation-experimental-custom-transition-1)*
+- *[Simple transitions: cross fade and Android default](/2016/12/22/navigation-experimental-custom-transition-2)*
+- *[Shared element transition 1/3: overview](/2017/01/23/react-navigation-shared-element-transition-1)*
 - *Shared element transition 2/3: bounding boxes (this post)*
-- *[Shared element transition 3/3: the animation](/2017/04/22/react-navigation-shared-element-transition-3.html)*
+- *[Shared element transition 3/3: the animation](/2017/04/22/react-navigation-shared-element-transition-3)*
 
 ---
 
-In the [last post](/2017/01/23/react-navigation-shared-element-transition-1.html), we've discussed some general ideas about how to create custom transitions like this:
+In the [last post](/2017/01/23/react-navigation-shared-element-transition-1), we've discussed some general ideas about how to create custom transitions like this:
 
 <video controls autoplay>
   <source src="/images/navigation-custom-transition/shared-elements-trimmed-480p.mov" type="video/mp4">

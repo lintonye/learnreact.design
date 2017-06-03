@@ -17,10 +17,10 @@ author:
 
 *This is a series of posts about how to create custom transition "views" using the `Transitioner` in [React Navigation](https://reactnavigation.org/) (based on “NavigationExperiemental”):*
 
-- *[An overview of Transitioner and CardStack](/2016/12/20/navigation-experimental-custom-transition-1.html)*
-- *[Simple transitions: cross fade and Android default](/2016/12/22/navigation-experimental-custom-transition-2.html)*
-- *[Shared element transition 1/3: overview](/2017/01/23/react-navigation-shared-element-transition-1.html)*
-- *[Shared element transition 2/3: bounding boxes](/2017/01/25/react-navigation-shared-element-transition-2.html)*
+- *[An overview of Transitioner and CardStack](/2016/12/20/navigation-experimental-custom-transition-1)*
+- *[Simple transitions: cross fade and Android default](/2016/12/22/navigation-experimental-custom-transition-2)*
+- *[Shared element transition 1/3: overview](/2017/01/23/react-navigation-shared-element-transition-1)*
+- *[Shared element transition 2/3: bounding boxes](/2017/01/25/react-navigation-shared-element-transition-2)*
 - *Shared element transition 3/3: the animation (this post)*
 
 ---
@@ -31,7 +31,7 @@ Time flies! I really appreciate your patience for this piece. In fact, I've been
 2. A [proposal and initial implementation](https://github.com/react-community/react-navigation/issues/175) of custom transitions in React Navigation.
 3. A couple of courses about React Native (more on that in future posts).
 
-Alright, enough excuses. :) Let's continue our adventure about shared element transition. In the [last post](/2017/01/25/react-navigation-shared-element-transition-2.html), we've discussed the core challenges in implementing shared element transition. Once we get the bounding boxes of the shared elements on both from and to scenes, we'll be ready to animate them. Let's finally look at that in this post!
+Alright, enough excuses. :) Let's continue our adventure about shared element transition. In the [last post](/2017/01/25/react-navigation-shared-element-transition-2), we've discussed the core challenges in implementing shared element transition. Once we get the bounding boxes of the shared elements on both from and to scenes, we'll be ready to animate them. Let's finally look at that in this post!
 
 You can find the full source code in [this repo](https://github.com/lintonye/react-native-diary/tree/master/transitions). However, I've generalized the core ideas and implemented a generic way to create custom transitions in [this pull request](https://github.com/react-community/react-navigation/pull/941). Feel free to compare the two and you'll find the connection. Of course the latter should be considered more mature, and it's still evolving as you can tell from the comments on GitHub.
 
@@ -85,7 +85,7 @@ React.cloneElement(item.reactElement, {
 }, []);
 {% endhighlight %}
 
-In the code above, `item.reactElement` is a React element (the result of `render()`) saved when the shared element registers itself (this is covered in detail in the [previous post](/2017/01/25/react-navigation-shared-element-transition-2.html)). `animatedStyle` is the style that we are going to create soon to actually animate the cloned views.
+In the code above, `item.reactElement` is a React element (the result of `render()`) saved when the shared element registers itself (this is covered in detail in the [previous post](/2017/01/25/react-navigation-shared-element-transition-2)). `animatedStyle` is the style that we are going to create soon to actually animate the cloned views.
 
 To make the transition more realistic, we also want to hide the original views during the transition. This is fairly similar to how we show/hide the overlay:
 
@@ -269,13 +269,13 @@ const getFontSize = element => {
 After we know the font size of both "from" and "to" items, it is a cakewalk to animate them.
 
 ## Revisiting goals
-OK Great! By far we've covered all aspects of creating a shared element transition. At the [beginning](/2017/01/23/react-navigation-shared-element-transition-1.html), we set three goals for this experiment. Let's revisit them to see how well we are doing:
+OK Great! By far we've covered all aspects of creating a shared element transition. At the [beginning](/2017/01/23/react-navigation-shared-element-transition-1), we set three goals for this experiment. Let's revisit them to see how well we are doing:
 
 ### 1. Pure JavaScript
 This one is apparent, I've never written a line of Java or Objective-C or Swift in the posts, right?
 
 ### 2. Minimal API
-In the second [post](/2017/01/25/react-navigation-shared-element-transition-2.html), I presented an API like this:
+In the second [post](/2017/01/25/react-navigation-shared-element-transition-2), I presented an API like this:
 
 {% highlight jsx %}
 // on photo grid screen

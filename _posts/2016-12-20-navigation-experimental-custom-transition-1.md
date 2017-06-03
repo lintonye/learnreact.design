@@ -16,10 +16,10 @@ author:
 *This is a series of posts about how to create custom transition "views" using the `Transitioner` in [React Navigation](https://reactnavigation.org/) (based on “NavigationExperiemental”):*
 
 - *An overview of Transitioner and CardStack (this post)*
-- *[Simple transitions: cross fade and Android default](/2016/12/22/navigation-experimental-custom-transition-2.html)*
-- *[Shared element transition 1/3: overview](/2017/01/23/react-navigation-shared-element-transition-1.html)*
-- *[Shared element transition 2/3: bounding boxes](/2017/01/25/react-navigation-shared-element-transition-2.html)*
-- *[Shared element transition 3/3: the animation](/2017/04/22/react-navigation-shared-element-transition-3.html)*
+- *[Simple transitions: cross fade and Android default](/2016/12/22/navigation-experimental-custom-transition-2)*
+- *[Shared element transition 1/3: overview](/2017/01/23/react-navigation-shared-element-transition-1)*
+- *[Shared element transition 2/3: bounding boxes](/2017/01/25/react-navigation-shared-element-transition-2)*
+- *[Shared element transition 3/3: the animation](/2017/04/22/react-navigation-shared-element-transition-3)*
 
 ---
 <div class="update-notes" style="background: #e8e8e8; padding: 10px; font-size: 0.8em; border-radius: 5px; margin-bottom: 20px;">
@@ -51,7 +51,7 @@ author:
 </div>
 
 
-Before jumping into it though, let's first study the built-in container `NavigationCardStack` and see how its transition is implemented. If you are not familiar with `NavigationCardStack`, see [my previous post](/2016/06/23/navigation-examples-1.html) for a simple tutorial on how to use it.
+Before jumping into it though, let's first study the built-in container `NavigationCardStack` and see how its transition is implemented. If you are not familiar with `NavigationCardStack`, see [my previous post](/2016/06/23/navigation-examples-1) for a simple tutorial on how to use it.
 
 # `NavigationCardStack` in a nutshell
 
@@ -317,7 +317,7 @@ function forHorizontal(props: NavigationSceneRendererProps): Object {
 
 We can see that `opacity`, `scale` and `translateX` are all interpolations of `position` -- they'll change as `position` changes. This effectively creates the sliding card animation that we've seen earlier.
 
-You probably have questions about how the input/output ranges are set up in this function, but let's leave them to the [next post](/2016/12/22/navigation-experimental-custom-transition-2.html), where we'll also start creating our own transitions soon!
+You probably have questions about how the input/output ranges are set up in this function, but let's leave them to the [next post](/2016/12/22/navigation-experimental-custom-transition-2), where we'll also start creating our own transitions soon!
 
 # Summary
 Just to repeat a few key points on how the transition animation works in the built-in `NavigationCardStack`:

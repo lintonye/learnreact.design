@@ -17,11 +17,11 @@ author:
 
 *This is a series of posts about how to create custom transition "views" using the `Transitioner` in [React Navigation](https://reactnavigation.org/) (based on “NavigationExperiemental”):*
 
-- *[An overview of Transitioner and CardStack](/2016/12/20/navigation-experimental-custom-transition-1.html)*
+- *[An overview of Transitioner and CardStack](/2016/12/20/navigation-experimental-custom-transition-1)*
 - *Simple transitions: cross fade and Android default (this post)*
-- *[Shared element transition 1/3: overview](/2017/01/23/react-navigation-shared-element-transition-1.html)*
-- *[Shared element transition 2/3: bounding boxes](/2017/01/25/react-navigation-shared-element-transition-2.html)*
-- *[Shared element transition 3/3: the animation](/2017/04/22/react-navigation-shared-element-transition-3.html)*
+- *[Shared element transition 1/3: overview](/2017/01/23/react-navigation-shared-element-transition-1)*
+- *[Shared element transition 2/3: bounding boxes](/2017/01/25/react-navigation-shared-element-transition-2)*
+- *[Shared element transition 3/3: the animation](/2017/04/22/react-navigation-shared-element-transition-3)*
 
 ---
 
@@ -34,7 +34,7 @@ author:
 </ul>
 </div>
 
-In the [previous post](/2016/12/20/navigation-experimental-custom-transition-1.html), we covered how the transition animations in `NavigationCardStack` work: the `NavigationTransitioner` creates two `AnimatedValue`s, `position` and `progress`, which are then passed to `CardStack` and "interpolated" into style properties such as `scaleX`, `translateX` and `opacity`.
+In the [previous post](/2016/12/20/navigation-experimental-custom-transition-1), we covered how the transition animations in `NavigationCardStack` work: the `NavigationTransitioner` creates two `AnimatedValue`s, `position` and `progress`, which are then passed to `CardStack` and "interpolated" into style properties such as `scaleX`, `translateX` and `opacity`.
 
 In this post, we'll take a closer look at how the `inputRange` and `outputRange` are set up in `CardStack` when interpolating the `AnimatedValue`s. We'll also apply what we learn to create a couple of simple transitions:
 

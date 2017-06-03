@@ -16,11 +16,11 @@ author:
 ---
 *This is a series of posts about how to create custom transition "views" using the `Transitioner` in [React Navigation](https://reactnavigation.org/) (based on “NavigationExperiemental”):*
 
-- *[An overview of Transitioner and CardStack](/2016/12/20/navigation-experimental-custom-transition-1.html)*
-- *[Simple transitions: cross fade and Android default](/2016/12/22/navigation-experimental-custom-transition-2.html)*
+- *[An overview of Transitioner and CardStack](/2016/12/20/navigation-experimental-custom-transition-1)*
+- *[Simple transitions: cross fade and Android default](/2016/12/22/navigation-experimental-custom-transition-2)*
 - *Shared element transition 1/3: overview (this post)*
-- *[Shared element transition 2/3: bounding boxes](/2017/01/25/react-navigation-shared-element-transition-2.html)*
-- *[Shared element transition 3/3: the animation](/2017/04/22/react-navigation-shared-element-transition-3.html)*
+- *[Shared element transition 2/3: bounding boxes](/2017/01/25/react-navigation-shared-element-transition-2)*
+- *[Shared element transition 3/3: the animation](/2017/04/22/react-navigation-shared-element-transition-3)*
 
 ---
 
@@ -119,7 +119,7 @@ We'll leave the discussion about this `cloneAndAnimateSharedViews` method to the
 
 ## Creating animated styles for scenes and overlay
 
-In order to ensure the overlay to be visible only during transition, we can use the "0.99-cliff" trick discussed in [the previous post](/2016/12/22/navigation-experimental-custom-transition-2.html#0.99-cliff):
+In order to ensure the overlay to be visible only during transition, we can use the "0.99-cliff" trick discussed in [the previous post](/2016/12/22/navigation-experimental-custom-transition-2#0.99-cliff):
 
 {% highlight javascript %}
   // in _renderOverlay()    //_
@@ -155,4 +155,4 @@ _renderScene(props) {
 ## Conclusion
 OK, let's take a break for now. We have discussed a high-level plan on how the shared element transition might work: the overlay is the key to create the shared element effect. We also covered some simpler aspects in its implementation: the `render*` methods, and how to show/hide scenes and the overlay at the right times.
 
-In the [next post](/2017/01/25/react-navigation-shared-element-transition-2.html), we'll look into how to actually animate the shared views on the overlay. Bear with me, the fun is still ahead!
+In the [next post](/2017/01/25/react-navigation-shared-element-transition-2), we'll look into how to actually animate the shared views on the overlay. Bear with me, the fun is still ahead!

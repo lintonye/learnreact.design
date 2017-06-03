@@ -1,7 +1,7 @@
 info:
   # Blog Information
-  title:        "Linton's React Native Diary"
-  subtitle:     "The best way to learn is to teach."
+  title:        "Backstage"
+  subtitle:     "Stories while this course is being created"
   cover_image:  cover-diary-react.png
   cover_image_caption: "React Native banner"
   about_image:  about-victoria.jpg
@@ -39,17 +39,19 @@ info:
   # Setup your fonts, colors etc at _assets/stylesheets/main.scss
 
 # Root URL where the site will be published
-url:         http://lintonye.github.io
+url:         http://learnreact.design
 
 # host 0.0.0.0 allows us to access site via sapphire.local or localhost or 127.0.0.1
 host: 0.0.0.0
 
 paginate:             10
+paginate_path: blog/page:num
 
 # safe mode must be disabled to use jekyll-assets.
 safe:               false
 highlighter: rouge
 markdown: kramdown
+permalink: pretty
 
 kramdown:
   input: GFM
