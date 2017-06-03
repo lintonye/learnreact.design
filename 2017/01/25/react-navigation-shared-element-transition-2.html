@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React Navigation: Shared element transition 2/3 (bounding boxes) &mdash; Linton's React Native Diary</title>
+  <!--[if lt IE 9]><script src='https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js'></script><![endif]-->
+  
+  <link rel="stylesheet" href="/assets/app.css">
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script src="/assets/app.js"></script>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-79925561-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <link rel="shortcut icon" href="/favicon.ico?v2" type="image/x-icon" />
+  <link rel="alternate" type="application/atom+xml" title="Linton's React Native Diary" href="/atom.xml" />
+  <meta name="title" content="React Navigation: Shared element transition 2/3 (bounding boxes) ">
+  <link rel="canonical" href="http://lintonye.github.io/2017/01/25/react-navigation-shared-element-transition-2.html">
+  
+  
+  <meta property="og:title" content="React Navigation: Shared element transition 2/3 (bounding boxes)"/>
+  <meta property="og:url" content="http://lintonye.github.io/2017/01/25/react-navigation-shared-element-transition-2.html"/>
+  
+  
+  <meta property="og:description" content="Blog series: creating custom transitions using NavigationExperimental. This post covers key challenges in the implementation."/>
+  <meta name="description" content="Blog series: creating custom transitions using NavigationExperimental. This post covers key challenges in the implementation."/>
+  
+  <meta property="og:site_name" content="Linton's React Native Diary">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav>
+      <a class="brand" href="/">
+        <img src="/images/logo.png" alt="Inc">
+      </a>
+      <a href="/react-course-for-designers.html">React course for designers</a>
+      <a href="/">Blog</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </header>
+
+  
+
+
+<article >
+
+  <div class="container">
+    <header>
+      <div class="meta">
+        By <address><a rel="author" href="" title="Linton Ye" target="_blank">Linton Ye</a></address> &mdash;
+        <time pubdate datetime="2017-25-January" title="Jan 25, 2017">Jan 25, 2017</time> &mdash;
+        
+29 min read
+
+      </div>
+      <h1 class="title">React Navigation: Shared element transition 2/3 (bounding boxes)</h1>
+      
+    </header>
+
+    <section>
+      <p><em>This is a series of posts about how to create custom transition “views” using the <code class="highlighter-rouge">Transitioner</code> in <a href="https://reactnavigation.org/">React Navigation</a> (based on “NavigationExperiemental”):</em></p>
+
+<ul>
+  <li><em><a href="/2016/12/20/navigation-experimental-custom-transition-1.html">An overview of Transitioner and CardStack</a></em></li>
+  <li><em><a href="/2016/12/22/navigation-experimental-custom-transition-2.html">Simple transitions: cross fade and Android default</a></em></li>
+  <li><em><a href="/2017/01/23/react-navigation-shared-element-transition-1.html">Shared element transition 1/3: overview</a></em></li>
+  <li><em>Shared element transition 2/3: bounding boxes (this post)</em></li>
+  <li><em><a href="/2017/04/22/react-navigation-shared-element-transition-3.html">Shared element transition 3/3: the animation</a></em></li>
+</ul>
+
+<hr />
+
+<p>In the <a href="/2017/01/23/react-navigation-shared-element-transition-1.html">last post</a>, we’ve discussed some general ideas about how to create custom transitions like this:</p>
+
+<video controls="" autoplay="">
+  <source src="/images/navigation-custom-transition/shared-elements-trimmed-480p.mov" type="video/mp4" />
+  <!-- <source src="movie.ogg" type="video/ogg"> -->
+  Your browser does not support the video tag.
+</video>
+
+<p>In this post, let’s start tackling the core problem: how to animate the shared views. Sections below discuss the key challenges I’ve encountered and <a href="#solution">my solution</a> to them. While they arose when making a specific transition, I believe they’ll be useful in many other things because we needed to dive deeper into how React works.</p>
+
+<h2 id="key-challenges">Key challenges</h2>
+<p>Most of the magic happens on the overlay, and our overlay is rendered like so:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// class SharedElementsTransitioner</span>
+ <span class="nx">_renderOverlay</span><span class="p">(....)</span> <span class="p">{</span>
+   <span class="kr">const</span> <span class="nx">sharedViews</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">cloneAndAnimateSharedViews</span><span class="p">(....);</span>
+   <span class="p">....</span>
+   <span class="k">return</span> <span class="p">(</span>
+     <span class="p">&lt;</span><span class="nc">Animated</span><span class="p">.</span><span class="nc">View</span> <span class="na">style=</span><span class="si">{</span><span class="nx">overlayStyle</span><span class="si">}</span><span class="p">&gt;</span>
+       <span class="si">{</span><span class="nx">sharedViews</span><span class="si">}</span>
+     <span class="p">&lt;/</span><span class="nc">Animated</span><span class="p">.</span><span class="nc">View</span><span class="p">&gt;</span>     
+   <span class="p">);</span>
+ <span class="p">}</span><span class="nx">_</span></code></pre></div>
+
+<p>Now here comes the question: What is this <code class="highlighter-rouge">cloneAndAnimateSharedViews</code> function supposed to look like?</p>
+
+<p>Conceptually, we can just find all the shared views in the current and upcoming scenes, pair them up, retrieve their bounding boxes, clone them and create animated styles.</p>
+
+<p>Let’s give it a try:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// class SharedElementsTransitioner</span>
+<span class="nx">cloneAndAnimateSharedViews</span><span class="p">(</span><span class="nx">transitionProps</span><span class="p">,</span> <span class="nx">prevTransitionProps</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">shareViewPairs</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">collectActiveSharedViewPairs</span><span class="p">(</span><span class="nx">transitionProps</span><span class="p">,</span> <span class="nx">prevTransitionProps</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">sharedViewPairs</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">pair</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Does this getBoundingBox() really work?</span>
+    <span class="kr">const</span> <span class="nx">bboxFrom</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getBoundingBox</span><span class="p">(</span><span class="nx">pair</span><span class="p">.</span><span class="nx">fromItem</span><span class="p">);</span>
+    <span class="kr">const</span> <span class="nx">bboxTo</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getBoundingBox</span><span class="p">(</span><span class="nx">pair</span><span class="p">.</span><span class="nx">toItem</span><span class="p">);</span>
+    <span class="kr">const</span> <span class="nx">animatedStyle</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">createAnimatedStyle</span><span class="p">(</span><span class="nx">bboxFrom</span><span class="p">,</span> <span class="nx">bboxTo</span><span class="p">);</span>
+    <span class="kr">const</span> <span class="nx">cloned</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">cloneElement</span><span class="p">(</span><span class="nx">pair</span><span class="p">.</span><span class="nx">fromItem</span><span class="p">);</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nc">Animated</span><span class="p">.</span><span class="nc">View</span> <span class="na">style=</span><span class="si">{</span><span class="nx">animatedStyle</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="si">{</span><span class="nx">cloned</span><span class="si">}</span>
+      <span class="p">&lt;/</span><span class="nc">Animated</span><span class="p">.</span><span class="nc">View</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="nx">collectActiveSharedViewPairs</span><span class="p">(</span><span class="nx">transitionProps</span><span class="p">,</span> <span class="nx">prevTransitionProps</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">//TODO</span>
+<span class="p">}</span>
+
+<span class="nx">getBoundingBox</span><span class="p">(</span><span class="nx">sharedView</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">//TODO</span>
+<span class="p">}</span></code></pre></div>
+
+<p>Now how do we implement the missing methods?</p>
+
+<ul>
+  <li><strong><code class="highlighter-rouge">collectActiveSharedViewPairs()</code></strong>: Shared views are scattered all over the place - they are defined in their corresponding scene components which are rendered as children of our transitioner. How do we visit these views? Is it easy to traverse the tree?</li>
+  <li><strong><code class="highlighter-rouge">getBoundingBox()</code></strong>: Even if we can collect all the shared views, how do we get their bounding boxes? Is it as straightforward as in other UI frameworks, such as native Android?</li>
+</ul>
+
+<p>To answer these questions, let’s go a bit deeper on how React works.</p>
+
+<h3 id="react-rendering-process">React rendering process</h3>
+<p>It’s useful to view what’s happening in React as a two-step process:</p>
+
+<ol>
+  <li>First, React creates a “virtual tree” that represents the native view hierarchy (which is more famously known as “virtual DOM” in ReactJS). The nodes on this tree, called React elements, are just descriptors – they are plain objects with no references to the native widgets whatsoever. This step is where we, as React developers, can construct and update the user interface: we create React elements to describe what we want, typically in <code class="highlighter-rouge">render</code> methods of components.</li>
+  <li>Then, React feeds these descriptors into a “reconciliation” step when the native widgets are actually created and/or updated. React handles this process internally and transparently. We have no direct access of this process (and this is where React shines as it hides the complexities of the target UI platform).</li>
+</ol>
+
+<p>When our <code class="highlighter-rouge">collectAndAnimateSharedViews</code> is called, we are at the first step above. So what we can visit is a tree of React elements.</p>
+
+<p>This unique process creates some challenges when implementing the two aforementioned methods:</p>
+
+<hr />
+<ul>
+  <li><code class="highlighter-rouge">collectActiveSharedViewPairs()</code>:
+    <ul>
+      <li>Challenge 1: React element trees are shallow.</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">getBoundingBox()</code>:
+    <ul>
+      <li>Challenge 2: No direct access to native widgets.</li>
+      <li>Challenge 3: Layout information only comes AFTER the virtual tree creation step.</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<p>Let me expand on them next.</p>
+
+<h3 id="challenge-1-react-element-trees-are-shallow">Challenge 1: React element trees are shallow.</h3>
+<p>This one hit me when I attempted to traverse the React element tree the same way as in other UI frameworks. I had the (wrong) intuition that the React element tree must have all nodes fully expanded and ready to be visited, something like this:</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">- View
+  - Transitioner
+    - PhotoGrid
+      - ListView
+        - SharedView
+          - Image
+          ...
+    - PhotoDetail
+      - SharedView
+        - Image
+      ...</code></pre></div>
+
+<p>The reality is different. Although a React element has a <code class="highlighter-rouge">children</code> prop, it only goes as far as it is declared, not all the way down to all leaves.</p>
+
+<p>For example, say we have a React element:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="k">return</span> <span class="p">(</span>
+  <span class="p">&lt;</span><span class="nc">View</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nc">Transitioner</span> <span class="p">.../&gt;</span>
+  <span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+<span class="p">);</span></code></pre></div>
+
+<p>If we try to traverse it only via <code class="highlighter-rouge">props.children</code>, we’ll get this:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="o">-</span> <span class="nx">View</span>
+  <span class="o">-</span> <span class="nx">Transitioner</span></code></pre></div>
+
+<p>If we want to know what’s inside the <code class="highlighter-rouge">Transitioner</code>, we’d have to instantiate <code class="highlighter-rouge">Transitioner</code> and call its <code class="highlighter-rouge">render</code> method (or if it’s a stateless component defined by a function, we’d call the function). I think that’s pretty much what React does at the “reconciliation” stage.</p>
+
+<p>Back to the <code class="highlighter-rouge">collectActiveSharedViewPairs</code> function that we were trying to write. All we wanted to do here is to collect shared views in the hierarchy. Doing it via tree traversal is possible, but it sounds wasteful if we have to redo what React is already doing.</p>
+
+<p>BTW: I haven’t yet found much about this traversal business. If you know a good resource, or want me to write more about it, say so in the <a href="#endofpost">comments</a>!</p>
+
+<h3 id="challenge-2-no-direct-access-to-native-widgets">Challenge 2: No direct access to native widgets</h3>
+<p>In other UI frameworks, such as native Android, we could easily obtain layout information, such as bounding boxes, by calling a few methods on the view object. But this does not work in React Native because we don’t have direct access to native widgets.</p>
+
+<p>To understand this, let’s go a bit deeper on how React works. It’s useful to view what’s happening in React as a two-step process:</p>
+
+<ol>
+  <li>First, React creates a “virtual tree” that represents the native view hierarchy (which is more famously known as “virtual DOM” in ReactJS). The nodes on this tree, called React elements, are just descriptors – they are plain objects with no references to the native widgets whatsoever. This step is where we, as React developers, can construct and update the user interface: we create React elements to describe what we want, typically in <code class="highlighter-rouge">render</code> methods of components.</li>
+  <li>Then, React takes these descriptors and runs a “reconciliation” step that actually creates and/or updates the native widgets. React handles this process internally and transparently. We have no direct access of this process (and this is where React shines).</li>
+</ol>
+
+<p>When our <code class="highlighter-rouge">collectAndAnimateSharedViews</code> is called, we are at the first step above and therefore only have access to React elements. React elements are plain objects and do not have a <code class="highlighter-rouge">getBoundingBox</code> method or anything remotely related!</p>
+
+<p>To learn more about how React works, I recommend <a href="https://facebook.github.io/react/blog/2015/12/18/react-components-elements-and-instances.html">this post</a> by Dan Abramov.</p>
+
+<h3 id="challenge-3-layout-information-only-comes-after-the-virtual-tree-creation-step">Challenge 3: Layout information only comes AFTER the virtual tree creation step</h3>
+
+<p>Why couldn’t we have this much needed <code class="highlighter-rouge">getBoundingBox</code> method on React elements?</p>
+
+<p>This is by design. Layout information, such as bounding boxes, is only available when a native widget gets laid out on the screen. However, when we are at the step 1 of the React rendering process, the corresponding native widgets may have not been laid out or even created yet!</p>
+
+<p>This is why our first attempt of <code class="highlighter-rouge">cloneAndAnimateSharedViews</code> won’t work!</p>
+
+<p><a name="solution"></a></p>
+
+<h2 id="my-solution">My solution</h2>
+<p>So what else are on the table? Here’s my approach in a nutshell:</p>
+
+<ul>
+  <li><strong>“Register” shared views on mount:</strong> Instead of redoing the traversal, we register shared views after they are mounted.</li>
+  <li><strong>UIManager:</strong> We’ll wait until the views are laid out before trying to obtain their layout information. Using the <code class="highlighter-rouge">onLayout</code> props, we call <code class="highlighter-rouge">UIManager</code> to measure bounding boxes at the right time.</li>
+</ul>
+
+<p>Along the way, we store information such as shared views and bounding boxes as the state of <code class="highlighter-rouge">SharedElementsTransitioner</code>. This allows us to code in the familiar React paradigm and enable us to take advantage of things like <code class="highlighter-rouge">shouldComponentUpdate</code> to improve the performance of animations.</p>
+
+<p>Next let’s check out the code!</p>
+
+<h3 id="api">API</h3>
+<p>Here’s how a user can mark an element as shared in the component’s <code class="highlighter-rouge">render</code> method:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// on photo grid screen</span>
+<span class="p">&lt;</span><span class="nc">SharedView</span> <span class="na">name=</span><span class="s1">'photo1'</span> <span class="na">containerRouteName=</span><span class="s1">'PhotoGrid'</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nc">Image</span> <span class="na">source=</span><span class="si">{</span><span class="nx">image</span><span class="si">}</span> <span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nc">SharedView</span><span class="p">&gt;</span>
+
+<span class="c1">// on photo detail screen</span>
+<span class="p">&lt;</span><span class="nc">SharedView</span> <span class="na">name=</span><span class="s1">'photo1'</span> <span class="na">containerRouteName=</span><span class="s1">'PhotoDetail'</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nc">Image</span> <span class="na">source=</span><span class="si">{</span><span class="nx">image</span><span class="si">}</span> <span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nc">SharedView</span><span class="p">&gt;</span></code></pre></div>
+
+<ul>
+  <li><code class="highlighter-rouge">name</code>: a name unique across the scene for pairing up the shared views on different scenes.</li>
+  <li><code class="highlighter-rouge">containerRouteName</code>: allows us to determine whether a shared view is on the “from” scene or “to” scene.</li>
+</ul>
+
+<h3 id="register-shared-views-on-mount">“Register” shared views on mount</h3>
+<p>This is how our <code class="highlighter-rouge">SharedView</code> looks like. Just take a quick glance and I’ll explain after the code block.</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kr">class</span> <span class="nx">SharedView</span> <span class="kr">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="kr">static</span> <span class="nx">contextTypes</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">registerSharedView</span><span class="p">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">func</span><span class="p">,</span>
+    <span class="na">unregisterSharedView</span><span class="p">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">func</span><span class="p">,</span>
+  <span class="p">};</span>
+  <span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="p">{</span> <span class="nx">registerSharedView</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">registerSharedView</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+    <span class="kr">const</span> <span class="p">{</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">containerRouteName</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">;</span>
+    <span class="p">....</span>
+    <span class="nx">registerSharedView</span><span class="p">(</span><span class="k">new</span> <span class="nx">SharedItem</span><span class="p">(</span>
+      <span class="nx">name</span><span class="p">,</span>
+      <span class="nx">containerRouteName</span><span class="p">,</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">render</span><span class="p">(),</span>
+      <span class="nx">nativeHandle</span><span class="p">,</span>
+    <span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="nx">componentWillUnmount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="p">{</span> <span class="nx">unregisterSharedView</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">unregisterSharedView</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+    <span class="kr">const</span> <span class="p">{</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">containerRouteName</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">;</span>
+    <span class="nx">unregisterSharedView</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">containerRouteName</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<h4 id="define-registerunregister-functions-in-context">Define register/unregister functions in <code class="highlighter-rouge">context</code></h4>
+
+<p>To save us from the trouble of traversing the tree, we just piggyback on React’s internal traversal – when the shared views are mounted, save it somewhere for later use.</p>
+
+<p>I chose to save the shared views as the state of the <code class="highlighter-rouge">SharedElementsTransitioner</code>. I also used <code class="highlighter-rouge">context</code> to save me from having to pass the register/unregister function all over the place. (To learn more about <code class="highlighter-rouge">context</code>s, read <a href="https://facebook.github.io/react/docs/context.html">this</a>)</p>
+
+<p>So in <code class="highlighter-rouge">SharedElementsTransitioner</code>, its child context is defined like so:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kr">class</span> <span class="nx">MaterialSharedElementTransitioner</span> <span class="kr">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="p">....</span>
+  <span class="kr">static</span> <span class="nx">childContextTypes</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">registerSharedView</span><span class="p">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">func</span><span class="p">,</span>
+    <span class="na">unregisterSharedView</span><span class="p">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">PropTypes</span><span class="p">.</span><span class="nx">func</span><span class="p">,</span>
+  <span class="p">}</span>
+  <span class="nx">getChildContext</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="nx">registerSharedView</span><span class="p">(</span><span class="na">sharedItem</span><span class="p">:</span> <span class="nx">SharedItem</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">....</span>
+      <span class="p">},</span>
+      <span class="nx">unregisterSharedView</span><span class="p">(</span><span class="na">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="na">containerRouteName</span><span class="p">:</span> <span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">....</span>
+      <span class="p">},</span>
+    <span class="p">};</span>
+  <span class="p">}</span>    
+<span class="p">}</span></code></pre></div>
+
+<h4 id="itemstomeasure"><code class="highlighter-rouge">itemsToMeasure</code></h4>
+
+<p>In <code class="highlighter-rouge">registerSharedView</code>, in addition to saving the shared item to a collection, we also maintain an <code class="highlighter-rouge">itemsToMeasure</code> for convenience. This way we’ll know which shared views are “active” and require the bounding box information to create the animation.</p>
+
+<p>The implementation of <code class="highlighter-rouge">registerSharedView</code> look like this:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// class SharedElementsTransitioner</span>
+<span class="nx">registerSharedView</span><span class="p">(</span><span class="nx">sharedItem</span><span class="p">:</span> <span class="nx">SharedItem</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">self</span><span class="p">.</span><span class="nx">addSharedItem</span><span class="p">(</span><span class="nx">sharedItem</span><span class="p">);</span>
+  <span class="kr">const</span> <span class="p">{</span><span class="nx">name</span><span class="p">,</span> <span class="nx">containerRouteName</span><span class="p">}</span> <span class="o">=</span> <span class="nx">sharedItem</span><span class="p">;</span>
+
+  <span class="kr">const</span> <span class="nx">matchingItem</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">sharedItems</span><span class="p">.</span><span class="nx">findMatchByName</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">containerRouteName</span><span class="p">);</span>
+  <span class="c1">// schedule to measure (on layout) if another view with the same name is mounted</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">matchingItem</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">setState</span><span class="p">((</span><span class="nx">prevState</span><span class="p">:</span><span class="nx">State</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span>
+      <span class="na">sharedItems</span><span class="p">:</span> <span class="nx">prevState</span><span class="p">.</span><span class="nx">sharedItems</span><span class="p">,</span>
+      <span class="na">itemsToMeasure</span><span class="p">:</span> <span class="p">[...</span><span class="nx">prevState</span><span class="p">.</span><span class="nx">itemsToMeasure</span><span class="p">,</span> <span class="nx">sharedItem</span><span class="p">,</span> <span class="nx">matchingItem</span><span class="p">]</span>
+    <span class="p">}));</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>BTW: We are using <a href="https://facebook.github.io/react/docs/react-component.html#setstate">the atomic flavor</a> of <code class="highlighter-rouge">setState</code> since the new state depends on the previous state.</p>
+
+<h3 id="get-bounding-boxes-with-uimanager">Get bounding boxes with <code class="highlighter-rouge">UIManager</code></h3>
+
+<p>If we do some googling, we’ll find that <code class="highlighter-rouge">UIManager.measureInWindow()</code> is the actual function that we can rely on to get the much needed bounding boxes.</p>
+
+<p>There are a few special things about this function that we need to cope with:</p>
+
+<ol>
+  <li>It only works after the view is laid out.</li>
+  <li>It works asynchronously.</li>
+  <li>It requires a “native handle” of the view.</li>
+  <li>On Android, it’ll return <code class="highlighter-rouge">undefined</code> if a view is “collapsed”, an optimization done by React Native.</li>
+</ol>
+
+<p>Let’s address them one by one:</p>
+
+<h4 id="1-it-only-works-after-the-view-is-laid-out">1. It only works after the view is laid out.</h4>
+<p>We’ll just have to call the function at the right time, using the <code class="highlighter-rouge">onLayout</code> prop of <code class="highlighter-rouge">React.View</code>. Note, only <code class="highlighter-rouge">React.View</code> has this prop, so we must wrap the <code class="highlighter-rouge">Transitioner</code> with a <code class="highlighter-rouge">View</code>.</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// class SharedElementsTransitioner</span>
+<span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">View</span> <span class="na">onLayout=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">_onLayout</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Transitioner</span>
+        <span class="p">....</span>
+          <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+  <span class="nx">_onLayout</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// call UIManager here</span>
+  <span class="p">}</span>
+<span class="p">}</span><span class="nx">_</span></code></pre></div>
+
+<p><strong>Update (2017-02-03):</strong> This only works on Android. On iOS, the <code class="highlighter-rouge">onLayout</code> function isn’t called during transition. This is perhaps more accurate behavior since the layout of the root view does not change during transition. I had to use the <code class="highlighter-rouge">onLayout</code> on each scene instead:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">_renderScene</span><span class="p">(</span><span class="nx">transitionProps</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">....</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Animated</span><span class="p">.</span><span class="nc">View</span> <span class="p">....</span>
+        <span class="na">onLayout=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">_onLayout</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Scene</span> <span class="na">navigation=</span><span class="si">{</span><span class="nx">navigation</span><span class="si">}</span> <span class="p">/&gt;</span>
+        ....
+    <span class="p">&lt;/</span><span class="nc">Animated</span><span class="p">.</span><span class="nc">View</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span><span class="nx">_</span></code></pre></div>
+
+<h4 id="2-it-works-asynchronously">2. It works asynchronously.</h4>
+
+<p>The function <code class="highlighter-rouge">UIManager.measureInWindow</code> returns the result in a callback:</p>
+
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">UIManager</span><span class="p">.</span><span class="nx">measureInWindow</span><span class="p">(</span>
+    <span class="nx">viewNativeHandle</span><span class="p">,</span>
+    <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="c1">// do something about x, y, width and height</span>
+    <span class="p">}</span>
+<span class="p">)</span></code></pre></div>
+
+<p>Using the awesome <a href="https://jakearchibald.com/2014/es7-async-functions/"><code class="highlighter-rouge">async</code> function in ES7</a>, we can write the function in a synchronous fashion. We can also make sure that we only call <code class="highlighter-rouge">setState</code> once until all items are measured:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// class SharedElementsTransitioner</span>
+<span class="nx">measure</span><span class="p">(</span><span class="nx">sharedItem</span><span class="p">:</span> <span class="nx">SharedItem</span><span class="p">):</span> <span class="nx">Promise</span><span class="o">&lt;</span><span class="nx">Metrics</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nx">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">UIManager</span><span class="p">.</span><span class="nx">measureInWindow</span><span class="p">(</span>
+      <span class="nx">sharedItem</span><span class="p">.</span><span class="nx">nativeHandle</span><span class="p">,</span>
+      <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">resolve</span><span class="p">({</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span> <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="nx">async</span> <span class="nx">_onLayout</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">toUpdate</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="c1">// Measure them one by one</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">item</span> <span class="nx">of</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">itemsToMeasure</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="p">{</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">containerRouteName</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">item</span><span class="p">;</span>
+    <span class="kr">const</span> <span class="nx">metrics</span> <span class="o">=</span> <span class="nx">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">measure</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+    <span class="nx">toUpdate</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">containerRouteName</span><span class="p">,</span> <span class="nx">metrics</span> <span class="p">});</span>
+  <span class="p">}</span>
+  <span class="c1">// Update the state when all metrics are ready</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">toUpdate</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">((</span><span class="na">prevState</span><span class="p">:</span> <span class="nx">State</span><span class="p">):</span> <span class="nx">State</span> <span class="o">=&gt;</span> <span class="p">({</span>
+      <span class="na">sharedItems</span><span class="p">:</span> <span class="nx">prevState</span><span class="p">.</span><span class="nx">sharedItems</span><span class="p">.</span><span class="nx">updateMetrics</span><span class="p">(</span><span class="nx">toUpdate</span><span class="p">),</span>
+      <span class="na">itemsToMeasure</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="p">}));</span>
+  <span class="p">}</span>
+<span class="p">}</span><span class="nx">_</span></code></pre></div>
+
+<h4 id="3-it-requires-a-native-handle-of-the-view">3. It requires a “native handle” of the view.</h4>
+<p>When registering a shared view, we retrieve its <a href="https://facebook.github.io/react/blog/2015/12/18/react-components-elements-and-instances.html">instance</a> using the <a href="https://facebook.github.io/react/docs/refs-and-the-dom.html"><code class="highlighter-rouge">ref</code> prop</a>, and use <code class="highlighter-rouge">findNodeHandle</code> to get the native handle, like so:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kr">import</span> <span class="p">{</span> <span class="nx">findNodeHandle</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'react-native'</span><span class="p">;</span>
+<span class="kr">class</span> <span class="nx">SharedView</span> <span class="kr">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="p">....</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nc">View</span> <span class="p">....</span>
+        <span class="na">ref=</span><span class="si">{</span><span class="nx">c</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">_view</span> <span class="o">=</span> <span class="nx">c</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">children</span><span class="si">}</span>
+      <span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+    <span class="p">)</span>
+  <span class="p">}</span>
+  <span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">....</span>
+    <span class="kr">const</span> <span class="nx">nativeHandle</span> <span class="o">=</span> <span class="nx">findNodeHandle</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_view</span><span class="p">);</span>
+    <span class="nx">registerSharedView</span><span class="p">(</span><span class="k">new</span> <span class="nx">SharedItem</span><span class="p">(</span>
+      <span class="p">....</span>
+      <span class="nx">nativeHandle</span><span class="p">,</span>
+    <span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">}</span><span class="nx">_</span></code></pre></div>
+
+<h4 id="4-it-returns-undefined-on-android-for-collapsed-views">4. It returns <code class="highlighter-rouge">undefined</code> on Android for “collapsed” views.</h4>
+<p>On Android, React may merge multiple views into a single view to achieve better rendering performance. In this case, <code class="highlighter-rouge">UIManager</code> is not able to measure the view anymore and, therefore, returns <code class="highlighter-rouge">undefined</code> in its callback.</p>
+
+<p>We can ask React to skip this optimization for shared views using the <code class="highlighter-rouge">collapsable</code> prop:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kr">class</span> <span class="nx">SharedView</span> <span class="kr">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="p">....</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nc">View</span> <span class="na">collapsable=</span><span class="si">{</span><span class="kc">false</span><span class="si">}</span>
+        <span class="p">....&gt;</span>
+        <span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">children</span><span class="si">}</span>
+      <span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+    <span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>This <code class="highlighter-rouge">collapsable</code> doesn’t seem to have any effect on iOS. We can just leave it as is.</p>
+
+<h3 id="improve-rendering-performance-using-shouldcomponentupdate">Improve rendering performance using <code class="highlighter-rouge">shouldComponentUpdate</code></h3>
+
+<p>So far we’ve been calling <code class="highlighter-rouge">setState</code> in many places:</p>
+
+<ul>
+  <li>When registering shared views</li>
+  <li>When we finish measuring the bounding boxes of shared views</li>
+  <li>When unregistering shared views</li>
+</ul>
+
+<p>If we allow React to update our transitioner on every change, the animation would look miserable, or perhaps no animation all.</p>
+
+<p>We can use <code class="highlighter-rouge">shouldComponentUpdate</code> to make sure that we update the transitioner only after we have enough information to create the animation. In fact, we can safely say that, as long as <code class="highlighter-rouge">itemsToMeasure</code> isn’t empty, it’s not worth it to update.</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">shouldComponentUpdate</span><span class="p">(</span><span class="nx">nextProps</span><span class="p">,</span> <span class="nx">nextState</span><span class="p">:</span> <span class="nx">State</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span> <span class="o">!==</span> <span class="nx">nextProps</span> <span class="o">||</span>  <span class="c1">// when props change, we need to update, as navigationState is in the props</span>
+    <span class="nx">nextState</span><span class="p">.</span><span class="nx">itemsToMeasure</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<h3 id="create-the-animation">Create the animation</h3>
+<p>Do you realize that we haven’t even started on actually creating the animation? All we’ve done so far is preparation. The post is already pretty long though, so let’s leave it to the next post!</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>In this post we talked about how to collect shared views and how to measure their bounding boxes. We haven’t actually created any animations yet. However, “the journey is the reward” – we’ve learned something about React.</p>
+
+<p>My personal takeaways after this project are:</p>
+
+<ul>
+  <li>React renders components in a two-step process. We only have control in the first step (and it’s a good thing).</li>
+  <li>React elements are plain objects. They are just descriptors, not the real native widgets that draw things on your screen.</li>
+  <li>React element trees are shallow. Traversing them isn’t as straightforward as it may sound. We’d need to keep creating React elements along the way by calling <code class="highlighter-rouge">render</code>.</li>
+  <li>Use the atomic flavor of <code class="highlighter-rouge">setState</code> if the new state depends on previous state</li>
+  <li>Use <code class="highlighter-rouge">shouldComponentUpdate</code> to avoid unnecessary component updates</li>
+</ul>
+
+<p>In the next post, we’ll be back to the world of Animated: interpolation, input range, output range etc. Stay tuned!</p>
+
+<p><a name="endofpost"></a></p>
+
+      
+<div class="social">
+  
+  <div class='twitter'>
+    <a href="https://twitter.com/share" class="twitter-share-button"  data-text="React Navigation: Shared element transition 2/3 (bounding boxes)" data-related="lintonye">Tweet</a>
+  </div>
+  
+
+  
+  <div class='facebook'>
+    <div class="fb-share-button" data-layout="button_count"></div>
+  </div>
+  
+
+  
+  <div class='google'>
+    <div class="g-plusone" data-size="medium"></div>
+  </div>
+  
+    
+  
+
+  
+  <div class='reddit'>
+    <a href="//www.reddit.com/submit" onclick="window.open('//www.reddit.com/submit?url=http://lintonye.github.io/2017/01/25/react-navigation-shared-element-transition-2.html&title=React+Navigation%3A+Shared+element+transition+2%2F3+%28bounding+boxes%29'); return false"> <img src="//www.redditstatic.com/spreddit7.gif" alt="submit to reddit" border="0" /> </a>
+  </div>
+  
+</div>
+
+      <script async id="_ck_208846" src="https://forms.convertkit.com/208846?v=6"></script>
+    </section>
+
+    <footer>
+      <address>
+        <img src="/images/linton.jpg">
+        <p>Written by <strong><a rel="author" href="https://twitter.com/lintonye" title="" target="_blank">Linton Ye</a></strong><br>
+          <span class="muted">Freelance full-stack developer in BC Canada (GMT-8). Android, React Native, Node.js, MongoDB, PostgreSQL. <a href="mailto:linton@jimulabs.com">Contact me.</a></span>
+        </p>
+      </address>
+      
+      
+      <section class="post_summary">
+        <h3 class="title">Next up: <a href="/2017/04/22/react-navigation-shared-element-transition-3.html" rel="prefetch">React Navigation: Shared element transition 3/3 (the animation)</a></h3>
+        <p>Blog series: creating custom transitions using NavigationExperimental. This post covers the creation of animations using Animated.</p>
+        <hr>
+      </section>
+      
+      
+      
+      <section class="post_summary">
+        <h3 class="title">Previous story: <a href="/2017/01/23/react-navigation-shared-element-transition-1.html" rel="prefetch">React Navigation: Shared element transition 1/3 (overview)</a></h3>
+        <p>Blog series: creating custom transitions using Transitioner in React Nativigation. This post covers an overview of shared element transition.</p>
+        <hr>
+      </section>
+      
+      
+      <section>
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'linton-react-native-diary';
+
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+      </section>
+      
+    </footer>
+  </div>
+</article>
+
+
+  <footer class="site-footer">
+    <div class="container">
+      &copy; 2017 Linton Ye
+
+      <nav>
+        <a href="/">Blog</a> &middot;
+        <a href="/about.html">About</a>
+      </nav>
+
+      <nav class="social">
+        
+<a href="https://twitter.com/lintonye" title="Follow on Twitter" target="_blank"><i class="icon icon-twitter"></i></a>
+
+
+<a href="https://github.com/lintonye" title="Watch on Github" target="_blank"><i class="icon icon-github"></i></a>
+
+
+<a href="/atom.xml" title="RSS Feed">
+  <i class="icon icon-rss"></i>
+</a>
+
+      </nav>
+      <div>Based on Incorporated theme by <a href="https://sendtoinc.com">Inc</a></div>
+    </div>
+  </footer>
+
+</body>
+</html>

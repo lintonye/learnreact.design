@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React Navigation: An Overview of Transitioner and CardStack &mdash; Linton's React Native Diary</title>
+  <!--[if lt IE 9]><script src='https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js'></script><![endif]-->
+  
+  <link rel="stylesheet" href="/assets/app.css">
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script src="/assets/app.js"></script>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-79925561-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <link rel="shortcut icon" href="/favicon.ico?v2" type="image/x-icon" />
+  <link rel="alternate" type="application/atom+xml" title="Linton's React Native Diary" href="/atom.xml" />
+  <meta name="title" content="React Navigation: An Overview of Transitioner and CardStack ">
+  <link rel="canonical" href="http://lintonye.github.io/2016/12/20/navigation-experimental-custom-transition-1.html">
+  
+  
+  <meta property="og:title" content="React Navigation: An Overview of Transitioner and CardStack"/>
+  <meta property="og:url" content="http://lintonye.github.io/2016/12/20/navigation-experimental-custom-transition-1.html"/>
+  
+  
+  <meta property="og:description" content="Blog series: creating custom transitions using React Navigation. This post covers an overview of Transitioner and CardStack."/>
+  <meta name="description" content="Blog series: creating custom transitions using React Navigation. This post covers an overview of Transitioner and CardStack."/>
+  
+  <meta property="og:site_name" content="Linton's React Native Diary">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav>
+      <a class="brand" href="/">
+        <img src="/images/logo.png" alt="Inc">
+      </a>
+      <a href="/react-course-for-designers.html">React course for designers</a>
+      <a href="/">Blog</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </header>
+
+  
+
+
+<article >
+
+  <div class="container">
+    <header>
+      <div class="meta">
+        By <address><a rel="author" href="" title="Linton Ye" target="_blank">Linton Ye</a></address> &mdash;
+        <time pubdate datetime="2016-20-December" title="Dec 20, 2016">Dec 20, 2016</time> &mdash;
+        
+19 min read
+
+      </div>
+      <h1 class="title">React Navigation: An Overview of Transitioner and CardStack</h1>
+      
+    </header>
+
+    <section>
+      <p><em>This is a series of posts about how to create custom transition “views” using the <code class="highlighter-rouge">Transitioner</code> in <a href="https://reactnavigation.org/">React Navigation</a> (based on “NavigationExperiemental”):</em></p>
+
+<ul>
+  <li><em>An overview of Transitioner and CardStack (this post)</em></li>
+  <li><em><a href="/2016/12/22/navigation-experimental-custom-transition-2.html">Simple transitions: cross fade and Android default</a></em></li>
+  <li><em><a href="/2017/01/23/react-navigation-shared-element-transition-1.html">Shared element transition 1/3: overview</a></em></li>
+  <li><em><a href="/2017/01/25/react-navigation-shared-element-transition-2.html">Shared element transition 2/3: bounding boxes</a></em></li>
+  <li><em><a href="/2017/04/22/react-navigation-shared-element-transition-3.html">Shared element transition 3/3: the animation</a></em></li>
+</ul>
+
+<hr />
+<div class="update-notes" style="background: #e8e8e8; padding: 10px; font-size: 0.8em; border-radius: 5px; margin-bottom: 20px;">
+<p><strong>Update notes (2017-02-01):</strong> This post was written before the release of React Navigation which will replace NavigationExperimental soon. However, this post is still worth reading since React Native uses core classes in NavigationExperimental. Some minor changes:</p>
+<ul>
+  <li><code class="highlighter-rouge">NavigationCardStack</code> and <code class="highlighter-rouge">NavigationTransitioner</code> are now simply <code class="highlighter-rouge">CardStack</code> and <code class="highlighter-rouge">Transitioner</code></li>
+  <li><code class="highlighter-rouge">CardStack</code> now uses bottom-up transition on Android by default, very similar to the androidDefault animation shown below. That’s a great move.</li>
+  <li><code class="highlighter-rouge">CardStack</code> now has a <a href="https://reactnavigation.org/docs/navigators/navigation-prop"><code class="highlighter-rouge">navigation</code> prop</a> which includes the <code class="highlighter-rouge">state</code> and navigation functions.</li>
+</ul>
+</div>
+
+<p><a href="https://facebook.github.io/react-native/docs/navigation.html#navigationexperimental">NavigationExperimental</a> provides great support for custom transition animations. Do you want to create transitions like the following? This series of posts is for you!</p>
+
+<div style="display:flex; flex-direction:row;">
+  <!-- crossFade -->
+  <div class="fivecol" style="float:none; margin-bottom:20px; ">
+  <iframe width="282" height="500" src="//www.youtube.com/embed/6_BGrOQQlko?controls=0&amp;rel=0&amp;showinfo=0;" frameborder="0" allowfullscreen=""></iframe>
+  </div>
+
+  <!-- androidDefault -->
+  <div class="fivecol" style="float:none; margin-bottom:20px; margin-left:10px;">
+  <iframe width="282" height="500" src="//www.youtube.com/embed/oVwq1QDcnOw?controls=0&amp;rel=0&amp;showinfo=0;" frameborder="0" allowfullscreen=""></iframe>
+  </div>
+
+  <!-- materialSharedElement -->
+  <div class="fivecol" style="float:none; margin-bottom:20px; margin-left:10px;">
+  <iframe width="282" height="500" src="//www.youtube.com/embed/efPFJkxa-BQ?controls=0&amp;rel=0&amp;showinfo=0;" frameborder="0" allowfullscreen=""></iframe>
+  </div>
+</div>
+
+<p>Before jumping into it though, let’s first study the built-in container <code class="highlighter-rouge">NavigationCardStack</code> and see how its transition is implemented. If you are not familiar with <code class="highlighter-rouge">NavigationCardStack</code>, see <a href="/2016/06/23/navigation-examples-1.html">my previous post</a> for a simple tutorial on how to use it.</p>
+
+<h1 id="navigationcardstack-in-a-nutshell"><code class="highlighter-rouge">NavigationCardStack</code> in a nutshell</h1>
+
+<p>With <code class="highlighter-rouge">NavigationCardStack</code>, screens are arranged in a virtual stack of cards. When a new card is brought into the scene, it slides in from either the right or bottom edge of the screen. When it leaves the scene, it slides back to its origin.</p>
+
+<div class="fivecol" style="float:none; margin-bottom:20px;">
+<iframe width="282" height="500" src="//www.youtube.com/embed/0e8Irs4gi3M?controls=0&amp;rel=0&amp;showinfo=0;" frameborder="0" allowfullscreen=""></iframe>
+</div>
+
+<p>How does it work? I dug into its source code and here’s what I’ve found in a nutshell:</p>
+
+<ul>
+  <li>The <code class="highlighter-rouge">Animated</code> library is the backbone of transition animations.</li>
+  <li><code class="highlighter-rouge">NavigationCardStack</code> is backed by <code class="highlighter-rouge">NavigationTransitioner</code>.</li>
+  <li><code class="highlighter-rouge">NavigationTransitioner</code> creates and passes along two generic values that describe the transition state: <code class="highlighter-rouge">position</code> and <code class="highlighter-rouge">progress</code>.</li>
+  <li><code class="highlighter-rouge">NavigationCardStack</code> converts these values to the actual visual style properties of the incoming and outgoing screens.</li>
+</ul>
+
+<p>Let’s unfold the whole process one step at a time.</p>
+
+<h1 id="a-premier-on-animated">A premier on <code class="highlighter-rouge">Animated</code></h1>
+<p><code class="highlighter-rouge">Animated</code> is a powerful animation library. As mentioned in the <a href="https://facebook.github.io/react-native/docs/animated.html">official document</a>, it “focuses on declarative relationship between inputs and outputs”, like so:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">rotate</span> <span class="o">=</span> <span class="nx">progress</span><span class="p">.</span><span class="nx">interpolate</span><span class="p">({</span>
+    <span class="na">inputRange</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="na">outputRange</span><span class="p">:</span> <span class="p">[</span><span class="s1">'0deg'</span><span class="p">,</span> <span class="s1">'360deg'</span><span class="p">]</span>
+<span class="p">});</span></code></pre></div>
+
+<p>Here, <code class="highlighter-rouge">progress</code> is an “<code class="highlighter-rouge">Animated.Value</code>” that represents a generic, high-level state that changes over time. We can then map (interpolate) this value to an actual visual style property (such as <code class="highlighter-rouge">rotate</code>).</p>
+
+<p>Whenever the original value changes, the visual style is updated accordingly. You just need to “wire” the animated values together (defining the mapping), and the rest is taken care of automatically. All this happens without going through the standard, setState-diff-render cycle in React. This removes a lot of overhead to ensure the smoothness of our animations.</p>
+
+<p><code class="highlighter-rouge">Animated</code> can be typically used this way:</p>
+
+<ul>
+  <li>Create an <code class="highlighter-rouge">Animated.Value</code> and start the animation when appropriate. This code typically lives in upstream where we just care about a generic state and want to delegate the actual rendering to downstream. <code class="highlighter-rouge">NavigationTransitioner</code> is a good example of this (we’ll come back to it later).</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">progress</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animated</span><span class="p">.</span><span class="nx">Value</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="nx">Animated</span><span class="p">.</span><span class="nx">timing</span><span class="p">({</span> <span class="nx">progress</span><span class="p">,</span> <span class="p">{</span> <span class="na">toValue</span><span class="p">:</span> <span class="mi">1</span> <span class="p">}}).</span><span class="nx">start</span><span class="p">();</span></code></pre></div>
+
+<ul>
+  <li>Map the value created above to desired visual style properties, by calling <code class="highlighter-rouge">interpolate()</code>:</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">rotate</span> <span class="o">=</span> <span class="nx">progress</span><span class="p">.</span><span class="nx">interpolate</span><span class="p">({</span>
+   <span class="na">inputRange</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+   <span class="na">outputRange</span><span class="p">:</span> <span class="p">[</span><span class="s1">'0deg'</span><span class="p">,</span> <span class="s1">'360deg'</span><span class="p">]</span>
+<span class="p">});</span></code></pre></div>
+
+<ul>
+  <li>Use the visual style properties created above in a <code class="highlighter-rouge">Animated.View</code> (or <code class="highlighter-rouge">Animated.Text</code>, <code class="highlighter-rouge">Animated.Image</code> etc.) to render the component:</li>
+</ul>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">style</span> <span class="o">=</span> <span class="p">{</span> <span class="na">transform</span><span class="p">:</span> <span class="p">[{</span> <span class="nx">rotate</span> <span class="p">}]};</span>
+<span class="k">return</span> <span class="p">&lt;</span><span class="nc">Animated</span><span class="p">.</span><span class="nc">View</span> <span class="na">style=</span><span class="si">{</span> <span class="nx">style</span> <span class="si">}</span><span class="p">&gt;</span> ... <span class="p">&lt;/</span><span class="nc">Animated</span><span class="p">.</span><span class="nc">View</span><span class="p">&gt;;</span></code></pre></div>
+
+<p>The code above will create a view that spins for 500 milliseconds (the default duration).</p>
+
+<p>Of course, I’ve only scratched the surface of <code class="highlighter-rouge">Animated</code> here. For more details, I’d recommend you to watch <a href="https://www.youtube.com/watch?v=xDlfrcM6YBk&amp;t=1333s">this talk</a> to see what’s possible, read through the <a href="https://facebook.github.io/react-native/docs/animated.html">official document</a>, and check out <a href="https://medium.com/react-native-training/react-native-animations-using-the-animated-api-ebe8e0669fae#.p1ngzm78r">this tutorial</a>.</p>
+
+<h1 id="cardstack-and-transitioner"><code class="highlighter-rouge">CardStack</code> and <code class="highlighter-rouge">Transitioner</code></h1>
+<p>Now that we know <code class="highlighter-rouge">Animated</code>, it’s time to dig into the source code of <code class="highlighter-rouge">NavigationCardStack</code>!</p>
+
+<p>There will be more code than talking from now on. My goal is to provide a guided tour for the source code to make it easier to understand. Only relevant code is shown and the rest are “<code class="highlighter-rouge">....</code>”. It’d perhaps be useful to open the full source on another screen when reading this post.</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kr">class</span> <span class="nx">NavigationCardStack</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="o">&lt;</span><span class="nx">DefaultProps</span><span class="p">,</span> <span class="nx">Props</span><span class="p">,</span> <span class="k">void</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="p">....</span>
+  <span class="nx">render</span><span class="p">():</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Element</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nc">NavigationTransitioner</span>
+        <span class="na">configureTransition=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">_configureTransition</span><span class="si">}</span>
+        <span class="na">navigationState=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">navigationState</span><span class="si">}</span>
+        <span class="na">render=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">_render</span><span class="si">}</span>
+        <span class="na">style=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">style</span><span class="si">}</span>
+      <span class="p">/&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>So a <code class="highlighter-rouge">NavigationCardStack</code> is bascially a <code class="highlighter-rouge">NavigationTransitioner</code>. Let’s follow along:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kr">class</span> <span class="nx">NavigationTransitioner</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="o">&lt;</span><span class="nx">any</span><span class="p">,</span> <span class="nx">Props</span><span class="p">,</span> <span class="nx">State</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="p">....</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="na">props</span><span class="p">:</span> <span class="nx">Props</span><span class="p">,</span> <span class="na">context</span><span class="p">:</span> <span class="nx">any</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">....</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="p">....</span>
+      <span class="na">position</span><span class="p">:</span> <span class="k">new</span> <span class="nx">Animated</span><span class="p">.</span><span class="nx">Value</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">navigationState</span><span class="p">.</span><span class="nx">index</span><span class="p">),</span>
+      <span class="na">progress</span><span class="p">:</span> <span class="k">new</span> <span class="nx">Animated</span><span class="p">.</span><span class="nx">Value</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+    <span class="p">};</span>
+    <span class="p">....</span>
+  <span class="p">}</span>
+
+  <span class="nx">componentWillReceiveProps</span><span class="p">(</span><span class="na">nextProps</span><span class="p">:</span> <span class="nx">Props</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+    <span class="p">....</span>
+    <span class="nx">progress</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+    <span class="kr">const</span> <span class="nx">animations</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="nx">timing</span><span class="p">(</span>
+        <span class="nx">progress</span><span class="p">,</span>
+        <span class="p">{</span>
+          <span class="p">...</span><span class="nx">transitionSpec</span><span class="p">,</span>
+          <span class="na">toValue</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="p">},</span>
+      <span class="p">),</span>
+    <span class="p">];</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">nextProps</span><span class="p">.</span><span class="nx">navigationState</span><span class="p">.</span><span class="nx">index</span> <span class="o">!==</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">navigationState</span><span class="p">.</span><span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">animations</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span>
+        <span class="nx">timing</span><span class="p">(</span>
+          <span class="nx">position</span><span class="p">,</span>
+          <span class="p">{</span>
+            <span class="p">...</span><span class="nx">transitionSpec</span><span class="p">,</span>
+            <span class="na">toValue</span><span class="p">:</span> <span class="nx">nextProps</span><span class="p">.</span><span class="nx">navigationState</span><span class="p">.</span><span class="nx">index</span><span class="p">,</span>
+          <span class="p">},</span>
+        <span class="p">),</span>
+      <span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// update scenes and play the transition</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">(</span><span class="nx">nextState</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="p">....</span>
+      <span class="nx">Animated</span><span class="p">.</span><span class="nx">parallel</span><span class="p">(</span><span class="nx">animations</span><span class="p">).</span><span class="nx">start</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_onTransitionEnd</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+  <span class="p">....</span>
+<span class="p">}</span></code></pre></div>
+
+<p>We see that two <code class="highlighter-rouge">Animated.Value</code>’s are created: <code class="highlighter-rouge">position</code> and <code class="highlighter-rouge">progress</code>. <code class="highlighter-rouge">progress</code> simply goes from <code class="highlighter-rouge">0</code> to <code class="highlighter-rouge">1</code> whereas <code class="highlighter-rouge">position</code> goes from the previous index to the next index of the navigation state. These two values are being animated in parallel. If the index does not change, then only <code class="highlighter-rouge">progress</code> will be animated.</p>
+
+<p>When it’s time to render, <code class="highlighter-rouge">NavigationTransitioner</code> simply delegates to the <code class="highlighter-rouge">render()</code> function in props:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">render</span><span class="p">():</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Element</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">View</span> <span class="p">...&gt;</span>
+      <span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_transitionProps</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_prevTransitionProps</span><span class="p">)</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span></code></pre></div>
+
+<p>The two <code class="highlighter-rouge">Animated.Value</code>’s, <code class="highlighter-rouge">position</code> and <code class="highlighter-rouge">progress</code>, are passed to <code class="highlighter-rouge">render()</code>, as a part of the two parameters <code class="highlighter-rouge">_transitionProps</code> and  <code class="highlighter-rouge">_prevTransitionProps</code>. Here’s how the <code class="highlighter-rouge">transitionProps</code> are constructed:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="p">...</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">_transitionProps</span> <span class="o">=</span> <span class="nx">buildTransitionProps</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">,</span> <span class="nx">nextState</span><span class="p">);</span>
+<span class="p">...</span>
+<span class="kd">function</span> <span class="nx">buildTransitionProps</span><span class="p">(</span>
+  <span class="nx">props</span><span class="p">:</span> <span class="nx">Props</span><span class="p">,</span>
+  <span class="nx">state</span><span class="p">:</span> <span class="nx">State</span><span class="p">,</span>
+<span class="p">):</span> <span class="nx">NavigationTransitionProps</span> <span class="p">{</span>
+  <span class="p">...</span>
+  <span class="kr">const</span> <span class="p">{</span>
+    <span class="nx">position</span><span class="p">,</span>
+    <span class="nx">progress</span><span class="p">,</span>
+    <span class="p">...</span>
+  <span class="p">}</span> <span class="o">=</span> <span class="nx">state</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">position</span><span class="p">,</span>
+    <span class="nx">progress</span><span class="p">,</span>
+    <span class="p">...</span>
+  <span class="p">};</span>
+<span class="p">}</span></code></pre></div>
+
+<p>Why do we pass <code class="highlighter-rouge">position</code> and <code class="highlighter-rouge">progress</code> to the <code class="highlighter-rouge">props.render</code> method? Let the implementor of <code class="highlighter-rouge">props.render</code> create the actual animations!</p>
+
+<h1 id="interpolating-position">Interpolating <code class="highlighter-rouge">position</code></h1>
+
+<p>Do you still remember how <code class="highlighter-rouge">Animated</code> works? We’ll need an <code class="highlighter-rouge">Animated.View</code> whose <code class="highlighter-rouge">style</code> prop is an <code class="highlighter-rouge">Animated.Value</code>.</p>
+
+<p>It’s safe to guess that there must be something like <code class="highlighter-rouge">position.interpolate()</code> in <code class="highlighter-rouge">NavigationCardStack</code> when it renders the view. Let’s track it down:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kr">class</span> <span class="nx">NavigationCardStack</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="o">&lt;</span><span class="nx">DefaultProps</span><span class="p">,</span> <span class="nx">Props</span><span class="p">,</span> <span class="k">void</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="p">...</span>
+  <span class="nx">_renderScene</span><span class="p">(</span><span class="na">props</span><span class="p">:</span> <span class="nx">NavigationSceneRendererProps</span><span class="p">):</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Element</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">isVertical</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">direction</span> <span class="o">===</span> <span class="s1">'vertical'</span><span class="p">;</span>
+
+    <span class="kr">const</span> <span class="nx">style</span> <span class="o">=</span> <span class="nx">isVertical</span> <span class="p">?</span>
+      <span class="nx">NavigationCardStackStyleInterpolator</span><span class="p">.</span><span class="nx">forVertical</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">:</span>
+      <span class="nx">NavigationCardStackStyleInterpolator</span><span class="p">.</span><span class="nx">forHorizontal</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+
+    <span class="p">...</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nc">NavigationCard</span> <span class="p">...</span>
+        <span class="na">style=</span><span class="si">{</span><span class="p">[</span><span class="nx">style</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">cardStyle</span><span class="p">]</span><span class="si">}</span>
+      <span class="p">/&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">class</span> <span class="nx">NavigationCard</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="o">&lt;</span><span class="nx">any</span><span class="p">,</span> <span class="nx">Props</span><span class="p">,</span> <span class="nx">any</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="p">....</span>
+  <span class="nx">render</span><span class="p">():</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Element</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="p">....</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nc">Animated</span><span class="p">.</span><span class="nc">View</span>
+        <span class="na">style=</span><span class="si">{</span><span class="p">[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">main</span><span class="p">,</span> <span class="nx">viewStyle</span><span class="p">]</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="si">{</span><span class="nx">renderScene</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span><span class="si">}</span>
+      <span class="p">&lt;/</span><span class="nc">Animated</span><span class="p">.</span><span class="nc">View</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>Each scene is rendered as a <code class="highlighter-rouge">NavigationCard</code>, which is eventually rendered as an <code class="highlighter-rouge">Animated.View</code>.  Bingo!</p>
+
+<p>Who creates the style for the <code class="highlighter-rouge">NavigationCard</code>? It’s <code class="highlighter-rouge">NavigationCardStackStyleInterpolator.forVertical()</code> (or <code class="highlighter-rouge">forHorizontal</code>)!</p>
+
+<p>We can then find the secrete sauce that maps (interpolates) <code class="highlighter-rouge">position</code> to the location, scale and opacity of the cards. Let’s take a quick glance:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// NavigationCardStackStyleInterpolator.js</span>
+
+<span class="kd">function</span> <span class="nx">forHorizontal</span><span class="p">(</span><span class="nx">props</span><span class="p">:</span> <span class="nx">NavigationSceneRendererProps</span><span class="p">):</span> <span class="nb">Object</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">{</span>
+    <span class="nx">position</span><span class="p">,</span>
+    <span class="p">....</span>
+  <span class="p">}</span> <span class="o">=</span> <span class="nx">props</span><span class="p">;</span>
+
+  <span class="p">....</span>
+  <span class="kr">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">index</span><span class="p">;</span>
+  <span class="kr">const</span> <span class="nx">inputRange</span> <span class="o">=</span> <span class="p">[</span><span class="nx">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">index</span> <span class="o">+</span> <span class="mf">0.99</span><span class="p">,</span> <span class="nx">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+  <span class="kr">const</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">layout</span><span class="p">.</span><span class="nx">initWidth</span><span class="p">;</span>
+  <span class="kr">const</span> <span class="nx">outputRange</span> <span class="o">=</span> <span class="nx">I18nManager</span><span class="p">.</span><span class="nx">isRTL</span> <span class="p">?</span>
+    <span class="p">([</span><span class="o">-</span><span class="nx">width</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">]:</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="nx">number</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">:</span>
+    <span class="p">([</span><span class="nx">width</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">]:</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="nx">number</span><span class="o">&gt;</span><span class="p">);</span>
+
+
+  <span class="kr">const</span> <span class="nx">opacity</span> <span class="o">=</span> <span class="nx">position</span><span class="p">.</span><span class="nx">interpolate</span><span class="p">({</span>
+    <span class="nx">inputRange</span><span class="p">,</span>
+    <span class="na">outputRange</span><span class="p">:</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">0</span><span class="p">]:</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="nx">number</span><span class="o">&gt;</span><span class="p">),</span>
+  <span class="p">});</span>
+
+  <span class="kr">const</span> <span class="nx">scale</span> <span class="o">=</span> <span class="nx">position</span><span class="p">.</span><span class="nx">interpolate</span><span class="p">({</span>
+    <span class="nx">inputRange</span><span class="p">,</span>
+    <span class="na">outputRange</span><span class="p">:</span> <span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">]:</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="nx">number</span><span class="o">&gt;</span><span class="p">),</span>
+  <span class="p">});</span>
+
+  <span class="kr">const</span> <span class="nx">translateY</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kr">const</span> <span class="nx">translateX</span> <span class="o">=</span> <span class="nx">position</span><span class="p">.</span><span class="nx">interpolate</span><span class="p">({</span>
+    <span class="nx">inputRange</span><span class="p">,</span>
+    <span class="nx">outputRange</span><span class="p">,</span>
+  <span class="p">});</span>
+
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">opacity</span><span class="p">,</span>
+    <span class="na">transform</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span> <span class="nx">scale</span> <span class="p">},</span>
+      <span class="p">{</span> <span class="nx">translateX</span> <span class="p">},</span>
+      <span class="p">{</span> <span class="nx">translateY</span> <span class="p">},</span>
+    <span class="p">],</span>
+  <span class="p">};</span>
+<span class="p">}</span></code></pre></div>
+
+<p>We can see that <code class="highlighter-rouge">opacity</code>, <code class="highlighter-rouge">scale</code> and <code class="highlighter-rouge">translateX</code> are all interpolations of <code class="highlighter-rouge">position</code> – they’ll change as <code class="highlighter-rouge">position</code> changes. This effectively creates the sliding card animation that we’ve seen earlier.</p>
+
+<p>You probably have questions about how the input/output ranges are set up in this function, but let’s leave them to the <a href="/2016/12/22/navigation-experimental-custom-transition-2.html">next post</a>, where we’ll also start creating our own transitions soon!</p>
+
+<h1 id="summary">Summary</h1>
+<p>Just to repeat a few key points on how the transition animation works in the built-in <code class="highlighter-rouge">NavigationCardStack</code>:</p>
+
+<ul>
+  <li>The <code class="highlighter-rouge">Animated</code> library is the backbone of transition animations.</li>
+  <li><code class="highlighter-rouge">NavigationCardStack</code> is backed by <code class="highlighter-rouge">NavigationTransitioner</code>.</li>
+  <li><code class="highlighter-rouge">NavigationTransitioner</code> creates and passes along two <code class="highlighter-rouge">Animated.Value</code>’s that describe the transition state: <code class="highlighter-rouge">position</code> and <code class="highlighter-rouge">progress</code>.</li>
+  <li><code class="highlighter-rouge">NavigationCardStack</code> converts these values to <code class="highlighter-rouge">translateX</code>, <code class="highlighter-rouge">opacity</code> and <code class="highlighter-rouge">scale</code> properties of the incoming and outgoing screens.</li>
+</ul>
+
+<p>Feel free to ask me questions in the comments below, or suggest topics that you’d like me to write about in future posts. Have a great day!</p>
+
+      
+<div class="social">
+  
+  <div class='twitter'>
+    <a href="https://twitter.com/share" class="twitter-share-button"  data-text="React Navigation: An Overview of Transitioner and CardStack" data-related="lintonye">Tweet</a>
+  </div>
+  
+
+  
+  <div class='facebook'>
+    <div class="fb-share-button" data-layout="button_count"></div>
+  </div>
+  
+
+  
+  <div class='google'>
+    <div class="g-plusone" data-size="medium"></div>
+  </div>
+  
+    
+  
+
+  
+  <div class='reddit'>
+    <a href="//www.reddit.com/submit" onclick="window.open('//www.reddit.com/submit?url=http://lintonye.github.io/2016/12/20/navigation-experimental-custom-transition-1.html&title=React+Navigation%3A+An+Overview+of+Transitioner+and+CardStack'); return false"> <img src="//www.redditstatic.com/spreddit7.gif" alt="submit to reddit" border="0" /> </a>
+  </div>
+  
+</div>
+
+      <script async id="_ck_208846" src="https://forms.convertkit.com/208846?v=6"></script>
+    </section>
+
+    <footer>
+      <address>
+        <img src="/images/linton.jpg">
+        <p>Written by <strong><a rel="author" href="https://twitter.com/lintonye" title="" target="_blank">Linton Ye</a></strong><br>
+          <span class="muted">Freelance full-stack developer in BC Canada (GMT-8). Android, React Native, Node.js, MongoDB, PostgreSQL. <a href="mailto:linton@jimulabs.com">Contact me.</a></span>
+        </p>
+      </address>
+      
+      
+      <section class="post_summary">
+        <h3 class="title">Next up: <a href="/2016/12/22/navigation-experimental-custom-transition-2.html" rel="prefetch">React Navigation: Cross Fade and Android Default Transitions</a></h3>
+        <p>Blog series: creating custom transitions using React Navigation. This post covers inputRange and a couple of simple custom transitions.</p>
+        <hr>
+      </section>
+      
+      
+      
+      <section class="post_summary">
+        <h3 class="title">Previous story: <a href="/2016/06/27/github-pages-custom-domain.html" rel="prefetch">Custom Domains with GitHub Pages</a></h3>
+        <p>A sane step-by-step guide on using custom domains with GitHub Pages</p>
+        <hr>
+      </section>
+      
+      
+      <section>
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'linton-react-native-diary';
+
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+      </section>
+      
+    </footer>
+  </div>
+</article>
+
+
+  <footer class="site-footer">
+    <div class="container">
+      &copy; 2017 Linton Ye
+
+      <nav>
+        <a href="/">Blog</a> &middot;
+        <a href="/about.html">About</a>
+      </nav>
+
+      <nav class="social">
+        
+<a href="https://twitter.com/lintonye" title="Follow on Twitter" target="_blank"><i class="icon icon-twitter"></i></a>
+
+
+<a href="https://github.com/lintonye" title="Watch on Github" target="_blank"><i class="icon icon-github"></i></a>
+
+
+<a href="/atom.xml" title="RSS Feed">
+  <i class="icon icon-rss"></i>
+</a>
+
+      </nav>
+      <div>Based on Incorporated theme by <a href="https://sendtoinc.com">Inc</a></div>
+    </div>
+  </footer>
+
+</body>
+</html>

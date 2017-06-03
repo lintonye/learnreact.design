@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React Navigation: Shared element transition 1/3 (overview) &mdash; Linton's React Native Diary</title>
+  <!--[if lt IE 9]><script src='https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js'></script><![endif]-->
+  
+  <link rel="stylesheet" href="/assets/app.css">
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script src="/assets/app.js"></script>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-79925561-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <link rel="shortcut icon" href="/favicon.ico?v2" type="image/x-icon" />
+  <link rel="alternate" type="application/atom+xml" title="Linton's React Native Diary" href="/atom.xml" />
+  <meta name="title" content="React Navigation: Shared element transition 1/3 (overview) ">
+  <link rel="canonical" href="http://lintonye.github.io/2017/01/23/react-navigation-shared-element-transition-1.html">
+  
+  
+  <meta property="og:title" content="React Navigation: Shared element transition 1/3 (overview)"/>
+  <meta property="og:url" content="http://lintonye.github.io/2017/01/23/react-navigation-shared-element-transition-1.html"/>
+  
+  
+  <meta property="og:description" content="Blog series: creating custom transitions using Transitioner in React Nativigation. This post covers an overview of shared element transition."/>
+  <meta name="description" content="Blog series: creating custom transitions using Transitioner in React Nativigation. This post covers an overview of shared element transition."/>
+  
+  <meta property="og:site_name" content="Linton's React Native Diary">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav>
+      <a class="brand" href="/">
+        <img src="/images/logo.png" alt="Inc">
+      </a>
+      <a href="/react-course-for-designers.html">React course for designers</a>
+      <a href="/">Blog</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </header>
+
+  
+
+
+<article >
+
+  <div class="container">
+    <header>
+      <div class="meta">
+        By <address><a rel="author" href="" title="Linton Ye" target="_blank">Linton Ye</a></address> &mdash;
+        <time pubdate datetime="2017-23-January" title="Jan 23, 2017">Jan 23, 2017</time> &mdash;
+        
+11 min read
+
+      </div>
+      <h1 class="title">React Navigation: Shared element transition 1/3 (overview)</h1>
+      
+    </header>
+
+    <section>
+      <p><em>This is a series of posts about how to create custom transition “views” using the <code class="highlighter-rouge">Transitioner</code> in <a href="https://reactnavigation.org/">React Navigation</a> (based on “NavigationExperiemental”):</em></p>
+
+<ul>
+  <li><em><a href="/2016/12/20/navigation-experimental-custom-transition-1.html">An overview of Transitioner and CardStack</a></em></li>
+  <li><em><a href="/2016/12/22/navigation-experimental-custom-transition-2.html">Simple transitions: cross fade and Android default</a></em></li>
+  <li><em>Shared element transition 1/3: overview (this post)</em></li>
+  <li><em><a href="/2017/01/25/react-navigation-shared-element-transition-2.html">Shared element transition 2/3: bounding boxes</a></em></li>
+  <li><em><a href="/2017/04/22/react-navigation-shared-element-transition-3.html">Shared element transition 3/3: the animation</a></em></li>
+</ul>
+
+<hr />
+
+<p>In the last couple of posts, we’ve learned about how Transitioner/CardStack works and how to create simple transitions by interpolating <code class="highlighter-rouge">AnimatedValue</code>s that the Transitioner creates. Now, let’s try something fancier - shared element transition:</p>
+
+<video controls="" autoplay="">
+  <source src="/images/navigation-custom-transition/shared-elements-trimmed-480p.mov" type="video/mp4" />
+  <!-- <source src="movie.ogg" type="video/ogg"> -->
+  Your browser does not support the video tag.
+</video>
+
+<p>This neat transition was inspired by the <a href="https://material.io/guidelines/patterns/navigational-transitions.html#navigational-transitions-parent-to-child">example in the Material design guideline</a>. We’ll look at an initial implementation which, of course, leaves plenty of room for improvements. And there might be much better approaches. But I think the main points learned via this excise should be useful elsewhere. If you prefer, feel free to dive into <a href="https://github.com/lintonye/react-native-diary/blob/master/transitions/app/MaterialSharedElementTransitioner.js">the source code</a>, play with it and come back as needed.</p>
+
+<h2 id="goals">Goals</h2>
+<p>Taking on it as a personal challenge, I set the following goals before coding:</p>
+
+<ul>
+  <li><strong>Pure JavaScript</strong>: Because <a href="https://blog.getexponent.com/good-practices-why-you-should-use-javascript-whenever-possible-with-react-native-26478ec22334#.1f5rqwn1c">Pure JS is good</a>.</li>
+  <li>
+    <p><strong>Minimal API</strong>: We’re gonna need a way to tell which views are shared and how they are linked. I wanted to minimize user’s effort for doing so.</p>
+  </li>
+  <li><strong>Reasonably smooth on older devices</strong>: Of course 60 FPS is the ultimate goal we should all aim at. But realistically it’s hard to achieve on older devices with pure JavaScript. The default CardStack animation sports about 40 FPS on my Nexus 5, which looks reasonably smooth and usable. Let’s use this as a yardstick and see how much further we can improve the performance.</li>
+</ul>
+
+<h2 id="dissecting-the-animation">Dissecting the animation</h2>
+
+<p>OK, it’s now time to look closely at the animation that we want to create. There are a number of things happening during the 300ms transition window:</p>
+
+<ol>
+  <li>The entire photo grid scene first darkens gradually.</li>
+  <li>The photo thumbnail in the grid is lifted up slightly (by casing a shadow).</li>
+  <li>The thumbnail then moves, zooms and eventually becomes the bigger photo in the detail scene.</li>
+  <li>Along with the photo, its container moves and grows until it fills up the screen.</li>
+</ol>
+
+<p><img src="/images/navigation-custom-transition/shared-element-animation-dissect.png" alt="Animation dissect" /></p>
+
+<p>The most interesting part is the No.3 above which creates an effect that the photo jumps out of the grid and expands itself into the detail scene. We’ll devote most of this post to how it works.</p>
+
+<h2 id="smoke-and-mirrors">Smoke and mirrors</h2>
+
+<p>Do you really believe that there is a single image being shared between the grid and detail screens?</p>
+
+<p>Let’s reveal the magic trick! The truth: nothing is shared and there is still a separate image on each scene. Most of the animation happens on an extra overlay visible only during the transition. BTW: It’s in fact very difficult, <a href="https://github.com/brentvatne/hard-react-native-problems/issues/11">if not impossible</a>, to share a view across different parts in a component hierarchy in React.</p>
+
+<p>It goes like this:</p>
+
+<ul>
+  <li><strong>When the transition is about to start:</strong> We show the overlay and clone the shared views onto the overlay. The detail scene is rendered but invisible, allowing us to calculate the bounding boxes of the shared views on both of the grid and the detail scenes.</li>
+  <li><strong>During the transition:</strong> Using the aforementioned bounding boxes, we animate the cloned views on the overlay.</li>
+  <li><strong>Right after the transition:</strong> We hide the overlay and show the actual detail scene.</li>
+</ul>
+
+<p>Sounds straightforward to implement, right? I thought so in the beginning, however, I had to go through a few iterations to do it properly in the React way, and the asynchronous nature of React Native presents some unique challenges.</p>
+
+<p>Let’s just start coding and see how far we could go.</p>
+
+<h2 id="the-render-methods">The <code class="highlighter-rouge">render*</code> methods</h2>
+<p>Still remember how to use Transitioner? Our <code class="highlighter-rouge">SharedElementsTransitioner</code> just renders to a <code class="highlighter-rouge">Transitioner</code> and defines its <code class="highlighter-rouge">_render</code> function like so:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kr">class</span> <span class="nx">SharedElementsTransitioner</span> <span class="kr">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+  <span class="p">....</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nc">Transitioner</span>
+        <span class="na">render=</span><span class="si">{</span><span class="k">this</span><span class="p">.</span><span class="nx">_render</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">)</span><span class="si">}</span>
+        <span class="p">....</span>
+      <span class="p">/&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+  <span class="nx">_render</span><span class="p">(....)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">scenes</span> <span class="o">=</span> <span class="nx">props</span><span class="p">.</span><span class="nx">scenes</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">scene</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">_renderScene</span><span class="p">({</span> <span class="p">...</span><span class="nx">props</span><span class="p">,</span> <span class="nx">scene</span> <span class="p">}));</span>
+    <span class="kr">const</span> <span class="nx">overlay</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_renderOverlay</span><span class="p">(</span><span class="nx">props</span><span class="p">,</span> <span class="nx">prevProps</span><span class="p">);</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nc">View</span> <span class="na">style=</span><span class="si">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">scenes</span><span class="si">}</span><span class="p">&gt;</span>
+            <span class="si">{</span><span class="nx">scenes</span><span class="si">}</span>
+            <span class="si">{</span><span class="nx">overlay</span><span class="si">}</span>
+        <span class="p">&lt;/</span><span class="nc">View</span><span class="p">&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span><span class="nx">_</span></code></pre></div>
+
+<p>The <code class="highlighter-rouge">_render</code> function is almost the same as that of <code class="highlighter-rouge">CardStack</code> except for the additional overlay where most of the animations take place.</p>
+
+<p>The <code class="highlighter-rouge">_renderOverlay</code> function should be straightforward too. We just render all the shared views there:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// class SharedElementsTransitioner</span>
+ <span class="nx">_renderOverlay</span><span class="p">(....)</span> <span class="p">{</span>
+   <span class="kr">const</span> <span class="nx">sharedViews</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">cloneAndAnimateSharedViews</span><span class="p">(....);</span>
+   <span class="p">....</span>
+   <span class="k">return</span> <span class="p">(</span>
+     <span class="p">&lt;</span><span class="nc">Animated</span><span class="p">.</span><span class="nc">View</span> <span class="na">style=</span><span class="si">{</span><span class="nx">overlayStyle</span><span class="si">}</span><span class="p">&gt;</span>
+       <span class="si">{</span><span class="nx">sharedViews</span><span class="si">}</span>
+     <span class="p">&lt;/</span><span class="nc">Animated</span><span class="p">.</span><span class="nc">View</span><span class="p">&gt;</span>     
+   <span class="p">);</span>
+ <span class="p">}</span><span class="nx">_</span></code></pre></div>
+
+<p>We’ll leave the discussion about this <code class="highlighter-rouge">cloneAndAnimateSharedViews</code> method to the next post (as it’s a long discussion).</p>
+
+<h2 id="creating-animated-styles-for-scenes-and-overlay">Creating animated styles for scenes and overlay</h2>
+
+<p>In order to ensure the overlay to be visible only during transition, we can use the “0.99-cliff” trick discussed in <a href="/2016/12/22/navigation-experimental-custom-transition-2.html#0.99-cliff">the previous post</a>:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="c1">// in _renderOverlay()    //_</span>
+  <span class="kr">const</span> <span class="nx">left</span> <span class="o">=</span> <span class="nx">transitionProps</span><span class="p">.</span><span class="nx">progress</span><span class="p">.</span><span class="nx">interpolate</span><span class="p">({</span>
+    <span class="na">inputRange</span><span class="p">:</span>  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="na">outputRange</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>    <span class="mi">100000</span><span class="p">],</span> <span class="c1">// move it off screen after transition is done</span>
+  <span class="p">});</span>
+  <span class="kr">const</span> <span class="nx">overlayStyle</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">left</span> <span class="p">};</span></code></pre></div>
+
+<p>Here we chose to animate <code class="highlighter-rouge">left</code> instead of <code class="highlighter-rouge">opacity</code> to prevent the overlay from blocking touch events.</p>
+
+<p>Similarly, we apply the “0.99-cliff” treatment to scene opacity in <code class="highlighter-rouge">_renderScene</code> to make sure that the detail scene is initially invisible and only becomes fully opaque when the transition is about to finish. Contrary to the detail scene, the grid scene remains visible during the transition and only becomes invisible right after.</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// class SharedElementsTransitioner</span>
+<span class="nx">_renderScene</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">{</span> <span class="nx">position</span><span class="p">,</span> <span class="nx">scene</span><span class="p">,</span> <span class="nx">progress</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">props</span><span class="p">;</span>
+  <span class="kr">const</span> <span class="p">{</span> <span class="nx">index</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">;</span>
+  <span class="kr">const</span> <span class="nx">opacity</span> <span class="o">=</span> <span class="nx">position</span><span class="p">.</span><span class="nx">interpolate</span><span class="p">({</span>
+    <span class="na">inputRange</span><span class="p">:</span> <span class="p">[</span><span class="nx">index</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nx">index</span><span class="o">-</span><span class="mf">0.01</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">index</span><span class="o">+</span><span class="mf">0.99</span><span class="p">,</span> <span class="nx">index</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span>
+    <span class="na">outputRange</span><span class="p">:[</span><span class="mi">0</span><span class="p">,</span>       <span class="mi">0</span><span class="p">,</span>          <span class="mi">1</span><span class="p">,</span>     <span class="mi">1</span><span class="p">,</span>          <span class="mi">0</span><span class="p">],</span>
+  <span class="p">});</span>
+  <span class="kr">const</span> <span class="nx">style</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">opacity</span> <span class="p">};</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">Animated</span><span class="p">.</span><span class="nc">View</span> <span class="na">style=</span><span class="si">{</span><span class="p">[</span><span class="nx">style</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">scene</span><span class="p">]</span><span class="si">}</span><span class="p">&gt;</span>
+      ....
+    <span class="p">&lt;/</span><span class="nc">Animated</span><span class="p">.</span><span class="nc">View</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span><span class="nx">_</span></code></pre></div>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>OK, let’s take a break for now. We have discussed a high-level plan on how the shared element transition might work: the overlay is the key to create the shared element effect. We also covered some simpler aspects in its implementation: the <code class="highlighter-rouge">render*</code> methods, and how to show/hide scenes and the overlay at the right times.</p>
+
+<p>In the <a href="/2017/01/25/react-navigation-shared-element-transition-2.html">next post</a>, we’ll look into how to actually animate the shared views on the overlay. Bear with me, the fun is still ahead!</p>
+
+      
+<div class="social">
+  
+  <div class='twitter'>
+    <a href="https://twitter.com/share" class="twitter-share-button"  data-text="React Navigation: Shared element transition 1/3 (overview)" data-related="lintonye">Tweet</a>
+  </div>
+  
+
+  
+  <div class='facebook'>
+    <div class="fb-share-button" data-layout="button_count"></div>
+  </div>
+  
+
+  
+  <div class='google'>
+    <div class="g-plusone" data-size="medium"></div>
+  </div>
+  
+    
+  
+
+  
+  <div class='reddit'>
+    <a href="//www.reddit.com/submit" onclick="window.open('//www.reddit.com/submit?url=http://lintonye.github.io/2017/01/23/react-navigation-shared-element-transition-1.html&title=React+Navigation%3A+Shared+element+transition+1%2F3+%28overview%29'); return false"> <img src="//www.redditstatic.com/spreddit7.gif" alt="submit to reddit" border="0" /> </a>
+  </div>
+  
+</div>
+
+      <script async id="_ck_208846" src="https://forms.convertkit.com/208846?v=6"></script>
+    </section>
+
+    <footer>
+      <address>
+        <img src="/images/linton.jpg">
+        <p>Written by <strong><a rel="author" href="https://twitter.com/lintonye" title="" target="_blank">Linton Ye</a></strong><br>
+          <span class="muted">Freelance full-stack developer in BC Canada (GMT-8). Android, React Native, Node.js, MongoDB, PostgreSQL. <a href="mailto:linton@jimulabs.com">Contact me.</a></span>
+        </p>
+      </address>
+      
+      
+      <section class="post_summary">
+        <h3 class="title">Next up: <a href="/2017/01/25/react-navigation-shared-element-transition-2.html" rel="prefetch">React Navigation: Shared element transition 2/3 (bounding boxes)</a></h3>
+        <p>Blog series: creating custom transitions using NavigationExperimental. This post covers key challenges in the implementation.</p>
+        <hr>
+      </section>
+      
+      
+      
+      <section class="post_summary">
+        <h3 class="title">Previous story: <a href="/2016/12/22/navigation-experimental-custom-transition-2.html" rel="prefetch">React Navigation: Cross Fade and Android Default Transitions</a></h3>
+        <p>Blog series: creating custom transitions using React Navigation. This post covers inputRange and a couple of simple custom transitions.</p>
+        <hr>
+      </section>
+      
+      
+      <section>
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'linton-react-native-diary';
+
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+      </section>
+      
+    </footer>
+  </div>
+</article>
+
+
+  <footer class="site-footer">
+    <div class="container">
+      &copy; 2017 Linton Ye
+
+      <nav>
+        <a href="/">Blog</a> &middot;
+        <a href="/about.html">About</a>
+      </nav>
+
+      <nav class="social">
+        
+<a href="https://twitter.com/lintonye" title="Follow on Twitter" target="_blank"><i class="icon icon-twitter"></i></a>
+
+
+<a href="https://github.com/lintonye" title="Watch on Github" target="_blank"><i class="icon icon-github"></i></a>
+
+
+<a href="/atom.xml" title="RSS Feed">
+  <i class="icon icon-rss"></i>
+</a>
+
+      </nav>
+      <div>Based on Incorporated theme by <a href="https://sendtoinc.com">Inc</a></div>
+    </div>
+  </footer>
+
+</body>
+</html>

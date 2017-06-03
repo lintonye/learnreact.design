@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React Navigation: Shared element transition 3/3 (the animation) &mdash; Linton's React Native Diary</title>
+  <!--[if lt IE 9]><script src='https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js'></script><![endif]-->
+  
+  <link rel="stylesheet" href="/assets/app.css">
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script src="/assets/app.js"></script>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-79925561-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <link rel="shortcut icon" href="/favicon.ico?v2" type="image/x-icon" />
+  <link rel="alternate" type="application/atom+xml" title="Linton's React Native Diary" href="/atom.xml" />
+  <meta name="title" content="React Navigation: Shared element transition 3/3 (the animation) ">
+  <link rel="canonical" href="http://lintonye.github.io/2017/04/22/react-navigation-shared-element-transition-3.html">
+  
+  
+  <meta property="og:title" content="React Navigation: Shared element transition 3/3 (the animation)"/>
+  <meta property="og:url" content="http://lintonye.github.io/2017/04/22/react-navigation-shared-element-transition-3.html"/>
+  
+  
+  <meta property="og:description" content="Blog series: creating custom transitions using NavigationExperimental. This post covers the creation of animations using Animated."/>
+  <meta name="description" content="Blog series: creating custom transitions using NavigationExperimental. This post covers the creation of animations using Animated."/>
+  
+  <meta property="og:site_name" content="Linton's React Native Diary">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav>
+      <a class="brand" href="/">
+        <img src="/images/logo.png" alt="Inc">
+      </a>
+      <a href="/react-course-for-designers.html">React course for designers</a>
+      <a href="/">Blog</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </header>
+
+  
+
+
+<article >
+
+  <div class="container">
+    <header>
+      <div class="meta">
+        By <address><a rel="author" href="" title="Linton Ye" target="_blank">Linton Ye</a></address> &mdash;
+        <time pubdate datetime="2017-22-April" title="Apr 22, 2017">Apr 22, 2017</time> &mdash;
+        
+28 min read
+
+      </div>
+      <h1 class="title">React Navigation: Shared element transition 3/3 (the animation)</h1>
+      
+    </header>
+
+    <section>
+      <p><em>This is a series of posts about how to create custom transition “views” using the <code class="highlighter-rouge">Transitioner</code> in <a href="https://reactnavigation.org/">React Navigation</a> (based on “NavigationExperiemental”):</em></p>
+
+<ul>
+  <li><em><a href="/2016/12/20/navigation-experimental-custom-transition-1.html">An overview of Transitioner and CardStack</a></em></li>
+  <li><em><a href="/2016/12/22/navigation-experimental-custom-transition-2.html">Simple transitions: cross fade and Android default</a></em></li>
+  <li><em><a href="/2017/01/23/react-navigation-shared-element-transition-1.html">Shared element transition 1/3: overview</a></em></li>
+  <li><em><a href="/2017/01/25/react-navigation-shared-element-transition-2.html">Shared element transition 2/3: bounding boxes</a></em></li>
+  <li><em>Shared element transition 3/3: the animation (this post)</em></li>
+</ul>
+
+<hr />
+
+<p>Time flies! I really appreciate your patience for this piece. In fact, I’ve been busy with something fairly relevant:</p>
+
+<ol>
+  <li>This <a href="https://github.com/react-community/react-navigation/pull/941">pull request</a> for shared element transition in React Navigation.</li>
+  <li>A <a href="https://github.com/react-community/react-navigation/issues/175">proposal and initial implementation</a> of custom transitions in React Navigation.</li>
+  <li>A couple of courses about React Native (more on that in future posts).</li>
+</ol>
+
+<p>Alright, enough excuses. :) Let’s continue our adventure about shared element transition. In the <a href="/2017/01/25/react-navigation-shared-element-transition-2.html">last post</a>, we’ve discussed the core challenges in implementing shared element transition. Once we get the bounding boxes of the shared elements on both from and to scenes, we’ll be ready to animate them. Let’s finally look at that in this post!</p>
+
+<p>You can find the full source code in <a href="https://github.com/lintonye/react-native-diary/tree/master/transitions">this repo</a>. However, I’ve generalized the core ideas and implemented a generic way to create custom transitions in <a href="https://github.com/react-community/react-navigation/pull/941">this pull request</a>. Feel free to compare the two and you’ll find the connection. Of course the latter should be considered more mature, and it’s still evolving as you can tell from the comments on GitHub.</p>
+
+<h2 id="some-more-preparation">Some more preparation</h2>
+<p>Before actually animating the shared elements, let’s do some prep work: we’ll study closely how to create an overlay, how to clone items onto it, a handy notion that makes things easier (“from” and “to” items), and whether to use <code class="highlighter-rouge">progress</code> or <code class="highlighter-rouge">position</code> to create the animations.</p>
+
+<h3 id="overlay">Overlay</h3>
+<p>Recall that most of the magic happens on an overlay? We want an overlay that covers the entire screen and is visible only during transition.</p>
+
+<p>Aside from making it absolutely positioned, we need to set a high enough elevation value on Android to make sure the overlay covers everything, for example toolbars that usually have higher elevation.</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">styles</span> <span class="o">=</span> <span class="nx">StyleSheet</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">overlay</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">position</span><span class="p">:</span> <span class="s1">'absolute'</span><span class="p">,</span>
+    <span class="na">left</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">right</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">top</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">bottom</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="na">elevation</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="c1">// make sure it's on the top on Android.</span>
+  <span class="p">},</span></code></pre></div>
+
+<p>To show and hide the overlay, we can just animate its opacity:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">animatedContainerStyle</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">opacity</span><span class="p">:</span> <span class="nx">transitionProps</span><span class="p">.</span><span class="nx">progress</span><span class="p">.</span><span class="nx">interpolate</span><span class="p">({</span>
+    <span class="na">inputRange</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.0001</span><span class="p">,</span> <span class="mf">0.9999</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="na">outputRange</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+  <span class="p">})</span>
+<span class="p">};</span></code></pre></div>
+
+<p>Finally, to prevent the overlay from eating up all touch events, we’ll set its <code class="highlighter-rouge">pointerEvents</code> to <code class="highlighter-rouge">none</code>.</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">//</span>
+<span class="p">&lt;</span><span class="nc">Animated</span><span class="p">.</span><span class="nc">View</span> <span class="na">style=</span><span class="si">{</span><span class="p">[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">overlay</span><span class="p">,</span> <span class="nx">animatedContainerStyle</span><span class="p">]</span><span class="si">}</span> <span class="na">pointerEvents=</span><span class="s2">"none"</span><span class="p">&gt;</span>
+  <span class="si">{</span><span class="nx">clones</span><span class="si">}</span>
+<span class="p">&lt;/</span><span class="nc">Animated</span><span class="p">.</span><span class="nc">View</span><span class="p">&gt;</span></code></pre></div>
+
+<h3 id="cloning-shared-elements-and-hiding-the-originals">Cloning shared elements and hiding the originals</h3>
+<p>Now that we have an overlay, we can clone the shared elements using <code class="highlighter-rouge">React.cloneElement()</code>:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">React</span><span class="p">.</span><span class="nx">cloneElement</span><span class="p">(</span><span class="nx">item</span><span class="p">.</span><span class="nx">reactElement</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">style</span><span class="p">:</span> <span class="p">[</span><span class="nx">item</span><span class="p">.</span><span class="nx">reactElement</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">style</span><span class="p">,</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">clonedItem</span><span class="p">,</span> <span class="nx">animatedStyle</span><span class="p">],</span>
+  <span class="na">key</span><span class="p">:</span> <span class="s2">`clone-</span><span class="p">${</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span>
+<span class="p">},</span> <span class="p">[]);</span></code></pre></div>
+
+<p>In the code above, <code class="highlighter-rouge">item.reactElement</code> is a React element (the result of <code class="highlighter-rouge">render()</code>) saved when the shared element registers itself (this is covered in detail in the <a href="/2017/01/25/react-navigation-shared-element-transition-2.html">previous post</a>). <code class="highlighter-rouge">animatedStyle</code> is the style that we are going to create soon to actually animate the cloned views.</p>
+
+<p>To make the transition more realistic, we also want to hide the original views during the transition. This is fairly similar to how we show/hide the overlay:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">originalViewStyle</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">opacity</span><span class="p">:</span> <span class="nx">transitionProps</span><span class="p">.</span><span class="nx">progress</span><span class="p">.</span><span class="nx">interpolate</span><span class="p">({</span>
+    <span class="na">inputRange</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.9999</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="na">outputRange</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+  <span class="p">})</span>
+<span class="p">};</span></code></pre></div>
+
+<h3 id="items-on-from-and-to-routes">Items on “from” and “to” routes</h3>
+<p>In order to animate a shared item, we need to measure its original bounding box before the transition starts, and its final bounding box when the transition completes. But how do we know which item is the origin and which is the destination? We can use a handy notion of “from” and “to” routes.</p>
+
+<p>As shown below, we can get the “from” and “to” routes whenever the component receives a new <code class="highlighter-rouge">navigation</code> prop:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">componentWillReceiveProps</span><span class="p">(</span><span class="nx">nextProps</span><span class="p">:</span> <span class="nx">Props</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">navigation</span> <span class="o">!==</span> <span class="nx">nextProps</span><span class="p">.</span><span class="nx">navigation</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">getRoute</span> <span class="o">=</span> <span class="nx">props</span> <span class="o">=&gt;</span> <span class="nx">props</span><span class="p">.</span><span class="nx">navigation</span> <span class="o">&amp;&amp;</span> <span class="p">{</span>
+      <span class="p">...</span><span class="nx">props</span><span class="p">.</span><span class="nx">navigation</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">routes</span><span class="p">[</span><span class="nx">props</span><span class="p">.</span><span class="nx">navigation</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">index</span><span class="p">],</span>
+      <span class="na">index</span><span class="p">:</span> <span class="nx">props</span><span class="p">.</span><span class="nx">navigation</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">index</span><span class="p">,</span>
+    <span class="p">};</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_fromRoute</span> <span class="o">=</span> <span class="nx">getRoute</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_toRoute</span> <span class="o">=</span> <span class="nx">getRoute</span><span class="p">(</span><span class="nx">nextProps</span><span class="p">);</span>
+    <span class="p">...</span>
+  <span class="p">}</span>
+<span class="p">}</span><span class="nx">_</span></code></pre></div>
+
+<p>Afterwards, we can deduct which items are on “from” and “to” routes, respectively:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">isOnRoute</span> <span class="o">=</span> <span class="nx">route</span> <span class="o">=&gt;</span> <span class="nx">item</span> <span class="o">=&gt;</span> <span class="nx">item</span><span class="p">.</span><span class="nx">routeName</span> <span class="o">===</span> <span class="p">(</span><span class="nx">route</span> <span class="o">&amp;&amp;</span> <span class="nx">route</span><span class="p">.</span><span class="nx">routeName</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">fromItems</span> <span class="o">=</span> <span class="nx">allItems</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">isOnRoute</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_fromRoute</span><span class="p">));</span>
+<span class="kr">const</span> <span class="nx">toItems</span> <span class="o">=</span> <span class="nx">allItems</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">isOnRoute</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_toRoute</span><span class="p">));</span></code></pre></div>
+<p>_</p>
+
+<h3 id="position-or-progress"><code class="highlighter-rouge">position</code> or <code class="highlighter-rouge">progress</code>?</h3>
+<p>If you recall, <code class="highlighter-rouge">transitionProps</code> includes two animated values: <code class="highlighter-rouge">progress</code> and <code class="highlighter-rouge">position</code>. When creating the style for the overlay above, I used <code class="highlighter-rouge">progress</code> just for convenience. Its <code class="highlighter-rouge">inputRange</code> is very simple to set up since the value of <code class="highlighter-rouge">progress</code> always changes from 0 to 1:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">progress</span><span class="p">.</span><span class="nx">interpolate</span><span class="p">({</span>
+  <span class="na">inputRange</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+  <span class="p">...</span>
+<span class="p">});</span></code></pre></div>
+
+<p>However, this simplicity of inputRange is also its disadvantage. Since it always goes from 0 to 1, we cannot use it to distinguish the direction of a transition, i.e. whether we’re opening a new screen, or moving back to an existing screen. We are confined to create the same animation in either direction.</p>
+
+<p>We can see this issue in action by doing the edge swipe gesture on iOS which navigates back to an existing screen.</p>
+
+<iframe width="282" height="500" src="//www.youtube.com/embed/cCKeLtPDQ1c?controls=0&amp;rel=0&amp;showinfo=0;" frameborder="0" allowfullscreen=""></iframe>
+
+<p>As shown above, the shared element on the overlay is never visible while the edge swipe is happening. This is because <code class="highlighter-rouge">progress</code> stays <code class="highlighter-rouge">0</code> which makes the opacity of the overlay always <code class="highlighter-rouge">0</code>.</p>
+
+<p><code class="highlighter-rouge">position</code> is here to the rescue. It represents the index of the current screen in the stack. When opening a new screen, its value increases, e.g. from 0 to 1. On the other direction, its value decreases, e.g from 4 to 3. <code class="highlighter-rouge">position</code> is updated continuously both during the transition and when the user is performing an edge swipe gesture. We can now create different animations for different transition directions based on this value.</p>
+
+<p>Of course it’s trickier to set up the inputRange in the interpolation since the value range isn’t fixed. To handle that, we compute the maximum and minimum indices of “from” and “to” routes, and use them as input range values:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">maxIndex</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_fromRoute</span><span class="p">.</span><span class="nx">index</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_toRoute</span><span class="p">.</span><span class="nx">index</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">minIndex</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_fromRoute</span><span class="p">.</span><span class="nx">index</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_toRoute</span><span class="p">.</span><span class="nx">index</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">animatedContainerStyle</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">opacity</span><span class="p">:</span> <span class="nx">transitionProps</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">interpolate</span><span class="p">({</span>
+    <span class="na">inputRange</span><span class="p">:</span> <span class="p">[</span><span class="nx">minIndex</span><span class="p">,</span> <span class="nx">minIndex</span> <span class="o">+</span> <span class="mf">0.0001</span><span class="p">,</span> <span class="nx">maxIndex</span> <span class="o">-</span> <span class="mf">0.0001</span><span class="p">,</span> <span class="nx">maxIndex</span><span class="p">],</span>
+    <span class="na">outputRange</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+  <span class="p">})</span>
+<span class="p">};</span><span class="nx">_</span></code></pre></div>
+
+<p>Here’s the result after we use <code class="highlighter-rouge">position</code> to interpolate every animated style:</p>
+
+<iframe width="282" height="500" src="//www.youtube.com/embed/ntTj0Y_oWKs?controls=0&amp;rel=0&amp;showinfo=0;" frameborder="0" allowfullscreen=""></iframe>
+
+<h2 id="animating-shared-elements">Animating shared elements</h2>
+<p>It’s now time to animate the shared elements! Even with all the preparation that we’ve done, it’s still trickier than I originally expected (that’s why it took me so much time!). We need to choose which style props to animate based on the type of the view. Please read on.</p>
+
+<h3 id="animating-scale">Animating scale</h3>
+<p>The first approach I thought of was to animate the <code class="highlighter-rouge">scaleX</code> and <code class="highlighter-rouge">scaleY</code> according to the sizes of the shared elements on the from and to scenes.</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">scaleX</span> <span class="o">=</span> <span class="nx">position</span><span class="p">.</span><span class="nx">interpolate</span><span class="p">({</span>
+  <span class="c1">// Note: this assumes fromIndex &lt; toIndex. If fromIndex &gt; toIndex,</span>
+  <span class="c1">// we need to reverse both inputRange and outputRange.</span>
+  <span class="na">inputRange</span><span class="p">:</span> <span class="p">[</span><span class="nx">fromIndex</span><span class="p">,</span> <span class="nx">toIndex</span><span class="p">],</span>
+  <span class="na">outputRange</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="nx">toItem</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span> <span class="o">/</span> <span class="nx">fromItem</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span><span class="p">],</span>
+<span class="p">});</span>
+<span class="p">...</span>
+<span class="kr">const</span> <span class="nx">style</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">transform</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span> <span class="nx">scaleX</span> <span class="p">},</span> <span class="p">{</span> <span class="nx">scaleY</span> <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">};</span></code></pre></div>
+
+<p>There are actually more steps to get the animation exactly right, but let’s skip them since this approach has a problem: if the aspect ratio of the shared item changes when moving to the next scene, the animation will look a little strange:</p>
+
+<iframe width="282" height="500" src="//www.youtube.com/embed/Nk2PG7OZ_mA?controls=0&amp;rel=0&amp;showinfo=0;" frameborder="0" allowfullscreen=""></iframe>
+
+<p>This led me to explore other approaches.</p>
+
+<h3 id="animating-widthheight">Animating width/height</h3>
+<p>In fact if the shared item is an <code class="highlighter-rouge">Image</code>, we can just animate its width and height! (how come didn’t I think of this in the first place…) If the <code class="highlighter-rouge">resizeMode</code> of the shared item remain the same on the from and to scenes, the animation looks pretty good even if the aspect ratio changes.</p>
+
+<iframe width="282" height="500" src="//www.youtube.com/embed/LJl0hNzoWmg?controls=0&amp;rel=0&amp;showinfo=0;" frameborder="0" allowfullscreen=""></iframe>
+
+<p>It’s fairly straightforward to create the animations as well:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">position</span><span class="p">.</span><span class="nx">interpolate</span><span class="p">({</span>
+  <span class="c1">// Note: this assumes fromIndex &lt; toIndex. If fromIndex &gt; toIndex, we need to reverse both inputRange and outputRange.</span>
+  <span class="na">inputRange</span><span class="p">:</span> <span class="p">[</span><span class="nx">fromIndex</span><span class="p">,</span> <span class="nx">toIndex</span><span class="p">],</span>
+  <span class="na">outputRange</span><span class="p">:</span> <span class="p">[</span><span class="nx">fromItem</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="nx">toItem</span><span class="p">.</span><span class="nx">metrics</span><span class="p">.</span><span class="nx">height</span><span class="p">]</span>  
+<span class="p">});</span>
+<span class="p">....</span>
+<span class="kr">const</span> <span class="nx">style</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">top</span><span class="p">,</span>
+<span class="p">}</span></code></pre></div>
+
+<h3 id="animating-fontsize">Animating fontSize</h3>
+<p>Now that we know how to animate images, what about Text? Simply animating width or height or the scale won’t work well. We want to animate its fontSize.</p>
+
+<p>The question is how we could get the font sizes of the “from” and “to” items. We know that font size is defined in the <code class="highlighter-rouge">style</code> prop of a Text. Is it as simple as just extracting it from the style?</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">fontSize</span> <span class="o">=</span> <span class="nx">reactElement</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">fontSize</span><span class="p">;</span></code></pre></div>
+
+<p>Not really. We indeed need to work with the <code class="highlighter-rouge">style</code> prop, but it takes a couple of extra steps to actually get the fontSize.</p>
+
+<p>If we print out the <code class="highlighter-rouge">style</code> prop of a react element, we’ll see something like this:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">style</span><span class="p">:</span> <span class="mi">20</span></code></pre></div>
+
+<p>Why are all styles reduced to just a number? It turns out that the styles are cached in a central registry where we can look up by an index (e.g. the number <code class="highlighter-rouge">20</code> above) and get the actual style object:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kr">import</span> <span class="nx">ReactNativePropRegistry</span> <span class="nx">from</span> <span class="s1">'ReactNativePropRegistry'</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">styleObj</span> <span class="o">=</span> <span class="nx">ReactNativePropRegistry</span><span class="p">.</span><span class="nx">getByID</span><span class="p">(</span><span class="nx">style</span><span class="p">);</span>
+<span class="kr">const</span> <span class="p">{</span> <span class="nx">fontSize</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">styleObj</span><span class="p">;</span></code></pre></div>
+
+<p>Additionally, React Native allows us to assign an array to the <code class="highlighter-rouge">style</code> prop where a style appears at the rear overrides those at the front:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="o">&lt;</span><span class="nx">Text</span> <span class="nx">style</span><span class="o">=</span><span class="p">{[</span><span class="nx">styles</span><span class="p">.</span><span class="nx">commonText</span><span class="p">,</span> <span class="p">{</span> <span class="na">fontSize</span><span class="p">:</span> <span class="mi">20</span> <span class="p">}]}</span><span class="o">&gt;</span></code></pre></div>
+
+<p>This needs some special treatment. We need to recursively walk through the embedded arrays to find the last fontSize and extract its value, either from the registry or directly if it’s a style object.</p>
+
+<p>To put things together, we can get the font size of a React element like so:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kr">import</span> <span class="nx">ReactNativePropRegistry</span> <span class="nx">from</span> <span class="s1">'ReactNativePropRegistry'</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">findLastFontSize</span> <span class="o">=</span> <span class="p">(</span><span class="nx">style</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">_</span><span class="p">.</span><span class="nx">isNumber</span><span class="p">(</span><span class="nx">style</span><span class="p">))</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">styleObj</span> <span class="o">=</span> <span class="nx">ReactNativePropRegistry</span><span class="p">.</span><span class="nx">getByID</span><span class="p">(</span><span class="nx">style</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">styleObj</span> <span class="o">&amp;&amp;</span> <span class="nx">styleObj</span><span class="p">.</span><span class="nx">fontSize</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">_</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">style</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">style</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kr">const</span> <span class="nx">fontSize</span> <span class="o">=</span> <span class="nx">findLastFontSize</span><span class="p">(</span><span class="nx">style</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">_</span><span class="p">.</span><span class="nx">isNumber</span><span class="p">(</span><span class="nx">fontSize</span><span class="p">))</span> <span class="k">return</span> <span class="nx">fontSize</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">_</span><span class="p">.</span><span class="nx">isObject</span><span class="p">(</span><span class="nx">style</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">style</span><span class="p">.</span><span class="nx">fontSize</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="kc">undefined</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kr">const</span> <span class="nx">getFontSize</span> <span class="o">=</span> <span class="nx">element</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">{</span> <span class="nx">style</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">element</span><span class="p">.</span><span class="nx">props</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">findLastFontSize</span><span class="p">(</span><span class="nx">style</span><span class="p">);</span>
+<span class="p">}</span></code></pre></div>
+
+<p>After we know the font size of both “from” and “to” items, it is a cakewalk to animate them.</p>
+
+<h2 id="revisiting-goals">Revisiting goals</h2>
+<p>OK Great! By far we’ve covered all aspects of creating a shared element transition. At the <a href="/2017/01/23/react-navigation-shared-element-transition-1.html">beginning</a>, we set three goals for this experiment. Let’s revisit them to see how well we are doing:</p>
+
+<h3 id="1-pure-javascript">1. Pure JavaScript</h3>
+<p>This one is apparent, I’ve never written a line of Java or Objective-C or Swift in the posts, right?</p>
+
+<h3 id="2-minimal-api">2. Minimal API</h3>
+<p>In the second <a href="/2017/01/25/react-navigation-shared-element-transition-2.html">post</a>, I presented an API like this:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="c1">// on photo grid screen</span>
+<span class="p">&lt;</span><span class="nc">SharedView</span> <span class="na">name=</span><span class="s1">'photo1'</span> <span class="na">containerRouteName=</span><span class="s1">'PhotoGrid'</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nc">Image</span> <span class="na">source=</span><span class="si">{</span><span class="nx">image</span><span class="si">}</span> <span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nc">SharedView</span><span class="p">&gt;</span></code></pre></div>
+
+<p>This is reasonable, but you’ll actually notice an even simpler API in the shared element transition <a href="https://github.com/react-community/react-navigation/pull/941">pull request</a>:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="o">&lt;</span><span class="nx">Transition</span><span class="p">.</span><span class="nx">SharedElement</span><span class="p">.</span><span class="nx">Image</span> <span class="nx">id</span><span class="o">=</span><span class="s1">'photo1'</span> <span class="nx">source</span><span class="o">=</span><span class="p">{</span><span class="nx">image</span><span class="p">}</span> <span class="sr">/&gt;</span></code></pre></div>
+
+<p>There are two improvements involved here:</p>
+
+<ol>
+  <li>Instead of using a wrapper <code class="highlighter-rouge">SharedView</code> which can bloat up the jsx fairly quickly, you can use a HOC (higher order component) in the same fashion as <code class="highlighter-rouge">Animated</code> components.</li>
+  <li>The prop <code class="highlighter-rouge">containerRouteName</code> is removed since the same information can be passed via context.</li>
+</ol>
+
+<p>I’m confident that this API is fairly easy to use now. What do you think?</p>
+
+<h3 id="3-reasonably-smooth-on-older-devices">3. Reasonably smooth on older devices</h3>
+<p>I set a performance goal of 40 FPS on an old Nexus 5, roughly the same as the frame rate of the default CardStack animation. So far the best I can achieve is 20-30 FPS.</p>
+
+<p>Let’s see what caused the dropped frames.</p>
+
+<h4 id="usenativedriver--false"><code class="highlighter-rouge">useNativeDriver = false</code></h4>
+<p>The Animated library has a hidden configuration property <code class="highlighter-rouge">useNativeDriver</code>. If set to <code class="highlighter-rouge">true</code>, native code will be used to drive the animation. Otherwise, JavaScript will be the driver which is understandably much slower.</p>
+
+<p>Unlike the default CardStack transition where <code class="highlighter-rouge">useNativeDriver</code> is <code class="highlighter-rouge">true</code>, unfortunately we have to set it to <code class="highlighter-rouge">false</code> for shared element transition.</p>
+
+<p>Why? Remember we animated <code class="highlighter-rouge">width</code> and <code class="highlighter-rouge">height</code> of images to achieve the best result? Sadly, the Animated native driver does not yet support these properties. In fact all properties that affect the layout are not supported yet, such as <code class="highlighter-rouge">left</code> and <code class="highlighter-rouge">top</code>.</p>
+
+<p>On the other hand, if we instead animate the scale properties (<code class="highlighter-rouge">scaleX</code> and <code class="highlighter-rouge">scaleY</code>) of shared elements, and use <code class="highlighter-rouge">translateX</code> and <code class="highlighter-rouge">translateY</code> to update their locations, we can use the native driver. The frame rate will be better, but images will be skewed if their aspect ratio changes during the transition.</p>
+
+<h4 id="extra-updates">Extra updates</h4>
+<p>The second reason for the dropped frames is the extra work required to implement the shared element transition. This includes the measuring of the bounding boxes, and the registration of new shared elements when the component is mounted. The best we can do is to minimize the number of times they are executed.</p>
+
+<p>The bounding box measuring is particularly expensive (in the order of tens of milliseconds per element) because it involves calling into the native code and carrying the data back to JS. Therefore, we need to minimize the number of views that are measured during the transition. That’s why I added a <a href="https://github.com/lintonye/react-navigation/blob/shared-element/src/views/Transition/Transitions/SharedElement.js#L89"><code class="highlighter-rouge">getItemsToMeasure</code> function</a> in the PR which only returns the matching items on the “from” and “to” routes.</p>
+
+<p>It’s worth noting that I have spent quite a bit of time making sure the component updates only when necessary. I added a logging statement in <code class="highlighter-rouge">componentDidUpdate</code> that prints the number of updates so far and then worked to reduce that number.</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">componentDidUpdate</span><span class="p">(</span><span class="nx">prevProps</span><span class="p">,</span> <span class="nx">prevState</span><span class="p">)</span> <span class="p">{</span>
+   <span class="k">this</span><span class="p">.</span><span class="nx">updateCount</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">updateCount</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
+   <span class="k">this</span><span class="p">.</span><span class="nx">updateCount</span><span class="o">++</span><span class="p">;</span>
+   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`======&gt; </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">updateCount</span><span class="p">}</span><span class="s2"> cardStack updated`</span><span class="p">);</span>
+ <span class="p">}</span></code></pre></div>
+
+<p>This technique may be useful for you too to optimize the performance of your components. If you know better ways, let me know!</p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>Alright, this is the final post about shared element transition. You can check out the code in <a href="https://github.com/react-community/react-navigation/pull/941">this PR</a> which also includes an implementation of custom transitions. In the mean time, the code in <a href="https://github.com/lintonye/react-native-diary/tree/master/transitions">this repo</a> might be easier to understand since it’s only about shared element transition. However, it does not include some optimizations I’ve done in the aforementioned PR.</p>
+
+<p>Here’s what we’ve covered in this post:</p>
+
+<ul>
+  <li>How to create, show and hide the overlay</li>
+  <li>How to clone the shared elements and hide the original ones</li>
+  <li>A handy notion that helps us determine which item is the origin and which item is the destination during the transition: “from” and “to” routes</li>
+  <li>A comparison of <code class="highlighter-rouge">position</code> and <code class="highlighter-rouge">progress</code> and why <code class="highlighter-rouge">position</code> is better</li>
+  <li>Various ways to animate the shared elements, and why we don’t want to always animate the scale</li>
+  <li>A discussion about the goals we set at the beginning</li>
+</ul>
+
+<p>This journey turned out to be much longer (and rewarding) than I expected. I hope you have learned one thing or two by reading my struggles and be able to apply them in your own projects. In the meantime, I’m working with the rest of React Navigation team to make custom transitions as easy as possible, so that you don’t have to repeat what I’m doing.</p>
+
+<p>Let me know what you think in the comments! Thanks for reading.</p>
+
+<p><a name="endofpost"></a></p>
+
+      
+<div class="social">
+  
+  <div class='twitter'>
+    <a href="https://twitter.com/share" class="twitter-share-button"  data-text="React Navigation: Shared element transition 3/3 (the animation)" data-related="lintonye">Tweet</a>
+  </div>
+  
+
+  
+  <div class='facebook'>
+    <div class="fb-share-button" data-layout="button_count"></div>
+  </div>
+  
+
+  
+  <div class='google'>
+    <div class="g-plusone" data-size="medium"></div>
+  </div>
+  
+    
+  
+
+  
+  <div class='reddit'>
+    <a href="//www.reddit.com/submit" onclick="window.open('//www.reddit.com/submit?url=http://lintonye.github.io/2017/04/22/react-navigation-shared-element-transition-3.html&title=React+Navigation%3A+Shared+element+transition+3%2F3+%28the+animation%29'); return false"> <img src="//www.redditstatic.com/spreddit7.gif" alt="submit to reddit" border="0" /> </a>
+  </div>
+  
+</div>
+
+      <script async id="_ck_208846" src="https://forms.convertkit.com/208846?v=6"></script>
+    </section>
+
+    <footer>
+      <address>
+        <img src="/images/linton.jpg">
+        <p>Written by <strong><a rel="author" href="https://twitter.com/lintonye" title="" target="_blank">Linton Ye</a></strong><br>
+          <span class="muted">Freelance full-stack developer in BC Canada (GMT-8). Android, React Native, Node.js, MongoDB, PostgreSQL. <a href="mailto:linton@jimulabs.com">Contact me.</a></span>
+        </p>
+      </address>
+      
+      
+      <section class="post_summary">
+        <h3 class="title">Next up: <a href="/2017/05/09/react-for-designers-interviews.html" rel="prefetch">React Course for Designers, Anyone?</a></h3>
+        <p>Should designers code? This is an eternal question.</p>
+        <hr>
+      </section>
+      
+      
+      
+      <section class="post_summary">
+        <h3 class="title">Previous story: <a href="/2017/01/25/react-navigation-shared-element-transition-2.html" rel="prefetch">React Navigation: Shared element transition 2/3 (bounding boxes)</a></h3>
+        <p>Blog series: creating custom transitions using NavigationExperimental. This post covers key challenges in the implementation.</p>
+        <hr>
+      </section>
+      
+      
+      <section>
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'linton-react-native-diary';
+
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+      </section>
+      
+    </footer>
+  </div>
+</article>
+
+
+  <footer class="site-footer">
+    <div class="container">
+      &copy; 2017 Linton Ye
+
+      <nav>
+        <a href="/">Blog</a> &middot;
+        <a href="/about.html">About</a>
+      </nav>
+
+      <nav class="social">
+        
+<a href="https://twitter.com/lintonye" title="Follow on Twitter" target="_blank"><i class="icon icon-twitter"></i></a>
+
+
+<a href="https://github.com/lintonye" title="Watch on Github" target="_blank"><i class="icon icon-github"></i></a>
+
+
+<a href="/atom.xml" title="RSS Feed">
+  <i class="icon icon-rss"></i>
+</a>
+
+      </nav>
+      <div>Based on Incorporated theme by <a href="https://sendtoinc.com">Inc</a></div>
+    </div>
+  </footer>
+
+</body>
+</html>

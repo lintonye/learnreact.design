@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NavigationExperimental Premier: A Simple Recipe &mdash; Linton's React Native Diary</title>
+  <!--[if lt IE 9]><script src='https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js'></script><![endif]-->
+  
+  <link rel="stylesheet" href="/assets/app.css">
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script src="/assets/app.js"></script>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-79925561-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <link rel="shortcut icon" href="/favicon.ico?v2" type="image/x-icon" />
+  <link rel="alternate" type="application/atom+xml" title="Linton's React Native Diary" href="/atom.xml" />
+  <meta name="title" content="NavigationExperimental Premier: A Simple Recipe ">
+  <link rel="canonical" href="http://lintonye.github.io/2016/06/23/navigation-examples-1.html">
+  
+  
+  <meta property="og:title" content="NavigationExperimental Premier: A Simple Recipe"/>
+  <meta property="og:url" content="http://lintonye.github.io/2016/06/23/navigation-examples-1.html"/>
+  <meta property="og:image" content="http://lintonye.github.io/images/navigation-simple/navigation-cover.jpg"/>
+  
+  <meta property="og:description" content="A simple tutorial on NavigationExperimental, the new navigation system that replaces Navigator"/>
+  <meta name="description" content="A simple tutorial on NavigationExperimental, the new navigation system that replaces Navigator"/>
+  
+  <meta property="og:site_name" content="Linton's React Native Diary">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav>
+      <a class="brand" href="/">
+        <img src="/images/logo.png" alt="Inc">
+      </a>
+      <a href="/react-course-for-designers.html">React course for designers</a>
+      <a href="/">Blog</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </header>
+
+  
+<div class="article-cover" style="background-image:url(/images/navigation-simple/navigation-cover.jpg)"></div>
+
+
+
+<article >
+
+  <div class="container">
+    <header>
+      <div class="meta">
+        By <address><a rel="author" href="" title="Linton Ye" target="_blank">Linton Ye</a></address> &mdash;
+        <time pubdate datetime="2016-23-June" title="Jun 23, 2016">Jun 23, 2016</time> &mdash;
+        
+15 min read
+
+      </div>
+      <h1 class="title">NavigationExperimental Premier: A Simple Recipe</h1>
+      
+    </header>
+
+    <section>
+      <p>Thanks to <a href="https://medium.com/@dabit3/first-look-react-native-navigator-experimental-9a7cf39a615b#.4zl60befe">Nader Dabit’s post</a>, I wasted no time when learning about navigation in React Native. The <a href="http://facebook.github.io/react-native/docs/navigator.html"><code class="highlighter-rouge">Navigator</code></a> will be soon <a href="https://github.com/ericvicenti/navigation-rfc/blob/master/Docs/NavigationOverview.md">deprecated</a> and it will be replaced by a different approach, currently called <code class="highlighter-rouge">NavigationExperimental</code>. However, I haven’t found much documentation that is easy to follow for a newbie (me) who doesn’t have much experience in Flux, Redux etc.</p>
+
+<p>I decided to write a simpler tutorial to help myself (and hopefully you too) understand how things work.</p>
+
+<p>In a nutshell, <code class="highlighter-rouge">NavigationExperimental</code> handles navigation with three things:</p>
+
+<ol>
+  <li><code class="highlighter-rouge">NavigationState</code>: exactly as its name says</li>
+  <li><code class="highlighter-rouge">NavigationStateUtils</code>: helper functions for manipulating navigation states</li>
+  <li><code class="highlighter-rouge">NavigationCardStack</code>: the container that renders scenes based on its navigation state</li>
+</ol>
+
+<p>Let me expand each of these while building some simple navigation like this:</p>
+
+<div class="fivecol" style="float:none; margin-bottom:20px;">
+<iframe width="282" height="500" src="//www.youtube.com/embed/enkPGpBBkFE?controls=0&amp;rel=0&amp;showinfo=0" frameborder="0" allowfullscreen=""></iframe>
+</div>
+
+<h2 id="navigationstate"><code class="highlighter-rouge">NavigationState</code></h2>
+<p>According to the <a href="https://github.com/ericvicenti/navigation-rfc/blob/master/Docs/NavigationOverview.md#navigator">proposal (RFC)</a> of the new navigation system, the old <code class="highlighter-rouge">Navigator</code> “owns navigation state and has an imperative API, which goes against the React philosophy of single-directional data flow”. The fix is to define the navigation states declaratively, basically the same way as other things in React: declaring it as a state on the top level component and pass it down in the hierarchy as props.</p>
+
+<p>A typical navigation state looks something like this:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span>
+  <span class="nl">index</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>  <span class="c1">// =&gt; index of the active scene</span>
+  <span class="nx">routes</span><span class="p">:</span> <span class="p">[</span>  <span class="c1">// =&gt; navigation stack</span>
+    <span class="p">{</span><span class="na">key</span><span class="p">:</span> <span class="s1">'screen1'</span><span class="p">},</span>
+    <span class="p">{</span><span class="na">key</span><span class="p">:</span> <span class="s1">'screen2'</span><span class="p">},</span>
+  <span class="p">]</span>
+<span class="p">}</span></code></pre></div>
+
+<p>The <code class="highlighter-rouge">NavigationCardStack</code> is aware of this <code class="highlighter-rouge">NavigationState</code> (actually passed in as a prop) and renders scenes accordingly.</p>
+
+<p>In our simple example app, we can assign the initial navigation state like so:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">class</span> <span class="nx">NavExample</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">super</span><span class="p">(</span><span class="nx">props</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">navigation</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">index</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="na">routes</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span><span class="na">key</span><span class="p">:</span> <span class="s1">'screen1'</span><span class="p">},</span>
+        <span class="p">]</span>
+      <span class="p">}</span>
+      <span class="p">...</span>
+    <span class="p">}</span>
+  <span class="p">...</span></code></pre></div>
+
+<p>This means that the entry of our app is <code class="highlighter-rouge">screen1</code>, and there is initially only one screen in the stack.</p>
+
+<p><em>BTW: One thing I’m not too sure here - why is the stack called <code class="highlighter-rouge">routes</code> instead of <code class="highlighter-rouge">scenes</code>? There seems indeed a difference between <code class="highlighter-rouge">scenes</code> and <code class="highlighter-rouge">routes</code> if you look at the <a href="#sceneProps"><code class="highlighter-rouge">sceneProps</code></a> passed into the <code class="highlighter-rouge">renderScene</code> function.</em></p>
+
+<h2 id="manipulating-states-with-navigationstateutils">Manipulating States with <code class="highlighter-rouge">NavigationStateUtils</code></h2>
+
+<p>Now if we click “Go screen2” and then click “Go screen3”, two scenes will be pushed into the stack. The state will look like this:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span>
+  <span class="nl">navigation</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">index</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">routes</span><span class="p">:</span> <span class="p">[{</span><span class="na">key</span><span class="p">:</span> <span class="s1">'screen1'</span><span class="p">},</span> <span class="p">{</span><span class="na">key</span><span class="p">:</span> <span class="s1">'screen2'</span><span class="p">},</span> <span class="p">{</span><span class="na">key</span><span class="p">:</span> <span class="s1">'screen3'</span><span class="p">}]</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>At this point if we hit the “Go Back” button, <code class="highlighter-rouge">screen3</code> will be popped off from the stack, making <code class="highlighter-rouge">screen2</code> active (on the top of the stack).</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span>
+  <span class="nl">navigation</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">index</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">routes</span><span class="p">:</span> <span class="p">[{</span><span class="na">key</span><span class="p">:</span> <span class="s1">'screen1'</span><span class="p">},</span> <span class="p">{</span><span class="na">key</span><span class="p">:</span> <span class="s1">'screen2'</span><span class="p">}]</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>These stack pushing/popping operations can be done with the helper functions in the <code class="highlighter-rouge">NavigationStateUtils</code> module (<code class="highlighter-rouge">push()</code>, <code class="highlighter-rouge">pop()</code> and <code class="highlighter-rouge">jumpTo()</code>).</p>
+
+<p>Below are the (flow) type definitions of these functions in the <a href="https://github.com/facebook/react-native/blob/master/Libraries/NavigationExperimental/NavigationStateUtils.js">source code</a>:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">push</span><span class="p">(</span><span class="nx">state</span><span class="p">:</span> <span class="nx">NavigationState</span><span class="p">,</span> <span class="nx">route</span><span class="p">:</span> <span class="nx">NavigationRoute</span><span class="p">):</span> <span class="nx">NavigationState</span> <span class="p">{</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">pop</span><span class="p">(</span><span class="nx">state</span><span class="p">:</span> <span class="nx">NavigationState</span><span class="p">):</span> <span class="nx">NavigationState</span> <span class="p">{</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">jumpTo</span><span class="p">(</span><span class="nx">state</span><span class="p">:</span> <span class="nx">NavigationState</span><span class="p">,</span> <span class="nx">key</span><span class="p">:</span> <span class="nx">string</span><span class="p">):</span> <span class="nx">NavigationState</span> <span class="p">{</span>
+  <span class="p">...</span>
+<span class="p">}</span></code></pre></div>
+
+<p>These functions return a new <code class="highlighter-rouge">NavigationState</code> which we can use to make the navigation happen by calling <code class="highlighter-rouge">this.setState()</code>:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">_navigate</span><span class="p">(</span><span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// NavigationStateUtils is used in reduceNavState()</span>
+  <span class="kr">const</span> <span class="nx">newNavState</span> <span class="o">=</span> <span class="nx">reduceNavState</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">navigation</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">newNavState</span> <span class="o">!==</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">navigation</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+      <span class="na">navigation</span><span class="p">:</span> <span class="nx">newNavState</span><span class="p">,</span>
+    <span class="p">})</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>Here this <code class="highlighter-rouge">reduceNavState</code> simply uses <code class="highlighter-rouge">NavigationStateUtils</code> to push or pop routes from the stack, but more complex navigation mechanisms can be implemented as needed (e.g. independent navigation stacks within tabs as in one of the <a href="https://github.com/facebook/react-native/blob/master/Examples/UIExplorer/NavigationExperimental/NavigationCardStack-NavigationHeader-Tabs-example.js">official examples</a>).</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">reduceNavState</span> <span class="o">=</span> <span class="p">(</span><span class="nx">navState</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">{</span><span class="nx">type</span><span class="p">,</span> <span class="nx">key</span><span class="p">}</span> <span class="o">=</span> <span class="nx">action</span><span class="p">;</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="s1">'push'</span><span class="p">:</span>
+      <span class="kr">const</span> <span class="nx">route</span> <span class="o">=</span> <span class="p">{</span><span class="nx">key</span><span class="p">}</span>
+      <span class="k">return</span> <span class="nx">NavStateUtils</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">navState</span><span class="p">,</span> <span class="nx">route</span><span class="p">)</span>
+    <span class="k">case</span> <span class="s1">'pop'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">NavStateUtils</span><span class="p">.</span><span class="nx">pop</span><span class="p">(</span><span class="nx">navState</span><span class="p">)</span>
+    <span class="na">default</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">navState</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
+
+<p>With the <code class="highlighter-rouge">_navigate()</code> function in hand, it’s now fairly easy to move around in our app, for example, creating a button that links to <code class="highlighter-rouge">screen2</code>:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">Button</span> <span class="nx">onPress</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">_navigate</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="p">{</span><span class="na">type</span><span class="p">:</span> <span class="s1">'push'</span><span class="p">,</span> <span class="na">key</span><span class="p">:</span> <span class="s1">'screen2'</span><span class="p">})}</span>
+  <span class="p">...</span><span class="o">/&gt;</span></code></pre></div>
+
+<p>If you are not familiar with <code class="highlighter-rouge">bind()</code>, it’ll create a new function that executes as if we are calling <code class="highlighter-rouge">_navigate({type: 'push', key: 'screen2'})</code>. See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind">here</a> for more information about <code class="highlighter-rouge">bind</code>.</p>
+
+<h2 id="navigationcardstack"><code class="highlighter-rouge">NavigationCardStack</code></h2>
+<p>The last piece of the puzzle is <code class="highlighter-rouge">NavigationCardStack</code>, a component acting as a container that renders scenes depending on the navigation state.</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">NavigationCardStack</span>
+  <span class="nx">renderScene</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">_renderScene</span><span class="p">}</span>  <span class="c1">// a function that performs the rendering</span>
+  <span class="nx">navigationState</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">navigation</span><span class="p">}</span> <span class="c1">// exactly as its name says</span>
+  <span class="nx">renderOverlay</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">_renderHeader</span><span class="p">}</span> <span class="c1">// renders something that's always on the screen</span>
+  <span class="nx">onNavigate</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">_goBack</span><span class="p">}</span> <span class="c1">// this has been renamed to onNavigateBack on master</span>
+<span class="sr">/&gt;</span></code></pre></div>
+
+<p>When the <code class="highlighter-rouge">renderScene</code> function is called, it’ll be provided with a <code class="highlighter-rouge">sceneProps</code> parameter which looks something like this:</p>
+
+<p><a name="sceneProps"></a></p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">{</span>
+  <span class="s2">"layout"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"height"</span><span class="p">:</span> <span class="mi">568</span><span class="p">,</span>
+    <span class="s2">"initHeight"</span><span class="p">:</span> <span class="mi">568</span><span class="p">,</span>
+    <span class="s2">"initWidth"</span><span class="p">:</span> <span class="mi">360</span><span class="p">,</span>
+    <span class="s2">"isMeasured"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">"width"</span><span class="p">:</span> <span class="mi">360</span>
+  <span class="p">},</span>
+  <span class="s2">"navigationState"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"index"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"routes"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"screen1"</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"screen2"</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="s2">"position"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"progress"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"scene"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"index"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"isStale"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"scene_screen2"</span><span class="p">,</span>
+    <span class="s2">"route"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"screen2"</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">"scenes"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"index"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"isStale"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"scene_screen1"</span><span class="p">,</span>
+      <span class="s2">"route"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"screen1"</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s2">"index"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"isStale"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"scene_screen2"</span><span class="p">,</span>
+      <span class="s2">"route"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"screen2"</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span></code></pre></div>
+
+<p>There’s a lot of stuff here, but it looks like <code class="highlighter-rouge">scene.route.key</code> here refers to the key of the active scene (I’ll update this after they finalize the API). We can then decide what screen to render depending on its value, typically in a <code class="highlighter-rouge">switch</code>:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">_renderScene</span><span class="p">(</span><span class="nx">sceneProps</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">sceneProps</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">route</span><span class="p">.</span><span class="nx">key</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">scene</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="s1">'screen1'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Screen1</span> <span class="nx">goScreen2</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">_goScreen2</span><span class="p">}</span>
+          <span class="nx">goScreen3</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">_goScreen3</span><span class="p">}</span>
+          <span class="p">{...</span><span class="nx">sceneProps</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="p">)</span>
+    <span class="k">case</span> <span class="s1">'screen2'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Screen2</span> <span class="nx">goBack</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">_goBack</span><span class="p">}</span>
+          <span class="nx">goScreen3</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">_goScreen3</span><span class="p">}</span>
+          <span class="p">{...</span><span class="nx">sceneProps</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="p">)</span>
+    <span class="k">case</span> <span class="s1">'screen3'</span><span class="p">:</span>
+      <span class="k">return</span> <span class="p">...</span>
+    <span class="p">...</span>
+<span class="p">}</span></code></pre></div>
+
+<p>Of course you have the freedom of rendering anything you like, for example, you can do a pattern matching on the route key and render the same screen for a class of scenes.</p>
+
+<h2 id="support-for-back-button-on-android">Support for Back button on Android</h2>
+<p>On Android, there is a Back button that needs some special treatment when implementing navigation. The standard behavior is to go back to the previous screen until the app exits. We can use the <a href="http://facebook.github.io/react-native/docs/backandroid.html"><code class="highlighter-rouge">BackAndroid</code></a> module to pop up scenes from the stack like so:</p>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kr">class</span> <span class="nx">NavExample</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">...</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">Platform</span><span class="p">.</span><span class="nx">OS</span> <span class="o">===</span> <span class="s1">'android'</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">BackAndroid</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'hardwareBackPress'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">navigation</span><span class="p">.</span><span class="nx">index</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">_goBack</span><span class="p">()</span>
+          <span class="k">return</span> <span class="kc">true</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="k">return</span> <span class="kc">false</span>
+        <span class="p">}</span>
+      <span class="p">})</span>
+    <span class="p">}</span>
+  <span class="p">}</span></code></pre></div>
+
+<h2 id="source-code">Source Code</h2>
+<p>You can find the source code of the example app <a href="https://github.com/lintonye/react-native-diary/tree/master/NavExamples">here</a>. Make sure you use React Native 0.28.0+: <code class="highlighter-rouge">react-native -v</code>. You can upgrade it using <code class="highlighter-rouge">npm install --save react-native@0.28.0</code> (or the latest version).</p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>So here you go, three parts of <code class="highlighter-rouge">NavigationExperimental</code> work together to complete the story: <code class="highlighter-rouge">NavigationState</code>, <code class="highlighter-rouge">NavigationStateUtils</code> and <code class="highlighter-rouge">NavigationCardStack</code>. Navigation states are now good React citizens as they are just normal states or props defined declaratively. This makes the navigation code easier to follow/debug and also open some interesting opportunities, for example, the navigation state can be persisted to the disk during app refreshes.</p>
+
+<p>Did you find this post useful? Do you have other things about navigation to share with us? Chime in below in the comments! Thanks for reading.</p>
+
+      
+<div class="social">
+  
+  <div class='twitter'>
+    <a href="https://twitter.com/share" class="twitter-share-button"  data-text="NavigationExperimental Premier: A Simple Recipe" data-related="lintonye">Tweet</a>
+  </div>
+  
+
+  
+  <div class='facebook'>
+    <div class="fb-share-button" data-layout="button_count"></div>
+  </div>
+  
+
+  
+  <div class='google'>
+    <div class="g-plusone" data-size="medium"></div>
+  </div>
+  
+    
+  
+
+  
+  <div class='reddit'>
+    <a href="//www.reddit.com/submit" onclick="window.open('//www.reddit.com/submit?url=http://lintonye.github.io/2016/06/23/navigation-examples-1.html&title=NavigationExperimental+Premier%3A+A+Simple+Recipe'); return false"> <img src="//www.redditstatic.com/spreddit7.gif" alt="submit to reddit" border="0" /> </a>
+  </div>
+  
+</div>
+
+      <script async id="_ck_208846" src="https://forms.convertkit.com/208846?v=6"></script>
+    </section>
+
+    <footer>
+      <address>
+        <img src="/images/linton.jpg">
+        <p>Written by <strong><a rel="author" href="https://twitter.com/lintonye" title="" target="_blank">Linton Ye</a></strong><br>
+          <span class="muted">Founder of jimu Labs. Full-stack developer, toolsmith, UI designer, entrepreneur and lifelong learner.</span>
+        </p>
+      </address>
+      
+      
+      <section class="post_summary">
+        <h3 class="title">Next up: <a href="/2016/06/27/github-pages-custom-domain.html" rel="prefetch">Custom Domains with GitHub Pages</a></h3>
+        <p>A sane step-by-step guide on using custom domains with GitHub Pages</p>
+        <hr>
+      </section>
+      
+      
+      
+      <section>
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'linton-react-native-diary';
+
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+      </section>
+      
+    </footer>
+  </div>
+</article>
+
+
+  <footer class="site-footer">
+    <div class="container">
+      &copy; 2017 Linton Ye
+
+      <nav>
+        <a href="/">Blog</a> &middot;
+        <a href="/about.html">About</a>
+      </nav>
+
+      <nav class="social">
+        
+<a href="https://twitter.com/lintonye" title="Follow on Twitter" target="_blank"><i class="icon icon-twitter"></i></a>
+
+
+<a href="https://github.com/lintonye" title="Watch on Github" target="_blank"><i class="icon icon-github"></i></a>
+
+
+<a href="/atom.xml" title="RSS Feed">
+  <i class="icon icon-rss"></i>
+</a>
+
+      </nav>
+      <div>Based on Incorporated theme by <a href="https://sendtoinc.com">Inc</a></div>
+    </div>
+  </footer>
+
+</body>
+</html>
