@@ -19,7 +19,7 @@ Should designers code? This is an eternal question.
 
 I believe designers and developers should both learn a bit about the profession of the other side. Armed with a holistic understanding of how design and engineering fit together to create great products, we will become better designers and better developers.
 
-As a developer who's benefited from learning design, I'm convinced that designers want to learn some coding as well. That is why I got so excited about creating a React course tailored for designers (excited about the course too? Sign up [here](/react-course-for-designers.html) and I'll keep you in the loop).
+As a developer who's benefited from learning design, I'm convinced that designers want to learn some coding as well. That is why I got so excited about creating a React course tailored for designers (excited about the course too? Sign up [here](http://learnreact.design) and I'll keep you in the loop).
 
 Wait a second. Am I just thinking in the vacuum though? I decided to [ask Designer News](https://www.designernews.co/stories/82837-react-native-course-for-designers-anyone). The result? I was totally blown away! The post has been the top story for more than a day and stayed on the front page for more than a week. Shortly after the post, 13 designers booked a call with me and wished to offer help. Wow! 13 real people were willing to spare 30 minutes out of their busy schedules to talk to a complete stranger -- me. There must be something that resonates with them!
 
@@ -153,7 +153,7 @@ Here are just a couple of examples:
 # Conclusion
 I am thrilled! I think many designers are motivated to learn coding. React is one of their favorite topics.
 
-Are you inspired to pick up some React as well? Sign up [here](/react-course-for-designers.html), and I'll send you an email when something is ready.
+Are you inspired to pick up some React as well? Sign up [here](http://learnreact.design), and I'll send you an email when something is ready.
 
 # Acknowledgements
 I'd like to thank everyone who spent your precious time to chat with me, made a comment or upvoted my post. Your insights will really have a huge influence on the course. Together, let's create something truly useful for designers!
