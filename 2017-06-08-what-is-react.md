@@ -4,7 +4,6 @@ last-modified: '2017-06-08'
 
 title: "What is React?"
 subtitle: "React terms in plain English and doodles"
-#cover_image: "navigation-custom-transition/transit.jpg"
 
 excerpt: "React terms explained in plain English and doodles🌴🎄⚛"
 
@@ -56,7 +55,7 @@ Forget about it. Let's check out the prestigious art studio "Web Browser"!
 
 So, DOM is a ... tree? Yup a tree. Oddly enough, a lot of things in your computer look like a tree[^1].
 
-DOM works as a model at the studio "Web Browser" -- Let's give him a nickname Domo. Domo's job is to pose in front of Browsera the artist who paints a portrait (or perhaps millions of portraits).
+Let's give DOM a nickname -- what about Domo? Domo works as a model at the studio "Web Browser". His job is to pose in front of Browsera the artist who paints a portrait (or perhaps millions of portraits).
 
 The portraits are what we see in the web browser when visiting a website. A developer's job is to tell Domo what to wear and what pose to make, which determine what those portraits look like in the end. Libraries like jQuery or React are the tools a developer uses to communicate with Domo.
 
