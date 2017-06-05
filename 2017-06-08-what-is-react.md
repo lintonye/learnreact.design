@@ -93,7 +93,7 @@ Heck, this sounds tedious and error-prone! Why can't we just tell Domo **what** 
 
 ![a few sketches of yoga poses on a piece of paper, in sketched tree forms, or perhaps just stickman](/images/what-is-react/08-thinker.png)
 
-More importantly, you can leave placeholders in your request to represent different variations of a same pose.
+Even cooler, you can leave placeholders in your request to represent different variations of a same pose.
 
 This way, when somebody asks for portraits of Domo wearing a different hat, you don't have to talk to Domo again. You can just sit back and let him change it himself.
 
@@ -106,7 +106,7 @@ To put things in perspective, check out this example (try changing Domo's hat):
 <p data-height="375" data-theme-id="light" data-slug-hash="gROrXx" data-default-tab="result" data-user="focuser" data-embed-version="2" data-pen-title="Reactive UI" class="codepen">See the Pen <a href="https://codepen.io/focuser/pen/gROrXx/">Reactive UI</a> by focuser (<a href="https://codepen.io/focuser">@focuser</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-I'll explain its full code in a future post, but at this point you can just look this core piece:
+I'll explain its full code in a future post, but at this point you can just look at this core piece:
 
 {% highlight jsx%}
 const ThinkerWithHat = ({hat}) => (
@@ -152,7 +152,9 @@ Another cool thing about components is that, if you change a component, everythi
 ![change hair style](/images/what-is-react/14-hair-style.png)
 
 # Conclusion
-TODO
+Alright. Hopefully you've learned a bit about React. It's essentially a tool that helps developers manipulate DOM to build user interfaces. Reactive UI, Virtual DOM and components are the three core ideas that make React special. Of course there are other interesting ideas, such as unidirectional data flow, which I'll unfold in a future post.
+
+In the next post, we'll look at how things like ReactJS, React Native and React Sketch.app relate to and different from each other.
 
 I encourage you to go back to the [Learning Goals](#learning-goals) to see if you can answer all the questions. Let me know if you have any questions or comments!
 
