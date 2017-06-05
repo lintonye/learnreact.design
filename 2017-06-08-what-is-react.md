@@ -27,7 +27,7 @@ React, ReactJS, React.js, React Native... How many times have you heard about th
 
 If you are a designer in a team that uses (or considers to use) React, or if you are simply curious about this React thing, this series of posts is for you.
 
-In plain English and doodles🌴🎄, I'll explain the terms in React family and dive into what makes React special. No coding knowledge is required to read this post. But when we actually get our hands dirty with code, what you'd learn here will become a solid foundation.
+In plain English and doodles🌴🎄, I'll explain the terms in React family and dive into what makes React special. No coding knowledge is required to read this post. But when we actually get our hands dirty with code, I hope you could recall what you'd learn here.
 
 Are you ready?
 
@@ -70,15 +70,15 @@ It is a tool that makes it easier for you to talk to Domo, just like a phone. Yo
 For years we have been using jQuery to directly communicate with Domo. It's handy but not without issues.
 
 # React
-Now meet our model agent, React:
+Now meet React:
 
 ![React, model agent](/images/what-is-react/05-model-agent.png)
 
-With React, we no longer directly talk to Domo. React acts as a middleman between a developer and Domo. She smoothes out the communication and streamlines the process of portrait creation.
+With React, we no longer directly talk to Domo. React acts as a middleman between a developer and Domo. He smoothes out the communication and streamlines the process of portrait creation.
 
 ![React as a middleman](/images/what-is-react/06-middleman.png)
 
-React has a few tricks to address the issues of jQuery and other tools. Here are her three main tricks:
+React has a few tricks to address the issues of jQuery and other tools. Here are his three main tricks:
 
 - Reactive UI
 - Virtual DOM
@@ -95,13 +95,13 @@ Heck, this sounds tedious and error-prone! Why can't we just tell Domo **what** 
 
 More importantly, you can leave placeholders in your request to represent different variations of a same pose.
 
-This way, when somebody asks for portraits where Domo wear a different hat, you don't have to talk to Domo again. You can just sit back and let him change it himself.
+This way, when somebody asks for portraits of Domo wearing a different hat, you don't have to talk to Domo again. You can just sit back and let him change it himself.
 
 ![Sketch with ornaments placeholders, Domo with different ornaments](/images/what-is-react/09-thinker-with-hat.png)
 
 This trick is how React got its name. The UI built with React is **reactive**. As a developer, you just need to write down **what** you want and React figures out **how** to do it. When the data change, your UI changes accordingly. You don't need to worry about updating the DOM, React does it for you automatically. The idea of reactive UI greatly simplifies UI development.
 
-To put things in perspective, try this example:
+To put things in perspective, check out this example (try changing Domo's hat):
 
 <p data-height="375" data-theme-id="light" data-slug-hash="gROrXx" data-default-tab="result" data-user="focuser" data-embed-version="2" data-pen-title="Reactive UI" class="codepen">See the Pen <a href="https://codepen.io/focuser/pen/gROrXx/">Reactive UI</a> by focuser (<a href="https://codepen.io/focuser">@focuser</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
@@ -128,7 +128,7 @@ Worse, we'd have to wait for Browsera to finish painting a portrait before being
 
 ![Domo and Browsera tell customer to wait, customer has a lot more requests, customer is frustrated](/images/what-is-react/10-slow-dom.png)
 
-React pulls another trick to fix that. She's very fast at drawing quick sketches. Almost immediately after you tell her your requirement, she's done with a sketch and ready to take the next order. Now no more wait! You can keep telling React about the portraits you want, nonstop. React keeps record of everything with sketches and show it to Domo at the right time.
+React pulls another trick to fix that. He's very fast at drawing quick sketches. Almost immediately after you tell him your requirement, he's done with a sketch and ready to take the next order. Now no more wait! You can keep telling React about the portraits you want, nonstop. React keeps record of everything with sketches and show it to Domo at the right time.
 
 ![React looks at a pile of sketches, quickly builds sketches and arrange them in a queue; Domo poses according to a sketch](/images/what-is-react/11-sketches.png)
 

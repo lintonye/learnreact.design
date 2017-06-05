@@ -14,6 +14,17 @@ author:
   bio: Freelance full-stack developer in BC Canada (GMT-8). Android, React Native, Node.js, MongoDB, PostgreSQL. <a href="mailto:linton@jimulabs.com">Contact me.</a>
   image: linton.jpg
 ---
+
+_This series of posts will be the very first part of the ["React for Designers" course](http://learnreact.design) I'm creating. Be sure to [sign up](http://learnreact.design) to receive exclusive updates!_
+
+- _[What is React?](TODO)_
+- _React, ReactJS, React.js, React Native, Which is Which? (this post)_
+- _Components, props, state etc. (coming soon)_
+
+---
+
+# Learning Goals
+
 # ReactJS, React Native, ReactXYZ...
 Hopefully you've got a hang of what React is, right? But what are those other things, such as ReactJS, React.js, React Native? Let's take a look.
 
