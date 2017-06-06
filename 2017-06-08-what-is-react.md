@@ -14,7 +14,7 @@ author:
   image: linton.jpg
 ---
 
-_This series of posts will be the very first part of the ["React for Designers" course](http://learnreact.design) I'm creating. Be sure to [sign up](http://learnreact.design) to receive exclusive updates!_
+_This series of posts will be the very first part of the ["React for Designers" course](http://learnreact.design) I'm creating. [Sign up](http://learnreact.design) now and receive exclusive updates!_
 
 - _What is React? (this post)_
 - _React, ReactJS, React.js, React Native, Which is Which? (coming soon)_
@@ -22,18 +22,18 @@ _This series of posts will be the very first part of the ["React for Designers" 
 
 ---
 
-React, ReactJS, React.js, React Native... How many times have you heard about these things this week? Are you confused by what they are really for?
+React, ReactJS, React.js, React Native... How many times have you heard about these things lately? Are you confused by what they are really for?
 
-If you are a designer in a team that uses (or considers to use) React, or if you are simply curious about this React thing, this series of posts is for you.
+If you are a designer in a team that uses (or is considering using) React, or if you are simply curious about this "React" thing, these posts are for you.
 
-In plain English and doodles🌴🎄, I'll explain the terms in React family and dive into what makes React special. No coding knowledge is required to read this post. But when we actually get our hands dirty with code, I hope you could recall what you'd learn here.
+In plain English and doodles🌴🎄, I'll explain the terms in React family and dive into what makes React so special. No coding knowledge is required at this point, but we'll roll up the sleeves and get our hands dirty with code soon enough. I want you to get familiar with a few concepts first so you don't feel like you're in the deep end when we get there. You can always come back here if you need to review anything in the future.
 
-Are you ready?
+Are you ready? Let's get started!
 
 <a name="learning-goals" >
 
 # Learning Goals
-After reading this post, I hope you can easily answer these questions:
+After reading this post, I'll get you to come back here. Hopefully you'll be able to answer these questions easily:
 
 - What is DOM?
 - What is React? Where does it fit in the development of an app?
@@ -47,33 +47,33 @@ After reading this post, I hope you can easily answer these questions:
 Let's begin with a couple of other terms that you might have heard of for years. The first one, DOM.
 
 ## DOM
-Well, DOM is Document Object Model. Get it? It's an object model for the document.
+Well, DOM is the Document Object Model. Simple? It's an object model for the document. Right?
 
 Forget about it. Let's check out the prestigious art studio "Web Browser"!
 
 ![Domo poses, Browsera draws](/images/what-is-react/02-domo-browsera.png)
 
-So, DOM is a ... tree? Yup a tree. Oddly enough, a lot of things in your computer look like a tree[^1].
+So, DOM is a ... tree? Yup a tree! Oddly enough, a lot of things in your computer look like a tree[^1].
 
-Let's give DOM a nickname -- what about Domo? Domo works as a model at the studio "Web Browser". His job is to pose in front of Browsera the artist who paints a portrait (or perhaps millions of portraits).
+Let's give DOM a nickname... ummm what about Domo? Domo works as a model at the studio "Web Browser". His job is to pose in front of the artist who paints a portrait (or perhaps millions of portraits).
 
-The portraits are what we see in the web browser when visiting a website. A developer's job is to tell Domo what to wear and what pose to make, which determine what those portraits look like in the end. Libraries like jQuery or React are the tools a developer uses to communicate with Domo.
+The portraits are what we see in the web browser when visiting a website. A developer's job is like that of a director who tells Domo what to wear and what pose to make.  This determines what those portraits look like in the end. jQuery or React are known as libraries and they are the tools a developer uses to communicate with Domo.
 
 ## jQuery
-jQuery is a JavaScript library that makes it easier for a developer to manipulate the DOM. How does it fit in the story of Domo and Browsera?
+jQuery is a JavaScript library that makes it easier for a developer to manipulate the DOM. How does it fit in the story of Domo?
 
-It is a tool that makes it easier for you to talk to Domo, just like a phone. You can call him wherever you are, whenever you want. It's a lot more convenient than before (raw JavaScript) -- remember the time when people had to be physically close enough to have a conversation before the invention of telephones?
+It is a tool that makes it easier for the developer to talk to Domo, just like a phone. You can call him wherever you are, whenever you want. It's a lot more convenient than before (raw JavaScript) -- remember the time when people had to be physically close enough to have a conversation before the invention of telephones?
 
 ![Use phone with a label "jQuery" to talk to Domo, or perhaps just a phone with label](/images/what-is-react/04-jquery-phone.png)
 
 For years we have been using jQuery to directly communicate with Domo. It's handy but not without issues.
 
 # React
-Now meet React:
+Let me introduce you to the new superhero, React:
 
 ![React, model agent](/images/what-is-react/05-model-agent.png)
 
-With React, we no longer directly talk to Domo. React acts as a middleman between a developer and Domo. He smoothes out the communication and streamlines the process of portrait creation.
+With React, developers no longer directly talk to Domo. React acts as a middleman between a developer and Domo. He smoothes out the communication and streamlines the process of portrait creation.
 
 ![React as a middleman](/images/what-is-react/06-middleman.png)
 
@@ -88,7 +88,7 @@ To update the DOM with jQuery, you'd have to specify what element to change at t
 
 ![sequential commands about how to pose](/images/what-is-react/07-step-by-step.png)
 
-Heck, this sounds tedious and error-prone! Why can't we just tell Domo **what** we want instead of **how** to pose[^2]?
+Heck, this sounds tedious and error-prone! Why can't you just tell Domo **what** you want instead of **how** to pose[^2]?
 
 ![a few sketches of yoga poses on a piece of paper, in sketched tree forms, or perhaps just stickman](/images/what-is-react/08-thinker.png)
 
@@ -119,19 +119,19 @@ const ThinkerWithHat = ({hat}) => (
 Notice that you just need to define what you want (a thinker with a hat), and "wire up" the data ("`type = {hat}`"). When the data change (user selects a hat), the UI updates automatically.
 
 ## Virtual DOM
-Another issue of jQuery is about the speed. As customers of the studio, we are very demanding. We want the portraits to come out as quickly as possible. We don't like to wait.
+Another issue of jQuery is about the speed.
 
-However, Domo and Browsera are slow. Not really as slow as a sloth, but it takes time for Domo to change clothes and poses, and it takes time for Browsera to paint.
+As a demanding director, you hate waiting. You want the portraits to come out as quickly as possible. However, Domo and the artist are slow. Not really as slow as a sloth, but it takes time for Domo to change clothes and poses, and it takes time for the artist to paint.
 
-Worse, we'd have to wait for Browsera to finish painting a portrait before being able to talk to Domo again. In fact we cannot do anything but wait. What a waste of time!
+Worse, you'd have to wait for the artist to finish a portrait before being able to talk to Domo again. In fact you cannot do anything but wait. What a waste of time!
 
 ![Domo and Browsera tell customer to wait, customer has a lot more requests, customer is frustrated](/images/what-is-react/10-slow-dom.png)
 
-React pulls another trick to fix that. He's very fast at drawing quick sketches. Almost immediately after you tell him your requirement, he's done with a sketch and ready to take the next order. Now no more wait! You can keep telling React about the portraits you want, nonstop. React keeps record of everything with sketches and show it to Domo at the right time.
+React pulls another trick to fix that. He's very fast at drawing quick sketches. Almost immediately after you tell him your instructions, he's done with a sketch and ready to take the next order. Now no more wait! You can keep telling React about the portraits you want, nonstop. React keeps record of everything with sketches and show it to Domo at the right time.
 
 ![React looks at a pile of sketches, quickly builds sketches and arrange them in a queue; Domo poses according to a sketch](/images/what-is-react/11-sketches.png)
 
-More importantly, React is smart. He can sort through the sketches, remove any duplication and make sure that Domo and Browsera do as little work as possible.
+More importantly, React is smart. He can sort through the sketches, remove any duplication and make sure that Domo and the artist do as little work as possible.
 
 ![React holds two sketch trees in each hand, similar poses, and tells Domo to only lift up his leg (or whatever minor adjustment)](/images/what-is-react/12-optimize-sketches.png)
 
@@ -144,7 +144,7 @@ Components should be straightforward to understand because it's the way how our 
 
 If you are familiar with Sketch, components are a lot like [symbols](https://www.sketchapp.com/learn/documentation/symbols/). Building an app in React is almost all about working with components: finding the best components for the job, fitting one with another, creating new components from existing ones etc.
 
-Back to our studio "Web Browser", you describe your requirement for portraits as components, React translates it into what Domo understands. This saves you a lot time because you don't have to repeat common parts in your order.
+Back to our studio "Web Browser", you describe your requirement for portraits as components, React translates it into what Domo understands. This saves you a lot time because you don't have to repeat common parts in your instructions.
 
 ![sketch made up of components](/images/what-is-react/13-components.png)
 
@@ -161,7 +161,7 @@ I encourage you to go back to the [Learning Goals](#learning-goals) to see if yo
 
 ---
 
-**Want to learn more about React? Be sure to sign up the [React course for Designers](/react-course-for-designers.html) to receive exclusive updates!**
+**Want to learn more about React? [Sign up](http://learnreact.design) now and receive exclusive updates!**
 
 ---
 
