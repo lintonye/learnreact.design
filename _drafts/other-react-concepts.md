@@ -141,3 +141,16 @@ Clock and gears analogy
 
 TODOs:
 - try out Create React App
+
+## DOM: A slightly more technical intro
+In reality, a developer writes HTML which gets turned into a DOM tree, a hierarchical data structure living in a web browser. What is a hierarchical data structure? You can imagine it as a whole bunch of boxes inside boxes.
+
+![boxes inside boxes](/images/what-is-react/02.1-box-in-box.png)
+
+For convenience, these boxes are represented as a chart as below which looks remotely like a upside-down tree:
+
+![a DOM tree](/images/what-is-react/02.2-dom-tree.png)
+
+The browser then renders a web page using the information in the DOM tree, just as Browsera paints a portrait according to Domo's pose. The developer can write JavaScript code to communicate with and update the DOM tree which, as the result, changes the content of the web page.
+
+![HTML -> DOM -> rendering in browser window, JS change DOM](/images/what-is-react/03-html-dom.png)
