@@ -142,6 +142,8 @@ The third trick of React is the concept of components.
 
 Components should be straightforward to understand because it's the way how our real world works. Our cars, houses and even our bodies are all made up of identifiable components that are individual, functional units. These components are made up of smaller components which consist of even smaller components, all the way down to atoms.
 
+If you are familiar with Sketch, components are a lot like [symbols](https://www.sketchapp.com/learn/documentation/symbols/). Building an app in React is almost all about working with components: finding the best components the job, fitting one with another, creating new components from existing ones etc.
+
 Back to our studio "Web Browser", you describe your requirement for portraits as components, React translates it into what Domo understands. This saves you a lot time because you don't have to repeat common parts in your order.
 
 ![sketch made up of components](/images/what-is-react/13-components.png)
