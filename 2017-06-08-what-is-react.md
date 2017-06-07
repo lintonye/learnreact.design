@@ -43,13 +43,13 @@ After reading this post, I'll get you to come back here. Hopefully you'll be abl
 - What is a reactive UI?
 - What are some benefits of components?
 
-# Prologue
+# A Couple Things About Web
 Let's begin with a couple of other terms that you might have heard of for years. The first one, DOM.
 
 ## DOM
 Well, DOM is the Document Object Model. Simple? It's an object model for the document. Right?
 
-Forget about it. Let's check out the prestigious art studio "Web Browser"!
+Forget about it. Let's check out the prestigious art studio "Web Browser"! Can you find DOM in the doodle below?
 
 ![Domo poses, Browsera draws](/images/what-is-react/02-domo-browsera.png)
 
@@ -173,7 +173,7 @@ These illustrations were generously crafted by [Beebee Ye](https://beebeeye.gith
 BTW: Learning to draw is one of my life goals -- hopefully I could show you some better doodles of my own in a few years. 🤔  We'll see...
 
 ## My 8 yo
-From the beginning, I set a goal that this post must be interesting enough for my 8 year old daughter to read, and easy enough for her to understand a couple of things.
+At the beginning, I set a goal that this post must be interesting enough for my 8 year old daughter to read, and easy enough for her to understand a couple of things.
 
 😀 Here's the [proof](TODO).  At least she can recall that DOM is a tree and React is a superman kind of person.
 
