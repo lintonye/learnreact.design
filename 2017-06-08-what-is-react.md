@@ -164,6 +164,27 @@ I encourage you to go back to the [Learning Goals](#learning-goals) to see if yo
 **Want to learn more about React? [Sign up](http://learnreact.design) now and receive exclusive updates!**
 
 ---
+# Backstage
+## Who drew the illustrations?
+Many people asked if I did it myself. Well, I wish I could. 😅 My doodles are like [this](/linton-doodles-2017).
+
+These illustrations were generously crafted by [Beebee Ye](https://beebeeye.github.io/) who has also been instrumental in making sure the post is actually understandable.
+
+BTW: Learning to draw is one of my life goals -- hopefully I could show you some better doodles of my own in a few years. 🤔  We'll see...
+
+## My 8 yo
+From the beginning, I set a goal that this post must be interesting enough for my 8 year old daughter to read, and easy enough for her to understand a couple of things.
+
+😀 Here's the [proof](TODO).  At least she can recall that DOM is a tree and React is a superman kind of person.
+
+She also contributed a few hats in the interactive example above and watched me putting them into the code. That was golden time! Guess which ones were drawn by her? My daughter wants you to answer in the [comments](#endofpost). 👧🏻
+
+## Special thanks
+I feel so lucky that so many of you are interested in this post. I want to thank everyone who has taken the time to read the early drafts, and sent me encouraging words and insightful suggestions.
+
+I want to express my deep gratitude to [Phil K](TODO) who volunteered to be the editor of this post. Man, his suggestions are really what make this post to shine! Thank you again Phil!
+
+---
 
 # Footnotes:
 
