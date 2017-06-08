@@ -57,7 +57,7 @@ Some tentative topics include:
 For more information, check out [this Trello board](https://trello.com/b/E7lYUXqZ/react-for-designers) where you can vote on ideas. I'd really appreciate your feedback!
 
 ## But I'm a designer, why should I learn coding?
-I encourage you to check out this [post](/2017/05/09/react-for-designers-interviews.html) to hear other designers' opinions.
+I encourage you to check out this [post](/2017/05/09/react-for-designers-interviews) to hear other designers' opinions.
 
 Learning to code will help you become better at design. Armed with a better understanding of how things work, you will find the communication with developers much more efficient. Your design ideas would be more convincing and more respected. You can even [design with code](https://blog.framer.com/what-if-a-designer-learns-code-59d790024c9e).
 
