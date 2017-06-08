@@ -43,7 +43,7 @@ After reading this post, I'll get you to come back here. Hopefully you'll be abl
 - What is a reactive UI?
 - What are some benefits of components?
 
-# A Couple Things About Web
+# A Couple Of Things About Web
 Let's begin with a couple of other terms that you might have heard of for years. The first one, DOM.
 
 ## DOM
@@ -175,9 +175,11 @@ BTW: Learning to draw is one of my life goals -- hopefully I could show you some
 ## My 8 yo
 At the beginning, I set a goal that this post must be interesting enough for my 8 year old daughter to read, and easy enough for her to understand a couple of things.
 
-😀 Here's the [proof](TODO).  At least she can recall that DOM is a tree and React talks to DOM.
+😀 At least she can recall that DOM is a tree and React talks to DOM.
 
 She also contributed a few hats in the interactive example above and watched me putting them into the code. That was golden time! Guess which ones were drawn by her? My daughter wants you to answer in the [comments](#endofpost). 👧🏻
+
+<iframe width="96" height="54" src="https://www.youtube.com/embed/o1SL_j5U8AQ?showinfo=0" frameborder="0" allowfullscreen></iframe>
 
 ## Special thanks
 I feel so lucky that so many of you are interested in this post. I want to thank everyone who has taken the time to read the early drafts, and sent me encouraging words and insightful suggestions.
