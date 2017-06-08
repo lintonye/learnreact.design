@@ -4,6 +4,8 @@ last-modified: '2017-06-08'
 
 title: "What is React?"
 subtitle: "React terms in plain English and doodles"
+redirect_from:
+  - /2017-06-08-what-is-react/
 
 excerpt: "React terms explained in plain English and doodles🌴🎄⚛"
 
