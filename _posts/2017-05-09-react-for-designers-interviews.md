@@ -5,6 +5,8 @@ last-modified: '2017-05-09'
 title: "React Course for Designers, Anyone?"
 subtitle: "A report of 10+ interviews with designers"
 #cover_image: "navigation-custom-transition/transit.jpg"
+redirect_from:
+  - /2017/05/09/react-for-designers-interviews.html
 
 excerpt: "Should designers code? This is an eternal question."
 
