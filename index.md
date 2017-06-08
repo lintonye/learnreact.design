@@ -18,7 +18,7 @@ author:
 
 <img src ="/images/designer-interviews/superman.jpg" style="width: 100%"/>
 
-- **Understand the constraints of React, design accordingly**
+- **Understand the constraints of React, design accordingly ([What is React?](/2017/06/08/what-is-react))**
 - **Stop waiting for developers, tweak the styles yourself**
 - **Hand off assets that your developers love**
 - **Empower your design with code, push back when they say it can't be done**
