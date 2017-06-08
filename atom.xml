@@ -4,13 +4,213 @@
  <title>Backstage</title>
  <link href="http://learnreact.design/atom.xml" rel="self"/>
  <link href="http://learnreact.design"/>
- <updated>2017-06-05T23:10:02-07:00</updated>
+ <updated>2017-06-08T07:40:27-07:00</updated>
  <id>http://learnreact.design/atom.xml</id>
  <author>
    <name>Linton Ye</name>
    <uri>http://learnreact.design</uri>
  </author>
 
+ 
+ <entry>
+   <title>What is React?</title>
+   <link href="http://learnreact.design/2017/06/08/what-is-react/"/>
+   <published>2017-06-08T00:00:00-07:00</published>
+   <updated>2017-06-08</updated>
+   <id>http://learnreact.design/2017/06/08/what-is-react</id>
+   <content type="html">&lt;p&gt;&lt;em&gt;This series of posts will be the very first part of the &lt;a href=&quot;http://learnreact.design&quot;&gt;“React for Designers” course&lt;/a&gt; I’m creating. &lt;a href=&quot;http://learnreact.design&quot;&gt;Sign up&lt;/a&gt; now and receive exclusive updates!&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;What is React? (this post)&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;React, ReactJS, React.js, React Native, Which is Which? (coming soon)&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Components, props, state etc. (coming a bit less soon)&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;React, ReactJS, React.js, React Native… How many times have you heard about these things lately? Are you confused by what they are really for?&lt;/p&gt;
+
+&lt;p&gt;If you are a designer in a team that uses (or is considering using) React, or if you are simply curious about this “React” thing, these posts are for you.&lt;/p&gt;
+
+&lt;p&gt;In plain English and doodles🌴🎄, I’ll explain the terms in React family and dive into what makes React so special. No coding knowledge is required at this point, but we’ll roll up the sleeves and get our hands dirty with code soon enough. I want you to get familiar with a few concepts first so you don’t feel like you’re in the deep end when we get there. You can always come back here if you need to review anything in the future.&lt;/p&gt;
+
+&lt;p&gt;Are you ready? Let’s get started!&lt;/p&gt;
+
+&lt;p&gt;&lt;a name=&quot;learning-goals&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;learning-goals&quot;&gt;Learning Goals&lt;/h1&gt;
+&lt;p&gt;After reading this post, I’ll get you to come back here. Hopefully you’ll be able to answer these questions easily:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is DOM?&lt;/li&gt;
+  &lt;li&gt;What is React? Where does it fit in the development of an app?&lt;/li&gt;
+  &lt;li&gt;How is React different from jQuery?&lt;/li&gt;
+  &lt;li&gt;What are the core ideas in React?&lt;/li&gt;
+  &lt;li&gt;Why do we need Virtual DOM?&lt;/li&gt;
+  &lt;li&gt;What is a reactive UI?&lt;/li&gt;
+  &lt;li&gt;What are some benefits of components?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;a-couple-of-things-about-web&quot;&gt;A Couple Of Things About Web&lt;/h1&gt;
+&lt;p&gt;Let’s begin with a couple of other terms that you might have heard of for years. The first one, DOM.&lt;/p&gt;
+
+&lt;h2 id=&quot;dom&quot;&gt;DOM&lt;/h2&gt;
+&lt;p&gt;Well, DOM is the Document Object Model. Simple? It’s an object model for the document. Right?&lt;/p&gt;
+
+&lt;p&gt;Forget about it. Let’s check out the prestigious art studio “Web Browser”! Can you find DOM in the doodle below?&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/what-is-react/02-domo-browsera.png&quot; alt=&quot;Domo poses, Browsera draws&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;So, DOM is a … tree? Yup a tree! Oddly enough, a lot of things in your computer look like a tree&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;Let’s give DOM a nickname… ummm what about Domo? Domo works as a model at the studio “Web Browser”. His job is to pose in front of the artist who paints a portrait (or perhaps millions of portraits).&lt;/p&gt;
+
+&lt;p&gt;The portraits are what we see in the web browser when visiting a website. A developer’s job is like that of a director who tells Domo what to wear and what pose to make.  This determines what those portraits look like in the end. jQuery or React are known as libraries and they are the tools a developer uses to communicate with Domo.&lt;/p&gt;
+
+&lt;h2 id=&quot;jquery&quot;&gt;jQuery&lt;/h2&gt;
+&lt;p&gt;jQuery is a JavaScript library that makes it easier for a developer to manipulate the DOM. How does it fit in the story of Domo?&lt;/p&gt;
+
+&lt;p&gt;It is a tool that makes it easier for the developer to talk to Domo, just like a phone. You can call him wherever you are, whenever you want. It’s a lot more convenient than before (raw JavaScript) – remember the time when people had to be physically close enough to have a conversation before the invention of telephones?&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/what-is-react/04-jquery-phone.png&quot; alt=&quot;Use phone with a label &amp;quot;jQuery&amp;quot; to talk to Domo, or perhaps just a phone with label&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;For years we have been using jQuery to directly communicate with Domo. It’s handy but not without issues.&lt;/p&gt;
+
+&lt;h1 id=&quot;react&quot;&gt;React&lt;/h1&gt;
+&lt;p&gt;Let me introduce you to the new superhero, React:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/what-is-react/05-model-agent.png&quot; alt=&quot;React, model agent&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;With React, developers no longer directly talk to Domo. React acts as a middleman between a developer and Domo. He smoothes out the communication and streamlines the process of portrait creation.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/what-is-react/06-middleman.png&quot; alt=&quot;React as a middleman&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;React has a few tricks to address the issues of jQuery and other tools. Here are his three main tricks:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Reactive UI&lt;/li&gt;
+  &lt;li&gt;Virtual DOM&lt;/li&gt;
+  &lt;li&gt;Components&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;reactive-ui&quot;&gt;Reactive UI&lt;/h2&gt;
+&lt;p&gt;To update the DOM with jQuery, you’d have to specify what element to change at the right time, in the right order. This is equivalent to describing to Domo how to position his head, arms and legs step by step, for each and every portrait.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/what-is-react/07-step-by-step.png&quot; alt=&quot;sequential commands about how to pose&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Heck, this sounds tedious and error-prone! Why can’t you just tell Domo &lt;strong&gt;what&lt;/strong&gt; you want instead of &lt;strong&gt;how&lt;/strong&gt; to pose&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;?&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/what-is-react/08-thinker.png&quot; alt=&quot;a few sketches of yoga poses on a piece of paper, in sketched tree forms, or perhaps just stickman&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Even cooler, imagine if you can leave placeholders in your request to represent different variations of a same pose. React does that too!&lt;/p&gt;
+
+&lt;p&gt;This way, when somebody asks for portraits of Domo wearing a different hat, you don’t have to talk to Domo again. You can just sit back and let him change it himself.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/what-is-react/09-thinker-with-hat.png&quot; alt=&quot;Sketch with ornaments placeholders, Domo with different ornaments&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This trick is how React got its name. The UI built with React is &lt;strong&gt;reactive&lt;/strong&gt;. As a developer, you just need to write down &lt;strong&gt;what&lt;/strong&gt; you want and React figures out &lt;strong&gt;how&lt;/strong&gt; to do it. When data change, your UI changes accordingly. You don’t need to worry about updating the DOM, React does it for you automatically. The idea of reactive UI greatly simplifies UI development.&lt;/p&gt;
+
+&lt;p&gt;I know I said you don’t need any coding knowledge but just to help put things in perspective, I’ve popped this in. Check out this example (try changing Domo’s hat):&lt;/p&gt;
+
+&lt;p data-height=&quot;375&quot; data-theme-id=&quot;light&quot; data-slug-hash=&quot;gROrXx&quot; data-default-tab=&quot;result&quot; data-user=&quot;focuser&quot; data-embed-version=&quot;2&quot; data-pen-title=&quot;Reactive UI&quot; class=&quot;codepen&quot;&gt;See the Pen &lt;a href=&quot;https://codepen.io/focuser/pen/gROrXx/&quot;&gt;Reactive UI&lt;/a&gt; by focuser (&lt;a href=&quot;https://codepen.io/focuser&quot;&gt;@focuser&lt;/a&gt;) on &lt;a href=&quot;https://codepen.io&quot;&gt;CodePen&lt;/a&gt;.&lt;/p&gt;
+&lt;script async=&quot;&quot; src=&quot;https://production-assets.codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;I’ll explain its full code in a future post, but at this point you can just look at this core piece:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-jsx&quot; data-lang=&quot;jsx&quot;&gt;&lt;span class=&quot;kr&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ThinkerWithHat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;hat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Hat&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;hat&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Thinker&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Notice that you just need to define what you want (a thinker with a hat), and “wire up” the data (“&lt;code class=&quot;highlighter-rouge&quot;&gt;type = {hat}&lt;/code&gt;”). When the data change (user selects a hat), the UI updates automatically.&lt;/p&gt;
+
+&lt;h2 id=&quot;virtual-dom&quot;&gt;Virtual DOM&lt;/h2&gt;
+&lt;p&gt;Another issue of jQuery is about the speed.&lt;/p&gt;
+
+&lt;p&gt;As a demanding director, you hate waiting. You want the portraits to come out as quickly as possible. However, Domo and the artist are slow. Not really as slow as a sloth, but it takes time for Domo to change clothes and poses, and it takes time for the artist to paint.&lt;/p&gt;
+
+&lt;p&gt;Worse, you’d have to wait for the artist to finish a portrait before being able to talk to Domo again. In fact you cannot do anything but wait. What a waste of time!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/what-is-react/10-slow-dom.png&quot; alt=&quot;Domo and Browsera tell customer to wait, customer has a lot more requests, customer is frustrated&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;React pulls another trick to fix that. He’s very fast at drawing quick sketches. Almost immediately after you tell him your instructions, he’s done with a sketch and ready to take the next order. Now no more wait! You can keep telling React about the portraits you want, nonstop. React keeps record of everything with sketches and show it to Domo at the right time.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/what-is-react/11-sketches.png&quot; alt=&quot;React looks at a pile of sketches, quickly builds sketches and arrange them in a queue; Domo poses according to a sketch&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;More importantly, React is smart. He can sort through the sketches, remove any duplication and make sure that Domo and the artist do as little work as possible.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/what-is-react/12-optimize-sketches.png&quot; alt=&quot;React holds two sketch trees in each hand, similar poses, and tells Domo to only lift up his leg (or whatever minor adjustment)&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;These sketches are called “Virtual DOM”. Virtual DOM is much faster to manipulate than DOM. Developers work with Virtual DOM most of the time instead of directly managing DOM. React handles the dirty work of managing the slow DOM.&lt;/p&gt;
+
+&lt;h2 id=&quot;components&quot;&gt;Components&lt;/h2&gt;
+&lt;p&gt;The third trick of React is the concept of components.&lt;/p&gt;
+
+&lt;p&gt;Components should be straightforward to understand because it’s the way how our real world works. Our cars, houses and even our bodies are all made up of identifiable components that are individual, functional units. These components are made up of smaller components which consist of even smaller components, all the way down to atoms.&lt;/p&gt;
+
+&lt;p&gt;If you are familiar with Sketch, components are a lot like &lt;a href=&quot;https://www.sketchapp.com/learn/documentation/symbols/&quot;&gt;symbols&lt;/a&gt;. Building an app in React is almost all about working with components: finding the best components for the job, fitting one with another, creating new components from existing ones etc.&lt;/p&gt;
+
+&lt;p&gt;Back to our studio “Web Browser”, you describe your requirement for portraits as components, React translates it into what Domo understands. This saves you a lot time because you don’t have to repeat common parts in your instructions.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/what-is-react/13-components.png&quot; alt=&quot;sketch made up of components&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Another cool thing about components is that, if you change a component, everything that includes this component will be updated automatically.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/what-is-react/14-hair-style.png&quot; alt=&quot;change hair style&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;Alright. Hopefully you’ve learned a bit about React. It’s essentially a tool that helps developers manipulate DOM to build user interfaces. Reactive UI, Virtual DOM and components are the three core ideas that make React special. Of course there are other interesting ideas, such as unidirectional data flow, which I’ll unfold in a future post.&lt;/p&gt;
+
+&lt;p&gt;In the next post, we’ll look at how things like ReactJS, React Native and React Sketch.app relate to and different from each other.&lt;/p&gt;
+
+&lt;p&gt;I encourage you to go back to the &lt;a href=&quot;#learning-goals&quot;&gt;Learning Goals&lt;/a&gt; to see if you can answer all the questions. Let me know if you have any questions or comments!&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;Want to learn more about React? &lt;a href=&quot;http://learnreact.design&quot;&gt;Sign up&lt;/a&gt; now and receive exclusive updates!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h1 id=&quot;backstage&quot;&gt;Backstage&lt;/h1&gt;
+&lt;h2 id=&quot;who-drew-the-illustrations&quot;&gt;Who drew the illustrations?&lt;/h2&gt;
+&lt;p&gt;Many people asked if I did it myself. Well, I wish I could. 😅 My doodles are like &lt;a href=&quot;/linton-doodles-2017&quot;&gt;this&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;These illustrations were generously crafted by &lt;a href=&quot;https://beebeeye.github.io/&quot;&gt;Beebee Ye&lt;/a&gt; who has also been instrumental in making sure the post is actually understandable.&lt;/p&gt;
+
+&lt;p&gt;BTW: Learning to draw is one of my life goals – hopefully I could show you some better doodles of my own in a few years. 🤔  We’ll see…&lt;/p&gt;
+
+&lt;h2 id=&quot;my-8-yo&quot;&gt;My 8 yo&lt;/h2&gt;
+&lt;p&gt;At the beginning, I set a goal that this post must be interesting enough for my 8 year old daughter to read, and easy enough for her to understand a couple of things.&lt;/p&gt;
+
+&lt;p&gt;😀 At least she can recall that DOM is a tree and React talks to DOM.&lt;/p&gt;
+
+&lt;p&gt;She also contributed a few hats in the interactive example above and watched me putting them into the code. That was golden time! Guess which ones were drawn by her? My daughter wants you to answer in the &lt;a href=&quot;#endofpost&quot;&gt;comments&lt;/a&gt;. 👧🏻&lt;/p&gt;
+
+&lt;iframe width=&quot;96&quot; height=&quot;54&quot; src=&quot;https://www.youtube.com/embed/o1SL_j5U8AQ?showinfo=0&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+
+&lt;h2 id=&quot;special-thanks&quot;&gt;Special thanks&lt;/h2&gt;
+&lt;p&gt;I feel so lucky that so many of you are interested in this post. I want to thank everyone who has taken the time to read the early drafts, and sent me encouraging words and insightful suggestions.&lt;/p&gt;
+
+&lt;p&gt;I want to express my deep gratitude to &lt;a href=&quot;http://philkhoo.com/&quot;&gt;Phil Khoo&lt;/a&gt; of &lt;a href=&quot;http://demingfactor.com/&quot;&gt;DemingFactor&lt;/a&gt; who volunteered to be the editor of this post. Man, his suggestions are really what make this post to shine! Thank you again Phil!&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;footnotes&quot;&gt;Footnotes:&lt;/h1&gt;
+
+&lt;p&gt;&lt;a name=&quot;endofpost&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;Fair enough, in reality, computers are not compost containers stuffed with tree branches. The tree notion comes from how people organize information in a way that’s easy for computers to process. People typically draw charts which remotely resemble upside-down trees, like &lt;a href=&quot;https://www.w3schools.com/js/pic_htmltree.gif&quot;&gt;this&lt;/a&gt; or &lt;a href=&quot;https://www.w3.org/TR/DOM-Level-2-Core/images/table.gif&quot;&gt;this&lt;/a&gt;. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;In fancy tech slang, if the code defines &lt;strong&gt;what&lt;/strong&gt; you want, it’s called &lt;em&gt;declarative&lt;/em&gt;; if it defines &lt;strong&gt;how&lt;/strong&gt; you want it to be done, it’s called &lt;em&gt;imperative&lt;/em&gt;. Imperative programming emerged from the day when computers were first invented. When the computers were primitive, people had to instruct them in detail: where to store the numbers, how to multiply etc. It was fine at the beginning, but coding this way becomes increasingly unmanageable as the tasks given to computers become more and more complex. People then wrote smart software that convert definition of problems into detailed instructions. Declarative programming was born. Today, more and more programming languages and frameworks, such as React, allow us to code declaratively instead of imperatively. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</content>
+ </entry>
  
  <entry>
    <title>React Course for Designers, Anyone?</title>
