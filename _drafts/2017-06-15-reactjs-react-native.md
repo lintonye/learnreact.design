@@ -22,25 +22,38 @@ _This series of posts will be the very first part of the ["React for Designers" 
 
 ---
 
-In the [last post](TODO), we covered the three core ideas of React: reactive UI, virtual DOM and components.
+In the [last post](TODO), we've covered the three core ideas of React: reactive UI, virtual DOM and components.
 
 Hopefully you've got a hang of what React is, right? But what are those other things, such as ReactJS, React.js, React Native? Let's take a look.
 
 
-- What is a native app, what s
-- History of RN
+# Learning Goals
+- What is a native app? What is a web app? Difference between the two?
+- What is an app built by PhoneGap?
 - What RW and RN can be used for? What we can't use RW/RN to build?
 
-# Learning Goals
+# Native app vs. Web app
+- difference:
+  - installation
+  - internet
+
+ - native app: found on app stores. Android has a way to make the installation faster, but genererally from app stores.
+ - Web app: no installation
+
+
+- Android instant app: https://developer.android.com/topic/instant-apps/index.html
+- progressive web app:
+  - http://blog.ionic.io/what-is-a-progressive-web-app/
+  - https://developers.google.com/web/progressive-web-apps/
 
 # ReactJS, React Native, ReactXYZ...
-Initially, React was created to build web applications. It's only about portraits from the studio "Web Browser".
+Initially, React was created to build web interfaces. It's only about portraits from the studio "Web Browser".
 
-As time goes by, React realized that he was actually capable of working with other studios, such as studio "Mobile", studio "Mac" and studio "Sketch".
+As time goes by, people realized that React was actually capable of working with other studios, such as studio "Mobile", studio "Mac" and studio "Sketch".
 
-To make things more efficient, React hired an assistant "ReactDOM" whose only job is to talk to Domo in the studio "Web Browser". React can now focus on taking orders from the customers (developers) and drawing sketches (virtual DOM).
+To make things more efficient, React hired an assistant "ReactDOM" whose only job is to talk to Domo in the studio "Web Browser". React can now focus on taking orders from the director (developer) and drawing sketches (virtual DOM).
 
-When customers ask for portraits from other studios, React hires more assistants, which are collectively called "Renderers". "ReactDOM" is a Renderer too.
+When customers ask for portraits from other studios, React hires more assistants, whose official job title is  "Renderer". "ReactDOM" is a Renderer too.
 
 ![Perhaps three images: React uses assistants to talk to models in three different studios: Domo, the model in studio "Mobile" and the model in studio "Sketch"](TODO)
 
@@ -53,6 +66,10 @@ With ReactJS at its core, plus a few new renderers, plus native APIs such as the
 React Native includes all you need to build an app, whereas React Web is just a small library focuses specifically on the UI in a web browser. This is the major difference between the two.
 
 Due to historical reasons, many people use ReactJS or React.js to refer to React Web. Interestingly, it seems Facebook has never officially used the name "ReactJS" or "React.js". It [has always been just "React"](https://web.archive.org/web/20130529213355/https://facebook.github.io/react/).
+
+npm:
+ - https://www.npmjs.com/package/react
+ - don't be confused: https://www.npmjs.com/package/reactjs
 
 # TODO what React Web is for? What React Native is for?
 

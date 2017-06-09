@@ -7,6 +7,7 @@ author:
   twitter: lintonye
   image: linton-face.jpg
 ---
+
 [//]: Master React. Design with Code Power.
 [//]: Master React. Unleash Your Design Superpower.
 [//]: Master React. Harness Your Design Superpower.
@@ -17,6 +18,14 @@ author:
 [//]: Design with React Superpowers.
 
 <img src ="/images/designer-interviews/superman.jpg" style="width: 100%"/>
+
+---
+<div style="text-align: center;">
+  <h2>Shoot me a reminder when the course is ready:</h2>
+</div>
+
+<script async id="_ck_209062" src="https://forms.convertkit.com/209062?v=6"></script>
+---
 
 - **Understand the constraints of React, design accordingly ([What is React?](/2017/06/08/what-is-react))**
 - **Stop waiting for developers, tweak the styles yourself**
@@ -29,12 +38,6 @@ author:
 [//]: - Be able to push back when you’re told it can’t be done
 [//]: - Talk in their jargon with developers
 
----
-<div style="text-align: center;">
-  <h2>Shoot me a reminder when the course is ready:</h2>
-</div>
-
-<script async id="_ck_209062" src="https://forms.convertkit.com/209062?v=6"></script>
 
 ---
 
