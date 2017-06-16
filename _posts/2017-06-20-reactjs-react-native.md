@@ -18,6 +18,7 @@ _This series of posts will be the very first part of the ["React for Designers" 
 
 - _[What is React?](TODO)_
 - _ReactJS, React.js, React Native, Which Is Which? (this post)_
+- _React Native vs. Hybrids (coming soon)_
 - _Components, props, state etc. (coming soon)_
 
 ---
@@ -28,7 +29,6 @@ In the [previous post](TODO), we looked at what React is and what makes it speci
 
 # Learning Goals
 - What is React Native? Why its name includes "Native"?
-- What is a native app? What is a web app? Difference between the two?
 - What can we build with React Native? What about React?
 - What is ReactDOM?
 - What is React Renderer?
@@ -87,11 +87,17 @@ React casted his summon spell. New superheros joined. The team "React Native" wa
 
 At this point, we say React Native is a complete platform because it provides all you need to build a full app (more on this [later](#comparison)).
 
+
 ## Native UI
-TODO
-- performance
-- native look and feel
-- hybrid app: outsource to Studio Web. It has its place especially in early days, but its ux sucks
+Have you ever wondered why React Native is labeled *Native*? That's actually its branding feature: the UI built with React Native consists of **native UI widgets** that perform well and look/feel consistent, not some simulated crap wrapped in a WebView.
+
+You know, those little things, such as scrolling acceleration, animations, keyboard behavior and drop shadows, actually play an important role in the user experience of your app. If those are not consistent with other apps on the phone, users will quickly get frustrated.
+
+I originally intended to explain here what "native" actually means and why React Native performs better. But my notes quickly grew into a full page after a few brainstorming sessions. Let's leave that as a future post of its own.
+
+For now, I want you to just remember that native UI is one of the great things that make React Native shine.
+
+![React Native key points summary](/images/reactjs-react-native/8-react-native-summary.png)
 
 # React Sketch.app, ReactVR, React XYZ...
 Recently Airbnb recently released a nifty tool called [React Sketch.app](TODO) which can convert React code into image layers in Sketch. Can you guess how it works?
@@ -133,7 +139,7 @@ In the past, building apps for both iOS and Android meant two completely separat
 
 React Native changes that. Developers are now able to build mobile apps in one language (JavaScript) using one set of tools (web development toolchain). Business logic only needs to be implemented once and can be easily shared between platforms. This opens up a huge opportunity for web developers and designers and even native mobile developers because React Native greatly simplifies mobile development.
 
-The user interfaces built with React Native are truly native. TODO
+The user interfaces built with React Native are truly native. The apps look and feel consistent with the rest of the platform. They are often indistinguishable from the apps written in native languages such as Swift and Java.
 
 React Native is designed to be platform agnostic. This means we can easily extend React Native to support other platforms -- mostly by writing a new React Renderer [^4]. The same person who understands React basics can build apps for many platforms using the same language and same patterns.
 
@@ -148,6 +154,9 @@ Following the de facto convention, when I say ReactJS, I mean React Web too.
 
 # Conclusion
 TODO
+
+# Backstage
+- TODO record video to show thought process - walking in the bushes.
 
 # Footnotes
 [^1]: Renderers update the object model in the target platform according to the virtual DOM. The object model determines what's drawn on the browser window or phone screen. This effectively "renders" stuff on the "canvas" of the target platform. That's how they got this name.
