@@ -5,6 +5,42 @@ His only favorite thing is to listen to your commands and draw stuff on a wall. 
 
 ^1: In technical terms, DOM is an API that a developer can use to manipulate HTML documents. Essentially, you write code to communicate with DOM and instruct the browser to do stuff. Our DOM-guy analogy isn't that far off, right?
 
+- what is Native really?
+- why are web interfaces slower than native interfaces?
+  - http://sealedabstract.com/rants/why-mobile-web-apps-are-slow/
+  - https://www.reddit.com/r/explainlikeimfive/comments/3tekn9/eli5_why_are_webbased_applications_slower_than/
+  - Web app: all the way JS
+  - RN: only some JS
+
+- Be careful about the promise: build native apps
+- native features, not native look and feel
+- Hybrid
+- RN: update app without app store
+
+- difference:
+  - installation
+  - internet
+
+ - native app: found on app stores. Android has a way to make the installation faster, but genererally from app stores.
+ - Web app: no installation
+
+- the boundary is starting to blur with new techs
+- Android instant app: https://developer.android.com/topic/instant-apps/index.html
+- progressive web app:
+  - http://blog.ionic.io/what-is-a-progressive-web-app/
+  - https://developers.google.com/web/progressive-web-apps/
+
+# Revisit: What is React?
+React is more about a way of programming, a style of thinking. With the same kind of pattern, you can build apps on various platforms. "Learn once, write everywhere".
+
+Use JavaScript.
+
+# Native app vs. Web app and hybrids
+What is actually going on with those other studios?
+Hybrid: outsource painting to Web Browser
+
+
+
 ## Bonus: differences between native mobile apps and web apps?
 
 - A Tree
