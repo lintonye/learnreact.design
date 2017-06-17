@@ -57,8 +57,6 @@ Some tentative topics include:
 - Design with code
   - Airbnb's [React Sketch.app](http://airbnb.design/painting-with-code/)
 
-For more information, check out [this Trello board](https://trello.com/b/E7lYUXqZ/react-for-designers) where you can vote on ideas. I'd really appreciate your feedback!
-
 ## But I'm a designer, why should I learn coding?
 I encourage you to check out this [post](/2017/05/09/react-for-designers-interviews) to hear other designers' opinions.
 
