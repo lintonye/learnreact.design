@@ -28,10 +28,11 @@ In the [previous post](TODO), we looked at what React is and what makes it speci
 <a name="learning-goals">
 
 # Learning Goals
-- What is React Native? Why its name includes "Native"?
+- What is React Native? Why does its name include "Native"?
+- Why is React Native cool?
 - What can we build with React Native? What about React?
 - What is ReactDOM?
-- What is React Renderer?
+- What does a React Renderer do?
 - How does React Sketch.app work?
 - How does ReactVR work?
 - What is ReactJS? React.js?
@@ -55,22 +56,33 @@ People started to ask React: "Can you work with other studios too on our behalf?
 
 # React Native
 
-React went ahead to summon his gang of helpers. The team "React Native" was formed.
+React looked at all the studios and realized that the biggest challenge was the different languages the staff spoke.
 
-## React Renderer
-React took off his cloak and sprinkled some magical dust.
+React told us that he needed a team. He wanted to name the team "React Native".
+
+## The New React and Renderers
+
+At studio "Web Browser", React used to talk to Domo a lot. But he knew it would drive him crazy if he had to talk to all those tree folks at different studios while doing many other things.
+
+![talk to many tree folks and crazy](/images/reactjs-react-native/2.5-crazy.png)
+
+He wanted someone to take care of the models. This way, he could focus on what he did the best: taking orders from the director (developer) and drawing quick sketches (virtual DOM).
+
+React took off his cloak and sprinkled some magic dust.
 
 ![cloak and magical dust](/images/reactjs-react-native/3-cloak-and-dust.png)
 
-His cloak went alive and became his first helper, "ReactDOM". ReactDOM's only job is to talk to Domo at the studio "Web Browser". This way, React can now focus on taking orders from the director (developer) and drawing quick sketches (virtual DOM).
+His cloak went alive and became his first helper, "ReactDOM",  whose only job was to talk to Domo at "Web Browser".
+
+Freed from the burden of dealing with Domo (and the cloak), React felt refreshed and considered himself the new React TODO.
 
 ![ReactDOM talks to Domo](/images/reactjs-react-native/4-reactdom-domo.png)
 
-React also recruited some other helpers similar to ReactDOM -- they are in charge of passing sketches to art studios and talking to them in whatever language they speak. These helpers are called "React Renderers" [^1]. ReactDOM is a renderer too. With the help of Renderers, React can now work with various art studios without being distracted from his core responsibilities.
+Once convinced of the capability of ReactDOM, React recruited some more similar helpers -- they are in charge of passing sketches to art studios and talking to the models in whatever language they speak. React likes to call these helpers "React Renderers" [^1]. ReactDOM is a renderer too. With the help of Renderers, React can now work with various art studios without being distracted from his core responsibilities.
 
 ![renderers to talk to Web, iOS and Android](/images/reactjs-react-native/5-renderers.png)
 
-This means a lot to you as a director. You can just talk to React in the same language and use the same pattern of words [^2]. React and his team handle the differences between studios and make sure you get the artwork of the best quality.
+This means a lot to you as a director. By just talking to React in the **same language and the same old pattern of words** [^2], you can get unique portraits from various art studios. React and his renderers handle the differences between studios and make sure you get the artwork of the best quality.
 
 ## A Complete Platform
 There's actually more going on at the studio "Web Browser" that we haven't had a chance to study. To create great artwork, we'd need the help of some other folks who take care of things like lighting, makeup, stage props etc.
@@ -93,7 +105,7 @@ Have you ever wondered why React Native is labeled *Native*? That's actually its
 
 You know, those little things, such as scrolling acceleration, animations, keyboard behavior and drop shadows, actually play an important role in the user experience of your app. If those are not consistent with other apps on the phone, users will quickly get frustrated.
 
-I originally intended to explain here what "native" actually means and why React Native performs better. But my notes quickly grew into a full page after a few brainstorming sessions. Let's leave that as a future post of its own.
+I originally intended to explain here what "native" really means and why React Native performs better. But my notes quickly grew into a full page after a few brainstorming sessions. Let's leave that as a future post of its own.
 
 For now, I want you to just remember that native UI is one of the great things that make React Native shine.
 
