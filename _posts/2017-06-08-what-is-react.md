@@ -2,7 +2,7 @@
 layout: post
 last-modified: '2017-06-08'
 
-title: "What is React?"
+title: "What Is React?"
 subtitle: "React terms in plain English and doodles"
 redirect_from:
   - /2017-06-08-what-is-react/
@@ -19,7 +19,8 @@ author:
 _This series of posts will be the very first part of the ["React for Designers" course](http://learnreact.design) I'm creating. [Sign up](http://learnreact.design) now and receive exclusive updates!_
 
 - _What is React? (this post)_
-- _React, ReactJS, React.js, React Native, Which is Which? (coming soon)_
+- _[What is React Native?](/2017/06/20/what-is-react-native/)_
+- _React Native vs. Hybrids (coming soon)_
 - _Components, props, state etc. (coming a bit less soon)_
 
 ---
@@ -157,7 +158,7 @@ Another cool thing about components is that, if you change a component, everythi
 # Conclusion
 Alright. Hopefully you've learned a bit about React. It's essentially a tool that helps developers manipulate DOM to build user interfaces. Reactive UI, Virtual DOM and components are the three core ideas that make React special. Of course there are other interesting ideas, such as unidirectional data flow, which I'll unfold in a future post.
 
-In the next post, we'll look at how things like ReactJS, React Native and React Sketch.app relate to and different from each other.
+In the [next post](/2017/06/20/what-is-react-native/), we'll look at how things like ReactJS, React Native and React Sketch.app relate to and different from each other.
 
 I encourage you to go back to the [Learning Goals](#learning-goals) to see if you can answer all the questions. Let me know if you have any questions or comments!
 

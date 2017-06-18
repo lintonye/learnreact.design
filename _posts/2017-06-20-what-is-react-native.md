@@ -2,10 +2,10 @@
 layout: post
 last-modified: '2017-06-20'
 
-title: "ReactJS, React.js, React Native, Which Is Which?"
-subtitle: "React terms in plain English and doodles🌴🎄"
+title: "What Is React Native?"
+subtitle: "React terms in plain English and doodles🌴🎄⚛"
 
-excerpt: "React terms explained in plain English and doodles🌴🎄."
+excerpt: "React terms explained in plain English and doodles🌴🎄⚛"
 
 author:
   name: Linton Ye
@@ -17,13 +17,13 @@ author:
 _This series of posts will be the very first part of the ["React for Designers" course](http://learnreact.design) I'm creating. Be sure to [sign up](http://learnreact.design) to receive exclusive updates!_
 
 - _[What is React?](/2017/06/08/what-is-react/)_
-- _ReactJS, React.js, React Native, Which Is Which? (this post)_
+- _What is React Native? (this post)_
 - _React Native vs. Hybrids (coming soon)_
 - _Components, props, state etc. (coming soon)_
 
 ---
 
-In the [previous post](/2017/06/08/what-is-react/), we looked at what React is and what makes it special. Now we are ready to study some other terms in the family: ReactJS, React.js, React Native, React Sketch.app etc.
+In the [previous post](/2017/06/08/what-is-react/), we looked at what React is and what makes it special. Today let's study React Native: what it's for, where it came from, how it's different from React and why it's cool.
 
 <a name="learning-goals">
 
@@ -170,7 +170,7 @@ Following the de facto convention, when I say ReactJS, I mean React Web too.
 # Conclusion
 Cool. We've gone over quite a few things so far. We've learned a bit of history of React and how he put together his team, React Native. Being a complete platform, React Native includes everything that you need to build native apps in JavaScript and React paradigm. React Native now supports many platforms including iOS, Android, Windows, macOS, Sketch.app and even VR. "Learn once, write anywhere"!
 
-In the next post, we'll look at what is really a *native* app and why React Native is one of the best ways to build native apps.
+In the next post, we'll look at what a *native* app really is and why React Native is one of the best ways to build native apps.
 
 I encourage you to go back to the [Learning Goals](#learning-goals) to see if you can answer all the questions. Let me know if you have any questions or comments!
 
