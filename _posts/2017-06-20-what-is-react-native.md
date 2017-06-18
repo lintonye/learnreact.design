@@ -156,7 +156,7 @@ React Native changes that. Developers are now able to build mobile apps in one l
 
 The user interfaces built with React Native are truly native. The apps look and feel consistent with the rest of the platform. They are often indistinguishable from the apps written in native languages such as Swift and Java, due to the full utilization of native UI widgets.
 
-React Native is designed to be platform agnostic. This means we can easily extend React Native to support other platforms -- mostly by writing a new React Renderer [^4]. The same person who understands React basics can build apps for many platforms using the same language and the same React paradigm.
+React Native can be easily extended to support other platforms -- mostly by writing a new React Renderer [^4]. The same person who understands React basics can build apps for many platforms using the same language and the same React paradigm.
 
 Again, **"learn once, write anywhere"**.
 
