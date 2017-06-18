@@ -3,9 +3,9 @@ layout: post
 last-modified: '2017-06-20'
 
 title: "ReactJS, React.js, React Native, Which Is Which?"
-subtitle: "React terms in plain English and doodles🌴🎄"
+subtitle: "React terms in plain English and doodles🌴🎄⚛"
 
-excerpt: "React terms explained in plain English and doodles🌴🎄."
+excerpt: "React terms explained in plain English and doodles🌴🎄⚛"
 
 author:
   name: Linton Ye
