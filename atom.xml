@@ -4,7 +4,7 @@
  <title>Backstage</title>
  <link href="http://learnreact.design/atom.xml" rel="self"/>
  <link href="http://learnreact.design"/>
- <updated>2017-06-09T10:36:16-07:00</updated>
+ <updated>2017-06-20T23:58:37-07:00</updated>
  <id>http://learnreact.design/atom.xml</id>
  <author>
    <name>Linton Ye</name>
@@ -13,7 +13,210 @@
 
  
  <entry>
-   <title>What is React?</title>
+   <title>What Is React Native?</title>
+   <link href="http://learnreact.design/2017/06/20/what-is-react-native/"/>
+   <published>2017-06-20T00:00:00-07:00</published>
+   <updated>2017-06-20</updated>
+   <id>http://learnreact.design/2017/06/20/what-is-react-native</id>
+   <content type="html">&lt;p&gt;&lt;em&gt;This series of posts will be the very first part of the &lt;a href=&quot;http://learnreact.design&quot;&gt;“React for Designers” course&lt;/a&gt; I’m creating. Be sure to &lt;a href=&quot;http://learnreact.design&quot;&gt;sign up&lt;/a&gt; to receive exclusive updates!&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;&lt;a href=&quot;/2017/06/08/what-is-react/&quot;&gt;What is React?&lt;/a&gt;&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;What is React Native? (this post)&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;React Native vs. Hybrids (coming soon)&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Components, props, state etc. (coming soon)&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;In the &lt;a href=&quot;/2017/06/08/what-is-react/&quot;&gt;previous post&lt;/a&gt;, we looked at what React is and what makes it special. Today let’s study React Native: what it’s for, where it came from, how it’s different from React and why it’s cool.&lt;/p&gt;
+
+&lt;p&gt;&lt;a name=&quot;learning-goals&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;learning-goals&quot;&gt;Learning Goals&lt;/h1&gt;
+&lt;p&gt;After reading this post, I’ll get you to come back here. Hopefully you’ll be able to answer these questions easily:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is React Native? Why does its name include “Native”?&lt;/li&gt;
+  &lt;li&gt;Why is React Native cool?&lt;/li&gt;
+  &lt;li&gt;What can we build with React Native? What about React?&lt;/li&gt;
+  &lt;li&gt;Where does ReactDOM come from? What does it do?&lt;/li&gt;
+  &lt;li&gt;What does a React Renderer do?&lt;/li&gt;
+  &lt;li&gt;How does React Sketch.app work?&lt;/li&gt;
+  &lt;li&gt;How does ReactVR work?&lt;/li&gt;
+  &lt;li&gt;What is ReactJS? React.js?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;other-art-studios&quot;&gt;Other Art Studios&lt;/h1&gt;
+&lt;p&gt;By now you probably have this picture in your head:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/reactjs-react-native/1-react-summary.png&quot; alt=&quot;what is React Summary&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You see, React is pretty good at getting portraits out of the studio “Web Browser”. More and more people choose to work with React since it frees them from the dirty work of communicating with Domo the slowpoke. They can now spend more time on thinking about a bigger picture instead of the fine details of how the studio operates.&lt;/p&gt;
+
+&lt;p&gt;It turns out that “Web Browser” is not the only art studio in town. There are other nifty studios producing unique portraits that are in great demand.&lt;/p&gt;
+
+&lt;p&gt;Similar to studio “Web Browser” though, the traditional way of working with those studios is to directly talk to their tree model. Moreover, the staff of those studios speak various different languages. That certainly won’t make your job as a director easier.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/reactjs-react-native/2-ios-android.png&quot; alt=&quot;studio &amp;quot;iOS&amp;quot; and studio &amp;quot;Android&amp;quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;People started to ask React: “Can you work with other studios too on our behalf?” If the answer was yes, it’d be really sweet: Just as with “Web Browser”, React could apply the same superpowers to make things really efficient. Furthermore, with React as a mediator in-between, you could speak &lt;strong&gt;the same language&lt;/strong&gt; to get portraits from other studios, however exotic they are.&lt;/p&gt;
+
+&lt;p&gt;“Consider it done”, our superhero replied.&lt;/p&gt;
+
+&lt;h1 id=&quot;react-native&quot;&gt;React Native&lt;/h1&gt;
+
+&lt;p&gt;React looked at all the studios and realized that the biggest challenge was the different languages the staff spoke.&lt;/p&gt;
+
+&lt;p&gt;React told us that he needed a team. He wanted to name the team “React Native”.&lt;/p&gt;
+
+&lt;h2 id=&quot;renderers-and-the-new-react&quot;&gt;Renderers And The New React&lt;/h2&gt;
+
+&lt;p&gt;At studio “Web Browser”, React used to talk to Domo a lot. But he knew it would drive him crazy if he had to talk to all those tree folks at different studios himself while doing many other things.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/reactjs-react-native/2.5-crazy.png&quot; alt=&quot;talk to many tree folks and crazy&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;He wanted someone to take care of the models. This way, he could focus on what he did the best: taking orders from the director (developer), drawing quick sketches (virtual DOM) and analyzing them.&lt;/p&gt;
+
+&lt;p&gt;React took off his cloak and sprinkled some magic dust.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/reactjs-react-native/3-cloak-and-dust.png&quot; alt=&quot;cloak and magical dust&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;His cloak went alive and became his first helper, “ReactDOM”,  whose only job was to talk to Domo at “Web Browser”. Freed from the burden of dealing with Domo, React felt refreshed than ever.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/reactjs-react-native/4-reactdom-domo.png&quot; alt=&quot;ReactDOM talks to Domo&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once convinced of the capability of ReactDOM, React recruited some more similar helpers – they are in charge of talking to the models in whatever language they speak. React likes to call these helpers “React Renderers” &lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. ReactDOM is a renderer too. With the help of Renderers, React can now work with various art studios without being distracted from his core responsibilities.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/reactjs-react-native/5-renderers.png&quot; alt=&quot;renderers to talk to Web, iOS and Android&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This means a lot to you as a director. By just talking to React in &lt;strong&gt;a single language, with the same old pattern of words&lt;/strong&gt;&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;, you can get unique portraits from various art studios – no longer limited to studio “Web Browser”. React and his renderers handle the nuances of different studios and make sure you get the artwork of the best quality.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-complete-platform&quot;&gt;A Complete Platform&lt;/h2&gt;
+&lt;p&gt;There’s actually more going on at the studio “Web Browser” that we haven’t had a chance to study. To create great artwork, we’d need the help of some other folks who take care of things like lighting, makeup, stage props etc.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/reactjs-react-native/6-other-folks-at-web.png&quot; alt=&quot;other folks at Web Browser&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In the past React didn’t really care about anything unrelated to Domo’s poses while the director chased after those other folks. After all, at studio “Web Browser”, everybody speaks the same language and it’s relatively easy for the director to communicate with everyone who’s involved.&lt;/p&gt;
+
+&lt;p&gt;However, when working with studios where the staff speak a different language, it becomes important to find professionals who can communicate with both the director and the studios.&lt;/p&gt;
+
+&lt;p&gt;React casted his summon spell. New superheros joined React and his renderers. The team “React Native” was formed. You can now just talk to this team and get everything done.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/reactjs-react-native/7-summon.png&quot; alt=&quot;other superheros&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;At this point, we say React Native is a complete platform because it includes all you need to build a full app. In comparison, the original React is only in charge of UI and you’ll need to include other parts yourself to create a web app. More on this &lt;a href=&quot;#comparison&quot;&gt;later&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;native-ui&quot;&gt;Native UI&lt;/h2&gt;
+&lt;p&gt;Have you ever wondered why React Native is labeled &lt;em&gt;Native&lt;/em&gt;? That’s actually its branding feature: the UI built with React Native consists of &lt;strong&gt;native UI widgets&lt;/strong&gt; that perform well and look/feel consistent, not some simulated crap wrapped in a WebView.&lt;/p&gt;
+
+&lt;p&gt;You know, those little things, such as scrolling acceleration, animations, keyboard behavior and drop shadows, actually play an important role in the user experience of your app. If those are not consistent with other apps on the phone, users will quickly get frustrated.&lt;/p&gt;
+
+&lt;p&gt;I originally intended to explain here what “native” really means and why React Native performs better. But my notes quickly grew into a full page after a few brainstorming sessions. Let’s leave that as a future post of its own.&lt;/p&gt;
+
+&lt;p&gt;For now, I want you to just remember that native UI is one of the great things that make React Native shine.&lt;/p&gt;
+
+&lt;p&gt;So here you go, React Native is a complete platform that allows you to build truly native apps following React paradigm&lt;sup id=&quot;fnref:2:1&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;, in JavaScript.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/reactjs-react-native/8-react-native-summary.png&quot; alt=&quot;React Native key points summary&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;react-sketchapp-reactvr-react-xyz&quot;&gt;React Sketch.app, ReactVR, React XYZ…&lt;/h1&gt;
+&lt;p&gt;Recently Airbnb recently released a nifty tool called &lt;a href=&quot;https://airbnb.design/painting-with-code/&quot;&gt;React Sketch.app&lt;/a&gt; which converts React code into image layers in Sketch. Can you guess how it works?&lt;/p&gt;
+
+&lt;p&gt;Right! It’s essentially React Native with a renderer who talks to the tree model in Sketch!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/reactjs-react-native/9-sketch.png&quot; alt=&quot;React Native team and Sketch Renderer&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Because React Sketch.app is based on React Native, which is a full package, we can do fancy things like fetching data from a real API and rendering it in Sketch.&lt;/p&gt;
+
+&lt;p&gt;In the meantime, many other variations of React Native are created to support building apps for &lt;a href=&quot;https://github.com/Microsoft/react-native-windows&quot;&gt;Windows&lt;/a&gt;, &lt;a href=&quot;https://github.com/ptmt/react-native-macos&quot;&gt;macOS&lt;/a&gt;, &lt;a href=&quot;https://github.com/facebook/react-vr&quot;&gt;VR&lt;/a&gt; etc.&lt;/p&gt;
+
+&lt;p&gt;This means, as long as you master the essence of React,  you can build apps for a gazillion of platforms (and counting), in JavaScript, with the same pattern of thinking. As
+the creators of React Native nicely put, &lt;strong&gt;“learn once, write anywhere”&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a name=&quot;comparison&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;comparing-react-with-react-native&quot;&gt;Comparing React with React Native&lt;/h1&gt;
+&lt;p&gt;Fantasy stories aside, let’s recap in a language that’s more connected to the reality.&lt;/p&gt;
+
+&lt;p&gt;React was originally created for building user interfaces on the web. Its name has always been “React” since the &lt;a href=&quot;https://web.archive.org/web/20130529213355/https://facebook.github.io/react/&quot;&gt;day one&lt;/a&gt; but let’s call it “React Web” to avoid confusion. Because it’s just a small UI library, &lt;strong&gt;you can’t build a full application with just React Web alone&lt;/strong&gt;. You’d need for example CSS for styling, webpack for preprocessing and bundling the code, Firebase for persisting the data etc.&lt;/p&gt;
+
+&lt;p&gt;To support platforms other than Web, such as iOS and Android, the original React was split into two parts: the new React (the cloakless superhero) and ReactDOM the renderer (the alive cloak). This separation of roles made it easy to write new code (renderers) that adapt to new platforms while maintaining a shared core. Therefore, React Native was born.&lt;/p&gt;
+
+&lt;p&gt;Compared to React Web, React Native is a complete platform which includes a lot of stuff:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;the new React as its core (our cloakless superhero),&lt;/li&gt;
+  &lt;li&gt;renderers for iOS and Android,&lt;/li&gt;
+  &lt;li&gt;tools that convert and bundle code into installable apps,&lt;/li&gt;
+  &lt;li&gt;native UI widgets (status bar, ListView etc.) and animations,&lt;/li&gt;
+  &lt;li&gt;toolkit for styling and laying out the UI (flexbox),&lt;/li&gt;
+  &lt;li&gt;essential parts that make up of most apps (such as networking),&lt;/li&gt;
+  &lt;li&gt;parts that provide native functionalities such as clipboard, accelerometer and storage.&lt;/li&gt;
+  &lt;li&gt;…&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;With React Native, you can definitely build a full app&lt;/strong&gt;&lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;React Native is a big deal.&lt;/p&gt;
+
+&lt;p&gt;In the past, building apps for both iOS and Android meant two completely separate codebases. Developers had to learn two different languages and toolchains. The same business logic had to be implemented twice. It was difficult and expensive to create an app and even more so to maintain it in the long run.&lt;/p&gt;
+
+&lt;p&gt;React Native changes that. Developers are now able to build mobile apps in one language (JavaScript) using one set of tools (web development toolchain). Business logic only needs to be implemented once and can be easily shared between platforms. This opens up a huge opportunity for web developers and designers and even native mobile developers because React Native greatly simplifies mobile development.&lt;/p&gt;
+
+&lt;p&gt;The user interfaces built with React Native are truly native. The apps look and feel consistent with the rest of the platform. They are often indistinguishable from the apps written in native languages such as Swift and Java, due to the full utilization of native UI widgets.&lt;/p&gt;
+
+&lt;p&gt;React Native can be easily extended to support other platforms – mostly by writing a new React Renderer &lt;sup id=&quot;fnref:4&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt;. The same person who understands React basics can build apps for many platforms using the same language and the same React paradigm.&lt;/p&gt;
+
+&lt;p&gt;Again, &lt;strong&gt;“learn once, write anywhere”&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;what-about-reactjs-and-reactjs&quot;&gt;What About ReactJS And React.js?&lt;/h1&gt;
+&lt;p&gt;You might have heard ReactJS (or React.js) a lot – and I used it too. In fact it’s never an official name &lt;sup id=&quot;fnref:5&quot;&gt;&lt;a href=&quot;#fn:5&quot; class=&quot;footnote&quot;&gt;5&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;Because JavaScript libraries tend to be named “XyzJS” or “Xyz.js” and React is a JavaScript library, perhaps people just appended “JS” or “.js” to its name voluntarily. Since React was a library for the web in the beginning, many people use ReactJS or React.js to refer to React Web, the duo of React and ReactDOM.&lt;/p&gt;
+
+&lt;p&gt;Following the de facto convention, when I say ReactJS, I mean React Web too.&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;Awesome! We’ve gone over quite a few things so far. We’ve learned a bit of history of React and how he put together his team, React Native. Being a complete platform, React Native includes everything that you need to build native apps in JavaScript and React paradigm. React Native now supports many platforms including iOS, Android, Windows, macOS, Sketch.app and even VR. “Learn once, write anywhere”!&lt;/p&gt;
+
+&lt;p&gt;In the next post, we’ll look at what a &lt;em&gt;native&lt;/em&gt; app really is and why React Native is one of the best ways to build native apps.&lt;/p&gt;
+
+&lt;p&gt;I encourage you to go back to the &lt;a href=&quot;#learning-goals&quot;&gt;Learning Goals&lt;/a&gt; to see if you can answer all the questions. Let me know if you have any questions or comments!&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;Want to learn more about React? &lt;a href=&quot;http://learnreact.design&quot;&gt;Sign up&lt;/a&gt; now and receive exclusive updates!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;footnotes&quot;&gt;Footnotes&lt;/h1&gt;
+
+&lt;p&gt;&lt;a name=&quot;endofpost&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;Renderers update the object model (tree) in the target platform according to the virtual DOM. The object model determines what’s drawn on the browser window or phone screen. This effectively “renders” stuff on the “canvas” of the target platform. That’s how they got this name. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;The pattern of words you use to talk to React is essentially the way how you think about a problem and how you describe it and its solution. In tech slang, it is called &lt;strong&gt;paradigm&lt;/strong&gt;. Declarative and imperative programming are both paradigms. The &lt;strong&gt;React paradigm&lt;/strong&gt; is about how to break down UI into components, how to pass data around etc. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt; &lt;a href=&quot;#fnref:2:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:3&quot;&gt;
+      &lt;p&gt;If you are looking for a in-depth technical comparison between React Native and React Web, check out this &lt;a href=&quot;https://medium.com/@alexmngn/from-reactjs-to-react-native-what-are-the-main-differences-between-both-d6e8e88ebf24&quot;&gt;post&lt;/a&gt;. &lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:4&quot;&gt;
+      &lt;p&gt;The idea of React Renderers is very powerful. Here are &lt;a href=&quot;https://github.com/chentsulin/awesome-react-renderer&quot;&gt;a list&lt;/a&gt; of cool renderers that make it possible to build many different things with React. &lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:5&quot;&gt;
+      &lt;p&gt;In NPM, the central repository for JavaScript libraries, you can find both &lt;a href=&quot;https://www.npmjs.com/package/reactjs&quot;&gt;reactjs&lt;/a&gt; and &lt;a href=&quot;https://www.npmjs.com/package/react&quot;&gt;react&lt;/a&gt;. Can you tell which one is the real React? &lt;a href=&quot;#fnref:5&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>What Is React?</title>
    <link href="http://learnreact.design/2017/06/08/what-is-react/"/>
    <published>2017-06-08T00:00:00-07:00</published>
    <updated>2017-06-08</updated>
@@ -22,7 +225,8 @@
 
 &lt;ul&gt;
   &lt;li&gt;&lt;em&gt;What is React? (this post)&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;React, ReactJS, React.js, React Native, Which is Which? (coming soon)&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;&lt;a href=&quot;/2017/06/20/what-is-react-native/&quot;&gt;What is React Native?&lt;/a&gt;&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;React Native vs. Hybrids (coming soon)&lt;/em&gt;&lt;/li&gt;
   &lt;li&gt;&lt;em&gt;Components, props, state etc. (coming a bit less soon)&lt;/em&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -163,7 +367,7 @@
 &lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
 &lt;p&gt;Alright. Hopefully you’ve learned a bit about React. It’s essentially a tool that helps developers manipulate DOM to build user interfaces. Reactive UI, Virtual DOM and components are the three core ideas that make React special. Of course there are other interesting ideas, such as unidirectional data flow, which I’ll unfold in a future post.&lt;/p&gt;
 
-&lt;p&gt;In the next post, we’ll look at how things like ReactJS, React Native and React Sketch.app relate to and different from each other.&lt;/p&gt;
+&lt;p&gt;In the &lt;a href=&quot;/2017/06/20/what-is-react-native/&quot;&gt;next post&lt;/a&gt;, we’ll look at how things like ReactJS, React Native and React Sketch.app relate to and different from each other.&lt;/p&gt;
 
 &lt;p&gt;I encourage you to go back to the &lt;a href=&quot;#learning-goals&quot;&gt;Learning Goals&lt;/a&gt; to see if you can answer all the questions. Let me know if you have any questions or comments!&lt;/p&gt;
 
