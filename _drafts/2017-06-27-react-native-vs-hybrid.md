@@ -44,6 +44,8 @@ In the [previous post](TODO), we looked at what React is and what makes it speci
   - native look and feel
   - The little things – like scrolling acceleration, keyboard behavior, and navigation – all add up and can create frustrating experiences for your customers when they don’t behave as expected.
 
+- learn once, write anywhere vs. write once, run anywhere.
+
 - why web/hybrid UI sucks on mobile?
   - principle
     - the design principle of web: make a page look the same regardless of platforms (perhaps even at the expense of reduced performance). -- this contradicts with the best practices of mobile design. Users want native look and feel. While the web gives enough liberty for a web app to simulate a lot of those, it's against its design goal.

@@ -89,7 +89,7 @@ There's actually more going on at the studio "Web Browser" that we haven't had a
 
 ![other folks at Web Browser](/images/reactjs-react-native/6-other-folks-at-web.png)
 
-In the past React didn't really care about anything unrelated to Domo's poses while the director chased after those other folks. After all, at studio "Web Browser", everybody speaks the same language (JavaScript) and it's relatively easy for the director to communicate with everyone who's involved.
+In the past React didn't really care about anything unrelated to Domo's poses while the director chased after those other folks. After all, at studio "Web Browser", everybody speaks the same language and it's relatively easy for the director to communicate with everyone who's involved.
 
 However, when working with studios where the staff speak a different language, it becomes important to find professionals who can communicate with both the director and the studios.
 
@@ -140,7 +140,7 @@ Compared to React Web, React Native is a complete platform which includes a lot 
 - the new React as its core (our cloakless superhero),
 - renderers for iOS and Android,
 - tools that convert and bundle code into installable apps,
-- native UI widgets (status bar, ListView etc.) and animation,
+- native UI widgets (status bar, ListView etc.) and animations,
 - toolkit for styling and laying out the UI (flexbox),
 - essential parts that make up of most apps (such as networking),
 - parts that provide native functionalities such as clipboard, accelerometer and storage.
@@ -168,7 +168,7 @@ Because JavaScript libraries tend to be named "XyzJS" or "Xyz.js" and React is a
 Following the de facto convention, when I say ReactJS, I mean React Web too.
 
 # Conclusion
-Cool. We've gone over quite a few things so far. We've learned a bit of history of React and how he put together his team, React Native. Being a complete platform, React Native includes everything that you need to build native apps in JavaScript and React paradigm. React Native now supports many platforms including iOS, Android, Windows, macOS, Sketch.app and even VR. "Learn once, write anywhere"!
+Awesome! We've gone over quite a few things so far. We've learned a bit of history of React and how he put together his team, React Native. Being a complete platform, React Native includes everything that you need to build native apps in JavaScript and React paradigm. React Native now supports many platforms including iOS, Android, Windows, macOS, Sketch.app and even VR. "Learn once, write anywhere"!
 
 In the next post, we'll look at what a *native* app really is and why React Native is one of the best ways to build native apps.
 
@@ -180,8 +180,8 @@ I encourage you to go back to the [Learning Goals](#learning-goals) to see if yo
 
 ---
 
-# Backstage
-- TODO record video to show thought process - walking in the bushes.
+[//]: # Backstage
+[//]: - TODO record video to show thought process - walking in the bushes.
 
 # Footnotes
 [^1]: Renderers update the object model (tree) in the target platform according to the virtual DOM. The object model determines what's drawn on the browser window or phone screen. This effectively "renders" stuff on the "canvas" of the target platform. That's how they got this name.
