@@ -23,6 +23,8 @@ _This series of posts will be the very first part of the ["React for Designers" 
 
 ---
 
+***NOTE: This is an abandoned draft which uses too much metaphor. See [here](/2017/06/20/what-is-react-native/) for the official post.***
+
 In the [previous post](/2017/06/08/what-is-react/), we looked at what React is and what makes it special. Today let's study React Native: what it's for, where it came from, how it's different from React and why it's cool.
 
 <a name="learning-goals">
