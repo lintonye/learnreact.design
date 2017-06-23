@@ -82,7 +82,7 @@
         By <address><a rel="author" href="" title="Linton Ye" target="_blank">Linton Ye</a></address> &mdash;
         <time pubdate datetime="2017-20-June" title="Jun 20, 2017">Jun 20, 2017</time> &mdash;
         
-17 min read
+20 min read
 
       </div>
       <h1 class="title">What Is React Native?</h1>
@@ -101,12 +101,12 @@
 
 <hr />
 
-<p>In the <a href="/2017/06/08/what-is-react/">previous post</a>, we looked at what React is and what makes it special. Today let’s study React Native: what it’s for, where it came from, how it’s different from React and why it’s cool.</p>
+<p>In the <a href="/2017/06/08/what-is-react/">previous post</a>, we looked at what React is and what makes it special. Today let’s study React Native: what it’s for, where it came from, how it’s different from React and why it’s a big deal.</p>
 
 <p><a name="learning-goals"></a></p>
 
 <h1 id="learning-goals">Learning Goals</h1>
-<p>After reading this post, I’ll get you to come back here. Hopefully you’ll be able to answer these questions easily:</p>
+<p>I’ll get you to come back here after reading this post. Hopefully you’ll be able to answer these questions easily:</p>
 
 <ul>
   <li>What is React Native? Why does its name include “Native”?</li>
@@ -124,19 +124,21 @@
 
 <p><img src="/images/reactjs-react-native/1-react-summary.png" alt="what is React Summary" /></p>
 
-<p>You see, React is a great tool for building user interfaces <em>on the web</em>. With React, you can build the UI by describing what you want instead of how to update the UI (reactive UI), organize the code in reusable components, and create performant UI without worrying about DOM the slowpoke (virtual DOM). More and more web developers choose React because it allows them to focus on a bigger picture instead of low-level details. We call this way of building the UI <em>React paradigm</em>, which basically means the way how you think about a problem and how you describe it and its solution<sup id="fnref:2"><a href="#fn:2" class="footnote">1</a></sup>.</p>
+<p>You see, React is a great tool for building user interfaces <em>on the web</em>. With React, you can build the UI by describing what you want instead of how to update the UI (reactive UI), organize the code in reusable components, and create performant UI without worrying about DOM the slowpoke (virtual DOM). More and more web developers choose React because it allows them to focus on a bigger picture instead of low-level details. We call this way of building the UI <em>React paradigm</em>. A paradigm is basically the way how you think about a problem and how you describe it and its solution<sup id="fnref:2"><a href="#fn:2" class="footnote">1</a></sup>.</p>
 
 <p>That’s great for web apps. What about other platforms, such as iOS and Android? Wouldn’t it be great if you could apply the same <em>React paradigm</em> to the development of mobile apps?</p>
 
-<p>In a way, mobile platforms work in a similar fashion as the Web. There is a model (a tree guy). There is something that creates visual elements according to the model (an artist). Not surprisingly, the traditional way of building a mobile UI is to directly manipulate the tree model and tell it how to update things (directly talk with the tree guy). This has similar shortcomings as directly working with the DOM in a web browser. React can definitely help on it.</p>
+<p>In a way, mobile platforms work in the same fashion as the Web. There is a model (a tree guy). There is something that creates visual elements according to the model (an artist). Not surprisingly, the traditional way of building a mobile UI is to directly manipulate the tree model and tell it how to update things (directly talk with the tree guy). This has similar shortcomings as directly working with the DOM in a web browser. React can definitely help on that.</p>
 
-<p>Similarities aside, mobile platforms are different from the Web, and they are different from each other. In the past, building native apps for both iOS and Android meant two completely separate codebases. Developers had to learn two different languages and toolchains. The same business logic had to be implemented twice. It was difficult and expensive to create an app and even more so to maintain it in the long run.</p>
+<p>Similarities aside, mobile platforms are different from the Web, and they are different from each other. In the past, developers had to learn the specific language and toolchain of a platform in order to build apps for it.</p>
 
 <p>This is like working with exotic studios where the staff speak various different languages. You’d have to learn all the new languages to communicate with those models. It doesn’t sound easy, does it?</p>
 
 <p><img src="/images/reactjs-react-native/2-ios-android.png" alt="studio &quot;iOS&quot; and studio &quot;Android&quot;" /></p>
 
-<p>That’s why React Native was created. Let’s see how it makes things a lot easier.</p>
+<p>Therefore, if you wanted to build native apps for both iOS and Android, you had to create two completely separate codebases. The same business logic had to be implemented twice. It was difficult and expensive to create an app and even more so to maintain it in the long run.</p>
+
+<p>That is why React Native was created. Let’s see how it makes things a lot easier.</p>
 
 <h1 id="react-native">React Native</h1>
 
@@ -219,6 +221,43 @@
 <p>This means, as long as you master the essence of React,  you can build apps for a gazillion of platforms (and counting), in JavaScript, with the same pattern of thinking. As
 the creators of React Native nicely put, <strong>“learn once, write anywhere”</strong>.</p>
 
+<h1 id="hands-on-time">Hands-on Time!</h1>
+<p>So much talking so far! Do you want to try something on your phone?</p>
+
+<p>I’m excited too! Grab your phone and follow me!</p>
+
+<ol>
+  <li>On your phone, open App Store. Search “Expo” and download the app. The app’s icon looks like <img src="/images/reactjs-react-native/expo-ios.jpg" /> (or <img src="/images/reactjs-react-native/expo-android.png" /> on Android). Or you can download the app from here: <a href="https://itunes.apple.com/app/apple-store/id982107779?pt=17102800&amp;ct=www&amp;mt=8">iOS</a>, <a href="https://play.google.com/store/apps/details?id=host.exp.exponent">Android</a>.</li>
+  <li>On your computer, open this page: <a href="https://snack.expo.io/">https://snack.expo.io/</a></li>
+  <li>On your phone, launch the Expo app and tap “Scan QR Code”</li>
+  <li>Scan the QR code displayed on your computer. You should see a green “Device connected” message if everything works fine.</li>
+  <li>If the QR code does not automatically disappear, close it by clicking the little cross on the top right of the page. You should see a code editor.</li>
+  <li>Delete everything in the editor, Paste <a href="https://gist.githubusercontent.com/lintonye/5cb3c11349591bf475b91573682fe688/raw/4ea0d4562ce45c1ba3867a1759359e1f86bb590a/domohat.jsx">this code</a>.</li>
+  <li>What do you see on your phone?</li>
+  <li>If you want, you can change the code in the editor and see the result on your phone right away!</li>
+</ol>
+
+<p>I’ll explain this environment in detail in the future. For now, just remember that it’s like Codepen (the tool I used to show you the Domo’s hat example in the previous post) for React Native.</p>
+
+<p>If you compare the <a href="https://gist.github.com/lintonye/5cb3c11349591bf475b91573682fe688">React Native version</a> of the code with the <a href="https://codepen.io/focuser/pen/gROrXx">React (Web) version</a>, you’ll notice that they look very similar. They both go like this:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="kr">const</span> <span class="nx">Hat</span> <span class="o">=</span> <span class="p">...</span>
+
+<span class="kr">const</span> <span class="nx">Thinker</span> <span class="o">=</span> <span class="p">...</span>
+
+<span class="kr">const</span> <span class="nx">ThinkerWithHat</span> <span class="o">=</span> <span class="p">({</span><span class="nx">hat</span><span class="p">})</span> <span class="o">=&gt;</span> <span class="p">(</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nc">Thinker</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nc">Hat</span> <span class="na">type=</span><span class="si">{</span><span class="nx">hat</span><span class="si">}</span><span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">HatSwitcher</span> <span class="o">=</span> <span class="p">...</span>
+
+<span class="p">...</span></code></pre></div>
+
+<p>“Learn once, write anywhere”! Remember?</p>
+
 <h1 id="what-about-reactjs-and-reactjs">What About ReactJS And React.js?</h1>
 <p>You might have heard ReactJS (or React.js) a lot – and I used it too. In fact it’s never an official name <sup id="fnref:5"><a href="#fn:5" class="footnote">6</a></sup>. The official name has always been “React” since the <a href="https://web.archive.org/web/20130529213355/https://facebook.github.io/react/">day one</a>.</p>
 
@@ -227,7 +266,7 @@ the creators of React Native nicely put, <strong>“learn once, write anywhere�
 <p>Following the de facto convention, when I say ReactJS, I mean React on the Web too.</p>
 
 <h1 id="conclusion">Conclusion</h1>
-<p>Awesome! We’ve gone over quite a few things so far. We’ve learned a bit of history of React and how he put together his team, React Native. Being a complete platform, React Native includes everything that you need to build native apps in JavaScript and React paradigm. React Native now supports many platforms including iOS, Android, Windows, macOS, Sketch.app and even VR. “Learn once, write anywhere”!</p>
+<p>Awesome! We’ve gone over quite a few things so far. We’ve learned a bit of history of React and how React Native is put together. Being a complete platform, React Native includes everything that you need to build native apps in JavaScript and React paradigm. React Native now supports many platforms including iOS, Android, Windows, macOS, Sketch.app and even VR. “Learn once, write anywhere”!</p>
 
 <p>In the next post, we’ll look at what a <em>native</em> app really is and why React Native is one of the best ways to build native apps.</p>
 
@@ -238,6 +277,17 @@ the creators of React Native nicely put, <strong>“learn once, write anywhere�
 <p><strong>Want to learn more about React? <a href="http://learnreact.design">Sign up</a> now and receive exclusive updates!</strong></p>
 
 <hr />
+
+<h1 id="backstage">Backstage</h1>
+<h2 id="illustrations">Illustrations</h2>
+<p>I am fortunate to work with <a href="https://beebeeye.github.io">Beebee Ye</a>, who is an excellent illustrator and storyteller. His illustrations have made these posts really unique and fun to read.</p>
+
+<h2 id="revisions">Revisions</h2>
+<p>As usual, this post has gone through many edits. What’s special here though, is that I’ve almost completely rewritten the whole thing hearing that I’ve taken the metaphors too far.</p>
+
+<p>I really appreciate your constructive suggestions that pushed me to rewrite it, <a href="https://twitter.com/Yitong_Zhang">Yitong Zhang</a>, Brittany Smart, <a href="https://disqus.com/by/lostpixel/">Grant Robinson</a>, Jason Fuller and Victoria Pugh. Thanks a ton!</p>
+
+<p>If you are curious, check out <a href="/2017-06-20-what-is-react-native-metaphor/">the previous version</a> that’s full of fantasy stories 🌈🦄  😆.</p>
 
 <h1 id="footnotes">Footnotes</h1>
 
