@@ -144,7 +144,7 @@ So much talking so far! Do you want to try something on your phone?
 
 I'm excited too! Grab your phone and follow me!
 
-1. On your phone, open App Store. Search "Expo" and download the app. The app's icon looks like <img src="/images/reactjs-react-native/expo-ios.jpg"> (or <img src="/images/reactjs-react-native/expo-android.png"> on Android). Or you can download the app from here: [iOS](https://itunes.apple.com/app/apple-store/id982107779?pt=17102800&ct=www&mt=8), [Android](https://play.google.com/store/apps/details?id=host.exp.exponent).
+1. On your phone, download the Expo app. You can either download from here: [iOS](https://itunes.apple.com/app/apple-store/id982107779?pt=17102800&ct=www&mt=8), [Android](https://play.google.com/store/apps/details?id=host.exp.exponent), or search "Expo" in the App Store. The app's icon looks like <img src="/images/reactjs-react-native/expo-ios.jpg"> (or <img src="/images/reactjs-react-native/expo-android.png"> on Android).
 2. On your computer, open this page: [https://snack.expo.io/](https://snack.expo.io/)
 3. On your phone, launch the Expo app and tap "Scan QR Code"
 4. Scan the QR code displayed on your computer. You should see a green "Device connected" message if everything works fine.
