@@ -4,7 +4,7 @@
  <title>Backstage</title>
  <link href="http://learnreact.design/atom.xml" rel="self"/>
  <link href="http://learnreact.design"/>
- <updated>2017-06-23T16:27:06-07:00</updated>
+ <updated>2017-06-23T16:31:46-07:00</updated>
  <id>http://learnreact.design/atom.xml</id>
  <author>
    <name>Linton Ye</name>
@@ -155,7 +155,7 @@ the creators of React Native nicely put, &lt;strong&gt;“learn once, write anyw
 &lt;p&gt;I’m excited too! Grab your phone and follow me!&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;On your phone, open App Store. Search “Expo” and download the app. The app’s icon looks like &lt;img src=&quot;/images/reactjs-react-native/expo-ios.jpg&quot; /&gt; (or &lt;img src=&quot;/images/reactjs-react-native/expo-android.png&quot; /&gt; on Android). Or you can download the app from here: &lt;a href=&quot;https://itunes.apple.com/app/apple-store/id982107779?pt=17102800&amp;amp;ct=www&amp;amp;mt=8&quot;&gt;iOS&lt;/a&gt;, &lt;a href=&quot;https://play.google.com/store/apps/details?id=host.exp.exponent&quot;&gt;Android&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;On your phone, download the Expo app. You can either download from here: &lt;a href=&quot;https://itunes.apple.com/app/apple-store/id982107779?pt=17102800&amp;amp;ct=www&amp;amp;mt=8&quot;&gt;iOS&lt;/a&gt;, &lt;a href=&quot;https://play.google.com/store/apps/details?id=host.exp.exponent&quot;&gt;Android&lt;/a&gt;, or search “Expo” in the App Store. The app’s icon looks like &lt;img src=&quot;/images/reactjs-react-native/expo-ios.jpg&quot; /&gt; (or &lt;img src=&quot;/images/reactjs-react-native/expo-android.png&quot; /&gt; on Android).&lt;/li&gt;
   &lt;li&gt;On your computer, open this page: &lt;a href=&quot;https://snack.expo.io/&quot;&gt;https://snack.expo.io/&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;On your phone, launch the Expo app and tap “Scan QR Code”&lt;/li&gt;
   &lt;li&gt;Scan the QR code displayed on your computer. You should see a green “Device connected” message if everything works fine.&lt;/li&gt;
