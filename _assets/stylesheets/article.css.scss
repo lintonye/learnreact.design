@@ -102,6 +102,12 @@ article {
     color:$text;
     font-weight:400;
     margin:0 0 1.5em;
+    // Image caption
+    img + em {
+      display: block;
+      text-align: center;
+      font-size: 0.9em;
+    }
   }
 
   ol, ul {
