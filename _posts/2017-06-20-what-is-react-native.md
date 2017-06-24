@@ -162,11 +162,13 @@ const Hat = ...
 
 const Thinker = ...
 
+// Below is the React Native version
+// For Web version, replace "View" with "div"
 const ThinkerWithHat = ({hat}) => (
-  <div>
+  <View>
     <Thinker />
     <Hat type={hat}/>
-  </div>
+  </View>
 );
 
 const HatSwitcher = ...
