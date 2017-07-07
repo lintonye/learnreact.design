@@ -1,0 +1,30 @@
+{% for course in include.courses %}
+<div class="course-card">
+  <div class="hero" style="background: {{ course.bg }}">
+    <div class="title">
+      <a href="{{ course.url }}" target="course-detail">{{ course.title }}</a>
+    </div>
+    <!--
+    <div class="description">
+      <div>{{ course.description}}</div>
+      {% if course.url %}
+      <a href="{{ course.url }}">Learn more &gt;</a>
+      {% endif %}
+    </div>
+    -->
+    <div class="date-price">
+      <div>{{ course.releaseDate }}</div>
+      {% if course.price %}
+      <div>${{ course.price }}</div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="action">
+    {% if course.preorderPrice %}
+    <a href="#">Pre-order for ${{course.preorderPrice}}</a>
+    {% else %}
+    <a href="{{ course.url }}">Vote For This Course</a>
+    {% endif %}
+  </div>
+</div>
+{% endfor %}

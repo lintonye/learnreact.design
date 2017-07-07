@@ -2,7 +2,7 @@
 layout: post
 last-modified: '2017-06-20'
 
-title: "ReactJS, React.js, React Native, Which Is Which?"
+title: "React Native vs. Hybrids"
 subtitle: "React terms in plain English and doodles🌴🎄⚛"
 
 excerpt: "React terms explained in plain English and doodles🌴🎄⚛"
@@ -56,6 +56,6 @@ In the [previous post](TODO), we looked at what React is and what makes it speci
   - JS
     - JS is slow. TODO the JS slow causes mobile web app slow post.
     - On Web, to simulate native interface, a lot of things have to be done in JS, which is slow.
-    - On RN, JS code is like glue that connects native parts together. Native does the heavylifting.
+    - On RN, JS code is like glue that connects native parts together. Native code does the heavylifting.
 
   <a name="endofpost">

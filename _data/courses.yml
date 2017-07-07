@@ -1,0 +1,58 @@
+- title: React Essentials For Designers
+  bg: "#673AB7"
+  releaseDate: October 2017
+  url: /re4d/
+  price: 149
+  preorderPrice: 59
+  description: >
+    <ul>
+      <li>5 hours of videos</li>
+      <li>Stream or download</li>
+      <li>Watch on any devices</li>
+    </ul>
+
+- title: React Native - Building Real World Mobile UI
+  bg: "#E53935"
+  releaseDate: December 2017
+  url: /re4d/
+  price: 149
+  preorderPrice: 59
+  description: >
+    <ul>
+      <li>5 hours of videos</li>
+      <li>Stream or download</li>
+      <li>Watch on any devices</li>
+    </ul>
+
+- title: React Sketch.app Deep Dive
+  bg: "#009688"
+  releaseDate: December 2017
+  url: /re4d/
+  price: 149
+  preorderPrice: 59
+  description: >
+    <ul>
+      <li>5 hours of videos</li>
+      <li>Stream or download</li>
+      <li>Watch on any devices</li>
+    </ul>
+
+- title: ReactJS - Building Real World Web UI
+  bg: "#757575"
+  releaseDate: TBD
+  description: >
+    <ul>
+      <li>5 hours of videos</li>
+      <li>Stream or download</li>
+      <li>Watch on any devices</li>
+    </ul>
+
+- title: JavaScript Fundamentals For Designers
+  bg: "#757575"
+  releaseDate: TBD
+  description: >
+    <ul>
+      <li>5 hours of videos</li>
+      <li>Stream or download</li>
+      <li>Watch on any devices</li>
+    </ul>
