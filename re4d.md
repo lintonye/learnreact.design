@@ -1,14 +1,25 @@
 ---
 layout: page
-title: React Essentials For Designers (RE4D)
+title: React Essentials For Designers
 #subtitle: React courses tailored for user interface designers
 author:
   name: Linton Ye
   twitter: lintonye
   image: linton-face.jpg
 ---
+- Planned release date: **October 2017**
+- Price: **$149**
 
-### What's Included?
+<a href="#" class="button">Pre-order for <strong>$59</strong></a>
+
+### Outline
+- [What Will Be Included?](TODO)
+- [Learning Goals](TODO)
+- [What is this course NOT about?](TODO)
+- [Requirements](TODO)
+- [Curriculum](TODO)
+
+### What Will Be Included?
 - Video lectures that you can stream or download
 - An Ebook that'll be used as a textbook
 - Exclusive access to Slack channel *React For Designers* where you can ask questions and network with fellow designers
@@ -46,7 +57,7 @@ This is certainly not a course on how to build a complete app. It is not even a 
 
 This is an entry-level course focused on breadth, rather than depth. You'll see high-level explanations of many related concepts, such as DOM, Webpack, Redux and React Router. But you won't find details on how to use them. This is by design. (As an example, check out this blog post: [What is React?](TODO))
 
-I think it'd be more effective to first show you a full bird's view of what an app is made up of. After grasping a complete picture, you'd be able to decide a subject that's important to you to dive in. For example, if you are involved in a React Native project and want to build the UI yourself, you can take the [React Native Real World UI course](TODO).
+I think it'd be more effective to first show you a full bird's view of what an app is made up of. After grasping a complete picture, you'd be able to decide on a subject that's important to you to dive in. For example, if you are involved in a React Native project and want to build the UI yourself, you can take the [React Native Real World UI course](TODO).
 
 ### Requirements
 - You are a designer with a yearning to learn. You heard about this "React" thing all the time and don't want to be left behind.

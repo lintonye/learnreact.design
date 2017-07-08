@@ -1,5 +1,5 @@
 - title: React Essentials For Designers
-  bg: "#673AB7"
+  bg: "#E53935"
   releaseDate: October 2017
   url: /re4d/
   price: 149
@@ -12,7 +12,7 @@
     </ul>
 
 - title: React Native - Building Real World Mobile UI
-  bg: "#E53935"
+  bg: "#673AB7"
   releaseDate: December 2017
   url: /re4d/
   price: 149

@@ -1,0 +1,27 @@
+$steps: 6;
+$len: 100 / $steps;
+
+@keyframes cycle {
+  @for $i from 0 through $steps - 1 {
+    $ty0: -$i * $len;
+    $ty1: $ty0 - $len;
+    #{$i * $len}% { transform: translateY($ty0 * 1%); }
+    #{($i + 1) * $len - 1}% { transform: translateY($ty0 * 1%); }
+    #{($i + 1) * $len }% { transform: translateY($ty1 * 1%); }
+  }
+}
+
+div.slider-container {
+  height: 50px;
+  overflow: hidden;
+  ul {
+    animation: cycle 33s linear infinite;
+  }
+  li {
+    list-style: none;
+    text-align: center;
+    height: 50px;
+    font-weight: bold;
+    color: #424242;
+  }
+}
