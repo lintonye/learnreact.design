@@ -13,13 +13,13 @@ author:
 <a href="#" class="button">Pre-order for <strong>$59</strong></a>
 
 ### Outline
-- [What Will Be Included?](TODO)
+- [What Will The Course Include?](TODO)
 - [Learning Goals](TODO)
 - [What is this course NOT about?](TODO)
 - [Requirements](TODO)
 - [Curriculum](TODO)
 
-### What Will Be Included?
+### What Will The Course Include?
 - Video lectures that you can stream or download
 - An Ebook that'll be used as a textbook
 - Exclusive access to Slack channel *React For Designers* where you can ask questions and network with fellow designers

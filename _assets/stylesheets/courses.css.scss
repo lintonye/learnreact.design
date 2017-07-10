@@ -8,7 +8,7 @@ div.tweets {
   }
 }
 
-$padding: 8px;
+$padding: 10px;
 
 @mixin flex {
   display: -webkit-flex;
@@ -93,12 +93,18 @@ div.course-container {
 
 div.profile-container {
   @include flex;
-  align-items: center;
-  img.profile {
-    width: 150px;
+  div.linton-photo {
+    background-image: url('/images/linton-profile.jpg');
+    flex-basis: 150px;
+    flex-grow: 0;
+    flex-shrink: 0;
     height: 150px;
     border-radius: 100px;
+    margin-top: 10px;
     margin-right: 20px;
+  }
+  div.linton-photo:hover {
+    background-image: url('/images/linton-profile-2.jpg');
   }
 }
 

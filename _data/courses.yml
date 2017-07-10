@@ -2,8 +2,8 @@
   bg: "#E53935"
   releaseDate: October 2017
   url: /re4d/
-  price: 149
-  preorderPrice: 59
+  price: 199
+  preorderPrice: 79
   description: >
     <ul>
       <li>5 hours of videos</li>
@@ -13,10 +13,10 @@
 
 - title: React Native - Building Real World Mobile UI
   bg: "#673AB7"
-  releaseDate: December 2017
+  releaseDate: January 2018
   url: /re4d/
-  price: 149
-  preorderPrice: 59
+  price: 199
+  preorderPrice: 79
   description: >
     <ul>
       <li>5 hours of videos</li>
@@ -26,10 +26,10 @@
 
 - title: React Sketch.app Deep Dive
   bg: "#009688"
-  releaseDate: December 2017
+  releaseDate: March 2018
   url: /re4d/
-  price: 149
-  preorderPrice: 59
+  price: 199
+  preorderPrice: 79
   description: >
     <ul>
       <li>5 hours of videos</li>

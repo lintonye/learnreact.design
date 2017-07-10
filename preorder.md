@@ -43,26 +43,50 @@ author:
 ---
 
 <div class="profile-container">
-  <img class="profile" src="/images/linton-profile.jpg" />
+  <div class="linton-photo"></div>
   <div>
     <h2>Hi! I'm Linton Ye</h2>
     <div>
-    I'm a full-stack developer who's learning design. I've been working on mobile since 2007 and React Native since 2015. I've authored a few courses at Treehouse and Lynda. I also contribute to <a href="https://github.com/react-community/react-navigation">React Navigation</a> project.
+      <p>Super excited to create these courses to help you become a better designer! </p>
+      <p>I'm a full-stack developer who's learning design. I have 10+ years of experience in mobile, development/design tools and web development. I've been working on React Native since 2015, and building Android apps since 2007 before the first Android phone, HTC G1, was even available. I also contribute to <a href="https://github.com/react-community/react-navigation">React Navigation</a> project, and write <a href="http://reactnativediary.com">a blog</a> about React.</p>
+
+      <p> I love teaching. I've authored a few courses at Treehouse and Lynda. My dark little secret: 😈 creating this course is also my special way to learn all things about design and React -- I believe the best way to learn is to teach.</p>
+
+      <p>Thrilled to be on this journey with you!</p>
     </div>
   </div>
 </div>
 
 ---
 
-## Why pre-order?
-It's still at a very early stage. I plan to gradually develop the course content over a few months. So you are practically witnessing the birth of a brand new course! It's a good opportunity to have your influence on creating a great resource for the entire design community. [Shoot me an email](mailto:linton@jimulabs.com), I'm all ears!
-
-## But why should a designer learn coding?
+## Why should you, as a designer, learn coding?
 I encourage you to check out this [post](/2017/05/09/react-for-designers-interviews) to hear other designers' opinions.
 
 Learning to code will help you become better at design. Armed with a better understanding of how things work, you will find the communication with developers much more efficient. Your design ideas would be more convincing and more respected. You can even [design with code](https://blog.framer.com/what-if-a-designer-learns-code-59d790024c9e).
 
 New skills you learn will open new doors. Trust me, it will be a new world of creativity!
+
+## Why should you pre-order?
+
+- **60% off** the regular price!
+- **Zero risk** -- You won't be charged until the planned release date. Plus you can cancel your order anytime until 30 days after launch. No hard feelings. BTW: Some of you might see a $1 charge after placing an order. This is the normal process that my payment processor uses to verify your credit card. The $1 will go back to your card soon after.
+- **Start learning sooner** -- I'll send you exclusive content updates while the courses are being created. You don't have to wait until the launch date.
+- **Learn what you want to learn** -- The courses are feedback driven. I'll try my best to integrate your feedback into the course materials. It’s a good opportunity to have your influence on creating a great resource for the entire design community. Shoot me an email, I’m all ears!
+- **Office hour** -- I'll experiment the idea of weekly webinars where I'll answer your questions. I'm not sure if this would scale after the launch, but I'll do it for everyone who places an pre-order.
+
+Thank you! I'd really appreciate your trust and support. I'll do my best!
+
+## What if you are not satisfied?
+If you are not 100% satisfied with the courses, you can cancel your order at any time before the launch of the course. After launch, you still have 30 days to get 100% refund. No hard feelings!
+
+## What if a course is not released on time?
+First thing first, I'll try all my best to release the courses on time, or even before the planned date.
+
+Second, you'll be able to monitor the creation process as I'll keep you constantly posted. Your credit card won't be charged until the planned launch date.
+
+But to be fair, things could happen. If for any reason I'd have to postpone or even cancel a course, I'd get in touch with you. I'd change the launch date when your card would be charged, or give you 100% refund. Remember you can also cancel your pre-orders anytime.
+
+Hopefully the odds for these to happen are tiny. But I'll make sure everything is covered.
 
 ## Acknowledgements
 My special thanks to these fantastic folks who have given me invaluable help, inspiration and encouragement (sorted by last name): [J. Terrell Allen](https://dribbble.com/JTerrellAllen), [Jovana Andjelkovic](https://dribbble.com/casualmess), [Olafur Breidfjord](http://olafurbreidfjord.com/), [Jinju Jang](http://medium.com/@arle13), Antti Kareinen, Sure Lee
