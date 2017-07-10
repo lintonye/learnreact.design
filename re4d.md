@@ -22,9 +22,7 @@ author:
 
 <a name="previews">
 ### Previews
-To see if you like my teaching style, check out this series of posts: [What is React?](/2017/06/08/what-is-react/)
-
-I'll be adding some sample videos here too.
+To see if you like my teaching style, check out this series of posts: [What is React?](/2017/06/08/what-is-react/) I'll be adding some sample videos here too.
 
 <a name="include">
 ### What Will Be Included?
