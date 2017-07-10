@@ -8,18 +8,19 @@ author:
   image: linton-face.jpg
 ---
 - Planned release date: **October 2017**
-- Price: **$149**
+- Price: **$199**
 
-<a href="#" class="button">Pre-order for <strong>$59</strong></a>
+<a href="#" class="button">Pre-order for <strong>$79</strong></a>
 
 ### Outline
-- [What Will The Course Include?](TODO)
-- [Learning Goals](TODO)
-- [What is this course NOT about?](TODO)
-- [Requirements](TODO)
-- [Curriculum](TODO)
+- [What Will The Course Include?](#include)
+- [Learning Goals](#goals)
+- [What is this course NOT about?](#not-about)
+- [Requirements](#requirements)
+- [Curriculum](#curriculum)
 
-### What Will The Course Include?
+<a name="include">
+### What Will Be Included?
 - Video lectures that you can stream or download
 - An Ebook that'll be used as a textbook
 - Exclusive access to Slack channel *React For Designers* where you can ask questions and network with fellow designers
@@ -28,10 +29,11 @@ author:
 - Unlimited updates
 - Weekly office hour webinar where I'll go over the most voted questions and you can ask me questions on the spot too (TBD: This is currently only open for people who have pre-ordered the course.)
 
+<a name="goals">
 ### Learning Goals
-The main goal of this course is to help you establish a firm understanding of the fundamentals, capability and limitations of React and **how they relate to design**.
+The main goal of this course is to help you establish a firm understanding of the fundamentals, capability and limitations of React and **how they relate to design**. Armed with a holistic view of how design and engineering interacts, you will become a better designer whom everyone loves to work with.
 
-After finishing the course, you will become aware of how the UI could be structured in reality when designing the next mockup in Sketch. You should be able to discuss with your developers, with more confidence, on how to design a great UI without sacrificing its engineering properties, such as performance and maintainability. You should also be able to style the UI of an existing React project yourself -- no more waiting for developers!
+After finishing the course, you should become aware of how the UI could be structured and constructed in reality when designing the next mockup in Sketch. You should be able to discuss with your developers, with more confidence, on how to design a great UI that's easy to implement, performant and easy to maintain. You should also be able to style the UI of an existing React project yourself -- no more waiting for developers!
 
 To break it down, here are a few verifiable goals to help you work along the course material. After completing the course, you should be able to:
 
@@ -52,22 +54,25 @@ To break it down, here are a few verifiable goals to help you work along the cou
 
 If you are struggling with anything above even after completing all the videos and exercises, email me! I'll try my best to help.
 
+<a name="not-about">
 ### What is this course NOT about?
 This is certainly not a course on how to build a complete app. It is not even a course on how to build a full UI on iOS or Android or web.
 
-This is an entry-level course focused on breadth, rather than depth. You'll see high-level explanations of many related concepts, such as DOM, Webpack, Redux and React Router. But you won't find details on how to use them. This is by design. (As an example, check out this blog post: [What is React?](TODO))
+This is an entry-level course focused on breadth, rather than depth. You'll see high-level explanations of many related concepts, such as DOM, Webpack, Redux and React Router. But you won't find details on how to use them. This is by design. (As an example, check out this blog post: [What is React?](/2017/06/08/what-is-react/))
 
-I think it'd be more effective to first show you a full bird's view of what an app is made up of. After grasping a complete picture, you'd be able to decide on a subject that's important to you to dive in. For example, if you are involved in a React Native project and want to build the UI yourself, you can take the [React Native Real World UI course](TODO).
+I think it'd be more effective to first show you a full bird's view of what an app is made up of and how it's implemented. After grasping a complete picture, you'd be able to decide on a subject that's important to you to dive in. For example, if you are involved in a React Native project and want to build the UI yourself, you can take the [React Native Real World UI course](/rnui/).
 
+<a name="requirements">
 ### Requirements
 - You are a designer with a yearning to learn. You heard about this "React" thing all the time and don't want to be left behind.
 - You are able to commit 2-3 hours per day for two weeks. The videos will be a few hours long, but you'd learn best if you could invest enough time to finish the exercises, do related research, participate office hours and discuss with fellow students.
-- You are familiar with a modern code editor. For JS projects, I recommend [Visual Studio Code](TODO).
+- You are familiar with a modern code editor. For JS projects, I recommend [Visual Studio Code](https://code.visualstudio.com/).
 - You are not intimidated by the terminal and command line. You don't need to be an expert of this but we'll do a bit of work in the terminal, mostly installing things via npm.
 - You have some base knowledge of programming, be familiar with HTML and CSS, and can read and edit JavaScript code. I will review some JS concepts that'll be used in the course, but in general I assume you'd come prepared. If you don't, no worries! There are many great resources for you to pick them up, for example, Treehouse's [JavaScript courses](https://teamtreehouse.com/learn/javascript), or Khan Academy's [Intro to JS: Drawing & Animation](https://www.khanacademy.org/computing/computer-programming/programming). If you want, you can even learn both JS and React in parallel and I'll cover some tips on this.
 
+<a name="curriculum">
 ### Curriculum
-Below is a tentative curriculum of the course. I may add, remove or reorder some sections to make it easy to follow. But no matter what changes I make, they'll serve to achieve the aforementioned [learning goals](TODO) in the most effective way I could find.
+Below is a tentative curriculum of the course. I may add, remove or reorder some sections to make it easy to follow. But no matter what changes I make, they'll serve to achieve the aforementioned [learning goals](#goals) in the most effective way I could find.
 
 - Introduction
   - What will we build?
