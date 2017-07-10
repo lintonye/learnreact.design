@@ -44,7 +44,7 @@ author:
 
 <div class="profile-container">
   <div class="linton-photo"></div>
-  <div>
+  <div class="content">
     <h2>Hi! I'm Linton Ye</h2>
     <div>
       <p>Super excited to create these courses to help you become a better designer! </p>

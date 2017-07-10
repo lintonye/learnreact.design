@@ -1,30 +1,23 @@
 ---
 layout: page
-title: React Essentials For Designers
+title: React Sketch.app Deep Dive
 #subtitle: React courses tailored for user interface designers
 author:
   name: Linton Ye
   twitter: lintonye
   image: linton-face.jpg
 ---
-- Planned release date: **October 2017**
+- Planned release date: **March 2018**
 - Price: **$199**
 
 <a href="#" class="button">Pre-order for <strong>$79</strong></a>
 
 ### Outline
-- [Previews](#previews)
 - [What Will The Course Include?](#include)
 - [Learning Goals](#goals)
 - [What is this course NOT about?](#not-about)
 - [Requirements](#requirements)
 - [Curriculum](#curriculum)
-
-<a name="previews">
-### Previews
-To see if you like my teaching style, check out this series of posts: [What is React?](/2017/06/08/what-is-react/)
-
-I'll be adding some sample videos here too.
 
 <a name="include">
 ### What Will Be Included?

@@ -1,13 +1,13 @@
 ---
 layout: page
-title: React Essentials For Designers
+title: React Native - Building Real World Mobile UI
 #subtitle: React courses tailored for user interface designers
 author:
   name: Linton Ye
   twitter: lintonye
   image: linton-face.jpg
 ---
-- Planned release date: **October 2017**
+- Planned release date: **January 2018**
 - Price: **$199**
 
 <a href="#" class="button">Pre-order for <strong>$79</strong></a>
@@ -38,7 +38,15 @@ I'll be adding some sample videos here too.
 
 <a name="goals">
 ### Learning Goals
-The main goal of this course is to help you establish a firm understanding of the fundamentals, capability and limitations of React and **how they relate to design**. Armed with a holistic view of how design and engineering interacts, you will become a better designer whom everyone loves to work with.
+This course will dive into building a fully functional UI on both iOS and Android. The prerequisite is the [React Essentials for Designers](/re4d/) course.
+
+The main goal of this course is to help you master the coding skills to build modern UI
+
+- build fully functional UI
+- iOS and Android
+- native look and feel, follows official UI guidelines (Material and iOS UI guidelines)
+- strategies on how to pick components
+- be aware of the native option, know when to go there
 
 After finishing the course, you should become aware of how the UI could be structured and constructed in reality when designing the next mockup in Sketch. You should be able to discuss with your developers, with more confidence, on how to design a great UI that's easy to implement, performant and easy to maintain. You should also be able to style the UI of an existing React project yourself -- no more waiting for developers!
 
@@ -73,9 +81,9 @@ I think it'd be more effective to first show you a full bird's view of what an a
 ### Requirements
 - You are a designer with a yearning to learn. You heard about this "React" thing all the time and don't want to be left behind.
 - You are able to commit 2-3 hours per day for two weeks. The videos will be a few hours long, but you'd learn best if you could invest enough time to finish the exercises, do related research, participate office hours and discuss with fellow students.
+- You have either completed [React Essentials for Designers](/re4d/) or have an equivalent understanding of React basics.
 - You are familiar with a modern code editor. For JS projects, I recommend [Visual Studio Code](https://code.visualstudio.com/).
 - You are not intimidated by the terminal and command line. You don't need to be an expert of this but we'll do a bit of work in the terminal, mostly installing things via npm.
-- You have some base knowledge of programming, be familiar with HTML and CSS, and can read and edit JavaScript code. I will review some JS concepts that'll be used in the course, but in general I assume you'd come prepared. If you don't, no worries! There are many great resources for you to pick them up, for example, Treehouse's [JavaScript courses](https://teamtreehouse.com/learn/javascript), or Khan Academy's [Intro to JS: Drawing & Animation](https://www.khanacademy.org/computing/computer-programming/programming). If you want, you can even learn both JS and React in parallel and I'll cover some tips on this.
 
 <a name="curriculum">
 ### Curriculum
