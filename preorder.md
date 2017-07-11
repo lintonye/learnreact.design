@@ -74,6 +74,10 @@ New skills you learn will open new doors. Trust me, it will be a new world of cr
 - **Learn what you want to learn** -- The courses are feedback driven. I'll try my best to integrate your feedback into the course materials. It’s a good opportunity to have your influence on creating a great resource for the entire design community. Shoot me an email, I’m all ears!
 - **Office hour** -- I'll experiment the idea of weekly webinars where I'll answer your questions. I'm not sure if this would scale after the launch, but I'll do it for everyone who places an pre-order.
 
+Finally, in the spirit of transparency, I must share that I'll use the number of pre-orders to gauge the potential of the idea. I'd really like to work on this full-time, but I need to be sure that my time is well spent -- I want to create enough value that you are willing to pay for.
+
+So if you think a course is worth your money and time, please pre-order. It's risk free since you'd only be charged when the course is actually released.
+
 Thank you! I'd really appreciate your trust and support. I'll do my best!
 
 ## What if you are not satisfied?
@@ -85,8 +89,6 @@ First thing first, I'll try all my best to release the courses on time, or even 
 Second, you'll be able to monitor the creation process as I'll keep you constantly posted. Your credit card won't be charged until the planned launch date.
 
 But to be fair, things could happen. If for any reason I'd have to postpone or even cancel a course, I'd get in touch with you. I'd change the launch date when your card would be charged, or give you 100% refund. Remember you can also cancel your pre-orders anytime.
-
-Hopefully the odds for these to happen are tiny. But I'll make sure everything is covered.
 
 ## Acknowledgements
 My special thanks to these fantastic folks who have given me invaluable help, inspiration and encouragement (sorted by last name): [J. Terrell Allen](https://dribbble.com/JTerrellAllen), [Jovana Andjelkovic](https://dribbble.com/casualmess), [Olafur Breidfjord](http://olafurbreidfjord.com/), [Jinju Jang](http://medium.com/@arle13), Antti Kareinen, Sure Lee
