@@ -10,7 +10,7 @@ author:
 - Planned release date: **October 2017**
 - Price: **$199**
 
-<a href="#" class="button">Pre-order for <strong>$79</strong></a>
+<a href="https://gum.co/reactessentials" class="button">Pre-order for <strong>$79</strong></a>
 
 ### Outline
 - [Previews](#previews)

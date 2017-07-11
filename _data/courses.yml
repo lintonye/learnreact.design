@@ -2,6 +2,7 @@
   bg: "#E53935"
   releaseDate: October 2017
   url: /re4d/
+  buyUrl: "https://gum.co/reactessentials"
   price: 199
   preorderPrice: 79
   description: >
@@ -15,6 +16,7 @@
   bg: "#673AB7"
   releaseDate: January 2018
   url: /rnui/
+  buyUrl: 'https://gum.co/LnbFX'
   price: 199
   preorderPrice: 79
   description: >
@@ -28,6 +30,7 @@
   bg: "#009688"
   releaseDate: March 2018
   url: /rsketch/
+  buyUrl: 'https://gum.co/xmgqZ'
   price: 199
   preorderPrice: 79
   description: >
@@ -40,6 +43,7 @@
 - title: ReactJS - Building Real World Web UI
   bg: "#757575"
   releaseDate: TBD
+  url: 'https://trello.com/c/kwEW1rCA/15-build-real-world-ui-with-reactjs'
   description: >
     <ul>
       <li>5 hours of videos</li>
@@ -50,6 +54,7 @@
 - title: JavaScript Fundamentals For Designers
   bg: "#757575"
   releaseDate: TBD
+  url: 'https://trello.com/c/fuMptZWK/9-javascript-fundamentals'
   description: >
     <ul>
       <li>5 hours of videos</li>

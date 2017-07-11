@@ -21,10 +21,19 @@
       </div>
     </div>
   </a>
-  <div class="action">
-    {% if course.preorderPrice %}
-    <a href="#">Pre-order for ${{course.preorderPrice}}</a> {% else %}
-    <a href="{{ course.url }}">Vote For This Course</a> {% endif %}
-  </div>
+
+  {% if course.preorderPrice %}
+  <a href="{{ course.buyUrl }}" target="action">
+    <div class="action">
+        Pre-order for ${{course.preorderPrice}}
+    </div>
+  </a>
+  {% else %}
+  <a href="{{ course.url }}" target="action">
+    <div class="action">
+        Vote For This Course
+    </div>
+  </a>
+  {% endif %}
 </div>
 {% endfor %}
