@@ -23,7 +23,7 @@ author:
 ---
 
 <div class="center">
-  <h2>Some nice things people say:</h2>
+  <h2>Some nice things people have said:</h2>
 </div>
 
 <div class="tweets">
