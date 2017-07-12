@@ -1,5 +1,5 @@
 {% for course in include.courses %}
-<a href="{{ course.url }}" target="course-detail">
+<a href="{{ course.url }}" target="_blank">
   <div class="course-card hvr-float">
     <div class="hero">
       <div class="title">
@@ -16,7 +16,7 @@
         <div>{{ course.releaseDate }}</div>
         <span class="price strike">${{ course.price }}</span>
       </div>
-      <div class="preorder-price">Pre-orders (60% off!): ${{course.preorderPrice}}</div>
+      <div class="preorder-price">60% off! Pre-order for ${{course.preorderPrice}}</div>
       {% else %}
       Vote For This Course
       {% endif %}

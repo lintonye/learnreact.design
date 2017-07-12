@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 'React Native: Building Real World Mobile UI'
+title: 'React Native: Build Real World Mobile UI'
 subtitle: An deep-dive, example-driven course on building modern mobile UIs that follow iOS and Material Design guidelines
 author:
   name: Linton Ye
