@@ -1,7 +1,7 @@
 ---
 layout: page
 title: React Essentials For Designers
-#subtitle: React courses tailored for user interface designers
+subtitle: 'An introductory, example-driven course on React: fundamentals, capabilities and limitations and how they relate to design'
 author:
   name: Linton Ye
   twitter: lintonye
@@ -27,7 +27,7 @@ To see if you like my teaching style, check out this series of posts: [What is R
 <a name="include">
 ### What Will Be Included?
 - Video lectures that you can stream or download
-- An Ebook that'll be used as a textbook
+- An Ebook that you can skim or study at your own pace
 - Exclusive access to Slack channel *React For Designers* where you can ask questions and network with fellow designers
 - Exercises
 - Certificate of completion
@@ -36,7 +36,7 @@ To see if you like my teaching style, check out this series of posts: [What is R
 
 <a name="goals">
 ### Learning Goals
-The main goal of this course is to help you establish a firm understanding of the fundamentals, capability and limitations of React and **how they relate to design**. Armed with a holistic view of how design and engineering interacts, you will become a better designer whom everyone loves to work with.
+The main goal of this course is to help you establish a firm understanding of the fundamentals, capabilities and limitations of React and **how they relate to design**. Armed with a holistic view of how design and engineering interacts, you will become a better designer whom everyone loves to work with.
 
 After finishing the course, you should become aware of how the UI could be structured and constructed in reality when designing the next mockup in Sketch. You should be able to discuss with your developers, with more confidence, on how to design a great UI that's easy to implement, performant and easy to maintain. You should also be able to style the UI of an existing React project yourself -- no more waiting for developers!
 
@@ -80,7 +80,7 @@ I think it'd be more effective to first show you a full bird's view of what an a
 Below is a tentative curriculum of the course. I may add, remove or reorder some sections to make it easy to follow. But no matter what changes I make, they'll serve to achieve the aforementioned [learning goals](#goals) in the most effective way I could find.
 
 - Introduction
-  - What will we build?
+  - What we will be building
   - Environment setup
     - Codepen: for ReactJS projects
     - Expo Snack: for React Native projects

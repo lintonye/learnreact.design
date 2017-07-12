@@ -80,6 +80,9 @@ So, if you want a course to see the light of day, please pre-order. It's risk fr
 
 Thank you! I'd really appreciate your trust and support. I'll do my best!
 
+## How to request new content?
+[Email me](mailto:linton@jimulabs.com)! Let me know if you want to request new chapters, or a completely new course. I read all emails from you. I'm all ears!
+
 ## What if you are not satisfied?
 If you are not 100% satisfied with the courses, you can cancel your order at any time before the launch of the course. After launch, you still have 30 days to get 100% refund. No hard feelings!
 

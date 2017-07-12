@@ -1,39 +1,28 @@
 {% for course in include.courses %}
-<div class="course-card hvr-float">
-  <a href="{{ course.url }}" target="course-detail">
-    <div class="hero" style="background: {{ course.bg }}">
+<a href="{{ course.url }}" target="course-detail">
+  <div class="course-card hvr-float">
+    <div class="hero">
       <div class="title">
         {{ course.title }}
       </div>
-      <!--
-    <div class="description">
-      <div>{{ course.description}}</div>
-      {% if course.url %}
-      <a href="{{ course.url }}">Learn more &gt;</a>
+      {% if course.image %}
+      <img src="{{ course.image }}" width="150" height="150">
       {% endif %}
     </div>
-    -->
+
+    <div class="action" style="background: {{ course.bg }}">
+      {% if course.price %}
+      <div>Pre-order price: ${{course.preorderPrice}}</div>
       <div class="date-price">
         <div>{{ course.releaseDate }}</div>
-        {% if course.price %}
-        <div>${{ course.price }}</div>
-        {% endif %}
+        <span class="strikethrough">
+          <span class="price">${{ course.price }}</span>
+        </span>
       </div>
+      {% else %}
+      Vote For This Course
+      {% endif %}
     </div>
-  </a>
-
-  {% if course.preorderPrice %}
-  <a href="{{ course.buyUrl }}" target="action">
-    <div class="action">
-        Pre-order for ${{course.preorderPrice}}
-    </div>
-  </a>
-  {% else %}
-  <a href="{{ course.url }}" target="action">
-    <div class="action">
-        Vote For This Course
-    </div>
-  </a>
-  {% endif %}
-</div>
+  </div>
+</a>
 {% endfor %}

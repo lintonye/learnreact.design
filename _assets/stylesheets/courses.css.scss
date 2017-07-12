@@ -55,40 +55,41 @@ div.course-container {
     .hero {
       @include flex;
       padding: $padding;
-      background: #673AB7;
+      // background: #673AB7;
       flex-grow: 1;
       flex-direction: column;
       justify-content: space-between;
+      align-items: center;
+      * { color: #222222; }
       cursor: pointer;
-      * { color: white; }
       .title {
         font-size: 1.1em;
         font-weight: bold;
       }
-      .description {
-        @include flex;
-        display: none;
-        flex-direction: column;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        a {
-          align-self: flex-end;
-        }
-      }
-      .date-price {
-        @include flex;
-        flex-direction: row;
-        justify-content: space-between;
-        margin-top: 50px;
-        // font-weight: bold;
-      }
     }
     .action {
       @include flex;
+      flex-direction: column;
+      color: white;
       padding: $padding;
       font-weight: bold;
-      justify-content: flex-end;
+      align-items: flex-end;
       cursor: pointer;
+    }
+    .date-price {
+      @include flex;
+      flex-direction: row;
+      justify-content: space-between;
+      flex-grow: 1;
+      align-self: stretch;
+      // font-weight: bold;
+      .price {
+        color: white;
+      }
+    }
+    .strikethrough {
+      color: red;
+      text-decoration: line-through;
     }
   }
 }
