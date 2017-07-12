@@ -7,6 +7,7 @@ author:
   twitter: lintonye
   image: linton-face.jpg
 ---
+![logo](/images/courses/sketch.png)
 
 - Planned release date: **March 2018**
 - Price: **$199**

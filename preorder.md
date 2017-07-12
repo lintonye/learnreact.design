@@ -42,7 +42,7 @@ author:
 
 ---
 <div class="center">
-  <h2>Send me updates for these courses:</h2>
+  <h2>Subscribe for course updates:</h2>
 </div>
 <script async id="_ck_209062" src="https://forms.convertkit.com/209062?v=6"></script>
 
@@ -51,7 +51,7 @@ author:
 <div class="profile-container">
   <div class="linton-photo"></div>
   <div class="content">
-    <h2>Hi! I'm Linton Ye</h2>
+    <h2>Hi! I'm Linton Ye.</h2>
     <div>
       <p>Super excited to create these courses to help you become a better designer! </p>
       <p>I'm a full-stack developer who's learning design. I have 10+ years of experience in mobile, development/design tools and web development. I've been working on React Native since 2015, and building Android apps since 2007 before the first Android phone, HTC G1, was even available. I also contribute to <a href="https://github.com/react-community/react-navigation">React Navigation</a> project, and write <a href="http://reactnativediary.com">a blog</a> about React.</p>

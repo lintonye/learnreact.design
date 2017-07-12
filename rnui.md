@@ -7,6 +7,8 @@ author:
   twitter: lintonye
   image: linton-face.jpg
 ---
+![logo](/images/courses/phones.png)
+
 - Planned release date: **January 2018**
 - Price: **$199**
 

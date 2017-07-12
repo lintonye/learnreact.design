@@ -1,7 +1,7 @@
 - title: React Essentials For Designers
   bg: "#E0E0E0"
   releaseDate: October 2017
-  image: '/images/courses/course-essentials.png'
+  image: '/images/courses/abc.png'
   url: /re4d/
   buyUrl: "https://gum.co/reactessentials"
   price: 199
@@ -10,7 +10,7 @@
 - title: 'React Native: Building Real World Mobile UI'
   bg: "#E0E0E0"
   releaseDate: January 2018
-  image: '/images/courses/course-rn.png'
+  image: '/images/courses/phones.png'
   url: /rnui/
   buyUrl: 'https://gum.co/LnbFX'
   price: 199
@@ -18,7 +18,7 @@
 
 - title: React Sketch.app Deep Dive
   bg: "#E0E0E0"
-  image: '/images/courses/course-sketch.png'
+  image: '/images/courses/sketch.png'
   releaseDate: March 2018
   url: /rsketch/
   buyUrl: 'https://gum.co/xmgqZ'

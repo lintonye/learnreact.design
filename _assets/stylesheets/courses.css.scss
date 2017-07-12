@@ -66,6 +66,9 @@ div.course-container {
         font-size: 1.1em;
         font-weight: bold;
       }
+      img {
+        margin: 15px;
+      }
     }
     .action {
       @include flex;

@@ -6,7 +6,7 @@
         {{ course.title }}
       </div>
       {% if course.image %}
-      <img src="{{ course.image }}" width="150" height="150">
+      <img src="{{ course.image }}" width="150" height="109">
       {% endif %}
     </div>
 
@@ -16,7 +16,7 @@
         <div>{{ course.releaseDate }}</div>
         <span class="price strike">${{ course.price }}</span>
       </div>
-      <div class="preorder-price">Pre-orders: ${{course.preorderPrice}}</div>
+      <div class="preorder-price">Pre-orders (60% off!): ${{course.preorderPrice}}</div>
       {% else %}
       Vote For This Course
       {% endif %}

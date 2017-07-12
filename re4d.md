@@ -7,6 +7,8 @@ author:
   twitter: lintonye
   image: linton-face.jpg
 ---
+![logo](/images/courses/abc.png)
+
 - Planned release date: **October 2017**
 - Price: **$199**
 
@@ -14,7 +16,7 @@ author:
 
 ### Outline
 - [Previews](#previews)
-- [What Will The Course Include?](#include)
+- [What Will Be Included?](#include)
 - [Learning Goals](#goals)
 - [What is this course NOT about?](#not-about)
 - [Requirements](#requirements)
