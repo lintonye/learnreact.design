@@ -16,6 +16,12 @@ author:
   {% include course-card.html courses=site.data.courses %}
 </div>
 
+---
+
+<div class="center">
+  <h2>Some nice things people say:</h2>
+</div>
+
 <div class="tweets">
   <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 

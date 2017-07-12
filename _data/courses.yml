@@ -1,5 +1,5 @@
 - title: React Essentials For Designers
-  bg: "#039BE5"
+  bg: "#E0E0E0"
   releaseDate: October 2017
   image: '/images/courses/course-essentials.png'
   url: /re4d/
@@ -8,7 +8,7 @@
   preorderPrice: 79
 
 - title: 'React Native: Building Real World Mobile UI'
-  bg: "#9575CD"
+  bg: "#E0E0E0"
   releaseDate: January 2018
   image: '/images/courses/course-rn.png'
   url: /rnui/
@@ -17,7 +17,7 @@
   preorderPrice: 79
 
 - title: React Sketch.app Deep Dive
-  bg: "#009688"
+  bg: "#E0E0E0"
   image: '/images/courses/course-sketch.png'
   releaseDate: March 2018
   url: /rsketch/
@@ -25,14 +25,14 @@
   price: 199
   preorderPrice: 79
 
-- title: 'ReactJS: Building Real World Web UI'
-  bg: "#757575"
-  image: '/images/courses/tbd.png'
-  releaseDate: TBD
-  url: 'https://trello.com/c/kwEW1rCA/15-build-real-world-ui-with-reactjs'
-
-- title: JavaScript Fundamentals For Designers
-  bg: "#757575"
-  image: '/images/courses/tbd.png'
-  releaseDate: TBD
-  url: 'https://trello.com/c/fuMptZWK/9-javascript-fundamentals'
+# - title: 'ReactJS: Building Real World Web UI'
+#   bg: "#E0E0E0"
+#   image: '/images/courses/tbd.png'
+#   releaseDate: TBD
+#   url: 'https://trello.com/c/kwEW1rCA/15-build-real-world-ui-with-reactjs'
+#
+# - title: JavaScript Fundamentals For Designers
+#   bg: "#E0E0E0"
+#   image: '/images/courses/tbd.png'
+#   releaseDate: TBD
+#   url: 'https://trello.com/c/fuMptZWK/9-javascript-fundamentals'

@@ -50,7 +50,7 @@ div.course-container {
     // border-color: #eeeeee;
     // border-radius: 2px;
     // border-style: solid;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 2px 0 rgba(5, 27, 23, 0.34), 0 3px 1px -2px rgba(0, 0, 0, 0.42), 0 1px 5px 0 rgba(16, 16, 16, 0.41);
     margin: 5px;
     .hero {
       @include flex;
@@ -60,7 +60,7 @@ div.course-container {
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      * { color: #222222; }
+      * { color: #212121; }
       cursor: pointer;
       .title {
         font-size: 1.1em;
@@ -70,10 +70,11 @@ div.course-container {
     .action {
       @include flex;
       flex-direction: column;
-      color: white;
+      color: #063a69;//#424242;
       padding: $padding;
-      font-weight: bold;
+      // font-weight: bold;
       align-items: flex-end;
+      font-size: 1.1em;
       cursor: pointer;
     }
     .date-price {
@@ -83,13 +84,20 @@ div.course-container {
       flex-grow: 1;
       align-self: stretch;
       // font-weight: bold;
-      .price {
-        color: white;
-      }
     }
-    .strikethrough {
-      color: red;
-      text-decoration: line-through;
+    .preorder-price {
+      font-style: italic;
+    }
+    .strike {
+      position: relative;
+    }
+    .strike::after {
+        content: '';
+        border-bottom: 2px solid red;
+        position: absolute;
+        left: 0;
+        top: 42%;
+        width: 100%;
     }
   }
 }

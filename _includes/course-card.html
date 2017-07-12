@@ -12,13 +12,11 @@
 
     <div class="action" style="background: {{ course.bg }}">
       {% if course.price %}
-      <div>Pre-order price: ${{course.preorderPrice}}</div>
       <div class="date-price">
         <div>{{ course.releaseDate }}</div>
-        <span class="strikethrough">
-          <span class="price">${{ course.price }}</span>
-        </span>
+        <span class="price strike">${{ course.price }}</span>
       </div>
+      <div class="preorder-price">Pre-orders: ${{course.preorderPrice}}</div>
       {% else %}
       Vote For This Course
       {% endif %}
