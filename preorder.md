@@ -16,6 +16,10 @@ author:
   {% include course-card.html courses=site.data.courses %}
 </div>
 
+<div class="why-preorder">
+  <a href="#why-preorder">Why pre-order?</a>
+</div>
+
 ---
 
 <div class="center">
@@ -72,6 +76,7 @@ Learning to code will help you become better at design. Armed with a better unde
 
 New skills you learn will open new doors. Trust me, it will be a new world of creativity!
 
+<a name="why-preorder">
 ## Why should you pre-order?
 
 - **60% off** the regular price!
