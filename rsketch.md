@@ -1,7 +1,7 @@
 ---
 layout: page
 title: React Sketch.app Deep Dive
-subtitle: A deep-dive course on React Sketch.app - what it is, why it's cool and how to use it to turbocharge your design workflow.
+subtitle: An deep-dive, example-driven course on React Sketch.app - what it is, why it's cool and how to use it to turbocharge your design workflow.
 author:
   name: Linton Ye
   twitter: lintonye
@@ -12,7 +12,7 @@ author:
 - Planned release date: **March 2018**
 - Price: **$199**
 
-<a href="#" class="button">Pre-order for <strong>$79</strong></a>
+<a href="https://gum.co/xmgqZ" class="button">Pre-order for <strong>$79</strong></a>
 
 ### Outline
 - [What Will Be Included?](#include)
@@ -26,20 +26,21 @@ author:
 - An Ebook that'll be used as a textbook
 - Exclusive access to Slack channel *React For Designers* where you can ask questions and network with fellow designers
 - Exercises
-- Certificate of completion
 - Unlimited updates
 - Weekly office hour webinar where I'll go over the most voted questions and you can ask me questions on the spot too (TBD: This is currently only open for people who have pre-ordered the course.)
 
 <a name="goals">
 ### Learning Goals
+Airbnb's [React Sketch.app](https://airbnb.design/painting-with-code/) allows designers to create a design system that's seamlessly in sync with engineering. This is powerful.
 
-Learning goals (TODO: Details coming soon):
+The main goal of this course is to give you a firm understanding of React Sketch.app and have hands-on experience in integrating it into your design workflow.
+
+Learning goals:
 
 - Understand the benefits of using React Sketch.app
-- Build a realistic example with the tool
+- Build realistic examples with React Sketch.app
+- Understand best practices on how to integrate React Sketch.app into your current workflow
 - Understand its limitations
-
-If you are struggling with anything above even after completing all the videos and exercises, email me! I'll try my best to help.
 
 <a name="requirements">
 ### Requirements
@@ -56,7 +57,23 @@ Below is a tentative curriculum of the course. I may add, remove or reorder some
 - Introduction
   - What will we build?
   - Environment setup
-- React Sketch.app Review
+- React Sketch.app Premier
+  - First impression: running built-in examples
+  - How does it work?
+  - Layout and style components
+- Main components
+  - Artboard
+  - Image
+  - RedBox
+  - Text
+  - View
+- Use real data from an API
+  - REST APIs
+  - GraphQL APIs
+- Create a design system
+- Integrate React Sketch.app into your workflow
+- Debugging tips
+- Case studies
 - TODO: more details to come
 - Conclusion
 

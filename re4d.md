@@ -1,7 +1,7 @@
 ---
 layout: page
 title: React Essentials For Designers
-subtitle: 'An introductory, example-driven course on React: fundamentals, capabilities and limitations and how they relate to design'
+subtitle: 'An introductory, example-driven course on React and React Native: fundamentals, capabilities, limitations and how they relate to design'
 author:
   name: Linton Ye
   twitter: lintonye
@@ -32,7 +32,6 @@ To see if you like my teaching style, check out this series of posts: [What is R
 - An Ebook that you can skim or study at your own pace
 - Exclusive access to Slack channel *React For Designers* where you can ask questions and network with fellow designers
 - Exercises
-- Certificate of completion
 - Unlimited updates
 - Weekly office hour webinar where I'll go over the most voted questions and you can ask me questions on the spot too (TBD: This is currently only open for people who have pre-ordered the course.)
 
@@ -47,7 +46,7 @@ To break it down, here are a few verifiable goals to help you work along the cou
 1. explain the following at a concept level (or better yet, since you are a designer, draw diagrams / sketches!):
   - Why are React and React Native cool?
   - How does React fit together with other parts of an app (Redux, Mobx, React Router, Server API, etc.)?
-  - What apps are React Native good for? What are not?
+  - What kind of apps is React Native good for, and otherwise?
   - What are components, props and states?
   - When to use props and when to use states?
   - Where does React fit in your design work flow?
@@ -67,7 +66,7 @@ This is certainly not a course on how to build a complete app. It is not even a 
 
 This is an entry-level course focused on breadth, rather than depth. You'll see high-level explanations of many related concepts, such as DOM, Webpack, Redux and React Router. But you won't find details on how to use them. This is by design. (As an example, check out this blog post: [What is React?](/2017/06/08/what-is-react/))
 
-I think it'd be more effective to first show you a full bird's view of what an app is made up of and how it's implemented. After grasping a complete picture, you'd be able to decide on a subject that's important to you to dive in. For example, if you are involved in a React Native project and want to build the UI yourself, you can take the [React Native Real World UI course](/rnui/).
+I think it'd be more effective to first show you a full bird's view of what an app is made up of and how it's implemented. After grasping a complete picture, you'd be able to decide on a subject that's important to you to dive in. For example, if you are involved in a React Native project and want to build UI prototypes, you can take the [React Native Real World UI course](/rnui/).
 
 <a name="requirements">
 ### Requirements

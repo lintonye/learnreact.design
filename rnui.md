@@ -1,7 +1,7 @@
 ---
 layout: page
 title: 'React Native: Building Real World Mobile UI'
-subtitle: A deep-dive course on building modern mobile UIs that follow iOS and Material Design guidelines
+subtitle: An deep-dive, example-driven course on building modern mobile UIs that follow iOS and Material Design guidelines
 author:
   name: Linton Ye
   twitter: lintonye
@@ -12,7 +12,7 @@ author:
 - Planned release date: **January 2018**
 - Price: **$199**
 
-<a href="#" class="button">Pre-order for <strong>$79</strong></a>
+<a href="https://gum.co/LnbFX" class="button">Pre-order for <strong>$79</strong></a>
 
 ### Outline
 - [Previews](#previews)
@@ -31,7 +31,6 @@ To see if you like my teaching style, check out this series of posts: [What is R
 - An Ebook that you can skim or study at your own pace
 - Exclusive access to Slack channel *React For Designers* where you can ask questions and network with fellow designers
 - Exercises
-- Certificate of completion
 - Unlimited updates
 - Weekly office hour webinar where I'll go over the most voted questions and you can ask me questions on the spot too (TBD: This is currently only open for people who have pre-ordered the course.)
 
@@ -39,19 +38,17 @@ To see if you like my teaching style, check out this series of posts: [What is R
 ### Learning Goals
 This course will dive into building a fully functional UI on both iOS and Android. The prerequisite is the [React Essentials for Designers](/re4d/) course.
 
-The main goal is to help you master the coding skills, best practices, patterns, tips and tricks that are required to build modern UIs on both iOS and Android.
+The main goal is to help you master the coding skills, best practices, patterns, tips and tricks that are required to build modern UIs on both iOS and Android with React Native.
 
 After finishing the course, you should be able to:
 
-1. create fully functional UI prototypes that run on iOS or Android devices
-  -
-2. build UI
-
-- build fully functional UI
-- iOS and Android
-- native look and feel, follows official UI guidelines (Material and iOS UI guidelines)
-- strategies on how to pick components
-- be aware of the native option, know when to go there
+1. convert mockups in Sketch or Framer into React Native components
+2. build fully functional UI prototypes with native look and feel on iOS and Android
+  - iOS and Material Design guidelines
+  - native animations and transitions
+  - performant UI
+3. explain the limitations of React Native: what kind of apps React Native is good for, and otherwise?
+4. find and evaluate UI components with a strategy
 
 <a name="requirements">
 ### Requirements
@@ -72,6 +69,7 @@ Below is a tentative curriculum of the course. I may add, remove or reorder some
   - React Native project structure
   - Style React Native components
   - Handle user interactions
+  - Debugging tips
   - TODO: more details to come
 - Animations with React Native
   - Animated API in React Native
@@ -86,7 +84,6 @@ Below is a tentative curriculum of the course. I may add, remove or reorder some
     - Grids and Keylines
     - Setup React Native for Android
     - Useful Tools
-    - Debugging Tips
   - Build the Materials with React Native
     - Elevation
     - Build Floating Action Button
