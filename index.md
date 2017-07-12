@@ -17,7 +17,7 @@ author:
 </div>
 
 <div class="why-preorder">
-  <a href="#why-preorder">Why pre-order?</a>
+  ○ <a href="#why-preorder">Why pre-order?</a> ○ <a href="#request-content">Request new content</a> ○
 </div>
 
 ---
@@ -91,6 +91,7 @@ So, if you want a course to see the light of day, please pre-order. It's risk fr
 
 Thank you! I'd really appreciate your trust and support. I'll do my best!
 
+<a name="request-content">
 ## How to request new content?
 [Email me](mailto:linton@jimulabs.com)! Let me know if you want to request new chapters, or a completely new course. I read all emails from you. I'm all ears!
 
