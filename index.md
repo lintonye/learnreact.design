@@ -17,7 +17,7 @@ author:
 </div>
 
 <div class="why-preorder">
-  ○ <a href="#why-preorder">Why pre-order?</a> ○ <a href="#request-content">Request new content</a> ○
+  <a href="#why-preorder">Why pre-order?</a>
 </div>
 
 ---

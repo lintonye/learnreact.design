@@ -105,6 +105,7 @@ Below is a tentative curriculum of the course. I may add, remove or reorder some
   - Comparing props and states
     - When to use states and when to use props?
     - Unidirectional data flow
+  - Think in React
   - React Developer Tool
   - Core components
   - Style components with CSS
