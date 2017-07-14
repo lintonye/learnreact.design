@@ -60,7 +60,7 @@ author:
       <p>Super excited to create these courses to help you become a better designer! </p>
       <p>I'm a full-stack developer who's learning design. I have 10+ years of experience in mobile, development/design tools and web development. I've been working on React Native since 2015, and building Android apps since 2007 before the first Android phone, HTC G1, was even available. I also contribute to <a href="https://github.com/react-community/react-navigation">React Navigation</a> project, and write <a href="http://reactnativediary.com">a blog</a> about React.</p>
 
-      <p> I love teaching. I've authored a few courses at Treehouse and Lynda. My dark little secret: 😈 creating this course is also my special way to learn all things about design and React -- I believe the best way to learn is to teach.</p>
+      <p> I love teaching. I've authored a few courses at Treehouse and Lynda. My dark little secret: 😈 creating this course is also my special way to learn all things about design and React -- trying to explain things clearly has taken my understanding of the concepts to a whole new level.</p>
 
       <p>Thrilled to be on this journey with you!</p>
     </div>
