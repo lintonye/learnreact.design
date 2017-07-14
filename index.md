@@ -21,6 +21,7 @@ author:
 </div>
 
 {% include testimonials.html %}
-{% include subscribe-form.html %}
+<!-- General form -->
+{% include subscribe-form.html formId=209062 %}
 {% include profile.html %}
 {% include faq.md %}
