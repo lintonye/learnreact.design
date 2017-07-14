@@ -16,7 +16,10 @@
         <div>{{ course.releaseDate }}</div>
         <span class="price strike">${{ course.price }}</span>
       </div>
-      <div class="preorder-price">60% off! Pre-order for ${{course.preorderPrice}}</div>
+      <div class="preorder-price date-price">
+        <div>Pre-order</div>
+        <strong>${{course.preorderPrice}}</strong>
+      </div>
       {% else %}
       Vote For This Course
       {% endif %}
