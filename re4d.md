@@ -22,6 +22,10 @@ author:
 - [Requirements](#requirements)
 - [Curriculum](#curriculum)
 
+{% include subscribe-form.html %}
+
+---
+
 <a name="previews">
 ### Previews
 To see if you like my teaching style, check out this series of posts: [What is React?](/2017/06/08/what-is-react/) I'll be adding some sample videos here too.
@@ -149,3 +153,6 @@ Below is a tentative curriculum of the course. I may add, remove or reorder some
   - Sketch <-> ReactJS <-> React Native
   - I'm most interested in being able to translate my designs into React Native code, prototyping in code, and a huge bonus would be connecting it all to Sketch in a way similar to AirBnb.
 -->
+{% include profile.html %}
+{% include faq.md %}
+{% include testimonials.html %}
