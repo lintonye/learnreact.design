@@ -16,9 +16,10 @@ author:
 
 _This series of posts will be the very first part of the ["React for Designers" course](http://learnreact.design) I'm creating. Be sure to [sign up](http://learnreact.design) to receive exclusive updates!_
 
-- _[What is React?](TODO)_
-- _ReactJS, React.js, React Native, Which Is Which? (this post)_
-- _Components, props, state etc. (coming soon)_
+- _[What is React?](/2017/06/08/what-is-react/)_
+- _What is React Native? (/2017/06/20/what-is-react-native)_
+- _React Native vs. Hybrids (coming soon)_
+- _Components, props, state etc. (this post)_
 
 ---
 
