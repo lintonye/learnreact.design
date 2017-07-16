@@ -10,9 +10,19 @@ author:
 ![logo](/images/courses/abc.png)
 
 - Planned release date: **October 2017**
-- Price: **$199**
+- Price: **$199** ▷ <a href="https://gum.co/reactessentials" class="button">Pre-order for <strong>$79</strong></a>
+- Examples of what you are gonna learn:
+  - What is DOM? How is it related to React?
+  - Why is React Native a big deal?
+  - What are components, props, states? When to use prop and when to use state?
+  - How to do layouts?
+  - What are the different ways of styling a component?
+  - How to take an existing React project and style its UI to whatever you want?
+  - What is React Sketch.app, why it’s cool, and how to use it?
+  - What is Storybook and why it’s useful as a design tool?
+  - How does React work together with other parts in a real app, for example, Redux, React Router, etc. etc.
+  - Where does React fit in your design workflow?
 
-<a href="https://gum.co/reactessentials" class="button">Pre-order for <strong>$79</strong></a>
 
 ### Outline
 - [Previews](#previews)
@@ -25,7 +35,6 @@ author:
 {% include subscribe-form.html formId=237691%}
 
 ---
-
 <a name="previews">
 ### Previews
 To see if you like my teaching style, check out this series of posts: [What is React?](/2017/06/08/what-is-react/) I'll be adding some sample videos here too.
