@@ -7,7 +7,12 @@ author:
   twitter: lintonye
   image: linton-face.jpg
 ---
-![logo](/images/courses/abc.png)
+
+<div class="video-wrapper">
+  <iframe width="600" height="338" src="https://www.youtube.com/embed/NnoNT7YYl84?controls=0&amp;rel=0&ampshowinfo=0" frameborder="0" allowfullscreen></iframe>
+</div>
+
+---
 
 - Planned release date: **October 2017**
 - Price: **$199** ▷ <a href="https://gum.co/reactessentials" class="button">Pre-order for <strong>$79</strong></a>

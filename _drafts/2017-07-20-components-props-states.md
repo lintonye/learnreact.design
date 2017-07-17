@@ -22,19 +22,33 @@ _This series of posts will be the very first part of the ["React for Designers" 
 - _Components, props, state etc. (this post)_
 
 ---
-
 <div>
   <HatSwitcher />
-  <Thinker hat={hat}/>
+  <Thinker />
 </div>
 
 HatSwitcher: ...
 
 Thinker:
   <div>
-    <ThinkerBody />
+    <DomoInPose />
     <Hat />
   </div>
+
+DomoInPose:
+  <img ... />
+
+Hat:
+  <img ... />
+
+DomoInPose:
+  <img src="https://..." />
+
+
+<div>
+  <HatSwitcher />
+  <Thinker hat={hat}/>
+</div>
 
 ThinkerBody:
   <img ... />
@@ -53,7 +67,10 @@ Hat:
 
 - what are Components
 - what are props
+  - accessible via: `this.props`
+  - read only
 - what are states?
+  - it is private and fully controlled by the component
 - when to use props, when to use states?
 - revisit Domo's hat
 - Unidirectional dataflow?
