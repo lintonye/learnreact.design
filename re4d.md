@@ -169,6 +169,5 @@ Below is a tentative curriculum of the course. I may add, remove or reorder some
   - I'm most interested in being able to translate my designs into React Native code, prototyping in code, and a huge bonus would be connecting it all to Sketch in a way similar to AirBnb.
 -->
 {% include profile.html %}
-<a name="faq">
 {% include faq.md %}
 {% include testimonials.html %}

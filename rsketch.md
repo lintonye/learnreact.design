@@ -19,6 +19,7 @@ author:
 - [Learning Goals](#goals)
 - [Requirements](#requirements)
 - [Curriculum](#curriculum)
+- [FAQ](#faq)
 
 {% include subscribe-form.html formId=237695 %}
 
