@@ -13,9 +13,9 @@ New skills you learn will open new doors. Trust me, it will be a new world of cr
 
 - **60% off** the regular price!
 - **Zero risk** -- You won't be charged until the planned release date. Plus you can cancel your order anytime until 30 days after launch. No hard feelings. BTW: Some of you might see a $1 charge after placing an order. This is the normal process that my payment processor uses to verify your credit card. The $1 will go back to your card soon after.
+- **Office hours** -- I'll experiment the idea of weekly webinars where I'll answer your questions. I'm not sure if this would scale after the launch, but I'll do it for everyone who places an pre-order.
 - **Start learning sooner** -- I'll send you exclusive content updates while the courses are being created. You don't have to wait until the launch date.
 - **Learn what you want to learn** -- The courses are feedback driven. I'll try my best to integrate your feedback into the course materials. It’s a good opportunity to have your influence on creating a great resource for the entire design community. Shoot me an email, I’m all ears!
-- **Office hour** -- I'll experiment the idea of weekly webinars where I'll answer your questions. I'm not sure if this would scale after the launch, but I'll do it for everyone who places an pre-order.
 
 In the spirit of transparency, I must share that I'll use the number of pre-orders to gauge the potential of the idea. I'd really like to work on this full-time, but I need to be sure that my time is well spent -- I want to create enough value that you are willing to pay for.
 
