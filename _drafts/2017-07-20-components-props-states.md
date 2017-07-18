@@ -71,10 +71,24 @@ Hat:
   - read only
 - what are states?
   - it is private and fully controlled by the component
+  - respond to user input, a server request or the passage of time. For this you use state.
+  - State allows you to dynamically change many elements at once based on one variable. State encompasses the key parts of your UI that change basic on user input.
+  - is it a state? Minimize state
+    - Is it passed in from a parent via props? If so, it probably isn't state.
+    - Does it remain unchanged over time? If so, it probably isn't state.
+    - Can you compute it based on any other state or props in your component? If so, it isn't state.
+  - which component should hold the state?
+    - This is often the most challenging part for newcomers to understand,
+    - how to find where the state should live?
+      - which components render according to the state?
+      - find a common owner
+      - the owner or its (grand)owner should hold the state
+      - create a new component simply for holding the state if no common owner is found
 - when to use props, when to use states?
 - revisit Domo's hat
 - Unidirectional dataflow?
 - States are things that change -- but props change too?
+- Try to keep as many of your components as possible stateless. By doing this you'll isolate the state to its most logical place and minimize redundancy, making it easier to reason about your application.
 
 
 <a name="learning-goals">
