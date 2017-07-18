@@ -22,7 +22,7 @@ author:
   - What are components, props, states? When to use prop and when to use state?
   - How to do layouts?
   - What are the different ways of styling a component?
-  - How to take an existing React project and style its UI to whatever you want?
+  - How to take an existing React project and style its UI?
   - What is React Sketch.app, why it’s cool, and how to use it?
   - What is Storybook and why it’s useful as a design tool?
   - How does React work together with other parts in a real app, for example, Redux, React Router, etc. etc.
