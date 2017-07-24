@@ -15,7 +15,7 @@ author:
 ---
 
 - Planned release date: **October 2017**
-- Price: **$199** ▷ <a href="https://gum.co/reactessentials" class="button">Pre-order for <strong>$79</strong></a>
+- Price: **$199** ▷ <a href="https://gum.co/reactessentials" class="button">Pre-order for <strong>$99</strong></a>
 - Examples of what you are gonna learn:
   - What is DOM? How is it related to React?
   - Why is React Native a big deal?
