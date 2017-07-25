@@ -24,6 +24,9 @@ So, if you want a course to see the light of day, please pre-order. It's risk fr
 
 Thank you! I'd really appreciate your trust and support. I'll do my best!
 
+## Is there a plan for other courses?
+See [here](/courses/).
+
 <a name="request-content">
 ## How to request new content?
 [Email me](mailto:linton@jimulabs.com)! Let me know if you want to request new chapters, or a completely new course. I read all emails from you. I'm all ears!
