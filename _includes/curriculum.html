@@ -1,9 +1,15 @@
 <div class="curriculum-container">
   {% for chapter in include.chapters %}
   <div class="chapter-container">
+    <a name="chapter-{{forloop.index}}"></a>
     <div class="chapter-title">
       Chapter {{ forloop.index }}: {{ chapter.title }}
     </div>
+    {% if chapter.subtitle %}
+    <div class="chapter-subtitle">
+      {{ chapter.subtitle }}
+    </div>
+    {% endif %}
     <div class="chapter-content-container">
       {% for video in chapter.videos %}
       <div class="video-container">

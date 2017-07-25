@@ -26,17 +26,80 @@
       link: https://youtu.be/BfWhRtKnh2Q
       thumbnail: https://img.youtube.com/vi/BfWhRtKnh2Q/0.jpg
       length: '5:50'
-    - title: Build a house in JS
+    - title: Build the House component in JS
       status: in-progress
-    - title: Create House component
+    - title: 'Blue roof, red roof - Props in JS'
       status: in-progress
-    - title:
+    - title: 'Open Sesame! - State in JS'
       status: in-progress
-    - title:
+    - title: Pass the state down - one-way data flow
       status: in-progress
-    - title:
+    - title: Think in React
       status: in-progress
-    - title:
+    - title: Check components in live apps - React Developer Tool
       status: in-progress
-    - title:
+    - title: Core components
+      status: in-progress
+    - title: Style components with CSS
+      status: in-progress
+    - title: Style components with JS
+      status: in-progress
+    - title: styled-components
+      status: in-progress
+    - title: Animations
+      status: in-progress
+- title: React Native Fundamentals
+  videos:
+    - title: What is React Native?
+      status: in-progress
+    - title: What are native apps? Why React Native is better?
+      status: in-progress
+    - title: Core components
+      status: in-progress
+    - title: React Developer Tool
+      status: in-progress
+    - title: Layout with Flexbox
+      status: in-progress
+    - title: Style React Native components
+      status: in-progress
+    - title: Animations
+      status: in-progress
+- title: 'The Other Parts'
+  subtitle: 'Conceptual intro to the rest of code that a full app consists of and tools involved'
+  videos:
+    - title: Webpack, Babel
+      status: in-progress
+    - title: Redux, Mobx etc.
+      status: in-progress
+    - title: React Router, React Navigation etc.
+      status: in-progress
+    - title: Get data from a server API
+      status: in-progress
+    - title: React Storybook
+      status: in-progress
+- title: Work With Existing Projects
+  videos:
+    - title: 'Setup Node + NPM'
+      status: in-progress
+    - title: Setup Android development environment
+      status: in-progress
+    - title: Setup iOS development environment
+      status: in-progress
+    - title: 'Case study: Browse a ReactJS project and update styles'
+      status: in-progress
+    - title: 'Case study: Browse a React Native project and update styles'
+      status: in-progress
+- title: React Sketch.app At A Glance
+  videos:
+    - title: How does it work?
+      status: in-progress
+    - title: Environment Setup
+      status: in-progress
+    - title: Try a simple example
+      status: in-progress
+    - title: Run an example that fetches real data
+      status: in-progress
+- title: Conclusion
+  videos:
+    - title: Next step
       status: in-progress

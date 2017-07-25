@@ -166,6 +166,9 @@ div.profile-container {
       padding: 4px;
       margin: 4px 0 4px 0;
     }
+    .chapter-subtitle {
+      padding: 4px;
+    }
     .chapter-content-container {
       @include flex;
       flex-wrap: wrap;
@@ -175,7 +178,7 @@ div.profile-container {
       .video-container {
         margin: 4px;
         position: relative;
-        max-width: 230px;
+        max-width: 220px;
       }
       .annotation {
         font-size: 0.8em;
