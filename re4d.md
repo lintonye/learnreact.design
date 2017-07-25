@@ -105,7 +105,7 @@ I think it'd be more effective to first show you a full bird's view of what an a
 ### Curriculum
 Below is a tentative curriculum of the course. I may add, remove or reorder some sections to make it easy to follow. But no matter what changes I make, they'll serve to achieve the aforementioned [learning goals](#goals) in the most effective way I could find.
 
-{% include curriculum.html chapters=site.data.re4d %}
+{% include curriculum.html chapters=site.data.re4d orderLink='https://gum.co/reactessentials'%}
 
 <!--
 - Introduction

@@ -21,7 +21,16 @@
           <div class="annotation video-length">{{ video.length}} </div>
         </div>
         </a>
-        {% else if video.status == 'in-progress'%}
+        {% elsif video.status == 'order' %}
+        <a href="{{ include.orderLink }}" target="_blank">
+        <div>
+          <img src="{{ video.thumbnail }}" alt="video">
+          <div class="annotation video-index">#{{ forloop.index }}</div>
+          <div class="annotation video-length">{{ video.length}} </div>
+          <button class="button order">Pre-order</button>
+        </div>
+        </a>
+        {% elsif video.status == 'in-progress'%}
         <img src="/images/courses/in-progress.png" />
         {% endif %}
         <div class="video-title">{{ video.title }}</div>
