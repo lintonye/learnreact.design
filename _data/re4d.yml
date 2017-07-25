@@ -22,9 +22,9 @@
       thumbnail: https://img.youtube.com/vi/Lr545N_mshY/0.jpg
       length: '5:42'
     - title: State
-      status: order
-      link: https://youtu.be/BfWhRtKnh2Q
-      thumbnail: https://img.youtube.com/vi/BfWhRtKnh2Q/0.jpg
+      status: preview
+      link: https://youtu.be/JSMHIF_3LII
+      thumbnail: https://img.youtube.com/vi/JSMHIF_3LII/0.jpg
       length: '5:00'
     - title: Build the House component in JS
       status: in-progress
