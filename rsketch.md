@@ -12,7 +12,7 @@ author:
 - Planned release date: **March 2018**
 - Price: **$199**
 
-<a href="https://gum.co/xmgqZ" class="button">Pre-order for <strong>$99</strong></a>
+<a href="https://gum.co/xmgqZ" class="button">Pre-order for <strong>$199</strong></a>
 
 ### Outline
 - [What Will Be Included?](#include)

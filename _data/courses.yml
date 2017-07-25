@@ -5,7 +5,7 @@
   url: /re4d/
   buyUrl: "https://gum.co/reactessentials"
   price: 199
-  preorderPrice: 99
+  preorderPrice: 119
 
 - title: 'React Native: Build Real World Mobile UI'
   bg: "#E0E0E0"
@@ -14,7 +14,7 @@
   url: /rnui/
   buyUrl: 'https://gum.co/LnbFX'
   price: 199
-  preorderPrice: 99
+  preorderPrice: 119
 
 - title: React Sketch.app Deep Dive
   bg: "#E0E0E0"
@@ -23,7 +23,7 @@
   url: /rsketch/
   buyUrl: 'https://gum.co/xmgqZ'
   price: 199
-  preorderPrice: 99
+  preorderPrice: 119
 
 # - title: 'ReactJS: Building Real World Web UI'
 #   bg: "#E0E0E0"

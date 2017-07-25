@@ -12,7 +12,7 @@ New skills you learn will open new doors. Trust me, it will be a new world of cr
 <a name="why-preorder">
 ## Why should you pre-order?
 
-- **60% off** the regular price!
+- **40% off** the regular price!
 - **Zero risk** -- You won't be charged until the planned release date. Plus you can cancel your order anytime until 30 days after launch. No hard feelings. BTW: Some of you might see a $1 charge after placing an order. This is the normal process that my payment processor uses to verify your credit card. The $1 will go back to your card soon after.
 - **Office hours** -- I'll experiment the idea of weekly webinars where I'll answer your questions. I'm not sure if this would scale after the launch, but I'll do it for everyone who places an pre-order.
 - **Start learning sooner** -- I'll send you exclusive content updates while the courses are being created. You don't have to wait until the launch date.

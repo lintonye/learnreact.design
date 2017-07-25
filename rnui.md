@@ -12,7 +12,7 @@ author:
 - Planned release date: **January 2018**
 - Price: **$199**
 
-<a href="https://gum.co/LnbFX" class="button">Pre-order for <strong>$99</strong></a>
+<a href="https://gum.co/LnbFX" class="button">Pre-order for <strong>$119</strong></a>
 
 ### Outline
 - [Previews](#previews)
