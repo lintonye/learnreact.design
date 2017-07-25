@@ -12,10 +12,15 @@ author:
   <iframe width="600" height="338" src="https://www.youtube.com/embed/NnoNT7YYl84?controls=0&amp;rel=0&ampshowinfo=0" frameborder="0" allowfullscreen></iframe>
 </div>
 
+{% include subscribe-form.html formId=237691%}
+
 ---
+
 
 - Planned release date: **October 2017**
 - Price: **$199** ▷ <a href="https://gum.co/reactessentials" class="button">Pre-order for <strong>$99</strong></a>
+
+<!--
 - Examples of what you are gonna learn:
   - What is DOM? How is it related to React?
   - Why is React Native a big deal?
@@ -27,7 +32,7 @@ author:
   - What is Storybook and why it’s useful as a design tool?
   - How does React work together with other parts in a real app, for example, Redux, React Router, etc. etc.
   - Where does React fit in your design workflow?
-
+-->
 
 ### Outline
 - [Previews](#previews)
@@ -38,12 +43,13 @@ author:
 - [Curriculum](#curriculum)
 - [FAQ](#faq)
 
-{% include subscribe-form.html formId=237691%}
-
 ---
 <a name="previews">
 ### Previews
-To see if you like my teaching style, check out this series of posts: [What is React?](/2017/06/08/what-is-react/) I'll be adding some sample videos here too.
+To see if you like my teaching style, check out:
+
+- Blog series: [What is React?](/2017/06/08/what-is-react/)
+- Video samples: [Components and props](#chapter-3)
 
 <a name="include">
 ### What Will Be Included?
@@ -99,6 +105,9 @@ I think it'd be more effective to first show you a full bird's view of what an a
 ### Curriculum
 Below is a tentative curriculum of the course. I may add, remove or reorder some sections to make it easy to follow. But no matter what changes I make, they'll serve to achieve the aforementioned [learning goals](#goals) in the most effective way I could find.
 
+{% include curriculum.html chapters=site.data.re4d orderLink='https://gum.co/reactessentials'%}
+
+<!--
 - Introduction
   - What we will be building
   - Environment setup
@@ -161,6 +170,7 @@ Below is a tentative curriculum of the course. I may add, remove or reorder some
   - Run an example that fetches real data
 - Bonus: Make a portfolio site with Gatsby (TBD)
 - Conclusion
+-->
 
 <!--
 - Connecting dots

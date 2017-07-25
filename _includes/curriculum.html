@@ -1,0 +1,43 @@
+<div class="curriculum-container">
+  {% for chapter in include.chapters %}
+  <div class="chapter-container">
+    <a name="chapter-{{forloop.index}}"></a>
+    <div class="chapter-title">
+      Chapter {{ forloop.index }}: {{ chapter.title }}
+    </div>
+    {% if chapter.subtitle %}
+    <div class="chapter-subtitle">
+      {{ chapter.subtitle }}
+    </div>
+    {% endif %}
+    <div class="chapter-content-container">
+      {% for video in chapter.videos %}
+      <div class="video-container">
+        {% if video.status == 'preview' %}
+        <a href="{{ video.link }}" target="_blank">
+        <div>
+          <img src="{{ video.thumbnail }}" alt="video">
+          <div class="annotation video-index">#{{ forloop.index }}</div>
+          <div class="annotation video-length">{{ video.length}} </div>
+          <button class="button orange-button order">Preview</button>
+        </div>
+        </a>
+        {% elsif video.status == 'order' %}
+        <a href="{{ include.orderLink }}" target="_blank">
+        <div>
+          <img src="{{ video.thumbnail }}" alt="video">
+          <div class="annotation video-index">#{{ forloop.index }}</div>
+          <div class="annotation video-length">{{ video.length}} </div>
+          <button class="button order">Pre-order</button>
+        </div>
+        </a>
+        {% elsif video.status == 'in-progress'%}
+        <img src="/images/courses/in-progress.png" />
+        {% endif %}
+        <div class="video-title">{{ video.title }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
