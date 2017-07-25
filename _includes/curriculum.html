@@ -19,6 +19,7 @@
           <img src="{{ video.thumbnail }}" alt="video">
           <div class="annotation video-index">#{{ forloop.index }}</div>
           <div class="annotation video-length">{{ video.length}} </div>
+          <button class="button orange-button order">Preview</button>
         </div>
         </a>
         {% elsif video.status == 'order' %}
