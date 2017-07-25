@@ -1,0 +1,27 @@
+<div class="curriculum-container">
+  {% for chapter in include.chapters %}
+  <div class="chapter-container">
+    <div class="chapter-title">
+      Chapter {{ forloop.index }}: {{ chapter.title }}
+    </div>
+    <div class="chapter-content-container">
+      {% for video in chapter.videos %}
+      <div class="video-container">
+        {% if video.status == 'preview' %}
+        <a href="{{ video.link }}" target="_blank">
+        <div>
+          <img src="{{ video.thumbnail }}" alt="video">
+          <div class="annotation video-index">#{{ forloop.index }}</div>
+          <div class="annotation video-length">{{ video.length}} </div>
+        </div>
+        </a>
+        {% else if video.status == 'in-progress'%}
+        <img src="/images/courses/in-progress.png" />
+        {% endif %}
+        <div class="video-title">{{ video.title }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</div>

@@ -1,0 +1,42 @@
+- title: Introduction
+  videos:
+    - title: What we will be building
+      status: in-progress
+    - title: Environment setup
+      status: in-progress
+    - title: Exercises and files
+      status: in-progress
+- title: JavaScript Review
+  videos:
+    - title: JS concepts we'll use
+      status: in-progress
+    - title: How to learn JS and React in parallel
+      status: in-progress
+- title: React Fundamentals
+  videos:
+    - title: What is React?
+      status: in-progress
+    - title: Components and Props
+      status: preview
+      link: https://youtu.be/BfWhRtKnh2Q
+      thumbnail: https://img.youtube.com/vi/BfWhRtKnh2Q/0.jpg
+      length: '5:50'
+    - title: State
+      status: preview
+      link: https://youtu.be/BfWhRtKnh2Q
+      thumbnail: https://img.youtube.com/vi/BfWhRtKnh2Q/0.jpg
+      length: '5:50'
+    - title: Build a house in JS
+      status: in-progress
+    - title: Create House component
+      status: in-progress
+    - title:
+      status: in-progress
+    - title:
+      status: in-progress
+    - title:
+      status: in-progress
+    - title:
+      status: in-progress
+    - title:
+      status: in-progress

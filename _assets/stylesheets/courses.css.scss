@@ -152,3 +152,50 @@ div.profile-container {
     height: 100%;
   }
 }
+
+.curriculum-container {
+  .chapter-container {
+    @include flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    .chapter-title {
+      font-weight: bold;
+      // text-align: center;
+      // background: #d0d0d0;
+      font-size: 1.1em;
+      padding: 4px;
+      margin: 4px 0 4px 0;
+    }
+    .chapter-content-container {
+      @include flex;
+      flex-wrap: wrap;
+      img {
+        width: 220px;
+      }
+      .video-container {
+        margin: 4px;
+        position: relative;
+        max-width: 230px;
+      }
+      .annotation {
+        font-size: 0.8em;
+        color: white;
+      }
+      .video-index {
+        position: absolute;
+        left: 5px;
+        top: 0;
+      }
+      .video-length {
+        position: absolute;
+        right: 5px;
+        top: 0;
+      }
+      .video-title {
+        margin: 10px 0 10px 0;
+        text-align: center;
+        font-size: 0.9em;
+      }
+    }
+  }
+}

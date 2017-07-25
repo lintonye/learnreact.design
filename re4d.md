@@ -12,7 +12,10 @@ author:
   <iframe width="600" height="338" src="https://www.youtube.com/embed/NnoNT7YYl84?controls=0&amp;rel=0&ampshowinfo=0" frameborder="0" allowfullscreen></iframe>
 </div>
 
+{% include subscribe-form.html formId=237691%}
+
 ---
+
 
 - Planned release date: **October 2017**
 - Price: **$199** ▷ <a href="https://gum.co/reactessentials" class="button">Pre-order for <strong>$99</strong></a>
@@ -37,8 +40,6 @@ author:
 - [Requirements](#requirements)
 - [Curriculum](#curriculum)
 - [FAQ](#faq)
-
-{% include subscribe-form.html formId=237691%}
 
 ---
 <a name="previews">
@@ -98,6 +99,8 @@ I think it'd be more effective to first show you a full bird's view of what an a
 <a name="curriculum">
 ### Curriculum
 Below is a tentative curriculum of the course. I may add, remove or reorder some sections to make it easy to follow. But no matter what changes I make, they'll serve to achieve the aforementioned [learning goals](#goals) in the most effective way I could find.
+
+{% include curriculum.html chapters=site.data.re4d %}
 
 - Introduction
   - What we will be building
