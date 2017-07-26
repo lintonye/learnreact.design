@@ -1,5 +1,11 @@
 ---
 <div class="center">
-  <h2>Subscribe for course updates:</h2>
+  <h2>
+    {% if include.title %}
+    {{ include.title }}
+    {% else %}
+    Subscribe for course updates:
+    {% endif %}
+  </h2>
 </div>
 <script async id="_ck_{{ include.formId }}" src="https://forms.convertkit.com/{{ include.formId }}?v=6"></script>
