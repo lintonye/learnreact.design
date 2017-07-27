@@ -54,7 +54,6 @@ To see if you like my teaching style, check out:
 <a name="include">
 ### What Will Be Included?
 - Video lectures that you can stream or download
-- An Ebook that you can skim or study at your own pace
 - Exclusive access to Slack channel *React For Designers* where you can ask questions and network with fellow designers
 - Exercises
 - Unlimited updates

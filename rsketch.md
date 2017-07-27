@@ -28,7 +28,6 @@ author:
 <a name="include">
 ### What Will Be Included?
 - Video lectures that you can stream or download
-- An Ebook that'll be used as a textbook
 - Exclusive access to Slack channel *React For Designers* where you can ask questions and network with fellow designers
 - Exercises
 - Unlimited updates
