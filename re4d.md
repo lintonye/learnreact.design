@@ -9,7 +9,7 @@ author:
 ---
 
 <div class="video-wrapper">
-  <iframe width="600" height="338" src="https://www.youtube.com/embed/umhgPH1vrLU?controls=0&amp;rel=0&ampshowinfo=0" frameborder="0" allowfullscreen></iframe>
+  <iframe width="600" height="338" src="https://www.youtube.com/embed/sy9abb3LGRI?controls=0&amp;rel=0&ampshowinfo=0" frameborder="0" allowfullscreen></iframe>
 </div>
 
 {% include subscribe-form.html formId=237691 title='Shoot me a reminder when the course is ready:'%}
@@ -96,10 +96,10 @@ I think it'd be more effective to first show you a full bird's view of what an a
 ### Requirements
 - You are a designer with a yearning to learn. You heard about this "React" thing all the time and don't want to be left behind.
 - You are able to commit 2-3 hours per day for two weeks. The videos will be a few hours long, but you'd learn best if you could invest enough time to finish the exercises, do related research, participate office hours and discuss with fellow students.
-- You are familiar with a modern code editor. For JS projects, I recommend [Visual Studio Code](https://code.visualstudio.com/).
+- You are familiar with a modern text editor. For JS projects, I recommend [Visual Studio Code](https://code.visualstudio.com/).
 - You are not intimidated by the terminal and command line. You don't need to be an expert of this but we'll do a bit of work in the terminal, mostly installing things via npm.
 - You are familiar with HTML and CSS.
-- You have some base knowledge of programming and understand things like variables, if-else, for loops, functions etc. It'd be great if you are familiar with JavaScript. I will review some JS concepts that'll be used in the course, but in general I assume you'd come prepared. If you don't, no worries! There are many great resources for you to pick them up, for example, Treehouse's [JavaScript courses](https://teamtreehouse.com/learn/javascript), or Khan Academy's [Intro to JS: Drawing & Animation](https://www.khanacademy.org/computing/computer-programming/programming). You can even learn both JS and React in parallel and I'll cover some tips on this.
+- JavaScript knowledge is NOT required. It'd be great if you are already familiar with JS and have some base knowledge of programming. However, if you are not, don't worry! I will help you get prepared. I will include resources for you to study along side the React content. You can learn JS and React at the same time!
 
 <a name="curriculum">
 ### Curriculum
