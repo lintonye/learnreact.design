@@ -9,10 +9,17 @@ author:
 ---
 ![logo](/images/courses/phones.png)
 
+<!--
 - Planned release date: **January 2018**
 - Price: **$199**
 
 <a href="https://gum.co/LnbFX" class="button">Pre-order for <strong>$119</strong></a>
+
+-->
+
+{% include subscribe-form.html formId=237694 title='Shoot me a reminder when the course is ready:' %}
+
+---
 
 ### Outline
 - [Previews](#previews)
@@ -21,8 +28,6 @@ author:
 - [Requirements](#requirements)
 - [Curriculum](#curriculum)
 - [FAQ](#faq)
-
-{% include subscribe-form.html formId=237694 %}
 
 ---
 

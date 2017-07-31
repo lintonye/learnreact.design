@@ -16,9 +16,11 @@ author:
   {% include course-card.html courses=site.data.courses %}
 </div>
 
+<!--
 <div class="why-preorder">
   <a href="#why-preorder">Why pre-order?</a>
 </div>
+-->
 
 {% include testimonials.html %}
 <!-- General form -->

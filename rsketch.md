@@ -9,10 +9,18 @@ author:
 ---
 ![logo](/images/courses/sketch.png)
 
+<!--
+
 - Planned release date: **March 2018**
 - Price: **$199**
 
 <a href="https://gum.co/xmgqZ" class="button">Pre-order for <strong>$199</strong></a>
+
+-->
+
+{% include subscribe-form.html formId=237695 title='Shoot me a reminder when the course is ready:'%}
+
+---
 
 ### Outline
 - [What Will Be Included?](#include)
@@ -20,8 +28,6 @@ author:
 - [Requirements](#requirements)
 - [Curriculum](#curriculum)
 - [FAQ](#faq)
-
-{% include subscribe-form.html formId=237695 %}
 
 ---
 

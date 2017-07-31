@@ -27,11 +27,11 @@
       thumbnail: https://img.youtube.com/vi/JSMHIF_3LII/0.jpg
       length: '5:00'
     - title: Build the House component in JavaScript
-      status: order
+      status: in-progress
       thumbnail: /images/
       length: 5:40
     - title: Smiley faces in components - JSX and arrow functions
-      status: order
+      status: in-progress
       thumbnail: /images/
       length: 5:40
     - title: 'Blue roof, red roof - Props in JS'

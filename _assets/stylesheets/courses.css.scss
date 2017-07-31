@@ -72,6 +72,7 @@ div.course-container {
     }
     .action {
       @include flex;
+      display: none;
       flex-direction: column;
       color: #063a69;//#424242;
       padding: $padding;
