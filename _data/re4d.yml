@@ -27,13 +27,14 @@
       thumbnail: https://img.youtube.com/vi/JSMHIF_3LII/0.jpg
       length: '5:00'
     - title: Build the House component in JavaScript
-      status: in-progress
-      thumbnail: /images/
-      length: 5:40
+      status: preview
+      thumbnail: https://img.youtube.com/vi/lzDknxiJ5_c/0.jpg
+      link: https://youtu.be/lzDknxiJ5_c
+      length: '7:31'
     - title: Smiley faces in components - JSX and arrow functions
-      status: in-progress
-      thumbnail: /images/
-      length: 5:40
+      status: order
+      thumbnail: /images/courses/re4d/3.5-jsx.png
+      length: '6:04'
     - title: 'Blue roof, red roof - Props in JS'
       status: in-progress
     - title: 'Open Sesame! - State in JS'
