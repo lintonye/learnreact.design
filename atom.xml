@@ -4,7 +4,7 @@
  <title>Backstage</title>
  <link href="http://learnreact.design/atom.xml" rel="self"/>
  <link href="http://learnreact.design"/>
- <updated>2017-08-01T11:44:18-07:00</updated>
+ <updated>2017-08-01T15:42:16-07:00</updated>
  <id>http://learnreact.design/atom.xml</id>
  <author>
    <name>Linton Ye</name>
@@ -18,7 +18,7 @@
    <published>2017-06-20T00:00:00-07:00</published>
    <updated>2017-06-23</updated>
    <id>http://learnreact.design/2017/06/20/what-is-react-native</id>
-   <content type="html">&lt;p&gt;&lt;em&gt;This series of posts will be the very first part of the &lt;a href=&quot;http://learnreact.design&quot;&gt;“React for Designers” course&lt;/a&gt; I’m creating. Be sure to &lt;a href=&quot;http://learnreact.design&quot;&gt;sign up&lt;/a&gt; to receive exclusive updates!&lt;/em&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;&lt;em&gt;This series of posts will be the very first part of the &lt;a href=&quot;http://learnreact.design/re4d-0&quot;&gt;“React Essentials for Designers” course&lt;/a&gt; I’m creating. &lt;a href=&quot;http://learnreact.design/re4d-0&quot;&gt;Sign up&lt;/a&gt; now and receive exclusive updates!&lt;/em&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;em&gt;&lt;a href=&quot;/2017/06/08/what-is-react/&quot;&gt;What is React?&lt;/a&gt;&lt;/em&gt;&lt;/li&gt;
@@ -253,7 +253,7 @@ the creators of React Native nicely put, &lt;strong&gt;“learn once, write anyw
    <published>2017-06-08T00:00:00-07:00</published>
    <updated>2017-06-08</updated>
    <id>http://learnreact.design/2017/06/08/what-is-react</id>
-   <content type="html">&lt;p&gt;&lt;em&gt;This series of posts will be the very first part of the &lt;a href=&quot;http://learnreact.design&quot;&gt;“React for Designers” course&lt;/a&gt; I’m creating. &lt;a href=&quot;http://learnreact.design&quot;&gt;Sign up&lt;/a&gt; now and receive exclusive updates!&lt;/em&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;&lt;em&gt;This series of posts will be the very first part of the &lt;a href=&quot;http://learnreact.design/re4d-0&quot;&gt;“React Essentials for Designers” course&lt;/a&gt; I’m creating. &lt;a href=&quot;http://learnreact.design/re4d-0&quot;&gt;Sign up&lt;/a&gt; now and receive exclusive updates!&lt;/em&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;em&gt;What is React? (this post)&lt;/em&gt;&lt;/li&gt;
