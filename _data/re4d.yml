@@ -28,8 +28,8 @@
       length: '5:00'
     - title: Build the House component in JavaScript
       status: preview
-      thumbnail: https://img.youtube.com/vi/lzDknxiJ5_c/0.jpg
-      link: https://youtu.be/lzDknxiJ5_c
+      thumbnail: https://img.youtube.com/vi/h1Hr_EslNfA/0.jpg
+      link: https://youtu.be/h1Hr_EslNfA
       length: '7:31'
     - title: Smiley faces in components - JSX and arrow functions
       status: in-progress
