@@ -14,7 +14,7 @@ author:
   image: linton.jpg
 ---
 
-_This series of posts will be the very first part of the ["React for Designers" course](http://learnreact.design) I'm creating. Be sure to [sign up](http://learnreact.design) to receive exclusive updates!_
+_This series of posts will be the very first part of the ["React Essentials for Designers" course](http://learnreact.design/re4d-0) I'm creating. [Sign up](http://learnreact.design/re4d-0) now and receive exclusive updates!_
 
 - _[What is React?](/2017/06/08/what-is-react/)_
 - _What is React Native? (this post)_
