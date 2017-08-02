@@ -2,6 +2,8 @@
 layout: page
 title: React Essentials For Designers
 subtitle: 'An introductory, example-driven course on React and React Native: fundamentals, capabilities, limitations and how they relate to design'
+redirect_from:
+  - /re4d-0/
 author:
   name: Linton Ye
   twitter: lintonye
@@ -16,9 +18,12 @@ author:
 
 ---
 
+<!--
 
 - Planned release date: **October 2017**
 - Price: **$199** ▷ <a href="https://gum.co/reactessentials" class="button">Pre-order for <strong>$119</strong></a>
+
+-->
 
 <!--
 - Examples of what you are gonna learn:
