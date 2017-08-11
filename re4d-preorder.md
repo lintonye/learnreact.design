@@ -1,7 +1,7 @@
 ---
 layout: page
 title: React Essentials For Designers
-subtitle: 'An introductory, example-driven course on React and React Native: fundamentals, capabilities, limitations and how they relate to design'
+subtitle: 'Understand the constraints of React, design accordingly. Stop waiting for developers, tweak the styles yourself. '
 author:
   name: Linton Ye
   twitter: lintonye
