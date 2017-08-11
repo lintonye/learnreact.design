@@ -39,8 +39,18 @@
       status: order
       thumbnail: /images/courses/re4d/3.6-props.jpg
       length: '8:41'
-    - title: 'Open Sesame! - State in JS'
-      status: in-progress
+    - title: 'ES6 Class'
+      status: order
+      thumbnail: /images/courses/re4d/es6.jpg
+      length: '9:33'
+    - title: 'Class components'
+      status: order
+      thumbnail: /images/courses/re4d/3.7-class-components.jpg
+      length: '7:59'
+    - title: 'Open Sesame! - setState'
+      status: order
+      thumbnail: /images/courses/re4d/3.8-setstate.jpg
+      length: '8:43'
     - title: Pass the state down - one-way data flow
       status: in-progress
     - title: Think in React
