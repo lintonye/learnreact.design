@@ -14,12 +14,12 @@ author:
   image: linton.jpg
 ---
 
-_This series of posts will be the very first part of the ["React Essentials for Designers" course](http://learnreact.design/re4d-0) I'm creating. [Sign up](http://learnreact.design/re4d-0) now and receive exclusive updates!_
+_This series of posts will be the very first part of the ["React Essentials for Designers" course](http://learnreact.design/re4d/) I'm creating. [Sign up](http://learnreact.design/re4d/) now and receive exclusive updates!_
 
 - _[What is React?](/2017/06/08/what-is-react/)_
 - _What is React Native? (this post)_
 - _React Native vs. Hybrids (coming soon)_
-- _Components, props, state etc. (coming soon)_
+- _[Components, Props and State](/2017/08/16/components-props-state/)_
 
 ---
 

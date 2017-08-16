@@ -1,8 +1,8 @@
 ---
 layout: post
-last-modified: '2017-06-20'
+last-modified: '2017-08-16'
 
-title: "Components, props, states"
+title: "Components, Props and State"
 subtitle: "React terms in plain English and doodles🌴🎄⚛"
 
 excerpt: "React terms explained in plain English and doodles🌴🎄⚛"
@@ -14,12 +14,12 @@ author:
   image: linton.jpg
 ---
 
-_This series of posts will be the very first part of the ["React for Designers" course](http://learnreact.design) I'm creating. Be sure to [sign up](http://learnreact.design) to receive exclusive updates!_
+_This series of posts will be the very first part of the ["React Essentials for Designers" course](http://learnreact.design/re4d/) I'm creating. [Sign up](http://learnreact.design/re4d/) now and receive exclusive updates!_
 
 - _[What is React?](/2017/06/08/what-is-react/)_
-- _What is React Native? (/2017/06/20/what-is-react-native)_
+- _[What is React Native?](/2017/06/20/what-is-react-native)_
 - _React Native vs. Hybrids (coming soon)_
-- _Components, props, state etc. (this post)_
+- _Components, Props and State (this post)_
 
 ---
 
@@ -27,7 +27,7 @@ Today let's study the three most important concepts in React: components, props 
 
 As in previous posts, I'll attempt to use plain English to explain the concepts. So, no JavaScript knowledge is required to read this post. 
 
-As the matter fact, you won't find any JavaScript code here at all. Instead, I'll use a simple notation to help you understand the main ideas first before diving into JavaScript (in future posts). In techie terms, it's called *pseudocode* because it's not real code, it's fairly [pseudo](https://encrypted.google.com/search?q=define:pseudo&hl=en).
+In fact, you won't find any JavaScript code here at all. Instead, I'll use a simple notation [^1] to help you understand the main ideas first before diving into JavaScript (in future posts). I believe this spoon-feeding 🥄 approach is an effective way to learn React (or any technologies) especially if you don't have much programming experience -- mixing React concepts and JavaScript subtleties can be quite overwhelming!
 
 <a name="learning-goals">
 
@@ -38,16 +38,16 @@ After reading this post, I'll get you to come back here. Hopefully you'll be abl
 - What is state?
 - When to use props and when to use state?
 - How to make the window openable?
-- Can you write the psedocode for [Domo's hat](TODO)?
+- Can you write the psedocode for [Domo's hat](/2017/06/08/what-is-react/#domo-hat)?
 
 # Let's build a house
 To understand what these concepts are and how to use them, let's build a simple example. What about a house? (Try clicking the door)
 
-<p data-height="365" data-theme-id="light" data-slug-hash="EXBOpx" data-default-tab="result" data-user="focuser" data-embed-version="2" data-pen-title="React House" class="codepen">See the Pen <a href="https://codepen.io/focuser/pen/EXBOpx/">React House</a> by focuser (<a href="https://codepen.io/focuser">@focuser</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="480" data-theme-id="light" data-slug-hash="EXBOpx" data-default-tab="result" data-user="focuser" data-embed-version="2" data-pen-title="React House" class="codepen">See the Pen <a href="https://codepen.io/focuser/pen/EXBOpx/">React House</a> by focuser (<a href="https://codepen.io/focuser">@focuser</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
 # Components
-If you remember what we've discussed in an [early post](TODO), components are one of the three pillars of React. Building an app in React is almost all about working with components.
+If you remember what we've discussed in an [early post](/2017/06/08/what-is-react/), components are one of the three pillars of React. Building an app in React is almost all about working with components.
 
 The very first step is to break down the UI into various components. For example, we can break down our house this way:
 
@@ -158,7 +158,7 @@ Roof:
 
 That's it? Right! There are a few things worth mentioning here:
 
-- The HTML-ish code that defines a component is a **template**, not just a single HTML tag. This means we can put _placeholders_ in it to output variations of HTML content without repeating ourselves. Remember [Domo's hat](TODO)? In this example, we'll get `<div>blue roof<div>` for `<Roof color="blue" />` or `<div>red roof</div>` for `<Roof color="red" />`.
+- The HTML-ish code that defines a component is a **template**, not just a single HTML tag. This means we can put _placeholders_ in it to output variations of HTML content without repeating ourselves. (Remember [this picture of Domo's hat](/images/what-is-react/09-thinker-with-hat.png)? That's the idea of placeholders!) In this example, for `<Roof color="blue" />`, we'll get `<div>blue roof<div>`; for `<Roof color="red" />`, we'll get `<div>red roof</div>`, so on and so forth.
 - The curly brackets used in the template tells React that we are gonna use a placeholder here, instead of plain content.
 - `props` can be think of as a container of all the prop values set in the `Roof` tag. So suppose we have `<Roof color="blue" material="wood" />`, we can then use both `props.color` and `props.material` in the definition of the `Roof` component.
 
@@ -197,9 +197,9 @@ Door:
     change state.status to "closed"
 {% endhighlight %}
 
-Again this is not real React code, but my point is to show you the big idea without involving JavaScript details, which can be quite overwhelming if you are not familiar with the language.
-
 The key thing here is that the state of a component changes from time to time. The output of the template, i.e. the generated HTML, changes accordingly and automatically.
+
+BTW: Don't forget that the above isn't real React code. Don't copy and paste it into your project! Things will get ugly... 💣
 
 ## State is private
 
@@ -234,9 +234,12 @@ Here we go, that’s props and state. Props are configuration of a component who
 
 But, but, we haven't built anything real, right? Plus, how useful is it to create an app that just displays plain text? I know, at least you want to see how to build the house that you see at the beginning of the post -- something colorful that you can click on, right?
 
-Not surprisingly, that requires JavaScript coding which would make this post too long. I'll leave it to future posts. If you don't want to wait, sign up for [my free email course](TODO) where things are taught in videos. The JavaScript fun starts at day 4!
+Not surprisingly, that requires JavaScript coding which would make this post too long. I'll leave it to future posts. If you don't want to wait, sign up for [my free email course](/react-mini/) where things are taught in videos. The JavaScript fun starts at day 4!
 
-# Footnotes
-[^1] It's called pseudo code.
+---
+
+# Footnotes:
+
+[^1]: In techie terms, the notation that describes the main ideas but not real code is called *pseudocode*. It's not meant for computers to execute. It's a tool for us humans to formalize thoughts and communicate with others. Remember, pseudocode won't work on a computer, it's fairly [pseudo](https://encrypted.google.com/search?q=define:pseudo&hl=en).
 
 <a name="endofpost">

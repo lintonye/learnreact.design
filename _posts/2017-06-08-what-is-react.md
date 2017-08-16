@@ -16,12 +16,12 @@ author:
   image: linton.jpg
 ---
 
-_This series of posts will be the very first part of the ["React Essentials for Designers" course](http://learnreact.design/re4d-0) I'm creating. [Sign up](http://learnreact.design/re4d-0) now and receive exclusive updates!_
+_This series of posts will be the very first part of the ["React Essentials for Designers" course](http://learnreact.design/re4d/) I'm creating. [Sign up](http://learnreact.design/re4d/) now and receive exclusive updates!_
 
 - _What is React? (this post)_
 - _[What is React Native?](/2017/06/20/what-is-react-native/)_
 - _React Native vs. Hybrids (coming soon)_
-- _Components, props, state etc. (coming a bit less soon)_
+- _[Components, Props and State](/2017/08/16/components-props-state/)_
 
 ---
 
@@ -104,6 +104,8 @@ This way, when somebody asks for portraits of Domo wearing a different hat, you 
 This trick is how React got its name. The UI built with React is **reactive**. As a developer, you just need to write down **what** you want and React figures out **how** to do it. When data change, your UI changes accordingly. You don't need to worry about updating the DOM, React does it for you automatically. The idea of reactive UI greatly simplifies UI development.
 
 I know I said you don't need any coding knowledge but just to help put things in perspective, I've popped this in. Check out this example (try changing Domo's hat):
+
+<a name="domo-hat"></a>
 
 <p data-height="375" data-theme-id="light" data-slug-hash="gROrXx" data-default-tab="result" data-user="focuser" data-embed-version="2" data-pen-title="Reactive UI" class="codepen">See the Pen <a href="https://codepen.io/focuser/pen/gROrXx/">Reactive UI</a> by focuser (<a href="https://codepen.io/focuser">@focuser</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
