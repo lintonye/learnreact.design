@@ -23,13 +23,22 @@ _This series of posts will be the very first part of the ["React for Designers" 
 
 ---
 
-Components, props and state are important concepts in React.
+Today let's study the three most important concepts in React: components, props and state, and the differences between props and state.
 
-Without JavaScript.
+As in previous posts, I'll attempt to use plain English to explain the concepts. So, no JavaScript knowledge is required to read this post. 
+
+As the matter fact, you won't find any JavaScript code here at all. Instead, I'll use a simple notation to help you understand the main ideas first before diving into JavaScript (in future posts). In techie terms, it's called *pseudocode* because it's not real code, it's fairly [pseudo](https://encrypted.google.com/search?q=define:pseudo&hl=en).
 
 <a name="learning-goals">
 
 # Learning Goals
+After reading this post, I'll get you to come back here. Hopefully you'll be able to answer these questions easily:
+
+- What is a prop?
+- What is state?
+- When to use props and when to use state?
+- How to make the window openable?
+- Can you write the psedocode for [Domo's hat](TODO)?
 
 # Let's build a house
 To understand what these concepts are and how to use them, let's build a simple example. What about a house? (Try clicking the door)
@@ -44,7 +53,7 @@ The very first step is to break down the UI into various components. For example
 
 ![house break down](/images/props-states/1-house-components.png)
 
-Now let's code it in React!
+Now let's code it!
 
 {% highlight jsx %}
 House:
@@ -59,21 +68,21 @@ House:
 
 Wait a second, isn't that some sort of HTML? That's right! Some parts of React code look very similar to HTML, and that, by design, is to make it easy for web designers to understand and write the code. How nice is that!
 
-So, in the code above, we have the `<div>` container which is exactly the same as in HTML. Things like `Roof` and `Wall` are custom tags/components that we are going to define soon.
+So, in the code above, we have the `<div>` container which is pretty much the same as in HTML. Things like `Roof` and `Wall` are custom tags/components that we are going to define soon.
 
-Of course, the above isn't exactly real React code -- there's no JavaScript at all. For now, let me just use loose syntax and plain English to explain what's in there ^1. Once you understand the ideas behind the scene, the next step is to learn the nitty gritty of JavaScript and convert the ideas into real code. I think this approach makes learning programming easier in general: ideas first, details later. TODO in my experience
+Remind you, the above isn't exactly real React code -- there's no JavaScript at all. For now, let me just use loose syntax and plain English to explain what's in there. Once you understand the ideas behind the scene, the next step is to learn the nitty gritty of JavaScript and convert the ideas into real code.
 
-Let's now build the Roof:
+To make things easier to understand, I'll use another simplification: instead of using images as you saw at the beginning of this post, for now let's make a super simple web app that displays plain text for everything.
+
+The roof is just a div with some plain text:
 
 {% highlight jsx %}
 Roof:
 
-  <img src='http://i.imgur.com/ylhqgpN.png' />
+  <div>roof</div>
 {% endhighlight %}
 
-There's really nothing fancy here. Our roof is just an image. As `div`, the tag `<img>` is exactly the same as in HTML. Other components are the same -- they are just different images.
-
-Let's look at the complete, React-ish code for our house:
+Other components are the same -- they are just plain text inside a HTML div. Let's look at the complete, React-ish code for our house:
 
 {% highlight jsx %}
 House:
@@ -88,58 +97,144 @@ House:
 
 Roof:
 
-  <img src='http://i.imgur.com/ylhqgpN.png' />
+  <div>roof</div>
 
 
 Wall:
 
-  <img src='http://i.imgur.com/ylhqgpN.png' />
+  <div>wall</div>
 
 
 Window:
 
-  <img src='http://i.imgur.com/ylhqgpN.png' />
+  <div>window</div>
 
 
 Door:
 
-  <img src='http://i.imgur.com/ylhqgpN.png' />
+  <div>door</div>
 
 {% endhighlight %}
 
-This is not hard to understand, right? House is made up of Roof, Wall, Window and Door, which are all made up of images (`img`).
+This is not hard to understand, right? House is made up of Roof, Wall, Window and Door, which are all made up of plain text.
 
-In the end, the code above will generate HTML like this:
+In the end, React will generate HTML like this:
 
 {% highlight html %}
 <div>
-  <img src='http://i.imgur.com/ylhqgpN.png' /> <!-- roof -->
-  <img src='http://i.imgur.com/ylhqgpN.png' /> <!-- wall -->
-  <img src='http://i.imgur.com/ylhqgpN.png' /> <!-- window -->
-  <img src='http://i.imgur.com/ylhqgpN.png' /> <!-- door -->
+  <div>roof</div>
+  <div>wall</div>
+  <div>windows</div>
+  <div>door</div>
 </div>
 {% endhighlight %}
 
-Of course, that's just a very boring house -- the whole thing is a bunch of static images and you can't do anything about it except staring at it. **However**, this is an important step that we should start with when building any app with React: always start with static components, add data and interactivity later. TODO perhaps more explanation
 
-With that said, bear with me, we are gonna add more interesting stuff soon.
+# Configure roof color with Props
 
-# Props
+Imagine that we send a sheet of specification to a factory where all the individual parts are built. In the specification, we can tell the factory about the intrinsic properities of the parts: the color of the roof, the shape of the door etc. After the roof and the door are built according to our request, those properties will stay the same. So the roof remains blue, and the door remains a rectangle. They won’t change at all.
 
+In React, we call these properties _Props_ which is basically short for properties. Remember two things about props: first, we determine the value of a prop and use it as part of the blueprint BEFORE a component is built. Second, the value of a prop will never change.
 
+So how does a prop look like in the code? In the House component, if we want our roof to be blue, we can simply add a prop “color” to the Roof tag. This is like specifying the color in the specification to be sent to the factory.
 
+It looks very similiar to HTML tags where where you can add attributes:  
 
+{% highlight jsx %}
+House:
+  <div>
+    <Roof color="blue"/>
+    ...
+  </div>
+{% endhighlight %}
 
+How is the roof actually built? Let’s write the code for it.
 
-In React, a component can have props, short for _properties_. Props are basically configuration of a component that determine the , for example, the color of the roof, the shape of the door etc.
+{% highlight jsx %}
+Roof:
 
-In HTML, we very naturally
+  <div>{props.color} roof</div>
+{% endhighlight %}
 
-question: what are `div` and `img` in the React code? They are components too! `src` is the prop of `img`.
+That's it? Right! There are a few things worth mentioning here:
 
-# State
+- The HTML-ish code that defines a component is a **template**, not just a single HTML tag. This means we can put _placeholders_ in it to output variations of HTML content without repeating ourselves. Remember [Domo's hat](TODO)? In this example, we'll get `<div>blue roof<div>` for `<Roof color="blue" />` or `<div>red roof</div>` for `<Roof color="red" />`.
+- The curly brackets used in the template tells React that we are gonna use a placeholder here, instead of plain content.
+- `props` can be think of as a container of all the prop values set in the `Roof` tag. So suppose we have `<Roof color="blue" material="wood" />`, we can then use both `props.color` and `props.material` in the definition of the `Roof` component.
+
+# Open the door with State
+## Add state to a component
+Another thing that a component can have is called _state_. What is a state? It’s something that can change AFTER a component is built.
+
+For example, the door can be either open or closed. We say the status of the door is a state because its value can change even after the door is built. This is different from a prop like the shape of the door which does not change once the door is created.
+
+The change of a state value is often caused by some external event. For a web app, it’s usually user input, or data from a server or the passage of time that’d change the state of a component.
+
+Let's add the state to the door:
+
+{% highlight jsx %}
+Door:
+  State:
+    status   // "open" or "closed"
+  <div>Door is {state.status}</div>
+{% endhighlight %}
+
+Very similar to `props`, `state` is a container of all the state values in the component. Therefore, we can use `state.[something]` inside the template in the component definition.
+
+## Change the state on user input
+
+Next, let's make the door interactive by adding some "code" that handles user input.
+
+{% highlight jsx %}
+Door:
+  State:
+    status   // "open" or "closed"
+  <div>Door is {state.status}</div>
+  // Handle user input
+  when the door is pulled
+    change state.status to "open"
+  when the door is pushed
+    change state.status to "closed"
+{% endhighlight %}
+
+Again this is not real React code, but my point is to show you the big idea without involving JavaScript details, which can be quite overwhelming if you are not familiar with the language.
+
+The key thing here is that the state of a component changes from time to time. The output of the template, i.e. the generated HTML, changes accordingly and automatically.
+
+## State is private
+
+The state is private to a component. Whether the door is open or closed is only the door’s business. It has nothing to do with the house, or other components. In fact we can just take the door out of the house, it can still be open or closed on its own.
+
+Therefore, the door's state is only visible inside the Door component. Within the Door component, we can only read or change its own state.
+
+{% highlight html %}
+House:
+  <div>
+    <Door />
+    ...
+    <!-- This is WRONG -->
+    <div>The door is {Door.state.status}</div>
+  </div>
+
+Window:
+  ...
+  <!-- This is WRONG -->
+  change Door.state.status to 'open'
+
+Door:
+  ...
+  <!-- Man, this is WRONG too! -->
+  if House.state.isForSale
+    make the door openable by the realtor
+{% endhighlight %}
+
 
 # Conclusion
+Here we go, that’s props and state. Props are configuration of a component whose values are determined before the component is created. Just like the shape of the door, or the color of the roof, props always stay the same. On the other hand, state is a component’s private data that’s available only after the component is created. Just like whether the door is open or closed, state changes from time to time. Usually it’s a response to user input, or something that happens on the server, or the passage of time.
+
+But, but, we haven't built anything real, right? Plus, how useful is it to create an app that just displays plain text? I know, at least you want to see how to build the house that you see at the beginning of the post -- something colorful that you can click on, right?
+
+Not surprisingly, that requires JavaScript coding which would make this post too long. I'll leave it to future posts. If you don't want to wait, sign up for [my free email course](TODO) where things are taught in videos. The JavaScript fun starts at day 4!
 
 # Footnotes
 [^1] It's called pseudo code.
