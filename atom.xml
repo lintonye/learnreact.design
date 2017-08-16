@@ -4,7 +4,7 @@
  <title>Backstage</title>
  <link href="http://learnreact.design/atom.xml" rel="self"/>
  <link href="http://learnreact.design"/>
- <updated>2017-08-11T16:42:33-07:00</updated>
+ <updated>2017-08-16T12:58:27-07:00</updated>
  <id>http://learnreact.design/atom.xml</id>
  <author>
    <name>Linton Ye</name>
@@ -13,18 +13,246 @@
 
  
  <entry>
+   <title>Components, Props and State</title>
+   <link href="http://learnreact.design/2017/08/16/components-props-state/"/>
+   <published>2017-08-16T00:00:00-07:00</published>
+   <updated>2017-08-16</updated>
+   <id>http://learnreact.design/2017/08/16/components-props-state</id>
+   <content type="html">&lt;p&gt;&lt;em&gt;This series of posts will be the very first part of the &lt;a href=&quot;http://learnreact.design/re4d/&quot;&gt;“React Essentials for Designers” course&lt;/a&gt; I’m creating. &lt;a href=&quot;http://learnreact.design/re4d/&quot;&gt;Sign up&lt;/a&gt; now and receive exclusive updates!&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;&lt;a href=&quot;/2017/06/08/what-is-react/&quot;&gt;What is React?&lt;/a&gt;&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;&lt;a href=&quot;/2017/06/20/what-is-react-native&quot;&gt;What is React Native?&lt;/a&gt;&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;React Native vs. Hybrids (coming soon)&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;Components, Props and State (this post)&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Today let’s study the three most important concepts in React: components, props and state, and the differences between props and state.&lt;/p&gt;
+
+&lt;p&gt;As in previous posts, I’ll attempt to use plain English to explain the concepts. So, no JavaScript knowledge is required to read this post.&lt;/p&gt;
+
+&lt;p&gt;In fact, you won’t find any JavaScript code here at all. Instead, I’ll use a simple notation &lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; to help you understand the main ideas first before diving into JavaScript (in future posts). I believe this spoon-feeding 🥄 approach is an effective way to learn React (or any technologies) especially if you don’t have much programming experience – mixing React concepts and JavaScript subtleties can be quite overwhelming!&lt;/p&gt;
+
+&lt;p&gt;&lt;a name=&quot;learning-goals&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;learning-goals&quot;&gt;Learning Goals&lt;/h1&gt;
+&lt;p&gt;After reading this post, I’ll get you to come back here. Hopefully you’ll be able to answer these questions easily:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is a prop?&lt;/li&gt;
+  &lt;li&gt;What is state?&lt;/li&gt;
+  &lt;li&gt;When to use props and when to use state?&lt;/li&gt;
+  &lt;li&gt;How to make the window openable?&lt;/li&gt;
+  &lt;li&gt;Can you write the psedocode for &lt;a href=&quot;/2017/06/08/what-is-react/#domo-hat&quot;&gt;Domo’s hat&lt;/a&gt;?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;lets-build-a-house&quot;&gt;Let’s build a house&lt;/h1&gt;
+&lt;p&gt;To understand what these concepts are and how to use them, let’s build a simple example. What about a house? (Try clicking the door)&lt;/p&gt;
+
+&lt;p data-height=&quot;480&quot; data-theme-id=&quot;light&quot; data-slug-hash=&quot;EXBOpx&quot; data-default-tab=&quot;result&quot; data-user=&quot;focuser&quot; data-embed-version=&quot;2&quot; data-pen-title=&quot;React House&quot; class=&quot;codepen&quot;&gt;See the Pen &lt;a href=&quot;https://codepen.io/focuser/pen/EXBOpx/&quot;&gt;React House&lt;/a&gt; by focuser (&lt;a href=&quot;https://codepen.io/focuser&quot;&gt;@focuser&lt;/a&gt;) on &lt;a href=&quot;https://codepen.io&quot;&gt;CodePen&lt;/a&gt;.&lt;/p&gt;
+&lt;script async=&quot;&quot; src=&quot;https://production-assets.codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+
+&lt;h1 id=&quot;components&quot;&gt;Components&lt;/h1&gt;
+&lt;p&gt;If you remember what we’ve discussed in an &lt;a href=&quot;/2017/06/08/what-is-react/&quot;&gt;early post&lt;/a&gt;, components are one of the three pillars of React. Building an app in React is almost all about working with components.&lt;/p&gt;
+
+&lt;p&gt;The very first step is to break down the UI into various components. For example, we can break down our house this way:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/props-states/1-house-components.png&quot; alt=&quot;house break down&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now let’s code it!&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-jsx&quot; data-lang=&quot;jsx&quot;&gt;&lt;span class=&quot;nx&quot;&gt;House&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+
+  &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Roof&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Wall&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Window&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Door&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Wait a second, isn’t that some sort of HTML? That’s right! Some parts of React code look very similar to HTML, and that, by design, is to make it easy for web designers to understand and write the code. How nice is that!&lt;/p&gt;
+
+&lt;p&gt;So, in the code above, we have the &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;div&amp;gt;&lt;/code&gt; container which is pretty much the same as in HTML. Things like &lt;code class=&quot;highlighter-rouge&quot;&gt;Roof&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Wall&lt;/code&gt; are custom tags/components that we are going to define soon.&lt;/p&gt;
+
+&lt;p&gt;Remind you, the above isn’t exactly real React code – there’s no JavaScript at all. For now, let me just use loose syntax and plain English to explain what’s in there. Once you understand the ideas behind the scene, the next step is to learn the nitty gritty of JavaScript and convert the ideas into real code.&lt;/p&gt;
+
+&lt;p&gt;To make things easier to understand, I’ll use another simplification: instead of using images as you saw at the beginning of this post, for now let’s make a super simple web app that displays plain text for everything.&lt;/p&gt;
+
+&lt;p&gt;The roof is just a div with some plain text:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-jsx&quot; data-lang=&quot;jsx&quot;&gt;&lt;span class=&quot;nx&quot;&gt;Roof&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+
+  &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;roof&lt;span class=&quot;p&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Other components are the same – they are just plain text inside a HTML div. Let’s look at the complete, React-ish code for our house:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-jsx&quot; data-lang=&quot;jsx&quot;&gt;&lt;span class=&quot;nx&quot;&gt;House&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+
+  &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Roof&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Wall&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Window&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Door&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;  
+
+
+&lt;span class=&quot;nl&quot;&gt;Roof&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+
+  &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;roof&lt;span class=&quot;p&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;
+
+
+&lt;span class=&quot;nl&quot;&gt;Wall&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+
+  &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;wall&lt;span class=&quot;p&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;
+
+
+&lt;span class=&quot;nl&quot;&gt;Window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+
+  &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;window&lt;span class=&quot;p&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;
+
+
+&lt;span class=&quot;nl&quot;&gt;Door&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+
+  &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;door&lt;span class=&quot;p&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This is not hard to understand, right? House is made up of Roof, Wall, Window and Door, which are all made up of plain text.&lt;/p&gt;
+
+&lt;p&gt;In the end, React will generate HTML like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&amp;gt;&lt;/span&gt;roof&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&amp;gt;&lt;/span&gt;wall&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&amp;gt;&lt;/span&gt;windows&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&amp;gt;&lt;/span&gt;door&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;configure-roof-color-with-props&quot;&gt;Configure roof color with Props&lt;/h1&gt;
+
+&lt;p&gt;Imagine that we send a sheet of specification to a factory where all the individual parts are built. In the specification, we can tell the factory about the intrinsic properities of the parts: the color of the roof, the shape of the door etc. After the roof and the door are built according to our request, those properties will stay the same. So the roof remains blue, and the door remains a rectangle. They won’t change at all.&lt;/p&gt;
+
+&lt;p&gt;In React, we call these properties &lt;em&gt;Props&lt;/em&gt; which is basically short for properties. Remember two things about props: first, we determine the value of a prop and use it as part of the blueprint BEFORE a component is built. Second, the value of a prop will never change.&lt;/p&gt;
+
+&lt;p&gt;So how does a prop look like in the code? In the House component, if we want our roof to be blue, we can simply add a prop “color” to the Roof tag. This is like specifying the color in the specification to be sent to the factory.&lt;/p&gt;
+
+&lt;p&gt;It looks very similiar to HTML tags where where you can add attributes:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-jsx&quot; data-lang=&quot;jsx&quot;&gt;&lt;span class=&quot;nx&quot;&gt;House&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Roof&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;color=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;blue&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;/&amp;gt;&lt;/span&gt;
+    ...
+  &lt;span class=&quot;p&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;How is the roof actually built? Let’s write the code for it.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-jsx&quot; data-lang=&quot;jsx&quot;&gt;&lt;span class=&quot;nx&quot;&gt;Roof&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+
+  &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;props&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt; roof&lt;span class=&quot;p&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;That’s it? Right! There are a few things worth mentioning here:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The HTML-ish code that defines a component is a &lt;strong&gt;template&lt;/strong&gt;, not just a single HTML tag. This means we can put &lt;em&gt;placeholders&lt;/em&gt; in it to output variations of HTML content without repeating ourselves. (Remember &lt;a href=&quot;/images/what-is-react/09-thinker-with-hat.png&quot;&gt;this picture of Domo’s hat&lt;/a&gt;? That’s the idea of placeholders!) In this example, for &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;Roof color=&quot;blue&quot; /&amp;gt;&lt;/code&gt;, we’ll get &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;div&amp;gt;blue roof&amp;lt;div&amp;gt;&lt;/code&gt;; for &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;Roof color=&quot;red&quot; /&amp;gt;&lt;/code&gt;, we’ll get &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;div&amp;gt;red roof&amp;lt;/div&amp;gt;&lt;/code&gt;, so on and so forth.&lt;/li&gt;
+  &lt;li&gt;The curly brackets used in the template tells React that we are gonna use a placeholder here, instead of plain content.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;props&lt;/code&gt; can be think of as a container of all the prop values set in the &lt;code class=&quot;highlighter-rouge&quot;&gt;Roof&lt;/code&gt; tag. So suppose we have &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;Roof color=&quot;blue&quot; material=&quot;wood&quot; /&amp;gt;&lt;/code&gt;, we can then use both &lt;code class=&quot;highlighter-rouge&quot;&gt;props.color&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;props.material&lt;/code&gt; in the definition of the &lt;code class=&quot;highlighter-rouge&quot;&gt;Roof&lt;/code&gt; component.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;open-the-door-with-state&quot;&gt;Open the door with State&lt;/h1&gt;
+&lt;h2 id=&quot;add-state-to-a-component&quot;&gt;Add state to a component&lt;/h2&gt;
+&lt;p&gt;Another thing that a component can have is called &lt;em&gt;state&lt;/em&gt;. What is a state? It’s something that can change AFTER a component is built.&lt;/p&gt;
+
+&lt;p&gt;For example, the door can be either open or closed. We say the status of the door is a state because its value can change even after the door is built. This is different from a prop like the shape of the door which does not change once the door is created.&lt;/p&gt;
+
+&lt;p&gt;The change of a state value is often caused by some external event. For a web app, it’s usually user input, or data from a server or the passage of time that’d change the state of a component.&lt;/p&gt;
+
+&lt;p&gt;Let’s add the state to the door:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-jsx&quot; data-lang=&quot;jsx&quot;&gt;&lt;span class=&quot;nx&quot;&gt;Door&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;State&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;status&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// &quot;open&quot; or &quot;closed&quot;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;Door is &lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Very similar to &lt;code class=&quot;highlighter-rouge&quot;&gt;props&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;state&lt;/code&gt; is a container of all the state values in the component. Therefore, we can use &lt;code class=&quot;highlighter-rouge&quot;&gt;state.[something]&lt;/code&gt; inside the template in the component definition.&lt;/p&gt;
+
+&lt;h2 id=&quot;change-the-state-on-user-input&quot;&gt;Change the state on user input&lt;/h2&gt;
+
+&lt;p&gt;Next, let’s make the door interactive by adding some “code” that handles user input.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-jsx&quot; data-lang=&quot;jsx&quot;&gt;&lt;span class=&quot;nx&quot;&gt;Door&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;State&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;status&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// &quot;open&quot; or &quot;closed&quot;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;Door is &lt;span class=&quot;si&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// Handle user input&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;door&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;pulled&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;change&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;status&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;open&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;door&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;pushed&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;change&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;status&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;closed&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The key thing here is that the state of a component changes from time to time. The output of the template, i.e. the generated HTML, changes accordingly and automatically.&lt;/p&gt;
+
+&lt;p&gt;BTW: Don’t forget that the above isn’t real React code. Don’t copy and paste it into your project! Things will get ugly… 💣&lt;/p&gt;
+
+&lt;h2 id=&quot;state-is-private&quot;&gt;State is private&lt;/h2&gt;
+
+&lt;p&gt;The state is private to a component. Whether the door is open or closed is only the door’s business. It has nothing to do with the house, or other components. In fact we can just take the door out of the house, it can still be open or closed on its own.&lt;/p&gt;
+
+&lt;p&gt;Therefore, the door’s state is only visible inside the Door component. Within the Door component, we can only read or change its own state.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;House:
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;Door&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    ...
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- This is WRONG --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&amp;gt;&lt;/span&gt;The door is {Door.state.status}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+
+Window:
+  ...
+  &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- This is WRONG --&amp;gt;&lt;/span&gt;
+  change Door.state.status to &#39;open&#39;
+
+Door:
+  ...
+  &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Man, this is WRONG too! --&amp;gt;&lt;/span&gt;
+  if House.state.isForSale
+    make the door openable by the realtor&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;Here we go, that’s props and state. Props are configuration of a component whose values are determined before the component is created. Just like the shape of the door, or the color of the roof, props always stay the same. On the other hand, state is a component’s private data that’s available only after the component is created. Just like whether the door is open or closed, state changes from time to time. Usually it’s a response to user input, or something that happens on the server, or the passage of time.&lt;/p&gt;
+
+&lt;p&gt;But, but, we haven’t built anything real, right? Plus, how useful is it to create an app that just displays plain text? I know, at least you want to see how to build the house that you see at the beginning of the post – something colorful that you can click on, right?&lt;/p&gt;
+
+&lt;p&gt;Not surprisingly, that requires JavaScript coding which would make this post too long. I’ll leave it to future posts. If you don’t want to wait, sign up for &lt;a href=&quot;/react-mini/&quot;&gt;my free email course&lt;/a&gt; where things are taught in videos. The JavaScript fun starts at day 4!&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;footnotes&quot;&gt;Footnotes:&lt;/h1&gt;
+
+&lt;p&gt;&lt;a name=&quot;endofpost&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;In techie terms, the notation that describes the main ideas but not real code is called &lt;em&gt;pseudocode&lt;/em&gt;. It’s not meant for computers to execute. It’s a tool for us humans to formalize thoughts and communicate with others. Remember, pseudocode won’t work on a computer, it’s fairly &lt;a href=&quot;https://encrypted.google.com/search?q=define:pseudo&amp;amp;hl=en&quot;&gt;pseudo&lt;/a&gt;. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>What Is React Native?</title>
    <link href="http://learnreact.design/2017/06/20/what-is-react-native/"/>
    <published>2017-06-20T00:00:00-07:00</published>
    <updated>2017-06-23</updated>
    <id>http://learnreact.design/2017/06/20/what-is-react-native</id>
-   <content type="html">&lt;p&gt;&lt;em&gt;This series of posts will be the very first part of the &lt;a href=&quot;http://learnreact.design/re4d-0&quot;&gt;“React Essentials for Designers” course&lt;/a&gt; I’m creating. &lt;a href=&quot;http://learnreact.design/re4d-0&quot;&gt;Sign up&lt;/a&gt; now and receive exclusive updates!&lt;/em&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;&lt;em&gt;This series of posts will be the very first part of the &lt;a href=&quot;http://learnreact.design/re4d/&quot;&gt;“React Essentials for Designers” course&lt;/a&gt; I’m creating. &lt;a href=&quot;http://learnreact.design/re4d/&quot;&gt;Sign up&lt;/a&gt; now and receive exclusive updates!&lt;/em&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;em&gt;&lt;a href=&quot;/2017/06/08/what-is-react/&quot;&gt;What is React?&lt;/a&gt;&lt;/em&gt;&lt;/li&gt;
   &lt;li&gt;&lt;em&gt;What is React Native? (this post)&lt;/em&gt;&lt;/li&gt;
   &lt;li&gt;&lt;em&gt;React Native vs. Hybrids (coming soon)&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;Components, props, state etc. (coming soon)&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;&lt;a href=&quot;/2017/08/16/components-props-state/&quot;&gt;Components, Props and State&lt;/a&gt;&lt;/em&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
@@ -253,13 +481,13 @@ the creators of React Native nicely put, &lt;strong&gt;“learn once, write anyw
    <published>2017-06-08T00:00:00-07:00</published>
    <updated>2017-06-08</updated>
    <id>http://learnreact.design/2017/06/08/what-is-react</id>
-   <content type="html">&lt;p&gt;&lt;em&gt;This series of posts will be the very first part of the &lt;a href=&quot;http://learnreact.design/re4d-0&quot;&gt;“React Essentials for Designers” course&lt;/a&gt; I’m creating. &lt;a href=&quot;http://learnreact.design/re4d-0&quot;&gt;Sign up&lt;/a&gt; now and receive exclusive updates!&lt;/em&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;&lt;em&gt;This series of posts will be the very first part of the &lt;a href=&quot;http://learnreact.design/re4d/&quot;&gt;“React Essentials for Designers” course&lt;/a&gt; I’m creating. &lt;a href=&quot;http://learnreact.design/re4d/&quot;&gt;Sign up&lt;/a&gt; now and receive exclusive updates!&lt;/em&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;em&gt;What is React? (this post)&lt;/em&gt;&lt;/li&gt;
   &lt;li&gt;&lt;em&gt;&lt;a href=&quot;/2017/06/20/what-is-react-native/&quot;&gt;What is React Native?&lt;/a&gt;&lt;/em&gt;&lt;/li&gt;
   &lt;li&gt;&lt;em&gt;React Native vs. Hybrids (coming soon)&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;Components, props, state etc. (coming a bit less soon)&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;&lt;a href=&quot;/2017/08/16/components-props-state/&quot;&gt;Components, Props and State&lt;/a&gt;&lt;/em&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
@@ -347,6 +575,8 @@ the creators of React Native nicely put, &lt;strong&gt;“learn once, write anyw
 &lt;p&gt;This trick is how React got its name. The UI built with React is &lt;strong&gt;reactive&lt;/strong&gt;. As a developer, you just need to write down &lt;strong&gt;what&lt;/strong&gt; you want and React figures out &lt;strong&gt;how&lt;/strong&gt; to do it. When data change, your UI changes accordingly. You don’t need to worry about updating the DOM, React does it for you automatically. The idea of reactive UI greatly simplifies UI development.&lt;/p&gt;
 
 &lt;p&gt;I know I said you don’t need any coding knowledge but just to help put things in perspective, I’ve popped this in. Check out this example (try changing Domo’s hat):&lt;/p&gt;
+
+&lt;p&gt;&lt;a name=&quot;domo-hat&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p data-height=&quot;375&quot; data-theme-id=&quot;light&quot; data-slug-hash=&quot;gROrXx&quot; data-default-tab=&quot;result&quot; data-user=&quot;focuser&quot; data-embed-version=&quot;2&quot; data-pen-title=&quot;Reactive UI&quot; class=&quot;codepen&quot;&gt;See the Pen &lt;a href=&quot;https://codepen.io/focuser/pen/gROrXx/&quot;&gt;Reactive UI&lt;/a&gt; by focuser (&lt;a href=&quot;https://codepen.io/focuser&quot;&gt;@focuser&lt;/a&gt;) on &lt;a href=&quot;https://codepen.io&quot;&gt;CodePen&lt;/a&gt;.&lt;/p&gt;
 &lt;script async=&quot;&quot; src=&quot;https://production-assets.codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
