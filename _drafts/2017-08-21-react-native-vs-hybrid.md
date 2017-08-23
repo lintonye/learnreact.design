@@ -2,7 +2,7 @@
 layout: post
 last-modified: '2017-06-20'
 
-title: "React Native vs. Hybrids"
+title: "React Native vs. Cordova, PhoneGap, Ionic etc."
 subtitle: "React terms in plain English and doodles🌴🎄⚛"
 
 excerpt: "React terms explained in plain English and doodles🌴🎄⚛"
