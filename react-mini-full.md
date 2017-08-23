@@ -160,6 +160,6 @@ Of course, to really use React in your projects, there are a lot more to learn. 
 
 Check out more details [here](http://www.learnreact.design/re4d-preorder/).
 
-![](/images/courses/re4d/finish_8_day_course.png)
+<!-- ![](/images/courses/re4d/finish_8_day_course.png) -->
 
 
