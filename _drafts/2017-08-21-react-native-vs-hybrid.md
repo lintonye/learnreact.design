@@ -58,4 +58,6 @@ In the [previous post](TODO), we looked at what React is and what makes it speci
     - On Web, to simulate native interface, a lot of things have to be done in JS, which is slow.
     - On RN, JS code is like glue that connects native parts together. Native code does the heavylifting.
 
+- hybrid
+  - a framework that attempts to mimic native controls using HTML/CSS. We’re not using a framework that tries to compile another language to native code, or make a cross-platform app from a single codebase.
   <a name="endofpost">
