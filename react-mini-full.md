@@ -22,10 +22,13 @@ Make sure that you can answer the questions in the "[Learning goals](http://www.
 
 --- 
 
-## Day 2/8: Components and props
-React is all about components. Today let's learn about components and their "props".
+## Day 2/8: Components, props and state
+React is all about components. Today let's learn about components and their "props". State is what makes our React app interactive. However, many people find state and props confusing when they get started.
 
 Watch this 5-minute video and come back to answer the question in the Homework section: [https://youtu.be/Lr545N_mshY](https://youtu.be/Lr545N_mshY)
+
+In this video, I talked about what state is and how it's different from props: [https://youtu.be/JSMHIF_3LII](https://youtu.be/JSMHIF_3LII)
+
 
 ### Homework
 
@@ -34,24 +37,12 @@ Watch this 5-minute video and come back to answer the question in the Homework s
 <p data-height="375" data-theme-id="light" data-slug-hash="gROrXx" data-default-tab="result" data-user="focuser" data-embed-version="2" data-pen-title="Reactive UI" class="codepen">See the Pen <a href="https://codepen.io/focuser/pen/gROrXx/">Reactive UI</a> by focuser (<a href="https://codepen.io/focuser">@focuser</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
+- Can you add the state in the simple notation you wrote above?
 - [Tweet your progress](https://twitter.com/home?status=Day%202/8%3A%20Just%20learned%20what%20%23React%20components%20and%20props%20are!%208-day%20%23React%20course%20by%20%40lintonye%20http%3A//learnreact.design/react-mini/). Now you know what React components and props are! 
 
 --- 
 
-## Day 3/8: State
-
-State is what makes our React app interactive. However, many people find state and props confusing when they get started.
-
-In this video, I talked about what state is and how it's different from props: [https://youtu.be/JSMHIF_3LII](https://youtu.be/JSMHIF_3LII)
-
-### Homework
-
-- Recall again Domo's hat, can you add the state in the simple notation you wrote yesterday?
-- Remember to [Tweet your progress](https://twitter.com/home?status=Day%203/8%3A%20What%20is%20%23React%20state?%20How%20is%20it%20different%20from%20props?%208-day%20%23React%20course%20by%20%40lintonye%20http%3A//learnreact.design/react-mini/), tell people that you can tell the difference between props and state!
-
---- 
-
-## Day 4/8: Build the House component in JavaScript
+## Day 3/8: Build the House component in JavaScript
 
 Today let's build some real stuff! We'll write some real JavaScript code that draws a house for us. Watch this video and come back for homework: [https://youtu.be/h1Hr_EslNfA](https://youtu.be/h1Hr_EslNfA)
 
@@ -60,51 +51,116 @@ Today let's build some real stuff! We'll write some real JavaScript code that dr
 - Add wall, window and door to the house
 - How can you display two houses?
 - 🙌 You just wrote some real React code! [Tweet your progress](https://twitter.com/home?status=Day%204/8%3A%20Join%20me!%20I%27m%20coding%20%23React%20components%20in%20JS%20now!%20http%3A//learnreact.design/react-mini/%20by%20%40lintonye) and treat yourself some yummy 🍩🍪 !
+- TODO capitalize or not
 
 --- 
 
-## Day 5/8: Learn a bit JavaScript
-I hope you had fun building the house yesterday. It's now time to learn a bit JavaScript! Of course, to fully master JavaScript it'd definitely take way more than one day. However, I hand-picked 20 minutes of videos plus exercises so that you can just learn enough to proceed with the course. It's more work than the previous few days, but you are up for challenges, right? 😎 💪
-
-Go ahead and register an account on [Khan Academy](https://www.khanacademy.org/) and finish the following videos and exercises:
-
-- [Intro to variables](https://www.khanacademy.org/computing/computer-programming/programming/variables/p/intro-to-variables)
-  - [Quiz: Variables](https://www.khanacademy.org/computing/computer-programming/programming/variables/e/exercise--intro-to-variables)
-  - [Challenge: Bucktooth Bunny](https://www.khanacademy.org/computing/computer-programming/programming/variables/p/challenge-bucktooth-bunny)
-- [More on variables](https://www.khanacademy.org/computing/computer-programming/programming/variables/p/more-on-variables)
-  - [Challenge: Funky Frog](https://www.khanacademy.org/computing/computer-programming/programming/variables/p/challenge-funky-frog)
-- [Functions](https://www.khanacademy.org/computing/computer-programming/programming/functions/p/functions)
-  - [Challenge: Say Your Name](https://www.khanacademy.org/computing/computer-programming/programming/functions/p/challenge-say-your-name)
-- [Function Parameters](https://www.khanacademy.org/computing/computer-programming/programming/functions/p/function-parameters)
-  - [Challenge: Moles in Holes](https://www.khanacademy.org/computing/computer-programming/programming/functions/p/challenge-moles-in-holes)
-- [Function Return Values](https://www.khanacademy.org/computing/computer-programming/programming/functions/p/function-return-values)
-  - [Challenge: Calculator](https://www.khanacademy.org/computing/computer-programming/programming/functions/p/challenge-calculator)
-
-Feel free to spread it over a few days if you are busy. Make sure though that you have understood the concepts above before proceeding with the React course.
-
-Remember to [Tweet your progress](https://twitter.com/home?status=Day%205/8%3A%20Join%20me!%20I%27m%20learning%20JS%20variables%20and%20functions%20today!%208-day%20%23React%20course%20by%20%40lintonye%20http%3A//learnreact.design/react-mini/), it's fine to brag a little bit. Just a little bit. 😇
-
---- 
-
-## Day 6/8: Smiley faces in components - JSX and arrow functions
+## Day 4/8: Smiley faces in components - JSX and arrow functions
 Now that you've wrote some code in JavaScript. It isn't that difficult, right?
 
-Remember the smiley faces when defining a React component? Watch this video and find out what those symbols really are: [https://youtu.be/5WRlEZwxdKM](https://youtu.be/5WRlEZwxdKM)
+Remember the smiley faces when defining a React component? Watch the videos below to find out what those symbols really are: 
+
+- [ES6 constant and arrow functions](TODO)
+- [JSX](https://youtu.be/5WRlEZwxdKM)
 
 ### Homework
-- What is this?
+- What is the result of the following code?
 {% highlight jsx %}
-() => 1
+var name = 'Tom';
+const age = 20;
+if (name === 'Tom') {
+  age = 25;
+}
 {% endhighlight %}
-- What about this?
+
+If you are not sure, paste the code in Chrome console and hit Enter key.
+
+- Convert the functions below to arrow functions (be as concise as possible). Remix [this project](https://glitch.com/edit/#!/es6-playground?path=src/index.js:1:0) and play with the code in Glitch.
+
 {% highlight jsx %}
-() => <img src={Images.window} className="window" />
+function pi() {
+  return 3.14159;
+}
+
+function square(n) {
+  return n * n;
+}
+
+function add(a, b) {
+  var result = a + b;
+  return result;
+}
+
+const yawn = function() {
+  console.log('yawn.');
+  console.log('yawn...');
+  console.log('zzzzzzZZZ');
+}
+
+console.log('pi = '+ pi());
+console.log('square 4 = ' + square(4));
+console.log('add(4, 5) = ' + add(4, 5));
+console.log(yawn());
 {% endhighlight %}
+
+- What is the output of the code below? What if we uncomment the last line?
+{% highlight jsx %}
+const fruit = () => '🍉';
+const burger = () => '🍔';
+
+const packLunch = (packMeal, packSnack) => [packMeal(), packSnack()];
+
+console.log(packLunch(burger, fruit));
+console.log(packLunch(() => '🌭', fruit));
+// console.log(packLunch('🍕', fruit)); 
+
+{% endhighlight %}
+
+- What does the following code do?
+{% highlight jsx %}
+const Window = () => <div>Window</div>;
+{% endhighlight %}
+
+
 - What is JSX? Why do we need it?
-- Open the previous project that you've worked on on day 4: open https://glitch.com/ and click "Resume Coding"; Open the "App.js" file
-- Can you change the definition of the Window component to a named function? Does the app still work?
-- Can you convert it to an anonymous function?
 - Don't forget to [tweet your progress](https://twitter.com/home?status=Day%206/8%3A%20Join%20me!%20I%27ve%20learned%20JSX%20and%20ES6%20arrow%20functions!%208-day%20%23React%20course%20by%20%40lintonye%20http%3A//learnreact.design/react-mini/)!
+
+--- 
+
+## Day TODO: More JSX
+
+- JS Expression and JSX
+
+### Homework
+- Which of the following are expressions?
+  - A. `true`
+  - B. `""`
+  - C. `<div>Window</div>`
+  - D. `n => n * n`
+- What does the following code do? Find all expressions in the code:
+{% highlight jsx %}
+const Lines = () => {
+  let children = [];
+  for (let i = 0; i < 10; i++) {
+    children.push(<div>Line { i+1 }</div>); // Array.push adds a new element to the array
+  }
+  return (
+    <div>
+      { children }
+    </div>
+  )
+}
+{% endhighlight %}
+
+---
+
+## Day TODO: Styling components
+- Import/export
+- Style with CSS and inline style
+- styled-components
+- Comparing vanilia CSS and CSS-in-JS
+
+### Homework
 
 --- 
 
@@ -131,6 +187,159 @@ const App = () => (
 );
 {% endhighlight %}
 - Don't forget to [tweet your progress](https://twitter.com/home?status=Day%207/8%3A%20I%27ve%20just%20coded%20some%20React%20props!%208-day%20%23React%20course%20by%20%40lintonye%20http%3A//learnreact.design/react-mini/)!
+
+--- 
+
+## ES6 Class
+
+TODO content
+
+### Homework
+- Convert the following JSX code into JavaScript code (try them in your editor):
+{% highlight jsx %}
+/* 
+ Hint: 
+  <MyComp prop1="a" prop2="b">
+    <div>Hello</div>
+    <Child2 />
+  </MyComp>
+
+  ==>
+
+  React.createElement(MyComp, 
+    {prop1: 'a', prop2: 'b'}, 
+    React.createElement('div', {}, 'Hello'),
+    React.createElement(Child2, {}, null)
+  );
+*/
+
+// 1
+const House = ({roofColor}) => 
+  <div>
+    <Roof color={roofColor} />
+    <Window />
+  </div>;
+
+// 2
+const Roof = () => 
+  <div>
+    <span>Roof</span>
+    This is Roof!
+  </div>;
+
+// 3
+const houses = [
+    <House roofColor="blue"/>, 
+    <House roofColor="red" />
+];
+
+{% endhighlight %}
+
+- Which of the following are valid components?
+{% highlight html %}
+// (A)
+const HouseA = <div>House</div>;
+
+// (B)
+const HouseB = <div />;
+
+// (C)
+const HouseC = () => <div><Roof><Window></div>;
+
+// (D)
+const HouseD = () => <div>House</div>;
+
+// (E)
+const HouseE = () => (
+  <Roof />
+  <Window />
+);
+
+// (F)
+const houseF = () => 
+  <div>
+    <Roof />
+    <Window />
+  </div>;
+
+{% endhighlight %}
+
+
+- Which of the following are true about ES6 classes?
+  - (A) By convention, the name of a class starts with a capital letter.
+  - (B) Class is a new feature in ES6.
+  - (C) A class can be used in the same way as an object.
+  - (D) Class can be used to style an HTML element.
+- Suppose we have a class named `Fruit`, how to create an object from it?
+  - (A) `const fruit = Fruit('🍑')`
+  - (B) `const fruit = Fruit 🥝`
+  - (C) `const fruit = new Fruit('🍇')`
+  - (D) `const fruit = Fruit.create('🍉')`
+- Which of the following are true about methods?
+  - (A) A method is defined in a class.
+  - (B) A method cannot have any parameters.
+  - (C) `this` can be used inside a method to refer to the current object.
+  - (D) A method must include a `return` statement.
+  - (E) A method can invoke another method defined in the same class with the `this` keyword. For example, `this.anotherMethod();`.
+- Why does the name of a class start with a capital letter?
+- Complete the "TODO" item in the code below:
+{% highlight jsx %}
+// TODO: define class Parrot here
+
+const brad = new Parrot('Brad');
+brad.say();
+{% endhighlight %}
+- In the code above, how can you simplify the definition of `Parrot` if you have a `Pet` class:
+{% highlight jsx %}
+class Pet {
+  constructor(name) {
+    this.name = name;
+  }
+  say() { console.log(this.name + ': Hello!'); }
+}
+{% endhighlight %}
+
+- Complete the "TODO" items in the code below so that it prints the following in the console:
+{% highlight html %}
+Brad: chirp, chirp!
+Bella: woooooof
+{% endhighlight %}
+
+{% highlight jsx %}
+class Pet {
+  constructor(name) {
+    this.name = name;
+  }
+  say() { 
+    // TODO: insert the content of say method here
+  }
+}
+
+// TODO: insert class Parrot here
+// TODO: insert class Dog here
+
+const brad = new Parrot('Brad');
+const bella = new dog1('Bella');
+brad.say();
+bella.say();
+{% endhighlight %}
+--- 
+
+## Class components
+
+### Homework
+- Which of the following are true about class components:
+  - (A) A class component is defined as an ES6 class.
+  - (B) Class components are stateful.
+  - (C) To use a class component inside another component, we need to create an instance using the `new` keyword.
+  - (D) Class components cannot have props.
+  - (E) The state of a class component can be accessed within a method using `this.state`.
+- What are the differences between class components and functional components?
+  - (A) Class components are stateless, whereas functional components are stateful.
+  - (B) The props of a class component can be accessed within a method using `this.props`; whereas the first parameter of a functional component is its props.
+  - (C) For a class component, props can also be retrieved as the first parameter of the render method, e.g. `render(props)`.
+  - (D) The state of a class component can change during its lifetime; whereas functional components don't have state.
+- Convert the `Roof` component to a class component which properly handles the `color` prop.
 
 --- 
 

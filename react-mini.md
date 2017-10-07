@@ -43,15 +43,52 @@ To break it down, here are a few verifiable goals to help you work along the cou
 2. create a simple component in two different ways and explain the differences
 3. create a component that takes user input and update the UI accordingly
 
+### Prerequisite
+- Be familiar with HTML and CSS
+- Understand JavaScript basic concepts such as variables, functions, if statements, objects etc.
+  - If you are not familiar with JavaScript, don't worry! I have hand-picked some videos plus exercises so that you can just learn enough to proceed with the course. Go ahead and register an account on [Khan Academy](https://www.khanacademy.org/) and finish the following videos and exercises (it's all free):
+    - [Variables](https://www.khanacademy.org/bigbingo_redirect?continue=https%3A%2F%2Fwww.khanacademy.org%2Fcomputing%2Fcomputer-programming%2Fprogramming%2Fvariables%2Fp%2Fintro-to-variables&conversion_ids=condensed_tutorial_title_click)
+    - [Bonus: Resizing with variables](https://www.khanacademy.org/bigbingo_redirect?continue=https%3A%2F%2Fwww.khanacademy.org%2Fcomputing%2Fcomputer-programming%2Fprogramming%2Fresizing-with-variables%2Fa%2Fusing-math-expressions-in-js&conversion_ids=condensed_tutorial_title_click)
+    - [Functions](https://www.khanacademy.org/bigbingo_redirect?continue=https%3A%2F%2Fwww.khanacademy.org%2Fcomputing%2Fcomputer-programming%2Fprogramming%2Ffunctions%2Fp%2Ffunctions&conversion_ids=condensed_tutorial_title_click)
+    - [Logic and if Statements](https://www.khanacademy.org/bigbingo_redirect?continue=https%3A%2F%2Fwww.khanacademy.org%2Fcomputing%2Fcomputer-programming%2Fprogramming%2Flogic-if-statements%2Fp%2Fif-statements&conversion_ids=condensed_tutorial_title_click)
+    - [Looping](https://www.khanacademy.org/bigbingo_redirect?continue=https%3A%2F%2Fwww.khanacademy.org%2Fcomputing%2Fcomputer-programming%2Fprogramming%2Flooping%2Fp%2Fintro-to-while-loops&conversion_ids=condensed_tutorial_title_click)
+    - [Arrays](https://www.khanacademy.org/bigbingo_redirect?continue=https%3A%2F%2Fwww.khanacademy.org%2Fcomputing%2Fcomputer-programming%2Fprogramming%2Farrays%2Fp%2Fintro-to-arrays&conversion_ids=condensed_tutorial_title_click)
+    - [Objects](https://www.khanacademy.org/bigbingo_redirect?continue=https%3A%2F%2Fwww.khanacademy.org%2Fcomputing%2Fcomputer-programming%2Fprogramming%2Fobjects%2Fp%2Fintro-to-objects&conversion_ids=condensed_tutorial_title_click)
+
+
 ### Course Outline
-- Day 1: What is React?
-- Day 2: Components and Props
-- Day 3: State
-- Day 4: Build the House component in JavaScript
-- Day 5: Learn a bit JavaScript
-- Day 6: Smiley faces in components - JSX and arrow functions
-- Day 7: Blue roof, red roof - Props in JS
-- Day 8: Open Sesame! - State in JS
+1. What is React?
+2. Components, Props and State
+3. Environment setup
+3. Build the House component in JavaScript
+    3. Exercises: Build two text houses
+4. ES6 Arrow functions
+    4. Exercises: Arrow functions
+4. JSX
+4. JavaScript Expressions
+5. More about JSX
+    5. Exercises: Expressions and JSX
+5. Style components with CSS and inline style
+    6. Exercises: Build the house
+7. styled-components
+    7. Exercises
+8. Vanilla CSS vs CSS-in-JS
+9. Blue roof, red roof - Props in JS
+9. React Developer Tool
+    9. Exercises: House with a number
+10. ES6 Class
+    10. Exercises: ES6 Class
+11. Class components
+    11. Exercises: Class components
+12. State
+12. Open Sesame! - setState
+    12. Exercises: Open window
+13. Sleepy cat - Props and state re-explained
+    13. Exercises
+14. Animation
+    14. Exercises
+15. Use JSON data
+16. Project: Dribbble Shot Card
 
 {% include profile.html %}
 
