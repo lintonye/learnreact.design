@@ -24,7 +24,7 @@ TLDR; React Sketch.app was built to solve a somewhat niche issue faced by large 
 If you want the juicy details and a peek into the future (and some cool videos and screenshots), read on!
 
 ## Why building it?
-Airbnb has a large team of designers and engineers. They want to ecourage designers to be using their design system and streamline the communication between designers and engineers.
+Airbnb has a large team of designers and engineers. They want to encourage designers to be using their design system and streamline the communication between designers and engineers.
 
 > We have a design system at Airbnb. The system has probably 200+ components. We have 100 designers and probably almost 1000 engineers. The current workflow is: the design system team creates the system. And we have a production design team who creates and updates the (Sketch) templates for all the design system files. Most of the time we'd love people to be using the system. That's one goal.
 
@@ -32,7 +32,7 @@ Airbnb has a large team of designers and engineers. They want to ecourage design
 
 However, the central artifacts in this workflow, the design system templates, tend to get out of sync with implementations very quickly, which make them not as useful as they should be.
 
-> (In order to create the design system templates, ) We played around smart symbols in Sketch. But essentially it's a big Sketch file stored on Dropbox. That has the tendancy of getting out of sync quite like how the code is. We have iOS, Android, Web and React Native -- all different codebases. It's very possible that the engineering implementations are out of sync with themselves. There is a huge possibility that the design system templates get out of sync with any of the implementations. There are so many chances of failure.
+> (In order to create the design system templates, ) We played around smart symbols in Sketch. But essentially it's a big Sketch file stored on Dropbox. That has the tendency of getting out of sync quite like how the code is. We have iOS, Android, Web and React Native -- all different codebases. It's very possible that the engineering implementations are out of sync with themselves. There is a huge possibility that the design system templates get out of sync with any of the implementations. There are so many chances of failure.
 
 > With Sketch files, there's not really much you can do. You have those human-updated things. It's kind of fine if you have 5 components. But if you have 500 components, that's a huge sketch file. The possibility of things being out of sync with so many moving parts is huge. 
 
@@ -40,14 +40,14 @@ They set out to solve the synchronization issue with code, and use code as the o
 
 > What we wanted to do with the system as a whole was to make 100% of the time everything is right everywhere. You can solve that pretty easily in code. You can have scripts that generate swift or java files to keep code in sync. (You can do) diffing, testing and all those things.
 
-> So we were like, what if we just render the sketch file? We just created a React wraper and render it (to sketch file).
+> So we were like, what if we just render the sketch file? We just created a React wrapper and render it (to sketch file).
 
 > That's the stuff you can play with in React Sketcha.app... You can write code to generate static sketch files, you can feed it with data, you can use react-primitive, real components etc. 
 
 ---
 
 ## Full vision
-Now here's the fun part. Although React Sketch.app solves a pratical issue very well, Jon only considers it as the step number one. When he started talking about his full vision, I could see the sparkles in his eyes.
+Now here's the fun part. Although React Sketch.app solves a practical issue very well, Jon only considers it as the step number one. When he started talking about his full vision, I could see the sparkles in his eyes.
 
 ### Render everywhere
 
@@ -68,7 +68,7 @@ So I guess the full picture is something like this:
 
 ![](/images/jon-gold/input-output.png)
 
-The implication is that when you use React components as the center piece connecting multiple mediums, as a designer, you'd have a lot of freedom in choosing whatever tool that fits in your workflow.
+The implication is that when you use React components as the centerpiece connecting multiple mediums, as a designer, you'd have a lot of freedom in choosing whatever tool that fits in your workflow.
 
 > It's about what we can do if we can render any components anywhere and come up with any way of rendering these things. The idea is that we can create the best input/output mechanisms for ourselves, and other designers can also create the best input/output mechanism for themselves.
 
@@ -97,7 +97,7 @@ React Sketch.app also makes it easier for tool developers to interact with Sketc
 
 > It's a flexible enough tool, it's like a foundational technology that people can use to make everything else.
 
-Archetype is one of these tools, where you can design a typography system in the brower and export to Sketch:
+Archetype is one of these tools, where you can design a typography system in the browser and export to Sketch:
 
 ![](/images/jon-gold/archetype.png)
 
@@ -114,7 +114,7 @@ The prospect of being able to bring our components anywhere we go sounds amazing
 
 [react-primitives](https://github.com/lelandrichardson/react-primitives) provides an abstraction that enables us to write cross-platform components. The idea is that if you use react-primitives as much as possible, your components will be future proof.
 
-> As a designer, when you design a design system, rather than thinking in terms of span, h1, you think in terms of view, text, image, that'd make everything so much easier. all of these cross-platform tools, with all the combination of inputs and outputs, they work a lot easier if you can use only one set of standardalized API for describing components instead of a different set of API for every single platform. 
+> As a designer, when you design a design system, rather than thinking in terms of span, h1, you think in terms of view, text, image, that'd make everything so much easier. all of these cross-platform tools, with all the combination of inputs and outputs, they work a lot easier if you can use only one set of standardized API for describing components instead of a different set of API for every single platform. 
 
 Of course, it's not without any challenges. For example, when it comes to migrating an existing codebase that was built for a specific platform, say, Web.
 
