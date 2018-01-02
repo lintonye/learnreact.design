@@ -1,6 +1,6 @@
 ---
 layout: post
-last-modified: '2018-01-08'
+last-modified: '2018-01-02'
 
 title: "React Sketch.app: backstory and full vision "
 subtitle: "A conversation with Jon Gold, the creator of React Sketch.app"
