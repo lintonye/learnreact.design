@@ -1,3 +1,0 @@
-# Comment the lines below to enable search engine indexing
-# User-agent: *
-# Disallow: /
