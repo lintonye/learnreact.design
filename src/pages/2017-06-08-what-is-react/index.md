@@ -1,7 +1,6 @@
 ---
 title: "What Is React?"
 subtitle: "React terms in plain English and doodles"
-path: '/2017/06/08/what-is-react'
 date: '2017-06-08'
 redirect_from:
   - /2017-06-08-what-is-react/

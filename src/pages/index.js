@@ -18,9 +18,9 @@ class BlogIndex extends React.Component {
           if (post.node.path !== '/404/') {
             const title = get(post, 'node.frontmatter.title') || post.node.path
             return (
-              <div key={post.node.frontmatter.path}>
+              <div key={post.node.fields.slug}>
                 <h3>
-                  <Link to={post.node.frontmatter.path} >
+                  <Link to={post.node.fields.slug} >
                     {post.node.frontmatter.title}
                   </Link>
                 </h3>
@@ -53,11 +53,13 @@ export const pageQuery = graphql`
         node {
           excerpt
           frontmatter {
-            path
             date(formatString: "DD MMMM, YYYY")
           }
           frontmatter {
             title
+          }
+          fields {
+            slug
           }
         }
       }
