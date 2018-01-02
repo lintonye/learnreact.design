@@ -58,7 +58,6 @@ To Jon, Sketch is just one of the many possible render targets. We should be abl
 > I don't know if you've seen the project we've done recently. It takes hand-drawn design and use AI to render it. 
 
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Converting sketches to code—our design technology team shares their first exploration into AI assisted design ✏️💻 &gt; <a href="https://t.co/qSshvcEtqu">https://t.co/qSshvcEtqu</a> <a href="https://t.co/hyEr42y6Ey">pic.twitter.com/hyEr42y6Ey</a></p>&mdash; Airbnb Design (@Airbnbdesign) <a href="https://twitter.com/Airbnbdesign/status/922970398169350144?ref_src=twsrc%5Etfw">October 24, 2017</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 > Another (example) is a [blog post](http://www.jon.gold/2017/08/dragging-rectangles/) I wrote about using markdown as a design tool. None of these actually render to Sketch. They could render to Sketch if you want them to.  
 
@@ -84,7 +83,6 @@ Once you are aware of all the possibilities, you'll be open to new world of tool
 To help designers design with components, Jon and his team is working on something pretty cool:
 
 <blockquote class="twitter-video" data-lang="en"><p lang="en" dir="ltr">FAQ: &quot;but why would you want to render React Native components to webviews or Sketch?&quot;<br>me: &quot;hold my kombucha&quot;<br><br>⚛️💎 <a href="https://t.co/D0yTtMjMVS">pic.twitter.com/D0yTtMjMVS</a></p>&mdash; ¸„.-•~¹°”ˆ˜¨ ĴÖŅ ĠÖĻĐ ¨˜ˆ”°¹~•-.„¸ (@jongold) <a href="https://twitter.com/jongold/status/866854672421634049?ref_src=twsrc%5Etfw">May 23, 2017</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 > It's a Sketch plugin you can browse your components from your React Native code base, you can drag them into Sketch and render them in Sketch because it just uses react-primitives that React Sketch.app knows how to render.  We've built a control panel similar to symbol's control panel where you can change the parameters, booleans that kind of thing for a component. 
 
