@@ -4,13 +4,196 @@
  <title>Backstage</title>
  <link href="http://learnreact.design/atom.xml" rel="self"/>
  <link href="http://learnreact.design"/>
- <updated>2017-10-07T07:23:01-07:00</updated>
+ <updated>2018-01-02T07:20:43-08:00</updated>
  <id>http://learnreact.design/atom.xml</id>
  <author>
    <name>Linton Ye</name>
    <uri>http://learnreact.design</uri>
  </author>
 
+ 
+ <entry>
+   <title>React Sketch.app: backstory and full vision </title>
+   <link href="http://learnreact.design/2018/01/02/jon-gold-on-react-sketchapp/"/>
+   <published>2018-01-02T00:00:00-08:00</published>
+   <updated>2018-01-02</updated>
+   <id>http://learnreact.design/2018/01/02/jon-gold-on-react-sketchapp</id>
+   <content type="html">&lt;p&gt;&lt;img src=&quot;/images/jon-gold/jon-gold.jpg&quot; style=&quot;border-radius: 500px&quot; /&gt;
+&lt;img src=&quot;/images/jon-gold/react-sketch-app.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I’ve always been curious about &lt;a href=&quot;https://github.com/airbnb/react-sketchapp&quot;&gt;React Sketch.app&lt;/a&gt; and how it might forever change the workflow of designers and developers. Recently I had the fortune to chat with Airbnb’s &lt;a href=&quot;https://twitter.com/jongold&quot;&gt;Jon Gold&lt;/a&gt;, the creator of React Sketch.app. This post is about the backstory and Jon’s full vision of the tool.&lt;/p&gt;
+
+&lt;p&gt;TLDR; React Sketch.app was built to solve a somewhat niche issue faced by large design teams at Airbnb’s scale. The full vision is however way beyond Sketch and has the potential to influence the entire design industry – it’s about designing with components and rendering components everywhere. To use it to its full potential, build your components based on react-primitives as much as possible.&lt;/p&gt;
+
+&lt;p&gt;If you want the juicy details and a peek into the future (and some cool videos and screenshots), read on!&lt;/p&gt;
+
+&lt;h2 id=&quot;why-building-it&quot;&gt;Why building it?&lt;/h2&gt;
+&lt;p&gt;Airbnb has a large team of designers and engineers. They want to encourage designers to be using their design system and streamline the communication between designers and engineers.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;We have a design system at Airbnb. The system has probably 200+ components. We have 100 designers and probably almost 1000 engineers. The current workflow is: the design system team creates the system. And we have a production design team who creates and updates the (Sketch) templates for all the design system files. Most of the time we’d love people to be using the system. That’s one goal.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Another goal is that we want absolute minimum of the time between design and engineering. There’s potentially back-and-forth of annotating specs, doing redlines and all that stuff. With any friction like that, times by the number of designers and engineers, the relationship becomes not scalable.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;However, the central artifacts in this workflow, the design system templates, tend to get out of sync with implementations very quickly, which make them not as useful as they should be.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;(In order to create the design system templates, ) We played around smart symbols in Sketch. But essentially it’s a big Sketch file stored on Dropbox. That has the tendency of getting out of sync quite like how the code is. We have iOS, Android, Web and React Native – all different codebases. It’s very possible that the engineering implementations are out of sync with themselves. There is a huge possibility that the design system templates get out of sync with any of the implementations. There are so many chances of failure.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;With Sketch files, there’s not really much you can do. You have those human-updated things. It’s kind of fine if you have 5 components. But if you have 500 components, that’s a huge sketch file. The possibility of things being out of sync with so many moving parts is huge.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;They set out to solve the synchronization issue with code, and use code as the only source of truth. Boom! React Sketch.app was born.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;What we wanted to do with the system as a whole was to make 100% of the time everything is right everywhere. You can solve that pretty easily in code. You can have scripts that generate swift or java files to keep code in sync. (You can do) diffing, testing and all those things.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;So we were like, what if we just render the sketch file? We just created a React wrapper and render it (to sketch file).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;That’s the stuff you can play with in React Sketcha.app… You can write code to generate static sketch files, you can feed it with data, you can use react-primitive, real components etc.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;full-vision&quot;&gt;Full vision&lt;/h2&gt;
+&lt;p&gt;Now here’s the fun part. Although React Sketch.app solves a practical issue very well, Jon only considers it as the step number one. When he started talking about his full vision, I could see the sparkles in his eyes.&lt;/p&gt;
+
+&lt;h3 id=&quot;render-everywhere&quot;&gt;Render everywhere&lt;/h3&gt;
+
+&lt;p&gt;To Jon, Sketch is just one of the many possible render targets. We should be able to render components anywhere.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;It’s not we just render things to Sketch. It’s like we can use cross-platform components and render them everywhere and build whatever input/output things we want for them.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I don’t know if you’ve seen the project we’ve done recently. It takes hand-drawn design and use AI to render it.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote class=&quot;twitter-tweet&quot; data-lang=&quot;en&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;Converting sketches to code—our design technology team shares their first exploration into AI assisted design ✏️💻 &amp;gt; &lt;a href=&quot;https://t.co/qSshvcEtqu&quot;&gt;https://t.co/qSshvcEtqu&lt;/a&gt; &lt;a href=&quot;https://t.co/hyEr42y6Ey&quot;&gt;pic.twitter.com/hyEr42y6Ey&lt;/a&gt;&lt;/p&gt;&amp;mdash; Airbnb Design (@Airbnbdesign) &lt;a href=&quot;https://twitter.com/Airbnbdesign/status/922970398169350144?ref_src=twsrc%5Etfw&quot;&gt;October 24, 2017&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Another (example) is a &lt;a href=&quot;http://www.jon.gold/2017/08/dragging-rectangles/&quot;&gt;blog post&lt;/a&gt; I wrote about using markdown as a design tool. None of these actually render to Sketch. They could render to Sketch if you want them to.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/jon-gold/literate-dls.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;So I guess the full picture is something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/jon-gold/input-output.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The implication is that when you use React components as the centerpiece connecting multiple mediums, as a designer, you’d have a lot of freedom in choosing whatever tool that fits in your workflow.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;It’s about what we can do if we can render any components anywhere and come up with any way of rendering these things. The idea is that we can create the best input/output mechanisms for ourselves, and other designers can also create the best input/output mechanism for themselves.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;design-with-components&quot;&gt;Design with components&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The thing I’m trying to push is about getting designers to think in terms of components. Once you can render any component, as a designer, you can create any tools you want… You can create a markdown tool that renders to Sketch, you can create an AI tool that renders to the browser, you can create an AI that renders to Sketch. This whole thing is a lot more than rendering React components to Sketch… If you can learn React, you can do whatever you want, you’ll be like superheros.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I know, not every designer has the time or skills to create tools for herself/himself. But what’s important is to have this mindset of components, which I think works hand in hand with &lt;a href=&quot;http://bradfrost.com/blog/post/atomic-web-design/&quot;&gt;Atomic Design&lt;/a&gt;. 
+Once you are aware of all the possibilities, you’ll be open to new world of tools that may boost your productivity.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;You want to be able to design with these components parametrically. You want to be able to say I have a component that has a boolean state and you can toggle it. You just want to see what it looks like. Maybe it has a filled background I can toggle with a boolean state. Or maybe it has a checkbox, or maybe it has an array of data, or an image…&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To help designers design with components, Jon and his team is working on something pretty cool:&lt;/p&gt;
+
+&lt;blockquote class=&quot;twitter-video&quot; data-lang=&quot;en&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;FAQ: &amp;quot;but why would you want to render React Native components to webviews or Sketch?&amp;quot;&lt;br /&gt;me: &amp;quot;hold my kombucha&amp;quot;&lt;br /&gt;&lt;br /&gt;⚛️💎 &lt;a href=&quot;https://t.co/D0yTtMjMVS&quot;&gt;pic.twitter.com/D0yTtMjMVS&lt;/a&gt;&lt;/p&gt;&amp;mdash; ¸„.-•~¹°”ˆ˜¨ ĴÖŅ ĠÖĻĐ ¨˜ˆ”°¹~•-.„¸ (@jongold) &lt;a href=&quot;https://twitter.com/jongold/status/866854672421634049?ref_src=twsrc%5Etfw&quot;&gt;May 23, 2017&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;It’s a Sketch plugin you can browse your components from your React Native code base, you can drag them into Sketch and render them in Sketch because it just uses react-primitives that React Sketch.app knows how to render.  We’ve built a control panel similar to symbol’s control panel where you can change the parameters, booleans that kind of thing for a component.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;That’s a game changer! Imagine that your design is always 100% consistent with what’s in production. Fonts, spacing, colors, drop shadows – all look exactly the same as in the app. When the production components change, your design gets automatically updated. No more taking new screenshots to design upon.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Sketch symbols are just not the real thing. This whole movement is about trying to get designers to design with the real things. Use the components parametrically as they are designed. So you are always designing with the real truth of things.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;a-foundation-for-building-new-design-tools&quot;&gt;A foundation for building new design tools&lt;/h3&gt;
+&lt;p&gt;React Sketch.app also makes it easier for tool developers to interact with Sketch. I’m not familiar with Sketch’s CocaScript-based API, but I suppose it’s not something super pleasant to work with. React Sketch.app takes care of a lot of heavylifting and you can just write React code to render things on the canvas. This makes it easier to build new tools/plugins for Sketch.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;It’s a flexible enough tool, it’s like a foundational technology that people can use to make everything else.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Archetype is one of these tools, where you can design a typography system in the browser and export to Sketch:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/jon-gold/archetype.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Another example is the component picker that Jon is working on:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The custom UI we built (the component picker) renders a webview (in Sketch) and then renders React inside that webview. Because we use react-primitives for React components, we can render the same component side-by-side, in the webview (as part of the UI) and in the Sketch canvas.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;You only need to write tiny bit of CocaScript (to build the UI). (I guess CocaScript is a pain in the butt?) React is the whole thing.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;big-requirement-for-this-full-vision-react-primitives&quot;&gt;Big requirement for this full vision: react-primitives&lt;/h2&gt;
+&lt;p&gt;The prospect of being able to bring our components anywhere we go sounds amazing. However, the very first requirement is that our components must be cross-platform.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/lelandrichardson/react-primitives&quot;&gt;react-primitives&lt;/a&gt; provides an abstraction that enables us to write cross-platform components. The idea is that if you use react-primitives as much as possible, your components will be future proof.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;As a designer, when you design a design system, rather than thinking in terms of span, h1, you think in terms of view, text, image, that’d make everything so much easier. all of these cross-platform tools, with all the combination of inputs and outputs, they work a lot easier if you can use only one set of standardized API for describing components instead of a different set of API for every single platform.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Of course, it’s not without any challenges. For example, when it comes to migrating an existing codebase that was built for a specific platform, say, Web.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The real hurdle is that when people have an app built with React-dom, h1, span etc. How do I convert this? I don’t have a good answer. We just haven’t got there yet. I have a feeling that you can probably write a transformer, some kind of codemod which converts for example h1 to Text, span to Text etc. But this seems like a really difficult problem. But we’ll get there eventually, because the Airbnb website is still a react-dom app.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;On the other hand,&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;If you have components that have been built with React Native in mind, at least for simple components, switching to react-primitives is easy.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;So what do you think about React Sketch.app and Jon’s full vision so far? To me, the most compelling aspect is being able to design with real components that are 100% in sync with implementation.&lt;/p&gt;
+
+&lt;p&gt;As a designer, if you can think, communicate and design with the same notion of &lt;em&gt;components&lt;/em&gt; as used by engineers, that’ll save a lot of back-and-forth time and even enable new ways of collaboration. As a result, the team will create better products and better experiences faster. Everyone wins!&lt;/p&gt;
+
+&lt;p&gt;Are you ready to design with components?&lt;/p&gt;
+
+&lt;h3 id=&quot;but-but-we-are-a-small-team-how-are-we-supposed-to-use-react-sketchapp&quot;&gt;But, but, we are a small team, how are we supposed to use React Sketch.app?&lt;/h3&gt;
+
+&lt;p&gt;People have been using React Sketch.app to define their design systems and create templates. But what’s beyond that? Is it useful at all for small teams? Have you tried to integrating React Sketch.app into your workflow? What are your findings so far?&lt;/p&gt;
+
+&lt;p&gt;Perhaps we can try to explore something together? &lt;a href=&quot;mailto:linton@jimulabs.com&quot;&gt;Email me&lt;/a&gt; and I’d love to exchange some thoughts with you!&lt;/p&gt;
+
+&lt;p&gt;&lt;a name=&quot;endofpost&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;!--
+One thing I found convenient is, instead of generating a full page, you can convert components into Sketch symbols and then use these symbols in your design. This way, when the component changes, those symbols will be updated and you still get to keep your custom design you&#39;ve done in the good old Sketch workflow. There&#39;s also some [interesting discussion](https://github.com/airbnb/react-sketchapp/issues/172
+) about generating a Sketch library from components.
+--&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Components, Props and State</title>
