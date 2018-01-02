@@ -1,11 +1,11 @@
 ---
 layout: post
-last-modified: '2017-06-23'
+last-modified: '2018-01-08'
 
 title: "React Sketch.app: backstory and full vision "
 subtitle: "A conversation with Jon Gold, the creator of React Sketch.app"
 
-excerpt: "React terms explained in plain English and doodles🌴🎄⚛"
+excerpt: "A conversation with Jon Gold, the creator of React Sketch.app"
 
 author:
   name: Linton Ye
