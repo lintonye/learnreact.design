@@ -30,8 +30,13 @@ exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
     } else {
       slug = `/${parsedFilePath.dir}/`;
     }
-    const datePath = moment(node.frontmatter.date).format('YYYY/MM/DD');
-    slug = datePath + slug;
+    if (
+      Object.prototype.hasOwnProperty.call(node, "frontmatter") &&
+      Object.prototype.hasOwnProperty.call(node.frontmatter, "date")
+    ) {
+      const datePath = moment(node.frontmatter.date).format('YYYY/MM/DD');
+      slug = datePath + slug;
+    }
     createNodeField({ node, name: "slug", value: slug });
   }
 };
