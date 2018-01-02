@@ -1,7 +1,5 @@
 ---
-layout: post
-last-modified: '2017-08-16'
-
+date: '2017-08-16'
 title: "Components, Props and State"
 subtitle: "React terms in plain English and doodles🌴🎄⚛"
 
@@ -51,11 +49,11 @@ If you remember what we've discussed in an [early post](/2017/06/08/what-is-reac
 
 The very first step is to break down the UI into various components. For example, we can break down our house this way:
 
-![house break down](/images/props-states/1-house-components.png)
+![house break down](./1-house-components.png)
 
 Now let's code it!
 
-{% highlight jsx %}
+```html
 House:
 
   <div>
@@ -64,7 +62,7 @@ House:
     <Window />
     <Door />
   </div>
-{% endhighlight %}
+```
 
 Wait a second, isn't that some sort of HTML? That's right! Some parts of React code look very similar to HTML, and that, by design, is to make it easy for web designers to understand and write the code. How nice is that!
 
@@ -76,15 +74,15 @@ To make things easier to understand, I'll use another simplification: instead of
 
 The roof is just a div with some plain text:
 
-{% highlight jsx %}
+```html
 Roof:
 
   <div>roof</div>
-{% endhighlight %}
+```
 
 Other components are the same -- they are just plain text inside a HTML div. Let's look at the complete, React-ish code for our house:
 
-{% highlight jsx %}
+```html
 House:
 
   <div>
@@ -94,41 +92,35 @@ House:
     <Door />
   </div>  
 
-
 Roof:
 
   <div>roof</div>
-
 
 Wall:
 
   <div>wall</div>
 
-
 Window:
 
   <div>window</div>
 
-
 Door:
 
   <div>door</div>
-
-{% endhighlight %}
+```
 
 This is not hard to understand, right? House is made up of Roof, Wall, Window and Door, which are all made up of plain text.
 
 In the end, React will generate HTML like this:
 
-{% highlight html %}
+```html
 <div>
   <div>roof</div>
   <div>wall</div>
   <div>windows</div>
   <div>door</div>
 </div>
-{% endhighlight %}
-
+```
 
 # Configure roof color with Props
 
@@ -140,21 +132,21 @@ So how does a prop look like in the code? In the House component, if we want our
 
 It looks very similiar to HTML tags where where you can add attributes:  
 
-{% highlight jsx %}
+```html
 House:
   <div>
     <Roof color="blue"/>
     ...
   </div>
-{% endhighlight %}
+```
 
 How is the roof actually built? Let’s write the code for it.
 
-{% highlight jsx %}
+```html
 Roof:
 
   <div>{props.color} roof</div>
-{% endhighlight %}
+```
 
 That's it? Right! There are a few things worth mentioning here:
 
@@ -172,12 +164,12 @@ The change of a state value is often caused by some external event. For a web ap
 
 Let's add the state to the door:
 
-{% highlight jsx %}
+```html
 Door:
   State:
     status   // "open" or "closed"
   <div>Door is {state.status}</div>
-{% endhighlight %}
+```
 
 Very similar to `props`, `state` is a container of all the state values in the component. Therefore, we can use `state.[something]` inside the template in the component definition.
 
@@ -207,7 +199,7 @@ The state is private to a component. Whether the door is open or closed is only 
 
 Therefore, the door's state is only visible inside the Door component. Within the Door component, we can only read or change its own state.
 
-{% highlight html %}
+```html
 House:
   <div>
     <Door />
@@ -226,7 +218,7 @@ Door:
   <!-- Man, this is WRONG too! -->
   if House.state.isForSale
     make the door openable by the realtor
-{% endhighlight %}
+```
 
 
 # Conclusion

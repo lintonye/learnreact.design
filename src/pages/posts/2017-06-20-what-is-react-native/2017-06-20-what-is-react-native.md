@@ -1,7 +1,5 @@
 ---
-layout: post
-last-modified: '2017-06-23'
-
+date: '2017-06-20'
 title: "What Is React Native?"
 subtitle: "React terms in plain English and doodles🌴🎄⚛"
 
@@ -42,7 +40,7 @@ I'll get you to come back here after reading this post. Hopefully you'll be able
 # Beyond The Web
 By now you probably have this picture in your head:
 
-![what is React Summary](/images/reactjs-react-native/1-react-summary.png)
+![what is React Summary](./1-react-summary.png)
 
 You see, React is a great tool for building user interfaces *on the web*. With React, you can build the UI by describing what you want instead of how to update the UI (reactive UI), organize the code in reusable components, and create performant UI without worrying about DOM the slowpoke (virtual DOM). More and more web developers choose React because it allows them to focus on a bigger picture instead of low-level details. We call this way of building the UI *React paradigm*. A paradigm is basically the way how you think about a problem and how you describe it and its solution[^2].
 
@@ -54,7 +52,7 @@ Similarities aside, mobile platforms are different from the Web, and they are di
 
 This is like working with exotic studios where the staff speak various different languages. You'd have to learn all the new languages to communicate with those models. It doesn't sound easy, does it?
 
-![studio "iOS" and studio "Android"](/images/reactjs-react-native/2-ios-android.png)
+![studio "iOS" and studio "Android"](./2-ios-android.png)
 
 Therefore, if you wanted to build native apps for both iOS and Android, you had to create two completely separate codebases. The same business logic had to be implemented twice. It was difficult and expensive to create an app and even more so to maintain it in the long run.
 
@@ -67,21 +65,21 @@ For web apps, React takes care of enabling the React paradigm (managing reactive
 
 However, for mobile apps, things get challenging when it's necessary to manage various tree models on different platforms. If we keep adding more responsibilities on React's shoulders, it'll start driving our poor superhero crazy [^7].
 
-![talk to many tree folks and crazy](/images/reactjs-react-native/2.5-crazy.png)
+![talk to many tree folks and crazy](./2.5-crazy.png)
 
 To deal with this, the creators of React split the original React into two parts. The first part is the new React which focuses on enabling the React paradigm. The second part is called ReactDOM, whose only job is to interact with DOM in the browser. Because ReactDOM updates DOM which determines what is *rendered* on the browser, we say ReactDOM is a *renderer*.
 
 Back to our story, imagine that our superhero takes off his cloak[^8] and sprinkles some magic dust.
 
-![cloak and magical dust](/images/reactjs-react-native/3-cloak-and-dust.png)
+![cloak and magical dust](./3-cloak-and-dust.png)
 
 His cloak goes alive and becomes his helper. Freed from the burden of dealing with Domo, React can now concentrate on what he does the best.
 
-![ReactDOM talks to Domo](/images/reactjs-react-native/4-reactdom-domo.png)
+![ReactDOM talks to Domo](./4-reactdom-domo.png)
 
 This separation of roles is a powerful idea. It makes it easy to write new *renderers* that adapt to new platforms while maintaining a shared core. Powered by the renderers for iOS and Android, you can now build apps for both platforms in **a single language and the same React paradigm**.
 
-![renderers to talk to Web, iOS and Android](/images/reactjs-react-native/5-renderers.png)
+![renderers to talk to Web, iOS and Android](./5-renderers.png)
 *React focuses on his thing. Renderers do the talk.*
 
 ## A Complete Platform
@@ -89,7 +87,7 @@ The official definition of React is: A JavaScript library for building user inte
 
 In fact, **you can't build a full application with just React alone**. You'd need for example CSS for styling, webpack for preprocessing and bundling the code, Firebase for persisting the data and many other things.
 
-![other folks at Web Browser](/images/reactjs-react-native/6-other-folks-at-web.png)
+![other folks at Web Browser](./6-other-folks-at-web.png)
 *The studio "Web Browser" is actually a lot busier than what you've seen.*
 
 This is fine in the context of web development because as a JavaScript library, React fits naturally with the other parts which are either JavaScript libraries too or are designed to work well with JavaScript libraries. After all, JavaScript is the language of the Web.
@@ -109,7 +107,7 @@ Compared to React on the Web, React Native includes a lot more stuff:
 
 We say React Native is a complete platform itself because **it includes all you need to build a full app**. In comparison, the original React is only in charge of web UI and you'll need to include other parts yourself to create a web app[^3].
 
-![other superheros](/images/reactjs-react-native/7-summon.png)
+![other superheros](./7-summon.png)
 *The formation of React Native*
 
 ## Native UI
@@ -123,14 +121,14 @@ For now, I want you to just remember that native UI is one of the great things t
 
 So here you go, React Native is a complete platform that allows you to build truly native apps following React paradigm, in JavaScript.
 
-![React Native key points summary](/images/reactjs-react-native/8-react-native-summary.png)
+![React Native key points summary](./8-react-native-summary.png)
 
 # React Sketch.app, ReactVR, React XYZ...
 Recently Airbnb recently released a nifty tool called [React Sketch.app](https://airbnb.design/painting-with-code/) which converts React code into image layers in Sketch. Can you guess how it works?
 
 Right! It's essentially React Native with a renderer who talks to the tree model in Sketch!
 
-![React Native team and Sketch Renderer](/images/reactjs-react-native/9-sketch.png)
+![React Native team and Sketch Renderer](./9-sketch.png)
 
 Because React Sketch.app is based on React Native, which is a full package, we can do fancy things like fetching data from a real API and rendering it in Sketch.
 
@@ -144,7 +142,7 @@ So much talking so far! Do you want to try something on your phone?
 
 I'm excited too! Grab your phone and follow me!
 
-1. On your phone, download the Expo app. You can either download from here: [iOS](https://itunes.apple.com/app/apple-store/id982107779?pt=17102800&ct=www&mt=8), [Android](https://play.google.com/store/apps/details?id=host.exp.exponent), or search "Expo" in the App Store. The app's icon looks like <img src="/images/reactjs-react-native/expo-ios.jpg"> (or <img src="/images/reactjs-react-native/expo-android.png"> on Android).
+1. On your phone, download the Expo app. You can either download from here: [iOS](https://itunes.apple.com/app/apple-store/id982107779?pt=17102800&ct=www&mt=8), [Android](https://play.google.com/store/apps/details?id=host.exp.exponent), or search "Expo" in the App Store. The app's icon looks like <img src="./expo-ios.jpg"> (or <img src="./expo-android.png"> on Android).
 2. On your computer, open this page: [https://snack.expo.io/](https://snack.expo.io/)
 3. On your phone, launch the Expo app and tap "Scan QR Code"
 4. Scan the QR code displayed on your computer. You should see a green "Device connected" message if everything works fine.
@@ -157,7 +155,7 @@ I'll explain this environment in detail in the future. For now, just remember th
 
 If you compare the [React Native version](https://gist.github.com/lintonye/5cb3c11349591bf475b91573682fe688) of the code with the [React (Web) version](https://codepen.io/focuser/pen/gROrXx), you'll notice that they look very similar. They both go like this:
 
-{% highlight jsx %}
+```jsx
 const Hat = ...
 
 const Thinker = ...
@@ -174,7 +172,7 @@ const ThinkerWithHat = ({hat}) => (
 const HatSwitcher = ...
 
 ...
-{% endhighlight %}
+```
 
 "Learn once, write anywhere"! Remember?
 

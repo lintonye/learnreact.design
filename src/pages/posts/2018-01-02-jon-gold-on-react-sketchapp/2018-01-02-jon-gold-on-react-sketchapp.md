@@ -1,6 +1,5 @@
 ---
-layout: post
-last-modified: '2018-01-02'
+date: '2018-01-02'
 
 title: "React Sketch.app: backstory and full vision "
 subtitle: "A conversation with Jon Gold, the creator of React Sketch.app"
@@ -14,8 +13,9 @@ author:
   image: linton.jpg
 ---
 
-<img src="/images/jon-gold/jon-gold.jpg" style="border-radius: 500px">
-![](/images/jon-gold/react-sketch-app.png)
+<img src="./jon-gold.jpg" style="border-radius: 500px">
+
+![](./react-sketch-app.png)
 
 I've always been curious about [React Sketch.app](https://github.com/airbnb/react-sketchapp) and how it might forever change the workflow of designers and developers. Recently I had the fortune to chat with Airbnb's [Jon Gold](https://twitter.com/jongold), the creator of React Sketch.app. This post is about the backstory and Jon's full vision of the tool.
 
@@ -62,11 +62,11 @@ To Jon, Sketch is just one of the many possible render targets. We should be abl
 
 > Another (example) is a [blog post](http://www.jon.gold/2017/08/dragging-rectangles/) I wrote about using markdown as a design tool. None of these actually render to Sketch. They could render to Sketch if you want them to.  
 
-![](/images/jon-gold/literate-dls.png)
+![](./literate-dls.png)
 
 So I guess the full picture is something like this: 
 
-![](/images/jon-gold/input-output.png)
+![](./input-output.png)
 
 The implication is that when you use React components as the centerpiece connecting multiple mediums, as a designer, you'd have a lot of freedom in choosing whatever tool that fits in your workflow.
 
@@ -99,7 +99,7 @@ React Sketch.app also makes it easier for tool developers to interact with Sketc
 
 Archetype is one of these tools, where you can design a typography system in the browser and export to Sketch:
 
-![](/images/jon-gold/archetype.png)
+![](./archetype.png)
 
 Another example is the component picker that Jon is working on:
 

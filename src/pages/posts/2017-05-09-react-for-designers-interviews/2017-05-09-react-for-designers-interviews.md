@@ -1,6 +1,5 @@
 ---
-layout: post
-last-modified: '2017-05-09'
+date: '2017-05-09'
 
 title: "React Course for Designers, Anyone?"
 subtitle: "A report of 10+ interviews with designers"
@@ -25,7 +24,7 @@ As a developer who's benefited from learning design, I'm convinced that designer
 
 Wait a second. Am I just thinking in the vacuum though? I decided to [ask Designer News](https://www.designernews.co/stories/82837-react-native-course-for-designers-anyone). The result? I was totally blown away! The post has been the top story for more than a day and stayed on the front page for more than a week. Shortly after the post, 13 designers booked a call with me and wished to offer help. Wow! 13 real people were willing to spare 30 minutes out of their busy schedules to talk to a complete stranger -- me. There must be something that resonates with them!
 
-![My Interview Calendar](/images/designer-interviews/interview-calendar.png)
+![My Interview Calendar](./interview-calendar.png)
 <br>
 *[ My calendar got quickly filled up by meeting requests ]*
 
