@@ -1,6 +1,6 @@
 import React from 'react';
 import BlogIndex from '../components/BlogIndex';
 
-const Home = (props) => <BlogIndex {...props} />;
+const Blog = (props) => <BlogIndex {...props} />;
 
-export default Home;
+export default Blog;
