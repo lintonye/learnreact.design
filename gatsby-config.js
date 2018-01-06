@@ -44,5 +44,6 @@ module.exports = {
     `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-twitter`,
+    `gatsby-plugin-styled-components`,
   ],
 }

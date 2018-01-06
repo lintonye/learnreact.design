@@ -1,8 +1,17 @@
 import React from 'react'
 import Link from 'gatsby-link'
+import styled from 'styled-components';
+
+const HeaderDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  div {
+    padding: 10px;
+  }
+`;
 
 const Header = () => (
-  <div>
+  <HeaderDiv>
     <div>
       <Link to='/'>Home</Link>
     </div>
@@ -12,7 +21,7 @@ const Header = () => (
     <div>
       <Link to='/about'>About</Link>
     </div>
-  </div>
+  </HeaderDiv>
 )
 
 class Template extends React.Component {
