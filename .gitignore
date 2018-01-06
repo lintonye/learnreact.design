@@ -1,5 +1,6 @@
 node_modules
 .cache
+public/render-page.js.map
 
 # Ignore OSX files like:
 .DS_Store
