@@ -1,16 +1,13 @@
 import React from 'react'
 import Link from 'gatsby-link'
 import get from 'lodash/get'
-import Helmet from 'react-helmet'
 
-class BlogIndex extends React.Component {
+class PostList extends React.Component {
   render() {
-    const siteTitle = get(this, 'props.data.site.siteMetadata.title')
-    const posts = get(this, 'props.data.allMarkdownRemark.edges')
+    const { posts } = this.props;
 
     return (
       <div>
-        <Helmet title={get(this, 'props.data.site.siteMetadata.title')} />
         {posts.map(post => {
           if (post.node.path !== '/404/') {
             const title = get(post, 'node.frontmatter.title') || post.node.path
@@ -32,8 +29,8 @@ class BlogIndex extends React.Component {
   }
 }
 
-BlogIndex.propTypes = {
+PostList.propTypes = {
   route: React.PropTypes.object,
 }
 
-export default BlogIndex
+export default PostList
