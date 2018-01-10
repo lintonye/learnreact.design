@@ -20,11 +20,41 @@ _This series of posts will be the very first part of the ["React Essentials for 
 - _[What is React Native?](/2017/06/20/what-is-react-native)_
 - _React Native vs. Hybrids (coming soon)_
 - _Components, Props and State (this post)_
+- _Props and State Re-explained (this post)_
 
 ---
 
+In the [last post](TODO), we've covered components, props and state. 
+
+The differences between props and state are fairly apparent, and it seems straightforward to determine when to use props and when to use state. For example, it's natural to see that the color of the roof is a prop since it's the intrinsic configuration of the Roof. On the other hand, the status of the door is an obvious candidate for state because it's easy to see the door being opened or closed after it is built.
+
+In this post, however, let's try to challenge this type of thinking! Seriously?!? Yes, you'll see that many things can be either prop or state. There is no set rules. I'll show you a more useful, practical way of thinking about props and state.
+
+# Learning Goals
+After reading this post, I'll get you to come back here. Hopefully you'll be able to answer these questions easily:
+
+- Again, when to use props and when to use state?
+- What are the primary use cases for props? What about state?
+- What does "elevating the state" mean? In what situation we need to elevate the state?
+
+# New Guest
+Alright, we've got a new guest around our house. Try clicking the door below!
+
+TODO: embedded code
+
+Just as any cat would do, she stands up once the door is open, and fall back asleep as soon as the door is closed. 
+
+# Implementing the Cat
+
+Now let me ask you, how to implement this behavior? Let's give it a try!
+
+Our "code" looks like this. Take a moment to read it through below.
+
+{% highlight jsx %}
 House:
   <div>
+    <Roof />
+    <Wall />
     <Window />
     <Door />
     <Cat />
@@ -38,26 +68,48 @@ Door:
       change door.state.status to "closed"
     otherwise
       change door.state.status to "open"
+{% endhighlight %}
 
+There is an additional Cat tag in the House component. What does the Cat component look like? Let's define it.
+
+The cat can be either sleeping or awake. This seems fairly similiar to the status of the door. Perhaps we can use state to represent the status of the cat as well:
+
+{% highlight jsx %}
 Cat:
   State: status // "sleeping" or "awake"
   <div>{state.status} cat</div>
+{% endhighlight}
 
-Attempt 1:
+With this definition of the Cat, the implementation of its aforementioned behavior is all about synccing up the status of the door and that of the cat. You know, when the status of the door is "open", we want the status of the cat to be "awake", otherwise, the status of the cat should be "sleeping". 
 
+Easy peasy? Let's see...
+
+## Attempt 1
+
+Since we already have code that toggles the door status according to the current status, why don't we change the cat status over there as well?
+
+{% highlight jsx %}
 Door:
   State: status // "open" or "closed"
   <div>{state.status} door</div>
   when the door is clicked
     if state.status is "open"
       change state.status to "closed"
-      change cat.state.status to "sleeping"     ---> WRONG
+      change cat.state.status to "sleeping"     //---> WRONG
     otherwise
       change state.status to "open"
-      change cat.state.status to "awake"        ---> WRONG
+      change cat.state.status to "awake"        //---> WRONG
+{% endhighlight %}
 
-Attempt 2:
+Unfortunately, this won't work! Remember that state is a component's private data that's only accessible from within the component itself? Nobody else, whether it's a parent or sibling, could access a component's state. 
 
+Here, we are trying to change the status of the cat from within the Door component. It will miserably fail (after converted to real JavaScript code of course).
+
+## Attempt 2:
+
+Hmm, how about changing the cat status from within the Cat component? That should work, right?
+
+{% highlight jsx %}
 Cat:
   State: status // "sleeping" or "awake"
   <div>{state.status} cat</div>
@@ -66,8 +118,87 @@ Cat:
       change cat.state.status to "sleeping"
     otherwise
       change cat.state.status to "awake"
+{% endhighlight %}
 
-Attempt 3:
+Yes, it's definitely fine to change cat status from within the Cat component. But we would need to read the status of the door to determine what the cat status should be. The status of the door is the state of Door component, and it's therefore not accessible from within the Cat component!
+
+## The Solution
+Errr! That's really lame. To keep the door status and the cat status in sync, we definitely need to access both of them somewhere. But it appears that the data is hidden one way or another, by design! How to solve this dilemma?
+
+The solution requires us to reflex (TODO) our understanding of the use cases of state and props. 
+
+If we look at the House component:
+
+{% highlight jsx %}
+House:
+  <div>
+    ...
+    <Door />
+    <Cat />
+  </div>
+{% endhighlight %}
+
+Here, the Door and Cat are side by side. Perhaps that's the place where we can easily sync them up?
+
+However, we are now inside the House component. For the same reason as our last attempts, it's impossible to either read the state of the Door or change the state of Cat here. 
+
+But what if we use props instead of state? 
+
+{% highlight jsx %}
+House:
+  <div>
+    ...
+    <Door status="open" />
+    <Cat status="awake" />
+  </div>
+{% endhighlight %}
+
+When the door is closed, it'd be:
+{% highlight jsx %}
+House:
+  <div>
+    ...
+    <Door status="closed" />
+    <Cat status="sleeping" />
+  </div>
+{% endhighlight %}
+
+Of course the status of the door can't be a fixed value. It changes from time to time. Let's denote it with "doorStatus".
+
+{% highlight jsx %}
+House:
+  <div>
+    ...
+    <Door status={doorStatus} />
+    <Cat status={if doorStatus is 'open' then 'awake' otherwise 'sleeping'} />
+  </div>
+{% endhighlight %}
+
+Didn't that solve the synchronization problem? By the way, what's this changing value "doorStatus"? What's the thing of a component that could change? It's state, right?
+
+{% highlight jsx %}
+House:
+  State: doorStatus // 'open' or 'closed'
+  <div>
+    ...
+    <Door status={state.doorStatus} />
+    <Cat status={if state.doorStatus is 'open' then 'awake' otherwise 'sleeping'} />
+  </div>
+{% endhighlight %}
+
+Vovla! (TODO) This House component looks fairly well-defined and the statuses of the door and the cat are now perfectly syncced up.
+
+We also need to change the definition of Door and Cat a bit to use props instead of state:
+
+{% highlight jsx %}
+Door:
+  <div>{props.status} door</div>
+Cat:
+  <div>{props.status} cat</div>  
+{% endhighlight %}
+
+TODO loss of interactivity
+
 
 key question: how to keep the status in sync --- want to keep the status of door and cat in sync. But can't do this inside either door or cat, because the states are inaccessible from another component.
 
