@@ -40,7 +40,8 @@ After reading this post, I'll get you to come back here. Hopefully you'll be abl
 # New Guest
 Alright, we've got a new guest around our house. Try clicking the door below!
 
-TODO: embedded code
+<p data-height="452" data-theme-id="light" data-slug-hash="VydPEJ" data-default-tab="result" data-user="focuser" data-embed-version="2" data-pen-title="React House With Cat" class="codepen">See the Pen <a href="https://codepen.io/focuser/pen/VydPEJ/">React House With Cat</a> by focuser (<a href="https://codepen.io/focuser">@focuser</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
 Just as any cat would do, she stands up once the door is open, and fall back asleep as soon as the door is closed. 
 
@@ -72,7 +73,7 @@ Door:
 
 There is an additional Cat tag in the House component. What does the Cat component look like? Let's define it.
 
-The cat can be either sleeping or awake. This seems fairly similiar to the status of the door. Perhaps we can use state to represent the status of the cat as well:
+The cat can be either sleeping or awake. This seems fairly similar to the status of the door. Perhaps we can use state to represent the status of the cat as well:
 
 {% highlight jsx %}
 Cat:
@@ -80,7 +81,7 @@ Cat:
   <div>{state.status} cat</div>
 {% endhighlight %}
 
-With this definition of the Cat, the implementation of its aforementioned behavior is all about synccing up the status of the door and that of the cat. You know, when the status of the door is "open", we want the status of the cat to be "awake", otherwise, the status of the cat should be "sleeping". 
+With this definition of the Cat, the implementation of its aforementioned behavior is all about syncing up the status of the door and that of the cat. You know, when the status of the door is "open", we want the status of the cat to be "awake", otherwise, the status of the cat should be "sleeping". 
 
 Easy peasy? Let's see...
 
@@ -187,7 +188,7 @@ House:
   </div>
 {% endhighlight %}
 
-Vovla! (TODO) This House component looks fairly well-defined and the statuses of the door and the cat are now perfectly syncced up.
+Bravo! This House component looks fairly well-defined and the statuses of the door and the cat are now perfectly synced up.
 
 We also need to change the definition of Door and Cat a bit to use props instead of state:
 
@@ -285,24 +286,55 @@ Cat:
 # Props vs State, Again
 Now let’s revisit a couple of questions, what are the differences between props and states? When should we use state, when should we use props?
 
+## When to use state, when to use props?
 If you remember, I said props are intrinsic properties of a component that don’t change, and state is something that can change after a component is built. This helps when you first learn about the concepts. 
 
 However, the example we’ve just built makes it confusing. Whether a door is open or whether a cat is sleeping definitely seem to be good candidates for state, but we use props to represent them. How so?
-It turns out that there’s a lot of flexibility for choosing between state and props. Depending on how you see it, you can find different ways to model your components. 
 
-For example you can say the state of the door is that it’s open, or the state of the house is that its door is open.
-Here’s a more useful way of thinking about the question.
+It turns out that there’s a lot of flexibility for choosing between state and props. Depending on how you see it, you can find different ways to model your components. For example you can say the state of the door is that it’s open, or the state of the house is that its door is open.
+
+## A more useful way to understand
+Confused? Here’s a more useful way of thinking about the question:
+
+- State: The UI needs to change => there should be a state somewhere.
+- Props: Use them to pass data & pass control
 
 If there is something changed in the UI when the app is running, there’s gotta be a state. If you see the door open and close when you click on it. There’s gotta be a state somewhere.
 
-However, the state does not necessarily need to live right on the updated component. It might be somewhere upstream. It all depends on where and how we need to use the information.
-For example, we decided to elevate the status of the door from Door component to House component, because we need to use it in the House component.
+However, the state does not necessarily need to live right on the updated component. It might be somewhere upstream. It all depends on where and how we need to use the information. For example, we decided to elevate the status of the door from Door component to House component, because we need to use it in the House component.
 
 On the other hand, props are just something that can be used to pass data downwards in the hierarchy. Just like what we did to pass the value of state isDoorOpen down to the Door component. 
 
 Props can also be used to pass down control. For example, we passed the event handler from House component to Door component.
 
+## But do the props change value in this case?
+No, they never will. I know, the door opens and closes, and the cat sleeps and wakes up. Since we now use props to represent these, it's really tempting to think that props behave just like state -- their values change, right?
+
+I find it useful to compare this with the animation created by flipping a book of drawings.
+
+TODO an image of a flip book
+
+This is just an illusion. The fact is that every time when the state of the house changes, a brand new door and a brand new cat is created from scratch. They are assigned new statuses. But this recreation happens really quickly, which gives us an illusion that an existing door opens or an existing cat wakes up.
+
+Throughout the lifespan of the cat, she stays asleep. When the door opens, the old, sleeping cat is removed and a new, awake cat is created. Throughout her lifespan, she stays alert. 
+
 # Conclusion
+
+Alright, we've studied props and state again with a more complex example. In this example, we'd have to keep the statuses of the door and the cat in sync, while the door should still open or close when clicked.
+
+Because state is private, we decided to *elevate* the door status from the state of Door component to the state of House component. This way, we can use this data in House component to set the statuses of the door and the cat. We pass down this data to Door and Cat as props so that they can display correct images according to the door status.
+
+TODO
+
+We can also change the door status, now state of House, from with House component, while
+
+. Like passing remote control of a TV, We pass down the event handler to Door component as a prop.
+
+Sometimes it may seem arbitrary
+
+- State: The UI needs to change => there should be a state somewhere.
+- Props: Use them to pass data & pass control
+
 
 ---
 
