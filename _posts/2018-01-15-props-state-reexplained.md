@@ -200,6 +200,8 @@ Cat:
 
 As you’ve seen, because we want to use the state of a component from its parent, in this case, using Door’s state from within House in order to set the status of the cat, we can represent the same data as the state of the parent and pass the data down to the child as props. This is often called **_elevating the state_**. We are moving the state up in the hierarchy.
 
+![remote control](/images/props-state-reexplained/elevate-state.gif)
+
 ### Changing House State
 Now that the statuses of the door and the cat are both linked to the state of the house. If we want to open the door or wake up the cat, we'd need to change the state of House. 
 
@@ -259,7 +261,7 @@ This is much like passing the remote control of your TV to someone else. That pe
 
 What's going to be performed depends on what kind of remote control is passed into Door. It could control a TV, an air conditioner or a HiFi audio system in House. In the Door component, all that person does is to press the button.
 
-TODO: a picture of remote control
+![remote control](/images/props-state-reexplained/remote-control.gif)
 
 That's all we need! Here's the full "code":
 
@@ -313,7 +315,7 @@ No, they never do and never will. I know, the door opens and closes, and the cat
 
 This is just an illusion, which I find fairly comparable to flipbook animations.
 
-TODO an image of a flip book
+![flipbook](/images/props-state-reexplained/flipbook.jpg)
 
 Every time when the state of the house changes, the old cat is removed and a brand new cat with new status is created from scratch. But this process happens really quickly, which gives us an illusion that there is only one cat that falls asleep and wakes up.
 
