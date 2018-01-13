@@ -20,6 +20,7 @@ _This series of posts will be the very first part of the ["React Essentials for 
 - _[What is React Native?](/2017/06/20/what-is-react-native)_
 - _React Native vs. Hybrids (coming soon)_
 - _Components, Props and State (this post)_
+- _[Props and State Re-explained](/2018/01/15/props-state-reexplained/)_
 
 ---
 
