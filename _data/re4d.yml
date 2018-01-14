@@ -32,23 +32,23 @@
       link: https://youtu.be/h1Hr_EslNfA
       length: '7:31'
     - title: Smiley faces in components - JSX and arrow functions
-      status: order
+      status: in-progress
       thumbnail: /images/courses/re4d/3.5-jsx.png
       length: '6:04'
     - title: 'Blue roof, red roof - Props in JS'
-      status: order
+      status: in-progress
       thumbnail: /images/courses/re4d/3.6-props.jpg
       length: '8:41'
     - title: 'ES6 Class'
-      status: order
+      status: in-progress
       thumbnail: /images/courses/re4d/es6.jpg
       length: '9:33'
     - title: 'Class components'
-      status: order
+      status: in-progress
       thumbnail: /images/courses/re4d/3.7-class-components.jpg
       length: '7:59'
     - title: 'Open Sesame! - setState'
-      status: order
+      status: in-progress
       thumbnail: /images/courses/re4d/3.8-setstate.jpg
       length: '8:43'
     - title: Pass the state down - one-way data flow

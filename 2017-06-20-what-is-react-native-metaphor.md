@@ -19,7 +19,8 @@ _This series of posts will be the very first part of the ["React for Designers" 
 - _[What is React?](/2017/06/08/what-is-react/)_
 - _What is React Native? (this post)_
 - _React Native vs. Hybrids (coming soon)_
-- _Components, props, state etc. (coming soon)_
+- _[Components, Props and State](/2017/08/16/components-props-state/)_
+- _[Props and State Re-explained](/2018/01/15/props-state-reexplained/)_
 
 ---
 
