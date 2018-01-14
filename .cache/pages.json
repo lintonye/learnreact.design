@@ -1,0 +1,43 @@
+[
+    {
+        "componentChunkName": "component---cache-dev-404-page-js",
+        "layout": null,
+        "jsonName": "dev-404-page.json",
+        "path": "/dev-404-page/"
+    },
+    {
+        "componentChunkName": "component---src-templates-blog-post-js",
+        "layout": "layout---index",
+        "layoutComponentChunkName": "component---src-layouts-index-js",
+        "jsonName": "2017-05-09-react-course-for-designers-anyone.json",
+        "path": "/2017/05/09/react-course-for-designers-anyone"
+    },
+    {
+        "componentChunkName": "component---src-templates-blog-post-js",
+        "layout": "layout---index",
+        "layoutComponentChunkName": "component---src-layouts-index-js",
+        "jsonName": "2017-06-08-what-is-react.json",
+        "path": "/2017/06/08/what-is-react"
+    },
+    {
+        "componentChunkName": "component---src-templates-blog-post-js",
+        "layout": "layout---index",
+        "layoutComponentChunkName": "component---src-layouts-index-js",
+        "jsonName": "2017-06-20-what-is-react-native.json",
+        "path": "/2017/06/20/what-is-react-native"
+    },
+    {
+        "componentChunkName": "component---src-templates-blog-post-js",
+        "layout": "layout---index",
+        "layoutComponentChunkName": "component---src-layouts-index-js",
+        "jsonName": "2017-08-16-components-props-and-state.json",
+        "path": "/2017/08/16/components-props-and-state"
+    },
+    {
+        "componentChunkName": "component---src-templates-blog-post-js",
+        "layout": "layout---index",
+        "layoutComponentChunkName": "component---src-layouts-index-js",
+        "jsonName": "2018-01-02-react-sketch-app-backstory-and-full-vision.json",
+        "path": "/2018/01/02/react-sketch-app-backstory-and-full-vision"
+    }
+]

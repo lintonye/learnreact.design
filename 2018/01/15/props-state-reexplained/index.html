@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Props and State Re-explained &mdash; Backstage</title>
+  <!--[if lt IE 9]><script src='https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js'></script><![endif]-->
+  
+  <link rel="stylesheet" href="/assets/app.css">
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script src="/assets/app.js"></script>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-100434258-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <link rel="shortcut icon" href="/favicon.ico?v2" type="image/x-icon" />
+  <link rel="alternate" type="application/atom+xml" title="Backstage" href="/atom.xml" />
+  <meta name="title" content="Props and State Re-explained ">
+  <link rel="canonical" href="http://learnreact.design/2018/01/15/props-state-reexplained/">
+  
+  
+  <meta property="og:title" content="Props and State Re-explained"/>
+  <meta property="og:url" content="http://learnreact.design/2018/01/15/props-state-reexplained/"/>
+  
+  
+  <meta property="og:description" content="React terms explained in plain English and doodles🌴🎄⚛"/>
+  <meta name="description" content="React terms explained in plain English and doodles🌴🎄⚛"/>
+  
+  <meta property="og:site_name" content="Backstage">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav>
+      <a class="brand" href="/">
+        <img src="/images/logo.png" alt="Inc">
+      </a>
+      <!--
+      <a href="/react-mini">FREE Course</a>
+      -->
+      <a href="/blog">Blog</a>
+      <a href="/about">About</a>
+    </nav>
+  </header>
+
+  
+
+
+<article >
+
+  <div class="container">
+    <header>
+      <div class="meta">
+        By <address><a rel="author" href="" title="Linton Ye" target="_blank">Linton Ye</a></address> &mdash;
+        <time pubdate datetime="2018-15-January" title="Jan 15, 2018">Jan 15, 2018</time> &mdash;
+        
+24 min read
+
+      </div>
+      <h1 class="title">Props and State Re-explained</h1>
+      <h2 class="subtitle">React terms in plain English and doodles🌴🎄⚛</h2>
+    </header>
+
+    <section>
+      <p><em>This series of posts will be the very first part of the <a href="http://learnreact.design/re4d/">“React Essentials for Designers” course</a> I’m creating. <a href="http://learnreact.design/re4d/">Sign up</a> now and receive exclusive updates!</em></p>
+
+<ul>
+  <li><em><a href="/2017/06/08/what-is-react/">What is React?</a></em></li>
+  <li><em><a href="/2017/06/20/what-is-react-native">What is React Native?</a></em></li>
+  <li><em>React Native vs. Hybrids (coming soon)</em></li>
+  <li><em><a href="/2017/08/16/components-props-state/">Components, Props and State</a></em></li>
+  <li><em>Props and State Re-explained (this post)</em></li>
+</ul>
+
+<hr />
+
+<p>In the <a href="/2017/08/16/components-props-state/">last post</a>, we’ve covered components, props and state.</p>
+
+<p>The differences between props and state are fairly apparent, and it seems straightforward to determine when to use props and when to use state. For example, it’s natural to see that the color of the roof is a prop since it’s an intrinsic configuration of the Roof. On the other hand, the status of the door is an obvious candidate for state because it’s easy to see the door being opened or closed after it is built. In this post, however, let’s challenge this line of thinking!</p>
+
+<p>Seriously?!? Yes, you’ll see that things can be either prop or state. There is no set rule. I’ll show you a more useful, practical way of thinking about props and state.</p>
+
+<h1 id="learning-goals">Learning Goals</h1>
+<p>After reading this post, I’ll get you to come back here. Hopefully you’ll be able to answer these questions easily:</p>
+
+<ul>
+  <li>What are the primary use cases for props? What about state?</li>
+  <li>What does “elevating the state” mean? In what situation we need to elevate the state?</li>
+</ul>
+
+<h1 id="new-guest">New Guest</h1>
+<p>Did you notice the new guest around our house? Try clicking the door below!</p>
+
+<p data-height="452" data-theme-id="light" data-slug-hash="VydPEJ" data-default-tab="result" data-user="focuser" data-embed-version="2" data-pen-title="React House With Cat" class="codepen">See the Pen <a href="https://codepen.io/focuser/pen/VydPEJ/">React House With Cat</a> by focuser (<a href="https://codepen.io/focuser">@focuser</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async="" src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>This is a sleepy cat – she sleeps as long as the door is closed, and only stands up when the door is open. If you close the door, she falls back asleep right away.</p>
+
+<h1 id="implementing-the-cat">Implementing the Cat</h1>
+
+<p>Now let me ask you, how to implement this behavior? Let’s give it a try!</p>
+
+<p>Let’s get started with the “code” below. Take a moment to read it through. (Again this is not real JavaScript code, but a simplified notation that helps you understand the concepts without being distracted by JS subtleties)</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">House</span><span class="p">:</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nc">Roof</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nc">Wall</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nc">Window</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nc">Door</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nc">Cat</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="nl">Door</span><span class="p">:</span>
+  <span class="nl">State</span><span class="p">:</span> <span class="nx">status</span> <span class="c1">// "open" or "closed"</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">state</span><span class="p">.</span><span class="nx">status</span><span class="si">}</span> door<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="nx">when</span> <span class="nx">the</span> <span class="nx">door</span> <span class="nx">is</span> <span class="nx">clicked</span>
+    <span class="k">if</span> <span class="nx">door</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">status</span> <span class="nx">is</span> <span class="s2">"open"</span>
+      <span class="nx">change</span> <span class="nx">door</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">status</span> <span class="nx">to</span> <span class="s2">"closed"</span>
+    <span class="nx">otherwise</span>
+      <span class="nx">change</span> <span class="nx">door</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">status</span> <span class="nx">to</span> <span class="s2">"open"</span></code></pre></div>
+
+<p>There is an additional Cat tag in the House component. What does the Cat component look like? Let’s define it.</p>
+
+<p>The cat can be either sleeping or awake. This seems fairly similar to the status of the door. Perhaps we can use state to represent the status of the cat as well:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">Cat</span><span class="p">:</span>
+  <span class="nl">State</span><span class="p">:</span> <span class="nx">status</span> <span class="c1">// "sleeping" or "awake"</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">state</span><span class="p">.</span><span class="nx">status</span><span class="si">}</span> cat<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre></div>
+
+<p>With this definition of the Cat, the implementation of its aforementioned behavior is all about syncing up the status of the door and that of the cat. You know, when the status of the door is “open”, we want the status of the cat to be “awake”, otherwise, the status of the cat should be “sleeping”.</p>
+
+<p>Easy peasy? Let’s see…</p>
+
+<h2 id="attempt-1">Attempt 1</h2>
+
+<p>Since we already have code that toggles the door status according to the current status, why don’t we change the cat status over there as well?</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">Door</span><span class="p">:</span>
+  <span class="nl">State</span><span class="p">:</span> <span class="nx">status</span> <span class="c1">// "open" or "closed"</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">state</span><span class="p">.</span><span class="nx">status</span><span class="si">}</span> door<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="nx">when</span> <span class="nx">the</span> <span class="nx">door</span> <span class="nx">is</span> <span class="nx">clicked</span>
+    <span class="k">if</span> <span class="nx">state</span><span class="p">.</span><span class="nx">status</span> <span class="nx">is</span> <span class="s2">"open"</span>
+      <span class="nx">change</span> <span class="nx">state</span><span class="p">.</span><span class="nx">status</span> <span class="nx">to</span> <span class="s2">"closed"</span>
+      <span class="nx">change</span> <span class="nx">cat</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">status</span> <span class="nx">to</span> <span class="s2">"sleeping"</span>     <span class="c1">//---&gt; WRONG</span>
+    <span class="nx">otherwise</span>
+      <span class="nx">change</span> <span class="nx">state</span><span class="p">.</span><span class="nx">status</span> <span class="nx">to</span> <span class="s2">"open"</span>
+      <span class="nx">change</span> <span class="nx">cat</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">status</span> <span class="nx">to</span> <span class="s2">"awake"</span>        <span class="c1">//---&gt; WRONG</span></code></pre></div>
+
+<p>Unfortunately, this won’t work! Remember that state is a component’s private data that’s only accessible from within the component itself? Nobody else, whether it’s a parent or sibling, could access a component’s state.</p>
+
+<p>Here, we are trying to change the status of the cat from within the Door component. It will miserably fail (after converted to real JavaScript code of course).</p>
+
+<h2 id="attempt-2">Attempt 2:</h2>
+
+<p>Hmm, how about changing the cat status from within the Cat component? That should work, right?</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">Cat</span><span class="p">:</span>
+  <span class="nl">State</span><span class="p">:</span> <span class="nx">status</span> <span class="c1">// "sleeping" or "awake"</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">state</span><span class="p">.</span><span class="nx">status</span><span class="si">}</span> cat<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="nx">when</span> <span class="nx">the</span> <span class="nx">door</span> <span class="nx">is</span> <span class="nx">clicked</span>                    <span class="o">---&gt;</span> <span class="p">???</span>
+    <span class="k">if</span> <span class="nx">door</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">status</span> <span class="nx">is</span> <span class="s2">"open"</span>            <span class="o">---&gt;</span> <span class="nx">WRONG</span>
+      <span class="nx">change</span> <span class="nx">cat</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">status</span> <span class="nx">to</span> <span class="s2">"sleeping"</span>
+    <span class="nx">otherwise</span>
+      <span class="nx">change</span> <span class="nx">cat</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">status</span> <span class="nx">to</span> <span class="s2">"awake"</span></code></pre></div>
+
+<p>Yes, it’s definitely fine to change cat status from within the Cat component. But we would need to read the status of the door to determine what the cat status should be. The status of the door is the state of Door component, and it’s therefore not accessible from within the Cat component!</p>
+
+<h2 id="the-solution">The Solution</h2>
+<p>Errr! That’s really lame. To keep the door status and the cat status in sync, we definitely need to access both of them somewhere. But it appears that the data is hidden one way or another, by design! How to solve this dilemma?</p>
+
+<p>The solution requires us to flex our understanding of the use cases of state and props.</p>
+
+<h3 id="elevating-door-state">Elevating Door State</h3>
+<p>If we look at the House component:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">House</span><span class="p">:</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    ...
+    <span class="p">&lt;</span><span class="nc">Door</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nc">Cat</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre></div>
+
+<p>Here, Door and Cat are side by side. Perhaps that’s the place where we can easily sync them up?</p>
+
+<p>However, we are now inside the House component. For the same reason as our last attempts, it’s impossible to either read the state of Door or change the state of Cat here.</p>
+
+<p>But what if we use props instead of state?</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">House</span><span class="p">:</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    ...
+    <span class="p">&lt;</span><span class="nc">Door</span> <span class="na">status=</span><span class="s2">"open"</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nc">Cat</span> <span class="na">status=</span><span class="s2">"awake"</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre></div>
+
+<p>When the door is closed, it’d be:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">House</span><span class="p">:</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    ...
+    <span class="p">&lt;</span><span class="nc">Door</span> <span class="na">status=</span><span class="s2">"closed"</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nc">Cat</span> <span class="na">status=</span><span class="s2">"sleeping"</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre></div>
+
+<p>Of course the status of the door can’t be a fixed value. It changes from time to time. Let’s denote it with “doorStatus”.</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">House</span><span class="p">:</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    ...
+    <span class="p">&lt;</span><span class="nc">Door</span> <span class="na">status=</span><span class="si">{</span><span class="nx">doorStatus</span><span class="si">}</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nc">Cat</span> <span class="na">status=</span><span class="si">{</span><span class="k">if</span> <span class="nx">doorStatus</span> <span class="nx">is</span> <span class="s1">'open'</span> <span class="nx">then</span> <span class="s1">'awake'</span> <span class="nx">otherwise</span> <span class="s1">'sleeping'</span><span class="si">}</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre></div>
+
+<p>Didn’t that solve the synchronization problem? By the way, what’s this changing value “doorStatus”? What’s the thing of a component that could change? It’s state, right?</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">House</span><span class="p">:</span>
+  <span class="nl">State</span><span class="p">:</span> <span class="nx">doorStatus</span> <span class="c1">// 'open' or 'closed'</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    ...
+    <span class="p">&lt;</span><span class="nc">Door</span> <span class="na">status=</span><span class="si">{</span><span class="nx">state</span><span class="p">.</span><span class="nx">doorStatus</span><span class="si">}</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nc">Cat</span> <span class="na">status=</span><span class="si">{</span><span class="k">if</span> <span class="nx">state</span><span class="p">.</span><span class="nx">doorStatus</span> <span class="nx">is</span> <span class="s1">'open'</span> <span class="nx">then</span> <span class="s1">'awake'</span> <span class="nx">otherwise</span> <span class="s1">'sleeping'</span><span class="si">}</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre></div>
+
+<p>Bravo! This House component looks fairly well-defined and the statuses of the door and the cat are now perfectly synced up.</p>
+
+<p>We also need to change the definition of Door and Cat a bit to use props instead of state:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">Door</span><span class="p">:</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">status</span><span class="si">}</span> door<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="nl">Cat</span><span class="p">:</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">status</span><span class="si">}</span> cat<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre></div>
+
+<p>As you’ve seen, because we want to use the state of a component from its parent, in this case, using Door’s state from within House in order to set the status of the cat, we can represent the same data as the state of the parent and pass the data down to the child as props. This is often called <strong><em>elevating the state</em></strong>. We are moving the state up in the hierarchy.</p>
+
+<p><img src="/images/props-state-reexplained/elevate-state.gif" alt="remote control" /></p>
+
+<h3 id="changing-house-state">Changing House State</h3>
+<p>Now that the statuses of the door and the cat are both linked to the state of the house. If we want to open the door or wake up the cat, we’d need to change the state of House.</p>
+
+<p>Question, what is the only place where we could update the state of House? From within House, right?</p>
+
+<p>However, we still want to trigger this change from Door. That is, we want the door to open only when the door is clicked, not the entire house, or window etc.</p>
+
+<p>So the Door component needs to be something like this:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">Door</span><span class="p">:</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">status</span><span class="si">}</span> door<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="nx">when</span> <span class="nx">door</span> <span class="nx">is</span> <span class="nx">clicked</span>
+    <span class="k">do</span> <span class="nx">something</span> <span class="nx">to</span> <span class="nx">change</span> <span class="nx">the</span> <span class="nx">state</span> <span class="nx">of</span> <span class="nx">the</span> <span class="nx">House</span></code></pre></div>
+
+<p>But wait a second, didn’t we say that it was impossible to change the state of House from within the Door component?</p>
+
+<p>That is right. We cannot <em>directly</em> change the state of House here. However, nothing prevents us from doing this <em>indirectly</em>. See this…</p>
+
+<p>In the House component, let’s write some code to actually change its own state:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">House</span><span class="p">:</span>
+  <span class="nl">State</span><span class="p">:</span> <span class="nx">doorStatus</span> <span class="c1">// 'open' or 'closed'</span>
+  <span class="nl">toggleDoorStatus</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nx">state</span><span class="p">.</span><span class="nx">doorStatus</span> <span class="nx">is</span> <span class="s1">'open'</span>
+      <span class="nx">change</span> <span class="nx">state</span><span class="p">.</span><span class="nx">doorStatus</span> <span class="nx">to</span> <span class="s1">'closed'</span>
+    <span class="nx">otherwise</span>
+      <span class="nx">change</span> <span class="nx">state</span><span class="p">.</span><span class="nx">doorStatus</span> <span class="nx">to</span> <span class="s1">'open'</span>
+  <span class="p">...</span></code></pre></div>
+
+<p>At this point, we haven’t specified <em>when</em> to run this piece of code. We just assign it a name (“toggleDoorStatus”) so that we can pick it by name and run it later.</p>
+
+<p>And then we pass down the name to Door as a prop</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">House</span><span class="p">:</span>
+  <span class="p">...</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    ...
+    <span class="p">&lt;</span><span class="nc">Door</span> <span class="p">...</span> <span class="na">onClickAction=</span><span class="si">{</span><span class="nx">toggleDoorStatus</span><span class="si">}</span> <span class="p">/&gt;</span>
+    ...
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre></div>
+
+<p>In the Door component, we just run this action:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">Door</span><span class="p">:</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">status</span><span class="si">}</span> door<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="nx">when</span> <span class="nx">door</span> <span class="nx">is</span> <span class="nx">clicked</span>
+    <span class="nx">run</span> <span class="nx">props</span><span class="p">.</span><span class="nx">onClickAction</span> <span class="c1">// this runs the code named "toggleDoorStatus"</span></code></pre></div>
+
+<p>This is much like passing the remote control of your TV to someone else. That person presses a button in the Door component. The TV in the House component changes channel or increases its volume.</p>
+
+<p>What’s going to be performed depends on what kind of remote control is passed into Door. It could control a TV, an air conditioner or a HiFi audio system in House. In the Door component, all that person does is to press the button.</p>
+
+<p><img src="/images/props-state-reexplained/remote-control.gif" alt="remote control" /></p>
+
+<p>That’s all we need! Here’s the full “code”:</p>
+
+<div class="highlight"><pre><code class="language-jsx" data-lang="jsx"><span class="nx">House</span><span class="p">:</span>
+  <span class="nl">State</span><span class="p">:</span> <span class="nx">doorStatus</span> <span class="c1">// 'open' or 'closed'</span>
+  <span class="nl">toggleDoorStatus</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nx">state</span><span class="p">.</span><span class="nx">doorStatus</span> <span class="nx">is</span> <span class="s1">'open'</span>
+      <span class="nx">change</span> <span class="nx">state</span><span class="p">.</span><span class="nx">doorStatus</span> <span class="nx">to</span> <span class="s1">'closed'</span>
+    <span class="nx">otherwise</span>
+      <span class="nx">change</span> <span class="nx">state</span><span class="p">.</span><span class="nx">doorStatus</span> <span class="nx">to</span> <span class="s1">'open'</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    ...
+    <span class="p">&lt;</span><span class="nc">Door</span> <span class="na">status=</span><span class="si">{</span><span class="nx">state</span><span class="p">.</span><span class="nx">doorStatus</span><span class="si">}</span> <span class="na">onClickAction=</span><span class="si">{</span><span class="nx">toggleDoorStatus</span><span class="si">}</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nc">Cat</span> <span class="na">status=</span><span class="si">{</span><span class="k">if</span> <span class="nx">state</span><span class="p">.</span><span class="nx">doorStatus</span> <span class="nx">is</span> <span class="s1">'open'</span> <span class="nx">then</span> <span class="s1">'awake'</span> <span class="nx">otherwise</span> <span class="s1">'sleeping'</span><span class="si">}</span> <span class="p">/&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="nl">Door</span><span class="p">:</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">status</span><span class="si">}</span> door<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="nx">when</span> <span class="nx">door</span> <span class="nx">is</span> <span class="nx">clicked</span>
+    <span class="nx">run</span> <span class="nx">props</span><span class="p">.</span><span class="nx">onClickAction</span>
+<span class="nl">Cat</span><span class="p">:</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">status</span><span class="si">}</span> cat<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span></code></pre></div>
+
+<h1 id="props-vs-state-again">Props vs State, Again</h1>
+<p>Now let’s revisit a couple of questions, what are the differences between props and states? When should we use state, when should we use props?</p>
+
+<h2 id="when-to-use-state-when-to-use-props">When to use state, when to use props?</h2>
+<p>If you remember, I said props are intrinsic properties of a component that don’t change, and state is something that can change after a component is built. This helps when you first learn about the concepts.</p>
+
+<p>However, the example we’ve just built makes it confusing. Whether a door is open or whether a cat is sleeping definitely seem to be good candidates for state, but we used props to represent them. How so?</p>
+
+<p>It turns out that there’s a lot of flexibility for choosing between state and props. Depending on how you see it, you can find different ways to model your components. For example you can say the state of the door is that it’s open, or the state of the house is that its door is open.</p>
+
+<h2 id="a-more-useful-way-to-understand">A more useful way to understand</h2>
+<p>Confused? Here’s a more useful way of thinking about the question:</p>
+
+<ul>
+  <li>State: The UI needs to change =&gt; there should be a state somewhere.</li>
+  <li>Props: Use them to pass data &amp; pass control</li>
+</ul>
+
+<p>If there is something changed in the UI when the app is running, there’s gotta be a state. If you see the door open and close when you click on it. There’s gotta be a state somewhere.</p>
+
+<p>However, the state does not necessarily need to live right on the updated component. It might be somewhere upstream. It all depends on where and how we need to use the information. For example, we decided to elevate the status of the door from Door component to House component, because we need to use it in the House component.</p>
+
+<p>On the other hand, props are just something that can be used to pass data downwards in the hierarchy. Just like what we did to pass the value of state isDoorOpen down to the Door component.</p>
+
+<p>Props can also be used to pass down control. For example, we passed the event handler from House to Door.</p>
+
+<h2 id="but-do-the-props-change-value-in-this-case">But do the props change value in this case?</h2>
+<p>No, they never do and never will. I know, the door opens and closes, and the cat sleeps and wakes up. Since we now use props to represent these, it’s really tempting to think that props behave just like state – their values change, right?</p>
+
+<p>This is just an illusion, which I find fairly comparable to flipbook animations.</p>
+
+<p><img src="/images/props-state-reexplained/flipbook.jpg" alt="flipbook" /></p>
+
+<p>Every time when the state of the house changes, the old cat is removed and a brand new cat with new status is created from scratch. But this process happens really quickly, which gives us an illusion that there is only one cat that falls asleep and wakes up.</p>
+
+<p>The sketches on any page in the flipbook never move. Similarly, the cats stay awake/asleep throughout their (short) lifespan.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Alright, we’ve studied props and state again with a more complex example. In this example, we’d have to keep the statuses of the door and the cat in sync, while the door should still open or close when clicked.</p>
+
+<p>Because state is private, we decided to <em>elevate</em> the door status from the state of Door component to the state of House component. This way, we can use this data in House component to set the statuses of the door and the cat. We pass down this data to Door and Cat as props so that they can display correct images according to the door status.</p>
+
+<p>The other requirement is to trigger state changes when the door is clicked. Because the door status is now a state private to House, from within Door we can only make the change <em>indirectly</em>. In House, we write the code that actually changes the state, and pass its name down to Door. This is like passing around the remove control of a TV.</p>
+
+<p>The example in this post may make things a bit confusing. Here’s a practical way of thinking about state and props:</p>
+
+<ul>
+  <li>State: The UI needs to change =&gt; there should be a state somewhere.</li>
+  <li>Props: Use them to pass down data &amp; control</li>
+</ul>
+
+<p>How do you like it so far? Feel free to leave your comments and questions below!</p>
+
+<hr />
+
+<p><a name="endofpost"></a></p>
+
+      
+<div class="social">
+  
+  <div class='twitter'>
+    <a href="https://twitter.com/share" class="twitter-share-button"  data-text="Props and State Re-explained" data-related="lintonye">Tweet</a>
+  </div>
+  
+
+  
+  <div class='facebook'>
+    <div class="fb-share-button" data-layout="button_count"></div>
+  </div>
+  
+
+  
+  <div class='google'>
+    <div class="g-plusone" data-size="medium"></div>
+  </div>
+  
+    
+  
+
+  
+  <div class='reddit'>
+    <a href="//www.reddit.com/submit" onclick="window.open('//www.reddit.com/submit?url=http://learnreact.design/2018/01/15/props-state-reexplained/&title=Props+and+State+Re-explained'); return false"> <img src="//www.redditstatic.com/spreddit7.gif" alt="submit to reddit" border="0" /> </a>
+  </div>
+  
+</div>
+
+    </section>
+
+    <footer>
+      <address>
+        <img src="/images/linton.jpg">
+        <p>Written by <strong><a rel="author" href="https://twitter.com/lintonye" title="" target="_blank">Linton Ye</a></strong><br>
+          <span class="muted">Freelance full-stack developer in BC Canada (GMT-8). Android, React Native, Node.js, MongoDB, PostgreSQL. <a href="mailto:linton@jimulabs.com">Contact me.</a></span>
+        </p>
+      </address>
+      
+      
+      
+      <section class="post_summary">
+        <h3 class="title">Previous story: <a href="/2018/01/02/jon-gold-on-react-sketchapp/" rel="prefetch">React Sketch.app: backstory and full vision </a></h3>
+        <p>A conversation with Jon Gold, the creator of React Sketch.app</p>
+        <hr>
+      </section>
+      
+      
+      <section>
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname = 'learnreact-design';
+
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+      </section>
+      
+    </footer>
+  </div>
+</article>
+
+
+  <footer class="site-footer">
+    <div class="container">
+      &copy; 2018 Linton Ye
+
+      <nav>
+        <a href="/blog">Blog</a> &middot;
+        <a href="/about">About</a>
+      </nav>
+
+      <nav class="social">
+        
+<a href="https://twitter.com/lintonye" title="Follow on Twitter" target="_blank"><i class="icon icon-twitter"></i></a>
+
+
+<a href="https://github.com/lintonye" title="Watch on Github" target="_blank"><i class="icon icon-github"></i></a>
+
+
+<a href="/atom.xml" title="RSS Feed">
+  <i class="icon icon-rss"></i>
+</a>
+
+      </nav>
+      <div>Based on Incorporated theme by <a href="https://sendtoinc.com">Inc</a></div>
+    </div>
+  </footer>
+
+</body>
+</html>
