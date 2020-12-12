@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Host: https://learnreact.design
+Sitemap: https://learnreact.design/sitemap.xml
