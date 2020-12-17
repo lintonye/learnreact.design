@@ -1,5 +1,6 @@
 import {jsx} from '@emotion/core'
 import {Menu} from '@headlessui/react'
+import Link from 'next/link'
 
 export function NavBar() {
   return (
@@ -17,16 +18,16 @@ export function NavBar() {
               <Menu.Button>Tutorials</Menu.Button>
               <Menu.Items>
                 <Menu.Item className="">
-                  <a>Design x React</a>
+                  <Link href="/design-react">Design x React</Link>
                 </Menu.Item>
                 <Menu.Item className="">
-                  <a>Fundamentals</a>
+                  <Link href="/html-css-js">Fundamentals</Link>
                 </Menu.Item>
                 <Menu.Item className="">
-                  <a>React</a>
+                  <Link href="/react">React</Link>
                 </Menu.Item>
                 <Menu.Item className="">
-                  <a>Framer</a>
+                  <Link href="/framer">Framer</Link>
                 </Menu.Item>
               </Menu.Items>
             </Menu>
@@ -38,14 +39,6 @@ export function NavBar() {
             <a href="/hire-me">Hire Linton</a>
           </li>
         </ul>
-        <Menu>
-          <Menu.Button className="">LearnReact.design</Menu.Button>
-          <Menu.Button className="">Courses</Menu.Button>
-          <Menu.Items></Menu.Items>
-          <Menu.Button className="">Tutorials</Menu.Button>
-          <Menu.Button className="">Webinars</Menu.Button>
-          <Menu.Button className="">Hire Linton</Menu.Button>
-        </Menu>
       </nav>
     </header>
   )
