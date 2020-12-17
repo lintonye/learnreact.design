@@ -3,6 +3,7 @@ export const meta = {
 }
 
 import DefaultLayout from '@/layouts/index'
+import domo from './02-domo-browsera.png'
 
 export default DefaultLayout
 
@@ -40,6 +41,7 @@ Well, DOM is the Document Object Model. Simple? It's an object model for the doc
 Forget about it. Let's check out the prestigious art studio "Web Browser"! Can you find DOM in the doodle below?
 
 ![Domo poses, Browsera draws](./02-domo-browsera.png)
+<img src={domo} />
 
 So, DOM is a ... tree? Yup a tree! Oddly enough, a lot of things in your computer look like a tree[^1].
 
@@ -175,7 +177,6 @@ At the beginning, I set a goal that this post must be interesting enough for my 
 
 She also contributed a few hats in the interactive example above and watched me putting them into the code. That was golden time! Guess which ones were drawn by her? My daughter wants you to answer in the [comments](#endofpost). 👧🏻
 
-<iframe width="96" height="54" src="https://www.youtube.com/embed/o1SL_j5U8AQ?showinfo=0" frameborder="0" allowfullscreen></iframe>
 
 ## Special thanks
 
@@ -194,5 +195,3 @@ I want to express my deep gratitude to [Phil Khoo](http://philkhoo.com/) of [Dem
 [^2]:
 
   In fancy tech slang, if the code defines **what** you want, it's called _declarative_; if it defines **how** you want it to be done, it's called _imperative_. Imperative programming emerged from the day when computers were first invented. When the computers were primitive, people had to instruct them in detail: where to store the numbers, how to multiply etc. It was fine at the beginning, but coding this way becomes increasingly unmanageable as the tasks given to computers become more and more complex. People then wrote smart software that convert definition of problems into detailed instructions. Declarative programming was born. Today, more and more programming languages and frameworks, such as React, allow us to code declaratively instead of imperatively.
-
-<a name="endofpost" />
