@@ -7,7 +7,10 @@
     "build": "NODE_ENV=production next build",
     "postbuild": "NODE_ENV=production next-sitemap",
     "start": "next start",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "analyze": "ANALYZE=true next build",
+    "analyze:server": "BUNDLE_ANALYZE=server next build",
+    "analyze:browser": "BUNDLE_ANALYZE=browser next build"
   },
   "dependencies": {
     "@emotion/core": "^10.1.1",
@@ -17,7 +20,6 @@
     "dotenv-flow": "^3.2.0",
     "emotion": "^10.0.27",
     "emotion-server": "^10.0.27",
-    "file-loader": "^6.2.0",
     "mdx-prism": "^0.3.1",
     "next": "10.0.3",
     "next-seo": "^4.17.0",
@@ -27,19 +29,20 @@
     "rehype": "^11.0.0",
     "remark-code-titles": "^0.1.1",
     "remark-footnotes": "^3.0.0",
-    "remark-images": "^2.0.0",
     "remark-slug": "^6.0.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-react-jsx": "^7.12.10",
     "@emotion/babel-preset-css-prop": "^10.2.1",
     "@mdx-js/loader": "^1.6.22",
+    "@next/bundle-analyzer": "^10.0.3",
     "@tailwindcss/typography": "^0.3.1",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@types/node": "^14.14.12",
     "@types/react": "^17.0.0",
     "babel-jest": "^26.6.3",
+    "file-loader": "^6.2.0",
     "husky": "^4.3.5",
     "jest": "^26.6.3",
     "lint-staged": "^10.5.3",
@@ -49,6 +52,7 @@
     "postcss-preset-env": "^6.7.0",
     "prettier": "^2.2.1",
     "react-test-renderer": "^17.0.1",
+    "simple-functional-loader": "^1.2.1",
     "tailwindcss": "^2.0.1",
     "typescript": "^4.1.2"
   },
@@ -72,7 +76,7 @@
     "semi": false,
     "singleQuote": true,
     "trailingComma": "all",
-    "bracketSpacing": false,
+    "bracketSpacing": true,
     "jsxBracketSameLine": false
   }
 }

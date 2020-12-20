@@ -1,11 +1,7 @@
 import { jsx } from '@emotion/core'
 import Head from 'next/head'
-import { Footer } from '../components/Footer'
-import { Hero } from '../components/Hero'
-import { Main } from '../components/Main'
-import { NavBar } from '../components/NavBar'
 
-export default function Home() {
+export default function PostList() {
   return (
     <div>
       <Head>
@@ -18,14 +14,9 @@ export default function Home() {
         />
       </Head>
 
-      <NavBar />
       <main>
-        <div className="max-w-screen-md mx-auto">
-          <Hero />
-          <Main />
-        </div>
+        <div className="max-w-screen-md mx-auto"></div>
       </main>
-      <Footer />
     </div>
   )
 }
