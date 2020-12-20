@@ -103,26 +103,28 @@ module.exports = withBundleAnalyzer({
         {
           use: [
             ...mdx,
-            // createLoader(function (src) {
-            //   const content = [
-            //     'import Post from "@/components/Post"',
-            //     'export { getStaticProps } from "@/getStaticProps"',
-            //     src,
-            //     'export default (props) => <Post meta={meta} {...props} />',
-            //   ].join('\n')
+            createLoader(function (src) {
+              const content = src.includes('export default ')
+                ? src
+                : [
+                    'import { Post } from "@/components/Post"',
+                    // 'export { getStaticProps } from "@/getStaticProps"',
+                    src,
+                    'export default (props) => <Post meta={meta} {...props} />',
+                  ].join('\n')
 
-            //   if (content.includes('<!--more-->')) {
-            //     return this.callback(
-            //       null,
-            //       content.split('<!--more-->').join('\n'),
-            //     )
-            //   }
+              if (content.includes('<!--more-->')) {
+                return this.callback(
+                  null,
+                  content.split('<!--more-->').join('\n'),
+                )
+              }
 
-            //   return this.callback(
-            //     null,
-            //     content.replace(/<!--excerpt-->.*<!--\/excerpt-->/s, ''),
-            //   )
-            // }),
+              return this.callback(
+                null,
+                content.replace(/<!--excerpt-->.*<!--\/excerpt-->/s, ''),
+              )
+            }),
           ],
         },
       ],

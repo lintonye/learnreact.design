@@ -1,15 +1,12 @@
-import React, {FunctionComponent} from 'react'
-import {NextSeo} from 'next-seo'
+import React, { FunctionComponent } from 'react'
+import { NextSeo } from 'next-seo'
 
 type LayoutProps = {
   meta: any
 }
 
-const DefaultLayout: FunctionComponent<LayoutProps> = ({
-  children,
-  meta,
-}) => {
-  const {title, description, titleAppendSiteName = false, url, ogImage} =
+export const Post: FunctionComponent<LayoutProps> = ({ children, meta }) => {
+  const { title, description, titleAppendSiteName = false, url, ogImage } =
     meta || {}
   return (
     <>
@@ -32,5 +29,3 @@ const DefaultLayout: FunctionComponent<LayoutProps> = ({
     </>
   )
 }
-
-export default DefaultLayout
