@@ -7,7 +7,8 @@ import Router from 'next/router'
 import SEO from '../../next-seo.json'
 import { pageview } from '@/lib/gtag'
 
-Router.events.on('routeChangeComplete', (url) => pageview(url))
+process.env.NODE_ENV === 'production' &&
+  Router.events.on('routeChangeComplete', (url) => pageview(url))
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
