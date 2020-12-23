@@ -1,3 +1,5 @@
+import { parseISO, compareDesc } from 'date-fns'
+
 type ImportedMdx = {
   categorySlug: string
   slug: string
@@ -22,6 +24,7 @@ function importAll(r: __WebpackModuleApi.RequireContext) {
             categorySlug: match[1],
             slug: match[2],
             ...module.meta,
+            date: parseISO(module.meta.date),
             excerpt: module.default, // This is a component!
           }
         : null
@@ -29,14 +32,8 @@ function importAll(r: __WebpackModuleApi.RequireContext) {
     .filter(isDefined)
 }
 
-function dateSortDesc(a: Date, b: Date) {
-  if (a > b) return -1
-  if (a < b) return 1
-  return 0
-}
-
 export default function getAllPostPreviews() {
   return importAll(
     require.context('./pages/?preview', true, /\.mdx$/),
-  ).sort((a, b) => dateSortDesc(a.date, b.date))
+  ).sort((a, b) => compareDesc(a.date, b.date))
 }

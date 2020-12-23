@@ -17,6 +17,7 @@
     "@emotion/styled": "^10.0.27",
     "@headlessui/react": "^0.2.0",
     "@next/mdx": "^10.0.3",
+    "date-fns": "^2.16.1",
     "dotenv-flow": "^3.2.0",
     "emotion": "^10.0.27",
     "emotion-server": "^10.0.27",

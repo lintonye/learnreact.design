@@ -1,6 +1,5 @@
 import { jsx } from '@emotion/core'
 import { PostList, filterPosts } from '@/components/PostList'
-import { PostPreview } from '@/types'
 import getAllPostPreviews from '@/getAllPostPreviews'
 
 export const meta = {
