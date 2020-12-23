@@ -1,6 +1,6 @@
 export type Post = {
   title: string
-  excerpt: React.FunctionComponent
+  excerpt: React.FunctionComponent | string
   slug: string
   categorySlug: string
 }
