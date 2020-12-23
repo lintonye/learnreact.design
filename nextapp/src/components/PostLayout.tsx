@@ -1,4 +1,5 @@
-import React, { FunctionComponent } from 'react'
+import { jsx } from '@emotion/core'
+import { FunctionComponent } from 'react'
 import { NextSeo } from 'next-seo'
 
 type LayoutProps = {

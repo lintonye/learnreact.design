@@ -1,3 +1,4 @@
+import { jsx } from '@emotion/core'
 export function Hero() {
   return (
     <h1>

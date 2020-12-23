@@ -1,3 +1,4 @@
+import { jsx } from '@emotion/core'
 import { featuredPostData } from '../featuredPostData'
 import { PostPreview } from './PostPreview'
 
