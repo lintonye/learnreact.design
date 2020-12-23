@@ -1,10 +1,15 @@
 import React from 'react'
-import {AppProps} from 'next/app'
+import { AppProps } from 'next/app'
 import '../styles/globals.css'
-import {DefaultSeo} from 'next-seo'
-import SEO from '../../next-seo.json'
+import { DefaultSeo } from 'next-seo'
+import Router from 'next/router'
 
-function MyApp({Component, pageProps}: AppProps) {
+import SEO from '../../next-seo.json'
+import { pageview } from '@/lib/gtag'
+
+Router.events.on('routeChangeComplete', (url) => pageview(url))
+
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <DefaultSeo {...SEO} />
