@@ -1,4 +1,4 @@
-export const postData = [
+export const featuredPostData = [
   {
     categoryTitle: 'Design ╳ React',
     categorySlug: 'design-react',

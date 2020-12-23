@@ -107,10 +107,10 @@ module.exports = withBundleAnalyzer({
               const content = src.includes('export default ')
                 ? src
                 : [
-                    'import { Post } from "@/components/Post"',
-                    // 'export { getStaticProps } from "@/getStaticProps"',
+                    'import { PostLayout } from "@/components/PostLayout"',
+                    'export { getStaticProps } from "@/getStaticProps"',
                     src,
-                    'export default (props) => <Post meta={meta} {...props} />',
+                    'export default (props) => <PostLayout meta={meta} {...props} />',
                   ].join('\n')
 
               if (content.includes('<!--more-->')) {

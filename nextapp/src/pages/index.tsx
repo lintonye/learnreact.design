@@ -13,8 +13,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="description"
-          content="Hand-picked resources on the intersection of design and frontend
-          development: React, Framer, HTML, CSS, JavaScript"
+          content="Hand-picked resources on design and frontend development: React, Framer, HTML, CSS, JavaScript"
         />
       </Head>
 

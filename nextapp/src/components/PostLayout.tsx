@@ -5,7 +5,10 @@ type LayoutProps = {
   meta: any
 }
 
-export const Post: FunctionComponent<LayoutProps> = ({ children, meta }) => {
+export const PostLayout: FunctionComponent<LayoutProps> = ({
+  children,
+  meta,
+}) => {
   const { title, description, titleAppendSiteName = false, url, ogImage } =
     meta || {}
   return (
