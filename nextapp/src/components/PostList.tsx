@@ -1,4 +1,5 @@
 import { jsx } from '@emotion/core'
+import React from 'react'
 import { FunctionComponent } from 'react'
 import { NextSeo } from 'next-seo'
 import { Category, Post } from '../types'
