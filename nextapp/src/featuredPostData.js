@@ -1,3 +1,10 @@
+export const highlightedPost = {
+  categorySlug: 'design-react',
+  title: 'What is React?',
+  excerpt: 'React concepts explained in plain English and doodles',
+  slug: 'what-is-react',
+}
+
 export const featuredPostData = [
   {
     categoryTitle: 'Design ╳ React',
