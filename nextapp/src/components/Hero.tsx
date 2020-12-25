@@ -9,7 +9,7 @@ export function Hero() {
       <div className="m-1">
         <h1 className="text-5xl p-3">
           React For <h1 className="text-8xl font-extrabold">Designers</h1>
-          <span className="font-cursive transform -rotate-6  text-4xl p-3 absolute top-36 md:right-1/3 sm:right-1/4 ">
+          <span className="font-cursive transform -rotate-6 text-4xl opacity-80 p-3 absolute top-36 md:right-1/3 sm:right-1/4 ">
             and visual learners
           </span>
         </h1>
