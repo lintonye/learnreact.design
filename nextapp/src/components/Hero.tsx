@@ -5,7 +5,7 @@ import Link from 'next/link'
 export function Hero() {
   const { title, excerpt, categorySlug, slug } = highlightedPost
   return (
-    <div className="md:flex sm:block ">
+    <div className="md:flex justify-center sm:block ">
       <div className="m-1">
         <h1 className="text-5xl p-3">
           React For <h1 className="text-8xl font-extrabold">Designers</h1>
