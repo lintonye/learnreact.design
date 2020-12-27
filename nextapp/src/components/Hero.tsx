@@ -5,11 +5,12 @@ import Link from 'next/link'
 export function Hero() {
   const { title, excerpt, categorySlug, slug } = highlightedPost
   return (
-    <div className="md:flex sm:flex-column">
+    <div className="flex-column md:flex">
       <div className="m-1">
-        <h1 className="text-5xl p-3">
-          React For <h1 className="text-8xl font-extrabold">Designers</h1>
-          <span className="font-cursive transform -rotate-6 text-4xl opacity-80 p-3 absolute top-36 md:right-1/3 sm:right-1/4 ">
+        <h1 className="text-4xl p-2 sm:text-5xl sm:p-3">
+          React For{' '}
+          <h1 className="font-extrabold text-7xl sm:text-8xl">Designers</h1>
+          <span className="font-cursive transform -rotate-6 text-2xl opacity-80 p-3 absolute top-32 right-12 sm:right-1/4 sm:text-4xl sm:top-36 md:right-1/3">
             and visual learners
           </span>
         </h1>
@@ -18,7 +19,7 @@ export function Hero() {
           Framer, HTML, CSS, JavaScript{' '}
         </p>
       </div>
-      <article className="border-l-2 m-2 p-5 relative left-26 md:top-32 sm:top-auto">
+      <article className="border-l-2 m-2 p-5 relative left-26 sm:top-0 md:top-32">
         <h2
           className="text-2xl font-bold text italic p-1 text-white"
           css={{
