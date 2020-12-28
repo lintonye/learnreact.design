@@ -12,7 +12,7 @@ export function Hero() {
           <h1 className="font-extrabold text-6xl p-1 sm:text-8xl sm:p-2">
             Designers
           </h1>
-          <IconPointArrow className="relative top-14 right-2"></IconPointArrow>{' '}
+          <IconPointArrow className="relative top-14 right-2" />
         </div>
         <span className="font-cursive transform -rotate-6 text-2xl opacity-80 p-3 absolute top-36 right-2 sm:right-1/4 sm:text-4xl md:right-1/3">
           and visual learners
