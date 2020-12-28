@@ -19,7 +19,7 @@ export default function Home() {
 
       <NavBar />
       <main>
-        <div className="max-w-screen-md mx-auto">
+        <div className="max-w-screen-lg mx-auto">
           <Hero />
           <Main />
         </div>

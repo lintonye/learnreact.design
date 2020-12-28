@@ -1,8 +1,10 @@
 import { jsx } from '@emotion/core'
+import { useState } from 'react'
 import { highlightedPost } from '@/featuredPostData'
 import Link from 'next/link'
 
 export function Hero() {
+  const [hovered, setHovered] = useState(false)
   const { title, excerpt, categorySlug, slug } = highlightedPost
   return (
     <div className="flex-column md:flex">
@@ -20,18 +22,32 @@ export function Hero() {
         </p>
       </div>
       <article className="border-l-2 m-2 p-5 relative left-26 sm:top-0 md:top-32">
-        <h2
-          className="text-2xl font-bold text italic p-1 text-white"
-          css={{
-            textShadow:
-              '-1px -1px 0 #000,1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000',
-          }}
+        <div
+          className="relative"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
         >
-          {title}
-        </h2>
-        <p className="p-1">{excerpt}</p>
-        <div className="text-sm font-bold p-1">
-          <Link href={`/${categorySlug}/${slug}`}>Read more</Link>
+          {hovered && (
+            <img
+              className="absolute top-0 left-0 h-full"
+              src="https://learnreact.design/static/cecc053c8ade6d7012817193ce68b690/ae6b7/06-middleman.png"
+            />
+          )}
+          <div className="relative" css={{ backdropFilter: 'blur(10px)' }}>
+            <h2
+              className="text-2xl font-bold text italic p-1 text-white"
+              css={{
+                textShadow:
+                  '-1px -1px 0 #000,1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000',
+              }}
+            >
+              {title}
+            </h2>
+            <p className="p-1">{excerpt}</p>
+            <div className="text-sm font-bold p-1">
+              <Link href={`/${categorySlug}/${slug}`}>Read more</Link>
+            </div>
+          </div>
         </div>
       </article>
     </div>
