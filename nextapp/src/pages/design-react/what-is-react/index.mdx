@@ -8,9 +8,172 @@ import domo from './02-domo-browsera.png'
 
 <!--excerpt-->
 
-This is excerpt
+What is DOM? Why is React so popular? What does like feel like to write a React app? Why do we need React?
+
+This is an interactive guide for absolute beginners. As long as you have some basic knowledge of HTML and JavaScript, you'll be able to understand the core ideas of React, why it's so popular, what problem does it solve.
 
 <!--/excerpt-->
+
+React is an important idea. started 2013, unlike many other trendy JS frameworks, the core ideas in React haven't changed since the day one. Makes easier than ever to build UI. Makes design tools possible. Heavily influenced design tools. For the first time in history, the gap between design and development starts to diminish! Look at the tools such as Framer, Modulz.
+
+Figma: design with code in mind - autolayout etc.
+
+React is getting ever popular. Not just developers, For UX designers, many company prefers React experience.
+
+What's this React thing?
+
+Let's start with the basics: how the web works, and what DOM is.
+
+# How the web works
+
+When you enter the address of your favorite website into a browser, your computer tries to contact another computer far away, commonly referred to as _server_. Then, the two computers start chit chatting. Typically your computer makes a request for some information and the server responds:
+
+> Your computer: Yo, what's good about this random site learnreact.design?
+> The server: Hang on, let me grab something for you. Beep. Bop.
+
+The server's response includes three types of content (of course there are other types but let's keep it simple for now):
+
+- HTML
+- CSS
+- JavaScript
+
+Once your browser receives this information, which often looks like giberish to our human eyes, it decodes it and displays it as a web page, something that we could comprehend and enjoy: titles, paragraphs, layouts, icons, images and animations.
+
+Let's zoom into the browser to see what's going on under the hood.
+
+## What is DOM
+
+HTML defines the buiding blocks of a web page and how they relate to each other. How many textboxes and buttons are there? Are they contained in the same box? The browser uses this information to construct something called DOM.
+
+![ DOM is born ](TODO)
+
+Wait a second, DOM is a ... tree? Yup a tree! Oddly enough, a lot of things in your computer look like a tree. Let's give our tree friend a nickname... ummm what about Domo?
+
+Domo works as a model at the prestigious art studio "Web Browser". His job is to pose in front of the artist who paints a portrait (or perhaps millions of portraits).
+
+![DOM poses](TODO)
+
+In real life, DOM stands for Document Object Model. It's indeed a model -- a model of the document (aka the web page). It works in the same way as Domo. It poses for somebody to paint portraits. The portraits are what we see on the web page: the textboxes, the paragraphs, the images and so on. A developer's job is like that of a director who tells Domo what to wear and what pose to make. This determines what those portraits look like in the end.
+
+## JavaScript
+
+What's JavaScript's role in this picture? It's like
+
+JavaScript to make change of Domo's pose
+
+What's CSS's role in this picture?
+
+What about JavaScript?
+
+jQuery or React are known as libraries and they are the tools a developer uses to communicate with Domo.
+
+The browser takes these information and constructs DOM.
+
+[ zoom into browser ]
+
+- computer connects to server, computers have conversations
+- decode server's talks: html/CSS/JS
+- zoom into browser:
+  - Domo is born out of HTML
+  - he's a model
+
+[DOMo the model, the artist draws control on the screen ]
+
+To check out what DOM looks like, you can inspect in the browser.
+
+[ inspect ]
+
+Hint: You can inspect this very page too.
+
+[ put a DOMO ascii art in the console ]
+
+JavaScript is how the browser takes user input, engages further conversations with the server and maybe other servers, and instructs Domo what poses he needs to do (and display that result on the web page).
+
+The developer uses JavaScript to instruct Domo what to do.
+
+[ JavaScript to instruct Domo to pose ]
+
+# Problems
+
+But it can be tedious to directly talk to Domo, because:
+
+- code is large, complex and difficult to manage
+
+  - React tries to make it easy to build complicated apps by making it easy to split up your app into many simple, independent components. This means that when you change code in one place, other parts of your app don't break.
+
+- it's slow
+- Domos in different browsers might speak slightly different languages
+- TODO why react?
+  - In a traditional JavaScript application, you need to look at what data changed and imperatively make changes to the DOM to keep it up-to-date.
+  - by definition, imperative code relies on the context of the current state.
+  - UI state hard to manage: need to remember the current state, need to remember what changed
+
+# Introducing React
+
+[ React superman ]
+
+[ act as a middleman ]
+
+# Components
+
+[Framer component video]
+
+Figma has similar feature, but Framer is more complete
+
+- composable
+- independent components. Change code in one place, other parts don't break. Only interact with other components at a very limited, well-defined places.
+
+```jsx
+// Domo
+<div>
+  <img src="domo.png" />
+</div>
+```
+
+```jsx
+<Domo />
+```
+
+```jsx
+// DomoCouple
+<div>
+  <Domo />
+  <Domo />
+</div>
+```
+
+```jsx
+// Domo
+<div>
+  <img src="domo.png" />
+  <img src="hat.png" />
+</div>
+```
+
+```jsx
+// Hat
+<div>
+  <img src="hat.png" />
+</div>
+```
+
+```jsx
+// ThinkerWithHat
+<div>
+  <Hat>
+  <Thinker />
+</div>
+```
+
+```jsx
+<div>
+  <ThinkerWithHat />
+  <ThinkerWithHat />
+  <ThinkerWithHat />
+</div>
+```
+
+Now of course this post only covers some concepts at a very high level, but it's really important that you have this mental model in mind. If you want to actually learn React and build stuff, take a look at this course.
 
 React, ReactJS, React.js, React Native... How many times have you heard about these things lately? Are you confused by what they are really for?
 
