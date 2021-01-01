@@ -22,28 +22,22 @@ React is getting ever popular. Not just developers, For UX designers, many compa
 
 What's this React thing?
 
-Let's start with the basics: how the web works, and what DOM is.
+Let's get started with something you might have heard many times, DOM.
 
-# How the web works
+# How does the Web work?
 
-When you enter the address of your favorite website into a browser, your computer tries to contact another computer far away, commonly referred to as _server_. Then, the two computers start chit chatting. Typically your computer makes a request for some information and the server responds:
+## What is DOM?
+
+When you enter the address of your favorite website into a browser, your computer starts a conversation with another computer far away, commonly referred to as _server_. Typically your computer makes a request for some information and the server responds:
 
 > Your computer: Yo, what's good about this random site learnreact.design?
 > The server: Hang on, let me grab something for you. Beep. Bop.
 
-The server's response includes three types of content (of course there are other types but let's keep it simple for now):
+The server's response typically includes three parts: HTML, CSS and JavaScript.
 
-- HTML
-- CSS
-- JavaScript
+HTML defines what buiding blocks are there in a web page and how they relate to each other. How many textboxes and buttons are there? Are they contained in the same box?
 
-Once your browser receives this information, which often looks like giberish to our human eyes, it decodes it and displays it as a web page, something that we could comprehend and enjoy: titles, paragraphs, layouts, icons, images and animations.
-
-Let's zoom into the browser to see what's going on under the hood.
-
-## What is DOM
-
-HTML defines the buiding blocks of a web page and how they relate to each other. How many textboxes and buttons are there? Are they contained in the same box? The browser uses this information to construct something called DOM.
+Using this information, the browser creates something called... DOM!
 
 ![ DOM is born ](TODO)
 
@@ -51,49 +45,35 @@ Wait a second, DOM is a ... tree? Yup a tree! Oddly enough, a lot of things in y
 
 Domo works as a model at the prestigious art studio "Web Browser". His job is to pose in front of the artist who paints a portrait (or perhaps millions of portraits).
 
-![DOM poses](TODO)
+![DOM poses, includes CSS](TODO)
 
 In real life, DOM stands for Document Object Model. It's indeed a model -- a model of the document (aka the web page). It works in the same way as Domo. It poses for somebody to paint portraits. The portraits are what we see on the web page: the textboxes, the paragraphs, the images and so on. A developer's job is like that of a director who tells Domo what to wear and what pose to make. This determines what those portraits look like in the end.
 
-## JavaScript
+To check out what DOM looks like, you can inspect the web page like so:
 
-What's JavaScript's role in this picture? It's like
+![inspect](TODO)
 
-JavaScript to make change of Domo's pose
-
-What's CSS's role in this picture?
-
-What about JavaScript?
-
-jQuery or React are known as libraries and they are the tools a developer uses to communicate with Domo.
-
-The browser takes these information and constructs DOM.
-
-[ zoom into browser ]
-
-- computer connects to server, computers have conversations
-- decode server's talks: html/CSS/JS
-- zoom into browser:
-  - Domo is born out of HTML
-  - he's a model
-
-[DOMo the model, the artist draws control on the screen ]
-
-To check out what DOM looks like, you can inspect in the browser.
-
-[ inspect ]
-
-Hint: You can inspect this very page too.
+Hint: Now right click on this very page, and choose "Inspect".
 
 [ put a DOMO ascii art in the console ]
 
-JavaScript is how the browser takes user input, engages further conversations with the server and maybe other servers, and instructs Domo what poses he needs to do (and display that result on the web page).
+## DOM API
 
-The developer uses JavaScript to instruct Domo what to do.
+We often want a web page dynamic and interactive -- that means the page needs to change according to users' input: adding or removing text here and there, showing a modal, or charting some new data retrieved from the server.
 
-[ JavaScript to instruct Domo to pose ]
+Remember, in order to change what's on a web page, we need to update the DOM. It's like that the artist won't be able to paint new portraits until Domo changes to a new pose.
 
-# Problems
+How would we get Domo to change to a new pose?
+
+We talk to him. More precisely, we talk into his ears, which happen to have a name: _DOM API_. We update DOM by writing JavaScript code that talks to DOM API.
+
+![ JavaScript to instruct Domo to pose ](TODO)
+
+## Problems
+
+For quite a while, developers
+
+In the past, a developer directly talks to Domo.
 
 But it can be tedious to directly talk to Domo, because:
 
