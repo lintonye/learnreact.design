@@ -14,6 +14,8 @@ This is an interactive guide for absolute beginners. As long as you have some ba
 
 <!--/excerpt-->
 
+This is a guide for beginners, absolute beginners I mean. So you don't need to know JS to read this post. BUT, the concepts introduced in this article will be useful for you after you learn JavaScript. Understand why needs React in the first place.
+
 React is an important idea. started 2013, unlike many other trendy JS frameworks, the core ideas in React haven't changed since the day one. Makes easier than ever to build UI. Makes design tools possible. Heavily influenced design tools. For the first time in history, the gap between design and development starts to diminish! Look at the tools such as Framer, Modulz.
 
 Figma: design with code in mind - autolayout etc.
@@ -30,28 +32,32 @@ Let's get started with something you might have heard many times, DOM.
 
 When you enter the address of your favorite website into a browser, your computer starts a conversation with another computer far away, commonly referred to as _server_. Typically your computer makes a request for some information and the server responds:
 
-> Your computer: Yo, what's good about this random site learnreact.design?
-> The server: Hang on, let me grab something for you. Beep. Bop.
+> **Your computer:** Yo, what's good about this random site learnreact.design?
+>
+> **The server:** Hang on, let me grab something for you. Beep. Boop.
 
 The server's response typically includes three parts: HTML, CSS and JavaScript.
 
-HTML defines what buiding blocks are there in a web page and how they relate to each other. How many textboxes and buttons are there? Are they contained in the same box?
+HTML defines what building blocks are there in a web page and how they relate to each other. How many buttons and images are there? Are they contained in the same box?
 
 Using this information, the browser creates something called... DOM!
 
 ![ DOM is born ](TODO)
 
-Wait a second, DOM is a ... tree? Yup a tree! Oddly enough, a lot of things in your computer look like a tree. Let's give our tree friend a nickname... ummm what about Domo?
+Wait a second, DOM is a ... tree? Yup, a tree! Oddly enough, a lot of things in your computer look like a tree. Let's give our tree friend a nickname... hmmm what about Domo?
 
 Domo works as a model at the prestigious art studio "Web Browser". His job is to pose in front of the artist who paints a portrait (or perhaps millions of portraits).
 
 ![DOM poses, includes CSS](TODO)
 
+<img src={domo} />
+
 In real life, DOM stands for Document Object Model. It's indeed a model -- a model of the document (aka the web page). It works in the same way as Domo. It poses for somebody to paint portraits. The portraits are what we see on the web page: the textboxes, the paragraphs, the images and so on. A developer's job is like that of a director who tells Domo what to wear and what pose to make. This determines what those portraits look like in the end.
 
-To check out what DOM looks like, you can inspect the web page like so:
+To check out what DOM looks like, you can inspect a web page like so:
 
 ![inspect](TODO)
+[TODO clearly marks out the DOM and tree]
 
 Hint: Now right click on this very page, and choose "Inspect".
 
@@ -59,42 +65,50 @@ Hint: Now right click on this very page, and choose "Inspect".
 
 ## DOM API
 
-We often want a web page dynamic and interactive -- that means the page needs to change according to users' input: adding or removing text here and there, showing a modal, or charting some new data retrieved from the server.
+We often want a web page dynamic and interactive -- that means its content needs to change according to users' input: adding or removing text here and there, showing a modal, or creating a new chart based on some new data coming from the server.
 
-Remember, in order to change what's on a web page, we need to update the DOM. It's like that the artist won't be able to paint new portraits until Domo changes to a new pose.
+Remember, in order to change what's on a web page, we need to update the DOM. The artist won't be able to paint new portraits until Domo changes to a new pose.
 
 How would we get Domo to change to a new pose?
 
-We talk to him. More precisely, we talk into his ears, which happen to have a name: _DOM API_. We update DOM by writing JavaScript code that talks to DOM API.
+We just talk to him. He listens. Interestingly, Domo's ears happen to have a name: _DOM API_.
 
 ![ JavaScript to instruct Domo to pose ](TODO)
 
+To manipulate DOM, a developer would write code in JavaScript which talks to DOM API, and in turn, updates the content of the web page.
+
 ## Problems
 
-For quite a while, developers
+_Directly_ talking to Domo has been the standard approach of web development for years, especially when the web content was mostly static. A developer would sprinkle some interactivity on top of the static pages by writing small amount of JavaScript code.
 
-In the past, a developer directly talks to Domo.
+However, with the emergence of SPAs (Single Page Application) such as Gmail and Google Maps, people started to expect a lot more. Instead of mostly static web _pages_, they want web _apps_ that are interactive, fast and responsive.
 
-But it can be tedious to directly talk to Domo, because:
+The code required to build web apps becomes increasingly large and complex. It often requires the collaboration of many team members to build.
 
-- code is large, complex and difficult to manage
+The traditional approach stopped working. It becomes chaotic and inefficient to always directly talk to Domo.
 
-  - React tries to make it easy to build complicated apps by making it easy to split up your app into many simple, independent components. This means that when you change code in one place, other parts of your app don't break.
+<!-- 1. Web apps are getting large and complex. Development of a web app often requires team collaboration
+2. The DOM itself has some issues. It's slow to update the entire DOM for a large page. The behaviors of different browsers have subtle differences.
+3. It's also not efficient to directly talk to Domo. -->
 
-- it's slow
-- Domos in different browsers might speak slightly different languages
-- TODO why react?
-  - In a traditional JavaScript application, you need to look at what data changed and imperatively make changes to the DOM to keep it up-to-date.
-  - by definition, imperative code relies on the context of the current state.
-  - UI state hard to manage: need to remember the current state, need to remember what changed
+![large pile of files, Multiple devs talk to Domo, some tries to shape his hair](TODO)
 
 # Introducing React
 
-[ React superman ]
+Let me introduce you to the new superhero, React:
 
-[ act as a middleman ]
+![React, model agent](./05-model-agent.png)
 
-# Components
+With React, developers no longer directly talk to Domo. React acts as a middleman between a developer and Domo. He smoothes out the communication and streamlines the process of portrait creation.
+
+![React as a middleman](./06-middleman.png)
+
+React has a few tricks to address the issues of the traditional approach of web development. Here are his two main tricks:
+
+- Components
+- Declarative UI
+
+## Components
 
 [Framer component video]
 

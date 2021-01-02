@@ -20,6 +20,12 @@ const components = {
   a: (props: any) => <a className="underline" {...props} />,
   p: (props: any) => <p className="my-4 leading-relaxed" {...props} />,
   hr: (props: any) => <hr className="my-6" {...props} />,
+  blockquote: (props: any) => (
+    <blockquote
+      className="pl-3 py-0.5 italic border-l-4 border-gray-300 bg-gray-100"
+      {...props}
+    />
+  ),
 }
 
 export const PostLayout: FunctionComponent<LayoutProps> = ({
