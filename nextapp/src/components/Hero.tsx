@@ -5,7 +5,7 @@ import Link from 'next/link'
 export function Hero() {
   const { title, excerpt, categorySlug, slug } = highlightedPost
   return (
-    <div className="flex-column sm:flex">
+    <div className="sm:flex">
       <div className="m-1">
         <h1 className="text-4xl p-1 sm:text-5xl sm:p-2">React For</h1>
         <div className="flex">
