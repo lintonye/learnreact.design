@@ -30,7 +30,7 @@ Let's get started with something you might have heard many times, DOM.
 
 ## What is DOM?
 
-When you enter the address of your favorite website into a browser, your computer starts a conversation with another computer far away, commonly referred to as _server_. Typically your computer makes a request for some information and the server responds:
+When we enter the address of our favorite website into a browser, our computer starts a conversation with another computer far away, commonly referred to as _server_. Typically our computer makes a request for some information and the server responds:
 
 > **Your computer:** Yo, what's good about this random site learnreact.design?
 >
@@ -44,7 +44,7 @@ Using this information, the browser creates something called... DOM!
 
 ![ DOM is born ](TODO)
 
-Wait a second, DOM is a ... tree? Yup, a tree! Oddly enough, a lot of things in your computer look like a tree. Let's give our tree friend a nickname... hmmm what about Domo?
+Wait a second, DOM is a ... tree? Yup, a tree! Oddly enough, a lot of things in our computer look like a tree. Let's give our tree friend a nickname... hmmm what about Domo?
 
 Domo works as a model at the prestigious art studio "Web Browser". His job is to pose in front of the artist who paints a portrait (or perhaps millions of portraits).
 
@@ -52,7 +52,7 @@ Domo works as a model at the prestigious art studio "Web Browser". His job is to
 
 <img src={domo} />
 
-In real life, DOM stands for Document Object Model. It's indeed a model -- a model of the document (aka the web page). It works in the same way as Domo. It poses for somebody to paint portraits. The portraits are what we see on the web page: the textboxes, the paragraphs, the images and so on. A developer's job is like that of a director who tells Domo what to wear and what pose to make. This determines what those portraits look like in the end.
+In real life, DOM stands for Document Object Model. It's indeed a model -- a model of the document (aka the web page). It strikes a pose. The browser paints a portrait. The portraits are what we see on a web page: the textboxes, the paragraphs, the images and so on. A developer's job is like that of a director who tells Domo what to wear and what pose to strike. This determines what those portraits look like in the end.
 
 To check out what DOM looks like, you can inspect a web page like so:
 
@@ -65,7 +65,7 @@ Hint: Now right click on this very page, and choose "Inspect".
 
 ## DOM API
 
-We often want a web page dynamic and interactive -- that means its content needs to change according to users' input: adding or removing text here and there, showing a modal, or creating a new chart based on some new data coming from the server.
+We often want a web page to be dynamic and interactive -- that means its content needs to change according to users' input: adding or removing text here and there, showing a modal, or updating a chart based on some new data coming from the server.
 
 Remember, in order to change what's on a web page, we need to update the DOM. The artist won't be able to paint new portraits until Domo changes to a new pose.
 
@@ -95,20 +95,93 @@ The traditional approach stopped working. It becomes chaotic and inefficient to 
 
 # Introducing React
 
-Let me introduce you to the new superhero, React:
+Let me introduce you to the superhero, React:
 
 ![React, model agent](./05-model-agent.png)
 
-With React, developers no longer directly talk to Domo. React acts as a middleman between a developer and Domo. He smoothes out the communication and streamlines the process of portrait creation.
+With React, developers no longer directly talk to Domo. React acts as an agent between a developer and Domo. He smoothes out the communication and streamlines the process of portrait creation.
 
-![React as a middleman](./06-middleman.png)
+![React as an agent](./06-middleman.png)
+
+React is made up of JavaScript code. It's built in a way that we no longer need to directly work with DOM API in most cases. Instead, we write simpler code while React handles the conversation with DOM under the hood.
 
 React has a few tricks to address the issues of the traditional approach of web development. Here are his two main tricks:
 
-- Components
 - Declarative UI
+- Components
 
-## Components
+# Declarative UI
+
+## Imperative vs. Declarative
+
+When directly working with DOM, we'd have to specify what element to change at the right time, in the right order. This is equivalent to describing to Domo how to position his head, arms and legs step by step, for each and every portrait.
+
+![sequential commands about how to pose](./07-step-by-step.png)
+
+Heck, this sounds tedious and error-prone! Why can't we just tell Domo **what** we want instead of **how** to pose?
+
+![a few sketches of yoga poses on a piece of paper, in sketched tree forms, or perhaps just stickman](./08-thinker.png)
+
+In tech terms, if the code defines **what** we want, it's called _declarative_; if it defines **how** we want it to be done, it's called _imperative_. Imperative programming emerged from the day when computers were first invented. When the computers were primitive, people had to instruct them in detail: where to store the numbers, how to multiply etc. It was fine at the beginning, but coding this way became increasingly unmanageable as the tasks given to computers became more and more complex. People then wrote smart software that convert definition of problems into detailed instructions. Declarative programming was born. Today, more and more programming languages and frameworks, such as React, allow us to code declaratively instead of imperatively.
+
+## Reactive UI
+
+Even cooler, imagine if we can leave placeholders in our request to represent different variations of a same pose. React does that too!
+
+This way, when somebody asks for portraits of Domo wearing a different hat, we don't have to talk to Domo again. You can just sit back and let him change it himself.
+
+![Sketch with ornaments placeholders, Domo with different ornaments](./09-thinker-with-hat.png)
+
+This trick is how React got its name. The UI built with React is **reactive**. As a developer, we just need to write down **what** we want and React figures out **how** to do it. When data change, our UI changes accordingly. We don't need to worry about updating the DOM, React does it for us automatically. The idea of reactive UI greatly simplifies UI development.
+
+## Flipbook
+
+# Components
+
+Components are the flagship feature of React. The core idea is based on a simple strategy: divide-and-conquer. If it becomes difficult to grok a problem all at once, we break it into smaller problems, solve them one at a time and then combine the results. In React, a typical app is divided into many components that are relatively more manageble.
+
+- example of UI
+- text representation
+- custom tags
+
+```jsx
+<div>
+  <Toolbar />
+  <Header />
+  <Content />
+  <SideBar />
+  <Footer />
+</div>
+```
+
+Components in React have two important properties:
+
+1. Components are _composable_. They are made for reuse.
+2. Components are _independent_ of each other. Change code in one place, other parts don't break.
+
+If this sounds abstract to you, don't worry! I'll show you some examples and explain these properties in details soon.
+
+But first, let's look at what a React component looks like in real life.
+
+## Components in design tools
+
+In today's design tools, such as Framer or Figma,
+
+If you are familiar with Sketch, components are a lot like [symbols](https://www.sketchapp.com/learn/documentation/symbols/). Building an app in React is almost all about working with components: finding the best components for the job, fitting one with another, creating new components from existing ones etc.
+
+## Write your first React component
+
+Back to our studio "Web Browser", you describe your requirement for portraits as components, React translates it into what Domo understands. This saves you a lot time because you don't have to repeat common parts in your instructions.
+
+## Components are composable
+
+The word "composable" means that we can make a component with other components.
+
+This is similar to how our real world works (with some important differences as I'll show you soon). Our cars, houses and even our bodies are all made up of identifiable components that are individual, functional units. These components are made up of smaller components which consist of even smaller components, all the way down to atoms.
+
+![sketch made up of components](./13-components.png)
+
+## Components are independent
 
 [Framer component video]
 
