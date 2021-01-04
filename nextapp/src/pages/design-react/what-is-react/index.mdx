@@ -59,7 +59,7 @@ HTML defines what building blocks are there in a web page and how they relate to
 
 Using this information, the browser creates something called... DOM!
 
-<img src={imgDomoBorn} alt="DOM is born" />
+<img src={imgDomoBorn} alt="Introducing DOM" />
 
 Wait a second, DOM is a ... tree? Yup, a tree! Oddly enough, a lot of things in our computer look like a tree. Let's give our tree friend a nickname... hmmm what about Domo?
 
@@ -89,7 +89,7 @@ How would we get Domo to change to a new pose?
 
 We just talk to him. He listens. Interestingly, Domo's ears happen to have a name: _DOM API_.
 
-<img src={imgTalkToDomo} alt="A developer talks to Domo" />
+<img src={imgTalkToDomo} alt="A developer works with DOM API" />
 
 To manipulate DOM, a developer would write code in JavaScript which talks to DOM API, and in turn, updates the content of the web page.
 
@@ -107,17 +107,20 @@ The traditional approach stopped working. It becomes chaotic and inefficient to 
 2. The DOM itself has some issues. It's slow to update the entire DOM for a large page. The behaviors of different browsers have subtle differences.
 3. It's also not efficient to directly talk to Domo. -->
 
-<img src={imgMultipleDevsTalk} alt="Multiple devs talk to Domo" />
+<img
+  src={imgMultipleDevsTalk}
+  alt="Directly working with DOM API is getting chaotic"
+/>
 
 ## Introducing React
 
 Let me introduce you to the superhero, React:
 
-<img src={imgIntroReact} alt="Introduction to React" />
+<img src={imgIntroReact} alt="Introducing React" />
 
 With React, developers no longer directly talk to Domo. React acts as an agent between a developer and Domo. He smoothes out the communication and streamlines the process of portrait creation.
 
-<img src={imgReactAgent} alt="React as an agent" />
+<img src={imgReactAgent} alt="React as an agent between a developer and DOM" />
 
 React is made up of JavaScript code. It's built in a way that we no longer need to directly work with DOM API in most cases. Instead, we write simpler code while React handles the conversation with DOM under the hood.
 
@@ -147,23 +150,23 @@ If this sounds abstract to you, don't worry! I'll show you some examples and exp
 
 <img
   src={imgComposableIndependant}
-  alt="Components are composable and independent"
+  alt="React components are composable and independent"
 />
 
 ### Declarative UI
 
 When directly working with DOM, we'd have to specify what element to change at the right time, in the right order. This is equivalent to describing to Domo how to position his head, arms and legs step by step, for each and every portrait.
 
-<img src={imgStepByStep} alt="Sequential commands about how to pose" />
+<img src={imgStepByStep} alt="Imperative programming" />
 TODO the confusion is on dev
 
 Heck, this sounds tedious and error-prone! Why can't we just tell Domo _what_ we want instead of _how_ to pose? In fact, this is exactly how to build a UI in React. A developer draws a quick sketch of what he or she wants. React explains it to Domo how to pose.
 
-<img src={imgThinker} alt="Dev draws sketch, React explains to Domo" />
+<img src={imgThinker} alt="Declarative programming in React" />
 
 Because the apps we build are dynamic, we often want Domo to change poses fairly quickly. We draw many sketches and hand them to React in a big pile. React stacks these sketches together and flips them like a flipbook. A dynamic UI comes live!
 
-<img src={imgFlipbook} alt="Flipbook" />
+<img src={imgFlipbook} alt="React treats input as a flipbook" />
 
 In tech terms, if the code defines _how_ we want it to be done, it's **imperative**; if it defines _what_ we want, it's **declarative**. The traditional way of directly working with DOM API is imperative, and the React way is declarative.
 
@@ -173,10 +176,7 @@ Besides making the life of a developer easier, declarative programming in React 
 
 When React has all the sketches beforehand, he can sort through them, remove any duplication and make sure that Domo and the artist do as little work as possible.
 
-<img
-  src={imgOptimizeSketches}
-  alt="React holds two sketch trees in each hand, similar poses, and tells Domo to only lift up his leg (or whatever minor adjustment)"
-/>
+<img src={imgOptimizeSketches} alt="React diffing with virtual DOM" />
 
 These sketches are called _Virtual DOM_. Virtual DOM is much faster to manipulate than DOM. Developers work with Virtual DOM most of the time instead of directly managing DOM. React handles the dirty work of managing the slow DOM.
 
@@ -184,7 +184,7 @@ These sketches are called _Virtual DOM_. Virtual DOM is much faster to manipulat
 
 Even cooler, imagine if we can leave placeholders in our sketches to represent different variations of a same pose. This way, when somebody asks for portraits of Domo wearing a different hat, we don't have to talk to React again. We can just sit back and let him change it himself.
 
-<img src={imgPlaceholders} alt="Domo with hat" />
+<img src={imgPlaceholders} alt="Reactive UI in React" />
 
 This trick is how React got its name. The UI built with React is **reactive**. As developers, we just need to write down **what** we want and React figures out **how** to do it. When data change, our UI changes accordingly. We don't need to worry about updating the DOM, React does it for us automatically. The idea of reactive UI greatly simplifies UI development.
 
