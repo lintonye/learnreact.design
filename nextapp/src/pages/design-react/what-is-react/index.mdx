@@ -128,7 +128,7 @@ React has a few tricks to tackle the ever-growing complexity of web development.
 
 - Components
 - Declarative UI
-- Reactiveness
+- Reactive DOM updates
 
 ### Components
 
@@ -147,6 +147,8 @@ Components in React have two important properties:
 2. Components are _independent_ of each other. If we change the code in one place, other parts don't break.
 
 If this sounds abstract to you, don't worry! I'll show you some examples and explain these properties in details soon.
+
+Nowadays, design tools such as Framer and Figma have components too (Sketch has symbols). They are a lot like React components, except that the latter are more flexible. In fact, the inspiration of components in design tools came directly from components in software engineering.
 
 <img
   src={imgComposableIndependant}
@@ -180,15 +182,16 @@ When React has all the sketches beforehand, he can sort through them, remove any
 
 These sketches are called _Virtual DOM_. Virtual DOM is much faster to manipulate than DOM. Developers work with Virtual DOM most of the time instead of directly managing DOM. React handles the dirty work of managing the slow DOM.
 
-### Reactiveness
+### Reactive DOM updates
 
-Even cooler, imagine if we can leave placeholders in our sketches to represent different variations of a same pose. This way, when somebody asks for portraits of Domo wearing a different hat, we don't have to talk to React again. We can just sit back and let him change it himself.
+Even cooler, imagine if we can leave placeholders in our sketches to represent different variations of a same pose. This way, when somebody asks for portraits of Domo wearing a different hat, we don't have to talk to React again. We can just sit back and let React change it for us.
 
 <img src={imgPlaceholders} alt="Reactive UI in React" />
+TODO: Make this interactive
 
-This trick is how React got its name. The UI built with React is **reactive**. As developers, we just need to write down **what** we want and React figures out **how** to do it. When data change, our UI changes accordingly. We don't need to worry about updating the DOM, React does it for us automatically. The idea of reactive UI greatly simplifies UI development.
+This trick is how React got its name. The UI built with React is **reactive** -- it appears that the DOM "reacts" to any changes to the underlying data. No need to track the data. No need to worry about when to update the DOM. It just gets updated automatically (by React). The idea of reactive UI greatly simplifies UI development.
 
-TODO: ThinkerHat example
+Here's the code of the demo above. If you are not familiar with JavaScript, just squint: it's some HTML surrounded by some text and parentheses.
 
 ```jsx
 const ThinkerWithHat = ({ hat }) => (
@@ -199,9 +202,28 @@ const ThinkerWithHat = ({ hat }) => (
 )
 ```
 
-Notice that you just need to define what you want (a thinker with a hat), and "wire up" the data ("`type = {hat}`"). When the data change (user selects a hat), the UI updates automatically.
+Notice that we just need to define what we want (a thinker with a hat), and "wire up" the data ("`type = {hat}`"). When the data change (user selects a hat), the UI updates automatically.
 
 ## Write your first React component
+
+Now let's get our hands on a few React components and review what we have learned about React so far.
+
+```jsx
+<div>
+  <Toolbar />
+  <Header />
+  <Content />
+  <SideBar />
+  <Footer />
+</div>
+```
+
+- break down UI
+- custom tags
+- declarative
+- composable, reuse
+- independent
+- reactiveness
 
 TODO: Hands-on examples
 
@@ -220,16 +242,6 @@ body {
 - example of UI
 - text representation
 - custom tags
-
-```jsx
-<div>
-  <Toolbar />
-  <Header />
-  <Content />
-  <SideBar />
-  <Footer />
-</div>
-```
 
 But first, let's look at what a React component looks like in real life.
 

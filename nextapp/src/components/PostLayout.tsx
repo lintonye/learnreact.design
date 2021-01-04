@@ -12,7 +12,7 @@ type LayoutProps = {
 const components = {
   h1: (props: any) => <h1 className="text-3xl font-bold my-6" {...props} />,
   h2: (props: any) => <h2 className="text-2xl font-bold my-4" {...props} />,
-  h3: (props: any) => <h3 className="text-xl font-bold" {...props} />,
+  h3: (props: any) => <h3 className="text-xl font-bold my-3" {...props} />,
   h4: (props: any) => <h4 className="text-lg font-bold" {...props} />,
   ul: (props: any) => <ul className="list-outside list-disc ml-5" {...props} />,
   ol: (props: any) => (
