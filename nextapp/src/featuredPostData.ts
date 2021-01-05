@@ -26,6 +26,9 @@ const postDataAtHome: Category[] = [
       {
         slug: 'what-is-react',
       },
+      {
+        slug: 'harness-react-power',
+      },
     ],
   },
   {

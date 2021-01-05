@@ -10,10 +10,10 @@ export function Hero() {
     <div className="sm:flex">
       <div className="m-1">
         <h1>
-          <span className="text-4xl p-1 sm:text-5xl sm:p-2">React For</span>
+          <span className="text-4xl p-1 sm:text-5xl sm:p-2">React For </span>
           <div className="flex items-end">
             <span className="font-extrabold text-6xl p-1 sm:text-8xl sm:p-2">
-              Designers
+              Designers{' '}
             </span>
             <IconPointArrow className="relative -left-2" />
           </div>
