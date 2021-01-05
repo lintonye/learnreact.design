@@ -1,18 +1,29 @@
-export const highlightedPost = {
-  categorySlug: 'design-react',
+import getAllPostPreviews from '@/getAllPostPreviews'
+import { Post } from '@/types'
+
+type PostAtHome = {
+  slug: string
+  title?: string
+  excerpt?: string
+}
+
+type Category = {
+  categoryTitle: string
+  categorySlug: string
+  posts: PostAtHome[]
+}
+
+const featuredPost = {
   title: 'What is React?',
-  excerpt: 'React concepts explained in plain English and doodles',
   slug: 'what-is-react',
 }
 
-export const featuredPostData = [
+const postDataAtHome: Category[] = [
   {
     categoryTitle: 'Design ╳ React',
     categorySlug: 'design-react',
     posts: [
       {
-        title: 'What is React?',
-        excerpt: 'React concepts explained in plain English and doodles',
         slug: 'what-is-react',
       },
     ],
@@ -51,3 +62,21 @@ export const featuredPostData = [
     ],
   },
 ]
+
+const allPostPreviews = getAllPostPreviews()
+
+function hydratePost(post: PostAtHome): Post {
+  const postPreview = allPostPreviews.find((p) => p.slug === post.slug) || {}
+  return { ...postPreview, ...post }
+}
+
+export function getPostDataAtHome() {
+  return postDataAtHome.map((cat) => ({
+    ...cat,
+    posts: cat.posts.map(hydratePost),
+  }))
+}
+
+export function getFeaturedPost() {
+  return hydratePost(featuredPost)
+}

@@ -1,9 +1,11 @@
 import { jsx } from '@emotion/core'
-import { highlightedPost } from '@/featuredPostData'
+import { getFeaturedPost } from '@/featuredPostData'
 import Link from 'next/link'
 
 export function Hero() {
-  const { title, excerpt, categorySlug, slug } = highlightedPost
+  const featuredPost = getFeaturedPost()
+  const { title, excerpt: Excerpt, url } = featuredPost
+
   return (
     <div className="sm:flex">
       <div className="m-1">
@@ -35,9 +37,11 @@ export function Hero() {
         >
           {title}
         </h2>
-        <p className="p-1">{excerpt}</p>
+        <p className="p-1">
+          {typeof Excerpt === 'string' ? Excerpt : <Excerpt />}
+        </p>
         <div className="text-sm font-bold p-1">
-          <Link href={`/${categorySlug}/${slug}`}>Read more</Link>
+          <Link href={url}>Read more</Link>
         </div>
       </article>
     </div>
