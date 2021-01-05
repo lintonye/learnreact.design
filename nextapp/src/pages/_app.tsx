@@ -1,5 +1,6 @@
 import React from 'react'
 import { AppProps } from 'next/app'
+import 'prismjs/themes/prism.css'
 import '../styles/globals.css'
 import { DefaultSeo } from 'next-seo'
 import Router from 'next/router'
