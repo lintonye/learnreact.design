@@ -37,5 +37,5 @@ export const PostList: FunctionComponent<Props> = ({ category, posts }) => {
 }
 
 export function filterPosts(posts: Post[], categorySlug: string) {
-  return posts.filter((p) => p.categorySlug === categorySlug)
+  return posts.filter((p) => p.tags.includes(categorySlug))
 }

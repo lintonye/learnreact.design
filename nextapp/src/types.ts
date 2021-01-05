@@ -2,7 +2,8 @@ export type Post = {
   title: string
   excerpt: React.FunctionComponent | string
   slug: string
-  categorySlug: string
+  url: string
+  tags: string[]
 }
 
 export type Category = {

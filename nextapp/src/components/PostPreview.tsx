@@ -12,12 +12,12 @@ function renderExcerpt(excerpt: string | FunctionComponent) {
   }
 }
 
-export function PostPreview({ slug, title, excerpt, categorySlug }: Post) {
+export function PostPreview({ url, title, excerpt }: Post) {
   return (
     <article>
       <h3>{title}</h3>
       <div>{renderExcerpt(excerpt)}</div>
-      <Link href={`/${categorySlug}/${slug}`}>Read more</Link>
+      <Link href={url}>Read more</Link>
     </article>
   )
 }

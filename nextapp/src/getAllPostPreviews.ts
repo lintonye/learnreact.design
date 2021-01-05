@@ -15,16 +15,16 @@ function importAll(r: __WebpackModuleApi.RequireContext) {
   return r
     .keys()
     .map((fileName) => {
-      const pattern = /.*\/([\w-\d]+)\/([\w-\d]+)\/.+\.mdx$/
+      const pattern = /.*\/([\w-\d]+)\/.+\.mdx$/
       const match = fileName.match(pattern)
       const module = r(fileName)
 
       return match
         ? {
-            categorySlug: match[1],
-            slug: match[2],
+            slug: match[1],
             ...module.meta,
             date: parseISO(module.meta.date),
+            url: `/posts/${match[1]}`,
             excerpt: module.default, // This is a component!
           }
         : null
@@ -34,6 +34,6 @@ function importAll(r: __WebpackModuleApi.RequireContext) {
 
 export default function getAllPostPreviews() {
   return importAll(
-    require.context('./pages/?preview', true, /\.mdx$/),
+    require.context('./pages/posts/?preview', true, /\.mdx$/),
   ).sort((a, b) => compareDesc(a.date, b.date))
 }
