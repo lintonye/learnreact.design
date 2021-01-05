@@ -2,17 +2,18 @@ import { jsx } from '@emotion/core'
 import React from 'react'
 import { FunctionComponent } from 'react'
 import { NextSeo } from 'next-seo'
-import { Category, Post } from '../types'
+import { Tag, Post } from '../types'
 import { PostPreview } from './PostPreview'
+import getAllPostPreviews from '@/getAllPostPreviews'
 
 type Props = {
-  category: Category
+  tag: Tag
   posts: Post[]
 }
 
-export const PostList: FunctionComponent<Props> = ({ category, posts }) => {
-  const { title, description, categorySlug } = category
-  const url = `/${categorySlug}`
+export const PostList: FunctionComponent<Props> = ({ tag, posts }) => {
+  const { title, description, tagSlug: tagSlug } = tag
+  const url = `/${tagSlug}`
   return (
     <>
       <NextSeo
@@ -36,6 +37,13 @@ export const PostList: FunctionComponent<Props> = ({ category, posts }) => {
   )
 }
 
-export function filterPosts(posts: Post[], categorySlug: string) {
-  return posts.filter((p) => p.tags.includes(categorySlug))
+export function filterPosts(posts: Post[], tagSlug: string) {
+  return posts.filter((p) => p.tags.includes(tagSlug))
+}
+
+export function createTagPostList(meta: Tag) {
+  const posts = filterPosts(getAllPostPreviews(), meta.tagSlug)
+  return function PostListWithMeta() {
+    return <PostList tag={meta} posts={posts} />
+  }
 }

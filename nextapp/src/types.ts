@@ -6,8 +6,8 @@ export type Post = {
   tags: string[]
 }
 
-export type Category = {
+export type Tag = {
   title: string
-  categorySlug: string
+  tagSlug: string
   description: string
 }

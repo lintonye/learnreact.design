@@ -3,14 +3,11 @@ import React from 'react'
 import { PostList, filterPosts } from '@/components/PostList'
 import getAllPostPreviews from '@/getAllPostPreviews'
 
-export const meta = {
-  categorySlug: 'design-react',
+import { createTagPostList } from '@/components/PostList'
+
+const DesignReactPostList = createTagPostList({
+  tagSlug: 'design-react',
   title: 'Design X React',
   description: 'All posts related to the use of React in design',
-}
-
-const posts = filterPosts(getAllPostPreviews(), meta.categorySlug)
-
-export default function DesignReactPostList() {
-  return <PostList category={meta} posts={posts} />
-}
+})
+export default DesignReactPostList
