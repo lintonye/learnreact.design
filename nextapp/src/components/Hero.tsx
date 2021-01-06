@@ -24,7 +24,7 @@ export function Hero() {
 
         <p className="p-3">
           Hand-picked resources on design and frontend development: React,
-          Framer, HTML, CSS, JavaScript{' '}
+          Framer, HTML, CSS, JavaScript
         </p>
       </div>
       <article className="border-l-2 m-2 p-5 relative sm:top-36">

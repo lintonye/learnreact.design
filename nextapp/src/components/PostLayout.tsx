@@ -4,6 +4,7 @@ import { FunctionComponent } from 'react'
 import { NextSeo } from 'next-seo'
 import { MDXProvider } from '@mdx-js/react'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 type LayoutProps = {
   meta: any
@@ -42,8 +43,15 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
   children,
   meta,
 }) => {
-  const { title, description, titleAppendSiteName = false, url, ogImage } =
-    meta || {}
+  const router = useRouter()
+  const currentCanonicalUrl = 'https://learnreact.design' + router.pathname
+  const {
+    title,
+    description,
+    titleAppendSiteName = false,
+    url = currentCanonicalUrl,
+    ogImage,
+  } = meta || {}
   return (
     <>
       <NextSeo
