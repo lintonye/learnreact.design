@@ -8,6 +8,7 @@ import { useRouter } from 'next/router'
 import * as SeoData from '../../next-seo.json'
 import Link from 'next/link'
 import { NavBar } from '@/components/NavBar'
+import { Footer } from '@/components/Footer'
 import { vi } from 'date-fns/esm/locale'
 
 type LayoutProps = {
@@ -144,6 +145,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
           </div>
         </div>
       </div>
+      <Footer />
     </>
   )
 }
