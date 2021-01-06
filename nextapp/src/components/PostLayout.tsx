@@ -6,6 +6,7 @@ import { MDXProvider } from '@mdx-js/react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import * as SeoData from '../../next-seo.json'
+import Link from 'next/link'
 
 type LayoutProps = {
   meta: any
@@ -40,6 +41,44 @@ const components = {
   ),
 }
 
+type HeadingProcessor = (params: {
+  heading: string
+  slug: string
+  content: string
+}) => void
+
+const headings = ['h2', 'h3']
+function visitHeading(children: any, headingProcessorFun: HeadingProcessor) {
+  if (children)
+    React.Children.forEach(children, (c) => {
+      if (c.props) {
+        if (headings.includes(c.props.originalType)) {
+          const heading = c.props.originalType
+          const content = c.props.children
+          const slug = c.props.id
+          headingProcessorFun({ heading, slug, content })
+        }
+        visitHeading(c.props.children, headingProcessorFun)
+      }
+    })
+}
+
+function createToc(path: string, children: any) {
+  const toc: React.ReactElement[] = []
+  visitHeading(children, ({ heading, slug, content }) => {
+    const url = `${path}#${slug}`
+    toc.push(
+      <li
+        key={url}
+        className={(heading === 'h3' ? 'ml-4' : 'ml-0') + ' hover:underline'}
+      >
+        <Link href={url}>{content}</Link>
+      </li>,
+    )
+  })
+  return <ul>{toc}</ul>
+}
+
 export const PostLayout: FunctionComponent<LayoutProps> = ({
   children,
   meta,
@@ -53,6 +92,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
     url = currentCanonicalUrl,
     ogImage,
   } = meta || {}
+  const toc = createToc(router.pathname, children)
   return (
     <>
       <NextSeo
@@ -67,6 +107,10 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
         }}
         canonical={url}
       />
+      <div className="sticky top-3">
+        <div className="uppercase">table of contents</div>
+        {toc}
+      </div>
       <MDXProvider components={components}>
         <div className="prose md:prose-xl max-w-screen-md mt-0 mx-auto leading-6">
           {title && (
