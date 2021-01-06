@@ -125,23 +125,23 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
         canonical={url}
       />
       <NavBar />
-      <div className="max-w-screen-lg mt-10 mx-auto h-auto ">
+      <div className="max-w-screen-sm lg:max-w-screen-md xl:max-w-screen-lg mt-10 mx-auto">
         {title && (
-          <h1 className="text-5xl max-w-3xl mx-auto font-bold leading-tight text-center my-36">
+          <h1 className="mx-auto font-bold leading-tight text-center text-2xl my-10 max-w-sm sm:text-4xl md:my-16 lg:max-w-2xl lg:my-24 xl:max-w-3xl xl:text-5xl xl:my-36">
             {title}
           </h1>
         )}
         <div className="flex justify-center space-x-16">
           <MDXProvider components={components}>
-            <div className="prose md:prose-xl max-w-2xl leading-6">
-              {children}
-            </div>
+            <div className="max-w-2xl leading-6">{children}</div>
           </MDXProvider>
           <div className="sticky top-20 self-start mt-6">
-            <div className="uppercase font-semibold text-gray-500">
-              table of contents
+            <div className="hidden xl:block">
+              <div className="uppercase font-semibold text-gray-500">
+                table of contents
+              </div>
+              <div className="text-sm text-gray-500">{toc}</div>
             </div>
-            <div className="text-sm text-gray-500">{toc}</div>
           </div>
         </div>
       </div>
