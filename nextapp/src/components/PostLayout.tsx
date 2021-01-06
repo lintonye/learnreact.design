@@ -92,7 +92,7 @@ function createToc(path: string, children: any) {
       </li>,
     )
   })
-  return <ul>{toc}</ul>
+  return <ul className="space-y-1">{toc}</ul>
 }
 
 export const PostLayout: FunctionComponent<LayoutProps> = ({
