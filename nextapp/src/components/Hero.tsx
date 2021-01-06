@@ -47,7 +47,7 @@ export function Hero() {
     </div>
   )
 }
-function IconPointArrow(props) {
+function IconPointArrow(props: any) {
   return (
     <svg
       width={22}
