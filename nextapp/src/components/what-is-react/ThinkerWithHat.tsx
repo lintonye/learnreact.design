@@ -2,7 +2,7 @@ import { jsx } from '@emotion/core'
 import imgThinkerWithHat from './thinker-with-hat.png'
 import Image from 'next/image'
 
-const Hat = ({ type }) => {
+const Hat = ({ type = 'cap' }: { type?: string }) => {
   let url = ''
   switch (type) {
     case 'cap':
