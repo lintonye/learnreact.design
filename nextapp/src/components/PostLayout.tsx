@@ -5,6 +5,7 @@ import { NextSeo } from 'next-seo'
 import { MDXProvider } from '@mdx-js/react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import * as SeoData from '../../next-seo.json'
 
 type LayoutProps = {
   meta: any
@@ -44,7 +45,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
   meta,
 }) => {
   const router = useRouter()
-  const currentCanonicalUrl = 'https://learnreact.design' + router.pathname
+  const currentCanonicalUrl = SeoData.siteUrl + router.pathname
   const {
     title,
     description,

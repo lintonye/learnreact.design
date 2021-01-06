@@ -4,19 +4,13 @@ import { Footer } from '../components/Footer'
 import { Hero } from '../components/Hero'
 import { Main } from '../components/Main'
 import { NavBar } from '../components/NavBar'
+import { NextSeo } from 'next-seo'
+import * as SEOData from '../../next-seo.json'
 
 export default function Home() {
   return (
     <div>
-      {/* <Head>
-        <title>React For Designers and Visual Learners</title>
-        <link rel="icon" href="/favicon.ico" />
-        <meta
-          name="description"
-          content="Hand-picked resources on design and frontend development: React, Framer, HTML, CSS, JavaScript"
-        />
-      </Head> */}
-
+      <NextSeo canonical={SEOData.siteUrl} />
       <NavBar />
       <main>
         <div className="max-w-screen-lg mx-auto">
