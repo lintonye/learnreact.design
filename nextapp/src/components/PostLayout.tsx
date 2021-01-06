@@ -132,11 +132,11 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
         )}
         <div className="flex justify-center space-x-16">
           <MDXProvider components={components}>
-            <div className="prose md:prose-xl max-w-2xl leading-6 text-lg">
+            <div className="prose md:prose-xl max-w-2xl leading-6">
               {children}
             </div>
           </MDXProvider>
-          <div className="sticky top-10 self-start">
+          <div className="sticky top-20 self-start mt-6">
             <div className="uppercase font-semibold text-gray-500">
               table of contents
             </div>

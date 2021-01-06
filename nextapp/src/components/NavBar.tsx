@@ -6,7 +6,7 @@ export function NavBar() {
   return (
     <header>
       <nav>
-        <ul className="flex m-2 space-x-2 text-sm">
+        <ul className="flex m-4 space-x-8 text-sm">
           <li>
             <a href="/">LearnReact.design</a>
           </li>
