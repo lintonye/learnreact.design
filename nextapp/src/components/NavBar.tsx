@@ -1,17 +1,17 @@
-import {jsx} from '@emotion/core'
-import {Menu} from '@headlessui/react'
+import { jsx } from '@emotion/core'
+import { Menu } from '@headlessui/react'
 import Link from 'next/link'
 
 export function NavBar() {
   return (
     <header>
       <nav>
-        <ul>
+        <ul className="flex m-2 space-x-2 text-sm">
           <li>
-            <a href="">LearnReact.design</a>
+            <a href="/">LearnReact.design</a>
           </li>
           <li>
-            <a href="/courses">Courses</a>
+            <Link href="/courses">Courses</Link>
           </li>
           <li>
             <Menu>

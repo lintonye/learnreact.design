@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import * as SeoData from '../../next-seo.json'
 import Link from 'next/link'
+import { NavBar } from '@/components/NavBar'
 
 type LayoutProps = {
   meta: any
@@ -107,10 +108,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
         }}
         canonical={url}
       />
-      <div className="sticky top-3">
-        <div className="uppercase">table of contents</div>
-        {toc}
-      </div>
+      <NavBar />
       <MDXProvider components={components}>
         <div className="prose md:prose-xl max-w-screen-md mt-0 mx-auto leading-6">
           {title && (
@@ -119,6 +117,10 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
           {children}
         </div>
       </MDXProvider>
+      <div className="sticky top-44">
+        <div className="uppercase">table of contents</div>
+        {toc}
+      </div>
     </>
   )
 }
