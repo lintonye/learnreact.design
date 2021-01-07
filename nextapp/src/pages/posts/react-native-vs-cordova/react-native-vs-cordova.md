@@ -1,0 +1,130 @@
+---
+date: '2018-02-14'
+title: 'React Native vs. Cordova, PhoneGap, Ionic etc.'
+subtitle: 'React terms in plain English and doodles🌴🎄⚛'
+
+excerpt: 'React terms explained in plain English and doodles🌴🎄⚛'
+---
+
+_Blog series: React terms explained in plain English and doodles_
+
+- _[What is React?](/2017/06/08/what-is-react/)_
+- _[What is React Native?](/2017/06/20/what-is-react-native)_
+- _[Components, Props and State](/2017/08/16/components-props-and-state)_
+- _[Props and State Re-explained](/2018/01/15/props-and-state-re-explained)_
+- _[React Native vs. Cordova, PhoneGap, Ionic etc.](/2018/02/14/react-native-vs-cordova-phone-gap-ionic-etc) (this post)_
+
+---
+
+In a [previous post](/2017/06/20/what-is-react-native), I've told you that React Native is great since it allows us to build apps with _native UI_. The user experience of a React Native app is a lot better than those with a WebView UI. But what does "native" actually mean? What is WebView UI? Why is native UI better than WebView UI? How does React Native compare to other mobile frameworks such as PhoneGap, Cordova and Ionic?
+
+Let's dig into these questions now. Sit tight!
+
+<a name="learning-goals"></a>
+
+# Learning Goals
+
+After reading this post, I'll get you to come back here. Hopefully you'll be able to answer these questions easily:
+
+- What is a native app?
+- What is WebView UI?
+- What are the benefits and shortcomings of a more native framework? What about a less native framework?
+- How does React Native compare to Cordova?
+
+# What is a "native" app, anyways?
+
+To understand what this "nativeness" actually means, let me present you with this:
+
+![matrix](./matrix.png)
+
+I'm a big fan of _The Matrix_, aren't you? You know, the reality as we know it is actually a simulation. And there are cues that even Zion, the last city where humans once considered themselves free, is a simulation too [^1]. The idea of multi-layer simulated reality has always fascinated me - a virtual world running as a simulation inside another virtual world which runs inside a third world [^2].
+
+This is a lot like the structure of the software in our computers (or phones).
+
+Software is the arrangement of instructions of how to operate the humongous number of transistors and circuits, collectively called hardware. The raw instructions that directly run on the hardware are close to incomprehensible to us humans, especially given the complexity and scale of today's computers.
+
+To make software understandable and operable, computer scientists divided it into multiple layers consisting of a framework [^3] running on top of another framework. Among all these frameworks, the closer a framework is to the hardware, we say it's more "native".
+
+![relative-native](./relative-native.png)
+
+Therefore, the "nativeness" of an app is really a relative term. Strictly speaking, we cannot say if an app is native or not by itself. We can only say, compared to another app, this app is _more_ native. As an example, you could build an Android app in C++, Java (or Kotlin), or Cordova. The C++ app is the most native and the Cordova app is the least native. The Java/Kotlin app sits in-between.
+
+# What's good about a more native app?
+
+There are benefits being either more native or less native. Closer to the metal means more freedom, whereas more simulation gets you more comfort.
+
+![cipher](./steak.png)
+
+A program in a more native framework usually have more access to hardware features, and more freedom in how to use them. It usually runs more efficiently because of lower overhead for simulation and translation between different languages. But the life in the base reality might be harsh - the code is often harder to write and understand.
+
+On the other hand, it's usually easier for us humans to write code in a less native framework. The coding language is easier to understand and more concise (requires less typing). Its vocabulary is closer to our natural languages. It requires less understanding of what the hardware is made up of and how it works under the hood. As an added benefit, a program in a less native framework is often more _portable_ - the program can run on totally different hardware platforms without modification because its vocabulary and underlying concepts do not contain anything specific to the original hardware. However, the cost of all this convenience is that you'd usually sacrifice some efficiency and freedom.
+
+# Mobile framework camps
+
+Before React Native, mobile frameworks usually fall into one of the two camps.
+
+The first is the native camp, for example Java/Kotlin for Android and Objective-C/Swift for iOS. In the native camp, apps are fast and can access abundant hardware features. The user interfaces are bespoke for the target platform (Android or iOS) and therefore are smooth and a pleasure to use. However, all these goodness are restricted in just one platform. To build apps, one has to learn two different frameworks, which makes the learning curve twice as steep. This especially leaves millions of web developers behind.
+
+Then there came the other camp of mobile frameworks, for example Cordova/PhoneGap and Ionic. These frameworks allow web developers to build mobile apps with their existing HTML, CSS and JavaScript skills. The apps can run on both Android and iOS (and more). However, they are more sluggish and have limited access to hardware features. Most importantly, the user interfaces of these apps suck! Since these frameworks use a key component called WebView to render the UI, let's call them WebView frameworks.
+
+WebView frameworks are built on top of native frameworks. We can see the former as simulated worlds running inside the latter. That's why they have the aforementioned benefits and limitations.
+
+![webview](./webview.png)
+
+Why can't we get the benefits of both and avoid pitfalls of either? That's what React Native sets out to do.
+
+React Native represents the third camp of mobile frameworks. Its UI layer is more native than WebView frameworks, whereas the rest is at the same level of simulation to achieve its ease of use.
+
+## React Native UI is more native than WebView UI
+
+Frameworks such as Cordova makes it possible to build mobile UI with web technologies. How do they do it? They embed a web browser, sneakily called WebView here, into every app! Everything you see in the UI, the buttons, menus and animations, is running inside a web page in the browser. In terms of simulation, the UI of a Cordova app is a simulated world running inside a web browser which is a simulated world running inside the native frameworks.
+
+In comparison, the UI of React Native is one layer more native than WebView frameworks - it runs directly inside the native frameworks.
+
+![rn](./rn.png)
+
+This structure determines the advantages of React Native UI. React Native directly uses native UI widgets, whereas the WebView frameworks attempt to mimic the look and feel of native UI with web UI in HTML/CSS. The real thing or fake thing, which one do you prefer?
+
+Empirically, it's not difficult to identify an app built with WebView frameworks in the wild. Those little things, like scrolling acceleration, keyboard behavior, navigation and general smoothness of the UI. If they don't behave exactly natively, things can add up and result in frustrating experiences for users.
+
+## React Native uses JavaScript to make things easier
+
+On the other hand, React Native still allows us to write apps in JavaScript and use syntax similar to HTML and CSS to build the UI. This definitely lowers the barrier to entry for web designers and developers.
+
+When necessary, React Native provides a way to penetrate to the native frameworks to achieve whatever native features that we wish to implement in the app. This is a bit like making a phone call in _The Matrix_.
+
+![phonecall](./phonecall.png)
+
+# So are WebView frameworks worthless?
+
+No, definitely not. For example, if you have a web app already and want to release it to the app stores as soon as possible. You are willing to sacrifice the user experience for the shortest time to market.
+
+Another case is that if what would be presented in the app is mostly content with not much interactivity, it wouldn't be too bad to put it inside a WebView.
+
+However, if the user experience of your app is important, if there's some interactivity in the app, like accepting user input, drag&drop, swiping screens etc., definitely consider React Native. Because the last thing you want to do is to mimic native UI with WebView UI.
+
+# Conclusion
+
+Alright, we've looked at what "native" really means, what WebView UI is and why React Native UI is better, how React Native compares to other WebView frameworks such as Cordova/PhoneGap and Ionic.
+
+What do you think? Which framework would you use to build your next app?
+
+![redpill](./redpill-bluepill.png)
+
+---
+
+# Footnotes
+
+[^1]:
+
+At the end of _Matrix Reloaded_, Neo was showing the ability to control and take down the sentinels even in Zion. Although this is not clearly explained in the followup _Matrix Revolution_, many fans at the time thought even Zion was simulated.
+
+[^2]:
+
+After all, as Elon Musk said, there's a one in billions chance we're in base reality.
+
+[^3]:
+
+Let's use the term "framework" loosely in this post to refer to a piece of software with some sort of structure.
+
+<a name="endofpost"></a>

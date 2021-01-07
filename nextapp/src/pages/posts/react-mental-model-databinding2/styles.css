@@ -1,0 +1,37 @@
+.App {
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.App * {
+  font-size: 20px;
+  box-sizing: border-box;
+}
+
+.suggestions {
+  margin: 16px;
+}
+
+.history {
+  border: solid 1px grey;
+  margin-bottom: 16px;
+  height: 400px;
+  width: 500px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.message {
+  background: purple;
+  color: white;
+  min-width: 200px;
+  border-radius: 24px 24px 0 24px;
+  padding: 16px;
+  margin: 8px 0 0 0;
+}

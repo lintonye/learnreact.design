@@ -1,0 +1,278 @@
+---
+date: '2020-03-31'
+title: 'React Mental Models: Working With Input'
+# subtitle: "Cutting holes in HTML"
+---
+
+import InputAndButtons from './InputAndButtons'
+import PandaPunch from './PandaPunch'
+
+![complete 4-frame comic](./hole-4-frames.png)
+
+You still remember this comic from [last post](/2020/03/23/react-mental-models-cutting-holes-in-html), right? I hope it's left a lasting impression on you since it's a really useful metaphor for thinking about React.
+
+In this post, we're going to dive deeper into this topic. We'll focus on a different tag, `<input>`, to complete our mental model.
+
+<!-- *BTW: Stuck at home? Why don't you join our [new React challenge](/challenges/bored-at-home-react)? Come learn React, meet like-minded people (with guaranteed social distance), build something cool and win prizes! It's FREE.* -->
+
+# Moving on to `input`
+
+Let's look at this component:
+
+```jsx
+function App() {
+  return (
+    <div>
+      <input type="text" />
+    </div>
+  )
+}
+```
+
+It's going to render a text box in the browser. Compared to the `div` or `span` we used before, `input` is special since it's interactive -- it allows a user to change its content.
+
+Let me ask you three questions.
+
+## Question 1
+
+First we add a button. When the button is clicked, we want to show an alert that contains the text in the text box.
+
+```jsx{7}
+function App() {
+  return (
+    <div>
+      <input type="text" />
+      <button onClick={
+        function() {
+          // TODO alert(text in the input)
+        }
+      }>Send</button>
+    </div>
+  )
+}
+```
+
+**How would we get the text that a user would enter into this text box?**
+
+If you are wondering how to get the reference of that input, THINK AGAIN! [^1]
+
+Remember, **always look at the data!**
+
+Right now, we only have a static structure in the component. There's no `{}` at all. We need to add the data and cut a hole somewhere:
+
+```jsx{2,5}
+function App() {
+  const [draft, setDraft] = React.useState("")
+  return (
+    <div>
+      <input type="text" value={draft} />
+      <button onClick={
+        function() {
+          // TODO alert(text in the input)
+        }
+      }>Send</button>
+    </div>
+  )
+}
+```
+
+So, how would we get the text of the text box? We should look at the value of `draft`:
+
+```jsx{3}
+<button onClick={
+  function() {
+    alert(draft)
+  }
+}>Send</button>
+```
+
+In fact, "what's the text in the text box" is almost the wrong question. What we should ask is "what's behind the hole", or "what's the data that's bound to the text box".
+
+From this example, we also see that we can cut holes in an attribute's value, in addition to the content of a tag. But that's it. There are no other places where we could cut holes.
+
+```jsx
+<input value={text} />         // ✅ Correct
+<div>💪{who}👊</div>           // ✅ Correct
+<span>💪{who}{action}</span>   // ✅ Correct
+
+<input {attr}="1" />           // ❌ Wrong
+<{tagName} />                  // ❌ Wrong
+```
+
+## Question 2
+
+Let's use a different button. How would we change the text in the text box when the user clicks the button?
+
+```jsx
+function App() {
+  const [draft, setDraft] = React.useState('')
+  return (
+    <div>
+      <input type="text" value={draft} />
+      <button
+        onClick={function () {
+          //TODO set the content of the textbox to "😍"
+        }}
+      >
+        😍
+      </button>
+    </div>
+  )
+}
+```
+
+Again, if you want to do something like below, wrong answer.
+
+```js
+$('input').val('😍')
+```
+
+Remember, **always look at the data!**
+
+Since the input is bound to `text` via `value={text}`, we just need to change the data, and the text box will update itself:
+
+```jsx
+setText('😍')
+```
+
+So the result would be like this:
+
+<InputAndButtons />
+
+## Question 3
+
+The emoji buttons above work fine. However, if you try to type in the text box, you'll see that it doesn't work at all! Try it above.
+
+Why?
+
+Let's check out the code again:
+
+```jsx{5}
+function App() {
+  const [draft, setDraft] = React.useState("")
+  return (
+    <div>
+      <input type="text" value={draft} />
+      <button onClick={
+        function() {
+          setDraft("😍")
+        }
+      }>😍</button>
+    </div>
+  )
+}
+```
+
+You see, the value of the input is determined by who's behind the hole, i.e. the value of `draft`. The only way to change `draft` is by calling `setDraft`. The only moment we call `setDraft` is when the button is clicked. It doesn't cover the situation when a user types in the text box!
+
+<!-- In the language of "data binding", since we've bound `draft` to the `value` of the input, React will always keep these two in sync.  -->
+
+To make the input work, we need to call `setDraft` when a user types something into the text box:
+
+```jsx{2-3}
+<input type="text" value={draft}
+  onChange={
+    function(event) {
+      setDraft(event.target.value)
+    }
+  }/>
+```
+
+Here, `event.target.value` is whatever the user types in the text box.
+
+# Recap
+
+We've looked at `<input>` as another example,
+
+- to retrieve its value, we look at the data bound to the input
+- to update its value, we look at the data too.
+- the only way to change the data is to call the `setXXX` function. In the `input`, if it's bound to some data, we need to explicitly call `setXXX` in `onChange`. Otherwise a user won't be able to type in anything.
+
+<!-- This is one of the most common frustrations I've seen when people get started on React. "How come my text input/dropdown/slider stops working?" -->
+
+When the `input` has its value bound to a data item, i.e. the state, we call it a _controlled component_. We have similiar stories for other interactive HTML elements, such as `select` and `textarea`.
+
+You might ask, are there _uncontrolled components_? You guess it right. I'll cover more about controlled and uncontrolled components in a future post.
+
+But let's do some work out first! 👇
+
+# Quiz Time!
+
+How about doing some Kung Fu routines with Panda? Try the slider and button below:
+
+<PandaPunch />
+
+## Your Tasks
+
+1. Use [this starter project](https://codesandbox.io/s/blog-data-binding-input-quiz-panda-punch-starter-g9luj)
+2. When the "show" button is clicked, show the current value of the slider in an alert dialog.
+3. When the slider moves, change the size of Panda's fist accordingly.
+4. When you are done, [tweet](https://twitter.com/intent/tweet?text=Just%20read%20React%20Mental%20Models%20post%20by%20%40lintonye%0Ahttps%3A//learnreact.design/2020/03/31/react-mental-models-data-binding-and-input%0AHere's%20my%20answer%20to%20%23ReactMentalModelsQuiz%3A%20%5Binsert%20sandbox%20URL%5D%0A) the URL of your sandbox to win some hearts! Remember to save your file **before** copying the URL.
+
+## Hints
+
+1. What's that `{ fontSize: 40 }` in the starter project? (Hint: it's a JavaScript thing.)
+2. Why are there two layers of `{}` around `fontSize: 40`?
+3. Try changing the number after `fontSize`, how would you make it dynamic?
+4. Instead of `event.target.value`, you'll need to use `event.target.valueAsNumber`. Otherwise the code won't work.
+
+## Solution
+
+Got stuck? Here's the [solution](https://codesandbox.io/s/blog-data-binding-input-quiz-panda-punch-solution-dcwjy). Promise me, don't peek until you've tried your very best!
+
+# Footnotes
+
+[^1]: To be accurate, it's possible to get the reference of a DOM node in React and sometimes it's absolutely necessary to do so. But in most cases, we work with the data instead of the DOM nodes. I'll cover the special cases in a future post.
+
+<!--
+
+We can put state, prop, context in the hole. In fact, we can put [any JavaScript expression there](TODO link to post).
+
+
+- example
+  - data, setData pair
+- separating data and UI
+  - static structure
+  - It's the data that changes
+  - why?
+  - All about data
+    - Get input value - from the data
+    - Set input value - set the data
+- What could be data?
+  - content data and ui states
+  - data includes: state, prop, context
+- UI automatically updates
+- link to workshop, sign up form etc.
+
+
+
+"What's the text inside that p tag?"
+"What's in the text box?"
+"What's the color of the button?"
+
+
+
+It's natural to point to a thing on the screen and talk about it.
+
+But what React enforces is that we need to think about the data and the static UI separately.
+
+
+
+
+
+```jsx
+<input value="" />
+```
+
+The typical way
+
+# Change text
+
+
+
+
+
+First of all, we have some static content rendered with a few lines of HTML code. Second, we *bind* data to the UI
+
+
+bind data to UI to make it interactive. Dynamic. -->

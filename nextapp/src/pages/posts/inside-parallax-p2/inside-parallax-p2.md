@@ -1,0 +1,479 @@
+---
+date: '2018-10-29'
+title: 'Inside Parallax, my first Framer X component, Part 2'
+subtitle: 'A technical drill down'
+---
+
+![gif of parallax](./parallax-cover.png)
+
+In this series of posts, I want to give you a technical drill down of the [parallax package](https://store.framer.com/package/lintonye/parallax) I built for Framer X. Here are some key points that are covered:
+
+- [last post](/2018/10/12/inside-parallax-my-first-framer-x-component-part-1):
+  - how to debug in Framer X
+  - how to reuse property controls of an existing component, such as Scroll
+  - how to add a connector to a component, just like the one Scroll has
+  - how to monitor the scrolling position
+- this post:
+  - how to recursively walk through a children tree and make changes
+  - how to use `Animatable`s to avoid excessive cloning
+  - how to use the Context API in React to further improve the performance
+    ``
+
+# Review: how does Parallax work?
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xFI8BPxB5TA?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+Remember how Parallax works? We have two components, `ParallaxScroll` and `ParallaxLayer`. `ParallaxScroll` monitors how much the page has been scrolled, finds out all `ParallaxLayer`s in the `children`, calculates their positions based on their `speed` props and the current scroll position, and update their positions.
+
+The code skeleton may look like this:
+
+```jsx
+export class ParallaxScroll extends Component {
+  ...
+  handleScroll = ({x, y}) => {
+    // find all ParallaxLayers in this.props.children
+    // and update their positions according to x or y
+  }
+  render() {
+    return (
+      <Scroll {...this.props} onMove={this.handleScroll}>
+        {this.props.children}
+      </Scroll>
+    );
+  }
+}
+```
+
+But how do we find the `ParallaxLayer`s and update their props? This is the focus of this post.
+
+As mentioned, I've tried three approaches:
+
+1. Clone the `children` tree when scrolling (slooooow!)
+2. Use Animatables to avoid excessive cloning (faster)
+3. No cloning at all with React Context (awesome!)
+
+Before going through these approaches though, let's visit a mistake that you'd probably make if you are new to React. Honest confession: I did something similar when I started learning React!
+
+# The first attempt
+
+Since `this.props.children` is a tree structure, why can't we just traverse it, find the `ParallaxLayer`s and update the props along the way?
+
+This seems like a straightforward process with recursion:
+
+```jsx
+const isParallaxLayer = (node) => ...;
+
+const updateParallaxLayerProps = (node) => ...;
+
+const updateParallaxLayers = (node) => {
+  if (isParallaxLayer(node)) {
+    updateParallaxLayerProps(node);
+  }
+  React.Children.toArray(node.props.children).forEach(c =>
+    updateParallaxLayers(c)
+  );
+};
+```
+
+In `updateParallaxLayerProps`, perhaps we have something like this, right?
+
+```jsx
+node.setProp('style', { left, top })
+// or:
+node.props.style = { left, top }
+```
+
+Unfortunately, there's no `setProp` method and this approach won't work at all. This approach goes against the core ideas of React. In React, props are immutable. We can't update them in-place like so in `updateParallaxLayerProps`!
+
+Heck, if the props in React can't be changed, how do we update our UI? There's certainly something that has to change!
+
+The solution is to create a new copy of the element with the new props:
+
+```jsx
+const newNode = React.cloneElement(node, newProps)
+```
+
+Here this `cloneElement` function creates a copy of `node` with exactly the same tag name, props and children, except that it'll replace the props included in `newProps`.
+
+We can replace its children as well:
+
+```jsx
+const newNode = React.cloneElement(node, newProps, newChildren)
+```
+
+We'll then use the `newNode` in the `render` method of the component. This leads to my first approach that actually works (albeit rather slow).
+
+# Approach 1: Clone the tree when scrolling
+
+The code of this approach is on [this branch](https://github.com/lintonye/parallax/tree/approach1-deep-clone-on-render).
+
+## Clone the tree
+
+Because the `children` tree is immutable, if we want to update the props of any element in it, we'd have to clone the entire tree!
+
+```jsx
+export class ParallaxScroll extends Component {
+  ...
+  render() {
+    const child = this.props.children[0];
+    return (
+      <Scroll {...this.props} onMove={this.handleScroll}>
+        {this.cloneAndOffsetParallaxLayers(child)}
+      </Scroll>
+    );
+  }
+}
+```
+
+The `cloneAndOffsetParallaxLayers` method looks like this:
+
+```jsx
+cloneAndOffsetParallaxLayers(child) {
+  const getUpdatedPositionProps = (node) => {
+    if (isParallaxLayer(node)) {
+      // return new position props according to scroll position
+    } else {
+      return null; // won't update props
+    }
+  }
+  return cloneAndUpdateProps(getUpdatedPositionProps, child)
+}
+```
+
+To make the cloning function reusable, the logic for getting the new props is exacted into the `getUpdatePropsFun` callback function.
+
+The `cloneAndUpdateProps` function uses recursion to clone the entire tree with updated props for each node along the way:
+
+```jsx
+function cloneAndUpdateProps(getUpdatePropsFun, node) {
+  if (!React.isValidElement(node)) return node
+  const updateProps = getUpdatePropsFun(node)
+  const clonedChildren = React.Children.map(node.props.children, (c) =>
+    cloneAndUpdateProps(getUpdatePropsFun, c),
+  )
+  return React.cloneElement(node, updateProps, clonedChildren)
+}
+```
+
+## Update when scrolling
+
+Now let's see how to update the positions of `ParallaxLayer`s when scrolling:
+
+```jsx{4-5}
+export class ParallaxScroll extends Component {
+  ...
+  handleScroll = ({x, y}) => {
+    // find all ParallaxLayers in this.props.children
+    // and update their positions according to x or y
+  }
+  render() {
+    return (
+      <Scroll {...this.props} onMove={this.handleScroll}>
+        {this.cloneAndOffsetParallaxLayers(child)}
+      </Scroll>
+    );
+  }
+}
+```
+
+In the `handleScroll` function above, we'll receive the scroll position `x` and `y`. We can just set it to the state:
+
+```jsx
+export class ParallaxScroll extends Component {
+  ...
+  state = {
+    scrollX: 0,
+    scrollY: 0
+  }
+  handleScroll = ({x, y}) => {
+    this.setState({scrollX: x, scrollY: y});
+  }
+  ...
+}
+```
+
+In the `cloneAndOffsetParallaxLayers` method, we'll use this state to work out the new position props:
+
+```jsx{7-8}
+cloneAndOffsetParallaxLayers(child) {
+  const getUpdatedPositionProps = (node) => {
+    if (isParallaxLayer(node)) {
+      ...
+      const scrollPosition =
+          this.props.direction === "vertical"
+            ? this.state.scrollY
+            : -this.state.scrollX;
+      const left = (scrollPosition * speedX) / 10;
+      const top = (scrollPosition * speedY) / 10;
+      return {style: {left, top}};
+    } else {
+      return null;
+    }
+  }
+  return cloneAndUpdateProps(getUpdatedPositionProps, child)
+}
+```
+
+So that's about it! Whenever the `ParallaxScroll` is scrolled, we'll update the state. As the result, we re-render the whole thing: clone and update the positions of all `ParallaxLayer`s.
+
+I know, this sounds really wasteful. Although the React elements we clone are plain objects which are relatively cheap to create, doing so on every render still doesn't sound like a good idea.
+
+In fact, the scrolling experience of this component looks like this:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/M0yDiMxkCdw?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
+
+# Approach 2: Use Animatable to avoid excessive cloning
+
+The code of this approach is on [this branch](https://github.com/lintonye/parallax/tree/approach2-use-Animatable-to-avoid-render-onScroll).
+
+## Use Animatable
+
+The major issue of the first approach is the excessive cloning that happens whenever the scroll position is updated. In order to get new `left` and `top` props, we have to clone the entire tree because it's immutable. It'd be much faster if we could update the `left` and `top` props of a `ParallaxLayer` in-place, instead of cloning it.
+
+How can we do that while keeping `this.props.children` immutable? The answer is we can't!
+
+In order to improve the animation performance, we'd have to make a compromise to the immutability rule. Framer X provides an `Animatable` that allows us to update its value in-place:
+
+```js
+anAnimatable.set(newValue)
+```
+
+This is the same idea as `Animated` on React Native that provides high-performance animation on mobile platforms.
+
+So, instead of plain numbers, we'll use `Animatable` for the `left` and `top` props of `ParallaxLayer`. We'd only need to clone the children tree once to replace the `left` and `top` props of all `ParallaxLayer`s:
+
+```jsx{5-9}
+cloneAndOffsetParallaxLayers(child) {
+  const getUpdatedPositionProps = (node) => {
+    if (isParallaxLayer(node)) {
+      ...
+      const left = Animatable(oldLeft);
+      const top = Animatable(oldTop);
+      // Keep a record of all layers so that
+      // we could update them later on scroll.
+      this.layerConfigs.push({left, top, props: node.props})
+      return {left, top};
+    } else {
+      return null;
+    }
+  }
+  return cloneAndUpdateProps(getUpdatedPositionProps, child)
+}
+```
+
+After that, when the scroll position updates, we can simply update the value of all the `Animatable`s:
+
+```jsx
+handleScroll = ({x, y}) => {
+  this.layerConfigs.forEach(({left, top, props}) => {
+    ...
+    left.set(newLeft);
+    top.set(newTop);
+  })
+}
+```
+
+This is definitely better than having to re-render and re-clone the entire children tree whenever the scroll position updates.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Mce8bHaBNlA?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+Oh btw, don't forget to use `Frame` instead of `div` in `ParallaxLayer`. `Frame` knows how to handle `left` and `top` props when they are `Animatable`s whereas `div` does not.
+
+```jsx{1}
+import { Frame } from 'framer';
+...
+class ParallaxLayer extends React.Component {
+  ...
+  render() {
+    return (
+      <Frame {...this.props} background={null}>
+        {this.props.children}
+      </Frame>
+    );
+  }
+}
+```
+
+## Performance issue of cloning
+
+Alright, we've significantly reduced the number of re-rendering and cloning. This is definitely an improvement.
+
+However, although we are doing it less frequently now, if the children tree is very deep and complex, it'll take a while for the cloning process to finish. This might freeze the UI and cause a janky experience.
+
+Even worse, Framer X will throw an error in our face if we are trying to clone a big tree:
+
+![exceeded time limit error](./exceed-time-limit.png)
+
+That's because Framer X is fairly strict about responsiveness. It only gives components 9ms each frame to finish the rendering.
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">We give every component 9ms per frame. For some operations, like mounting and rendering children for first time, that is not much. You can use a short timer to drive setState() and build up the component in some staggering way.</p>&mdash; onnlucky🍀 (@onnlucky) <a href="https://twitter.com/onnlucky/status/1049392195852259329?ref_src=twsrc%5Etfw">October 8, 2018</a></blockquote>
+
+This is definitely a bummer. Fortunately, for the use case of Parallax, there's a workaround and we don't have to clone at all! I'll talk about the technique in the next section.
+
+On another note, sometimes we have no choice but to clone. For example, in my other component, [Translate All](https://store.framer.com/package/lintonye/translate-all), I'd have to make changes to components I don't have much control. In order to prevent the "exceeded time limit" error, as [onnlucky](https://twitter.com/onnlucky) mentioned, I'd need to do it in a "staggered way" -- divide the cloning process into small pieces that fit the 9ms window of each frame.
+
+It's possible to clone the children tree with a stack instead of recursion. With a stack, it'd be easier to save the unfinished work and pick up where it's left off on the next frame. This may be a little tricky to implement though. The good news is that the upcoming [time slicing](https://reactjs.org/blog/2018/03/01/sneak-peek-beyond-react-16.html) in React sounds like exactly what we wanted! Hopefully Framer X will update React soon enough when it's available.
+
+# Approach 3: No cloning at all with React Context
+
+The code of this approach on [this branch](https://github.com/lintonye/parallax/tree/approach3-use-context-to-avoid-cloning).
+
+## Why tree traversal if we have full control of `ParallaxLayer`?
+
+The previous two approaches perform a full tree traversal to find out all `ParallaxLayer`s and then clone the entire tree to make changes. This is where the slowness comes in -- if the tree has many nodes, it'd take quite a while to traverse and clone it.
+
+How to avoid tree traversal while still getting hold of all `ParallaxLayer`s?
+
+If we look closely, `ParallaxLayer` is a component we write and we have full control of it. Instead of being passively picked out by the container, why can't a `ParallaxLayer` announce itself voluntarily?
+
+Here's the solution. We can ask a `ParallaxLayer` to register itself when it's mounted, and unregister when it's unmounted. This way, we don't need to traverse the children tree at all!
+
+```jsx
+class ParallaxLayer extends React.Component {
+  ...
+  componentDidMount() {
+    // register
+  }
+  componentWillUnmount() {
+    // unregister
+  }
+}
+```
+
+I'll talk about the details in a bit.
+
+As a bonus, in approach 2 we had to clone the tree to change the `left` and `top` props of `ParallaxLayer` to `Animatable`, remember? In fact, since we have full control of the `ParallaxLayer` component, why can't we just use `Animatable`s in the render method? No funky cloning at all!
+
+```jsx{10-11}
+class ParallaxLayer extends React.Component {
+  ...
+  layerConfig = {
+    left: Animatable(0),
+    top: Animatable(0),
+  }
+  render() {
+    return (
+      <Frame
+        left={this.layerConfig.left}
+        top={this.layerConfig.top}>
+        {this.props.children}
+      </Frame>
+    )
+  }
+```
+
+## Pass register functions downwards with React Context
+
+Let's now study the implementation details of the register/unregister functions.
+
+First of all, we'd save information of all the layers to the parent `ParallaxScroll` so that we could access it when the scroll position is updated. It could be a simple array available as a class field:
+
+```jsx
+class ParallaxScroll extends React.Component {
+  layerConfigs = []
+  registerLayer = (layer) => {
+    this.layerConfigs.push(layer)
+  }
+  ...
+}
+```
+
+But how do we pass this `registerLayer` function to `ParallaxScroll`'s children?
+
+If the children of `ParallaxScroll` were hardcoded as below, it'd be fairly straightforward -- we can just pass the function as a prop:
+
+```jsx
+<Scroll>
+  <ParallaxLayer register={this.registerLayer} />
+  <ParallaxLayer register={this.registerLayer} />
+  ...
+</Scroll>
+```
+
+Unfortunately that is not the case. The code is like this and the `ParallaxLayer`s in the children are added dynamically:
+
+```jsx
+<Scroll>{this.props.children}</Scroll>
+```
+
+In this case, we can use React Context to pass the register functions downwards.
+
+```jsx
+class ParallaxScroll extends React.Component {
+  render() {
+    return (
+      <RegisterContext.Provider
+        value={{
+          registerLayer: this.registerLayer,
+          unregisterLayer: this.unregisterLayer,
+        }}
+      >
+        <Scroll {...this.props} onMove={this.handleScroll}>
+          {children}
+        </Scroll>
+      </RegisterContext.Provider>
+    )
+  }
+}
+```
+
+In `ParallaxLayer`, we can get the register/unregister functions out of the context this way:
+
+```jsx
+class ParallaxLayer extends React.Component {
+  render() {
+    return (
+      <RegisterContext.Consumer>
+        {({ registerLayer, unregisterLayer }) => {
+          // pass registerLayer / unregisterLayer as props
+          // to downstream components
+        }}
+      </RegisterContext.Consumer>
+    )
+  }
+}
+```
+
+# Conclusion
+
+So that's it! In this post, we've looked at three approaches of how to find out all `ParallaxLayer`s in the children tree and update their positions. The register/unregister approach with React Context is clearly the winner. It gets the job done without the overhead of cloning the tree.
+
+We should think twice before cloning a children tree because it's potentially costly. Sometimes, we can ask the children to announce themselves voluntarily instead of being picked out passively with a tree traversal.
+
+<!--
+
+## Traverse and update children tree
+In `ParallaxScroll`, it's important
+
+
+```jsx
+const cloneAndUpdateProps = (getUpdatePropsFun, node) => {
+  if (!React.isValidElement(node)) return node;
+  const updateProps = getUpdatePropsFun(node);
+  const clonedChildren = React.Children.map(node.props.children, c =>
+    cloneAndUpdateProps(getUpdatePropsFun, c)
+  );
+  return React.cloneElement(node, updateProps, clonedChildren);
+};
+```
+
+points to cover:
+
+- how to debug / find out undocumented things
+  - primitive inspect/console method
+  - react developer tools
+- reuse property controls of Scroll
+- children connector
+- recursively walk through the children tree and made modifications
+- Scroll + onMove
+- how to move an item off its original position
+
+- intro
+- high-level picture
+- technical drill-down
+- future plan
+  - support for horizontal scroll
+- reflection
+  - hard to rename a component -- other people's prototype will be broken
+  - what if I loose the framerx file?
+-->

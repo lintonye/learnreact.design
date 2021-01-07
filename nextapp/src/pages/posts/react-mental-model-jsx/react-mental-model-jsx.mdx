@@ -1,0 +1,246 @@
+---
+date: '2020-04-20'
+title: 'React Mental Models: The True Face of JSX'
+subtitle: 'What really is a JSX tag? Why bother?'
+---
+
+import Quiz from '../../new-components/FirebaseQuiz'
+
+![JSX wearing a mask](./jsx-wear-mask.png)
+
+Look at this React component:
+
+```jsx
+function App() {
+  return <input />
+}
+```
+
+It'll render an HTML input in the browser. It's a JavaScript function that returns a value.
+
+But let me ask you, **what does the function actually return?**
+
+...
+
+An HTML `input` tag?
+
+A special `html-tag` value in JavaScript, perhaps similar to a `string`, `number` or `object`?
+
+...
+
+No. Certainly no. In fact, the code above isn't pure JavaScript. It's called _JSX_. It's a format that allows us to write tags that pretend to be HTML and embed them in JavaScript code.
+
+Yes, I said _pretend_. What are those tags really?
+
+Let's reveal the true face of JSX!
+
+# JS In Disguise
+
+JSX tags are JavaScript code in disguise. For example,
+
+```jsx
+<input />
+```
+
+is equivalent to
+
+```jsx
+React.createElement('input')
+```
+
+Our component can be rewritten as:
+
+```jsx
+function App() {
+  return React.createElement('input')
+}
+```
+
+This makes much more sense, right? In the `App` function, we call the function `createElement` and return the result. The parameter is a string which tells React what kind of _element_ we want to create: an `input`.
+
+With JSX, we can write succinct tags that are both easy to read and write. Under the hood, a tool converts the tags into the corresponding JS code.
+
+Those HTML-ish tags are called _elements_ in React world.
+
+# Why Bother Learning This?
+
+I know. You probably don't plan to work on React itself. Why bother learning things under the hood? Would it help us build apps?
+
+I think it'd help a lot. We don't want to blindly follow a specific format (tags after `return` etc.). We want to make sense of the code. We want to be able to freely express our thoughts. We want to take advantage of language/framework features. With a deeper understanding of what's behind the scene, we can do that.
+
+It's a bit of superpower. Really.
+
+## It's an expression!
+
+Do you know we can assign a tag to a variable?
+
+```jsx
+let content = <div>Hey!</div>
+```
+
+Or pass a tag around as a function parameter?
+
+```jsx
+showAlert(<div>Hello!</div>)
+```
+
+Or even print it out?
+
+```jsx
+console.log(<input />)
+```
+
+Why can we do that?
+
+It's not magic. It's because those tags are just function calls (`React.createElement(...)`). Like any function call, **a JSX tag is a JavaScript expression**. We can put it wherever an expression fits.
+
+By the way, if we print out a tag in the console, it's in fact an ordinary JavaScript object. Again, nothing magical!
+
+```js
+Object {type: "input", key: null, ref: null, props: Object, _owner: null}
+```
+
+I don't know about you, but I once tried to do this:
+
+```jsx
+React.createElement('div').appendChild('input')
+```
+
+You know why it doesn't work now, right?
+
+What `React.createElement` creates is a plain object. It's not a DOM node. We can't call `appendChild` on it!
+
+## Debugging
+
+Do you know why we'd get an error for the code below?
+
+```jsx
+// import React from 'react';
+function App() {
+  return <input /> // ❌ Error: React not defined.
+}
+```
+
+This is a common mistake when we try to write a component in a blank file. The error is much more visible if we convert the tag into JS:
+
+```jsx
+// import React from 'react';
+function App() {
+  return React.createElement('div') // ❌ Error: React not defined.
+}
+```
+
+## Differences between JSX and HTML
+
+Although JSX tags look like HTML, they are not HTML. In fact, there are quite a few differences between the two. For example, a button in HTML looks like this:
+
+```html
+<button onclick="alert('OK')">OK</button>
+```
+
+And this is the JSX version:
+
+```jsx
+<button onClick={() => alert('OK')}>OK</button>
+```
+
+There are two notable differences above. First, the attribute in HTML is all lowercase, whereas in JSX it's camelCase. Second, the attribute values, the parts after `=`, are quite different.
+
+I'll cover the details in the next post. For now, I want you to remember the core reason for these differences: JSX tags are fundamentally JavaScript code.
+
+# Recap
+
+Here's the React mental model covered in this post: a JSX tag is JavaScript code pretending to be an HTML tag. It is:
+
+- a function call
+- an expression
+- and its value is an object.
+
+Remember this. It might open new doors when you write React code.
+
+# Quizzes
+
+How much do you remember from this post? Give it a try below!
+
+Q1: What does this function return?
+
+```jsx
+function App() {
+  return <strong>Hello!</strong>
+}
+```
+
+<Quiz
+  options={['An HTML element', 'A string', 'An object', 'None of the above']}
+  id="jsx-post-return-tag"
+  mb={6}
+  answer="C"
+  explanation="Need explanation for this? Scroll to the top of this post!"
+/>
+
+Q2: What will this component render in the browser?
+
+```jsx
+function App() {
+  return 'Message: ' + <strong>Hello!</strong>
+}
+```
+
+<Quiz
+  options={[
+    'Message: <strong>Hello!</strong>',
+    'Blank page',
+    'Syntax error',
+    'None of the above',
+  ]}
+  id="jsx-post-string-plus-jsx"
+  mb={6}
+  answer="D"
+  explanation="Add to your code: console.log('Message: '+<strong>Hello!</strong>). What did you get in the cnosole? Why?"
+/>
+
+Q3: What will this component render in the browser?
+
+```jsx
+function App() {
+  return (
+    <input type="text" />
+    <button>Send</button>
+  )
+}
+```
+
+<Quiz
+  options={['Blank page', 'Syntax error', 'A text box and a button']}
+  id="jsx-post-missing-parent"
+  mb={6}
+  answer="B"
+  explanation="If you convert these two tags into JS, what would you get? Is that valid JavaScript code? Can we return TWO values in JS?"
+/>
+
+Q4: What will this component render in the browser?
+
+```jsx
+function App() {
+  let header = (
+    <h1>
+      What is the answer to the ultimate question of life the universe and
+      everything?
+    </h1>
+  )
+  return header + <p>42</p>
+}
+```
+
+<Quiz
+  options={[
+    <code>{`<h1>What is the answer to the ultimate question of life the universe and everything?</h1><p>42</p>`}</code>,
+    <code>[object Object][object Object]</code>,
+    'Syntax error',
+    'None of the above',
+  ]}
+  id="jsx-post-jsx-plus-jsx"
+  mb={6}
+  answer="B"
+  explanation="Try in the console: {}+{}. What did you get? Why is this related to our JSX question?"
+/>

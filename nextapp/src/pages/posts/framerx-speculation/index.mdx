@@ -1,0 +1,160 @@
+---
+date: '2018-06-22'
+title: 'Framer X: the hype, the powers, the challenges and the grand vision'
+subtitle: 'A pure speculation'
+---
+
+![waiting list](./waiting-list.png)
+
+**Update 09/21/2018:** Now that Framer X is launched. Glad that I was able to guess a few things right. 😄 Check out this course I built: [Framer X + React](/framerx-react).
+
+---
+
+Have you watched the Framer X [movie trailer](https://www.producthunt.com/posts/framer-x-2)? Are you not excited?
+
+WOW! We will soon be able to **design with React**!
+
+- "Build entire interactive design systems with React and ES6" -- components, components, components!
+- "Make it easy for just about anyone to jump into design work" -- Sweeeeeet!
+- "Seamlessly blends design and development" -- This is huge! How does it work? Will it export production code?
+
+Unfortunately that's about everything that the company is willing to reveal at this point, and the beta waiting queue is 18K-people long (and counting)! Damned!
+
+(Putting on my detective's hat) 🕵️‍♂️🧐 Let me start ~~guessing~~ speculating!
+
+---
+
+<small>
+
+Disclaimer: at this point, I'm not associated with Framer the company in any way. I don't have any insider knowledge about Framer X. I haven't attended any of their demos, haven't tried the product or talked much with Framer employees. Below
+are just my thoughts, and hopefully I've made it clear enough in the title -- it's pure speculation.
+
+I do plan to create tutorials and/or blog posts once I get my hands on it. So [stay tuned](https://app.convertkit.com/landing_pages/412086?v=7)!
+
+</small>
+
+---
+
+# Screenshots
+
+First, some eye candies -- let's start with the only trace of screenshots appeared in their movie trailer.
+
+![layout](./layout.png)
+
+Apparently they've re-organized the toolbelt, which looks fairly reasonable and familiar. But what's that shopping bag? You can buy components from a market??
+
+In addition to "Frame", there are some new "Layout" items: "Stack", "Grid" and "Text". They all look useful. But why is "Text" even a layout item? Is that a bug in the video?
+
+Also, under "Interactive", there are "Flow", "Scroll", "Page" etc. They've become first-class citizens just as "Frame" and "Text" -- no longer hidden in the Snippets sub-menu in the code mode. You'd be able to drag-and-drop them onto the canvas. That's sweet! More interestingly, you'd likely get a visual way to configure these interactive items. We'll see how that pans out.
+
+![outline](./outline.png)
+
+Now under the "Outline" tab, this should be a list of things that are currently on the canvas. Hmm but why "Frame" is separate from "Component"? Aren't Frames components?
+
+Speaking of components, let's discuss the most intriguing aspect of Framer X: React component support.
+
+# Everything is a component, React component!
+
+## Sketch / Figma already has components, right?
+
+That's right. Components are actually not new concepts in design tools. Figma has them. Sketch has them too, which happen to be named "Symbols". The most useful aspect of components is that once you update the master, all the copies (instances) get automatically updated. This saves time and keeps the design coherent.
+
+Hmm... If the idea isn't that new, what's the big deal of components in Framer X?
+
+Well, because it uses **real** components!
+
+The idea of components is borrowed from engineering, where developers use code to configure common properties, behaviors, overrides etc. Code is such a powerful tool because it has logic in it that can do smart things.
+
+However, to make components usable in design tools, we'd have to find a way to make this configuration **visual and relatively simple** to non-technical users. The usual approach is to "dumb down" the components in design tools. Many limitations are added to what a component can do in exchange of easy configuration. For example, in Sketch, we can only override text and image, not even colors (correct me if I'm wrong). In Figma, components are more flexible -- we can override any property, but that's about what we can do to customize a component.
+
+What about a themed component where we only specify "light" or "dark" and get all the colors updated accordingly?
+
+What about a list component where we can configure the number of rows?
+
+What about a component that prevents mistakes by making only a subset of properties overridable?
+
+What about designing with components which the final product is made up of?
+
+What about using third-party components available as NPM modules?
+
+These are all difficult to achieve in existing design tools, but straightforward with **real** components (in the engineering sense). With real components, the possibility is limited by our imagination. Because with code, we can do almost anything!
+
+## Challenges
+
+Power is a double-edged sword. With React components, we can do a lot more than those "dumb" components in other design tools. However, it can be 10x more difficult to use if it's not designed properly.
+
+It'd be interesting to see what the component editing experience looks like in Framer X.
+
+In fact, Figma already has a pretty compelling experience in terms of component creation, in-place editing, real-time updates of instances, like so:
+
+![Figma UI](./figma-edit-comp.gif)
+
+My prediction: in the design mode of Framer X, it'd be more or less the same as Figma. We'd be able to create components by selecting a few items and choose "Add component". We could copy&paste to create instances of a component. We could override colors, font size, images, text etc. by choosing values from the property panel.
+
+What's unique in Framer is its code mode. There, we'd be able to create and use more abstract and powerful components with React code.
+
+However, what remains to be seen is how the more abstract components and props are exposed in the design mode, if they are not simple color, text or images. How is the state of a component represented? Which parts of the configuration are chosen as visual configs? Which are left in code? What if a component doesn't contain anything visual (e.g. a [HOC](https://reactjs.org/docs/higher-order-components.html))? Is it actually possible to use production components in design? ([React Primitives](https://github.com/lelandrichardson/react-primitives)? [React Native DOM](https://github.com/vincentriemer/react-native-dom)?)
+
+There are many challenges to use React components in a design tool. Let's watch how the Framer team solves it!
+
+# "Seamlessly blending design & development"
+
+They totally got me by saying "seamlessly blending design and development". How does Framer X blend the two? Is it the ultimate bridge between design and development?
+
+It's silly having to re-implement an animation or interaction in production if we've already coded it up when designing it. Ultimately we want to be able to directly transfer a design to development, all the way to the final product. We also want to be able to keep design and development closely in sync.
+
+The engineer in me wants to be able to design with production components and third-party libraries. Drag and drop, tweak some props, done! The components in design look and behave exactly the same as in production. And not just at the beginning, the design evolves with the final product too, automagically.
+
+The designer in me wants basic paths, shapes and effects that could be combined to make anything. As designers, we want a tool that liberates our creativity, instead of confining it with a pre-defined list of rigid components.
+
+Blending the two sounds like a very challenging balance art. It's interesting to see what approach the Framer team takes.
+
+Would it provide both native components (such as text boxes and buttons) and basic shapes? How would it convert new widgets designed with basic shapes into native components that actually work? Would it export React code, just like those Sketch plugins? Would it take a compiler approach similar to [Pagedraw](https://pagedraw.io/) that treats UI as a blackbox to keep design and development in sync?
+
+So many opportunities!
+
+# A few other things
+
+## ES6 vs. CoffeeScript
+
+In Framer X, the main programming language will be JavaScript ES6, instead of CoffeeScript. This was [confirmed](https://twitter.com/krijnrijshouwer/status/1007375937250488321) by one of Framer's designer, Krijn Rijshouwer.
+
+At this point, it sounds like CoffeeScript is completely out of the window. This made me scratching my head. Why did they decide to drop a language their users love? Will they introduce some kind of converter/wrapper to support existing Framer modules?
+
+I know, CoffeeScript is no longer widely used and many of its goodness have been ported to ES6. But it doesn't sound too complicated to support both CoffeeScript and ES6, given that the new version of CoffeeScript [supports React's JSX](https://coffeescript.org/#jsx).
+
+Guess I may have overlooked something important. I might come back to this "why" question after actually seeing Framer X in action.
+
+## "Built for large team collaboration"
+
+Framer Cloud has been in existence for more than a year. They'll likely build on top of it to add more security features, or some sort of admin controls, or perhaps something similar to Figma's team component library.
+
+I'm guessing one of the cornerstones that enables these changes would be the ability to use code as the single source of truth in the design process, a concept pioneered by [React Sketch.app](http://airbnb.io/react-sketchapp/).
+
+## Windows version
+
+Windows users, cheer up! A Windows version of Framer X is [coming your way soon](https://twitter.com/krijnrijshouwer/status/1007156746660581379)! Let's just hope it makes the first batches of beta as well. 🤞
+
+# Conclusion: the grand vision
+
+Phew! I realized I have asked more questions than providing potential answers. Hope you enjoyed reading this wall of text as much as I did writing it. █😝
+
+Let me conclude by pretending to know Framer's grand vision.
+
+2018 is an interesting year for design tools. Major players are competing head-to-head trying to own the entire design workflow. Framer's move, IMHO, is the most ambitious of them all.
+
+They are not just trying to become the only tool designers would need. They want to make Framer the go-to tool for designing AND building digital experiences! They want to empower designers with development knowledge. They want to be the ultimate tool that bridges the gap between design and engineering: zero-friction transition from design to final products, iterative design and development processes where all artifacts are always in sync, no loss of design details, no tedious back-and-forth UI tickets.
+
+A product builder's dream!
+
+Of course, this is a noble goal with many challenges which will likely take a long time to solve. In the near term, I predict Framer X will make an important contribution: making React significantly more accessible to designers. Great time, guys!
+
+Framer includes all the tools that designers are familiar and fond with: simple and intuitive visual editor, direct manipulation of shapes, paths, colors and shadows, instant and realistic previews, easy setup and easy share. It'll become the easiest environment to learn React for designers. Hands down. You can just download the tool and start writing code, and boom, your prototype is working on your phone and you can share it with the world with just a few clicks! You don't even need to install Node.js, no need to mess around with command line etc.
+
+The only obstacle is that you'd have to pay monthly even to just start on learning. Who knows, perhaps when Framer charges enough for its team features, they'll make the solo version free just like Figma does.
+
+Framer Gods, can you hear us? 😉 Wink, Wink.
+
+---
+
+PS: Want to learn React to get prepared for Framer X? I've created a series of video courses tailored for designers. Check out [learnreact.design](https://learnreact.design/?utm_source=ux_planet&utm_campaign=framerx&utm_content=bottom)!
