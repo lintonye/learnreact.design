@@ -110,7 +110,7 @@ module.exports = withBundleAnalyzer({
                     'import { PostLayout } from "@/components/PostLayout"',
                     'export { getStaticProps } from "@/getStaticProps"',
                     src,
-                    'export default (props) => <PostLayout meta={meta} {...props} />',
+                    'export default function PostPage(props) { return <PostLayout meta={meta} {...props} />}',
                   ].join('\n')
 
               if (content.includes('<!--more-->')) {
