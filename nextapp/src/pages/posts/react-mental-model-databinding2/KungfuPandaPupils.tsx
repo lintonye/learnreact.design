@@ -1,5 +1,5 @@
 import * as React from 'react'
-import './panda.css'
+// import './panda.css'
 
 export default function KungfuPandaPupils() {
   const [action, setAction] = React.useState('👊')

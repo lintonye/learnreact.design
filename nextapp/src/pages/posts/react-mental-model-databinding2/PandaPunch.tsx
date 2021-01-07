@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './panda-punch.css'
+// import './panda-punch.css'
 
 export default function PandaPunch() {
   const [punch, setPunch] = useState(40)
