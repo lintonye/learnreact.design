@@ -12,9 +12,11 @@ import imgFlipbook from './flipbook.png'
 import imgOptimizeSketches from './optimize-sketches.png'
 import imgPlaceholders from './placeholders-in-sketch.png'
 // import img from './.png'
+import imgInspect from './inspect.png'
 
 import { DomoAsciiArt } from '@/components/what-is-react/DomoAsciiArt'
 import { ThinkerWithHat } from '@/components/what-is-react/ThinkerWithHat'
+import { IconBinocular } from '@/components/what-is-react/IconBinocular'
 
 export const meta = {
   title: 'What is React: A Visual Introduction For Beginners',
@@ -50,11 +52,11 @@ What is React exactly? Why is React so popular? What problems does React solve?
 
 This article is an introduction to React for beginners. I'll explain the core ideas of React in plain English (and doodles <span className='text-base'>🌴</span>). No JavaScript experience? No problem! As long as you have some basic HTML knowledge (e.g. the format of an HTML tag), you should be able to enjoy this article.
 
-This is a bird's-eye view <span className='text-2xl'>🦅</span> but I'll also equip you with a telescope <span className='text-2xl'>🔭</span> . You'll not only see the big picture of what make React special, but also zoom in to get hands-on experience of writing an actual React component. And yes, no JS knowledge required!
+This is a bird's-eye view <span className='text-2xl'>🦅</span> but I'll also equip you with a binocular <IconBinocular size={25} className='inline-block align-bottom'/> . You'll not only see the big picture of what makes React special, but also zoom in to get some hands-on experience of writing an actual React component. And yes, no JS knowledge required!
 
 Remember: You don't need to be an experienced developer to make sense of React!
 
-Ready to start the jouney?
+Ready to start the journey?
 
 ## A few things about Web
 
@@ -84,13 +86,9 @@ Domo works as a model at the prestigious art studio "Web Browser". His job is to
 
 In real life, DOM stands for Document Object Model. It's indeed a model -- a model of the document (aka the web page). It strikes a pose. The browser paints a portrait. The portraits are what we see on a web page: the textboxes, the paragraphs, the images and so on. A developer's job is like that of a director who tells Domo what to wear and what pose to strike. This determines what those portraits look like in the end.
 
-To check out what DOM looks like, you can inspect a web page like so:
+To check out what DOM looks like, right-click on this very page and choose "Inspect". Can you make sense of what's in the Elements tab?
 
-<!-- ![inspect](TODO) -->
-
-[TODO clearly marks out the DOM and tree]
-
-Hint: Now right click on this very page and choose "Inspect". Can you make sense of what's in the Elements tab? For a bonus, navigate to the Console tab.
+<img src={imgInspect} alt="Inspect in Chrome" />
 
 <DomoAsciiArt />
 
@@ -190,7 +188,7 @@ Because the apps we build are dynamic, we often want Domo to change poses fairly
 
 In tech terms, if the code defines _how_ we want it to be done, it's **imperative**; if it defines _what_ we want, it's **declarative**. The traditional way of directly working with DOM API is imperative, and the React way is declarative.
 
-Imperative programming emerged from the day when the computers were primitive. People had to instruct them in detail: where to store the nubmers, how to multiply etc. But this eventally got unmanageable, people wrote smart software that convert definition of problems into detailed instructions. Declarative programming was born.
+Imperative programming emerged from the day when the computers were primitive. People had to instruct them in detail: where to store the numbers, how to multiply etc. But this eventally got unmanageable, people wrote smart software that convert definition of problems into detailed instructions. Declarative programming was born.
 
 #### Virtual DOM
 
