@@ -208,7 +208,7 @@ Even cooler, imagine if we can leave placeholders in our sketches to represent d
 
 This trick is how React got its name. The UI built with React is **reactive** -- it appears that the DOM "reacts" to any changes to the underlying data. No need to track the data. No need to worry about when to update the DOM. It just gets updated automatically (by React). The idea of reactive UI greatly simplifies UI development.
 
-Here's the code of the demo above. If you are not familiar with JavaScript, just squint: it's some HTML surrounded by some text and parentheses.
+<!-- Here's the code of the demo above. If you are not familiar with JavaScript, just squint: it's some HTML surrounded by some text and parentheses.
 
 ```jsx
 const ThinkerWithHat = ({ hat }) => (
@@ -219,11 +219,107 @@ const ThinkerWithHat = ({ hat }) => (
 )
 ```
 
-Notice that we just need to define what we want (a thinker and a hat in a div), and "wire up" the data ("`type = {hat}`"). When the data change (user selects a hat), the UI updates automatically.
+Notice that we just need to define what we want (a thinker and a hat in a div), and "wire up" the data ("`type = {hat}`"). When the data change (user selects a hat), the UI updates automatically. -->
 
 ## Write your first React component
 
+Now let's review what we have learned so far and get our hands on a few real React components. To make it easy for you to understand, I left out some details in the code (notebly JavaScript). The goal is to let the core ideas shine through. If you are confident in reading JavaScript code, you can also check out the [real source code](TODO).
+
+### Components are composable
+
+Let's say we want to build a TODO. We can break this UI into a few parts:
+
+<div className="sticky h-64 bg-red-300 top-0" />
+
+This decomposition can be written in code like so:
+
+```jsx
+// DomoHatShopHome
+<div>
+  <Header />
+  <Content />
+  <Footer />
+</div>
+```
+
+This looks like HTML, right? Except for those tags that start with capital letters: `<Header>`, `<Content>` and `<Footer>`. They are not standard HTML tags. They are custom tags.
+
+What are these custom tags actually? How would we tell React that the Header consists of a header tag, a bunch of list items and a search bar?
+
+We write the Header component!
+
+```jsx
+// Header
+<header>
+  <nav>
+    <ul>
+      <li></li>
+      <li></li>
+    </ul>
+  </nav>
+  <SearchBar />
+</header>
+```
+
+Now in this Header component, it includes a custom tag `<SearchBar />`. What's in it?
+
+```jsx
+// SearchBar
+<form>
+  <input type="string" />
+  <button>Search</button>
+</form>
+```
+
+Remember the first important property of React components? They are **composable**. This means that we can use components to build other components -- exactly what we have just done.
+
+Now an exercise for you.
+
+Let's say we want to add the SearchBar into the Footer as well. What would you do?
+
+```jsx
+// Footer
+<div>
+  ...
+  <SearchBar />
+</div>
+```
+
+You get the idea!
+
+### Components are live TODO
+
+"Composable" means being able to create a component using other components as its building blocks. This sounds very similar to how nature works, except for one important difference: TODO
+
+Try to change the SearchBar code below. What do you see?
+
+TODO SearchBar code
+
+The SearchBar on both Header and Footer updates. Right? Once we use a component in another component, it still "attaches" to the original component. When the original changes, all instances update along with it.
+
+React components are made for **reuse**. Once a component is defined, we can use it as a custom tag in other components, as many times as we want. If we change the component, all components that include it will change accordingly.
+
+This works very similiarly to components in design tools such as Framer and Figma.
+
+### Components are independent
+
+Remember? React components are also **independent**. This means if we change one component, other components (that don't include it) still behave the same way as before.
+
 TODO
+
+### Declarative & Reactive
+
+```jsx
+// DomoWithHat
+<div>
+  <Hat type={hat} />
+  <Domo />
+</div>
+```
+
+Notice that we just need to define what we want (Domo and a hat in a div), and "wire up" the data ("`type = {hat}`"). When the data change (user selects a hat), the UI updates automatically.
+
+## Conclusion
 
 <!-- You can use this component in another component, that is, use this component to build another component, and that other component can be used to create yet another component, and so on.
 
