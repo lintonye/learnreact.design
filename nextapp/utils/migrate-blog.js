@@ -39,7 +39,8 @@ function processFile(filePath) {
           (imageImports.size > 0
             ? Array.from(imageImports).join('\n') + '\n\n'
             : '') +
-          (meta ? meta + '\n' : '') +
+          (meta ? meta + '\n\n' : '') +
+          `<!--excerpt-->\n${frontMatter.excerpt || ''}\n<!--/excerpt-->\n` +
           newContent.join('\n')
         fs.writeFile(filePath, newFileContent, () => console.log(filePath))
       }
