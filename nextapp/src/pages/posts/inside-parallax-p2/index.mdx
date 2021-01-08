@@ -21,7 +21,14 @@ In this series of posts, I want to give you a technical drill down of the [paral
 
 # Review: how does Parallax work?
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/xFI8BPxB5TA?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/xFI8BPxB5TA?rel=0"
+  frameborder="0"
+  allow="autoplay; encrypted-media"
+  allowfullscreen
+></iframe>
 
 Remember how Parallax works? We have two components, `ParallaxScroll` and `ParallaxLayer`. `ParallaxScroll` monitors how much the page has been scrolled, finds out all `ParallaxLayer`s in the `children`, calculates their positions based on their `speed` props and the current scroll position, and update their positions.
 
@@ -220,7 +227,14 @@ I know, this sounds really wasteful. Although the React elements we clone are pl
 
 In fact, the scrolling experience of this component looks like this:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/M0yDiMxkCdw?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/M0yDiMxkCdw?rel=0"
+  frameborder="0"
+  allow="autoplay; encrypted-media"
+  allowFullScreen
+></iframe>
 
 # Approach 2: Use Animatable to avoid excessive cloning
 
@@ -275,7 +289,14 @@ handleScroll = ({x, y}) => {
 
 This is definitely better than having to re-render and re-clone the entire children tree whenever the scroll position updates.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Mce8bHaBNlA?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/Mce8bHaBNlA?rel=0"
+  frameborder="0"
+  allow="autoplay; encrypted-media"
+  allowfullscreen
+></iframe>
 
 Oh btw, don't forget to use `Frame` instead of `div` in `ParallaxLayer`. `Frame` knows how to handle `left` and `top` props when they are `Animatable`s whereas `div` does not.
 
@@ -306,7 +327,17 @@ Even worse, Framer X will throw an error in our face if we are trying to clone a
 
 That's because Framer X is fairly strict about responsiveness. It only gives components 9ms each frame to finish the rendering.
 
-<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">We give every component 9ms per frame. For some operations, like mounting and rendering children for first time, that is not much. You can use a short timer to drive setState() and build up the component in some staggering way.</p>&mdash; onnlucky🍀 (@onnlucky) <a href="https://twitter.com/onnlucky/status/1049392195852259329?ref_src=twsrc%5Etfw">October 8, 2018</a></blockquote>
+<blockquote class="twitter-tweet" data-lang="en">
+  <p lang="en" dir="ltr">
+    We give every component 9ms per frame. For some operations, like mounting
+    and rendering children for first time, that is not much. You can use a short
+    timer to drive setState() and build up the component in some staggering way.
+  </p>
+  &mdash; onnlucky🍀 (@onnlucky){' '}
+  <a href="https://twitter.com/onnlucky/status/1049392195852259329?ref_src=twsrc%5Etfw">
+    October 8, 2018
+  </a>
+</blockquote>
 
 This is definitely a bummer. Fortunately, for the use case of Parallax, there's a workaround and we don't have to clone at all! I'll talk about the technique in the next section.
 
