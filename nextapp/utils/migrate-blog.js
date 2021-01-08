@@ -17,7 +17,7 @@ function processFile(filePath) {
   const meta =
     frontMatter.title &&
     `export const meta = ${JSON.stringify(frontMatter, null, 2)}`
-  const imageImports = []
+  const imageImports = new Set()
   const newContent = []
   readInterface
     .on('line', (line) => {
@@ -27,16 +27,18 @@ function processFile(filePath) {
         const imgAlt = match[1]
         const imgPath = match[2]
         const imgVar = fn2var(path.basename(imgPath))
-        imageImports.push(`import ${imgVar} from "${imgPath}"`)
+        imageImports.add(`import ${imgVar} from "${imgPath}"`)
         newContent.push(`<img src={${imgVar}} alt={\`${imgAlt}\`} />`)
       } else {
         newContent.push(line)
       }
     })
     .on('close', () => {
-      if (meta || imageImports.length > 0) {
+      if (meta || imageImports.size > 0) {
         const newFileContent =
-          (imageImports.length > 0 ? imageImports.join('\n') + '\n\n' : '') +
+          (imageImports.size > 0
+            ? Array.from(imageImports).join('\n') + '\n\n'
+            : '') +
           (meta ? meta + '\n' : '') +
           newContent.join('\n')
         fs.writeFile(filePath, newFileContent, () => console.log(filePath))
