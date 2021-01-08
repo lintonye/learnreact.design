@@ -18,7 +18,7 @@ function importAll(r: __WebpackModuleApi.RequireContext) {
       const pattern = /.*\/([\w-\d]+)\/.+\.mdx$/
       const match = fileName.match(pattern)
       const module = r(fileName)
-
+      console.log({ fileName })
       return match
         ? {
             slug: match[1],
