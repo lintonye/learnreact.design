@@ -233,7 +233,7 @@ Now let's review what we have learned so far and get our hands dirty on a few re
 
 <div>
 
-Alright. Let's say we want to help Domo build an online hat store 🧢.
+Alright. Let's say we want to help Domo build an online hat store 🧢 (hint: it's interactive. Choose a hat for Domo!).
 
 <DomoHatShopDemo />
 
@@ -258,7 +258,7 @@ This decomposition can be written in code like so:
 
 </OffScreenDetector>
 
-<OffScreenDetector on="Header" off="Header Main Footer">
+<OffScreenDetector on="Header" off="">
 
 This looks like HTML, right? Except for those tags that start with capital letters: `<Header>`, `<Content>` and `<Footer>`. They are not standard HTML tags. They are custom tags.
 
@@ -287,6 +287,8 @@ We write the Header component!
 
 </OffScreenDetector>
 
+<OffScreenDetector on="SearchBar ShoppingCart" off="">
+
 Now in this Header component, it includes two custom tags `<SearchBar>` and `<ShoppingCart>`. What's in there?
 
 ```jsx
@@ -306,6 +308,8 @@ Now in this Header component, it includes two custom tags `<SearchBar>` and `<Sh
 ```
 
 Remember the first important property of React components? They are **composable**. This means that we can use components to build other components -- exactly what we have just done.
+
+</OffScreenDetector>
 
 Now an exercise for you.
 

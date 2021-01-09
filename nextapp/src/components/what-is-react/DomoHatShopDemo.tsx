@@ -18,6 +18,7 @@ type Props = {
 function SearchBar() {
   return (
     <form
+      id="SearchBar"
       className="space-x-0.5 flex"
       onSubmit={(e) => {
         e.preventDefault()
@@ -33,7 +34,7 @@ function SearchBar() {
 
 function ShoppingCart() {
   return (
-    <div className="relative m-1">
+    <div className="relative m-1" id="ShoppingCart">
       <FiShoppingCart size={20} />
       <div
         className="absolute -right-2 -top-2 rounded-full w-4 h-4 flex justify-center items-center bg-pink-600"
@@ -168,7 +169,7 @@ function Highlight({ id, delay }: { id: string; delay: number }) {
   useEffect(() => {
     const element = document.getElementById(id)
     const rec = element?.getBoundingClientRect()
-    const container = element?.parentElement
+    const container = document.getElementById('annotation')
     const parentBox = container?.getBoundingClientRect()
 
     rec &&
@@ -205,7 +206,7 @@ function Highlight({ id, delay }: { id: string; delay: number }) {
 
 function Annotation({ highlights = [] }: { highlights: string[] }) {
   return (
-    <div className="absolute inset-0 pointer-events-none">
+    <div className="absolute inset-0 pointer-events-none" id="annotation">
       <AnimatePresence>
         {highlights.map((h, index) => (
           <Highlight id={h} key={h} delay={index * 0.4} />
