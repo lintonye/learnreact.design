@@ -1,5 +1,5 @@
 import { jsx } from '@emotion/core'
-import React from 'react'
+import React, { useState } from 'react'
 import { FunctionComponent } from 'react'
 import { NextSeo } from 'next-seo'
 import { MDXProvider } from '@mdx-js/react'
@@ -9,7 +9,7 @@ import * as SeoData from '../../next-seo.json'
 import Link from 'next/link'
 import { NavBar } from '@/components/NavBar'
 import { Footer } from '@/components/Footer'
-import { vi } from 'date-fns/esm/locale'
+import { InPostMessageContext } from './InPostMessageContext'
 
 type LayoutProps = {
   meta: any
@@ -110,6 +110,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
     ogImage,
   } = meta || {}
   const toc = createToc(router.pathname, children)
+  const [inPostMessage, setInPostMessage] = useState('')
   return (
     <>
       <NextSeo
@@ -131,19 +132,23 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
             {title}
           </h1>
         )}
-        <div className="flex justify-center space-x-16">
-          <MDXProvider components={components}>
-            <div className="max-w-2xl leading-6">{children}</div>
-          </MDXProvider>
-          <div className="sticky top-20 self-start mt-6">
-            <div className="hidden xl:block">
-              <div className="uppercase font-semibold text-gray-500">
-                table of contents
+        <InPostMessageContext.Provider
+          value={[inPostMessage, (msg) => setInPostMessage(msg)]}
+        >
+          <div className="flex justify-center space-x-16">
+            <MDXProvider components={components}>
+              <div className="max-w-2xl leading-6">{children}</div>
+            </MDXProvider>
+            <div className="sticky top-20 self-start mt-6">
+              <div className="hidden xl:block">
+                <div className="uppercase font-semibold text-gray-500">
+                  table of contents
+                </div>
+                <div className="text-sm text-gray-500">{toc}</div>
               </div>
-              <div className="text-sm text-gray-500">{toc}</div>
             </div>
           </div>
-        </div>
+        </InPostMessageContext.Provider>
       </div>
       <Footer />
     </>

@@ -7,7 +7,9 @@ import imgHatPropeller from './hat-propeller.png'
 import imgThinker from './thinker.png'
 import Image from 'next/image'
 import { FiShoppingCart } from 'react-icons/fi'
-import { useState } from 'react'
+import { useState, useContext, useEffect, useRef } from 'react'
+import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion'
+import { InPostMessageContext } from '@/components/InPostMessageContext'
 
 type Props = {
   id: string
@@ -45,7 +47,7 @@ function ShoppingCart() {
 
 function Header() {
   return (
-    <header>
+    <header id="Header">
       <ul className="flex justify-between items-center p-3 text-sm bg-indigo-900 text-white">
         <li>Home</li>
         <li>
@@ -106,7 +108,7 @@ function Main() {
   const hatNames = Object.keys(hats)
   const [activeHat, setActiveHat] = useState(hatNames[0])
   return (
-    <div className="p-3 flex justify-around">
+    <main className="p-3 flex justify-around" id="Main">
       <DomoWithHat hat={activeHat} />
       <div className="flex flex-col justify-center space-y-3 items-start">
         <h2 className="text-2xl">{activeHat}</h2>
@@ -131,13 +133,16 @@ function Main() {
           Add To Cart
         </button>
       </div>
-    </div>
+    </main>
   )
 }
 
 function Footer() {
   return (
-    <footer className="p-2 text-xs flex justify-center bg-indigo-900 text-white">
+    <footer
+      className="p-2 text-xs flex justify-center bg-indigo-900 text-white"
+      id="Footer"
+    >
       <div>© 2021 Domo's Hat Shop</div>
     </footer>
   )
@@ -153,10 +158,71 @@ function DomoHatShop() {
   )
 }
 
-export function DomoHatShopDemo({ id }: Props) {
+const variants = {
+  initial: { opacity: 0 },
+  visible: { opacity: 1 },
+}
+
+function Highlight({ id, delay }: { id: string; delay: number }) {
+  const [rec, setRec] = useState<DOMRect | undefined>(undefined)
+  useEffect(() => {
+    const element = document.getElementById(id)
+    const rec = element?.getBoundingClientRect()
+    const container = element?.parentElement
+    const parentBox = container?.getBoundingClientRect()
+
+    rec &&
+      parentBox &&
+      setRec(
+        DOMRectReadOnly.fromRect({
+          x: rec.left - parentBox.left,
+          y: rec.top - parentBox.top,
+          width: rec.width,
+          height: rec.height,
+        }),
+      )
+  }, [id])
+
   return (
-    <div className="top-0 sticky shadow-lg rounded-md">
+    <motion.div
+      variants={variants}
+      initial="initial"
+      animate="visible"
+      exit="initial"
+      transition={{ delay }}
+      className="bg-black bg-opacity-50 border-2 pl-2 border-yellow-400 h-1/6 absolute text-yellow-300 text-xl font-semibold "
+      css={{
+        left: rec?.left,
+        top: rec?.top,
+        width: rec?.width,
+        height: rec?.height,
+      }}
+    >
+      {id}
+    </motion.div>
+  )
+}
+
+function Annotation({ highlights = [] }: { highlights: string[] }) {
+  return (
+    <div className="absolute inset-0 pointer-events-none">
+      <AnimatePresence>
+        {highlights.map((h, index) => (
+          <Highlight id={h} key={h} delay={index * 0.4} />
+        ))}
+      </AnimatePresence>
+    </div>
+  )
+}
+
+export function DomoHatShopDemo({ id }: Props) {
+  const [msg] = useContext(InPostMessageContext)
+  const highlights = msg === '' ? [] : msg.split(' ')
+
+  return (
+    <div className="top-0 sticky shadow-lg rounded-md" id={id}>
       <DomoHatShop />
+      <Annotation highlights={highlights} />
     </div>
   )
 }

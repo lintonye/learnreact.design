@@ -18,6 +18,7 @@ import { DomoAsciiArt } from '@/components/what-is-react/DomoAsciiArt'
 import { ThinkerWithHat } from '@/components/what-is-react/ThinkerWithHat'
 import { IconBinocular } from '@/components/what-is-react/IconBinocular'
 import { DomoHatShopDemo } from '@/components/what-is-react/DomoHatShopDemo'
+import { OffScreenDetector } from '@/components/OffScreenDetector'
 
 export const meta = {
   title: 'What is React: A Visual Introduction For Beginners',
@@ -226,17 +227,23 @@ Notice that we just need to define what we want (a thinker and a hat in a div), 
 
 Now let's review what we have learned so far and get our hands dirty on a few real React components. To make it easy for you to understand, I left out some details in the code (notedly JavaScript). The goal is to let the core ideas shine through without being bogged down by JS syntax. If you are comfortable with reading JavaScript code, feel free to check out the [real source code](TODO).
 
-Alright. Let's say we want to help Domo build an online hat store 🧢.
-
 ### Components are composable
 
 <!-- This div is to ensure that the sticky Demo stops to be sticky when Conclusion is scrolled to view -->
 
 <div>
 
-We can break the UI into a few parts:
+Alright. Let's say we want to help Domo build an online hat store 🧢.
 
 <DomoHatShopDemo />
+
+<OffScreenDetector on="Header Main Footer" off="">
+
+We can break the UI into a few parts:
+
+- Header: the header on the top
+- Main: the main content area
+- Footer: the footer on the bottom
 
 This decomposition can be written in code like so:
 
@@ -244,10 +251,14 @@ This decomposition can be written in code like so:
 // DomoHatShopHome
 <div>
   <Header />
-  <Content />
+  <Main />
   <Footer />
 </div>
 ```
+
+</OffScreenDetector>
+
+<OffScreenDetector on="Header" off="Header Main Footer">
 
 This looks like HTML, right? Except for those tags that start with capital letters: `<Header>`, `<Content>` and `<Footer>`. They are not standard HTML tags. They are custom tags.
 
@@ -260,15 +271,23 @@ We write the Header component!
 <header>
   <nav>
     <ul>
-      <li></li>
-      <li></li>
+      <li>Home</li>
+      <li>
+        <SearchBar />
+      </li>
+      <li>Account</li>
+      <li>Return &amp; Orders</li>
+      <li>
+        <ShoppingCart />
+      </li>
     </ul>
   </nav>
-  <SearchBar />
 </header>
 ```
 
-Now in this Header component, it includes a custom tag `<SearchBar />`. What's in it?
+</OffScreenDetector>
+
+Now in this Header component, it includes two custom tags `<SearchBar>` and `<ShoppingCart>`. What's in there?
 
 ```jsx
 // SearchBar
@@ -276,6 +295,14 @@ Now in this Header component, it includes a custom tag `<SearchBar />`. What's i
   <input type="string" />
   <button>Search</button>
 </form>
+
+// ShoppingCart
+<div>
+  <FiShoppingCart size={20} />
+  <div>
+    2
+  </div>
+</div>
 ```
 
 Remember the first important property of React components? They are **composable**. This means that we can use components to build other components -- exactly what we have just done.
