@@ -3,11 +3,13 @@ import { useEffect, useRef, useState, useContext } from 'react'
 import { InPostMessageContext } from '@/components/InPostMessageContext'
 
 type Props = {
-  topMarginItemId: string
+  children: any
+  on?: string
+  off?: string
 }
 
 export function OffScreenDetector({ children, on, off }: Props) {
-  const ref = useRef<HTMLDivElement | null>(null)
+  const ref = useRef<HTMLDivElement>(null)
   const [targetHeight, setTargetHeight] = useState(0)
   const [_, setMessage] = useContext(InPostMessageContext)
   // useEffect(() => {
@@ -17,7 +19,7 @@ export function OffScreenDetector({ children, on, off }: Props) {
   //   }
   // }, [topMarginItemId])
   useEffect(() => {
-    if (ref) {
+    if (ref.current) {
       const observer = new IntersectionObserver(
         (entries) => {
           const entry = entries[0]
