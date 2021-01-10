@@ -198,7 +198,7 @@ function Highlight({ id, delay }: { id: string; delay: number }) {
       animate="visible"
       exit="initial"
       transition={{ delay }}
-      className="bg-black bg-opacity-50 border-2 pl-2 border-yellow-400 h-1/6 absolute text-yellow-300 text-xl font-semibold "
+      className="border-2 pl-2 border-yellow-400 h-1/6 absolute text-yellow-300 text-xl font-semibold "
       css={{
         left: rect?.left,
         top: rect?.top,
@@ -206,68 +206,52 @@ function Highlight({ id, delay }: { id: string; delay: number }) {
         height: rect?.height,
       }}
     >
-      {id}
+      <span css={{ textShadow: '1px 1px 1px rgba(0,0,0,0.5)' }}>{id}</span>
     </motion.div>
   )
 }
 
-function Annotation({ highlights = [] }: { highlights: string[] }) {
-  const rects = useHighlightRects(highlights)
-  // const clipPath = rects.map(
-  //   (r) => `inset(${r?.top}px ${r?.right}px ${r?.bottom}px ${r?.left}px)`,
-  // )
-  // console.log(clipPath)
-
+function Annotation({ ids = [] }: { ids: string[] }) {
+  const rects = useHighlightRects(ids)
   const rectSvgs = rects.map(
     (r) =>
       `<rect x="${r?.x}" y="${r?.y}" width="${r?.width}" height="${r?.height}" />`,
   )
 
   return (
-    <div
-      className="absolute inset-0 pointer-events-none bg-black bg-opacity-50 "
-      id="annotation"
-      // css={{ maskComposite: 'destination-out', mask: 'url(#highlights)' }}
-      css={{
-        // For some reason, only inline svg works as a mask here.
-        mask: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><g id="highlights">${rectSvgs.join(
-          ' ',
-        )}</g></svg>'), linear-gradient(#fff,#fff)`,
-        maskComposite: 'exclude', // Firefox
-        WebkitMaskComposite: 'xor', // Chrome and Safari
-      }}
-    >
-      {/* <svg width="100%" height="100%">
-        <g id="highlights">
-          {rects.map((r) => (
-            <rect
-              key={r?.toJSON()}
-              x={r?.x}
-              y={r?.y}
-              width={r?.width}
-              height={r?.height}
-              fill="black"
-            />
-          ))}
-        </g>
-      </svg> */}
-      {/* <AnimatePresence>
-        {highlights.map((h, index) => (
+    <div className="absolute inset-0 pointer-events-none " id="annotation">
+      {/* Text annotations */}
+      <AnimatePresence>
+        {ids.map((h, index) => (
           <Highlight id={h} key={h} delay={index * 0.4} />
         ))}
-      </AnimatePresence> */}
+      </AnimatePresence>
+      {/* Backdrop */}
+      {ids.length > 0 && (
+        <div
+          className="absolute inset-0 pointer-events-none bg-black bg-opacity-50 "
+          css={{
+            // For some reason, only inline svg works as a mask here.
+            mask: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><g>${rectSvgs.join(
+              ' ',
+            )}</g></svg>'), linear-gradient(#fff,#fff)`,
+            maskComposite: 'exclude', // Firefox
+            WebkitMaskComposite: 'xor', // Chrome and Safari
+          }}
+        />
+      )}
     </div>
   )
 }
 
-export function DomoHatShopDemo({ id }: Props) {
+export function DomoHatShopDemo() {
   const [msg] = useContext(InPostMessageContext)
   const highlights = msg === '' ? [] : msg.split(' ')
 
   return (
-    <div className="top-0 sticky shadow-lg rounded-md" id={id}>
+    <div className="top-0 sticky shadow-lg rounded-md">
       <DomoHatShop />
-      <Annotation highlights={highlights} />
+      <Annotation ids={highlights} />
     </div>
   )
 }
