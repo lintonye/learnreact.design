@@ -15,7 +15,6 @@ import imgPlaceholders from './placeholders-in-sketch.png'
 import imgInspect from './inspect.png'
 
 import { DomoAsciiArt } from '@/components/what-is-react/DomoAsciiArt'
-import { ThinkerWithHat } from '@/components/what-is-react/ThinkerWithHat'
 import { IconBinocular } from '@/components/what-is-react/IconBinocular'
 import { DomoHatShopDemo } from '@/components/what-is-react/DomoHatShopDemo'
 import { OffScreenDetector } from '@/components/OffScreenDetector'
@@ -90,7 +89,7 @@ In real life, DOM stands for Document Object Model. It's indeed a model -- a mod
 
 To check out what DOM looks like, right-click on this very page and choose "Inspect". Can you make sense of what's in the Elements tab?
 
-<img src={imgInspect} alt="Inspect in Chrome" />
+<img src={imgInspect} alt="Inspect in Chrome" width={2048} height={1536} />
 
 <DomoAsciiArt />
 
@@ -206,7 +205,7 @@ These sketches are called _Virtual DOM_. Virtual DOM is much faster to manipulat
 
 Even cooler, imagine if we can leave placeholders in our sketches to represent different variations of a same pose. This way, when somebody asks for portraits of Domo wearing a different hat, we don't have to talk to React again. We can just sit back and let React change it for us.
 
-<ThinkerWithHat />
+<img src={imgPlaceholders} alt="Thinker with a hat: Placeholder in JSX" />
 
 This trick is how React got its name. The UI built with React is **reactive** -- it appears that the DOM "reacts" to any changes to the underlying data. No need to track the data. No need to worry about when to update the DOM. It just gets updated automatically (by React). The idea of reactive UI greatly simplifies UI development.
 
@@ -233,7 +232,7 @@ Now let's review what we have learned so far and get our hands dirty on a few re
 
 <div>
 
-Alright. Let's say we want to help Domo build an online hat store 🧢 (hint: it's interactive. Choose a hat for Domo!).
+Alright. Let's say we want to help Domo build an online hat store 🧢 .
 
 <DomoHatShopDemo />
 
@@ -315,12 +314,12 @@ Now an exercise for you.
 
 Let's say we want to add the SearchBar into the Footer as well. What would you do?
 
-```jsx
-// Footer
-<div>
-  ...
-  <SearchBar />
-</div>
+TODO: Editor
+
+```jsx live=true
+<footer>
+  <div>© 2021 Domo's Hat Shop</div>
+</footer>
 ```
 
 You get the idea!
@@ -329,9 +328,17 @@ You get the idea!
 
 "Composable" means being able to create a component using other components as its building blocks. This sounds very similar to how nature works, except for one important difference: TODO
 
-Try to change the SearchBar code below. What do you see?
+Try to change the text on the button below. What do you see?
 
-TODO SearchBar code
+TODO Editor: SearchBar code
+
+```jsx live=true
+// SearchBar
+<form>
+  <input type="string" />
+  <button>Search</button>
+</form>
+```
 
 The SearchBar on both Header and Footer updates. Right? Once we use a component in another component, it still "attaches" to the original component. When the original changes, all instances update along with it.
 
@@ -346,6 +353,8 @@ Remember? React components are also **independent**. This means if we change one
 TODO
 
 ### Declarative & Reactive
+
+Hint: it's interactive. Choose a hat for Domo!
 
 ```jsx
 // DomoWithHat
