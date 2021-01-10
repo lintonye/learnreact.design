@@ -126,22 +126,45 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
         canonical={url}
       />
       <NavBar />
-      <div className="max-w-screen-sm lg:max-w-screen-md xl:max-w-screen-lg mt-10 mx-auto">
+      <div
+        className={
+          'max-w-xs mx-auto mt-10 ' +
+          'sm:max-w-screen-sm ' +
+          'lg:max-w-screen-md ' +
+          'xl:max-w-screen-lg '
+        }
+      >
         {title && (
-          <h1 className="mx-auto font-bold leading-tight text-center text-2xl my-10 max-w-sm sm:text-4xl md:my-16 lg:max-w-2xl lg:my-24 xl:max-w-3xl xl:text-5xl xl:my-36">
+          <h1
+            className={
+              'mx-auto font-bold leading-tight text-center text-2xl my-10 w-full ' +
+              'sm:text-4xl ' +
+              'md:my-16 ' +
+              'lg:max-w-2xl lg:my-24 ' +
+              'xl:max-w-3xl xl:text-5xl xl:my-36 '
+            }
+          >
             {title}
           </h1>
         )}
         <InPostMessageContext.Provider
           value={[inPostMessage, (msg) => setInPostMessage(msg)]}
         >
-          <div className="flex justify-center space-x-16">
+          <div
+            className={
+              'block justify-center space-x-16 w-full mx-auto ' + //
+              'lg:flex '
+            }
+          >
+            {/* Main content */}
             <MDXProvider components={components}>
-              <div className="max-w-2xl leading-6">{children}</div>
+              <div className="w-full">{children}</div>
             </MDXProvider>
+
+            {/* Sidebar */}
             <div className="sticky top-20 self-start mt-6">
-              <div className="hidden xl:block">
-                <div className="uppercase font-semibold text-gray-500">
+              <div className="hidden lg:block">
+                <div className="uppercase font-semibold text-gray-500 my-2">
                   table of contents
                 </div>
                 <div className="text-sm text-gray-500">{toc}</div>
