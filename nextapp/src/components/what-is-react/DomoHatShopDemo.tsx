@@ -98,7 +98,7 @@ function Hat({
 
 function DomoWithHat({ hat }: { hat: string }) {
   return (
-    <div className="relative flex-shrink-0">
+    <div className="relative flex-shrink-0" id="DomoWithHat">
       <Domo />
       <Hat type={hat} className="absolute -top-3 right-2" />
     </div>

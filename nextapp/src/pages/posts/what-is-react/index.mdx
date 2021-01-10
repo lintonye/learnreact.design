@@ -177,7 +177,6 @@ If this sounds abstract to you, don't worry! I'll show you some examples and exp
 When directly working with DOM API, we'd have to specify what element to change at the right time, in the right order. This is equivalent to describing to Domo how to position his head, arms and legs step by step, for each and every portrait.
 
 <img src={imgStepByStep} alt="Imperative programming" />
-TODO the confusion is on dev
 
 Heck, this sounds tedious and error-prone! Why can't we just tell Domo _what_ we want instead of _how_ to pose? In fact, this is exactly how to build a UI in React. A developer draws a quick sketch of what he or she wants. React explains it to Domo how to pose.
 
@@ -317,6 +316,7 @@ Let's say we want to add the SearchBar into the Footer as well. What would you d
 TODO: Editor
 
 ```jsx live=true
+// Footer
 <footer>
   <div>© 2021 Domo's Hat Shop</div>
 </footer>
@@ -324,11 +324,11 @@ TODO: Editor
 
 You get the idea!
 
-### Components are live TODO
+### Components are made for reuse
 
-"Composable" means being able to create a component using other components as its building blocks. This sounds very similar to how nature works, except for one important difference: TODO
+"Composable" means being able to create a component using other components as its building blocks. This sounds very similar to how nature works, except for one important difference: in React, once we use a component in another component, it still "attaches" to the original component. When the original changes, all instances update along with it.
 
-Try to change the text on the button below. What do you see?
+Try to change the text on the button in the code below. What do you see?
 
 TODO Editor: SearchBar code
 
@@ -340,21 +340,23 @@ TODO Editor: SearchBar code
 </form>
 ```
 
-The SearchBar on both Header and Footer updates. Right? Once we use a component in another component, it still "attaches" to the original component. When the original changes, all instances update along with it.
+The SearchBar on both Header and Footer updates. Right? This works very similarly to components in design tools such as Framer and Figma.
 
 React components are made for **reuse**. Once a component is defined, we can use it as a custom tag in other components, as many times as we want. If we change the component, all components that include it will change accordingly.
-
-This works very similarly to components in design tools such as Framer and Figma.
 
 ### Components are independent
 
 Remember? React components are also **independent**. This means if we change one component, other components (that don't include it) still behave the same way as before.
 
-TODO
+When we change the SearchBar component above, only the Header and Footer change. This may sound very straightforward (perhaps too obvious). But it's a fundamental idea in software engineering and it goes a long way to keep software development manageable.
 
 ### Declarative & Reactive
 
-Hint: it's interactive. Choose a hat for Domo!
+Now let's move on to the Main component. Have you choosen a hat for Domo yet? The demo above is not just an image. It's interactive!
+
+<OffScreenDetector on="DomoWithHat" off="">
+
+Here's the code for the component DomoWithHat, the widget on the left.
 
 ```jsx
 // DomoWithHat
@@ -364,7 +366,11 @@ Hint: it's interactive. Choose a hat for Domo!
 </div>
 ```
 
-Notice that we just need to define what we want (Domo and a hat in a div), and "wire up" the data ("`type = {hat}`"). When the data change (user selects a hat), the UI updates automatically.
+Note that we just need to define what we want (Domo and a hat in a div), and "wire up" the data ("`type = {hat}`"). When the data change (user selects a hat), the UI updates automatically. We don't need to worry about when and how to update the DOM. We don't even need to keep track of the data. What we need is just to draw a quick sketch, i.e. the code above.
+
+Remember the other two superpowers of React? **Declarative UI** and **Reactive DOM updates**.
+
+</OffScreenDetector>
 
 </div>
 
@@ -375,128 +381,3 @@ Notice that we just need to define what we want (Domo and a hat in a div), and "
 - sign up form
 
 <div className="mb-96 h-96" />
-
-<!-- You can use this component in another component, that is, use this component to build another component, and that other component can be used to create yet another component, and so on.
-
-Now let's get our hands on a few React components and review what we have learned about React so far.
-
-Component `Shot`
-
-```jsx
-<div>
-  <ShotDetail />
-  <Sidebar />
-</div>
-
-// ShotDetail
-<div>
-  <Avatar />
-  <Titles />
-</div>
-```
-
-- break down UI
-- custom tags
-- declarative
-- composable, reuse
-- independent
-- reactiveness
-
-If you are familiar with JavaScript, check out this sandbox.
-
-TODO: Hands-on examples
-
-STOP READING FROM HERE
-
-Today, more and more programming languages and frameworks allow us to code declaratively instead of imperatively. CSS is another example of declarative programming -- we only describe the style what we want, and the browser figures out how to style the web page for us.
-
-```css
-body {
-  font-size: 16px;
-  padding: 8px;
-  background: #fefefe;
-}
-```
-
-- example of UI
-- text representation
-- custom tags
-
-But first, let's look at what a React component looks like in real life.
-
-### Components in design tools
-
-In today's design tools, such as Framer or Figma,
-
-If you are familiar with Sketch, components are a lot like [symbols](https://www.sketchapp.com/learn/documentation/symbols/).
-
-### Write your first React component
-
-Back to our studio "Web Browser", you describe your requirement for portraits as components, React translates it into what Domo understands. This saves you a lot time because you don't have to repeat common parts in your instructions.
-
-### Components are composable
-
-The word "composable" means that we can make a component with other components.
-
-This is similar to how our real world works (with some important differences as I'll show you soon). Our cars, houses and even our bodies are all made up of identifiable components that are individual, functional units. These components are made up of smaller components which consist of even smaller components, all the way down to atoms.
-
-
-### Components are independent
-
-[Framer component video]
-
-Figma has similar feature, but Framer is more complete
-
-- composable
-- independent components. Change code in one place, other parts don't break. Only interact with other components at a very limited, well-defined places.
-
-```jsx
-// Domo
-<div>
-  <img src="domo.png" />
-</div>
-```
-
-```jsx
-<Domo />
-```
-
-```jsx
-// DomoCouple
-<div>
-  <Domo />
-  <Domo />
-</div>
-```
-
-```jsx
-// Domo
-<div>
-  <img src="domo.png" />
-  <img src="hat.png" />
-</div>
-```
-
-```jsx
-// Hat
-<div>
-  <img src="hat.png" />
-</div>
-```
-
-```jsx
-// ThinkerWithHat
-<div>
-  <Hat>
-  <Thinker />
-</div>
-```
-
-```jsx
-<div>
-  <ThinkerWithHat />
-  <ThinkerWithHat />
-  <ThinkerWithHat />
-</div>
-```
- -->
