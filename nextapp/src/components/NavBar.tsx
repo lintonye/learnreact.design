@@ -35,9 +35,9 @@ export function NavBar() {
           <li>
             <a href="/webinars">Webinars</a>
           </li>
-          <li>
+          {/* <li>
             <a href="/hire-me">Hire Linton</a>
-          </li>
+          </li> */}
         </ul>
       </nav>
     </header>

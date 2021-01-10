@@ -49,14 +49,14 @@ function ShoppingCart() {
 function Header() {
   return (
     <header id="Header">
-      <ul className="flex justify-between items-center p-3 text-sm bg-indigo-900 text-white">
+      <ul className="flex space-x-6 items-center p-3 text-sm bg-indigo-900 text-white">
         <li>Home</li>
         <li>
           <SearchBar />
         </li>
         <li>Account</li>
-        <li>Return &amp; Orders</li>
-        <li>
+        {/* <li>Return &amp; Orders</li> */}
+        <li className="flex-1 flex justify-end">
           <ShoppingCart />
         </li>
       </ul>
