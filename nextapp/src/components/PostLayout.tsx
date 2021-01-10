@@ -30,8 +30,8 @@ const components = {
   img: (props: any) => (
     <Image
       className="mx-auto max-w-full"
-      width={500}
-      height={300}
+      width={1024}
+      height={768}
       layout="responsive"
       {...props}
     />
