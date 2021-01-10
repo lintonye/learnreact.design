@@ -164,26 +164,33 @@ const variants = {
   visible: { opacity: 1 },
 }
 
-function Highlight({ id, delay }: { id: string; delay: number }) {
-  const [rec, setRec] = useState<DOMRect | undefined>(undefined)
+function useHighlightRects(ids: string[]) {
+  const [rects, setRects] = useState<(DOMRect | undefined)[]>([])
   useEffect(() => {
-    const element = document.getElementById(id)
-    const rec = element?.getBoundingClientRect()
-    const container = document.getElementById('annotation')
-    const parentBox = container?.getBoundingClientRect()
+    function computeRect(id: string) {
+      const element = document.getElementById(id)
+      const box = element?.getBoundingClientRect()
+      const container = document.getElementById('annotation')
+      const parentBox = container?.getBoundingClientRect()
 
-    rec &&
-      parentBox &&
-      setRec(
+      return (
+        box &&
+        parentBox &&
         DOMRectReadOnly.fromRect({
-          x: rec.left - parentBox.left,
-          y: rec.top - parentBox.top,
-          width: rec.width,
-          height: rec.height,
-        }),
+          x: box.left - parentBox.left,
+          y: box.top - parentBox.top,
+          width: box.width,
+          height: box.height,
+        })
       )
-  }, [id])
+    }
+    setRects(ids.map(computeRect))
+  }, [ids])
+  return rects
+}
 
+function Highlight({ id, delay }: { id: string; delay: number }) {
+  const rect = useHighlightRects([id])[0]
   return (
     <motion.div
       variants={variants}
@@ -193,10 +200,10 @@ function Highlight({ id, delay }: { id: string; delay: number }) {
       transition={{ delay }}
       className="bg-black bg-opacity-50 border-2 pl-2 border-yellow-400 h-1/6 absolute text-yellow-300 text-xl font-semibold "
       css={{
-        left: rec?.left,
-        top: rec?.top,
-        width: rec?.width,
-        height: rec?.height,
+        left: rect?.left,
+        top: rect?.top,
+        width: rect?.width,
+        height: rect?.height,
       }}
     >
       {id}
@@ -205,13 +212,50 @@ function Highlight({ id, delay }: { id: string; delay: number }) {
 }
 
 function Annotation({ highlights = [] }: { highlights: string[] }) {
+  const rects = useHighlightRects(highlights)
+  // const clipPath = rects.map(
+  //   (r) => `inset(${r?.top}px ${r?.right}px ${r?.bottom}px ${r?.left}px)`,
+  // )
+  // console.log(clipPath)
+
+  const rectSvgs = rects.map(
+    (r) =>
+      `<rect x="${r?.x}" y="${r?.y}" width="${r?.width}" height="${r?.height}" />`,
+  )
+
   return (
-    <div className="absolute inset-0 pointer-events-none" id="annotation">
-      <AnimatePresence>
+    <div
+      className="absolute inset-0 pointer-events-none bg-black bg-opacity-50 "
+      id="annotation"
+      // css={{ maskComposite: 'destination-out', mask: 'url(#highlights)' }}
+      css={{
+        // For some reason, only inline svg works as a mask here.
+        mask: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><g id="highlights">${rectSvgs.join(
+          ' ',
+        )}</g></svg>'), linear-gradient(#fff,#fff)`,
+        maskComposite: 'exclude', // Firefox
+        WebkitMaskComposite: 'xor', // Chrome and Safari
+      }}
+    >
+      {/* <svg width="100%" height="100%">
+        <g id="highlights">
+          {rects.map((r) => (
+            <rect
+              key={r?.toJSON()}
+              x={r?.x}
+              y={r?.y}
+              width={r?.width}
+              height={r?.height}
+              fill="black"
+            />
+          ))}
+        </g>
+      </svg> */}
+      {/* <AnimatePresence>
         {highlights.map((h, index) => (
           <Highlight id={h} key={h} delay={index * 0.4} />
         ))}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </div>
   )
 }
