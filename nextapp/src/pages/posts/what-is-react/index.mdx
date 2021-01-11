@@ -17,6 +17,7 @@ import imgInspect from './inspect.png'
 import { DomoAsciiArt } from '@/components/what-is-react/DomoAsciiArt'
 import { IconBinocular } from '@/components/what-is-react/IconBinocular'
 import { DomoHatShopDemo } from '@/components/what-is-react/DomoHatShopDemo'
+import { CodeEditor } from '@/components/what-is-react/CodeEditor'
 import { OffScreenDetector } from '@/components/OffScreenDetector'
 
 export const meta = {
@@ -235,7 +236,7 @@ Alright. Let's say we want to help Domo build an online hat store 🧢 .
 
 <DomoHatShopDemo />
 
-<OffScreenDetector on="Header Main Footer" off="">
+<OffScreenDetector on="Header Main Footer">
 
 We can break the UI into a few parts:
 
@@ -255,8 +256,6 @@ This decomposition can be written in code like so:
 ```
 
 </OffScreenDetector>
-
-<OffScreenDetector on="Header" off="">
 
 This looks like HTML, right? Except for those tags that start with capital letters: `<Header>`, `<Content>` and `<Footer>`. They are not standard HTML tags. They are custom tags.
 
@@ -282,8 +281,6 @@ We write the Header component!
   </nav>
 </header>
 ```
-
-</OffScreenDetector>
 
 <OffScreenDetector on="SearchBar ShoppingCart" off="">
 
@@ -313,14 +310,12 @@ Now here's an exercise for you.
 
 Let's say we want to add the SearchBar into the Footer as well. What would you do?
 
-TODO: Editor
-
-```jsx live=true
-// Footer
-<footer>
+<CodeEditor
+  code={`<footer>
   <div>© 2021 Domo's Hat Shop</div>
-</footer>
-```
+</footer>`}
+  onChange={(code, dispatch) => dispatch({ type: 'update-footer', data: code })}
+/>
 
 You get the idea!
 

@@ -138,7 +138,7 @@ function Main() {
   )
 }
 
-function Footer() {
+function Footer({ code }: { code: string }) {
   return (
     <footer
       className="p-2 text-xs flex justify-center bg-indigo-900 text-white"
@@ -149,12 +149,12 @@ function Footer() {
   )
 }
 
-function DomoHatShop() {
+function DomoHatShop({ footerCode }: { footerCode: string }) {
   return (
     <div className="bg-white top-0 sticky">
       <Header />
       <Main />
-      <Footer />
+      <Footer code={footerCode} />
     </div>
   )
 }
@@ -247,11 +247,20 @@ function Annotation({ ids = [] }: { ids: string[] }) {
 
 export function DomoHatShopDemo() {
   const [msg] = useContext(InPostMessageContext)
-  const highlights = msg === '' ? [] : msg.split(' ')
+  let highlights: string[] = [],
+    footerCode = null
+  switch (msg?.type) {
+    case 'highlight':
+      highlights = msg?.data === '' ? [] : msg?.data.split(' ')
+      break
+    case 'update-footer':
+      footerCode = msg?.data
+      break
+  }
 
   return (
     <div className="top-0 sticky shadow-lg rounded-md">
-      <DomoHatShop />
+      <DomoHatShop footerCode={footerCode} />
       <Annotation ids={highlights} />
     </div>
   )

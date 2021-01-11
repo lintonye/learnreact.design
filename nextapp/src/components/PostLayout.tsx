@@ -110,7 +110,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
     ogImage,
   } = meta || {}
   const toc = createToc(router.pathname, children)
-  const [inPostMessage, setInPostMessage] = useState('')
+  const [inPostMessage, setInPostMessage] = useState(null)
   return (
     <>
       <NextSeo

@@ -11,7 +11,7 @@ type Props = {
 export function OffScreenDetector({ children, on, off }: Props) {
   const ref = useRef<HTMLDivElement>(null)
   const [targetHeight, setTargetHeight] = useState(0)
-  const [_, setMessage] = useContext(InPostMessageContext)
+  const [_, dispatch] = useContext(InPostMessageContext)
   // useEffect(() => {
   //   const target = document.getElementById(topMarginItemId)
   //   if (target) {
@@ -32,8 +32,10 @@ export function OffScreenDetector({ children, on, off }: Props) {
           //   entry.isIntersecting,
           //   entry.intersectionRatio,
           // )
-          if (on !== undefined && entry.isIntersecting) setMessage(on)
-          if (off !== undefined && !entry.isIntersecting) setMessage(off)
+          if (on !== undefined && entry.isIntersecting)
+            dispatch({ type: 'highlight', data: on })
+          if (off !== undefined && !entry.isIntersecting)
+            dispatch({ type: 'highlight', data: on })
         },
         { threshold: 1 },
       )

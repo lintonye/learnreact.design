@@ -1,8 +1,9 @@
 import React from 'react'
 
-type MessagePair = [string, (message: string) => void]
+type Message = {
+  type: string
+  data: any
+}
+type MessagePair = [Message, (message: Message) => void] | []
 
-export const InPostMessageContext = React.createContext<MessagePair>([
-  '',
-  (message: string) => {},
-])
+export const InPostMessageContext = React.createContext<MessagePair>([])
