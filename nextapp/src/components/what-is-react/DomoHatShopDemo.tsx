@@ -231,7 +231,8 @@ function Annotation({ ids = [] }: { ids: string[] }) {
         <div
           className="absolute inset-0 pointer-events-none bg-black bg-opacity-50 "
           css={{
-            // For some reason, only inline svg works as a mask here.
+            // 1. For some reason, only inline svg works as a mask here. Referencing a g or mask with url doesn't work
+            // 2. This linear-gradient(#fff,#fff) is particular important to reverse the mask, i.e. carve a hole
             mask: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><g>${rectSvgs.join(
               ' ',
             )}</g></svg>'), linear-gradient(#fff,#fff)`,
