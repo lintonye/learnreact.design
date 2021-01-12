@@ -11,7 +11,7 @@ import { FiShoppingCart } from 'react-icons/fi'
 import { useState, useContext, useEffect, useRef } from 'react'
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion'
 import { InPostStateContext as InPostStateContext } from '@/components/InPostStateContext'
-import { JsxNode } from '@/types'
+import { JsxNode, JsxParentNode } from '@/types'
 
 type Props = {
   id: string
@@ -156,12 +156,11 @@ function getType(type: string) {
 }
 
 function createElement(node: JsxNode) {
-  const children = Array.isArray(node.children)
+  if (typeof node === 'string') return node
+  const children: React.ReactNode[] = Array.isArray(node.children)
     ? node.children.map(createElement)
     : []
-  return typeof node === 'string'
-    ? node
-    : React.createElement(getType(node.type), node.attrs, ...children)
+  return React.createElement(getType(node.type), node.attrs, ...children)
 }
 
 function populate(
@@ -170,6 +169,7 @@ function populate(
   fallback: React.ReactElement,
 ) {
   if (code) {
+    if (typeof code === 'string') return code
     if (code.type === rootType && Array.isArray(code.children))
       return code.children.map(createElement)
   }
