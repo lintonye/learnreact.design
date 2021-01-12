@@ -24,7 +24,6 @@
     "emotion": "^10.0.27",
     "emotion-server": "^10.0.27",
     "framer-motion": "^3.2.0",
-    "jsx-parser": "^1.0.8",
     "mdx-prism": "^0.3.1",
     "next": "10.0.3",
     "next-seo": "^4.17.0",

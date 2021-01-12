@@ -314,7 +314,9 @@ Let's say we want to add the SearchBar into the Footer as well. What would you d
   code={`<footer>
   <div>© 2021 Domo's Hat Shop</div>
 </footer>`}
-  onChange={(code, dispatch) => dispatch({ type: 'update-footer', data: code })}
+  onChange={(jsxJson, dispatch) =>
+    dispatch({ type: 'update-footer', data: jsxJson })
+  }
 />
 
 You get the idea!

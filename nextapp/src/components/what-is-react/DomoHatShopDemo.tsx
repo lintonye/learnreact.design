@@ -1,4 +1,5 @@
 import { jsx } from '@emotion/core'
+import React from 'react'
 import imgHatCap from './hat-cap.png'
 import imgHatHarryPotter from './hat-harry-potter.png'
 import imgHatLeprechaun from './hat-leprechaun.png'
@@ -10,6 +11,7 @@ import { FiShoppingCart } from 'react-icons/fi'
 import { useState, useContext, useEffect, useRef } from 'react'
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion'
 import { InPostMessageContext } from '@/components/InPostMessageContext'
+import { JsxNode } from '@/types'
 
 type Props = {
   id: string
@@ -138,18 +140,48 @@ function Main() {
   )
 }
 
-function Footer({ code }: { code: string }) {
+function getType(type: string) {
+  switch (type) {
+    case 'SearchBar':
+      return SearchBar
+      break
+  }
+  return type
+}
+
+function createElement(node: JsxNode) {
+  const children = Array.isArray(node.children)
+    ? node.children.map(createElement)
+    : []
+  return typeof node === 'string'
+    ? node
+    : React.createElement(getType(node.type), node.attrs, ...children)
+}
+
+function populate(
+  code: JsxNode,
+  rootType: string,
+  fallback: React.ReactElement,
+) {
+  if (code) {
+    if (code.type === rootType && Array.isArray(code.children))
+      return code.children.map(createElement)
+  }
+  return fallback
+}
+
+function Footer({ code }: { code: JsxNode }) {
   return (
     <footer
-      className="p-2 text-xs flex justify-center bg-indigo-900 text-white"
+      className="p-2 text-xs flex justify-around items-center bg-indigo-900 text-white"
       id="Footer"
     >
-      <div>© 2021 Domo's Hat Shop</div>
+      {populate(code, 'footer', <div>© 2021 Domo's Hat Shop</div>)}
     </footer>
   )
 }
 
-function DomoHatShop({ footerCode }: { footerCode: string }) {
+function DomoHatShop({ footerCode }: { footerCode?: JsxNode }) {
   return (
     <div className="bg-white top-0 sticky">
       <Header />
@@ -245,13 +277,26 @@ function Annotation({ ids = [] }: { ids: string[] }) {
   )
 }
 
+const mockFooterCode: JsxNode = {
+  type: 'footer',
+  children: [
+    {
+      type: 'SearchBar',
+    },
+    {
+      type: 'div',
+      children: ['@ Domo!'],
+    },
+  ],
+}
+
 export function DomoHatShopDemo() {
   const [msg] = useContext(InPostMessageContext)
   let highlights: string[] = [],
-    footerCode = null
+    footerCode = undefined
   switch (msg?.type) {
     case 'highlight':
-      highlights = msg?.data === '' ? [] : msg?.data.split(' ')
+      // highlights = msg?.data === '' ? [] : msg?.data.split(' ')
       break
     case 'update-footer':
       footerCode = msg?.data
