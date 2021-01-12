@@ -12,7 +12,7 @@ type Props = {
 
 export function CodeEditor({ code: initialCode, onChange }: Props) {
   const [code, setCode] = useState(initialCode)
-  const [error, setError] = useState(null)
+  const [error, setError] = useState<string | null>(null)
   const [_, dispatch] = useContext(InPostMessageContext)
   return (
     <div>
@@ -21,10 +21,13 @@ export function CodeEditor({ code: initialCode, onChange }: Props) {
         onValueChange={(c) => {
           setCode(c)
           try {
+            // console.log(c)
             const jsxJson = parseJsx(c)
+            setError(null)
             typeof onChange === 'function' && onChange(jsxJson, dispatch)
           } catch (e) {
-            setError(e)
+            setError(typeof e === 'string' ? e : JSON.stringify(e))
+            if (typeof e !== 'string') console.error(e)
           }
         }}
         highlight={(code) => highlight(code, languages.xml, 'xml')}

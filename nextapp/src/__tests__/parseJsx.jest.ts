@@ -54,8 +54,26 @@ describe('parseHtml', () => {
     expect(parseJsx('  abc ddegeeg   ')).toEqual('abc ddegeeg')
   })
 
+  it('should parse footer and div tags', () => {
+    expect(
+      parseJsx(`<footer>
+
+    <div>© 2021 Domo's Hat Shop</div>
+  </footer>`),
+    ).toEqual({
+      type: 'footer',
+      children: [{ type: 'div', children: ["© 2021 Domo's Hat Shop"] }],
+    })
+  })
+
   it('should throw error when tag is not closed', () => {
     expect(() => parseJsx(`<div`)).toThrow(/Invalid content:.+/)
+  })
+
+  it('should throw error when embedded only an < ', () => {
+    expect(() => parseJsx('<footer>\n<\n</footer>')).toThrow(
+      /Invalid content:.+/,
+    )
   })
 
   it('should throw error when embedded tag is not closed', () => {

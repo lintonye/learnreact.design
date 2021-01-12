@@ -14,6 +14,10 @@ function addChild(parent: JsxNode, child: JsxNode) {
   else parent.children = [child]
 }
 
+function matchFirstChar(match: RegExpMatchArray | null) {
+  return Boolean(match && match.index === 0)
+}
+
 /*
 -
   - type: 'div'
@@ -31,7 +35,9 @@ export function parseJsx(code: string) {
   while (c.length > 0) {
     // start tag
     const matchStart = c.match(startTagRegex)
-    if (matchStart) {
+    // console.log({ matchStart })
+
+    if (matchStart && matchFirstChar(matchStart)) {
       let parent = nodeStack[nodeStack.length - 1]
       const node: JsxNode = { type: matchStart[1] }
       if (!parent) root = node
@@ -55,7 +61,8 @@ export function parseJsx(code: string) {
     }
     // end tag
     const matchEnd = c.match(endTagRegex)
-    if (matchEnd) {
+    // console.log({ matchEnd })
+    if (matchEnd && matchFirstChar(matchEnd)) {
       const tag = matchEnd[1]
       const n = nodeStack.pop()
       if (n === undefined || typeof n === 'string') {
@@ -69,7 +76,8 @@ export function parseJsx(code: string) {
     }
     // text content
     const matchText = c.match(textContentRegex)
-    if (matchText && matchText[0].length > 0) {
+    // console.log({ matchText })
+    if (matchText && matchFirstChar(matchText) && matchText[0].length > 0) {
       const text = matchText[1].trim() // TODO maybe should update regex for this
       if (!root) root = text
       else addChild(nodeStack[nodeStack.length - 1], text)
