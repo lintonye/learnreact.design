@@ -318,10 +318,10 @@ const mockFooterCode: JsxNode = {
 
 export function DomoHatShopDemo() {
   const [state] = useContext(InPostStateContext)
-  const highlights = state?.highlights === '' ? [] : state?.highlights
+  const highlights: string[] = [] //state?.highlights === '' ? [] : state?.highlights
 
   return (
-    <div className="top-0 sticky shadow-lg rounded-md">
+    <div className="top-0 sticky shadow-lg rounded-md z-10">
       <DomoHatShop />
       <Annotation ids={highlights} />
     </div>
