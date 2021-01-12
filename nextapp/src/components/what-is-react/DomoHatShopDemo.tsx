@@ -288,22 +288,27 @@ function ComponentHighlighter({
   return (
     <div className="absolute inset-0 pointer-events-none " id="annotation">
       {/* Backdrop */}
-      {ids.length > 0 && (
-        <div
-          className="absolute inset-0 pointer-events-none bg-black bg-opacity-50 "
-          css={
-            !labelsOnly && {
-              // 1. For some reason, only inline svg works as a mask here. Referencing a g or mask with url doesn't work
-              // 2. This linear-gradient(#fff,#fff) is particular important to reverse the mask, i.e. carve a hole
-              mask: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><g>${rectSvgs.join(
-                ' ',
-              )}</g></svg>'), linear-gradient(#fff,#fff)`,
-              maskComposite: 'exclude', // Firefox
-              WebkitMaskComposite: 'xor', // Chrome and Safari
+      <AnimatePresence>
+        {ids.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 pointer-events-none bg-black bg-opacity-50 "
+            css={
+              !labelsOnly && {
+                // 1. For some reason, only inline svg works as a mask here. Referencing a g or mask with url doesn't work
+                // 2. This linear-gradient(#fff,#fff) is particular important to reverse the mask, i.e. carve a hole
+                mask: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><g>${rectSvgs.join(
+                  ' ',
+                )}</g></svg>'), linear-gradient(#fff,#fff)`,
+                maskComposite: 'exclude', // Firefox
+                WebkitMaskComposite: 'xor', // Chrome and Safari
+              }
             }
-          }
-        />
-      )}
+          />
+        )}
+      </AnimatePresence>
       {/* Text annotations */}
       <AnimatePresence>
         {ids.map((h, index) => (
@@ -330,13 +335,14 @@ const mockFooterCode: JsxNode = {
 export function DomoHatShopDemo() {
   const [state] = useContext(InPostStateContext)
   const highlightOptions = (state?.highlights || '').split(':')
-  const ids = highlightOptions[0] || ''
+  const ids = highlightOptions[0] === '' ? [] : highlightOptions[0].split(' ')
   const labelsOnly = highlightOptions[1] === 'labels-only'
+  // console.log({ state })
 
   return (
     <div className="top-0 sticky shadow-lg rounded-md z-10">
       <DomoHatShop />
-      <ComponentHighlighter ids={ids.split(' ')} labelsOnly={labelsOnly} />
+      <ComponentHighlighter ids={ids} labelsOnly={labelsOnly} />
     </div>
   )
 }

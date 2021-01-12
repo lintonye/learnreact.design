@@ -282,7 +282,7 @@ We write the Header component!
 </header>
 ```
 
-<OffScreenDetector on="SearchBar ShoppingCart" off="">
+<OffScreenDetector on="SearchBar ShoppingCart">
 
 Now in this Header component, it includes two custom tags `<SearchBar>` and `<ShoppingCart>`. What's in there?
 
@@ -306,6 +306,8 @@ Remember the first important property of React components? They are **composable
 
 </OffScreenDetector>
 
+<OffScreenDetector on="">
+
 Now here's an exercise for you:
 
 <div className="bg-indigo-100 px-3 py-1 rounded-md">
@@ -324,6 +326,8 @@ Now here's an exercise for you:
 </div>
 
 You get the idea!
+
+</OffScreenDetector>
 
 ### Components are made for reuse
 
@@ -359,7 +363,7 @@ When we change the SearchBar component above, only the Header and Footer change.
 
 Now let's move on to the Main component. Have you choosen a hat for Domo yet? The demo above is not just an image. It's interactive!
 
-<OffScreenDetector on="DomoWithHat" off="">
+<OffScreenDetector on="DomoWithHat">
 
 Here's the code for the component DomoWithHat, the widget on the left.
 
