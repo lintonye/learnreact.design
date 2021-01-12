@@ -60,7 +60,7 @@ function ShoppingCart() {
 function Header({ searchBarCode }: { searchBarCode?: JsxNode }) {
   return (
     <header id="Header">
-      <ul className="flex space-x-6 items-center p-3 text-sm bg-indigo-900 text-white">
+      <ul className="flex space-x-6 items-center p-3 text-sm bg-gray-900 text-white">
         <li>Home</li>
         <li>
           <SearchBar />
@@ -141,7 +141,7 @@ function Main() {
         <p className="text-sm">
           A covering for the head usually having a shaped crown and brim.
         </p>
-        <button className="rounded-sm bg-indigo-500 text-white text-sm py-1 px-2">
+        <button className="rounded-sm bg-pink-600 text-white text-sm py-1 px-2">
           Add To Cart
         </button>
       </div>
@@ -196,7 +196,7 @@ function Footer() {
 
   return (
     <footer
-      className="p-2 text-xs flex justify-around items-center bg-indigo-900 text-white"
+      className="p-2 text-xs flex justify-around items-center bg-gray-900 text-white"
       id="Footer"
     >
       {populate(code, 'footer', <div>© 2021 Domo's Hat Shop</div>)}
