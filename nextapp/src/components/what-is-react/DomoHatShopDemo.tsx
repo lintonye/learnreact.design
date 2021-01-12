@@ -1,5 +1,5 @@
 import { jsx } from '@emotion/core'
-import React from 'react'
+import React, { RefObject } from 'react'
 import imgHatCap from './hat-cap.png'
 import imgHatHarryPotter from './hat-harry-potter.png'
 import imgHatLeprechaun from './hat-leprechaun.png'
@@ -8,7 +8,7 @@ import imgHatPropeller from './hat-propeller.png'
 import imgThinker from './thinker.png'
 import Image from 'next/image'
 import { FiShoppingCart } from 'react-icons/fi'
-import { useState, useContext, useEffect, useRef } from 'react'
+import { useState, useContext, useEffect, useLayoutEffect, useRef } from 'react'
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion'
 import { InPostStateContext as InPostStateContext } from '@/components/InPostStateContext'
 import { JsxNode, JsxParentNode } from '@/types'
@@ -225,7 +225,7 @@ const variants = {
   visible: { opacity: 1 },
 }
 
-function useHighlightRects(ids: string[]) {
+function useComponentRects(ids: string[]) {
   const [rects, setRects] = useState<(DOMRect | undefined)[]>([])
   useEffect(() => {
     function computeRect(id: string) {
@@ -250,8 +250,47 @@ function useHighlightRects(ids: string[]) {
   return rects
 }
 
+function relativeTo(rect: DOMRect, parentRect: DOMRect) {
+  return DOMRectReadOnly.fromRect({
+    x: rect.x - parentRect.x,
+    y: rect.y - parentRect.y,
+    width: rect.width,
+    height: rect.height,
+  })
+}
+
+function useAdjustedLabelXY(
+  componentRect?: DOMRect,
+): [{ x: number; y: number }, RefObject<HTMLElement>] {
+  const ref = useRef<HTMLElement>(null)
+  const [xy, setXy] = useState({ x: 4, y: 4 })
+
+  useLayoutEffect(() => {
+    if (ref.current && componentRect) {
+      const labelViewportRect = ref.current.getBoundingClientRect()
+      const container = document.getElementById('annotation')
+      const parentViewportRect = container?.getBoundingClientRect()
+      if (labelViewportRect && parentViewportRect) {
+        const labelRect = relativeTo(labelViewportRect, parentViewportRect)
+        setXy({
+          x:
+            labelRect.right > componentRect.right
+              ? -labelRect.width + componentRect.width
+              : 4,
+          y:
+            labelRect.bottom - componentRect.bottom > 5
+              ? componentRect.height
+              : 4,
+        })
+      }
+    }
+  }, [componentRect, ref])
+  return [xy, ref]
+}
+
 function ComponentLabel({ id, delay }: { id: string; delay: number }) {
-  const rect = useHighlightRects([id])[0]
+  const rect = useComponentRects([id])[0]
+  const [labelXY, labelRef] = useAdjustedLabelXY(rect)
   return (
     <motion.div
       variants={variants}
@@ -267,7 +306,17 @@ function ComponentLabel({ id, delay }: { id: string; delay: number }) {
         height: rect?.height,
       }}
     >
-      <span css={{ textShadow: '1px 1px 1px rgba(0,0,0,0.5)' }}>{id}</span>
+      <span
+        ref={labelRef}
+        className="absolute"
+        css={{
+          textShadow: '1px 1px 1px rgba(0,0,0,0.5)',
+          left: labelXY.x,
+          top: labelXY.y,
+        }}
+      >
+        {id}
+      </span>
     </motion.div>
   )
 }
@@ -279,7 +328,7 @@ function ComponentHighlighter({
   ids: string[]
   labelsOnly: boolean
 }) {
-  const rects = useHighlightRects(ids)
+  const rects = useComponentRects(ids)
   const rectSvgs = rects.map(
     (r) =>
       `<rect x="${r?.x}" y="${r?.y}" width="${r?.width}" height="${r?.height}" />`,
