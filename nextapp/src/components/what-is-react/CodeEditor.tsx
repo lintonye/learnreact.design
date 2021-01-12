@@ -17,27 +17,29 @@ export function CodeEditor({ code: initialCode, onChange }: Props) {
   const [_, dispatch] = useContext(InPostStateContext)
   return (
     <div>
-      <Editor
-        value={code}
-        onValueChange={(c) => {
-          setCode(c)
-          try {
-            // console.log(c)
-            const jsxJson = parseJsx(c)
-            setError(null)
-            typeof onChange === 'function' && onChange(jsxJson, dispatch)
-          } catch (e) {
-            setError(typeof e === 'string' ? e : JSON.stringify(e))
-            if (typeof e !== 'string') console.error(e)
-          }
-        }}
-        highlight={(code) => highlight(code, languages.xml, 'xml')}
-        padding={10}
-        // style={{
-        //   fontFamily: '"Fira code", "Fira Mono", monospace',
-        //   fontSize: 12,
-        // }}
-      />
+      <div className="font-mono">
+        <Editor
+          value={code}
+          onValueChange={(c) => {
+            setCode(c)
+            try {
+              // console.log(c)
+              const jsxJson = parseJsx(c)
+              setError(null)
+              typeof onChange === 'function' && onChange(jsxJson, dispatch)
+            } catch (e) {
+              setError(typeof e === 'string' ? e : JSON.stringify(e))
+              if (typeof e !== 'string') console.error(e)
+            }
+          }}
+          highlight={(code) => highlight(code, languages.xml, 'xml')}
+          padding={10}
+          // style={{
+          //   fontFamily: '"Fira code", "Fira Mono", monospace',
+          //   fontSize: 12,
+          // }}
+        />
+      </div>
       {error && <div className="bg-red-500 text-white p-2">{error}</div>}
     </div>
   )
