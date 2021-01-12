@@ -17,7 +17,10 @@ type Props = {
   id: string
 }
 
-function SearchBar({ code }: { code?: JsxNode }) {
+function SearchBar() {
+  const [state] = useContext(InPostStateContext)
+  const code = state?.updateSearchBar
+
   return (
     <form
       id="SearchBar"
@@ -160,7 +163,15 @@ function createElement(node: JsxNode) {
   const children: React.ReactNode[] = Array.isArray(node.children)
     ? node.children.map(createElement)
     : []
-  return React.createElement(getType(node.type), node.attrs, ...children)
+  const attrs =
+    node.type === 'button'
+      ? { className: 'border-white border p-0.5 px-2 rounded-sm' }
+      : {}
+  return React.createElement(
+    getType(node.type),
+    { ...node.attrs, ...attrs },
+    ...children,
+  )
 }
 
 function populate(
@@ -176,7 +187,10 @@ function populate(
   return fallback
 }
 
-function Footer({ code }: { code?: JsxNode }) {
+function Footer() {
+  const [state] = useContext(InPostStateContext)
+  const code = state?.updateFooter
+
   return (
     <footer
       className="p-2 text-xs flex justify-around items-center bg-indigo-900 text-white"
@@ -305,12 +319,10 @@ const mockFooterCode: JsxNode = {
 export function DomoHatShopDemo() {
   const [state] = useContext(InPostStateContext)
   const highlights = state?.highlights === '' ? [] : state?.highlights
-  const footerCode = state?.updateFooter
-  const searchBarCode = state?.updateSearchBar
 
   return (
     <div className="top-0 sticky shadow-lg rounded-md">
-      <DomoHatShop footerCode={footerCode} searchBarCode={searchBarCode} />
+      <DomoHatShop />
       <Annotation ids={highlights} />
     </div>
   )
