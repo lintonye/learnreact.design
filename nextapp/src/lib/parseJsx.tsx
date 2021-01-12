@@ -1,4 +1,4 @@
-import { JsxNode } from '@/types'
+import { JsxParentNode, JsxNode } from '@/types'
 
 // tagName: group 1, attrs: group 2, selfClosed?: group 6
 const startTagRegex = /^\s*<(\w+)((\s+\w+\s*=\s*("|')([^"]*)\4)*)\s*(\/)?>\s*/m
@@ -9,7 +9,7 @@ const endTagRegex = /^<\/(\w+)\s*>\s*/m
 // content: group 1
 const textContentRegex = /^\s*([^<]*)/m
 
-function addChild(parent: JsxNode, child: JsxNode) {
+function addChild(parent: JsxParentNode, child: JsxNode) {
   if (Array.isArray(parent.children)) parent.children.push(child)
   else parent.children = [child]
 }
@@ -29,8 +29,8 @@ function matchFirstChar(match: RegExpMatchArray | null) {
     ...
 */
 export function parseJsx(code: string) {
-  let root: JsxNode
-  const nodeStack: JsxNode[] = []
+  let root: JsxNode | null = null
+  const nodeStack: JsxParentNode[] = []
   let c = code
   while (c.length > 0) {
     // start tag
@@ -86,5 +86,6 @@ export function parseJsx(code: string) {
     }
     throw `Invalid content: ${c}`
   }
-  return root
+  if (root) return root
+  else throw `Empty content: ${code}`
 }

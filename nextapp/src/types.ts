@@ -12,10 +12,10 @@ export type Tag = {
   description: string
 }
 
-export type JsxNode =
-  | {
-      type: string
-      attrs?: { [name: string]: string }
-      children?: JsxNode[]
-    }
-  | string
+export type JsxParentNode = {
+  type: string
+  attrs?: { [name: string]: string }
+  children?: JsxNode[]
+}
+
+export type JsxNode = JsxParentNode | string

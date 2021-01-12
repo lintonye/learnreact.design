@@ -4,10 +4,11 @@ import { highlight, languages } from 'prismjs'
 import { useState, useContext } from 'react'
 import { InPostStateContext } from '@/components/InPostStateContext'
 import { parseJsx } from '@/lib/parseJsx'
+import { JsxNode } from '@/types'
 
 type Props = {
   code: string
-  onChange?: (code: string, dispatch: any) => void
+  onChange?: (code: JsxNode, dispatch: any) => void
 }
 
 export function CodeEditor({ code: initialCode, onChange }: Props) {
