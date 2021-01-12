@@ -259,7 +259,7 @@ function ComponentLabel({ id, delay }: { id: string; delay: number }) {
       animate="visible"
       exit="initial"
       transition={{ delay }}
-      className="border-2 pl-2 border-yellow-400 h-1/6 absolute text-yellow-300 text-xl font-semibold "
+      className="border-2 pl-2 border-yellow-300 h-1/6 absolute text-yellow-300 text-xl font-semibold "
       css={{
         left: rect?.left,
         top: rect?.top,
@@ -272,7 +272,13 @@ function ComponentLabel({ id, delay }: { id: string; delay: number }) {
   )
 }
 
-function ComponentHighlighter({ ids = [] }: { ids: string[] }) {
+function ComponentHighlighter({
+  ids = [],
+  labelsOnly = false,
+}: {
+  ids: string[]
+  labelsOnly: boolean
+}) {
   const rects = useHighlightRects(ids)
   const rectSvgs = rects.map(
     (r) =>
@@ -281,27 +287,29 @@ function ComponentHighlighter({ ids = [] }: { ids: string[] }) {
 
   return (
     <div className="absolute inset-0 pointer-events-none " id="annotation">
+      {/* Backdrop */}
+      {ids.length > 0 && (
+        <div
+          className="absolute inset-0 pointer-events-none bg-black bg-opacity-50 "
+          css={
+            !labelsOnly && {
+              // 1. For some reason, only inline svg works as a mask here. Referencing a g or mask with url doesn't work
+              // 2. This linear-gradient(#fff,#fff) is particular important to reverse the mask, i.e. carve a hole
+              mask: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><g>${rectSvgs.join(
+                ' ',
+              )}</g></svg>'), linear-gradient(#fff,#fff)`,
+              maskComposite: 'exclude', // Firefox
+              WebkitMaskComposite: 'xor', // Chrome and Safari
+            }
+          }
+        />
+      )}
       {/* Text annotations */}
       <AnimatePresence>
         {ids.map((h, index) => (
           <ComponentLabel id={h} key={h} delay={index * 0.3} />
         ))}
       </AnimatePresence>
-      {/* Backdrop */}
-      {ids.length > 0 && (
-        <div
-          className="absolute inset-0 pointer-events-none bg-black bg-opacity-50 "
-          css={{
-            // 1. For some reason, only inline svg works as a mask here. Referencing a g or mask with url doesn't work
-            // 2. This linear-gradient(#fff,#fff) is particular important to reverse the mask, i.e. carve a hole
-            mask: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><g>${rectSvgs.join(
-              ' ',
-            )}</g></svg>'), linear-gradient(#fff,#fff)`,
-            maskComposite: 'exclude', // Firefox
-            WebkitMaskComposite: 'xor', // Chrome and Safari
-          }}
-        />
-      )}
     </div>
   )
 }
@@ -321,14 +329,14 @@ const mockFooterCode: JsxNode = {
 
 export function DomoHatShopDemo() {
   const [state] = useContext(InPostStateContext)
-  const highlights: string[] = !state?.highlights
-    ? []
-    : state?.highlights.split(' ')
+  const highlightOptions = (state?.highlights || '').split(':')
+  const ids = highlightOptions[0] || ''
+  const labelsOnly = highlightOptions[1] === 'labels-only'
 
   return (
     <div className="top-0 sticky shadow-lg rounded-md z-10">
       <DomoHatShop />
-      <ComponentHighlighter ids={highlights} />
+      <ComponentHighlighter ids={ids.split(' ')} labelsOnly={labelsOnly} />
     </div>
   )
 }
