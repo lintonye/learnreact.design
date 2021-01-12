@@ -33,9 +33,9 @@ export function OffScreenDetector({ children, on, off }: Props) {
           //   entry.intersectionRatio,
           // )
           if (on !== undefined && entry.isIntersecting)
-            dispatch({ type: 'highlight', data: on })
+            dispatch({ type: 'highlights', data: on })
           if (off !== undefined && !entry.isIntersecting)
-            dispatch({ type: 'highlight', data: on })
+            dispatch({ type: 'highlights', data: on })
         },
         { threshold: 1 },
       )

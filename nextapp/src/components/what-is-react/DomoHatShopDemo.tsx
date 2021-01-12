@@ -246,11 +246,11 @@ function useHighlightRects(ids: string[]) {
       )
     }
     setRects(ids.map(computeRect))
-  }, [ids])
+  }, [ids.join(' ')])
   return rects
 }
 
-function Highlight({ id, delay }: { id: string; delay: number }) {
+function ComponentLabel({ id, delay }: { id: string; delay: number }) {
   const rect = useHighlightRects([id])[0]
   return (
     <motion.div
@@ -272,7 +272,7 @@ function Highlight({ id, delay }: { id: string; delay: number }) {
   )
 }
 
-function Annotation({ ids = [] }: { ids: string[] }) {
+function ComponentHighlighter({ ids = [] }: { ids: string[] }) {
   const rects = useHighlightRects(ids)
   const rectSvgs = rects.map(
     (r) =>
@@ -284,7 +284,7 @@ function Annotation({ ids = [] }: { ids: string[] }) {
       {/* Text annotations */}
       <AnimatePresence>
         {ids.map((h, index) => (
-          <Highlight id={h} key={h} delay={index * 0.4} />
+          <ComponentLabel id={h} key={h} delay={index * 0.3} />
         ))}
       </AnimatePresence>
       {/* Backdrop */}
@@ -321,12 +321,14 @@ const mockFooterCode: JsxNode = {
 
 export function DomoHatShopDemo() {
   const [state] = useContext(InPostStateContext)
-  const highlights: string[] = [] //state?.highlights === '' ? [] : state?.highlights
+  const highlights: string[] = !state?.highlights
+    ? []
+    : state?.highlights.split(' ')
 
   return (
     <div className="top-0 sticky shadow-lg rounded-md z-10">
       <DomoHatShop />
-      <Annotation ids={highlights} />
+      <ComponentHighlighter ids={highlights} />
     </div>
   )
 }
