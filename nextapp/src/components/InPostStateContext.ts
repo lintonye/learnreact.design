@@ -9,6 +9,9 @@ export type InPostState = {
   [key: string]: any
 }
 
-type MessagePair = [InPostState, (action: InPostAction) => void] | []
+type MessagePair = [InPostState, (action: InPostAction) => void]
 
-export const InPostStateContext = React.createContext<MessagePair>([])
+export const InPostStateContext = React.createContext<MessagePair>([
+  {},
+  () => {},
+])

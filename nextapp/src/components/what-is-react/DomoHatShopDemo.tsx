@@ -230,18 +230,12 @@ function Footer() {
   )
 }
 
-function DomoHatShop({
-  footerCode,
-  searchBarCode,
-}: {
-  footerCode?: JsxNode
-  searchBarCode?: JsxNode
-}) {
+function DomoHatShop() {
   return (
     <div className="bg-white top-0 sticky">
-      <Header searchBarCode={searchBarCode} />
+      <Header />
       <Main />
-      <Footer code={footerCode} />
+      <Footer />
     </div>
   )
 }
