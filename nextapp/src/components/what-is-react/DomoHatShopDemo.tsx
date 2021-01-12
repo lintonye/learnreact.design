@@ -17,7 +17,7 @@ type Props = {
   id: string
 }
 
-function SearchBar() {
+function SearchBar({ code }: { code?: JsxNode }) {
   return (
     <form
       id="SearchBar"
@@ -26,10 +26,16 @@ function SearchBar() {
         e.preventDefault()
       }}
     >
-      <input type="string" className="text-black px-1" />
-      <button className="border-white border p-0.5 px-2 rounded-sm">
-        Search
-      </button>
+      {populate(
+        code,
+        'form',
+        <>
+          <input type="string" className="text-black px-1" />
+          <button className="border-white border p-0.5 px-2 rounded-sm">
+            Search
+          </button>
+        </>,
+      )}
     </form>
   )
 }
@@ -48,13 +54,13 @@ function ShoppingCart() {
   )
 }
 
-function Header() {
+function Header({ searchBarCode }: { searchBarCode?: JsxNode }) {
   return (
     <header id="Header">
       <ul className="flex space-x-6 items-center p-3 text-sm bg-indigo-900 text-white">
         <li>Home</li>
         <li>
-          <SearchBar />
+          <SearchBar code={searchBarCode} />
         </li>
         <li>Account</li>
         {/* <li>Return &amp; Orders</li> */}
@@ -159,7 +165,7 @@ function createElement(node: JsxNode) {
 }
 
 function populate(
-  code: JsxNode,
+  code: JsxNode | undefined,
   rootType: string,
   fallback: React.ReactElement,
 ) {
@@ -170,7 +176,7 @@ function populate(
   return fallback
 }
 
-function Footer({ code }: { code: JsxNode }) {
+function Footer({ code }: { code?: JsxNode }) {
   return (
     <footer
       className="p-2 text-xs flex justify-around items-center bg-indigo-900 text-white"
@@ -181,10 +187,16 @@ function Footer({ code }: { code: JsxNode }) {
   )
 }
 
-function DomoHatShop({ footerCode }: { footerCode?: JsxNode }) {
+function DomoHatShop({
+  footerCode,
+  searchBarCode,
+}: {
+  footerCode?: JsxNode
+  searchBarCode?: JsxNode
+}) {
   return (
     <div className="bg-white top-0 sticky">
-      <Header />
+      <Header searchBarCode={searchBarCode} />
       <Main />
       <Footer code={footerCode} />
     </div>
@@ -293,7 +305,8 @@ const mockFooterCode: JsxNode = {
 export function DomoHatShopDemo() {
   const [msg] = useContext(InPostMessageContext)
   let highlights: string[] = [],
-    footerCode = undefined
+    footerCode,
+    searchBarCode
   switch (msg?.type) {
     case 'highlight':
       // highlights = msg?.data === '' ? [] : msg?.data.split(' ')
@@ -301,11 +314,14 @@ export function DomoHatShopDemo() {
     case 'update-footer':
       footerCode = msg?.data
       break
+    case 'update-search-bar':
+      searchBarCode = msg?.data
+      break
   }
 
   return (
     <div className="top-0 sticky shadow-lg rounded-md">
-      <DomoHatShop footerCode={footerCode} />
+      <DomoHatShop footerCode={footerCode} searchBarCode={searchBarCode} />
       <Annotation ids={highlights} />
     </div>
   )

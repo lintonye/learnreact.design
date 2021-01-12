@@ -325,17 +325,17 @@ You get the idea!
 
 "Composable" means being able to create a component using other components as its building blocks. This sounds very similar to how nature works, except for one important difference: in React, once we use a component in another component, it still "attaches" to the original component. When the original changes, all instances update along with it.
 
-Try to change the text on the button in the code below. What do you see?
+Try to change the text on the button in the code of SearchBar below. What do you see?
 
-TODO Editor: SearchBar code
-
-```jsx live=true
-// SearchBar
-<form>
+<CodeEditor
+  code={`<form>
   <input type="string" />
   <button>Search</button>
-</form>
-```
+</form>`}
+  onChange={(jsxJson, dispatch) =>
+    dispatch({ type: 'update-search-bar', data: jsxJson })
+  }
+/>
 
 The SearchBar on both Header and Footer updates. Right? This works very similarly to components in design tools such as Framer and Figma.
 
