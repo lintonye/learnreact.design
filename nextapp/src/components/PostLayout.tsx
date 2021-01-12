@@ -1,5 +1,5 @@
 import { jsx } from '@emotion/core'
-import React, { useState } from 'react'
+import React, { useState, useReducer } from 'react'
 import { FunctionComponent } from 'react'
 import { NextSeo } from 'next-seo'
 import { MDXProvider } from '@mdx-js/react'
@@ -9,7 +9,11 @@ import * as SeoData from '../../next-seo.json'
 import Link from 'next/link'
 import { NavBar } from '@/components/NavBar'
 import { Footer } from '@/components/Footer'
-import { InPostMessageContext } from './InPostMessageContext'
+import {
+  InPostStateContext,
+  InPostAction,
+  InPostState,
+} from './InPostStateContext'
 
 type LayoutProps = {
   meta: any
@@ -96,6 +100,10 @@ function createToc(path: string, children: any) {
   return <ul className="space-y-1">{toc}</ul>
 }
 
+function inPostStateReducer(state: InPostState, action: InPostAction) {
+  return { ...state, [action.type]: action.data }
+}
+
 export const PostLayout: FunctionComponent<LayoutProps> = ({
   children,
   meta,
@@ -110,7 +118,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
     ogImage,
   } = meta || {}
   const toc = createToc(router.pathname, children)
-  const [inPostMessage, setInPostMessage] = useState(null)
+  const [inPostState, dispatch] = useReducer(inPostStateReducer, [])
   return (
     <>
       <NextSeo
@@ -147,9 +155,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
             {title}
           </h1>
         )}
-        <InPostMessageContext.Provider
-          value={[inPostMessage, (msg) => setInPostMessage(msg)]}
-        >
+        <InPostStateContext.Provider value={[inPostState, dispatch]}>
           <div
             className={
               'block justify-center space-x-16 w-full mx-auto ' + //
@@ -171,7 +177,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
               </div>
             </div>
           </div>
-        </InPostMessageContext.Provider>
+        </InPostStateContext.Provider>
       </div>
       <Footer />
     </>

@@ -315,7 +315,7 @@ Let's say we want to add the SearchBar into the Footer as well. What would you d
   <div>© 2021 Domo's Hat Shop</div>
 </footer>`}
   onChange={(jsxJson, dispatch) =>
-    dispatch({ type: 'update-footer', data: jsxJson })
+    dispatch({ type: 'updateFooter', data: jsxJson })
   }
 />
 
@@ -333,7 +333,7 @@ Try to change the text on the button in the code of SearchBar below. What do you
   <button>Search</button>
 </form>`}
   onChange={(jsxJson, dispatch) =>
-    dispatch({ type: 'update-search-bar', data: jsxJson })
+    dispatch({ type: 'updateSearchBar', data: jsxJson })
   }
 />
 

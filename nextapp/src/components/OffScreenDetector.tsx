@@ -1,6 +1,6 @@
 import { jsx } from '@emotion/core'
 import { useEffect, useRef, useState, useContext } from 'react'
-import { InPostMessageContext } from '@/components/InPostMessageContext'
+import { InPostStateContext } from '@/components/InPostStateContext'
 
 type Props = {
   children: any
@@ -11,7 +11,7 @@ type Props = {
 export function OffScreenDetector({ children, on, off }: Props) {
   const ref = useRef<HTMLDivElement>(null)
   const [targetHeight, setTargetHeight] = useState(0)
-  const [_, dispatch] = useContext(InPostMessageContext)
+  const [_, dispatch] = useContext(InPostStateContext)
   // useEffect(() => {
   //   const target = document.getElementById(topMarginItemId)
   //   if (target) {

@@ -10,7 +10,7 @@ import Image from 'next/image'
 import { FiShoppingCart } from 'react-icons/fi'
 import { useState, useContext, useEffect, useRef } from 'react'
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion'
-import { InPostMessageContext } from '@/components/InPostMessageContext'
+import { InPostStateContext as InPostStateContext } from '@/components/InPostStateContext'
 import { JsxNode } from '@/types'
 
 type Props = {
@@ -303,21 +303,10 @@ const mockFooterCode: JsxNode = {
 }
 
 export function DomoHatShopDemo() {
-  const [msg] = useContext(InPostMessageContext)
-  let highlights: string[] = [],
-    footerCode,
-    searchBarCode
-  switch (msg?.type) {
-    case 'highlight':
-      // highlights = msg?.data === '' ? [] : msg?.data.split(' ')
-      break
-    case 'update-footer':
-      footerCode = msg?.data
-      break
-    case 'update-search-bar':
-      searchBarCode = msg?.data
-      break
-  }
+  const [state] = useContext(InPostStateContext)
+  const highlights = state?.highlights === '' ? [] : state?.highlights
+  const footerCode = state?.updateFooter
+  const searchBarCode = state?.updateSearchBar
 
   return (
     <div className="top-0 sticky shadow-lg rounded-md">

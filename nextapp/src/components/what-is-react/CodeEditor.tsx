@@ -2,7 +2,7 @@ import { jsx } from '@emotion/core'
 import Editor from 'react-simple-code-editor'
 import { highlight, languages } from 'prismjs'
 import { useState, useContext } from 'react'
-import { InPostMessageContext } from '@/components/InPostMessageContext'
+import { InPostStateContext } from '@/components/InPostStateContext'
 import { parseJsx } from '@/lib/parseJsx'
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
 export function CodeEditor({ code: initialCode, onChange }: Props) {
   const [code, setCode] = useState(initialCode)
   const [error, setError] = useState<string | null>(null)
-  const [_, dispatch] = useContext(InPostMessageContext)
+  const [_, dispatch] = useContext(InPostStateContext)
   return (
     <div>
       <Editor
