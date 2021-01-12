@@ -310,7 +310,8 @@ function ComponentLabel({ id, delay }: { id: string; delay: number }) {
         ref={labelRef}
         className="absolute"
         css={{
-          textShadow: '1px 1px 1px rgba(0,0,0,0.5)',
+          textShadow:
+            '-1px -1px 0 #666,1px -1px 0 #666, -1px 1px 0 #666, 1px 1px 0 #666',
           left: labelXY.x,
           top: labelXY.y,
         }}
@@ -389,7 +390,7 @@ export function DomoHatShopDemo() {
   // console.log({ state })
 
   return (
-    <div className="top-0 sticky shadow-lg rounded-md z-10">
+    <div className="top-0 sticky shadow-lg rounded-sm z-10 overflow-hidden">
       <DomoHatShop />
       <ComponentHighlighter ids={ids} labelsOnly={labelsOnly} />
     </div>
