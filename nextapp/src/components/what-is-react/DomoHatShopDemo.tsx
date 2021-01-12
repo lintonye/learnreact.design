@@ -6,6 +6,18 @@ import imgHatLeprechaun from './hat-leprechaun.png'
 import imgHatPirate from './hat-pirate.png'
 import imgHatPropeller from './hat-propeller.png'
 import imgThinker from './thinker.png'
+
+import imgXmas from './hat_xmas.png'
+import imgWool from './hat_wool.png'
+import imgPolice from './hat_police.png'
+import imgPirate from './hat_pirate.png'
+import imgFlower from './hat_ladyFlower.png'
+import imgHarry from './hat_Harry.png'
+import imgElegant from './hat_elegant.png'
+import imgChef from './hat_chef.png'
+import imgCap from './hat_cap.png'
+import imgBall from './hat_ball.png'
+
 import Image from 'next/image'
 import { FiShoppingCart } from 'react-icons/fi'
 import { useState, useContext, useEffect, useLayoutEffect, useRef } from 'react'
@@ -80,11 +92,21 @@ function Domo() {
 }
 
 const hats: { [key: string]: string } = {
-  Cap: imgHatCap,
-  'Harry Potter': imgHatHarryPotter,
-  Leprechaun: imgHatLeprechaun,
-  Pirate: imgHatPirate,
-  Propeller: imgHatPropeller,
+  // Cap: imgHatCap,
+  // 'Harry Potter': imgHatHarryPotter,
+  // Leprechaun: imgHatLeprechaun,
+  // Pirate: imgHatPirate,
+  // Propeller: imgHatPropeller,
+  Cap: imgCap,
+  Christmas: imgXmas,
+  Wool: imgWool,
+  Police: imgPolice,
+  Pirate: imgPirate,
+  Flower: imgFlower,
+  'Harry Potter': imgHarry,
+  Elegant: imgElegant,
+  Chef: imgChef,
+  Ball: imgBall,
 }
 
 function Hat({
@@ -96,12 +118,16 @@ function Hat({
   className?: string
   small?: boolean
 }) {
+  const ratio = 396 / 865
+  const smallWidth = 80
+  const largeWidth = 200
   return (
     <div className={className}>
       <Image
         src={hats[type]}
-        width={small ? 30 : 100}
-        height={small ? 30 : 100}
+        width={small ? smallWidth : largeWidth}
+        height={small ? smallWidth * ratio : largeWidth * ratio}
+        layout="fixed"
       />
     </div>
   )
@@ -111,7 +137,7 @@ function DomoWithHat({ hat }: { hat: string }) {
   return (
     <div className="relative flex-shrink-0" id="DomoWithHat">
       <Domo />
-      <Hat type={hat} className="absolute -top-3 right-2" />
+      <Hat type={hat} className="absolute left-12 -top-1" />
     </div>
   )
 }
