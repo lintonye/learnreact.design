@@ -52,7 +52,7 @@ Let's get started with something you might have heard many times, DOM. -->
 
 What is React exactly? Why is React so popular? What problems does React solve?
 
-This article is an introduction to React for beginners. I'll explain the core ideas of React in plain English (and doodles <span className='text-base'>🌴</span>). No JavaScript experience? No problem! As long as you have some basic HTML knowledge (e.g. the format of an HTML tag), you should be able to enjoy this article.
+This article is an introduction to React for beginners. It's the first post you'd want to read before learning the specifics of React. I'll explain the core ideas of React in plain English (and doodles <span className='text-base'>🌴</span>). No JavaScript experience? No problem! As long as you have some basic HTML knowledge (e.g. the format of an HTML tag), you should be able to enjoy this article.
 
 This is a bird's-eye view <span className='text-2xl'>🦅</span> but I'll also equip you with a binocular <IconBinocular size={25} className='inline-block align-bottom'/> . You'll not only see the big picture of what makes React special, but also zoom in to get some hands-on experience of writing an actual React component. And yes, no JS knowledge required!
 
@@ -308,7 +308,7 @@ Remember the first important property of React components? They are **composable
 
 Now here's an exercise for you:
 
-<div className="bg-blue-100 px-3 py-1 rounded-md">
+<div className="bg-indigo-100 px-3 py-1 rounded-md">
 
 ✍️ Let's say we want to add the SearchBar into the Footer as well. What would you do? **Edit the code below:**
 
@@ -329,7 +329,7 @@ You get the idea!
 
 "Composable" means being able to create a component using other components as its building blocks. This sounds very similar to how nature works, except for one important difference: in React, once we use a component in another component, it still "attaches" to the original component. When the original changes, all instances update along with it.
 
-<div className="bg-blue-100 px-3 py-1 rounded-md">
+<div className="bg-indigo-100 px-3 py-1 rounded-md">
 
 ✍️ Change the text on the button in the code of SearchBar below:
 
@@ -381,9 +381,16 @@ Remember the other two superpowers of React? **Declarative UI** and **Reactive D
 
 ## Conclusion
 
-- all terms
-- summary
-- next step
-- sign up form
+Congrats! You've finished the first important lesson of React! It's about the big picture of "why do we need React at all?". Here are the three core ideas that make React powerful: Components, Declarative UI and Reactive DOM updates.
 
-<div className="mb-96 h-96" />
+In fact, I bet even experienced React developers are not super clear about these concepts (for example, myself!). When I wrote the first version of this article a few years ago, I put focus on the wrong things. I'm happy to correct it with this revision!
+
+Here's a list of terms covered in the post:
+
+- DOM (Document Object Model)
+- DOM API
+- React components
+- Components are composable and independent
+- Imperative vs. declarative programming
+- Virtual DOM
+- Reactive DOM updates

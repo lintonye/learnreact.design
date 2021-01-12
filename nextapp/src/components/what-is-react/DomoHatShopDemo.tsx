@@ -63,7 +63,7 @@ function Header({ searchBarCode }: { searchBarCode?: JsxNode }) {
       <ul className="flex space-x-6 items-center p-3 text-sm bg-indigo-900 text-white">
         <li>Home</li>
         <li>
-          <SearchBar code={searchBarCode} />
+          <SearchBar />
         </li>
         <li>Account</li>
         {/* <li>Return &amp; Orders</li> */}
@@ -153,6 +153,9 @@ function getType(type: string) {
   switch (type) {
     case 'SearchBar':
       return SearchBar
+      break
+    case 'ShoppingCart':
+      return ShoppingCart
       break
   }
   return type
