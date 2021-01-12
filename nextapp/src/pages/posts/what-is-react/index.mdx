@@ -306,9 +306,11 @@ Remember the first important property of React components? They are **composable
 
 </OffScreenDetector>
 
-Now here's an exercise for you.
+Now here's an exercise for you:
 
-Let's say we want to add the SearchBar into the Footer as well. What would you do? **Type in the code below:**
+<div className="bg-blue-100 px-3 py-1 rounded-md">
+
+✍️ Let's say we want to add the SearchBar into the Footer as well. What would you do? **Edit the code below:**
 
 <CodeEditor
   code={`<footer>
@@ -319,13 +321,17 @@ Let's say we want to add the SearchBar into the Footer as well. What would you d
   }
 />
 
+</div>
+
 You get the idea!
 
 ### Components are made for reuse
 
 "Composable" means being able to create a component using other components as its building blocks. This sounds very similar to how nature works, except for one important difference: in React, once we use a component in another component, it still "attaches" to the original component. When the original changes, all instances update along with it.
 
-Try to change the text on the button in the code of SearchBar below. What do you see?
+<div className="bg-blue-100 px-3 py-1 rounded-md">
+
+✍️ Change the text on the button in the code of SearchBar below:
 
 <CodeEditor
   code={`<form>
@@ -337,7 +343,9 @@ Try to change the text on the button in the code of SearchBar below. What do you
   }
 />
 
-The SearchBar on both Header and Footer updates. Right? This works very similarly to components in design tools such as Framer and Figma.
+</div>
+
+What did you see? The SearchBar on both Header and Footer updates. Right? This works very similarly to components in design tools such as Framer and Figma.
 
 React components are made for **reuse**. Once a component is defined, we can use it as a custom tag in other components, as many times as we want. If we change the component, all components that include it will change accordingly.
 
