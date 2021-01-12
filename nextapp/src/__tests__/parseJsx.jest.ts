@@ -87,4 +87,9 @@ describe('parseHtml', () => {
       /Mismatching start and end tags:.+/,
     )
   })
+  it('should throw error for non-single root', () => {
+    expect(() => parseJsx('<div></div><img />')).toThrow(
+      /There must be only one root tag./,
+    )
+  })
 })

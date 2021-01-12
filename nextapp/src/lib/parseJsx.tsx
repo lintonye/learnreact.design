@@ -33,6 +33,8 @@ export function parseJsx(code: string) {
   const nodeStack: JsxParentNode[] = []
   let c = code
   while (c.length > 0) {
+    if (nodeStack.length === 0 && c !== code)
+      throw 'There must be only one root tag.'
     // start tag
     const matchStart = c.match(startTagRegex)
     // console.log({ matchStart })
