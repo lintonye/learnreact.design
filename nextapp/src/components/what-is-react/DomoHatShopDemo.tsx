@@ -58,7 +58,7 @@ function SearchBar() {
   )
 }
 
-function ShoppingCart({ count }: { count: number }) {
+function ShoppingCart({ count = 0 }: { count?: number }) {
   return (
     <div className="relative m-1" id="ShoppingCart">
       <FiShoppingCart size={20} />
@@ -215,7 +215,8 @@ function createElement(node: JsxNode) {
       : {}
   return React.createElement(
     getType(node.type),
-    { ...node.attrs, ...attrs },
+    // Weird: need "count" here to pass TypeScript check
+    { count: 1, ...node.attrs, ...attrs },
     ...children,
   )
 }
