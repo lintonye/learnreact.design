@@ -14,6 +14,7 @@ import {
   InPostAction,
   InPostState,
 } from './InPostStateContext'
+import { ConvertKitForm } from './design-system'
 
 type LayoutProps = {
   meta: any
@@ -176,6 +177,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
                 </div>
                 <div className="text-sm text-gray-500">{toc}</div>
               </div>
+              <ConvertKitForm formId="465988" />
             </div>
           </div>
         </InPostStateContext.Provider>
