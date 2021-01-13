@@ -46,7 +46,10 @@ function SearchBar() {
         'form',
         <>
           <input type="string" className="text-black px-1" />
-          <button className="border-white border p-0.5 px-2 rounded-sm">
+          <button
+            className="border-white border p-0.5 px-2 rounded-sm"
+            onClick={() => alert("Hang on, I'll search it for you!")}
+          >
             Search
           </button>
         </>,
@@ -55,7 +58,7 @@ function SearchBar() {
   )
 }
 
-function ShoppingCart() {
+function ShoppingCart({ count }: { count: number }) {
   return (
     <div className="relative m-1" id="ShoppingCart">
       <FiShoppingCart size={20} />
@@ -63,13 +66,23 @@ function ShoppingCart() {
         className="absolute -right-2 -top-2 rounded-full w-4 h-4 flex justify-center items-center bg-pink-600"
         css={{ fontSize: '0.5rem' }}
       >
-        2
+        <AnimatePresence>
+          <motion.div
+            className="absolute"
+            key={count}
+            initial={{ y: -10, opacity: 1 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 10, opacity: 0 }}
+          >
+            {count}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   )
 }
 
-function Header({ searchBarCode }: { searchBarCode?: JsxNode }) {
+function Header({ countInCart }: { countInCart: number }) {
   return (
     <header id="Header">
       <ul className="flex space-x-6 items-center p-3 text-sm bg-gray-900 text-white">
@@ -80,7 +93,7 @@ function Header({ searchBarCode }: { searchBarCode?: JsxNode }) {
         <li>Account</li>
         {/* <li>Return &amp; Orders</li> */}
         <li className="flex-1 flex justify-end">
-          <ShoppingCart />
+          <ShoppingCart count={countInCart} />
         </li>
       </ul>
     </header>
@@ -124,6 +137,7 @@ function Hat({
   return (
     <div className={className}>
       <Image
+        className="rotate-12 transform"
         src={hats[type]}
         width={small ? smallWidth : largeWidth}
         height={small ? smallWidth * ratio : largeWidth * ratio}
@@ -142,7 +156,7 @@ function DomoWithHat({ hat }: { hat: string }) {
   )
 }
 
-function Main() {
+function Main({ onAddToCart }: { onAddToCart: () => void }) {
   const hatNames = Object.keys(hats)
   const [activeHat, setActiveHat] = useState(hatNames[0])
   return (
@@ -167,7 +181,10 @@ function Main() {
         <p className="text-sm">
           A covering for the head usually having a shaped crown and brim.
         </p>
-        <button className="rounded-sm bg-pink-600 text-white text-sm py-1 px-2">
+        <button
+          className="rounded-sm bg-pink-600 text-white text-sm py-1 px-2"
+          onClick={onAddToCart}
+        >
           Add To Cart
         </button>
       </div>
@@ -231,10 +248,11 @@ function Footer() {
 }
 
 function DomoHatShop() {
+  const [countInCart, setCountInCart] = useState(2)
   return (
     <div className="bg-white top-0 sticky">
-      <Header />
-      <Main />
+      <Header countInCart={countInCart} />
+      <Main onAddToCart={() => setCountInCart((c) => c + 1)} />
       <Footer />
     </div>
   )
