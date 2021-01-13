@@ -1,6 +1,8 @@
 import { jsx } from '@emotion/core'
 import Editor from 'react-simple-code-editor'
 import { highlight, languages } from 'prismjs'
+import 'prismjs/components/prism-markup'
+import 'prismjs/components/prism-jsx'
 import { useState, useContext } from 'react'
 import { InPostStateContext } from '@/components/InPostStateContext'
 import { parseJsx } from '@/lib/parseJsx'
@@ -32,7 +34,7 @@ export function CodeEditor({ code: initialCode, onChange }: Props) {
               if (typeof e !== 'string') console.error(e)
             }
           }}
-          highlight={(code) => highlight(code, languages.xml, 'xml')}
+          highlight={(code) => highlight(code, languages.xml, 'jsx')}
           padding={10}
           // style={{
           //   fontFamily: '"Fira code", "Fira Mono", monospace',
