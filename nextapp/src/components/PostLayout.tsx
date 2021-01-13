@@ -28,6 +28,7 @@ const components = {
   ol: (props: any) => (
     <ol className="list-outside list-decimal ml-5" {...props} />
   ),
+  li: (props: any) => <li className=" leading-relaxed" {...props} />,
   a: (props: any) => <a className="underline" {...props} />,
   p: (props: any) => <p className="my-4 leading-relaxed" {...props} />,
   hr: (props: any) => <hr className="my-6" {...props} />,
