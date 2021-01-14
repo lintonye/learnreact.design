@@ -84,7 +84,7 @@ function ShoppingCart({ count = 0 }: { count?: number }) {
 
 function Header({ countInCart }: { countInCart: number }) {
   return (
-    <header id="Header">
+    <div id="Header">
       <ul className="flex space-x-6 items-center p-3 text-sm bg-gray-900 text-white">
         <li>Home</li>
         <li>
@@ -96,7 +96,7 @@ function Header({ countInCart }: { countInCart: number }) {
           <ShoppingCart count={countInCart} />
         </li>
       </ul>
-    </header>
+    </div>
   )
 }
 
@@ -160,7 +160,7 @@ function Main({ onAddToCart }: { onAddToCart: () => void }) {
   const hatNames = Object.keys(hats)
   const [activeHat, setActiveHat] = useState(hatNames[0])
   return (
-    <main className="p-3 flex justify-around" id="Main">
+    <div className="p-3 flex justify-around" id="Main">
       <DomoWithHat hat={activeHat} />
       <div className="flex flex-col justify-center space-y-3 items-start">
         <h2 className="text-2xl">{activeHat}</h2>
@@ -188,7 +188,7 @@ function Main({ onAddToCart }: { onAddToCart: () => void }) {
           Add To Cart
         </button>
       </div>
-    </main>
+    </div>
   )
 }
 
@@ -239,12 +239,12 @@ function Footer() {
   const code = state?.updateFooter
 
   return (
-    <footer
+    <div
       className="p-2 text-xs flex justify-around items-center bg-gray-900 text-white"
       id="Footer"
     >
       {populate(code, 'footer', <div>© 2021 Domo's Hat Shop</div>)}
-    </footer>
+    </div>
   )
 }
 
