@@ -74,7 +74,7 @@ When you enter the address of your favorite website into a browser, your compute
 
 The server's response usually includes three parts: HTML, CSS and JavaScript.
 
-HTML defines what building blocks are there in a web page and how they relate to each other. How many buttons and images are there? Are they contained in the same box?
+HTML lists the content of a web page and describes its structure. How many headings and paragraphs are there? What images should a user see? Are this button and that textbox contained in the same box?
 
 Using this information, the browser creates something called... DOM!
 
@@ -139,11 +139,15 @@ With React, developers no longer directly talk to Domo. React acts as an agent b
 
 React is made up of JavaScript code. It's built in a way that we no longer need to directly work with DOM API in most cases. Instead, we write simpler code while React handles the conversation with DOM under the hood.
 
-React has a few tricks to tackle the ever-growing complexity of web development. Here are his three main tricks:
+React has a few superpowers to tackle the ever-growing complexity of web development:
 
 - Components
 - Declarative UI
 - Reactive DOM updates
+
+If these terms sound scary to you, don't be intimidated! As promised, I'll use plain English and doodles to help you make sense of them. Trust me, it's not that hard!
+
+Just read on!
 
 ### Components
 
@@ -322,6 +326,16 @@ Now here's an exercise for you:
     dispatch({ type: 'updateFooter', data: jsxJson })
   }
 />
+
+<div className="text-sm mb-3">
+
+Hints:
+
+- Make sure to put tags inside `<footer>`
+- Scroll up to check the code of `Header`
+- Try adding some other tags
+
+</div>
 
 </div>
 
