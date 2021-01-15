@@ -46,7 +46,7 @@ React is getting ever popular. Not just developers, For UX designers, many compa
 
 What's this React thing?
 
-Let's get started with something you might have heard many times, DOM. -->
+Let's get started with something you might have heard many times, the DOM. -->
 
 ## Introduction
 
@@ -62,9 +62,9 @@ Ready to start the journey?
 
 ## A few things about Web
 
-Let's get started with something you might have heard many times, DOM.
+Let's get started with something you might have heard many times, the DOM.
 
-### What is DOM?
+### What is the DOM?
 
 When you enter the address of your favorite website into a browser, your computer starts a conversation with another computer far away, commonly referred to as _server_. Typically your computer makes a request for some information and the server responds:
 
@@ -76,11 +76,11 @@ The server's response usually includes three parts: HTML, CSS and JavaScript.
 
 HTML lists the content of a web page and describes its structure. How many headings and paragraphs are there? What images should a user see? Are this button and that textbox contained in the same box?
 
-Using this information, the browser creates something called... DOM!
+Using this information, the browser creates something called... the DOM!
 
-<img src={imgDomoBorn} alt="Introducing DOM" />
+<img src={imgDomoBorn} alt="Introducing the DOM" />
 
-Wait a second, DOM is a ... tree? Yup, a tree! Oddly enough, a lot of things in our computer look like a tree. Let's give our tree friend a nickname... hmm what about Domo?
+Wait a second, the DOM is a ... tree? Yup, a tree! Oddly enough, a lot of things in our computer look like a tree. Let's give our tree friend a nickname... hmm what about Domo?
 
 Domo works as a model at the prestigious art studio "Web Browser". His job is to pose in front of the artist who paints a portrait (or perhaps millions of portraits).
 
@@ -88,7 +88,7 @@ Domo works as a model at the prestigious art studio "Web Browser". His job is to
 
 In real life, DOM stands for Document Object Model. It's indeed a model -- a model of the document (aka the web page). It strikes a pose. The browser paints a portrait. The portraits are what we see on a web page: the textboxes, the paragraphs, the images and so on. A developer's job is like that of a director who tells Domo what to wear and what pose to strike. This determines what those portraits look like in the end.
 
-To check out what DOM looks like, right-click on this very page and choose "Inspect". Can you make sense of what's in the Elements tab?
+To check out what the DOM looks like, right-click on this very page and choose "Inspect". Can you make sense of what's in the Elements tab?
 
 <img src={imgInspect} alt="Inspect in Chrome" width={2048} height={1536} />
 
@@ -106,7 +106,7 @@ We just talk to him. He listens. Interestingly, Domo's ears happen to have a nam
 
 <img src={imgTalkToDomo} alt="A developer works with DOM API" />
 
-To manipulate DOM, a developer would write code in JavaScript which talks to DOM API, and in turn, updates the content of the web page.
+To manipulate the DOM, a developer would write code in JavaScript which talks to the DOM API, and in turn, updates the content of the web page.
 
 ### The increasing complexity of web development
 
@@ -124,7 +124,7 @@ The traditional approach stopped working. It becomes chaotic and inefficient to 
 
 <img
   src={imgMultipleDevsTalk}
-  alt="Directly working with DOM API is getting chaotic"
+  alt="Directly working with the DOM API is getting chaotic"
 />
 
 ## The Core Ideas of React
@@ -135,9 +135,12 @@ Let me introduce you to the superhero, React:
 
 With React, developers no longer directly talk to Domo. React acts as an agent between a developer and Domo. He smoothens the communication and streamlines the process of portrait creation.
 
-<img src={imgReactAgent} alt="React as an agent between a developer and DOM" />
+<img
+  src={imgReactAgent}
+  alt="React as an agent between a developer and the DOM"
+/>
 
-React is made up of JavaScript code. It's built in a way that we no longer need to directly work with DOM API in most cases. Instead, we write simpler code while React handles the conversation with DOM under the hood.
+React is made up of JavaScript code. It's built in a way that we no longer need to directly work with the DOM API in most cases. Instead, we write simpler code while React handles the conversation with the DOM under the hood.
 
 React has a few superpowers to tackle the ever-growing complexity of web development:
 
@@ -179,7 +182,7 @@ If this sounds abstract to you, don't worry! I'll show you some examples and exp
 
 #### Imperative vs. declarative
 
-When directly working with DOM API, we'd have to specify what element to change at the right time, in the right order. This is equivalent to describing to Domo how to position his head, arms and legs step by step, for each and every portrait.
+When directly working with the DOM API, we'd have to specify what element to change at the right time, in the right order. This is equivalent to describing to Domo how to position his head, arms and legs step by step, for each and every portrait.
 
 <img src={imgStepByStep} alt="Imperative programming" />
 
@@ -191,7 +194,7 @@ Because the apps we build are dynamic, we often want Domo to change poses fairly
 
 <img src={imgFlipbook} alt="React treats input as a flipbook" />
 
-In tech terms, if the code defines _how_ we want it to be done, it's **imperative**; if it defines _what_ we want, it's **declarative**. The traditional way of directly working with DOM API is imperative, and the React way is declarative.
+In tech terms, if the code defines _how_ we want it to be done, it's **imperative**; if it defines _what_ we want, it's **declarative**. The traditional way of directly working with the DOM API is imperative, and the React way is declarative.
 
 Imperative programming emerged from the day when the computers were primitive. People had to instruct them in detail: where to store the numbers, how to multiply etc. But this eventually got unmanageable, people wrote smart software that convert definition of problems into detailed instructions. Declarative programming was born.
 
@@ -203,7 +206,7 @@ When React has all the sketches beforehand, he can sort through them, remove any
 
 <img src={imgOptimizeSketches} alt="React diffing with virtual DOM" />
 
-These sketches are called _Virtual DOM_. Virtual DOM is much faster to manipulate than DOM. Developers work with Virtual DOM most of the time instead of directly managing DOM. React handles the dirty work of managing the slow DOM.
+These sketches are called _Virtual DOM_. Virtual DOM is much faster to manipulate than the DOM. Developers work with Virtual DOM most of the time instead of directly managing the DOM. React handles the dirty work of managing the slow DOM.
 
 ### Reactive DOM updates
 
@@ -405,8 +408,8 @@ In fact, I bet even some experienced React developers (for example, myself!) are
 
 Here's a list of terms covered in the post:
 
-- DOM (Document Object Model)
-- DOM API
+- The DOM (Document Object Model)
+- The DOM API
 - React components
 - Components are composable and independent
 - Imperative vs. declarative programming
