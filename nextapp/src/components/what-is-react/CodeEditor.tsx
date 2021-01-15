@@ -13,7 +13,7 @@ type Props = {
   onChange?: (code: JsxNode, dispatch: any) => void
 }
 
-export function CodeEditor({ code: initialCode, onChange }: Props) {
+export function CodeEditor({ code: initialCode, onChange, ...props }: Props) {
   const [code, setCode] = useState(initialCode)
   const [error, setError] = useState<string | null>(null)
   const [_, dispatch] = useContext(InPostStateContext)
@@ -36,6 +36,7 @@ export function CodeEditor({ code: initialCode, onChange }: Props) {
           }}
           highlight={(code) => highlight(code, languages.xml, 'jsx')}
           padding={10}
+          {...props}
           // style={{
           //   fontFamily: '"Fira code", "Fira Mono", monospace',
           //   fontSize: 12,

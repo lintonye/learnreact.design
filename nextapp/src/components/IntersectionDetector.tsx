@@ -4,11 +4,16 @@ import { InPostStateContext } from '@/components/InPostStateContext'
 
 type Props = {
   children: any
-  on?: string
-  off?: string
+  onIntersectionChange: (params: {
+    isIntersecting: boolean
+    dispatch: any
+  }) => void
 }
 
-export function OffScreenDetector({ children, on, off }: Props) {
+export function IntersectionDetector({
+  children,
+  onIntersectionChange,
+}: Props) {
   const ref = useRef<HTMLDivElement>(null)
   const [targetHeight, setTargetHeight] = useState(0)
   const [_, dispatch] = useContext(InPostStateContext)
@@ -34,17 +39,22 @@ export function OffScreenDetector({ children, on, off }: Props) {
           // )
           // console.log(entry)
 
-          if (on !== undefined && entry.isIntersecting)
-            dispatch({ type: 'highlights', data: on })
-          if (off !== undefined && !entry.isIntersecting)
-            dispatch({ type: 'highlights', data: on })
+          // if (on !== undefined && entry.isIntersecting)
+          //   dispatch({ type: 'highlights', data: on })
+          // if (off !== undefined && !entry.isIntersecting)
+          //   dispatch({ type: 'highlights', data: on })
+          typeof onIntersectionChange === 'function' &&
+            onIntersectionChange({
+              isIntersecting: entry.isIntersecting,
+              dispatch,
+            })
         },
         { threshold: 1 },
       )
       observer.observe(ref.current)
       return () => observer.disconnect()
     }
-  }, [on, off])
+  }, [onIntersectionChange])
   return (
     // <div className="relative">
     //   <div
