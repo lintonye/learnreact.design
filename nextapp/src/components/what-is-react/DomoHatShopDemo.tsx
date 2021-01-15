@@ -163,7 +163,7 @@ function Main({ onAddToCart }: { onAddToCart: () => void }) {
     <div className="p-3 flex justify-around" id="Main">
       <DomoWithHat hat={activeHat} />
       <div className="flex flex-col justify-center space-y-3 items-start">
-        <h2 className="text-2xl">{activeHat}</h2>
+        <div className="text-2xl">{activeHat}</div>
         <div>$50</div>
         <div className="grid gap-1 grid-cols-5">
           {hatNames.map((hat) => (
