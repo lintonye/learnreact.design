@@ -1,9 +1,10 @@
+import { jsx } from '@emotion/core'
 import * as React from 'react'
-import { Text, Box, Button, Input } from './index'
+import { Button, Input } from './index'
 
 type Props = {
-  onSubmitError: (e: string) => void
-  onSubmitSuccess: () => void
+  onSubmitError?: (e: string) => void
+  onSubmitSuccess?: () => void
   formId: string
   subscribeButtonTitle?: string
   successMessage?: string
@@ -15,11 +16,11 @@ type CustomField = {
 }
 
 type DesignProps = {
-  onSubmit: (e: any) => void
-  onValidateEmail: (e: any) => void
-  submissionResult: string
-  loading: boolean
-  emailEmpty: boolean
+  onSubmit?: (e: any) => void
+  onValidateEmail?: (e: any) => void
+  submissionResult?: string
+  loading?: boolean
+  emailEmpty?: boolean
   firstName?: boolean
   subscribeButtonTitle?: string
   customFields?: CustomField[]
@@ -41,14 +42,10 @@ export function ConvertKitFormDesign(props: DesignProps) {
   } = props
   const formRef = React.useRef<HTMLFormElement>(null)
   if (submissionResult === 'success')
-    return (
-      <Text textVariant="body" color="success" {...rest}>
-        {successMessage}
-      </Text>
-    )
+    return <p className="text-green-600">{successMessage}</p>
 
   return (
-    <Box maxWidth={600} {...rest}>
+    <div className="">
       <form
         id="ck_subscribe_form"
         action={`https://app.convertkit.com/landing_pages/${formId}/subscribe`}
@@ -57,9 +54,9 @@ export function ConvertKitFormDesign(props: DesignProps) {
         // onSubmit={onSubmit}
       >
         {submissionResult === 'error' && (
-          <Text textVariant="small" color="error" m={1}>
+          <p className="text-red-500 text-sm my-1">
             Operation failed. Check your network connection.
-          </Text>
+          </p>
         )}
         <input
           type="hidden"
@@ -67,14 +64,14 @@ export function ConvertKitFormDesign(props: DesignProps) {
           id="ck_form_options"
         />
         <input type="hidden" name="id" value={formId} id="landing_page_id" />
-        <Box
-          layout="grid"
-          gridTemplateColumns={
-            firstName ? ['auto', '100px 200px 150px'] : ['auto', '200px 150px']
-          }
-          justifyItems="stretch"
-          gridColumnGap={1}
-          gridRowGap={1}
+
+        <div
+          className="flex"
+          // css={{
+          //   gridTemplateColumns: firstName
+          //     ? ['auto', '100px 200px 150px']
+          //     : ['auto', '200px 150px'],
+          // }}
         >
           {firstName && (
             <Input
@@ -109,14 +106,14 @@ export function ConvertKitFormDesign(props: DesignProps) {
           <Button
             disabled={loading || emailEmpty}
             id="ck_subscribe_button"
-            variant="small"
+            // variant="small"
             onClick={() => onSubmit && onSubmit(formRef.current)}
           >
             {loading ? 'Working...' : subscribeButtonTitle}
           </Button>
-        </Box>
+        </div>
       </form>
-    </Box>
+    </div>
   )
 }
 

@@ -1,5 +1,3 @@
-export { Box } from './Box'
-export { Text } from './Text'
 export { Button } from './Button'
 // export {  theme } from "./theme";
 // export {  Layout } from "./Layout";
