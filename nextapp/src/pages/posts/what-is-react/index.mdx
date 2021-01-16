@@ -19,6 +19,7 @@ import { IconBinocular } from '@/components/what-is-react/IconBinocular'
 import { DomoHatShopDemo } from '@/components/what-is-react/DomoHatShopDemo'
 import { CodeEditor } from '@/components/what-is-react/CodeEditor'
 import { IntersectionDetector } from '@/components/IntersectionDetector'
+import { FullBleed } from '@/components/FullBleed'
 
 export const meta = {
   title: 'What is React: A Visual Introduction For Beginners',
@@ -233,19 +234,21 @@ const ThinkerWithHat = ({ hat }) => (
 
 Notice that we just need to define what we want (a thinker and a hat in a div), and "wire up" the data ("`type = {hat}`"). When the data change (user selects a hat), the UI updates automatically. -->
 
+<FullBleed className="grid grid-cols-2 items-start space-x-8 my-8 bg-purple-50 z-20">
+
+  <div className="col-start-1 col-end-3 text-3xl font-bold py-12 mb-8 justify-self-stretch text-center bg-gray-700 text-white ">
+
 ## Write your first React component
+
+  </div>
+
+  <div className="max-w-lg justify-self-end">
 
 Now let's review what we have learned so far and get our hands dirty on a few real React components. To make it easy for you to understand, I left out some details in the code (notedly JavaScript). The goal is to let the core ideas shine through without being bogged down by JS syntax. If you are comfortable with reading JavaScript code, feel free to check out the [real source code](https://codesandbox.io/s/domos-hat-shop-4x7n0?file=/src/App.js).
 
-### Components are composable
-
-<!-- This div is to ensure that the sticky Demo stops to be sticky when Conclusion is scrolled to view -->
-
-<div>
-
 Alright. Let's say we want to help Domo build an online hat store 🧢 .
 
-<DomoHatShopDemo />
+### Components are composable
 
 <IntersectionDetector onIntersectionChange={({isIntersecting, dispatch}) => {
     if (isIntersecting) {
@@ -419,8 +422,12 @@ Note that we just need to define what we want (Domo and a hat in a div), and "wi
 Remember the other two superpowers of React? **Declarative UI** and **Reactive DOM updates**.
 
 </IntersectionDetector>
-
 </div>
+
+{' '}
+<DomoHatShopDemo />
+
+</FullBleed>
 
 ## Conclusion
 

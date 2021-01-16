@@ -1,15 +1,14 @@
 import { jsx } from '@emotion/core'
+import React from 'react'
 
 type Props = {
-  children: any
-}
+  className?: string
+} & React.HTMLAttributes<HTMLDivElement>
 
-export function Fullbleed({ children }: Props) {
+export function FullBleed({ className, children, ...props }: Props) {
   return (
-    <div className="relative mb-96 pb-96 -ml-40">
-      <div className="absolute w-screen grid grid-cols-2 items-start justify-items-center">
-        {children}
-      </div>
+    <div className={`w-full ` + ' ' + className} css={{ gridColumn: '1/5' }}>
+      {children}
     </div>
   )
 }

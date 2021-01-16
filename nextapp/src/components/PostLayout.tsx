@@ -135,41 +135,42 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
         canonical={url}
       />
       <NavBar />
-      <div
-        className={
-          'max-w-xs mx-auto mt-10 ' +
-          'sm:max-w-screen-sm ' +
-          'lg:max-w-screen-md ' +
-          'xl:max-w-screen-lg '
-        }
-      >
-        {title && (
-          <h1
-            className={
-              'mx-auto font-bold leading-tight text-center text-2xl my-10 w-full ' +
-              'sm:text-4xl ' +
-              'md:my-16 ' +
-              'lg:max-w-2xl lg:my-24 ' +
-              'xl:max-w-3xl xl:text-5xl xl:my-36 '
-            }
-          >
-            {title}
-          </h1>
-        )}
-        <InPostStateContext.Provider value={[inPostState, dispatch]}>
+      <InPostStateContext.Provider value={[inPostState, dispatch]}>
+        <MDXProvider components={components}>
           <div
             className={
-              'block justify-center space-x-16 w-full mx-auto ' + //
-              'lg:flex '
+              'grid ' //+
+              // 'sm:max-w-screen-sm ' +
+              // 'lg:max-w-screen-md ' +
+              // 'xl:max-w-screen-lg '
             }
+            css={{
+              gridTemplateColumns: '1fr min(65ch, 100%) 40ch 1fr',
+              '& > *': { gridColumn: 2 },
+            }}
           >
-            {/* Main content */}
-            <MDXProvider components={components}>
-              <div className="w-full">{children}</div>
-            </MDXProvider>
+            {title && (
+              <h1
+                className={
+                  'font-bold leading-tight text-center text-2xl my-10 justify-self-center ' +
+                  // 'sm:text-4xl ' +
+                  // 'md:my-16 ' +
+                  // 'lg:max-w-2xl lg:my-24 ' +
+                  'xl:max-w-3xl xl:text-5xl xl:my-36 '
+                }
+                css={{
+                  gridColumn: '2/4',
+                }}
+              >
+                {title}
+              </h1>
+            )}
 
             {/* Sidebar */}
-            <div className="sticky top-20 self-start mt-6">
+            <div
+              className="sticky top-20 self-start mt-6 ml-4 justify-self-center"
+              css={{ gridColumn: '3/4', gridRow: '2/100' }}
+            >
               <div className="hidden lg:block">
                 <div className="uppercase font-semibold text-gray-500 my-2">
                   table of contents
@@ -177,9 +178,13 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
                 <div className="text-sm text-gray-500">{toc}</div>
               </div>
             </div>
+
+            {/* Main content */}
+            {children}
           </div>
-        </InPostStateContext.Provider>
-      </div>
+        </MDXProvider>
+      </InPostStateContext.Provider>
+
       <Footer />
     </>
   )

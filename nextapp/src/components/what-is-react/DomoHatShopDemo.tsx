@@ -429,7 +429,10 @@ export function DomoHatShopDemo() {
   // console.log({ state })
 
   return (
-    <div className="top-0 sticky shadow-lg rounded-sm z-10 overflow-hidden">
+    <div
+      className="top-60 sticky shadow-lg rounded-sm z-10 overflow-hidden "
+      css={{ maxWidth: 540 }}
+    >
       <DomoHatShop />
       <ComponentHighlighter ids={ids} labelsOnly={labelsOnly} />
     </div>
