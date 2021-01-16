@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.max-w-prose {
+  max-width: 65ch;
+}
