@@ -119,7 +119,7 @@ const hats: { [key: string]: string } = {
   'Harry Potter': imgHarry,
   Elegant: imgElegant,
   Chef: imgChef,
-  Ball: imgBall,
+  Toque: imgBall,
 }
 
 function Hat({
