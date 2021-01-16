@@ -17,7 +17,7 @@ export function Hero() {
             </span>
             <IconPointArrow className="relative -left-2" />
           </div>
-          <span className="font-cursive transform -rotate-6 text-2xl opacity-80 p-3 absolute top-36 right-2 sm:right-1/4 sm:text-4xl md:right-1/3">
+          <span className="font-cursive transform -rotate-6 text-2xl opacity-80 p-3 absolute top-20 right-2 sm:right-1/4 sm:text-4xl md:right-1/3">
             and visual learners
           </span>
         </h1>
