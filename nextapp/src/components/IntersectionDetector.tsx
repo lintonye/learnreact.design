@@ -54,7 +54,7 @@ export function IntersectionDetector({
       observer.observe(ref.current)
       return () => observer.disconnect()
     }
-  }, [onIntersectionChange])
+  }, [dispatch])
   return (
     // <div className="relative">
     //   <div

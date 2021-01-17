@@ -1,5 +1,5 @@
 import { jsx } from '@emotion/core'
-import React, { useState, useReducer } from 'react'
+import React, { useState, useReducer, useContext } from 'react'
 import { FunctionComponent } from 'react'
 import { NextSeo } from 'next-seo'
 import { MDXProvider } from '@mdx-js/react'
@@ -14,6 +14,7 @@ import {
   InPostAction,
   InPostState,
 } from './InPostStateContext'
+import { IntersectionDetector } from './IntersectionDetector'
 
 type LayoutProps = {
   meta: any
@@ -21,8 +22,12 @@ type LayoutProps = {
 
 const components = {
   h1: (props: any) => <h1 className="text-3xl font-bold my-6" {...props} />,
-  h2: (props: any) => <h2 className="text-2xl font-bold my-4" {...props} />,
-  h3: (props: any) => <h3 className="text-xl font-bold my-3" {...props} />,
+  h2: withTocNotifier((props: any) => (
+    <h2 className="text-2xl font-bold my-4" {...props} />
+  )),
+  h3: withTocNotifier((props: any) => (
+    <h3 className="text-xl font-bold my-3" {...props} />
+  )),
   h4: (props: any) => <h4 className="text-lg font-bold" {...props} />,
   ul: (props: any) => <ul className="list-outside list-disc ml-5" {...props} />,
   ol: (props: any) => (
@@ -85,14 +90,20 @@ function visitHeading(children: any, headingProcessorFun: HeadingProcessor) {
   })
 }
 
-function createToc(path: string, children: any) {
+function createToc(path: string, activeHeadingSlug: string, children: any) {
   const toc: React.ReactElement[] = []
   visitHeading(children, ({ heading, slug, content }) => {
     const url = `${path}#${slug}`
+    // console.log({ activeHeadingSlug, slug })
+
     toc.push(
       <li
         key={url}
-        className={(heading === 'h3' ? 'ml-4' : 'ml-0') + ' hover:underline'}
+        className={
+          (heading === 'h3' ? 'ml-4' : 'ml-0') +
+          ' hover:underline ' +
+          (activeHeadingSlug === slug ? ' text-black font-bold ' : '')
+        }
       >
         <Link href={url}>{content}</Link>
       </li>,
@@ -103,6 +114,45 @@ function createToc(path: string, children: any) {
 
 function inPostStateReducer(state: InPostState, action: InPostAction) {
   return { ...state, [action.type]: action.data }
+}
+
+function withTocNotifier(Comp: FunctionComponent) {
+  return function HeadingWithTocNotifier(props: any) {
+    return (
+      <>
+        <Comp {...props} />
+        <IntersectionDetector
+          onIntersectionChange={({ isIntersecting, dispatch }) => {
+            // isIntersecting && console.log('heading', props.children)
+
+            isIntersecting &&
+              dispatch({ type: 'activeHeadingSlug', data: props.id })
+          }}
+        >
+          <div className="absolute h-16 w-1" />
+        </IntersectionDetector>
+      </>
+    )
+  }
+}
+
+function Toc({
+  pathname,
+  contentChildren,
+}: {
+  pathname: string
+  contentChildren: any
+}) {
+  const [state] = useContext(InPostStateContext)
+  const toc = createToc(pathname, state?.activeHeadingSlug, contentChildren)
+  return (
+    <div className="hidden lg:block">
+      <div className="uppercase font-semibold text-gray-500 my-2">
+        table of contents
+      </div>
+      <div className="text-sm text-gray-500">{toc}</div>
+    </div>
+  )
 }
 
 export const PostLayout: FunctionComponent<LayoutProps> = ({
@@ -118,7 +168,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
     url = currentCanonicalUrl,
     ogImage,
   } = meta || {}
-  const toc = createToc(router.pathname, children)
+
   const [inPostState, dispatch] = useReducer(inPostStateReducer, [])
   return (
     <>
@@ -171,12 +221,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
               className="sticky top-20 self-start mt-6 ml-12 justify-self-center"
               css={{ gridColumn: '3/4', gridRow: '2/100' }}
             >
-              <div className="hidden lg:block">
-                <div className="uppercase font-semibold text-gray-500 my-2">
-                  table of contents
-                </div>
-                <div className="text-sm text-gray-500">{toc}</div>
-              </div>
+              <Toc pathname={router.pathname} contentChildren={children} />
             </div>
 
             {/* Main content */}
