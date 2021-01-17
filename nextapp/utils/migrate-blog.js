@@ -22,13 +22,17 @@ function processFile(filePath) {
   readInterface
     .on('line', (line) => {
       const imagePattern = /^!\[(.*)\]\((.*)\)/
-      const match = line.match(imagePattern)
-      if (match) {
-        const imgAlt = match[1]
-        const imgPath = match[2]
+      const headingPattern = /^(#+)(\s+.+)$/
+      const matchImg = line.match(imagePattern)
+      const matchHeading = line.match(headingPattern)
+      if (matchImg) {
+        const imgAlt = matchImg[1]
+        const imgPath = matchImg[2]
         const imgVar = fn2var(path.basename(imgPath))
         imageImports.add(`import ${imgVar} from "${imgPath}"`)
         newContent.push(`<img src={${imgVar}} alt={\`${imgAlt}\`} />`)
+      } else if (matchHeading) {
+        newContent.push(`#${matchHeading[1]}${matchHeading[2]}`)
       } else {
         newContent.push(line)
       }
