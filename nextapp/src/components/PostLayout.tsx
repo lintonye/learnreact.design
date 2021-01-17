@@ -21,21 +21,23 @@ type LayoutProps = {
 }
 
 const components = {
-  h1: (props: any) => <h1 className="text-3xl font-bold my-6" {...props} />,
+  h1: (props: any) => <h1 className="text-4xl font-bold" {...props} />,
   h2: withTocNotifier((props: any) => (
-    <h2 className="text-2xl font-bold my-4" {...props} />
+    <h2 {...props} className={'text-3xl font-bold my-3 ' + props.className} />
   )),
   h3: withTocNotifier((props: any) => (
-    <h3 className="text-xl font-bold my-3" {...props} />
+    <h3 {...props} className={'text-2xl font-bold my-2 ' + props.className} />
   )),
-  h4: (props: any) => <h4 className="text-lg font-bold" {...props} />,
+  h4: (props: any) => (
+    <h4 {...props} className={'text-xl font-bold ' + props.className} />
+  ),
   ul: (props: any) => <ul className="list-outside list-disc ml-5" {...props} />,
   ol: (props: any) => (
     <ol className="list-outside list-decimal ml-5" {...props} />
   ),
-  li: (props: any) => <li className=" leading-relaxed" {...props} />,
+  li: (props: any) => <li className=" leading-loose" {...props} />,
   a: (props: any) => <a className="underline" {...props} />,
-  p: (props: any) => <p className="my-4 leading-relaxed" {...props} />,
+  p: (props: any) => <p className="leading-loose" {...props} />,
   hr: (props: any) => <hr className="my-6" {...props} />,
   img: (props: any) => (
     <Image
@@ -48,7 +50,7 @@ const components = {
   ),
   blockquote: (props: any) => (
     <blockquote
-      className="pl-3 py-0.5 italic border-l-4 border-gray-300 bg-gray-100"
+      className="px-3 py-2 italic border-l-4 border-gray-300 bg-gray-100"
       {...props}
     />
   ),
@@ -102,14 +104,14 @@ function createToc(path: string, activeHeadingSlug: string, children: any) {
         className={
           (heading === 'h3' ? 'ml-4' : 'ml-0') +
           ' hover:underline ' +
-          (activeHeadingSlug === slug ? ' text-black font-bold ' : '')
+          (activeHeadingSlug === slug ? ' text-black font-semibold ' : '')
         }
       >
         <Link href={url}>{content}</Link>
       </li>,
     )
   })
-  return <ul className="space-y-1">{toc}</ul>
+  return <ul className="space-y-2">{toc}</ul>
 }
 
 function inPostStateReducer(state: InPostState, action: InPostAction) {
@@ -118,9 +120,11 @@ function inPostStateReducer(state: InPostState, action: InPostAction) {
 
 function withTocNotifier(Comp: FunctionComponent) {
   return function HeadingWithTocNotifier(props: any) {
+    console.log({ props })
+
     return (
-      <>
-        <Comp {...props} />
+      <div>
+        <Comp {...props} className={props.className + ' '} />
         <IntersectionDetector
           onIntersectionChange={({ isIntersecting, dispatch }) => {
             // isIntersecting && console.log('heading', props.children)
@@ -131,7 +135,7 @@ function withTocNotifier(Comp: FunctionComponent) {
         >
           <div className="absolute h-16 w-1" />
         </IntersectionDetector>
-      </>
+      </div>
     )
   }
 }
@@ -147,10 +151,10 @@ function Toc({
   const toc = createToc(pathname, state?.activeHeadingSlug, contentChildren)
   return (
     <div className="hidden lg:block">
-      <div className="uppercase font-semibold text-gray-500 my-2">
+      <div className="uppercase font-semibold tracking-wider text-gray-800 mb-4">
         table of contents
       </div>
-      <div className="text-sm text-gray-500">{toc}</div>
+      <div className="text-sm text-gray-600">{toc}</div>
     </div>
   )
 }
@@ -189,7 +193,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
         <MDXProvider components={components}>
           <div
             className={
-              'grid ' //+
+              'grid gap-y-5 ' //+
               // 'sm:max-w-screen-sm ' +
               // 'lg:max-w-screen-md ' +
               // 'xl:max-w-screen-lg '
@@ -219,7 +223,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
             {/* Sidebar */}
             <div
               className="sticky top-20 self-start mt-6 ml-12 justify-self-center"
-              css={{ gridColumn: '3/4', gridRow: '2/100' }}
+              css={{ gridColumn: '3/4', gridRow: '2/20' }}
             >
               <Toc pathname={router.pathname} contentChildren={children} />
             </div>
