@@ -120,11 +120,9 @@ function inPostStateReducer(state: InPostState, action: InPostAction) {
 
 function withTocNotifier(Comp: FunctionComponent) {
   return function HeadingWithTocNotifier(props: any) {
-    console.log({ props })
-
     return (
       <div>
-        <Comp {...props} className={props.className + ' '} />
+        <Comp {...props} />
         <IntersectionDetector
           onIntersectionChange={({ isIntersecting, dispatch }) => {
             // isIntersecting && console.log('heading', props.children)
