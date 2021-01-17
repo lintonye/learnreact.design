@@ -76,6 +76,7 @@ His cloak comes alive and becomes his helper. Freed from the burden of dealing w
 This separation of roles is a powerful idea. It makes it easy to write new _renderers_ that adapt to new platforms while maintaining a shared core. Powered by the renderers for iOS and Android, you can now build apps for both platforms in **a single language and the same React paradigm**.
 
 ![renderers to talk to Web, iOS and Android](./5-renderers.png)
+
 _React focuses on his thing. Renderers do the talk._
 
 ## A Complete Platform
@@ -84,7 +85,8 @@ The official definition of React is: A JavaScript library for building user inte
 
 In fact, **you can't build a full application with just React alone**. You'd need for example CSS for styling, webpack for preprocessing and bundling the code, Firebase for persisting the data and many other things.
 
-![other folks at Web Browser](./6-other-folks-at-web.png)
+![The studio "Web Browser" is actually a lot busier than what you've seen.](./6-other-folks-at-web.png)
+
 _The studio "Web Browser" is actually a lot busier than what you've seen._
 
 This is fine in the context of web development because as a JavaScript library, React fits naturally with the other parts which are either JavaScript libraries too or are designed to work well with JavaScript libraries. After all, JavaScript is the language of the Web.
@@ -104,7 +106,8 @@ Compared to React on the Web, React Native includes a lot more stuff:
 
 We say React Native is a complete platform itself because **it includes all you need to build a full app**. In comparison, the original React is only in charge of web UI and you'll need to include other parts yourself to create a web app[^3].
 
-![other superheros](./7-summon.png)
+![The formation of React Native](./7-summon.png)
+
 _The formation of React Native_
 
 ## Native UI
@@ -142,7 +145,7 @@ So much talking so far! Do you want to try something on your phone?
 
 I'm excited too! Grab your phone and follow me!
 
-1. On your phone, download the Expo app. You can either download from here: [iOS](https://itunes.apple.com/app/apple-store/id982107779?pt=17102800&ct=www&mt=8), [Android](https://play.google.com/store/apps/details?id=host.exp.exponent), or search "Expo" in the App Store. The app's icon looks like <img src="./expo-ios.jpg"/> (or <img src="./expo-android.png"/> on Android).
+1. On your phone, download the Expo app. You can either download from here: [iOS](https://itunes.apple.com/app/apple-store/id982107779?pt=17102800&ct=www&mt=8), [Android](https://play.google.com/store/apps/details?id=host.exp.exponent), or search "Expo" in the App Store. The app's icon looks like ![Expo iOS icon](./expo-ios.jpg) (or ![Expo Android icon](./expo-android.png) on Android).
 2. On your computer, open this page: [https://snack.expo.io/](https://snack.expo.io/)
 3. On your phone, launch the Expo app and tap "Scan QR Code"
 4. Scan the QR code displayed on your computer. You should see a green "Device connected" message if everything works fine.
@@ -220,5 +223,3 @@ I really appreciate your constructive suggestions that pushed me to rewrite it, 
 [^3]: If you are looking for a in-depth technical comparison between React Native and React Web, check out this [post](https://medium.com/@alexmngn/from-reactjs-to-react-native-what-are-the-main-differences-between-both-d6e8e88ebf24).
 [^4]: The idea of React Renderers is very powerful. Here are [a list](https://github.com/chentsulin/awesome-react-renderer) of cool renderers that make it possible to build many different things with React.
 [^5]: In NPM, the central repository for JavaScript libraries, you can find both [reactjs](https://www.npmjs.com/package/reactjs) and [react](https://www.npmjs.com/package/react). Can you tell which one is the real React?
-
-{' '}
