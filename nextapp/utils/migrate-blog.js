@@ -23,6 +23,7 @@ function processFile(filePath) {
     .on('line', (line) => {
       const imagePattern = /^!\[(.*)\]\((.*)\)/
       const headingPattern = /^(#+)(\s+.+)$/
+      const toDeletePatterns = [/^<a\s+name=".+">\s*<\/a>/]
       const matchImg = line.match(imagePattern)
       const matchHeading = line.match(headingPattern)
       if (matchImg) {
@@ -33,7 +34,7 @@ function processFile(filePath) {
         newContent.push(`<img src={${imgVar}} alt={\`${imgAlt}\`} />`)
       } else if (matchHeading) {
         newContent.push(`#${matchHeading[1]}${matchHeading[2]}`)
-      } else {
+      } else if (!toDeletePatterns.some((p) => line.match(p))) {
         newContent.push(line)
       }
     })
