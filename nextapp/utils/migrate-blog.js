@@ -50,7 +50,11 @@ function processFile(filePath) {
   })
   const meta =
     frontMatter.title &&
-    `export const meta = ${JSON.stringify(frontMatter, null, 2)}`
+    `export const meta = ${JSON.stringify(
+      { tags: [], ...frontMatter },
+      null,
+      2,
+    )}`
   const imageImports = new Set()
   const newContent = []
   getAllImageInfo(path.dirname(filePath), readInterface)
