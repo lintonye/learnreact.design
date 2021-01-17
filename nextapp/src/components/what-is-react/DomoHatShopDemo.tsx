@@ -431,7 +431,7 @@ export function DomoHatShopDemo({ className }: { className?: string }) {
   return (
     <div
       className={'shadow-lg rounded-sm overflow-hidden ' + className}
-      css={{ maxWidth: 540 }}
+      // css={{ maxWidth: 540 }}
     >
       <DomoHatShop />
       <ComponentHighlighter ids={ids} labelsOnly={labelsOnly} />

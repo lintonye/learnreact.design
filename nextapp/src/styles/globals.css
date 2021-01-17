@@ -5,3 +5,8 @@
 .max-w-prose {
   max-width: 65ch;
 }
+
+/* Remove Prism's bg color. TODO: there might be better ways! */
+pre {
+  background-color: transparent !important;
+}
