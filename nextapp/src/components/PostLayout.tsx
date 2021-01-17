@@ -145,7 +145,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
               // 'xl:max-w-screen-lg '
             }
             css={{
-              gridTemplateColumns: '1fr min(65ch, 100%) 40ch 1fr',
+              gridTemplateColumns: '1fr min(65ch, 100%) 30ch 1fr',
               '& > *': { gridColumn: 2 },
             }}
           >
@@ -168,7 +168,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
 
             {/* Sidebar */}
             <div
-              className="sticky top-20 self-start mt-6 ml-4 justify-self-center"
+              className="sticky top-20 self-start mt-6 ml-12 justify-self-center"
               css={{ gridColumn: '3/4', gridRow: '2/100' }}
             >
               <div className="hidden lg:block">
