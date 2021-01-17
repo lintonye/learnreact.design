@@ -1,5 +1,5 @@
 import { jsx } from '@emotion/core'
-import React, { useState, useReducer } from 'react'
+import React, { useState, useReducer, useContext } from 'react'
 import { FunctionComponent } from 'react'
 import { NextSeo } from 'next-seo'
 import { MDXProvider } from '@mdx-js/react'
@@ -14,23 +14,30 @@ import {
   InPostAction,
   InPostState,
 } from './InPostStateContext'
+import { IntersectionDetector } from './IntersectionDetector'
 
 type LayoutProps = {
   meta: any
 }
 
 const components = {
-  h1: (props: any) => <h1 className="text-3xl font-bold my-6" {...props} />,
-  h2: (props: any) => <h2 className="text-2xl font-bold my-4" {...props} />,
-  h3: (props: any) => <h3 className="text-xl font-bold my-3" {...props} />,
-  h4: (props: any) => <h4 className="text-lg font-bold" {...props} />,
+  h1: (props: any) => <h1 className="text-4xl font-bold" {...props} />,
+  h2: withTocNotifier((props: any) => (
+    <h2 {...props} className={'text-3xl font-bold my-3 ' + props.className} />
+  )),
+  h3: withTocNotifier((props: any) => (
+    <h3 {...props} className={'text-2xl font-bold my-2 ' + props.className} />
+  )),
+  h4: (props: any) => (
+    <h4 {...props} className={'text-xl font-bold ' + props.className} />
+  ),
   ul: (props: any) => <ul className="list-outside list-disc ml-5" {...props} />,
   ol: (props: any) => (
     <ol className="list-outside list-decimal ml-5" {...props} />
   ),
-  li: (props: any) => <li className=" leading-relaxed" {...props} />,
+  li: (props: any) => <li className=" leading-loose" {...props} />,
   a: (props: any) => <a className="underline" {...props} />,
-  p: (props: any) => <p className="my-4 leading-relaxed" {...props} />,
+  p: (props: any) => <p className="leading-loose" {...props} />,
   hr: (props: any) => <hr className="my-6" {...props} />,
   img: (props: any) => (
     <Image
@@ -43,7 +50,7 @@ const components = {
   ),
   blockquote: (props: any) => (
     <blockquote
-      className="pl-3 py-0.5 italic border-l-4 border-gray-300 bg-gray-100"
+      className="px-3 py-2 italic border-l-4 border-gray-300 bg-gray-100"
       {...props}
     />
   ),
@@ -85,24 +92,69 @@ function visitHeading(children: any, headingProcessorFun: HeadingProcessor) {
   })
 }
 
-function createToc(path: string, children: any) {
+function createToc(path: string, activeHeadingSlug: string, children: any) {
   const toc: React.ReactElement[] = []
   visitHeading(children, ({ heading, slug, content }) => {
     const url = `${path}#${slug}`
+    // console.log({ activeHeadingSlug, slug })
+
     toc.push(
       <li
         key={url}
-        className={(heading === 'h3' ? 'ml-4' : 'ml-0') + ' hover:underline'}
+        className={
+          (heading === 'h3' ? 'ml-4' : 'ml-0') +
+          ' hover:underline ' +
+          (activeHeadingSlug === slug ? ' text-black font-semibold ' : '')
+        }
       >
         <Link href={url}>{content}</Link>
       </li>,
     )
   })
-  return <ul className="space-y-1">{toc}</ul>
+  return <ul className="space-y-2">{toc}</ul>
 }
 
 function inPostStateReducer(state: InPostState, action: InPostAction) {
   return { ...state, [action.type]: action.data }
+}
+
+function withTocNotifier(Comp: FunctionComponent) {
+  return function HeadingWithTocNotifier(props: any) {
+    return (
+      <div>
+        <Comp {...props} />
+        <IntersectionDetector
+          onIntersectionChange={({ isIntersecting, dispatch }) => {
+            // isIntersecting && console.log('heading', props.children)
+
+            isIntersecting &&
+              dispatch({ type: 'activeHeadingSlug', data: props.id })
+          }}
+        >
+          <div className="absolute h-16 w-1" />
+        </IntersectionDetector>
+      </div>
+    )
+  }
+}
+
+function Toc({
+  pathname,
+  contentChildren,
+}: {
+  pathname: string
+  contentChildren: any
+}) {
+  const [state] = useContext(InPostStateContext)
+  const toc = createToc(pathname, state?.activeHeadingSlug, contentChildren)
+  return (
+    <div className="hidden lg:block">
+      <div className="uppercase font-semibold tracking-wider text-gray-800 mb-4">
+        table of contents
+      </div>
+      <div className="text-sm text-gray-600">{toc}</div>
+    </div>
+  )
 }
 
 export const PostLayout: FunctionComponent<LayoutProps> = ({
@@ -118,7 +170,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
     url = currentCanonicalUrl,
     ogImage,
   } = meta || {}
-  const toc = createToc(router.pathname, children)
+
   const [inPostState, dispatch] = useReducer(inPostStateReducer, [])
   return (
     <>
@@ -135,51 +187,51 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
         canonical={url}
       />
       <NavBar />
-      <div
-        className={
-          'max-w-xs mx-auto mt-10 ' +
-          'sm:max-w-screen-sm ' +
-          'lg:max-w-screen-md ' +
-          'xl:max-w-screen-lg '
-        }
-      >
-        {title && (
-          <h1
-            className={
-              'mx-auto font-bold leading-tight text-center text-2xl my-10 w-full ' +
-              'sm:text-4xl ' +
-              'md:my-16 ' +
-              'lg:max-w-2xl lg:my-24 ' +
-              'xl:max-w-3xl xl:text-5xl xl:my-36 '
-            }
-          >
-            {title}
-          </h1>
-        )}
-        <InPostStateContext.Provider value={[inPostState, dispatch]}>
+      <InPostStateContext.Provider value={[inPostState, dispatch]}>
+        <MDXProvider components={components}>
           <div
             className={
-              'block justify-center space-x-16 w-full mx-auto ' + //
-              'lg:flex '
+              'grid gap-y-5 ' //+
+              // 'sm:max-w-screen-sm ' +
+              // 'lg:max-w-screen-md ' +
+              // 'xl:max-w-screen-lg '
             }
+            css={{
+              gridTemplateColumns: '1fr min(65ch, 100%) 30ch 1fr',
+              '& > *': { gridColumn: 2 },
+            }}
           >
-            {/* Main content */}
-            <MDXProvider components={components}>
-              <div className="w-full">{children}</div>
-            </MDXProvider>
+            {title && (
+              <h1
+                className={
+                  'font-bold leading-tight text-center text-2xl my-10 justify-self-center ' +
+                  'sm:text-4xl ' +
+                  'md:my-16 ' +
+                  'lg:max-w-2xl lg:my-24 ' +
+                  'xl:max-w-3xl xl:text-5xl xl:my-36 '
+                }
+                css={{
+                  gridColumn: '2/4',
+                }}
+              >
+                {title}
+              </h1>
+            )}
 
             {/* Sidebar */}
-            <div className="sticky top-20 self-start mt-6">
-              <div className="hidden lg:block">
-                <div className="uppercase font-semibold text-gray-500 my-2">
-                  table of contents
-                </div>
-                <div className="text-sm text-gray-500">{toc}</div>
-              </div>
+            <div
+              className="sticky top-20 self-start mt-6 ml-12 justify-self-center"
+              css={{ gridColumn: '3/4', gridRow: '2/20' }}
+            >
+              <Toc pathname={router.pathname} contentChildren={children} />
             </div>
+
+            {/* Main content */}
+            {children}
           </div>
-        </InPostStateContext.Provider>
-      </div>
+        </MDXProvider>
+      </InPostStateContext.Provider>
+
       <Footer />
     </>
   )

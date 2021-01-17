@@ -19,6 +19,7 @@ import { IconBinocular } from '@/components/what-is-react/IconBinocular'
 import { DomoHatShopDemo } from '@/components/what-is-react/DomoHatShopDemo'
 import { CodeEditor } from '@/components/what-is-react/CodeEditor'
 import { IntersectionDetector } from '@/components/IntersectionDetector'
+import { FullBleed } from '@/components/FullBleed'
 
 export const meta = {
   title: 'What is React: A Visual Introduction For Beginners',
@@ -52,7 +53,7 @@ Let's get started with something you might have heard many times, the DOM. -->
 
 > React is a JavaScript library for building user interfaces.
 
-That's the official definition of React. But what if you are not familiar with JavaScript? What if you are not a developer? Would you still be able to make sense of (and learn) React?
+This is the official definition of React. But what if you are not familiar with JavaScript? What if you are not a developer? Would you still be able to make sense of (and learn) React?
 
 My answer is a firm YES. That's why I wrote this article: what is React exactly? Why is it so popular? What problems does React solve?
 
@@ -112,7 +113,7 @@ We just talk to him. He listens. Interestingly, Domo's ears happen to have a nam
 
 To manipulate the DOM, a developer would write code in JavaScript which talks to the DOM API, and in turn, updates the content of the web page.
 
-### The increasing complexity of web development
+### The increasing complexity
 
 _Directly_ talking to Domo has been the standard approach of web development for years, especially when the web content was mostly static. A developer would sprinkle some interactivity on top of the static pages by writing small amount of JavaScript code.
 
@@ -233,19 +234,21 @@ const ThinkerWithHat = ({ hat }) => (
 
 Notice that we just need to define what we want (a thinker and a hat in a div), and "wire up" the data ("`type = {hat}`"). When the data change (user selects a hat), the UI updates automatically. -->
 
+<FullBleed className="grid grid-cols-2 items-start gap-x-8 my-8 pb-4 bg-indigo-50 z-20 justify-items-start">
+
+  <div className="col-start-1 col-end-3 text-3xl font-bold py-12 mb-8 justify-self-stretch text-center bg-indigo-200 text-indigo-900">
+
 ## Write your first React component
+
+  </div>
+
+  <div className="max-w-prose justify-self-end ml-8 space-y-5">
 
 Now let's review what we have learned so far and get our hands dirty on a few real React components. To make it easy for you to understand, I left out some details in the code (notedly JavaScript). The goal is to let the core ideas shine through without being bogged down by JS syntax. If you are comfortable with reading JavaScript code, feel free to check out the [real source code](https://codesandbox.io/s/domos-hat-shop-4x7n0?file=/src/App.js).
 
-### Components are composable
-
-<!-- This div is to ensure that the sticky Demo stops to be sticky when Conclusion is scrolled to view -->
-
-<div>
-
 Alright. Let's say we want to help Domo build an online hat store 🧢 .
 
-<DomoHatShopDemo />
+### Components are composable
 
 <IntersectionDetector onIntersectionChange={({isIntersecting, dispatch}) => {
     if (isIntersecting) {
@@ -334,7 +337,7 @@ Remember the first important property of React components? They are **composable
 
 Now here's an exercise for you:
 
-<div className="bg-indigo-100 px-3 py-1 rounded-md">
+<div className="bg-indigo-100 px-3 py-3 rounded-md my-5 space-y-5">
 
 ✍️ Let's say we want to add the SearchBar into the Footer as well. What would you do? **Edit the code below:**
 
@@ -348,7 +351,7 @@ Now here's an exercise for you:
   textareaId="code-editor-updateFooter"
 />
 
-<div className="text-sm mb-3">
+<div className="text-sm">
 
 Hints:
 
@@ -368,7 +371,7 @@ You get the idea!
 
 "Composable" means being able to create a component using other components as its building blocks. This sounds very similar to how nature works, except for one important difference: in React, once we use a component in another component, it still "attaches" to the original component. When the original changes, all instances update along with it.
 
-<div className="bg-indigo-100 px-3 py-1 rounded-md">
+<div className="bg-indigo-100 px-3 py-3 rounded-md">
 
 ✍️ Change the text on the button in the code of SearchBar below:
 
@@ -419,8 +422,11 @@ Note that we just need to define what we want (Domo and a hat in a div), and "wi
 Remember the other two superpowers of React? **Declarative UI** and **Reactive DOM updates**.
 
 </IntersectionDetector>
-
 </div>
+
+<DomoHatShopDemo className="top-20 sticky z-10 mr-8" />
+
+</FullBleed>
 
 ## Conclusion
 
