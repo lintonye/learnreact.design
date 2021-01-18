@@ -1,10 +1,20 @@
----
-date: '2018-06-22'
-title: 'Framer X: the hype, the powers, the challenges and the grand vision'
-subtitle: 'A pure speculation'
----
+import imgWaitingListPng from './waiting-list.png'
+import imgLayoutPng from './layout.png'
+import imgOutlinePng from './outline.png'
+import imgFigmaEditCompGif from './figma-edit-comp.gif'
 
-![waiting list](./waiting-list.png)
+export const meta = {
+  tags: [],
+  date: '2018-06-22',
+  title: 'Framer X: the hype, the powers, the challenges and the grand vision',
+  subtitle: 'A pure speculation',
+}
+
+<!--excerpt-->
+
+<!--/excerpt-->
+
+<img src={imgWaitingListPng} alt={`waiting list`} width={1487} height={490} />
 
 **Update 09/21/2018:** Now that Framer X is launched. Glad that I was able to guess a few things right. 😄 Check out this course I built: [Framer X + React](/framerx-react).
 
@@ -35,11 +45,11 @@ I do plan to create tutorials and/or blog posts once I get my hands on it. So [s
 
 ---
 
-# Screenshots
+## Screenshots
 
 First, some eye candies -- let's start with the only trace of screenshots appeared in their movie trailer.
 
-![layout](./layout.png)
+<img src={imgLayoutPng} alt={`layout`} width={1203} height={997} />
 
 Apparently they've re-organized the toolbelt, which looks fairly reasonable and familiar. But what's that shopping bag? You can buy components from a market??
 
@@ -47,15 +57,15 @@ In addition to "Frame", there are some new "Layout" items: "Stack", "Grid" and "
 
 Also, under "Interactive", there are "Flow", "Scroll", "Page" etc. They've become first-class citizens just as "Frame" and "Text" -- no longer hidden in the Snippets sub-menu in the code mode. You'd be able to drag-and-drop them onto the canvas. That's sweet! More interestingly, you'd likely get a visual way to configure these interactive items. We'll see how that pans out.
 
-![outline](./outline.png)
+<img src={imgOutlinePng} alt={`outline`} width={805} height={839} />
 
 Now under the "Outline" tab, this should be a list of things that are currently on the canvas. Hmm but why "Frame" is separate from "Component"? Aren't Frames components?
 
 Speaking of components, let's discuss the most intriguing aspect of Framer X: React component support.
 
-# Everything is a component, React component!
+## Everything is a component, React component!
 
-## Sketch / Figma already has components, right?
+### Sketch / Figma already has components, right?
 
 That's right. Components are actually not new concepts in design tools. Figma has them. Sketch has them too, which happen to be named "Symbols". The most useful aspect of components is that once you update the master, all the copies (instances) get automatically updated. This saves time and keeps the design coherent.
 
@@ -79,7 +89,7 @@ What about using third-party components available as NPM modules?
 
 These are all difficult to achieve in existing design tools, but straightforward with **real** components (in the engineering sense). With real components, the possibility is limited by our imagination. Because with code, we can do almost anything!
 
-## Challenges
+### Challenges
 
 Power is a double-edged sword. With React components, we can do a lot more than those "dumb" components in other design tools. However, it can be 10x more difficult to use if it's not designed properly.
 
@@ -87,7 +97,7 @@ It'd be interesting to see what the component editing experience looks like in F
 
 In fact, Figma already has a pretty compelling experience in terms of component creation, in-place editing, real-time updates of instances, like so:
 
-![Figma UI](./figma-edit-comp.gif)
+<img src={imgFigmaEditCompGif} alt={`Figma UI`} width={1000} height={483} />
 
 My prediction: in the design mode of Framer X, it'd be more or less the same as Figma. We'd be able to create components by selecting a few items and choose "Add component". We could copy&paste to create instances of a component. We could override colors, font size, images, text etc. by choosing values from the property panel.
 
@@ -97,7 +107,7 @@ However, what remains to be seen is how the more abstract components and props a
 
 There are many challenges to use React components in a design tool. Let's watch how the Framer team solves it!
 
-# "Seamlessly blending design & development"
+## "Seamlessly blending design & development"
 
 They totally got me by saying "seamlessly blending design and development". How does Framer X blend the two? Is it the ultimate bridge between design and development?
 
@@ -113,9 +123,9 @@ Would it provide both native components (such as text boxes and buttons) and bas
 
 So many opportunities!
 
-# A few other things
+## A few other things
 
-## ES6 vs. CoffeeScript
+### ES6 vs. CoffeeScript
 
 In Framer X, the main programming language will be JavaScript ES6, instead of CoffeeScript. This was [confirmed](https://twitter.com/krijnrijshouwer/status/1007375937250488321) by one of Framer's designer, Krijn Rijshouwer.
 
@@ -125,17 +135,17 @@ I know, CoffeeScript is no longer widely used and many of its goodness have been
 
 Guess I may have overlooked something important. I might come back to this "why" question after actually seeing Framer X in action.
 
-## "Built for large team collaboration"
+### "Built for large team collaboration"
 
 Framer Cloud has been in existence for more than a year. They'll likely build on top of it to add more security features, or some sort of admin controls, or perhaps something similar to Figma's team component library.
 
 I'm guessing one of the cornerstones that enables these changes would be the ability to use code as the single source of truth in the design process, a concept pioneered by [React Sketch.app](http://airbnb.io/react-sketchapp/).
 
-## Windows version
+### Windows version
 
 Windows users, cheer up! A Windows version of Framer X is [coming your way soon](https://twitter.com/krijnrijshouwer/status/1007156746660581379)! Let's just hope it makes the first batches of beta as well. 🤞
 
-# Conclusion: the grand vision
+## Conclusion: the grand vision
 
 Phew! I realized I have asked more questions than providing potential answers. Hope you enjoyed reading this wall of text as much as I did writing it. █😝
 

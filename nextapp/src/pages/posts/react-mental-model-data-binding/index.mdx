@@ -1,14 +1,23 @@
----
-date: '2020-03-23'
-title: 'React Mental Models: Cutting Holes In HTML'
-# subtitle: "React in comics"
----
+import imgHole1Png from './hole1.png'
+import imgHole2Png from './hole2.png'
+import imgSetWhoPng from './setWho.png'
+import imgKnowledgeTreePng from './knowledge-tree.png'
+
+export const meta = {
+  tags: [],
+  date: '2020-03-23',
+  title: 'React Mental Models: Cutting Holes In HTML',
+}
+
+<!--excerpt-->
+
+<!--/excerpt-->
 
 import KungfuPanda from './KungfuPanda'
 import { Video } from '@/components/Video'
 // import ConvertKitForm from '../../design-system/ConvertKitForm'
 
-![hole comic 1](./hole1.png)
+<img src={imgHole1Png} alt={`hole comic 1`} width={1727} height={662} />
 
 What is the comic above about?
 
@@ -21,7 +30,7 @@ Cutting holes???
 
 Yup, I'd cut some holes so that we'll see what's behind, like so:
 
-![hole comic 2](./hole2.png)
+<img src={imgHole2Png} alt={`hole comic 2`} width={800} height={584} />
 
 In all seriousness, it's how I see it when I make the UI work -- making it dynamic and interactive.
 
@@ -31,7 +40,7 @@ Bear with me, let me explain.
 
 <!-- *BTW: Stuck at home? Why don't you join our [new challenge](/challenges/bored-at-home-react)? Come learn React, meet like-minded people (with guaranteed social distance), build something cool and win prizes! * -->
 
-# An example
+## An example
 
 Let's start with the simplest React app possible. Let's say we want to display this emoji Kungfu Panda (well, if you squint):
 
@@ -49,7 +58,7 @@ function App() {
 
 It's a function that returns an HTML tag. I'll expand on this HTML tag topic in another post, but for now just remember: we can use all the standard HTML tags after this `return`. If we surround the HTML with some JavaScript stuff, we get a React component.
 
-# Making it dynamic
+## Making it dynamic
 
 Of course this app doesn't do much (if you are willing to call it an app anyways). We should make it interactive, right? How about adding a few buttons to switch the character? We want Kungfu Monkey, Kungfu Tiger and maybe Kungfu Pig too (try it below!).
 
@@ -140,11 +149,16 @@ So, we defined both `who` and `setWho` here. `setWho` is a function that we can 
 
 Back to the hole-on-cardboard analogy, this `setWho` chooses the person behind the cardboard.
 
-![setWho choose the person](./setWho.png)
+<img
+  src={imgSetWhoPng}
+  alt={`setWho choose the person`}
+  width={800}
+  height={593}
+/>
 
 BTW, as you might have noticed, we have `React.useState` in the code. We just used _state_ in our component!
 
-# Separating Data from UI
+## Separating Data from UI
 
 The hole-on-cardboard analogy tells us an important idea about React. There are two separate things:
 
@@ -181,7 +195,7 @@ There are many benefits of separating the data from the UI. But to avoid talking
 
 <!-- For now, let's look at some new examples to complete our mental model. -->
 
-# Recap
+## Recap
 
 Alright! I hope you have remembered a few things:
 
@@ -198,7 +212,7 @@ The important idea here is that we separate the data from the UI. We almost alwa
 
 <!-- *Don't forget to check out the [March 31st workshop](/workshops/react-mental-models-1)!* -->
 
-# Quiz time!
+## Quiz time!
 
 It's time to flex your muscles (or at least Panda's)! Write a component to help Panda and his pupils:
 
@@ -216,7 +230,7 @@ _Got stuck? Here's the [solution](https://codesandbox.io/s/blog-quiz-1-change-ac
 
 See you soon! 👊
 
-# Footnotes
+## Footnotes
 
 [^1]: This and the following posts will cover my mental models of working with React. This switch of focus is inspired by Dan Abramov's [Just JavaScript](https://justjavascript.com/). It's such an whimsical way to learn JavaScript. Whether you are experienced in JS or not, I highly recommend you to check it out!
 [^2]: This is [_array destructuring_](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) in ES6.
@@ -225,7 +239,7 @@ See you soon! 👊
 <!-- # The tree of all React knowledge
 I'd like to imagine all React knowledge (in fact all knowledge) as a tree.
 
-![knowledge tree](./knowledge-tree.png) -->
+<img src={imgKnowledgeTreePng} alt={`knowledge tree`} width={2000} height={1492} />
 
 <!-- 💪🐼👊
 

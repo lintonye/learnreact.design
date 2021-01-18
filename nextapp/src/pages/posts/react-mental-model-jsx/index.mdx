@@ -1,12 +1,24 @@
----
-date: '2020-04-20'
-title: 'React Mental Models: The True Face of JSX'
-subtitle: 'What really is a JSX tag? Why bother?'
----
+import imgJsxWearMaskPng from './jsx-wear-mask.png'
+
+export const meta = {
+  tags: [],
+  date: '2020-04-20',
+  title: 'React Mental Models: The True Face of JSX',
+  subtitle: 'What really is a JSX tag? Why bother?',
+}
+
+<!--excerpt-->
+
+<!--/excerpt-->
 
 // import Quiz from '../../new-components/FirebaseQuiz'
 
-![JSX wearing a mask](./jsx-wear-mask.png)
+<img
+  src={imgJsxWearMaskPng}
+  alt={`JSX wearing a mask`}
+  width={2369}
+  height={1684}
+/>
 
 Look at this React component:
 
@@ -34,7 +46,7 @@ Yes, I said _pretend_. What are those tags really?
 
 Let's reveal the true face of JSX!
 
-# JS In Disguise
+## JS In Disguise
 
 JSX tags are JavaScript code in disguise. For example,
 
@@ -62,7 +74,7 @@ With JSX, we can write succinct tags that are both easy to read and write. Under
 
 Those HTML-ish tags are called _elements_ in React world.
 
-# Why Bother Learning This?
+## Why Bother Learning This?
 
 I know. You probably don't plan to work on React itself. Why bother learning things under the hood? Would it help us build apps?
 
@@ -70,7 +82,7 @@ I think it'd help a lot. We don't want to blindly follow a specific format (tags
 
 It's a bit of superpower. Really.
 
-## It's an expression!
+### It's an expression!
 
 Do you know we can assign a tag to a variable?
 
@@ -110,7 +122,7 @@ You know why it doesn't work now, right?
 
 What `React.createElement` creates is a plain object. It's not a DOM node. We can't call `appendChild` on it!
 
-## Debugging
+### Debugging
 
 Do you know why we'd get an error for the code below?
 
@@ -130,7 +142,7 @@ function App() {
 }
 ```
 
-## Differences between JSX and HTML
+### Differences between JSX and HTML
 
 Although JSX tags look like HTML, they are not HTML. In fact, there are quite a few differences between the two. For example, a button in HTML looks like this:
 
@@ -148,7 +160,7 @@ There are two notable differences above. First, the attribute in HTML is all low
 
 I'll cover the details in the next post. For now, I want you to remember the core reason for these differences: JSX tags are fundamentally JavaScript code.
 
-# Recap
+## Recap
 
 Here's the React mental model covered in this post: a JSX tag is JavaScript code pretending to be an HTML tag. It is:
 

@@ -1,10 +1,23 @@
----
-date: '2020-02-21'
-title: 'Design Data Tables with Real Tables: Part 2'
-subtitle: 'Data Table package for Framer X, a complete guide'
----
+import imgHeroPng from './hero.png'
+import imgHoverActionsGif from './hover-actions.gif'
+import imgAddRemoveRowsGif from './add-remove-rows.gif'
+import imgPaginationGif from './pagination.gif'
+import imgGoogleFlightsGif from './google-flights.gif'
+import imgTableActionsOnEachRowPng from './table-actions-on-each-row.png'
+import imgSimpleExpandableRowsGif from './simple-expandable-rows.gif'
 
-![hero](./hero.png)
+export const meta = {
+  tags: [],
+  date: '2020-02-21',
+  title: 'Design Data Tables with Real Tables: Part 2',
+  subtitle: 'Data Table package for Framer X, a complete guide',
+}
+
+<!--excerpt-->
+
+<!--/excerpt-->
+
+<img src={imgHeroPng} alt={`hero`} width={1600} height={1202} />
 
 In the [last post](/2020/02/08/design-data-tables-with-real-tables-part-1), I showed you how to design a table with the [Data Table](https://packages.framer.com/package/lintonye/data-grid-table) package in Framer X. Have you tried it yet? If not, do it now and come back. I'll wait for you.
 
@@ -21,23 +34,38 @@ I'll also show you some details under the hood to give you an impression of what
 
 Here are some GIFs for your viewing pleasure:
 
-## Hover action
+### Hover action
 
-![Hover action GIF](./hover-actions.gif)
+<img
+  src={imgHoverActionsGif}
+  alt={`Hover action GIF`}
+  width={400}
+  height={253}
+/>
 
-## Add / remove rows
+### Add / remove rows
 
-![Add/Remove row GIF](./add-remove-rows.gif)
+<img
+  src={imgAddRemoveRowsGif}
+  alt={`Add/Remove row GIF`}
+  width={400}
+  height={253}
+/>
 
-## Pagination
+### Pagination
 
-![Pagination GIF](./pagination.gif)
+<img src={imgPaginationGif} alt={`Pagination GIF`} width={400} height={266} />
 
-## Expandable rows
+### Expandable rows
 
-![Expandable rows GIF](./google-flights.gif)
+<img
+  src={imgGoogleFlightsGif}
+  alt={`Expandable rows GIF`}
+  width={400}
+  height={259}
+/>
 
-# Prerequisite
+## Prerequisite
 
 To take full advantage of this post, you should know [overrides](https://school.learnreact.design/courses/780181/lectures/14156273) and [how overrides communicate](https://school.learnreact.design/courses/780181/lectures/14156276).
 
@@ -45,7 +73,7 @@ Overrides are a powerful idea in Framer X. It gives you the best of both worlds:
 
 If you are not familiar with overrides (or even coding), take a look at [this course](/framer-in-4-weeks/) I prepared for you.
 
-# Hover Actions
+## Hover Actions
 
 Guess what the override below will give us?
 
@@ -83,7 +111,12 @@ export function TableHoverActions(): Override {
 
 You should be able to work it out if you've read the [last post](/2020/02/08/design-data-tables-with-real-tables-part-1), right? It'd be a 4-column table. The last column would include custom cells for each row:
 
-![Table with actions on each row](./table-actions-on-each-row.png)
+<img
+  src={imgTableActionsOnEachRowPng}
+  alt={`Table with actions on each row`}
+  width={1133}
+  height={687}
+/>
 
 How would we make it interactive? How would we only show the actions for the row that the user is hovering the mouse on?
 
@@ -151,15 +184,20 @@ export function TableHoverActions(): Override {
 }
 ```
 
-## Full source code
+### Full source code
 
 The full source code can be found [here](https://github.com/lintonye/tables/blob/master/demos.framerfx/code/HoverActions.tsx).
 
 Note: as an alternative, we could use React state for this prototype, instead of `Data`.
 
-# Add / remove rows
+## Add / remove rows
 
-![Add/Remove row GIF](./add-remove-rows.gif)
+<img
+  src={imgAddRemoveRowsGif}
+  alt={`Add/Remove row GIF`}
+  width={400}
+  height={253}
+/>
 
 To update the rows in the table, we'd use the `data` prop of the component. The rest is some usual Override/JS fu.
 
@@ -196,13 +234,13 @@ export function Remove(props): Override {
 }
 ```
 
-## Full source code
+### Full source code
 
 The full source code can be found [here](https://github.com/lintonye/tables/blob/master/demos.framerfx/code/AddRemoveRows.tsx).
 
-# Pagination
+## Pagination
 
-![Pagination GIF](./pagination.gif)
+<img src={imgPaginationGif} alt={`Pagination GIF`} width={400} height={266} />
 
 To support pagination, we need to override two props: `pageSize` and `pageIndex`.
 
@@ -282,13 +320,18 @@ export function PageInfo(props): Override {
 }
 ```
 
-## Full source code
+### Full source code
 
 The full source code can be found [here](https://github.com/lintonye/tables/blob/master/demos.framerfx/code/Paging.tsx).
 
-# Expandable Rows
+## Expandable Rows
 
-![Expandable rows GIF](./simple-expandable-rows.gif)
+<img
+  src={imgSimpleExpandableRowsGif}
+  alt={`Expandable rows GIF`}
+  width={400}
+  height={266}
+/>
 
 Typically we'd have a column to let user expand or collapse a row. We could use `row.getExpandedToggleProps()` to make an element clickable. Behind the scene, it adds event handlers and styles to the element and toggles the internal state of the row.
 
@@ -335,7 +378,7 @@ export function Table(props): Override {
 }
 ```
 
-## Full source code
+### Full source code
 
 - [The simple example discussed in this section](https://github.com/lintonye/tables/blob/master/demos.framerfx/code/SimpleExpandableRows.tsx)
 - [Google Flights example](https://github.com/lintonye/tables/blob/master/demos.framerfx/code/ExpandableRow.tsx) (with bells and whistles such as animations)
@@ -344,11 +387,11 @@ export function Table(props): Override {
 - React Table
 - HTML table -->
 
-# Future possibilities
+## Future possibilities
 
 Under the hood, Data Table is powered by the wonderful [react-table](https://github.com/tannerlinsley/react-table) package (Thanks [Tanner](https://twitter.com/tannerlinsley)!). Since react-table is a fully featured library for production usage, we can see a lot of exciting possibilities for future improvement. What about filtering, sorting, re-ordering columns, or resizable columns? [Tell me](https://twitter.com/lintonye) what you want to build, and I'll see if I can add it in!
 
-# Wrapping up
+## Wrapping up
 
 Alright! This post is all about creating interactive data tables with a little bit of code. With what's covered in the [last post](/2020/02/08/design-data-tables-with-real-tables-part-1), I hope you find Data Table a useful tool in your arsenal.
 

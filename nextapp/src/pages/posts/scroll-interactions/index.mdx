@@ -1,20 +1,45 @@
----
-date: '2019-02-06'
-title: 'Prototyping Advanced Scroll Interactions in Framer X'
-subtitle: "How-tos and what's under the hood"
----
+import imgStickyScrollGif from './sticky-scroll.gif'
+import imgIPhoneXrGif from './iPhoneXR.gif'
+import imgSvgTracingGif from './svg-tracing.gif'
+import imgIphoneXrCanvasPng from './iphoneXR-canvas.png'
+import imgIphoneNameSizeSlowdownGif from './iphone-name-size-slowdown.gif'
+import imgSvgLineTracingPropertyPanelGif from './svg-line-tracing-property-panel.gif'
+import imgScrollPropsConsolePng from './scroll-props-console.png'
+import imgAboutPropsConsolePng from './about-props-console.png'
+import imgSnapAndNavigateGif from './snap-and-navigate.gif'
+
+export const meta = {
+  tags: [],
+  date: '2019-02-06',
+  title: 'Prototyping Advanced Scroll Interactions in Framer X',
+  subtitle: "How-tos and what's under the hood",
+}
+
+<!--excerpt-->
+
+<!--/excerpt-->
 
 Quick, how do you prototype a page with sticky headers like this in Framer X?
 
-![gif of sticky header](./sticky-scroll.gif)
+<img
+  src={imgStickyScrollGif}
+  alt={`gif of sticky header`}
+  width={300}
+  height={186}
+/>
 
 What about this one?
 
-![gif of iphone xr](./iPhoneXR.gif)
+<img src={imgIPhoneXrGif} alt={`gif of iphone xr`} width={205} height={160} />
 
 Or an SVG line tracing animation controlled by scrolling?
 
-![gif of svg tracing](./svg-tracing.gif)
+<img
+  src={imgSvgTracingGif}
+  alt={`gif of svg tracing`}
+  width={203}
+  height={160}
+/>
 
 The short answer is: use Linton's Parallax module. :)
 
@@ -24,9 +49,14 @@ In this post, I'll show you exactly how to build advanced scroll interactions li
 
 Are you ready?
 
-# Sticky headers
+## Sticky headers
 
-![gif of sticky header](./sticky-scroll.gif)
+<img
+  src={imgStickyScrollGif}
+  alt={`gif of sticky header`}
+  width={300}
+  height={186}
+/>
 
 How do we make something "sticky" on a scrolling page? Moreover, these headers are only sticky when scrolling into a predefined range. If we scroll out of that range, the headers will be back to normal and move with the rest of the content. How do we build that?
 
@@ -99,21 +129,26 @@ export const Portfolio: Override = (props) => overrides.portfolio(props)
 export const Contact: Override = (props) => overrides.contact(props)
 ```
 
-# iPhone XR page
+## iPhone XR page
 
 Let's now look at this baby:
 
-![gif of iphone xr](./iPhoneXR.gif)
+<img src={imgIPhoneXrGif} alt={`gif of iphone xr`} width={205} height={160} />
 
 This prototype is definitely more complex than the last one. We'll study the effects one at a time.
 
-## `modulate`
+### `modulate`
 
 First, we see the block of text fades away as it's scrolled up, as if it's pushed away by the phone. How do we build that?
 
 You'll know it if you see the canvas:
 
-![canvas screenshot](./iphoneXR-canvas.png)
+<img
+  src={imgIphoneXrCanvasPng}
+  alt={`canvas screenshot`}
+  width={530}
+  height={400}
+/>
 
 On the canvas, we have a frame with a gradient background that covers the text. On the preview, the opacity of this "cover" frame is initially set to 0. The opacity is gradually increased to 1 when scrolling up.
 
@@ -128,11 +163,11 @@ const overrides = scrollOverrides(
 
 Right! it's the same pattern as `sticky`. Scroll range first, and then the behavior when scrolling into this range. Here, `modulate` is conceptually similar to [`Utils.modulate`](https://medium.com/the-school-of-do/framer-cheat-sheets-utils-modulate-b88e359fdcc6) in Framer Classic. It converts the scroll position into an opacity value between `0` and `1`.
 
-## `speed`
+### `speed`
 
 Now let's switch our focus to the phone frame. If we look at it closely, we'll see that the phone moves faster than the rest of the page. This creates the effect that it's popping out from the bottom.
 
-![gif of iphone xr](./iPhoneXR.gif)
+<img src={imgIPhoneXrGif} alt={`gif of iphone xr`} width={205} height={160} />
 
 You guessed right, we have a function to control the speed too! Unsurprisingly, it's called `speed`:
 
@@ -150,13 +185,18 @@ By the way, did you notice that there's some zooming effect when the phone is mo
 ;[300, 750], { id: 'iPhoneXR', op: modulate('scale', [1.5, 1]) }
 ```
 
-## Play custom animations
+### Play custom animations
 
 So far, we have `modulate` and `speed` which are both closely tied to the scroll position. If the page scroll a little bit, the values change a little bit. If the page does not scroll, the values won't change. This works great, but sometimes we just want to trigger an animation when the page scrolls into a range. Even when we are NOT scrolling anymore, the animation should keep playing.
 
 The label to the left of the iPhone works like below. Note even when I stopped scrolling (the phone stopped zooming in), the animation continued until the label disappeared.
 
-![iphone name size slowdown](./iphone-name-size-slowdown.gif)
+<img
+  src={imgIphoneNameSizeSlowdownGif}
+  alt={`iphone name size slowdown`}
+  width={410}
+  height={320}
+/>
 
 We can build it this way:
 
@@ -187,15 +227,25 @@ Finally, don't forget the `_ => ` in the front. You'll get an error if you do!
 
 Alright, that's the iPhone XR prototype! There're not much more surprises in the rest of it -- just the same pattern being reused and combined. Check out the [demo file](https://www.dropbox.com/s/6tpjipqxyftbz1v/parallax-webinar.framerx?dl=0) for the complete source code.
 
-# SVG line tracing
+## SVG line tracing
 
-![gif of svg tracing](./svg-tracing.gif)
+<img
+  src={imgSvgTracingGif}
+  alt={`gif of svg tracing`}
+  width={203}
+  height={160}
+/>
 
 This line tracing effect looks rad, right? How do we build it?
 
 In fact, I've got a `IPadSvg` code component that does most of the heavy-lifting. It exposes a `progress` prop that we can use to control how much the tracing has been done:
 
-![svg line tracing property panel](./svg-line-tracing-property-panel.gif)
+<img
+  src={imgSvgLineTracingPropertyPanelGif}
+  alt={`svg line tracing property panel`}
+  width={564}
+  height={320}
+/>
 
 Since SVG line tracing is not the focus of this post, check out [this article](https://css-tricks.com/svg-line-animation-works/) and the [source code](https://github.com/lintonye/parallax/blob/master/code/SvgTrace.tsx) of `IPadSvg` for more details.
 
@@ -223,13 +273,13 @@ export const Svg: Override = () => ({
 })
 ```
 
-# Under the hood
+## Under the hood
 
 Until this point, if you are not satisfied with the "magic" of the Parallax module and start wondering how this stuff works, Kudos! That's a great mindset to have!
 
 I know, perhaps your goal is not to write a Parallax module of your own. Perhaps you just want to build a prototype that rocks. However, don't you want to be the master of your tools? Then you'd better understand how they work!
 
-## What's that `overrides`?
+### What's that `overrides`?
 
 Let's start with this:
 
@@ -269,7 +319,12 @@ export const Scroll: Override = props => {
 }
 ```
 
-![console output](./scroll-props-console.png)
+<img
+  src={imgScrollPropsConsolePng}
+  alt={`console output`}
+  width={650}
+  height={188}
+/>
 
 Hmm, looks like it's just an object that contains an `onMove` function? Exactly! This is how we monitor the scroll position!
 
@@ -281,7 +336,12 @@ export const About: Override = (props) => overrides.about(props)
 
 We'll get:
 
-![console output about](./about-props-console.png)
+<img
+  src={imgAboutPropsConsolePng}
+  alt={`console output about`}
+  width={1194}
+  height={318}
+/>
 
 This time, we create an object that has a `top` Animatable and a `bottom` with `null` value. They override the original `top` and `bottom` -- this is how `sticky` works! (BTW: guess what `left` and `right` are for?)
 
@@ -314,7 +374,7 @@ This looks more familiar, doesn't it?
 
 That's pretty much how it works! With the Parallax module, all we need to do is to define the scrolling behavior, and call `overrides.scroll(props)` or `overrides.about(props)` and so on, the rest of the grunt work is handled by the module.
 
-## Merge overrides
+### Merge overrides
 
 Armed with the knowledge that `overrides.scroll(props)` just returns an override object, we can get back to our earlier [discussion](/2019/02/06/prototyping-advanced-scroll-interactions-in-framer-x#play-custom-animations) about `data.phoneNameSizeOpacity`.
 
@@ -369,11 +429,16 @@ export const PhoneNameSize: Override = props => ({
 
 This is the power of knowing what's under the hood!
 
-## Access internal Animatable
+### Access internal Animatable
 
 Here's another example. Let's say we have a Scroll that "snaps to" a given range. We also want to have navigation buttons that scroll to a location on the page.
 
-![snap and navigate](./snap-and-navigate.gif)
+<img
+  src={imgSnapAndNavigateGif}
+  alt={`snap and navigate`}
+  width={270}
+  height={160}
+/>
 
 The snapping behavior can be implemented with the `snap` function in Parallax:
 
@@ -415,13 +480,13 @@ export NavButton: Override = () => ({
 })
 ```
 
-## Extension opportunities
+### Extension opportunities
 
 If you dig deeper, you'd find other opportunities to use Parallax. For example, did you notice that there is a [`scrollAwayHeader`](https://github.com/lintonye/parallax/blob/master/code/ScrollOverrides.ts#L538) function that's built upon `scrollOverrides`?
 
 What about writing a new "op" function that's similar to `sticky`, `speed` or `modulate`? This would definitely be more involved, but what prevents you from reading the [source code](https://github.com/lintonye/parallax/blob/master/code/ScrollOverrides.ts#L267) and learning how to do it?
 
-# Conclusion
+## Conclusion
 
 Alright, so this is how to prototype advanced, range-based scroll interactions in Framer X. I wrote the Parallax module to help you build great stuff with less time and effort. And I couldn't help writing a bunch of words here about how it works behind the scene, because I believe knowing your tools from inside out really goes a long way.
 

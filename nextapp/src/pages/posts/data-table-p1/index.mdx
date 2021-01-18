@@ -1,16 +1,36 @@
----
-date: '2020-02-08'
-title: 'Design Data Tables with Real Tables: Part 1'
-subtitle: 'Data Table package for Framer X, a complete guide'
----
+import imgHeroPng from './hero.png'
+import imgTediusDrawTableGif from './tedius-draw-table.gif'
+import imgDataTableBlogDemo1Gif from './data-table-blog-demo1.gif'
+import imgDropPresetGif from './drop-preset.gif'
+import imgDataPropertiesPanelPng from './data-properties-panel.png'
+import imgCheckboxesPng from './checkboxes.png'
+import imgZebraPng from './zebra.png'
+import imgDesignComponentGif from './design-component.gif'
+import imgOverridePanelPng from './override-panel.png'
 
-![hero](./hero.png)
+export const meta = {
+  tags: [],
+  date: '2020-02-08',
+  title: 'Design Data Tables with Real Tables: Part 1',
+  subtitle: 'Data Table package for Framer X, a complete guide',
+}
+
+<!--excerpt-->
+
+<!--/excerpt-->
+
+<img src={imgHeroPng} alt={`hero`} width={1600} height={1202} />
 
 You are designing a new dashboard. You need to create a data table. You want custom styles on the titles and cells. You want precise control of the divider lines and paddings. You also want to fill it with real data, not just some misleading placeholders.
 
 How would you do it? Is the experience like this?
 
-![Gif of designing table](./tedius-draw-table.gif)
+<img
+  src={imgTediusDrawTableGif}
+  alt={`Gif of designing table`}
+  width={480}
+  height={270}
+/>
 
 You see, even the tiniest change would require lots of tedious clicking around and re-arrangement of elements. What if we want to insert a row? What if we want to delete a column? What if we need to swap out the data that we've just laboriously entered into each cell?
 
@@ -18,7 +38,12 @@ I know, things are probably not that bad. Nowadays design tools offer features s
 
 Why can't we just design with a real table? A real HTML `<table>` that we can configure and style as a whole. What if we can design a table this way:
 
-![1-5 second demo](./data-table-blog-demo1.gif)
+<img
+  src={imgDataTableBlogDemo1Gif}
+  alt={`1-5 second demo`}
+  width={480}
+  height={270}
+/>
 
 This is the Framer X package that I want to show you today: [Data Table](https://packages.framer.com/package/lintonye/data-grid-table). I believe it'll save us a lot of time and foster new opportunities.
 
@@ -34,11 +59,16 @@ Ready for some fun on the table (pun intended)? 🎉👇
 
 _Prerequisites: To enjoy basic styling and data import capabilities of Data Table, you don't need to code. However, the second half of this post, Advanced styling, assumes that you are familiar with the basics of React and overrides in Framer X. If you are new to these concepts, check out [my course](/prototyping-with-react-framer) to build a solid foundation first, before you can harness the superpowers!_
 
-# Basic styling
+## Basic styling
 
 How to get started with Data Table? Just drop a preset or two onto the canvas and pick your favorite:
 
-![Drag&Drop presets GIF](./drop-preset.gif)
+<img
+  src={imgDropPresetGif}
+  alt={`Drag&Drop presets GIF`}
+  width={480}
+  height={270}
+/>
 
 These presets are just a starting point. From there, you can tweak the styles, but in terms of the styles of the table, not individual cells one by one. I'd say that's a big time saver. What do you think?
 
@@ -64,13 +94,18 @@ Here's a complete list of properties that can be adjusted right from the propert
 | gap                | number  | Margin of each cell                            |
 | cellBorderRadius   | number  | The border radius of each cell                 |
 
-# BYOD (Bring Your Own Data)
+## BYOD (Bring Your Own Data)
 
 A table design isn't really useful unless it's populated with real data. I've taken this into account from Day One. With Data Table, we can import JSON or CSV files with just a couple of clicks.
 
-![import data](./data-properties-panel.png)
+<img
+  src={imgDataPropertiesPanelPng}
+  alt={`import data`}
+  width={496}
+  height={146}
+/>
 
-## JSON
+### JSON
 
 The JSON file is expected to be an array of objects. All objects should have the same keys. The keys will be used as the labels in the column header (customizable, see "Advanced styling"). Example:
 
@@ -81,7 +116,7 @@ The JSON file is expected to be an array of objects. All objects should have the
 ]
 ```
 
-## CSV
+### CSV
 
 The CSV file is expected to have a header row. The fields in the header row will be used as the labels in the column header. Example:
 
@@ -91,31 +126,41 @@ TSLA,906
 AAPL,219
 ```
 
-# Advanced styling
+## Advanced styling
 
 I hear you. The styles in the properties panel are useful and convenient, but they can only take you so far. What if we want something more complex or fancier?
 
 For example, adding a checkbox in front of every row:
 
-![checkboxes](./checkboxes.png)
+<img src={imgCheckboxesPng} alt={`checkboxes`} width={851} height={700} />
 
 Or rows with a zebra stripe pattern (well this style is old school, but definitely more complex than the basic configuration we could set so far):
 
-![stripe](./zebra.png)
+<img src={imgZebraPng} alt={`stripe`} width={904} height={549} />
 
 Or a cell that can be dynamically adjusted on the canvas:
 
-![design component GIF](./design-component.gif)
+<img
+  src={imgDesignComponentGif}
+  alt={`design component GIF`}
+  width={480}
+  height={441}
+/>
 
 That's the fun part I'm going to show you!
 
-## Style with overrides
+### Style with overrides
 
 For more advanced control of Data Table, we need to use code. In particular, we're gonna use Code Overrides in exactly the same way as how we would use them for prototyping in the preview window. There's only one exception: the code override on a table works on the canvas too! (thanks for the help to get my weird hacks working, [Tisho](https://twitter.com/tisho)!)
 
 We'd write a code override, in the same way as how we would write it normally, and select it on the properties panel.
 
-![override on properties panel](./override-panel.png)
+<img
+  src={imgOverridePanelPng}
+  alt={`override on properties panel`}
+  width={257}
+  height={215}
+/>
 
 Why code overrides?
 
@@ -123,13 +168,13 @@ Or do you want another 50 properties on the properties panel? Believe it or not,
 
 So, [learn to code](/prototyping-with-react-framer) to take advantage of this convenience (not to mention other superpowers)!
 
-## Customize `columns`
+### Customize `columns`
 
 The most popular prop that we can override is `columns`. It allows us to customize the columns of the table.
 
 The value of `columns` prop is expected to be an array of objects. Each object represents a column of the table.
 
-### Customize column header
+#### Customize column header
 
 For example, we could customize the header of a column like so:
 
@@ -147,7 +192,7 @@ Note the first letter of `Header` is capitalized. We could also use a React elem
   { accessor: "firstName", Header: <h1>First Name</h1> },
 ```
 
-### Customize column order / hide columns
+#### Customize column order / hide columns
 
 When `showDefaultColumns` is set to `false`, only columns specified in `columns` property will be displayed. The order is the same as how it appears in the `columns` array.
 
@@ -166,7 +211,7 @@ export function Table(props): Override {
 
 There are other things that can be used here, but let's save it for a later section.
 
-## Customize rows
+### Customize rows
 
 Another useful prop to override is `rowProps`. It gives us an opportunity to customize the props of the container of each row.
 
@@ -199,7 +244,7 @@ export function TablePattern(props): Override {
 }
 ```
 
-## Customize individual cells
+### Customize individual cells
 
 Finally, the most powerful customization of all, we could customize individual cells with code overrides.
 
@@ -238,7 +283,12 @@ Cell: ({
 
 These abilities enable a particularly interesting use case:
 
-![design component GIF](./design-component.gif)
+<img
+  src={imgDesignComponentGif}
+  alt={`design component GIF`}
+  width={480}
+  height={441}
+/>
 
 How is this done? Design components in Framer X!
 
@@ -269,7 +319,7 @@ export function TableAvatar(props): Override {
 }
 ```
 
-# Conclusion
+## Conclusion
 
 Designing a data table is a surprisingly difficult task with common design tools. I believe [Data Table](https://packages.framer.com/package/lintonye/data-grid-table) in Framer X is a promising solution. Its allows us to import data and style the entire table, rather than just individual cells. I think these two features alone already make it worth trying. The advanced styling options give us fine control of individual cells, and it is backed by the underlying table data. When combined with design components in Framer X, we get the best of the two worlds: design on canvas and work with data in code.
 
@@ -278,20 +328,20 @@ In the [next post](/2020/02/21/design-data-tables-with-real-tables-part-2), I'll
 Are you convinced yet? Will you use it for your next project? Give it a [try](https://packages.framer.com/package/lintonye/data-grid-table) and [let me know](https://twitter.com/lintonye)!
 
 <!--
-# Interaction
+## Interaction
 Now what if you want to create a prototype for user testing? Don't forget that you are in Framer X! High-fidelity prototyping is the forte of Framer X.
 
-## Pagination
-## Hover actions
-## Expandable rows
+### Pagination
+### Hover actions
+### Expandable rows
 
-# Implementation notes
+## Implementation notes
 React Table
 HTML table
 
-# Conclusion & Future possibilities
-## More interactions
-## Export to code!
+## Conclusion & Future possibilities
+### More interactions
+### Export to code!
 
 
 - Motivation

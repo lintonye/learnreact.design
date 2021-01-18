@@ -1,10 +1,27 @@
----
-date: '2017-06-20'
-title: 'What Is React Native?'
-subtitle: 'React terms in plain English and doodles🌴🎄⚛'
+import img1ReactSummaryPng from './1-react-summary.png'
+import img2IosAndroidPng from './2-ios-android.png'
+import img25CrazyPng from './2.5-crazy.png'
+import img3CloakAndDustPng from './3-cloak-and-dust.png'
+import img4ReactdomDomoPng from './4-reactdom-domo.png'
+import img5RenderersPng from './5-renderers.png'
+import img6OtherFolksAtWebPng from './6-other-folks-at-web.png'
+import img7SummonPng from './7-summon.png'
+import img8ReactNativeSummaryPng from './8-react-native-summary.png'
+import img9SketchPng from './9-sketch.png'
 
-excerpt: 'React terms explained in plain English and doodles🌴🎄⚛'
----
+export const meta = {
+  tags: [],
+  date: '2017-06-20',
+  title: 'What Is React Native?',
+  subtitle: 'React terms in plain English and doodles🌴🎄⚛',
+  excerpt: 'React terms explained in plain English and doodles🌴🎄⚛',
+}
+
+<!--excerpt-->
+
+React terms explained in plain English and doodles🌴🎄⚛
+
+<!--/excerpt-->
 
 _Blog series: React terms explained in plain English and doodles_
 
@@ -18,7 +35,7 @@ _Blog series: React terms explained in plain English and doodles_
 
 In the [previous post](/2017/06/08/what-is-react/), we looked at what React is and what makes it special. Today let's study React Native: what it's for, where it came from, how it's different from React and why it's a big deal.
 
-# Learning Goals
+## Learning Goals
 
 I'll get you to come back here after reading this post. Hopefully you'll be able to answer these questions easily:
 
@@ -31,11 +48,16 @@ I'll get you to come back here after reading this post. Hopefully you'll be able
 - How does ReactVR work?
 - What is ReactJS? React.js?
 
-# Beyond The Web
+## Beyond The Web
 
 By now you probably have this picture in your head:
 
-![what is React Summary](./1-react-summary.png)
+<img
+  src={img1ReactSummaryPng}
+  alt={`what is React Summary`}
+  width={750}
+  height={400}
+/>
 
 You see, React is a great tool for building user interfaces _on the web_. With React, you can build the UI by describing what you want instead of how to update the UI (reactive UI), organize the code in reusable components, and create performant UI without worrying about DOM the slowpoke (virtual DOM). More and more web developers choose React because it allows them to focus on a bigger picture instead of low-level details. We call this way of building the UI _React paradigm_. A paradigm is basically the way how you think about a problem and how you describe it and its solution[^2].
 
@@ -47,45 +69,75 @@ Similarities aside, mobile platforms are different from the Web, and they are di
 
 This is like working with exotic studios where the staff speak various different languages. You'd have to learn all the new languages to communicate with those models. It doesn't sound easy, does it?
 
-![studio "iOS" and studio "Android"](./2-ios-android.png)
+<img
+  src={img2IosAndroidPng}
+  alt={`studio "iOS" and studio "Android"`}
+  width={900}
+  height={500}
+/>
 
 Therefore, if you wanted to build native apps for both iOS and Android, you had to create two completely separate codebases. The same business logic had to be implemented twice. It was difficult and expensive to create an app and even more so to maintain it in the long run.
 
 That is why React Native was created. Let's see how it makes things a lot easier.
 
-# React Native
+## React Native
 
-## Renderers And The New React
+### Renderers And The New React
 
 For web apps, React takes care of enabling the React paradigm (managing reactive UI, components and virtual DOM), as well as actually updating the DOM in the browser (talking with Domo). When the DOM is the only thing it needs to interact, React can easily handle both tasks.
 
 However, for mobile apps, things get challenging when it's necessary to manage various tree models on different platforms. If we keep adding more responsibilities on React's shoulders, it'll start driving our poor superhero crazy [^7].
 
-![talk to many tree folks and crazy](./2.5-crazy.png)
+<img
+  src={img25CrazyPng}
+  alt={`talk to many tree folks and crazy`}
+  width={825}
+  height={450}
+/>
 
 To deal with this, the creators of React split the original React into two parts. The first part is the new React which focuses on enabling the React paradigm. The second part is called ReactDOM, whose only job is to interact with DOM in the browser. Because ReactDOM updates DOM which determines what is _rendered_ on the browser, we say ReactDOM is a _renderer_.
 
 Back to our story, imagine that our superhero takes off his cloak[^8] and sprinkles some magic dust.
 
-![cloak and magical dust](./3-cloak-and-dust.png)
+<img
+  src={img3CloakAndDustPng}
+  alt={`cloak and magical dust`}
+  width={550}
+  height={400}
+/>
 
 His cloak comes alive and becomes his helper. Freed from the burden of dealing with Domo, React can now concentrate on what he does the best.
 
-![ReactDOM talks to Domo](./4-reactdom-domo.png)
+<img
+  src={img4ReactdomDomoPng}
+  alt={`ReactDOM talks to Domo`}
+  width={550}
+  height={400}
+/>
 
 This separation of roles is a powerful idea. It makes it easy to write new _renderers_ that adapt to new platforms while maintaining a shared core. Powered by the renderers for iOS and Android, you can now build apps for both platforms in **a single language and the same React paradigm**.
 
-![renderers to talk to Web, iOS and Android](./5-renderers.png)
+<img
+  src={img5RenderersPng}
+  alt={`renderers to talk to Web, iOS and Android`}
+  width={825}
+  height={600}
+/>
 
 _React focuses on his thing. Renderers do the talk._
 
-## A Complete Platform
+### A Complete Platform
 
 The official definition of React is: A JavaScript library for building user interfaces. Its meaning is twofold: first it's a great tool for UI, second it doesn't include anything else.
 
 In fact, **you can't build a full application with just React alone**. You'd need for example CSS for styling, webpack for preprocessing and bundling the code, Firebase for persisting the data and many other things.
 
-![The studio "Web Browser" is actually a lot busier than what you've seen.](./6-other-folks-at-web.png)
+<img
+  src={img6OtherFolksAtWebPng}
+  alt={`The studio "Web Browser" is actually a lot busier than what you've seen.`}
+  width={830}
+  height={610}
+/>
 
 _The studio "Web Browser" is actually a lot busier than what you've seen._
 
@@ -106,11 +158,16 @@ Compared to React on the Web, React Native includes a lot more stuff:
 
 We say React Native is a complete platform itself because **it includes all you need to build a full app**. In comparison, the original React is only in charge of web UI and you'll need to include other parts yourself to create a web app[^3].
 
-![The formation of React Native](./7-summon.png)
+<img
+  src={img7SummonPng}
+  alt={`The formation of React Native`}
+  width={935}
+  height={680}
+/>
 
 _The formation of React Native_
 
-## Native UI
+### Native UI
 
 Have you ever wondered why React Native is labeled _Native_? That's actually its branding feature: the UI built with React Native consists of **native UI widgets** that perform well and look/feel consistent, not some simulated crap wrapped in a WebView. The apps built with React Native are often indistinguishable from the apps written in native languages such as Swift and Java.
 
@@ -122,15 +179,25 @@ For now, I want you to just remember that native UI is one of the great things t
 
 So here you go, React Native is a complete platform that allows you to build truly native apps following React paradigm, in JavaScript.
 
-![React Native key points summary](./8-react-native-summary.png)
+<img
+  src={img8ReactNativeSummaryPng}
+  alt={`React Native key points summary`}
+  width={550}
+  height={400}
+/>
 
-# React Sketch.app, ReactVR, React XYZ...
+## React Sketch.app, ReactVR, React XYZ...
 
 Recently Airbnb released a nifty tool called [React Sketch.app](https://airbnb.design/painting-with-code/) which converts React code into image layers in Sketch. Can you guess how it works?
 
 Right! It's essentially React Native with a renderer who talks to the tree model in Sketch!
 
-![React Native team and Sketch Renderer](./9-sketch.png)
+<img
+  src={img9SketchPng}
+  alt={`React Native team and Sketch Renderer`}
+  width={550}
+  height={350}
+/>
 
 Because React Sketch.app is based on React Native, which is a full package, we can do fancy things like fetching data from a real API and rendering it in Sketch.
 
@@ -139,7 +206,7 @@ In the meantime, many other variations of React Native are created to support bu
 This means, as long as you master the essence of React, you can build apps for a gazillion of platforms (and counting), in JavaScript, with the same pattern of thinking. As
 the creators of React Native nicely put, **"learn once, write anywhere"**.
 
-# Hands-on Time!
+## Hands-on Time!
 
 So much talking so far! Do you want to try something on your phone?
 
@@ -179,7 +246,7 @@ const HatSwitcher = ...
 
 "Learn once, write anywhere"! Remember?
 
-# What About ReactJS And React.js?
+## What About ReactJS And React.js?
 
 You might have heard ReactJS (or React.js) a lot -- and I used it too. In fact it's never an official name [^5]. The official name has always been "React" since the [day one](https://web.archive.org/web/20130529213355/https://facebook.github.io/react/).
 
@@ -187,7 +254,7 @@ Because JavaScript libraries tend to be named "XyzJS" or "Xyz.js" and React is a
 
 Following the de facto convention, when I say ReactJS, I mean React on the Web too.
 
-# Conclusion
+## Conclusion
 
 Awesome! We've gone over quite a few things so far. We've learned a bit of history of React and how React Native is put together. Being a complete platform, React Native includes everything that you need to build native apps in JavaScript and React paradigm. React Native now supports many platforms including iOS, Android, Windows, macOS, Sketch.app and even VR. "Learn once, write anywhere"!
 
@@ -201,13 +268,13 @@ I encourage you to go back to the [Learning Goals](#learning-goals) to see if yo
 
 ---
 
-# Backstage
+## Backstage
 
-## Illustrations
+### Illustrations
 
 I am fortunate to work with [Beebee Ye](https://beebeeye.github.io), who is an excellent illustrator and storyteller. His illustrations have made these posts really unique and fun to read.
 
-## Revisions
+### Revisions
 
 As usual, this post has gone through many edits. What's special here though, is that I've almost completely rewritten the whole thing hearing that I've taken the metaphors too far.
 
@@ -215,7 +282,7 @@ I really appreciate your constructive suggestions that pushed me to rewrite it, 
 
 <!-- If you are curious, check out [the previous version](/2017-06-20-what-is-react-native-metaphor/) that's full of fantasy stories 🌈🦄  😆. -->
 
-# Footnotes
+## Footnotes
 
 [^7]: In reality, it'd drive the maintainers of React crazy.
 [^8]: Well, the cloak is the only thing that I could think of can be _split_ off from the superhero without any damage. Bear with me!

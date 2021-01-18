@@ -1,11 +1,28 @@
----
-date: '2018-10-12'
-title: 'Inside Parallax, my first Framer X component, Part 1'
-subtitle: 'A technical drill down'
-draft: 'no'
----
+import imgParallaxCoverPng from './parallax-cover.png'
+import imgInspectPng from './inspect.png'
+import imgConnectorGif from './connector.gif'
+import imgPropsPanelPng from './props-panel.png'
+import imgOnScrollConsolePng from './onScroll-console.png'
+import imgOnMoveConsolePng from './onMove-console.png'
 
-![gif of parallax](./parallax-cover.png)
+export const meta = {
+  tags: [],
+  date: '2018-10-12',
+  title: 'Inside Parallax, my first Framer X component, Part 1',
+  subtitle: 'A technical drill down',
+  draft: 'no',
+}
+
+<!--excerpt-->
+
+<!--/excerpt-->
+
+<img
+  src={imgParallaxCoverPng}
+  alt={`gif of parallax`}
+  width={800}
+  height={600}
+/>
 
 On [day 2](https://twitter.com/lintonye/status/1025197705755152384) of Framer X Beta, I built a proof of concept of a [parallax component](https://store.framer.com/package/lintonye/parallax) to explore the capability of the platform. Over the next couple of months, I've done some spontaneous updates whenever I got bored (or stressed out) of writing scripts or recording videos for [Framer X + React](/framerx-react). :)
 
@@ -23,7 +40,7 @@ Here are some key points that will be covered:
   - how to use Animatable to avoid cloning the children tree on every render
   - how to use the Context API in React to avoid cloning the children tree
 
-# A high-level picture
+## A high-level picture
 
 <iframe
   width="560"
@@ -38,7 +55,7 @@ There are two React components in the Parallax package: `Parallax` and `Parallax
 
 It's straightforward to use Parallax. First you use `ParallaxScroll` in the same way as `Scroll`: drag it onto the canvas and connect it to a longer content frame. Second, in the scrolling content, add as many `ParallaxLayer`s as you want, and connect them to corresponding content frames. These layers will move at a different speed from the rest of the frame when scrolling. Third, configure the direction and speed of each `ParallaxLayer`, and profit!
 
-## How does this thing work?
+### How does this thing work?
 
 `ParallaxScroll` monitors how much the page has been scrolled, finds out all `ParallaxLayer`s in the `children`, calculates their positions based on their `speed` props and the current scroll position, and update their positions.
 
@@ -52,7 +69,7 @@ Apparently the third approach is the best, but it'd be interesting to see the im
 
 Before diving into the clone-or-no-clone story, however, let's iron out some basics: how to debug in Framer X, how to make an identical Scroll and how to monitor scrolling position.
 
-# How to debug in Framer X
+## How to debug in Framer X
 
 As long as we are building something non-trivial, we are gonna need to debug our code. How to debug components in Framer X?
 
@@ -60,7 +77,7 @@ Fundamentally, Framer X is a modified web browser. What's running inside is just
 
 In fact, in Preview, there's an inspect option that allows us to do exactly that!
 
-![inspect menu](./inspect.png)
+<img src={imgInspectPng} alt={`inspect menu`} width={542} height={470} />
 
 Once the Web Inspector is open, we'll be at home! We can inspect the DOM elements of individual items on the preview. We can put `console.log` in our code and look at the result in the console. We can monitor the network traffic. We can even put breakpoints in the code.
 
@@ -68,18 +85,18 @@ When I was building Parallax, a few `console.log` went a long way to help me fin
 
 If Web Inspector is not enough, it's even possible to enable React Developer Tools. I haven't explored this myself, but apparently the prolific Dan Abramov has [proved](https://twitter.com/dan_abramov/status/1025816235798343682) that it's possible.
 
-# Make an identical `Scroll`
+## Make an identical `Scroll`
 
 Let's first look at how to make a component that behaves exactly the same as `Scroll`. This includes three aspects:
 
 - 1.  In preview, it should apparently allow scrolling.
 - 2.  On the canvas, it should have a connector interface for us to connect it to the content frame.
 
-![connector](./connector.gif)
+<img src={imgConnectorGif} alt={`connector`} width={522} height={524} />
 
 - 3.  On the properties panel, it should have the same properties as `Scroll`.
 
-![properties panel](./props-panel.png)
+<img src={imgPropsPanelPng} alt={`properties panel`} width={462} height={308} />
 
 The easiest way is of course to reuse the `Scroll` component:
 
@@ -146,7 +163,7 @@ Don't forget to propagate all the props to `Scroll`. Otherwise the settings on t
 
 For those who are not familiar with ES6, this `...` syntax is called [spread operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#Spread_in_object_literals). It allows us to easily duplicate an object and optionally make modifications when constructing a new object. I'll leave you to read the docs for details since it's not the focus of this post.
 
-# Monitor scroll position
+## Monitor scroll position
 
 Now that we have a `ParallaxScroll` component that works exactly the same as `Scroll`. It's time to make it a bit more interesting. We want to monitor the scroll position and do something about it. Right?
 
@@ -166,13 +183,18 @@ These events all look very promising. However, as soon as I dug deeper, I realiz
 
 Check out this console output:
 
-![onScroll console screenshot](./onScroll-console.png)
+<img
+  src={imgOnScrollConsolePng}
+  alt={`onScroll console screenshot`}
+  width={1080}
+  height={733}
+/>
 
 It looks like `onScroll` does not provide the current scrolling position. What it gives us is just a delta since the last scroll event. This might be useful in other scenarios but in `Parallax` we need the actual scroll positions.
 
 On the other hand, there's an `onMove` event that gives us exactly what we want:
 
-![onMove](./onMove-console.png)
+<img src={imgOnMoveConsolePng} alt={`onMove`} width={990} height={420} />
 
 So our `ParallaxScroll` component would look something like this:
 
@@ -192,13 +214,13 @@ export class ParallaxScroll extends Component {
 }
 ```
 
-# Wrap up for now
+## Wrap up for now
 
 Alright! I've just shown you how to debug in Framer X, how to make an identical `Scroll` and how to monitor scroll position. But the fun has just begun! In the [next post](/2018/10/29/inside-parallax-my-first-framer-x-component-part-2), I'll show you how to recursively walk through a children tree and make changes, and an better alternative to that with the Context API in React.
 
 <!--
 
-## Traverse and update children tree
+### Traverse and update children tree
 In `ParallaxScroll`, it's important
 
 

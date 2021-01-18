@@ -1,13 +1,24 @@
----
-date: '2020-03-31'
-title: 'React Mental Models: Working With Input'
-# subtitle: "Cutting holes in HTML"
----
+import imgHole4FramesPng from './hole-4-frames.png'
+
+export const meta = {
+  tags: [],
+  date: '2020-03-31',
+  title: 'React Mental Models: Working With Input',
+}
+
+<!--excerpt-->
+
+<!--/excerpt-->
 
 import InputAndButtons from './InputAndButtons'
 import PandaPunch from './PandaPunch'
 
-![complete 4-frame comic](./hole-4-frames.png)
+<img
+  src={imgHole4FramesPng}
+  alt={`complete 4-frame comic`}
+  width={1721}
+  height={1400}
+/>
 
 You still remember this comic from [last post](/2020/03/23/react-mental-models-cutting-holes-in-html), right? I hope it's left a lasting impression on you since it's a really useful metaphor for thinking about React.
 
@@ -15,7 +26,7 @@ In this post, we're going to dive deeper into this topic. We'll focus on a diffe
 
 <!-- *BTW: Stuck at home? Why don't you join our [new React challenge](/challenges/bored-at-home-react)? Come learn React, meet like-minded people (with guaranteed social distance), build something cool and win prizes! It's FREE.* -->
 
-# Moving on to `input`
+## Moving on to `input`
 
 Let's look at this component:
 
@@ -33,7 +44,7 @@ It's going to render a text box in the browser. Compared to the `div` or `span` 
 
 Let me ask you three questions.
 
-## Question 1
+### Question 1
 
 First we add a button. When the button is clicked, we want to show an alert that contains the text in the text box.
 
@@ -99,7 +110,7 @@ From this example, we also see that we can cut holes in an attribute's value, in
 <{tagName} />                  // ❌ Wrong
 ```
 
-## Question 2
+### Question 2
 
 Let's use a different button. How would we change the text in the text box when the user clicks the button?
 
@@ -139,7 +150,7 @@ So the result would be like this:
 
 <InputAndButtons />
 
-## Question 3
+### Question 3
 
 The emoji buttons above work fine. However, if you try to type in the text box, you'll see that it doesn't work at all! Try it above.
 
@@ -180,7 +191,7 @@ To make the input work, we need to call `setDraft` when a user types something i
 
 Here, `event.target.value` is whatever the user types in the text box.
 
-# Recap
+## Recap
 
 We've looked at `<input>` as another example,
 
@@ -196,31 +207,31 @@ You might ask, are there _uncontrolled components_? You guess it right. I'll cov
 
 But let's do some work out first! 👇
 
-# Quiz Time!
+## Quiz Time!
 
 How about doing some Kung Fu routines with Panda? Try the slider and button below:
 
 <PandaPunch />
 
-## Your Tasks
+### Your Tasks
 
 1. Use [this starter project](https://codesandbox.io/s/blog-data-binding-input-quiz-panda-punch-starter-g9luj)
 2. When the "show" button is clicked, show the current value of the slider in an alert dialog.
 3. When the slider moves, change the size of Panda's fist accordingly.
 4. When you are done, [tweet](https://twitter.com/intent/tweet?text=Just%20read%20React%20Mental%20Models%20post%20by%20%40lintonye%0Ahttps%3A//learnreact.design/2020/03/31/react-mental-models-data-binding-and-input%0AHere's%20my%20answer%20to%20%23ReactMentalModelsQuiz%3A%20%5Binsert%20sandbox%20URL%5D%0A) the URL of your sandbox to win some hearts! Remember to save your file **before** copying the URL.
 
-## Hints
+### Hints
 
 1. What's that `{ fontSize: 40 }` in the starter project? (Hint: it's a JavaScript thing.)
 2. Why are there two layers of `{}` around `fontSize: 40`?
 3. Try changing the number after `fontSize`, how would you make it dynamic?
 4. Instead of `event.target.value`, you'll need to use `event.target.valueAsNumber`. Otherwise the code won't work.
 
-## Solution
+### Solution
 
 Got stuck? Here's the [solution](https://codesandbox.io/s/blog-data-binding-input-quiz-panda-punch-solution-dcwjy). Promise me, don't peek until you've tried your very best!
 
-# Footnotes
+## Footnotes
 
 [^1]: To be accurate, it's possible to get the reference of a DOM node in React and sometimes it's absolutely necessary to do so. But in most cases, we work with the data instead of the DOM nodes. I'll cover the special cases in a future post.
 
@@ -266,7 +277,7 @@ But what React enforces is that we need to think about the data and the static U
 
 The typical way
 
-# Change text
+## Change text
 
 
 

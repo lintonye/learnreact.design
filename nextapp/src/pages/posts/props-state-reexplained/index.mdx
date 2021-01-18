@@ -1,11 +1,20 @@
----
-date: '2018-01-15'
+import imgElevateStateGif from './elevate-state.gif'
+import imgRemoteControlGif from './remote-control.gif'
+import imgFlipbookJpg from './flipbook.jpg'
 
-title: 'Props and State Re-explained'
-subtitle: 'React terms in plain English and doodles🌴🎄⚛'
+export const meta = {
+  tags: [],
+  date: '2018-01-15',
+  title: 'Props and State Re-explained',
+  subtitle: 'React terms in plain English and doodles🌴🎄⚛',
+  excerpt: 'React terms explained in plain English and doodles🌴🎄⚛',
+}
 
-excerpt: 'React terms explained in plain English and doodles🌴🎄⚛'
----
+<!--excerpt-->
+
+React terms explained in plain English and doodles🌴🎄⚛
+
+<!--/excerpt-->
 
 _Blog series: React terms explained in plain English and doodles_
 
@@ -23,14 +32,14 @@ The differences between props and state are fairly apparent, and it seems straig
 
 Seriously?!? Yes, you'll see that things can be either prop or state. There is no set rule. I'll show you a more useful, practical way of thinking about props and state.
 
-# Learning Goals
+## Learning Goals
 
 After reading this post, I'll get you to come back here. Hopefully you'll be able to answer these questions easily:
 
 - What are the primary use cases for props? What about state?
 - What does "lifting up the state" mean? In what situation we need to lift the state up?
 
-# New Guest
+## New Guest
 
 Did you notice the new guest around our house? Try clicking the door below!
 
@@ -52,7 +61,7 @@ Did you notice the new guest around our house? Try clicking the door below!
 
 This is a sleepy cat -- she sleeps as long as the door is closed, and only stands up when the door is open. If you close the door, she falls back asleep right away.
 
-# Implementing the Cat
+## Implementing the Cat
 
 Now let me ask you, how to implement this behavior? Let's give it a try!
 
@@ -89,7 +98,7 @@ With this definition of the Cat, the implementation of its aforementioned behavi
 
 Easy peasy? Let's see...
 
-## Attempt 1
+### Attempt 1
 
 Since we already have code that toggles the door status according to the current status, why don't we change the cat status over there as well?
 
@@ -108,7 +117,7 @@ Unfortunately, this won't work! Remember that state is a component's private dat
 
 Here, we are trying to change the status of the cat from within the Door component. It will miserably fail (after converted to real JavaScript code of course).
 
-## Attempt 2:
+### Attempt 2:
 
 Hmm, how about changing the cat status from within the Cat component? That should work, right?
 
@@ -126,13 +135,13 @@ change cat.state.status to "sleeping" otherwise change cat.state.status to
 
 Yes, it's definitely fine to change cat status from within the Cat component. But we would need to read the status of the door to determine what the cat status should be. The status of the door is the state of Door component, and it's therefore not accessible from within the Cat component!
 
-## The Solution
+### The Solution
 
 Errr! That's really lame. To keep the door status and the cat status in sync, we definitely need to access both of them somewhere. But it appears that the data is hidden one way or another, by design! How to solve this dilemma?
 
 The solution requires us to flex our understanding of the use cases of state and props.
 
-### Lifting up Door State
+#### Lifting up Door State
 
 If we look at the House component:
 
@@ -208,9 +217,9 @@ Cat:
 
 As you’ve seen, because we want to use the state of a component from its parent, in this case, using Door’s state from within House in order to set the status of the cat, we can represent the same data as the state of the parent and pass the data down to the child as props. This is often called **_lifting up the state_**. We are moving the state up in the hierarchy.
 
-![remote control](./elevate-state.gif)
+<img src={imgElevateStateGif} alt={`remote control`} width={600} height={239} />
 
-### Changing House State
+#### Changing House State
 
 Now that the statuses of the door and the cat are both linked to the state of the house. If we want to open the door or wake up the cat, we'd need to change the state of House.
 
@@ -265,7 +274,12 @@ This is much like passing the remote control of your TV to someone else. That pe
 
 What's going to be performed depends on what kind of remote control is passed into Door. It could control a TV, an air conditioner or a HiFi audio system in House. In the Door component, all that person does is to press the button.
 
-![remote control](./remote-control.gif)
+<img
+  src={imgRemoteControlGif}
+  alt={`remote control`}
+  width={600}
+  height={292}
+/>
 
 That's all we need! Here's the full "code":
 
@@ -286,11 +300,11 @@ when door is clicked run props.onClickAction Cat:
 <div>{props.status} cat</div>
 ```
 
-# Props vs State, Again
+## Props vs State, Again
 
 Now let’s revisit a couple of questions, what are the differences between props and states? When should we use state, when should we use props?
 
-## When to use state, when to use props?
+### When to use state, when to use props?
 
 If you remember, I said props are intrinsic properties of a component that don’t change, and state is something that can change after a component is built. This helps when you first learn about the concepts.
 
@@ -298,7 +312,7 @@ However, the example we’ve just built makes it confusing. Whether a door is op
 
 It turns out that there’s a lot of flexibility for choosing between state and props. Depending on how you see it, you can find different ways to model your components. For example you can say the state of the door is that it’s open, or the state of the house is that its door is open.
 
-## A more useful way to understand
+### A more useful way to understand
 
 Confused? Here’s a more useful way of thinking about the question:
 
@@ -313,19 +327,19 @@ On the other hand, props are just something that can be used to pass data downwa
 
 Props can also be used to pass down control. For example, we passed the event handler from House to Door.
 
-## But do the props change value in this case?
+### But do the props change value in this case?
 
 No, they never do and never will. I know, the door opens and closes, and the cat sleeps and wakes up. Since we now use props to represent these, it's really tempting to think that props behave just like state -- their values change, right?
 
 This is just an illusion, which I find fairly comparable to flipbook animations.
 
-![flipbook](./flipbook.jpg)
+<img src={imgFlipbookJpg} alt={`flipbook`} width={600} height={338} />
 
 Every time when the state of the house changes, the old cat is removed and a brand new cat with new status is created from scratch. But this process happens really quickly, which gives us an illusion that there is only one cat that falls asleep and wakes up.
 
 The sketches on any page in the flipbook never move. Similarly, the cats stay awake/asleep throughout their (short) lifespan.
 
-# Conclusion
+## Conclusion
 
 Alright, we've studied props and state again with a more complex example. In this example, we'd have to keep the statuses of the door and the cat in sync, while the door should still open or close when clicked.
 
