@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import * as SeoData from '../../next-seo.json'
 import Link from 'next/link'
+import { FiLink } from 'react-icons/fi'
 import { NavBar } from '@/components/NavBar'
 import { Footer } from '@/components/Footer'
 import {
@@ -23,15 +24,19 @@ type LayoutProps = {
 
 const components = {
   h1: (props: any) => <h1 className="text-4xl font-bold" {...props} />,
-  h2: withTocNotifier((props: any) => (
-    <h2 {...props} className={'text-3xl font-bold my-3 ' + props.className} />
-  )),
-  h3: withTocNotifier((props: any) => (
-    <h3 {...props} className={'text-2xl font-bold my-2 ' + props.className} />
-  )),
-  h4: (props: any) => (
-    <h4 {...props} className={'text-xl font-bold ' + props.className} />
+  h2: withAnchor(
+    withTocNotifier((props: any) => (
+      <h2 {...props} className={'text-3xl font-bold my-3 ' + props.className} />
+    )),
   ),
+  h3: withAnchor(
+    withTocNotifier((props: any) => (
+      <h3 {...props} className={'text-2xl font-bold my-2 ' + props.className} />
+    )),
+  ),
+  h4: withAnchor((props: any) => (
+    <h4 {...props} className={'text-xl font-bold ' + props.className} />
+  )),
   ul: (props: any) => <ul className="list-outside list-disc ml-5" {...props} />,
   ol: (props: any) => (
     <ol className="list-outside list-decimal ml-5" {...props} />
@@ -103,7 +108,6 @@ function visitHeading(
 }
 
 function createToc(
-  path: string,
   activeHeadingSlug: string,
   children: any,
   headings: string[],
@@ -112,7 +116,7 @@ function createToc(
   visitHeading(
     children,
     ({ heading, slug, content }) => {
-      const url = `${path}#${slug}`
+      const url = `#${slug}`
       // console.log({ activeHeadingSlug, slug })
 
       toc.push(
@@ -137,6 +141,28 @@ function inPostStateReducer(state: InPostState, action: InPostAction) {
   return { ...state, [action.type]: action.data }
 }
 
+function withAnchor(Comp: FunctionComponent) {
+  return function HeadingWithAnchor({ id, ...props }: any) {
+    return (
+      <div className="relative">
+        <a
+          id={id}
+          href={`#${id}`}
+          className="hover:underline"
+          css={{
+            '&:hover .icon': {
+              opacity: 1,
+            },
+          }}
+        >
+          <FiLink className="absolute top-2 -left-7 opacity-0 icon" size={20} />
+          <Comp {...props} />
+        </a>
+      </div>
+    )
+  }
+}
+
 function withTocNotifier(Comp: FunctionComponent) {
   return function HeadingWithTocNotifier(props: any) {
     return (
@@ -158,21 +184,14 @@ function withTocNotifier(Comp: FunctionComponent) {
 }
 
 function Toc({
-  pathname,
   contentChildren,
   headings = ['h2', 'h3'],
 }: {
-  pathname: string
   contentChildren: any
   headings: string[]
 }) {
   const [state] = useContext(InPostStateContext)
-  const toc = createToc(
-    pathname,
-    state?.activeHeadingSlug,
-    contentChildren,
-    headings,
-  )
+  const toc = createToc(state?.activeHeadingSlug, contentChildren, headings)
   return (
     <div className="hidden lg:block">
       <div className="uppercase font-semibold tracking-wider text-gray-800 mb-4">
@@ -250,11 +269,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
               className="sticky top-20 self-start mt-6 ml-12 justify-self-center space-y-8"
               css={{ gridColumn: '3/4', gridRow: '2/20' }}
             >
-              <Toc
-                pathname={router.pathname}
-                contentChildren={children}
-                headings={tocHeadings}
-              />
+              <Toc contentChildren={children} headings={tocHeadings} />
               <div className="space-y-2 text-sm">
                 <div className="uppercase tracking-wider font-semibold">
                   Sign up for updates:
