@@ -80,8 +80,11 @@ function flatten(children: any) {
   return result
 }
 
-const headings = ['h2', 'h3']
-function visitHeading(children: any, headingProcessorFun: HeadingProcessor) {
+function visitHeading(
+  children: any,
+  headingProcessorFun: HeadingProcessor,
+  headings: string[],
+) {
   visit(children, (c) => {
     if (c.props && headings.includes(c.props.originalType)) {
       const heading = c.props.originalType
@@ -92,25 +95,34 @@ function visitHeading(children: any, headingProcessorFun: HeadingProcessor) {
   })
 }
 
-function createToc(path: string, activeHeadingSlug: string, children: any) {
+function createToc(
+  path: string,
+  activeHeadingSlug: string,
+  children: any,
+  headings: string[],
+) {
   const toc: React.ReactElement[] = []
-  visitHeading(children, ({ heading, slug, content }) => {
-    const url = `${path}#${slug}`
-    // console.log({ activeHeadingSlug, slug })
+  visitHeading(
+    children,
+    ({ heading, slug, content }) => {
+      const url = `${path}#${slug}`
+      // console.log({ activeHeadingSlug, slug })
 
-    toc.push(
-      <li
-        key={url}
-        className={
-          (heading === 'h3' ? 'ml-4' : 'ml-0') +
-          ' hover:underline ' +
-          (activeHeadingSlug === slug ? ' text-black font-semibold ' : '')
-        }
-      >
-        <Link href={url}>{content}</Link>
-      </li>,
-    )
-  })
+      toc.push(
+        <li
+          key={url}
+          className={
+            (heading === 'h3' ? 'ml-4' : 'ml-0') +
+            ' hover:underline ' +
+            (activeHeadingSlug === slug ? ' text-black font-semibold ' : '')
+          }
+        >
+          <Link href={url}>{content}</Link>
+        </li>,
+      )
+    },
+    headings,
+  )
   return <ul className="space-y-2">{toc}</ul>
 }
 
@@ -141,12 +153,19 @@ function withTocNotifier(Comp: FunctionComponent) {
 function Toc({
   pathname,
   contentChildren,
+  headings = ['h2', 'h3'],
 }: {
   pathname: string
   contentChildren: any
+  headings: string[]
 }) {
   const [state] = useContext(InPostStateContext)
-  const toc = createToc(pathname, state?.activeHeadingSlug, contentChildren)
+  const toc = createToc(
+    pathname,
+    state?.activeHeadingSlug,
+    contentChildren,
+    headings,
+  )
   return (
     <div className="hidden lg:block">
       <div className="uppercase font-semibold tracking-wider text-gray-800 mb-4">
@@ -169,6 +188,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
     titleAppendSiteName = false,
     url = currentCanonicalUrl,
     ogImage,
+    tocHeadings,
   } = meta || {}
 
   const [inPostState, dispatch] = useReducer(inPostStateReducer, [])
@@ -223,7 +243,11 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
               className="sticky top-20 self-start mt-6 ml-12 justify-self-center"
               css={{ gridColumn: '3/4', gridRow: '2/20' }}
             >
-              <Toc pathname={router.pathname} contentChildren={children} />
+              <Toc
+                pathname={router.pathname}
+                contentChildren={children}
+                headings={tocHeadings}
+              />
             </div>
 
             {/* Main content */}
