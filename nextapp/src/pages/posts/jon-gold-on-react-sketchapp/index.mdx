@@ -27,9 +27,9 @@ A conversation with Jon Gold, the creator of React Sketch.app
 
 <img src={imgJonGoldJpeg} alt={`jon gold`} width={900} height={400} />
 
-<!-- <img src="./jon-gold.jpg" style="border-radius: 500px" />
+<!-- <img src={imgReactSketchAppPng} alt={``} width={543} height={163} /> -->
 
-<img src={imgReactSketchAppPng} alt={``} width={543} height={163} />
+## Introduction
 
 I've always been curious about [React Sketch.app](https://github.com/airbnb/react-sketchapp) and how it might forever change the workflow of designers and developers. Recently I had the fortune to chat with Airbnb's [Jon Gold](https://twitter.com/jongold), the creator of React Sketch.app. This post is about the backstory and Jon's full vision of the tool.
 
@@ -37,7 +37,7 @@ TLDR; React Sketch.app was built to solve a somewhat niche issue faced by large 
 
 If you want the juicy details and a peek into the future (and some cool videos and screenshots), read on!
 
-### Why building it?
+## Why building it?
 
 Airbnb has a large team of designers and engineers. They want to encourage designers to be using their design system and streamline the communication between designers and engineers.
 
@@ -61,11 +61,11 @@ They set out to solve the synchronization issue with code, and use code as the o
 
 ---
 
-### Full vision
+## Full vision
 
 Now here's the fun part. Although React Sketch.app solves a practical issue very well, Jon only considers it as the step number one. When he started talking about his full vision, I could see the sparkles in his eyes.
 
-#### Render everywhere
+### Render everywhere
 
 To Jon, Sketch is just one of the many possible render targets. We should be able to render components anywhere.
 
@@ -80,10 +80,7 @@ To Jon, Sketch is just one of the many possible render targets. We should be abl
     <a href="https://t.co/qSshvcEtqu">https://t.co/qSshvcEtqu</a>{' '}
     <a href="https://t.co/hyEr42y6Ey">pic.twitter.com/hyEr42y6Ey</a>
   </p>
-  &mdash; Airbnb Design (@Airbnbdesign){' '}
-  <a href="https://twitter.com/Airbnbdesign/status/922970398169350144?ref_src=twsrc%5Etfw">
-    October 24, 2017
-  </a>
+  &mdash; Airbnb Design (@Airbnbdesign) <a href="https://twitter.com/Airbnbdesign/status/922970398169350144?ref_src=twsrc%5Etfw">October 24, 2017</a>
 </blockquote>
 
 > Another (example) is a [blog post](http://www.jon.gold/2017/08/dragging-rectangles/) I wrote about using markdown as a design tool. None of these actually render to Sketch. They could render to Sketch if you want them to.
@@ -98,7 +95,7 @@ The implication is that when you use React components as the centerpiece connect
 
 > It's about what we can do if we can render any components anywhere and come up with any way of rendering these things. The idea is that we can create the best input/output mechanisms for ourselves, and other designers can also create the best input/output mechanism for themselves.
 
-#### Design with components
+### Design with components
 
 > The thing I'm trying to push is about getting designers to think in terms of components. Once you can render any component, as a designer, you can create any tools you want... You can create a markdown tool that renders to Sketch, you can create an AI tool that renders to the browser, you can create an AI that renders to Sketch. This whole thing is a lot more than rendering React components to Sketch... If you can learn React, you can do whatever you want, you'll be like superheros.
 
@@ -119,10 +116,7 @@ To help designers design with components, Jon and his team is working on somethi
     <br />
     ⚛️💎 <a href="https://t.co/D0yTtMjMVS">pic.twitter.com/D0yTtMjMVS</a>
   </p>
-  &mdash; ¸„.-•~¹°”ˆ˜¨ ĴÖŅ ĠÖĻĐ ¨˜ˆ”°¹~•-.„¸ (@jongold){' '}
-  <a href="https://twitter.com/jongold/status/866854672421634049?ref_src=twsrc%5Etfw">
-    May 23, 2017
-  </a>
+  &mdash; ¸„.-•~¹°”ˆ˜¨ ĴÖŅ ĠÖĻĐ ¨˜ˆ”°¹~•-.„¸ (@jongold) <a href="https://twitter.com/jongold/status/866854672421634049?ref_src=twsrc%5Etfw">May 23, 2017</a>
 </blockquote>
 
 > It's a Sketch plugin you can browse your components from your React Native code base, you can drag them into Sketch and render them in Sketch because it just uses react-primitives that React Sketch.app knows how to render. We've built a control panel similar to symbol's control panel where you can change the parameters, booleans that kind of thing for a component.
@@ -131,7 +125,7 @@ That's a game changer! Imagine that your design is always 100% consistent with w
 
 > Sketch symbols are just not the real thing. This whole movement is about trying to get designers to design with the real things. Use the components parametrically as they are designed. So you are always designing with the real truth of things.
 
-#### A foundation for building new design tools
+### A foundation for building new design tools
 
 React Sketch.app also makes it easier for tool developers to interact with Sketch. I'm not familiar with Sketch's CocaScript-based API, but I suppose it's not something super pleasant to work with. React Sketch.app takes care of a lot of heavylifting and you can just write React code to render things on the canvas. This makes it easier to build new tools/plugins for Sketch.
 
@@ -149,7 +143,7 @@ Another example is the component picker that Jon is working on:
 
 ---
 
-### Big requirement for this full vision: react-primitives
+## Big requirement for this full vision: react-primitives
 
 The prospect of being able to bring our components anywhere we go sounds amazing. However, the very first requirement is that our components must be cross-platform.
 
@@ -167,7 +161,7 @@ On the other hand,
 
 ---
 
-### Conclusion
+## Conclusion
 
 So what do you think about React Sketch.app and Jon's full vision so far? To me, the most compelling aspect is being able to design with real components that are 100% in sync with implementation.
 
@@ -175,13 +169,11 @@ As a designer, if you can think, communicate and design with the same notion of 
 
 Are you ready to design with components?
 
-#### But, but, we are a small team, how are we supposed to use React Sketch.app?
+### But, but, we are a small team, how are we supposed to use React Sketch.app?
 
 People have been using React Sketch.app to define their design systems and create templates. But what's beyond that? Is it useful at all for small teams? Have you tried to integrating React Sketch.app into your workflow? What are your findings so far?
 
 Perhaps we can try to explore something together? [Email me](mailto:linton@jimulabs.com) and I'd love to exchange some thoughts with you!
-
-<a name="endofpost" />
 
 <!--
 One thing I found convenient is, instead of generating a full page, you can convert components into Sketch symbols and then use these symbols in your design. This way, when the component changes, those symbols will be updated and you still get to keep your custom design you've done in the good old Sketch workflow. There's also some [interesting discussion](https://github.com/airbnb/react-sketchapp/issues/172
