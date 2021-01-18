@@ -23,11 +23,11 @@ React terms explained in plain English and doodles🌴🎄⚛
 
 _Blog series: React terms explained in plain English and doodles_
 
-- _[What is React?](/2017/06/08/what-is-react/)_
-- _[What is React Native?](/2017/06/20/what-is-react-native)_
-- _[Components, Props and State](/2017/08/16/components-props-and-state) (this post)_
-- _[Props and State Re-explained](/2018/01/15/props-and-state-re-explained)_
-- _[React Native vs. Cordova, PhoneGap, Ionic etc.](/2018/02/14/react-native-vs-cordova-phone-gap-ionic-etc)_
+- _[What is React?](/posts/what-is-react)_
+- _[What is React Native?](/posts/what-is-react-native)_
+- _[Components, Props and State](/posts/components-props-state) (this post)_
+- _[Props and State Re-explained](/posts/props-state-reexplained)_
+- _[React Native vs. Cordova, PhoneGap, Ionic etc.](/posts/react-native-vs-cordova)_
 
 ---
 
@@ -45,7 +45,7 @@ After reading this post, I'll get you to come back here. Hopefully you'll be abl
 - What is state?
 - When to use props and when to use state?
 - How to make the window openable?
-- Can you write the pseudocode for [Domo's hat](/2017/06/08/what-is-react/#domo-hat)?
+- Can you write the pseudocode for [Domo's hat](/posts/what-is-react/#domo-hat)?
 
 ## Let's build a house
 
@@ -68,7 +68,7 @@ To understand what these concepts are and how to use them, let's build a simple 
 
 ## Components
 
-If you remember what we've discussed in an [early post](/2017/06/08/what-is-react/), components are one of the three pillars of React. Building an app in React is almost all about working with components.
+If you remember what we've discussed in an [early post](/posts/what-is-react/), components are one of the three pillars of React. Building an app in React is almost all about working with components.
 
 The very first step is to break down the UI into various components. For example, we can break down our house this way:
 
@@ -178,7 +178,7 @@ Roof:
 
 That's it? Right! There are a few things worth mentioning here:
 
-- The HTML-ish code that defines a component is a **template**, not just a single HTML tag. This means we can put _placeholders_ in it to output variations of HTML content without repeating ourselves. (Remember [Domo's hat](/2017/06/08/what-is-react/#domo-hat)? That's the idea of placeholders!) In this example, for `<Roof color="blue" />`, we'll get `<div>blue roof<div>`; for `<Roof color="red" />`, we'll get `<div>red roof</div>`, so on and so forth.
+- The HTML-ish code that defines a component is a **template**, not just a single HTML tag. This means we can put _placeholders_ in it to output variations of HTML content without repeating ourselves. (Remember [Domo's hat](/posts/what-is-react/#domo-hat)? That's the idea of placeholders!) In this example, for `<Roof color="blue" />`, we'll get `<div>blue roof<div>`; for `<Roof color="red" />`, we'll get `<div>red roof</div>`, so on and so forth.
 - The curly brackets used in the template tells React that we are gonna use a placeholder here, instead of plain content.
 - `props` can be think of as a container of all the prop values set in the `Roof` tag. So suppose we have `<Roof color="blue" material="wood" />`, we can then use both `props.color` and `props.material` in the definition of the `Roof` component.
 
