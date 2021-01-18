@@ -1,12 +1,13 @@
 import * as React from 'react'
+import { Input, Button } from '@/components/design-system'
 // import './styles.css'
 
 export default function InputAndButtons() {
   const [draft, setDraft] = React.useState('') // define data/state
   return (
-    <div className="App">
+    <div className="space-y-3">
       <div>
-        <input
+        <Input
           placeholder="Write a reply..."
           type="text"
           value={draft}
@@ -15,30 +16,30 @@ export default function InputAndButtons() {
           // }}
         />
       </div>
-      <div className="suggestions">
-        <button
+      <div className="space-x-1">
+        <Button
           onClick={() => {
             // set input text to Hi
             setDraft('😍')
           }}
         >
           😍
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={() => {
             // set input text to Hey
             setDraft('😡')
           }}
         >
           😡
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={() => {
             setDraft('😭')
           }}
         >
           😭
-        </button>
+        </Button>
       </div>
     </div>
   )
