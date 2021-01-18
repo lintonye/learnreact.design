@@ -15,6 +15,7 @@ import {
   InPostState,
 } from './InPostStateContext'
 import { IntersectionDetector } from './IntersectionDetector'
+import { ConvertKitForm } from './design-system'
 
 type LayoutProps = {
   meta: any
@@ -254,6 +255,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
                 contentChildren={children}
                 headings={tocHeadings}
               />
+              <ConvertKitForm formId="465988" />
             </div>
 
             {/* Main content */}
