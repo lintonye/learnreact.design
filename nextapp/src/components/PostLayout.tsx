@@ -39,6 +39,12 @@ const components = {
   a: (props: any) => <a className="underline" {...props} />,
   p: (props: any) => <p className="leading-loose" {...props} />,
   hr: (props: any) => <hr className="my-6" {...props} />,
+  table: (props: any) => (
+    <table className="border-collapse border border-gray-300" {...props} />
+  ),
+  td: (props: any) => <td className="border border-gray-300 p-2" {...props} />,
+  th: (props: any) => <th className="border border-gray-300 p-2" {...props} />,
+  thead: (props: any) => <thead className="bg-gray-100" {...props} />,
   img: (props: any) => (
     <Image
       className="mx-auto max-w-full"
