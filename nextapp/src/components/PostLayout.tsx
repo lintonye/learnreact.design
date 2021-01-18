@@ -247,7 +247,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
 
             {/* Sidebar */}
             <div
-              className="sticky top-20 self-start mt-6 ml-12 justify-self-center"
+              className="sticky top-20 self-start mt-6 ml-12 justify-self-center space-y-8"
               css={{ gridColumn: '3/4', gridRow: '2/20' }}
             >
               <Toc
@@ -255,7 +255,12 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
                 contentChildren={children}
                 headings={tocHeadings}
               />
-              <ConvertKitForm formId="465988" />
+              <div className="space-y-2 text-sm">
+                <div className="uppercase tracking-wider font-semibold">
+                  Sign up for updates:
+                </div>
+                <ConvertKitForm formId="465988" />
+              </div>
             </div>
 
             {/* Main content */}
