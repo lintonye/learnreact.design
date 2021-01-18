@@ -2,6 +2,10 @@ import imgHole1Png from './hole1.png'
 import imgHole2Png from './hole2.png'
 import imgSetWhoPng from './setWho.png'
 import imgKnowledgeTreePng from './knowledge-tree.png'
+import videoExercise from './quiz-result.mp4'
+import { KungfuPanda } from './KungfuPanda'
+import { Video } from '@/components/Video'
+// import ConvertKitForm from '../../design-system/ConvertKitForm'
 
 export const meta = {
   tags: [],
@@ -13,9 +17,7 @@ export const meta = {
 
 <!--/excerpt-->
 
-import KungfuPanda from './KungfuPanda'
-import { Video } from '@/components/Video'
-// import ConvertKitForm from '../../design-system/ConvertKitForm'
+## The mental model
 
 <img src={imgHole1Png} alt={`hole comic 1`} width={1727} height={662} />
 
@@ -58,7 +60,7 @@ function App() {
 
 It's a function that returns an HTML tag. I'll expand on this HTML tag topic in another post, but for now just remember: we can use all the standard HTML tags after this `return`. If we surround the HTML with some JavaScript stuff, we get a React component.
 
-## Making it dynamic
+## Make it dynamic
 
 Of course this app doesn't do much (if you are willing to call it an app anyways). We should make it interactive, right? How about adding a few buttons to switch the character? We want Kungfu Monkey, Kungfu Tiger and maybe Kungfu Pig too (try it below!).
 
@@ -158,7 +160,7 @@ Back to the hole-on-cardboard analogy, this `setWho` chooses the person behind t
 
 BTW, as you might have noticed, we have `React.useState` in the code. We just used _state_ in our component!
 
-## Separating Data from UI
+## Separate data from UI
 
 The hole-on-cardboard analogy tells us an important idea about React. There are two separate things:
 
@@ -216,7 +218,7 @@ The important idea here is that we separate the data from the UI. We almost alwa
 
 It's time to flex your muscles (or at least Panda's)! Write a component to help Panda and his pupils:
 
-<Video src="./quiz-result.mp4" width="100%" />
+<Video src={videoExercise} width="100%" />
 
 Are you ready? Give it a try with this [starter project](https://codesandbox.io/s/blog-quiz-1-change-action-starter-qv0pd).
 

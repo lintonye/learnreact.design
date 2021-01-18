@@ -1,51 +1,40 @@
 import * as React from 'react'
+import { Button } from '@/components/design-system/Button'
 
-export default function KungfuPanda() {
+export function KungfuPanda() {
   const [who, setWho] = React.useState('🐼')
-  const buttonStyle = { fontSize: 18 }
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
+    <div className="flex flex-col justify-center items-center">
       <div style={{ fontSize: 100 }}>💪{who}👊</div>
-      <div style={{}}>
-        <button
-          style={buttonStyle}
+      <div className=" space-x-4">
+        <Button
           onClick={function () {
             setWho('🐼')
           }}
         >
           Panda
-        </button>
-        <button
-          style={buttonStyle}
+        </Button>
+        <Button
           onClick={function () {
             setWho('🐯')
           }}
         >
           Tiger
-        </button>
-        <button
-          style={buttonStyle}
+        </Button>
+        <Button
           onClick={function () {
             setWho('🐵')
           }}
         >
           Monkey
-        </button>
-        <button
-          style={buttonStyle}
+        </Button>
+        <Button
           onClick={function () {
             setWho('🐷')
           }}
         >
           Pig
-        </button>
+        </Button>
       </div>
     </div>
   )
