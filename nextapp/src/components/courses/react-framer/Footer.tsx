@@ -5,17 +5,17 @@ import siteLogo from './assets/site-logo-dark.svg'
 import { ThemeContext } from '@emotion/core'
 import { spaceDark } from '@/components/legacy-design-system/theme'
 
-function BottomLink({ label, to }) {
+function BottomLink({ label, to }: any) {
   return (
     <Link to={to}>
-      <Text textVariant="body" ml={3}>
+      <Text textVariant="small" ml={3} color="secondaryText">
         {label}
       </Text>
     </Link>
   )
 }
 
-export default function Footer(props) {
+export default function Footer(props: any) {
   return (
     <ThemeContext.Provider value={spaceDark}>
       <Box
