@@ -215,11 +215,11 @@ function Planet({ index, type, playVideo, video, poster, link, ...props }) {
       play={playVideo}
       videoUrl={video}
       posterUrl={poster}
-      src={video}
       width={450}
+      maxWidth={450}
+      src={video}
       style={{
         borderRadius: 300,
-        flexShrink: 0,
       }}
     />
   ) : (
@@ -229,7 +229,6 @@ function Planet({ index, type, playVideo, video, poster, link, ...props }) {
       style={{
         height: 250,
         borderRadius: 300,
-        flexShrink: 0,
       }}
     />
   )
@@ -257,6 +256,11 @@ function Planet({ index, type, playVideo, video, poster, link, ...props }) {
         justifyContent="center"
         alignItems="center"
         position="relative"
+        css={{
+          '& > *': {
+            flexShrink: 0,
+          },
+        }}
       >
         {link ? <Link to={link}>{videoTag}</Link> : videoTag}
       </Box>

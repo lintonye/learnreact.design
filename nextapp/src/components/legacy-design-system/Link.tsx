@@ -41,7 +41,7 @@ export default function Link(props: any) {
       target={target}
       style={{ textAlign }}
     >
-      <Text {...rest} as="span">
+      <Text {...rest} as="span" className="cursor-pointer">
         {children}
       </Text>
     </LinkComp>

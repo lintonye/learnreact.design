@@ -29,6 +29,7 @@ export default function Video({
       poster={posterUrl}
       style={{
         ...style,
+        display: 'inline-block',
         width,
         height,
         maxWidth,
