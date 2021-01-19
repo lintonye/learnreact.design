@@ -30,7 +30,7 @@ const Flex = styled(_Flex)(boxShadow, common)
 
 const Grid = styled(_Box)(justifyItems, grid, boxShadow, alignItems, common)
 
-function Box(props) {
+function Box(props: any) {
   const { layout = 'box', alignItemsGrid, ...rest } = props
   return (
     <>

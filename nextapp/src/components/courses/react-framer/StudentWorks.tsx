@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box, Text, Link } from '../../design-system'
+import { Box, Text, Link } from '@/components/legacy-design-system'
 import GalaxyHole from './GalaxyHole'
 import { getFeaturedWorks } from './StudentWorksData'
 import StudentWork from './StudentWork'

@@ -1,6 +1,12 @@
 import * as React from 'react'
-import { Text, Box, Video, Link, Image } from '../../design-system'
-import Icon from '../../design-system/Icon'
+import {
+  Text,
+  Box,
+  Video,
+  Link,
+  Image,
+} from '@/components/legacy-design-system'
+import Icon from '@/components/legacy-design-system/Icon'
 import GalaxyHole from './GalaxyHole'
 import CardExpandVideo from './assets/card-expand.mp4'
 import StockChartVideo from './assets/stock-chart.mp4'

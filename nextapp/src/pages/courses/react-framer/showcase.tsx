@@ -1,7 +1,7 @@
 import * as React from 'react'
-import AllStudentWorks from '../../new-components/prototyping-course/AllStudentWorks'
-import Footer from '../../new-components/prototyping-course/Footer'
-import { Layout, Header } from '../../design-system'
+import AllStudentWorks from '@/components/courses/react-framer/AllStudentWorks'
+import Footer from '@/components/courses/react-framer/Footer'
+import { Layout, Header } from '@/components/legacy-design-system'
 
 export default function StudentWorksPage() {
   return (

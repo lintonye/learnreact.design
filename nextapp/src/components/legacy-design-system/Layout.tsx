@@ -3,16 +3,14 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import { Box, Text } from '.'
 import { themeGet } from '@styled-system/theme-get'
 import * as themes from './theme'
-import { CourseEvents } from '../new-components/CourseEvents'
+// import { CourseEvents } from '../new-components/CourseEvents'
 import { MDXProvider } from '@mdx-js/react'
 import 'prismjs/themes/prism.css'
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=EB+Garamond:400i|Nunito:200,300,400,700,900');
   body {
     margin: 0;
-    font-family: Nunito, sans-serif;
     color: ${themeGet('colors.primaryText', 'black')};
     background-color: ${themeGet('colors.primaryBg', 'white')};
     /* transition: background-color 0.2s ease, color 0.2s ease;
@@ -40,7 +38,7 @@ function Footer() {
   )
 }
 
-export function ThemeWrapper({ theme = 'light', children, ...props }) {
+export function ThemeWrapper({ theme = 'light', children, ...props }: any) {
   return (
     <MDXProvider
       components={{
@@ -63,14 +61,14 @@ export default function Layout({
   footer = true,
   courseEvents = true,
   ...props
-}) {
+}: any) {
   return (
     <ThemeWrapper {...props}>
       <Box minHeight="95vh" {...props} m={0} p={0}>
         {children}
       </Box>
       {footer && <Footer />}
-      {courseEvents && <CourseEvents />}
+      {/* {courseEvents && <CourseEvents />} */}
     </ThemeWrapper>
   )
 }

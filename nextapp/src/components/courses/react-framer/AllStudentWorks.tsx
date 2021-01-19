@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { Box, Text } from '../../design-system'
+import { Box, Text } from '@/components/legacy-design-system'
 import { getAllWorks } from './StudentWorksData'
 import StudentWork from './StudentWork'
 import GalaxyHole from './GalaxyHole'
-import { spaceDark } from '../../design-system/theme'
+import { spaceDark } from '@/components/legacy-design-system/theme'
 import { ThemeProvider } from 'styled-components'
 const works = getAllWorks()
 

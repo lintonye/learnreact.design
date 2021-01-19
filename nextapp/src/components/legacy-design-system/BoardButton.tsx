@@ -5,7 +5,7 @@ import { RocketArrow, SmallFlame, BigFlame } from './canvas'
 // Open Preview (CMD + P)
 // API Reference: https://www.framer.com/api
 
-export function BoardButton({ onTap, ...props }) {
+export function BoardButton({ onTap, ...props }: any) {
   const [variant, setVariant] = React.useState('normal')
   const containerVariants = {
     hover: {

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box, Text, Link, Video } from '../../design-system'
+import { Box, Text, Link, Video } from '@/components/legacy-design-system'
 export default function StudentWork({
   title,
   poster,

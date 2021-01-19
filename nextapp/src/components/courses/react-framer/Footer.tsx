@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { Image, Box, Link, Text } from '../../design-system'
+import { Image, Box, Link, Text } from '@/components/legacy-design-system'
 import footerBg from './assets/footer-bg.svg'
 import siteLogo from './assets/site-logo-dark.svg'
 import { ThemeProvider } from 'styled-components'
-import { spaceDark } from '../../design-system/theme'
+import { spaceDark } from '@/components/legacy-design-system/theme'
 
 function BottomLink({ label, to }) {
   return (

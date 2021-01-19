@@ -9,7 +9,7 @@ const Svg = styled.svg`
   ${fill};
 `
 
-function Quote({ color, ...rest }) {
+function Quote({ color, ...rest }: any) {
   return (
     <Box {...rest}>
       <Svg
@@ -34,7 +34,7 @@ export function Testimonial({
   company,
   showMore = true,
   ...rest
-}) {
+}: any) {
   return (
     <Box
       {...rest}
@@ -62,7 +62,7 @@ export function Testimonial({
       </Box>
       <ProfilePhoto
         size={[80, 100]}
-        url={require(`../components/re4d/student-profile-photos/${photoName}.jpg`)}
+        url={require(`./assets/student-profile-photos/${photoName}.jpg`)}
         style={{ gridRow: 'span 4' }}
       />
       <Text

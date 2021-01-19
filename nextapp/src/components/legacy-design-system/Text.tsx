@@ -25,7 +25,7 @@ const textStyle = compose(
   letterSpacing,
 )
 
-export const textVariantStyle = (props) => {
+export const textVariantStyle = (props: any) => {
   //// In Gatsby's HTML build, textVariant() returns
   //// null, so the line below fails
   // const { as, ...variantStyle } = textVariant(props);

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Link as GLink } from 'gatsby'
+import NLink from 'next/link'
 import Text from './Text'
 import styled, { css } from 'styled-components'
 import { themeGet } from '@styled-system/theme-get'
@@ -14,12 +14,13 @@ const common = css`
     color: ${themeGet('colors.secondaryText')};
   }
   &:hover {
-    text-decoration: ${({ underline }) => underline && 'underline'};
+    text-decoration: ${({ underline }: { underline: boolean }) =>
+      underline && 'underline'};
     color: ${themeGet('colors.primaryText')};
   }
 `
 
-const StyledLink = styled(GLink)`
+const StyledLink = styled(NLink)`
   ${common};
 `
 
@@ -27,13 +28,13 @@ const StyledAnchor = styled.a`
   ${common};
 `
 
-export default function Link(props) {
+export default function Link(props: any) {
   const { to, children, underline = true, target, textAlign, ...rest } = props
-  const LinkComp =
-    to && to.match(/(https?)|(mailto:).+/) ? StyledAnchor : StyledLink
+  const LinkComp: React.FunctionComponent<
+    React.AnchorHTMLAttributes<HTMLAnchorElement>
+  > = to && to.match(/(https?)|(mailto:).+/) ? StyledAnchor : StyledLink
   return (
     <LinkComp
-      to={to}
       href={to}
       underline={underline}
       target={target}

@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { Box, Text, Video } from '../../design-system'
-import ConvertKitForm from '../../design-system/ConvertKitForm'
+import { Box, Text, Video } from '@/components/legacy-design-system'
+import ConvertKitForm from '@/components/legacy-design-system/ConvertKitForm'
 
 export default function EmailForm(props) {
   return (

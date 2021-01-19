@@ -1,7 +1,14 @@
 import * as React from 'react'
-import { Box, Text, Video, Header, Image, Link } from '../../design-system'
-import { withDelayFramerHack } from '../../design-system/withDelayFramerHack'
-import BoardButtonWrap from '../../design-system/BoardButtonGatsbyWrap'
+import {
+  Box,
+  Text,
+  Video,
+  Header,
+  Image,
+  Link,
+} from '@/components/legacy-design-system'
+import { withDelayFramerHack } from '@/components/legacy-design-system/withDelayFramerHack'
+import BoardButtonWrap from '@/components/legacy-design-system/BoardButtonGatsbyWrap'
 import { Location } from '@reach/router'
 
 import heroDemoVideo from './assets/hero-demos.mp4'

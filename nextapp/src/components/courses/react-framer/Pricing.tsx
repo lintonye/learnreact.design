@@ -1,5 +1,11 @@
 import * as React from 'react'
-import { Box, Text, Button, Link, Image } from '../../design-system'
+import {
+  Box,
+  Text,
+  Button,
+  Link,
+  Image,
+} from '@/components/legacy-design-system'
 import pricingColumnBg1 from './assets/pricing-column-bg1.svg'
 import pricingColumnBg2 from './assets/pricing-column-bg2.svg'
 import pricingColumnBg3 from './assets/pricing-column-bg3.svg'
@@ -9,7 +15,7 @@ import planLogoStarship from './assets/plan-starship.svg'
 import planTopComet from './assets/plan-top-comet.svg'
 import { Waypoint } from 'react-waypoint'
 import { animated, useSpring, useTrail } from 'react-spring'
-import ConvertKitForm from '../../design-system/ConvertKitForm'
+import ConvertKitForm from '@/components/legacy-design-system/ConvertKitForm'
 import styled from 'styled-components'
 
 const plans = [
