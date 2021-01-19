@@ -1,4 +1,4 @@
-import { jsx } from '@emotion/core'
+import { jsx } from '@emotion/react'
 import Link from 'next/link'
 import { FunctionComponent } from 'react'
 import { Post } from '../types'

@@ -1,4 +1,4 @@
-import { jsx } from '@emotion/core'
+import { jsx } from '@emotion/react'
 import { InputHTMLAttributes } from 'react'
 
 type Props = {

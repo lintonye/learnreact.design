@@ -1,4 +1,4 @@
-import { jsx } from '@emotion/core'
+import { jsx } from '@emotion/react'
 import { getFeaturedPost } from '@/featuredPostData'
 import Link from 'next/link'
 

@@ -1,4 +1,4 @@
-import { jsx } from '@emotion/core'
+import { jsx } from '@emotion/react'
 import Head from 'next/head'
 import { Footer } from '../components/Footer'
 import { Hero } from '../components/Hero'
