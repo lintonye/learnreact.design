@@ -93,7 +93,7 @@ const NormalPrice = styled(Text)`
   }
 `
 
-function Prices({ normal, discounted }) {
+function Prices({ normal, discounted }: any) {
   const crossOut = normal > discounted
   return (
     <Box layout="flex">
@@ -123,7 +123,7 @@ function PricingColumn({
   index,
   offerTitle,
   ...props
-}) {
+}: any) {
   const bgs = [pricingColumnBg1, pricingColumnBg2, pricingColumnBg3]
   const buttonColors = ['#74699f', '#530066', '#260166']
   return (
@@ -148,14 +148,20 @@ function PricingColumn({
       </Box>
       <Box color="white">
         {titles.map((title, idx) => (
-          <Text textAlign="center" textVariant="h3" fontWeight={700} key={idx}>
+          <Text
+            textAlign="center"
+            fontSize={[3, 3, 4]}
+            lineHeight={1.1}
+            fontWeight={600}
+            key={idx}
+          >
             {title}
           </Text>
         ))}
       </Box>
       <Box color="gray.1">
         {descriptions.map((description, idx) => (
-          <Text key={idx} textAlign="center" textVariant="body">
+          <Text key={idx} textAlign="center" fontSize={[1, 2]}>
             {description}
           </Text>
         ))}

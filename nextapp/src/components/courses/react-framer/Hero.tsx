@@ -34,7 +34,11 @@ function Titles(props) {
       <Image src={courseLogo} size={[40, 60]} mb={[2, 0]} />
       <Text
         as="h1"
-        textVariant="courseTitleHeader"
+        // textVariant="courseTitleHeader"
+        fontSize={[4, 5, 35]}
+        lineHeight={1.1}
+        fontWeight={700}
+        letterSpacing={1.2}
         mb={5}
         textAlign={['center', 'left']}
       >
@@ -47,7 +51,8 @@ function Titles(props) {
         mt={-2}
         // mb={0}
         textAlign={['center', 'left']}
-        textVariant="h4"
+        // textVariant="h4"
+        fontSize={[1, 2]}
       >
         An expedited ride to a new galaxy of creativity
       </Text>
@@ -186,11 +191,11 @@ function StartingPoint(props) {
         zIndex={-1}
       />
       <Box mb={8} width={[250, 300]} color="secondaryText">
-        <Text textVariant="h4" mb={2}>
+        <Text fontSize={[1, 2, 3]} mb={2}>
           Are you familiar with HTML/CSS but new to <strong>JavaScript</strong>{' '}
           or <strong>React</strong>?
         </Text>
-        <Text textVariant="h4">This course is tailored for you!</Text>
+        <Text fontSize={[1, 2, 3]}>This course is tailored for you!</Text>
       </Box>
     </Box>
   )
