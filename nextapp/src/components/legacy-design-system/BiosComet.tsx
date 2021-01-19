@@ -31,7 +31,7 @@ function Bio({
             position="absolute"
             zIndex={0}
             {...(cometBgDirection === 'down'
-              ? { right: -30, bottom: [-7, 24] }
+              ? { right: -30, top: [-679] }
               : { right: -30, top: -30 })}
           >
             <img
@@ -53,7 +53,12 @@ function Bio({
       <Text textVariant="h2" mt={[4, -2]} style={{ zIndex: 1 }}>
         {greeting}
       </Text>
-      <Text textVariant="body" color="secondaryText" style={{ zIndex: 1 }}>
+      <Text
+        textVariant="body"
+        color="secondaryText"
+        style={{ zIndex: 1 }}
+        className="space-y-5"
+      >
         {description}
       </Text>
     </Box>

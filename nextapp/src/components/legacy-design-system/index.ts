@@ -11,7 +11,7 @@ export { default as Video } from './Video'
 export { default as Image } from './Image'
 // export { DayNightToggle } from "./DayNightToggle";
 export { BigNumber } from './BigNumber'
-export { PricingCard } from './PricingCard'
+// export { PricingCard } from './PricingCard'
 export { Testimonial } from './Testimonial'
 // export { default as Quiz } from './Quiz'
 export { default as ConvertKitForm } from './ConvertKitForm'

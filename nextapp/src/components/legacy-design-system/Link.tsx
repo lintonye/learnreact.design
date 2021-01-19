@@ -5,7 +5,7 @@ import Text from './Text'
 import styled from '@emotion/styled'
 import { themeGet } from '@styled-system/theme-get'
 
-const common = css`
+const common = `
   &:link {
     text-decoration: none;
     color: ${themeGet('colors.secondaryText')};
@@ -40,7 +40,11 @@ export default function Link(props: any) {
       target={target}
       style={{ textAlign }}
     >
-      <Text {...rest} as="span" className="cursor-pointer">
+      <Text
+        {...rest}
+        as="span"
+        className={`cursor-pointer ${underline ? 'hover:underline' : ''}`}
+      >
         {children}
       </Text>
     </LinkComp>

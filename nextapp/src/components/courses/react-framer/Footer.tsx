@@ -52,7 +52,7 @@ export default function Footer(props: any) {
           gridColumn={1}
         />
         <Box gridRow={2} gridColumn={2} alignSelf="end" pb={[1, 0]}>
-          <Text textVariant="body" color="secondaryText">
+          <Text textVariant="small" color="secondaryText">
             © {new Date().getFullYear()} jimu Labs Inc.
           </Text>
         </Box>

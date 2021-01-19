@@ -96,7 +96,7 @@ const NormalPrice = styled(Text)`
 function Prices({ normal, discounted }: any) {
   const crossOut = normal > discounted
   return (
-    <Box layout="flex">
+    <Box layout="flex" justifyContent="center">
       <NormalPrice textVariant="h2" crossOut={crossOut}>
         {normal === 0 ? 'FREE' : `$${normal}`}
       </NormalPrice>
@@ -167,7 +167,7 @@ function PricingColumn({
         ))}
       </Box>
       <Box>
-        <Box mb={4}>
+        <Box mb={5}>
           {comingSoon ? (
             <Text textVariant="h3">Coming soon</Text>
           ) : (
