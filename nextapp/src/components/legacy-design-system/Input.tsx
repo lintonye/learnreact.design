@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { space, color, width } from 'styled-system'
 import { themeGet } from '@styled-system/theme-get'
-import styled, { css } from 'styled-components'
+import styled from '@emotion/styled'
+import { css } from '@emotion/core'
 import { textVariantStyle } from './Text'
 
 const StyledInput = styled.input`

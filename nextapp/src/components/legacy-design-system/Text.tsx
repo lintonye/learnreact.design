@@ -12,7 +12,7 @@ import {
   maxWidth,
   minWidth,
 } from 'styled-system'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 
 const textVariant = variant({ key: 'textVariants', prop: 'textVariant' })
 

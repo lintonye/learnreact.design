@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Box, Text, Link } from '.'
 import Button from './Button'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 
 const NormalPrice = styled(Text)`
   position: relative;

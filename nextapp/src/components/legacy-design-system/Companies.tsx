@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Box from './Box'
 import Text from './Text'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { space } from 'styled-system'
 
 const LogoImg = styled.img(space)

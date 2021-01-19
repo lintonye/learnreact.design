@@ -16,7 +16,7 @@ import planTopComet from './assets/plan-top-comet.svg'
 import { Waypoint } from 'react-waypoint'
 import { animated, useSpring, useTrail } from 'react-spring'
 import ConvertKitForm from '@/components/legacy-design-system/ConvertKitForm'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 
 const plans = [
   {

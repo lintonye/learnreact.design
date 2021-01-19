@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { Box } from '@/components/legacy-design-system'
-import styled, { keyframes, css } from 'styled-components'
 import starsPng from './assets/stars.png'
 
 function ShootingStar({ id, x, begin }) {

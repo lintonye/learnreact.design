@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Box, Text, Link } from '.'
 import { style } from 'styled-system'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import ProfilePhoto from './ProfilePhoto'
 
 const fill = style({ prop: 'fill', key: 'colors' })

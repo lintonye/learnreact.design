@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Box as _Box, Flex as _Flex } from 'rebass'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import {
   border,
   background,

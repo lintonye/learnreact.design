@@ -1,7 +1,8 @@
+import { css } from '@emotion/core'
 import * as React from 'react'
 import Box from './Box'
 import Text from './Text'
-import styled, { css } from 'styled-components'
+import styled from '@emotion/styled'
 import { themeGet } from '@styled-system/theme-get'
 const tinycolor = require('tinycolor2')
 

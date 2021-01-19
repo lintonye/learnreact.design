@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { Box, Link } from '.'
 import Icon from './Icon'
-import styled from 'styled-components'
 import { themeGet } from '@styled-system/theme-get'
 import { NavBar } from '../NavBar'
 // import Headroom from 'react-headroom'

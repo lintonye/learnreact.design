@@ -8,20 +8,20 @@ import { MDXProvider } from '@mdx-js/react'
 import 'prismjs/themes/prism.css'
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
 
-const GlobalStyle = createGlobalStyle`
-  body {
-    margin: 0;
-    color: ${themeGet('colors.primaryText', 'black')};
-    background-color: ${themeGet('colors.primaryBg', 'white')};
-    /* transition: background-color 0.2s ease, color 0.2s ease;
-    div {
-      transition: background-color 0.2s ease, color 0.2s ease;      
-    }
-    input {
-      transition: background-color 0.2s ease, color 0.2s ease;
-    } */
-  }
-`
+// const GlobalStyle = createGlobalStyle`
+//   body {
+//     margin: 0;
+//     color: ${themeGet('colors.primaryText', 'black')};
+//     background-color: ${themeGet('colors.primaryBg', 'white')};
+//     /* transition: background-color 0.2s ease, color 0.2s ease;
+//     div {
+//       transition: background-color 0.2s ease, color 0.2s ease;
+//     }
+//     input {
+//       transition: background-color 0.2s ease, color 0.2s ease;
+//     } */
+//   }
+// `
 
 function Footer() {
   return (
@@ -50,7 +50,7 @@ export function ThemeWrapper({ theme = 'light', children, ...props }: any) {
     >
       <ThemeProvider theme={themes[theme]}>
         {children}
-        <GlobalStyle />
+        {/* <GlobalStyle /> */}
       </ThemeProvider>
     </MDXProvider>
   )
