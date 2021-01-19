@@ -31,7 +31,7 @@ const StyledBox = styled(Box)`
         `};
 `
 
-export default function (props) {
+export default function Button(props: any) {
   const { children, height, variant, onClick, ...rest } = props
 
   return (

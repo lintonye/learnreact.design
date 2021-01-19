@@ -33,6 +33,7 @@ function Titles(props) {
     >
       <Image src={courseLogo} size={[40, 60]} mb={[2, 0]} />
       <Text
+        as="h1"
         textVariant="courseTitleHeader"
         mb={5}
         textAlign={['center', 'left']}
@@ -41,7 +42,7 @@ function Titles(props) {
         React + Framer
       </Text>
       <Text
-        as="h4"
+        // as="h4"
         color="secondaryText"
         mt={-2}
         // mb={0}
