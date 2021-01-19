@@ -4,18 +4,18 @@ import { getAllWorks } from './StudentWorksData'
 import StudentWork from './StudentWork'
 import GalaxyHole from './GalaxyHole'
 import { spaceDark } from '@/components/legacy-design-system/theme'
-import { ThemeProvider } from 'styled-components'
+import { ThemeContext } from '@emotion/core'
 const works = getAllWorks()
 
 function Banner() {
   return (
-    <ThemeProvider theme={spaceDark}>
+    <ThemeContext.Provider value={spaceDark}>
       <GalaxyHole galaxy="subPageHero" ml={[-9, -11]} mb={7}>
         <Text textVariant="h1" color="primaryText" textAlign="center">
           Student Work Showcase
         </Text>
       </GalaxyHole>
-    </ThemeProvider>
+    </ThemeContext.Provider>
   )
 }
 

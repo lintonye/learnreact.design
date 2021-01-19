@@ -1,7 +1,6 @@
 import * as React from 'react'
-import { createGlobalStyle, ThemeProvider } from 'styled-components'
+import { ThemeContext } from '@emotion/core'
 import { Box, Text } from '.'
-import { themeGet } from '@styled-system/theme-get'
 import * as themes from './theme'
 // import { CourseEvents } from '../new-components/CourseEvents'
 import { MDXProvider } from '@mdx-js/react'
@@ -38,7 +37,7 @@ function Footer() {
   )
 }
 
-export function ThemeWrapper({ theme = 'light', children, ...props }: any) {
+export function ThemeWrapper({ theme = 'light', children }: any) {
   return (
     <MDXProvider
       components={{
@@ -48,10 +47,10 @@ export function ThemeWrapper({ theme = 'light', children, ...props }: any) {
         h3: (props) => <Text textVariant="h3" as="h3" {...props} />,
       }}
     >
-      <ThemeProvider theme={themes[theme]}>
+      <ThemeContext.Provider value={themes[theme]}>
         {children}
         {/* <GlobalStyle /> */}
-      </ThemeProvider>
+      </ThemeContext.Provider>
     </MDXProvider>
   )
 }

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Image, Box, Link, Text } from '@/components/legacy-design-system'
 import footerBg from './assets/footer-bg.svg'
 import siteLogo from './assets/site-logo-dark.svg'
-import { ThemeProvider } from 'styled-components'
+import { ThemeContext } from '@emotion/core'
 import { spaceDark } from '@/components/legacy-design-system/theme'
 
 function BottomLink({ label, to }) {
@@ -17,7 +17,7 @@ function BottomLink({ label, to }) {
 
 export default function Footer(props) {
   return (
-    <ThemeProvider theme={spaceDark}>
+    <ThemeContext.Provider value={spaceDark}>
       <Box
         position="relative"
         width={1}
@@ -57,6 +57,6 @@ export default function Footer(props) {
           </Text>
         </Box>
       </Box>
-    </ThemeProvider>
+    </ThemeContext.Provider>
   )
 }
