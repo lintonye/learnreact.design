@@ -15,7 +15,7 @@ function Bio({
   photo,
   cometBgDirection,
   ...rest
-}) {
+}: any) {
   return (
     <Box
       maxWidth={800}
@@ -31,12 +31,13 @@ function Bio({
             position="absolute"
             zIndex={0}
             {...(cometBgDirection === 'down'
-              ? { right: -30, bottom: [-13, 71] }
-              : { right: -30, top: -28 })}
+              ? { right: -30, bottom: [-7, 24] }
+              : { right: -30, top: -30 })}
           >
             <img
               src={cometBgDirection === 'down' ? cometDownBg : cometUpBg}
               width={600}
+              css={{ maxWidth: 600 }}
             />
           </Box>
         )}
