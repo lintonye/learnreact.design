@@ -23,7 +23,7 @@ import playSvg from './assets/play.svg'
 
 const BoardButton = withDelayFramerHack(BoardButtonWrap)
 
-function Titles(props) {
+function Titles(props: any) {
   return (
     <Box
       {...props}
@@ -60,7 +60,7 @@ function Titles(props) {
   )
 }
 
-function Modal({ children, ...props }) {
+function Modal({ children, ...props }: any) {
   return (
     <Box
       {...props}
@@ -83,7 +83,7 @@ function Modal({ children, ...props }) {
   )
 }
 
-function YoutubeVideoModal({ onClose, ...props }) {
+function YoutubeVideoModal({ onClose, ...props }: any) {
   const youtubeId = 'MHQ40KiJ1wU'
   const mute = false
   const loop = false
@@ -139,7 +139,7 @@ function WelcomeVideo() {
   )
 }
 
-function WhatYouWillBuild(props) {
+function WhatYouWillBuild(props: any) {
   return (
     <GalaxyHole {...props} galaxy={['mobileHero', 'hero']}>
       <Box
@@ -167,7 +167,7 @@ function WhatYouWillBuild(props) {
             return (
               <Link to={enrollLink} underline={false}>
                 <BoardButton>
-                  <Text textVariant="body">BOARD NOW</Text>
+                  <Text textVariant="small">BOARD NOW</Text>
                 </BoardButton>
               </Link>
             )
@@ -178,7 +178,7 @@ function WhatYouWillBuild(props) {
   )
 }
 
-function StartingPoint(props) {
+function StartingPoint(props: any) {
   return (
     <Box {...props} position="relative" mt={[4, 9]} ml={[6, 0]}>
       <Image
@@ -201,7 +201,7 @@ function StartingPoint(props) {
   )
 }
 
-export default function Hero(props) {
+export default function Hero(props: any) {
   return (
     <Box
       layout="grid"
@@ -224,7 +224,7 @@ export default function Hero(props) {
 
             return (
               <Header
-                extraLinks={[{ title: '➜ Board Now!', link: enrollLink }]}
+              // extraLinks={[{ title: '➜ Board Now!', link: enrollLink }]}
               />
             )
           }}

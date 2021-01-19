@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Box } from '.'
 
-export default function Image({ src, size = undefined, ...props }) {
+export default function Image({ src, size = undefined, ...props }: any) {
   const images = Array.isArray(src) ? src : [src]
   return (
     <Box

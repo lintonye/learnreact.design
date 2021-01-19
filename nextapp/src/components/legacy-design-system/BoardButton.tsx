@@ -64,7 +64,11 @@ export function BoardButton({ onTap, ...props }: any) {
         variants={{
           hover: {
             y: [3, 0],
-            transition: { yoyo: Infinity, duration: 3 },
+            transition: {
+              repeat: Infinity,
+              repeatType: 'reverse',
+              duration: 3,
+            },
           },
           normal: { y: 0 },
         }}
@@ -98,15 +102,15 @@ export function BoardButton({ onTap, ...props }: any) {
           }}
         >
           <SmallFlame
-            style={{ position: 'absolute', top: 10, left: 0 }}
+            style={{ position: 'absolute', top: 20, left: 0 }}
             variants={flameVariants}
           />
           <BigFlame
-            style={{ position: 'absolute', top: 20, left: 10 }}
+            style={{ position: 'absolute', top: 30, left: 10 }}
             variants={flameVariants}
           />
           <SmallFlame
-            style={{ position: 'absolute', top: 10, left: 23 }}
+            style={{ position: 'absolute', top: 20, left: 23 }}
             variants={flameVariants}
           />
         </motion.div>
