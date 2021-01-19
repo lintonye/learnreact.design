@@ -1,4 +1,4 @@
-import { jsx } from '@emotion/react'
+import { jsx } from '@emotion/core'
 import React from 'react'
 import { PostList, filterPosts } from '@/components/PostList'
 import getAllPostPreviews from '@/getAllPostPreviews'

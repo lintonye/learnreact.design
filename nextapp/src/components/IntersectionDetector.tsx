@@ -1,4 +1,4 @@
-import { jsx } from '@emotion/react'
+import { jsx } from '@emotion/core'
 import { useEffect, useRef, useState, useContext } from 'react'
 import { InPostStateContext } from '@/components/InPostStateContext'
 

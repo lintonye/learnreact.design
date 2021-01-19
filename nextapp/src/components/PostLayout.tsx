@@ -1,4 +1,4 @@
-import { jsx } from '@emotion/react'
+import { jsx } from '@emotion/core'
 import React, { useState, useReducer, useContext } from 'react'
 import { FunctionComponent } from 'react'
 import { NextSeo } from 'next-seo'

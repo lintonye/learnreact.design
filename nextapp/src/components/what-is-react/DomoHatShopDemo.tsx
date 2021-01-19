@@ -1,4 +1,4 @@
-import { jsx } from '@emotion/react'
+import { jsx } from '@emotion/core'
 import React, { RefObject } from 'react'
 import imgHatCap from './hat-cap.png'
 import imgHatHarryPotter from './hat-harry-potter.png'
