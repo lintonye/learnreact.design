@@ -31,9 +31,8 @@ const StyledAnchor = styled.a`
 
 export default function Link(props: any) {
   const { to, children, underline = true, target, textAlign, ...rest } = props
-  const LinkComp: React.FunctionComponent<
-    React.AnchorHTMLAttributes<HTMLAnchorElement>
-  > = to && to.match(/(https?)|(mailto:).+/) ? StyledAnchor : StyledLink
+  const LinkComp: React.FunctionComponent<any> =
+    to && to.match(/(https?)|(mailto:).+/) ? StyledAnchor : StyledLink
   return (
     <LinkComp
       href={to}
