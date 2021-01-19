@@ -9,17 +9,18 @@ const tinycolor = require('tinycolor2')
 const StyledBox = styled(Box)`
   ${({ disabled, primary, color }) =>
     disabled
-      ? css`
+      ? `
           cursor: default;
           background-color: ${themeGet(
             `colors.${primary ? 'secondaryBg' : 'disabledBg'}`,
           )};
           color: ${themeGet(`colors.disabledText`)};
         `
-      : css`
+      : `
           cursor: pointer;
-          background-color: ${color ||
-          themeGet(`colors.${primary ? 'accent' : 'transparent'}`)};
+          background-color: ${
+            color || themeGet(`colors.${primary ? 'accent' : 'transparent'}`)
+          };
 
           &:hover {
             background-color: ${(props) =>
