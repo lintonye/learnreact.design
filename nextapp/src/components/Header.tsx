@@ -2,7 +2,7 @@ import { jsx } from '@emotion/core'
 import { Menu } from '@headlessui/react'
 import Link from 'next/link'
 
-export function NavBar() {
+export function Header() {
   return (
     <header>
       <nav>

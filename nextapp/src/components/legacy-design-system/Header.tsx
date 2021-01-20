@@ -2,14 +2,14 @@ import * as React from 'react'
 import { Box, Link } from '.'
 import Icon from './Icon'
 import { themeGet } from '@styled-system/theme-get'
-import { NavBar } from '../NavBar'
+import { Header as Head } from '../Header'
 // import Headroom from 'react-headroom'
 // import logoDark from './assets/logo-dark.svg'
 // import logoLight from "./assets/logo-light.svg";
 // import { animated, useTransition } from 'react-spring'
 
 export default function Header() {
-  return <NavBar />
+  return <Head />
 }
 
 // const Container = styled.div`

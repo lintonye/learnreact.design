@@ -5,6 +5,7 @@ import { NextSeo } from 'next-seo'
 import { Tag, Post } from '../types'
 import { PostPreview } from './PostPreview'
 import getAllPostPreviews from '@/getAllPostPreviews'
+import { Layout } from '@/components/Layout'
 
 type Props = {
   tag: Tag
@@ -15,7 +16,7 @@ export const PostList: FunctionComponent<Props> = ({ tag, posts }) => {
   const { title, description, tagSlug: tagSlug } = tag
   const url = `/${tagSlug}`
   return (
-    <>
+    <Layout>
       <NextSeo
         title={title}
         description={description}
@@ -33,7 +34,7 @@ export const PostList: FunctionComponent<Props> = ({ tag, posts }) => {
           <PostPreview key={post.slug} {...post} />
         ))}
       </div>
-    </>
+    </Layout>
   )
 }
 
