@@ -39,7 +39,7 @@ export default function FAQ() {
       gridGap={4}
     >
       <GalaxyHole galaxy={['mobileSmall1', 'small1']}>
-        <Text textVariant="h2" color="white" ml={6}>
+        <Text as="h2" textVariant="h2" color="white" ml={6}>
           FAQs
         </Text>
       </GalaxyHole>

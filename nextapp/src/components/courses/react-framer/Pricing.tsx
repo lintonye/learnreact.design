@@ -296,7 +296,7 @@ export default function Pricing() {
               formId="465352"
               subscribeButtonTitle="Get Free Videos"
             /> */}
-            <Text as="h3" color="primaryText" textVariant="h3" mt={8}>
+            <Text as="h2" color="primaryText" textVariant="h3" mt={8}>
               100% RISK-FREE INVESTMENT
             </Text>
             <Text as="div" color="primaryText" textVariant="body">

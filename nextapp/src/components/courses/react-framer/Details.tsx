@@ -286,6 +286,7 @@ function ModuleDetail({ logo, text, align }: any) {
     >
       <img src={logo} />
       <Text
+        as="h4"
         textVariant="body"
         color="secondaryText"
         textAlign={['left', align]}
@@ -334,7 +335,7 @@ function Module({
         link={link}
       />
       <Box maxWidth={[250, 400]} mr={4}>
-        <Text textVariant="h3" textAlign={['center', textAlign]} mb={1}>
+        <Text as="h3" textVariant="h3" textAlign={['center', textAlign]} mb={1}>
           <strong>{name}</strong>
         </Text>
         {js && (
@@ -428,7 +429,7 @@ function Topics() {
             <img src={icon} alt={name} width={'100%'} />
           </Box>
           {subTopics.map((st) => (
-            <Text key={st} textAlign="center" textVariant="body">
+            <Text as="h3" key={st} textAlign="center" textVariant="body">
               {st}
             </Text>
           ))}
@@ -455,19 +456,25 @@ export default function Details() {
           alignItems="center"
           mb={3}
         >
-          <GalaxyHole galaxy={['mobileSmall2', 'small2']}>
-            <Text textVariant="h2" color="white">
-              Save Time!
+          <h2>
+            <GalaxyHole
+              galaxy={['mobileSmall2', 'small2']}
+              className="inline-block"
+            >
+              <Text textVariant="h2" color="white">
+                Save Time!{' '}
+              </Text>
+            </GalaxyHole>
+            <Text
+              textVariant="h2"
+              as="span"
+              ml={[0, 3]}
+              mt={[-1, 4]}
+              style={{ textShadow: '0 0 1px white, 0 0 2px white' }}
+            >
+              Only learn what’s necessary!
             </Text>
-          </GalaxyHole>
-          <Text
-            textVariant="h2"
-            ml={[0, 3]}
-            mt={[-1, 4]}
-            style={{ textShadow: '0 0 1px white, 0 0 2px white' }}
-          >
-            Only learn what’s necessary!
-          </Text>
+          </h2>
         </Box>
         <Text
           textAlign="center"

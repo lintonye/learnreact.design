@@ -13,14 +13,20 @@ export default function StudentWorks() {
   return (
     <Box my={[7, 8]}>
       <Box layout="flex" justifyContent="center" alignItems="center" mb={4}>
-        <Text textVariant="h2" mr={1}>
-          By
-        </Text>
-        <GalaxyHole galaxy={['mobileSmall1', 'small1']} mt={-3}>
-          <Text textVariant="h2" color="white">
-            Previous Students
+        <h2>
+          <Text as="span" textVariant="h2" mr={0}>
+            By{' '}
           </Text>
-        </GalaxyHole>
+          <GalaxyHole
+            galaxy={['mobileSmall1', 'small1']}
+            mt={-3}
+            className="inline-block"
+          >
+            <Text as="span" textVariant="h2" color="white">
+              Previous Students
+            </Text>
+          </GalaxyHole>
+        </h2>
       </Box>
       <Box
         layout="flex"
@@ -53,7 +59,7 @@ export default function StudentWorks() {
         <Location>
           {({ location: { pathname } }) => (
             <Link to={`${pathname}/showcase`}>
-              <Text textVariant="small" textAlign="center" mt={'4px'}>
+              <Text as="h3" textVariant="small" textAlign="center" mt={'4px'}>
                 <strong>MORE SHOWCASES</strong>
               </Text>
             </Link>
