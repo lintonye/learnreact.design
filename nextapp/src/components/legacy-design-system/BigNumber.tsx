@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Box, Text } from '.'
 
-export function BigNumber({ number, subtitle, ...rest }) {
+export function BigNumber({ number, subtitle, ...rest }: any) {
   return (
     <Box {...rest} layout="flex" alignItems="baseline">
       <Text textVariant="bigNumber" color="primaryText">

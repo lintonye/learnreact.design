@@ -1,12 +1,14 @@
 import * as React from 'react'
-import styled from 'styled-@emotion/styled'
+import styled from '@emotion/styled'
 
-const Svg = styled.svg({
-  width: ({ width }) => width,
-  height: ({ height }) => height,
-})
+// const Svg = styled.svg`
+//   width: ({width}: any) => width;
+//   height: ({height}: any) => height;
+// `
 
-function Icon_burger(props) {
+const Svg = styled.svg``
+
+function Icon_burger(props: any) {
   return (
     <Svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 21">
       <path
@@ -20,7 +22,7 @@ function Icon_burger(props) {
   )
 }
 
-function Icon_close(props) {
+function Icon_close(props: any) {
   return (
     <Svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 21">
       <path
@@ -33,7 +35,7 @@ function Icon_close(props) {
   )
 }
 
-function Icon_course_framerx(props) {
+function Icon_course_framerx(props: any) {
   return (
     <Svg
       {...props}
@@ -142,7 +144,7 @@ function Icon_course_framerx(props) {
   )
 }
 
-function Icon_course_r101(props) {
+function Icon_course_r101(props: any) {
   return (
     <Svg
       {...props}
@@ -212,7 +214,7 @@ function Icon_course_r101(props) {
   )
 }
 
-function Icon_course_rn101(props) {
+function Icon_course_rn101(props: any) {
   return (
     <Svg
       {...props}
@@ -295,7 +297,7 @@ function Icon_course_rn101(props) {
   )
 }
 
-function Icon_course_web_fundamentals(props) {
+function Icon_course_web_fundamentals(props: any) {
   return (
     <Svg
       {...props}
@@ -361,7 +363,7 @@ function Icon_course_web_fundamentals(props) {
   )
 }
 
-function Icon_dot_framer(props) {
+function Icon_dot_framer(props: any) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="30">
       <path
@@ -372,7 +374,7 @@ function Icon_dot_framer(props) {
   )
 }
 
-function Icon_dot_react(props) {
+function Icon_dot_react(props: any) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="30">
       <path
@@ -383,7 +385,7 @@ function Icon_dot_react(props) {
   )
 }
 
-function Icon_dot_workflow(props) {
+function Icon_dot_workflow(props: any) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="30">
       <path
@@ -394,7 +396,7 @@ function Icon_dot_workflow(props) {
   )
 }
 
-function Icon_site_logo(props) {
+function Icon_site_logo(props: any) {
   return (
     <Svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 185 185">
       <path
@@ -412,7 +414,7 @@ function Icon_site_logo(props) {
   )
 }
 
-export default function Icon({ iconName, ...rest }) {
+export default function Icon({ iconName, ...rest }: any) {
   return (
     <>
       {iconName === 'Icon_burger' && <Icon_burger {...rest} />}

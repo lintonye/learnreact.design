@@ -2,8 +2,12 @@ import * as React from 'react'
 import { motion } from 'framer-motion'
 import * as Svgs from './canvasSvg'
 
-function withFrame(Comp, width, height) {
-  return function (props) {
+function withFrame(
+  Comp: React.FunctionComponent,
+  width: number,
+  height: number,
+) {
+  return function (props: any) {
     return (
       <motion.div
         {...props}

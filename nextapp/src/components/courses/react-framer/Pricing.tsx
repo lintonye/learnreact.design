@@ -15,7 +15,6 @@ import planLogoStarship from './assets/plan-starship.svg'
 import planTopComet from './assets/plan-top-comet.svg'
 import { Waypoint } from 'react-waypoint'
 import { animated, useSpring, useTrail } from 'react-spring'
-import ConvertKitForm from '@/components/legacy-design-system/ConvertKitForm'
 import styled from '@emotion/styled'
 
 const plans = [
@@ -147,7 +146,7 @@ function PricingColumn({
         </Text>
       </Box>
       <Box color="white">
-        {titles.map((title, idx) => (
+        {titles.map((title: string, idx: number) => (
           <Text
             textAlign="center"
             fontSize={[3, 3, 4]}
@@ -160,7 +159,7 @@ function PricingColumn({
         ))}
       </Box>
       <Box color="gray.1">
-        {descriptions.map((description, idx) => (
+        {descriptions.map((description: string, idx: number) => (
           <Text key={idx} textAlign="center" fontSize={[1, 2]}>
             {description}
           </Text>
@@ -220,7 +219,7 @@ function PricingColumn({
 const AnimatedImage = animated(Image)
 const AnimatedPricingColumn = animated(PricingColumn)
 
-export default function Pricing(props) {
+export default function Pricing() {
   const [showPricing, setShowPricing] = React.useState(false)
   const cometStyle = useSpring({
     transform: `translate(${showPricing ? 0 : -1400}px, ${

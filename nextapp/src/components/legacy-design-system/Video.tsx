@@ -9,7 +9,7 @@ export default function Video({
   maxWidth = undefined,
   style,
   ...props
-}) {
+}: any) {
   const videoRef = React.useRef<HTMLVideoElement>()
   React.useEffect(() => {
     const videoElement = videoRef.current

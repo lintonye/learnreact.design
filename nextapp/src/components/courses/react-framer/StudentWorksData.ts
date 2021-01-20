@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 import MarioPoster from './assets/student-kevin-cannon-mario.mp4.jpg'
 import AppBarPoster from './assets/student-fabrizio-app-bar.mp4.jpg'
 import SpotifyPoster from './assets/student-lichin-spotify.mp4.jpg'
@@ -137,8 +135,17 @@ const works = [
   },
 ]
 
-export function getFeaturedWorks(count) {
-  return _.shuffle(works.filter((w) => w.featured)).slice(0, count)
+function shuffle(array: any[]) {
+  const shuffled: any[] = Array.from(array)
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+  }
+  return shuffled
+}
+
+export function getFeaturedWorks(count: number) {
+  return shuffle(works.filter((w) => w.featured)).slice(0, count)
 }
 
 export function getAllWorks() {

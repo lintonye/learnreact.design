@@ -5,11 +5,7 @@ type PhotoParams = {
   size: number | number[]
   url: string
 }
-export default function ProfilePhoto({
-  size = 100,
-  url,
-  ...rest
-}: PhotoParams) {
+export default function ProfilePhoto({ size = 100, url, ...rest }: any) {
   return (
     <Box
       backgroundImage={`url(${url})`}

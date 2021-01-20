@@ -19,7 +19,7 @@ function Banner() {
   )
 }
 
-export default function AllStudentWorks(props) {
+export default function AllStudentWorks() {
   const [activeIdx, setActiveIdx] = React.useState(-1)
   return (
     <Box width={1} overflow="hidden">

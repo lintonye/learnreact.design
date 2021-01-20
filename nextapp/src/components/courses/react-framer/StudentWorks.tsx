@@ -29,7 +29,7 @@ export default function StudentWorks() {
         maxWidth={1200}
         mx="auto"
       >
-        {featuredWorks.map((work, idx) => (
+        {featuredWorks.map((work: any, idx: number) => (
           <StudentWork
             key={idx}
             {...work}

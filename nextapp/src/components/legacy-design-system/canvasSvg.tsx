@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-export function TrackDay(props) {
+export function TrackDay(props: any) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="96" height="28">
       <g>
@@ -66,7 +66,7 @@ export function TrackDay(props) {
   )
 }
 
-export function TrackNight(props) {
+export function TrackNight(props: any) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="96" height="28">
       <defs>
@@ -86,7 +86,7 @@ export function TrackNight(props) {
   )
 }
 
-export function ShootingStar(props) {
+export function ShootingStar(props: any) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28">
       <path
@@ -98,7 +98,7 @@ export function ShootingStar(props) {
   )
 }
 
-export function FgNight(props) {
+export function FgNight(props: any) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28">
       <path
@@ -113,7 +113,7 @@ export function FgNight(props) {
   )
 }
 
-export function FgDay(props) {
+export function FgDay(props: any) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28">
       <path
@@ -144,7 +144,7 @@ export function FgDay(props) {
   )
 }
 
-export function KnobDay(props) {
+export function KnobDay(props: any) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -229,7 +229,7 @@ export function KnobDay(props) {
     </svg>
   )
 }
-export function KnobNight(props) {
+export function KnobNight(props: any) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

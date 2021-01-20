@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Box, Text, Link } from '@/components/legacy-design-system'
 import GalaxyHole from './GalaxyHole'
 
-const Question = ({ title, children, ...props }) => (
+const Question = ({ title, children, ...props }: any) => (
   <Box
     {...props}
     layout="grid"

@@ -1,8 +1,6 @@
 import * as React from 'react'
 import { useCallback } from 'react'
 import Layout from '@/components/legacy-design-system/Layout'
-import ConvertKitForm from '@/components/legacy-design-system/ConvertKitForm'
-import { Box, Header, Text } from '@/components/legacy-design-system'
 import Bios from '@/components/legacy-design-system/BiosComet'
 import Hero from '@/components/courses/react-framer/Hero'
 import SocialProof from '@/components/courses/react-framer/SocialProof'
@@ -22,11 +20,6 @@ export default function PrototypingMasterCourse() {
     scrollTop: 0,
     xy: [0, 0],
   }))
-  const onMove = useCallback(
-    ({ clientX: x, clientY: y }) =>
-      set({ xy: [x - window.innerWidth / 2, y - window.innerHeight / 2] }),
-    [],
-  )
   const onScroll = useCallback(
     (e) => set({ scrollTop: e.target.scrollTop / 30 }),
     [],

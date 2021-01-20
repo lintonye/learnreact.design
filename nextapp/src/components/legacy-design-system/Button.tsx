@@ -23,7 +23,7 @@ const StyledBox = styled(Box)`
           };
 
           &:hover {
-            background-color: ${(props) =>
+            background-color: ${(props: any) =>
               primary
                 ? tinycolor(color || themeGet('colors.accent')(props))
                     .brighten()

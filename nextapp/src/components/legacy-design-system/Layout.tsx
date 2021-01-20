@@ -37,7 +37,13 @@ function Footer() {
   )
 }
 
-export function ThemeWrapper({ theme = 'light', children }: any) {
+export function ThemeWrapper({
+  theme = 'light',
+  children,
+}: {
+  theme: 'light' | 'dark' | 'spaceDark' | 'spaceLight'
+  children: any
+}) {
   return (
     <MDXProvider
       components={{

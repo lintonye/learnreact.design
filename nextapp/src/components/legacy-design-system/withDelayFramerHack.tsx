@@ -4,8 +4,8 @@ import { Box } from '.'
 
 // // This is a hack to work around the issue that the page
 // // needs a refresh to properly display the toggle.
-export function withDelayFramerHack(Comp) {
-  return function WithDelayFramerHack(props) {
+export function withDelayFramerHack(Comp: React.FunctionComponent) {
+  return function WithDelayFramerHack(props: any) {
     const [realComp, setRealComp] = React.useState(false)
     const [visible, setVisible] = React.useState(false)
     const anim = useSpring({ opacity: visible ? 1 : 0 })

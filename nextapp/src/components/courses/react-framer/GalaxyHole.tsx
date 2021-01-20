@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Box } from '@/components/legacy-design-system'
 import starsPng from './assets/stars.png'
 
-function ShootingStar({ id, x, begin }) {
+function ShootingStar({ id, x, begin }: any) {
   return (
     <use xlinkHref="#shootingStar" opacity="0">
       <animateTransform
@@ -60,7 +60,7 @@ function Galaxy({
   clipPath,
   name,
   imageOffset = { x: 0, y: 0 },
-}) {
+}: any) {
   const shootingStars = Array(3)
     .fill(0)
     .map((_, id) => {
@@ -150,7 +150,15 @@ function Galaxy({
   )
 }
 
-const galaxies = {
+type Galaxy = {
+  [name: string]: any
+}
+
+type Galaxies = {
+  [name: string]: Galaxy
+}
+
+const galaxies: Galaxies = {
   hero: {
     clipPath: (
       <path d="M12.2667 0C-8.6236 70.4856 -2.52383 148.958 28.2141 211.897C49.7358 255.966 92.0762 280.032 139.831 307.175C185.27 333.002 235.611 361.615 277.584 412.897C348.5 484.719 369 495.054 421.584 514.897C565.769 569.307 758.273 469.85 935.905 378.077C1065.55 311.098 1187.27 248.212 1276.5 252.22C1542.5 264.168 1758.45 123.719 1931.38 11.2534C1937.2 7.46826 1942.97 3.71484 1948.69 0L12.2667 0Z" />
@@ -228,7 +236,7 @@ const galaxies = {
   },
 }
 
-function getResponsiveValue(value) {
+function getResponsiveValue(value: any) {
   const breakpoints = [500, 800]
   if (Array.isArray(value)) {
     if (typeof window !== 'undefined') {
@@ -246,7 +254,7 @@ function getResponsiveValue(value) {
   }
 }
 
-export default function GalaxyHole({ galaxy, children, ...props }) {
+export default function GalaxyHole({ galaxy, children, ...props }: any) {
   const g = getResponsiveValue(galaxy)
   return (
     <Box {...props} position="relative">

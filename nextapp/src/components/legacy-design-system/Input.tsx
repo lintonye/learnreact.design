@@ -25,7 +25,7 @@ const StyledInput = styled.input`
 //   bg: "primaryBg"
 // };
 
-export default function Input(props) {
+export default function Input(props: any) {
   return (
     <StyledInput
       textVariant="body"

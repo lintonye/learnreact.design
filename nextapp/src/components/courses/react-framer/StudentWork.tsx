@@ -11,7 +11,7 @@ export default function StudentWork({
   onHoverStart,
   onHoverEnd,
   ...props
-}) {
+}: any) {
   const videoTag = (
     <Box
       bg="primaryBg"

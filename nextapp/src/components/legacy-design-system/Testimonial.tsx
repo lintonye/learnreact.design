@@ -93,8 +93,13 @@ export function Testimonial({
       </Text>
 
       {showMore && (
-        <Link textAlign="right" textVariant="small" to="/testimonials">
-          👉 More Testimonials
+        <Link
+          textAlign="right"
+          textVariant="small"
+          to="/testimonials"
+          className="text-right"
+        >
+          <span className="mr-2">👉</span> More Testimonials
         </Link>
       )}
     </Box>

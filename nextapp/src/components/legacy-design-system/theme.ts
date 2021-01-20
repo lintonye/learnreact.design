@@ -1,7 +1,11 @@
 const tinycolor = require('tinycolor2')
 const fontSizes = [12, 14, 16, 18, 20, 24, 30, 36, 48, 60, 72]
 
-export const light = {
+type Theme = {
+  [name: string]: any
+}
+
+export const light: Theme = {
   name: 'light',
   space: [0, 8, 12, 16, 24, 32, 48, 64, 96, 128, 192, 256],
   breakpoints: [40, 52, 64].map((n) => n + 'em'),
@@ -184,7 +188,7 @@ export const light = {
   },
 }
 
-export const dark = {
+export const dark: Theme = {
   ...light,
   name: 'dark',
   colors: {
@@ -205,7 +209,7 @@ export const dark = {
   },
 }
 
-export const darkGrey = {
+export const darkGrey: Theme = {
   ...dark,
   name: 'darkGrey',
   colors: {
@@ -226,7 +230,7 @@ export const darkGrey = {
   },
 }
 
-export const spaceLight = {
+export const spaceLight: Theme = {
   ...light,
   name: 'spaceLight',
   colors: {
@@ -250,7 +254,7 @@ export const spaceLight = {
   },
 }
 
-export const spaceDark = {
+export const spaceDark: Theme = {
   ...dark,
 }
 

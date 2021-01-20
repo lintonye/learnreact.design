@@ -30,7 +30,15 @@ const StyledAnchor = styled.a`
 `
 
 export default function Link(props: any) {
-  const { to, children, underline = true, target, textAlign, ...rest } = props
+  const {
+    to,
+    children,
+    underline = true,
+    target,
+    textAlign,
+    className,
+    ...rest
+  } = props
   const LinkComp: React.FunctionComponent<any> =
     to && to.match(/(https?)|(mailto:).+/) ? StyledAnchor : StyledLink
   return (
@@ -43,7 +51,9 @@ export default function Link(props: any) {
       <Text
         {...rest}
         as="span"
-        className={`cursor-pointer ${underline ? 'hover:underline' : ''}`}
+        className={`cursor-pointer ${
+          underline ? 'hover:underline' : ''
+        } ${className}`}
       >
         {children}
       </Text>

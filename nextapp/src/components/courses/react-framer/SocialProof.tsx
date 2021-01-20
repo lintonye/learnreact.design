@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { Box, Testimonial, Companies } from '@/components/legacy-design-system'
-import EmailForm from './EmailForm'
 
 export default function SocialProof() {
   return (

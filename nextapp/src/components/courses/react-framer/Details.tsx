@@ -206,7 +206,15 @@ const modules = [
   },
 ]
 
-function Planet({ index, type, playVideo, video, poster, link, ...props }) {
+function Planet({
+  index,
+  type,
+  playVideo,
+  video,
+  poster,
+  link,
+  ...props
+}: any) {
   const planetBgs = playVideo
     ? [Planet1HighlightBg, Planet2HighlightBg, Planet3HighlightBg]
     : [Planet1Bg, Planet2Bg, Planet3Bg]
@@ -268,7 +276,7 @@ function Planet({ index, type, playVideo, video, poster, link, ...props }) {
   )
 }
 
-function ModuleDetail({ logo, text, align }) {
+function ModuleDetail({ logo, text, align }: any) {
   return (
     <Box
       layout="flex"
@@ -304,7 +312,7 @@ function Module({
   imageFirst,
   onHoverStart,
   onHoverEnd,
-}) {
+}: any) {
   const textAlign = imageFirst ? 'left' : 'right'
   return (
     <Box
@@ -355,7 +363,7 @@ function Module({
   )
 }
 
-function Title({ color, backgroundImage, title }) {
+function Title({ color, backgroundImage, title }: any) {
   return (
     <Box
       layout="flex"
