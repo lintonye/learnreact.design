@@ -34,15 +34,16 @@ export default function Footer(props: any) {
         {...props}
       >
         <Box
+          as="nav"
           layout="flex"
           justifyContent={['space-between', 'flex-start']}
           gridColumn={['span 2', 1]}
         >
           <BottomLink label="Home" to="/" />
-          <BottomLink label="Courses" to="/#enroll" />
-          <BottomLink label="Tips" to="/tips" />
+          <BottomLink label="Courses" to="/courses" />
+          <BottomLink label="Posts" to="/posts" />
           <BottomLink label="Webinars" to="/webinars" />
-          <BottomLink label="Blog" to="/blog" />
+          {/* <BottomLink label="Blog" to="/blog" /> */}
         </Box>
         <Image
           src={siteLogo}
