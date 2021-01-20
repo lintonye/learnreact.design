@@ -8,8 +8,9 @@ import { useRouter } from 'next/router'
 import * as SeoData from '../../next-seo.json'
 import Link from 'next/link'
 import { FiLink } from 'react-icons/fi'
-import { NavBar } from '@/components/NavBar'
+import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
+import { Layout } from '@/components/Layout'
 import {
   InPostStateContext,
   InPostAction,
@@ -219,7 +220,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
 
   const [inPostState, dispatch] = useReducer(inPostStateReducer, [])
   return (
-    <>
+    <Layout>
       <NextSeo
         title={title}
         description={description}
@@ -232,7 +233,6 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
         }}
         canonical={url}
       />
-      <NavBar />
       <InPostStateContext.Provider value={[inPostState, dispatch]}>
         <MDXProvider components={components}>
           <div
@@ -283,8 +283,6 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
           </div>
         </MDXProvider>
       </InPostStateContext.Provider>
-
-      <Footer />
-    </>
+    </Layout>
   )
 }
