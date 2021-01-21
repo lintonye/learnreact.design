@@ -20,13 +20,12 @@ type Props = {
 export function PostPreview({ url, title, excerpt, titleAs = 'div' }: Props) {
   return (
     <article className="space-y-2">
-      <Link href={url}>
-        {React.createElement(
-          titleAs,
-          { className: 'text-xl font-bold' },
-          title,
-        )}
-      </Link>
+      {React.createElement(
+        titleAs,
+        { className: 'text-xl font-bold' },
+        <Link href={url}>{title}</Link>,
+      )}
+
       <div>{renderExcerpt(excerpt)}</div>
       <div className="text-sm font-bold">
         <Link href={url}>Read more</Link>
