@@ -1,4 +1,5 @@
 import { parseISO, compareDesc } from 'date-fns'
+import { Post } from './types'
 
 type ImportedMdx = {
   categorySlug: string
@@ -32,7 +33,7 @@ function importAll(r: __WebpackModuleApi.RequireContext) {
     .filter(isDefined)
 }
 
-export default function getAllPostPreviews() {
+export default function getAllPostPreviews(): Post[] {
   return importAll(
     require.context('./pages/posts/?preview', true, /\.mdx$/),
   ).sort((a, b) => compareDesc(a.date, b.date))

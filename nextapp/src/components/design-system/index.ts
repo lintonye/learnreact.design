@@ -1,7 +1,7 @@
 export { Button } from './Button'
 // export {  theme } from "./theme";
 // export {  Layout } from "./Layout";
-// export {  Link } from "./Link";
+export { Link } from './Link'
 // export {  Header } from "./Header";
 // export {  Companies } from "./Companies";
 export { Input } from './Input'

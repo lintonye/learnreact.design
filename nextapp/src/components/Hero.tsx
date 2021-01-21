@@ -1,6 +1,6 @@
 import { jsx } from '@emotion/core'
 import { getFeaturedPost } from '@/featuredPostData'
-import Link from 'next/link'
+import { Link } from '@/components/design-system'
 
 export function Hero() {
   const featuredPost = getFeaturedPost()

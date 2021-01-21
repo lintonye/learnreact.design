@@ -1,6 +1,6 @@
 import { jsx } from '@emotion/core'
 import { Menu } from '@headlessui/react'
-import Link from 'next/link'
+import { Link } from '@/components/design-system'
 
 export function Header() {
   return (
@@ -8,7 +8,7 @@ export function Header() {
       <nav>
         <ul className="flex m-4 space-x-8 text-sm">
           <li>
-            <a href="/">LearnReact.design</a>
+            <Link href="/">LearnReact.design</Link>
           </li>
           <li>
             <Link href="/courses">Courses</Link>
@@ -33,7 +33,7 @@ export function Header() {
             </Menu>
           </li>
           <li>
-            <a href="/webinars">Webinars</a>
+            <Link href="/webinars">Webinars</Link>
           </li>
           {/* <li>
             <a href="/hire-me">Hire Linton</a>
