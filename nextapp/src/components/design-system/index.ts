@@ -13,3 +13,4 @@ export { Input } from './Input'
 // export { Testimonial } from "./Testimonial";
 // export {  Quiz } from "./Quiz";
 export { ConvertKitForm } from './ConvertKitForm'
+export { Chip } from './Chip'

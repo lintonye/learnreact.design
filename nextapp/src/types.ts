@@ -1,5 +1,6 @@
 export type Post = {
   title: string
+  date: Date
   excerpt: React.FunctionComponent | string
   slug: string
   url: string
