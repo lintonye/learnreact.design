@@ -30,12 +30,12 @@ export type JsxNode = JsxParentNode | string
 export type Requirement = 'none' | 'js' | 'react'
 
 export type Course = {
-  id: string
-  name: string
-  subtitle: string
+  slug: string
+  title: string
+  excerpt: string
   icon: React.ReactNode
   length: string
-  detailLink: string
+  url: string
   requirement: Requirement
   chapters?: any[]
   isNew?: boolean

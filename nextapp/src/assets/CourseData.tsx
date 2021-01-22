@@ -41,35 +41,35 @@ const makeLengthText = (hours: number, lessons: number) =>
 
 const ALL_COURSES: Course[] = [
   {
-    id: 'web-basics',
-    name: 'Web Basics',
-    subtitle: 'HTML + CSS + JS',
+    slug: 'web-basics',
+    title: 'Web Basics',
+    excerpt: 'HTML + CSS + JS',
     icon: ICONS.prep,
     length: '6-week email course',
-    detailLink: '/re4d-prerequisites',
+    url: '/re4d-prerequisites',
     requirement: 'none',
   },
   {
-    id: 'react-framer',
-    name: 'Prototyping With React + Framer',
-    subtitle: 'Build 15+ real world prototypes',
+    slug: 'react-framer',
+    title: 'Prototyping With React + Framer',
+    excerpt: 'Build 15+ real world prototypes',
     icon: ICONS.prototypingReactFramer,
     length: makeLengthText(
       HOURS.prototypingReactFramer,
       LESSONS.prototypingReactFramer,
     ),
-    detailLink: '/courses/react-framer',
+    url: '/courses/react-framer',
     requirement: 'none',
     chapters: Chapters.framerx,
   },
   {
-    id: 'rmm',
-    name: 'React Mental Models',
-    subtitle: 'Think in React',
+    slug: 'rmm',
+    title: 'React Mental Models',
+    excerpt: 'Think in React',
     icon: ICONS.r101,
     isNew: true,
     length: `In the making`, //makeLengthText(HOURS.r101, LESSONS.r101),
-    detailLink: '/courses/react-mental-models',
+    url: '/courses/react-mental-models',
     requirement: 'js',
     chapters: Chapters.r101,
   },
@@ -86,33 +86,33 @@ const ALL_COURSES: Course[] = [
   //   bundleable: true,
   // },
   {
-    id: 'smileyinmotion',
-    name: 'Smiley In Motion',
-    subtitle:
+    slug: 'smiley-in-motion',
+    title: 'Smiley In Motion',
+    excerpt:
       'A Framer Motion course on mental models, tips & tricks and common pitfalls',
     icon: ICONS.smiley,
     isNew: true,
     length: '2 hours, 24 lessons',
-    detailLink: 'https://smileyinmotion.com',
+    url: 'https://smileyinmotion.com',
     requirement: 'react',
   },
   {
-    id: 'r101',
-    name: 'React 101',
-    subtitle: 'Build web UIs yourself!',
+    slug: 'r101',
+    title: 'React 101',
+    excerpt: 'Build web UIs yourself!',
     icon: ICONS.r101,
     length: makeLengthText(HOURS.r101, LESSONS.r101),
-    detailLink: '/courses/react-101',
+    url: '/courses/react-101',
     requirement: 'js',
     chapters: Chapters.r101,
   },
   {
-    id: 'rn101',
-    name: 'React Native 101',
-    subtitle: 'Build mobile UIs yourself!',
+    slug: 'rn101',
+    title: 'React Native 101',
+    excerpt: 'Build mobile UIs yourself!',
     icon: ICONS.rn101,
     length: makeLengthText(HOURS.rn101, LESSONS.rn101),
-    detailLink: '/courses/react-native-101',
+    url: '/courses/react-native-101',
     requirement: 'react',
     chapters: Chapters.rn101,
   },
@@ -123,7 +123,7 @@ export function coursesByReq(reqId: string) {
 }
 
 export function getCourse(courseId: string) {
-  const course = ALL_COURSES.find((c) => c.id === courseId)
+  const course = ALL_COURSES.find((c) => c.slug === courseId)
   if (!!!course) throw `Invalid courseId: ${courseId}`
   return course
 }
@@ -144,7 +144,7 @@ export function getRequirement(courseIds: string[]) {
     js: { difficulty: 1, title: 'Requires JavaScript knowledge' },
     react: { difficulty: 1, title: 'Requires JavaScript and React knowledge' },
   }
-  const reqs = ALL_COURSES.filter((c) => courseIds.includes(c.id))
+  const reqs = ALL_COURSES.filter((c) => courseIds.includes(c.slug))
     .map((c) => c.requirement)
     .sort((ra, rb) => {
       const da = requirements[ra].difficulty
@@ -196,9 +196,9 @@ export function getRequirement(courseIds: string[]) {
 // }
 
 export function getLength(courseIds: string[]) {
-  const courses = ALL_COURSES.filter((c) => courseIds.includes(c.id))
-  const hours = courses.reduce((h, c) => HOURS[c.id] + h, 0)
-  const lessons = courses.reduce((h, c) => LESSONS[c.id] + h, 0)
+  const courses = ALL_COURSES.filter((c) => courseIds.includes(c.slug))
+  const hours = courses.reduce((h, c) => HOURS[c.slug] + h, 0)
+  const lessons = courses.reduce((h, c) => LESSONS[c.slug] + h, 0)
   return makeLengthText(hours, lessons)
 }
 
@@ -227,7 +227,7 @@ export function getLength(courseIds: string[]) {
 // }
 
 export function sanitizeCourseIds(courseIds: string[]) {
-  const validCourseIds = ALL_COURSES.map((c) => c.id)
+  const validCourseIds = ALL_COURSES.map((c) => c.slug)
   return courseIds.filter((cid) => validCourseIds.includes(cid))
 }
 

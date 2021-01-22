@@ -11,11 +11,11 @@ type Props = {
 export function CoursePreview({
   nameAs = 'div',
   subtitleAs = 'div',
-  name,
-  subtitle,
+  title: name,
+  excerpt: subtitle,
   icon,
   length,
-  detailLink,
+  url: detailLink,
   isNew,
 }: Props) {
   return (

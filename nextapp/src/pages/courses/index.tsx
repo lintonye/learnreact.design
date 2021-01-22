@@ -24,7 +24,12 @@ export default function AllCoursesPage() {
             .map((r) => coursesByReq(r))
             .flatMap((courses) =>
               courses.map((c) => (
-                <CoursePreview key={c.id} nameAs="h2" subtitleAs="h3" {...c} />
+                <CoursePreview
+                  key={c.slug}
+                  nameAs="h2"
+                  subtitleAs="h3"
+                  {...c}
+                />
               )),
             )}
         </div>
