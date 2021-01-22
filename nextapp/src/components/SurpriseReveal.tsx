@@ -9,7 +9,7 @@ export function SurpriseReveal({
     revealed: { x: -80, rotate: 0 },
   },
 }: {
-  surprise: React.ReactNode
+  surprise: React.ReactNode | ((revealEnded: boolean) => React.ReactNode)
   children: React.ReactNode
   animationVariants?: Variants
 }) {
@@ -22,7 +22,9 @@ export function SurpriseReveal({
       onMouseLeave={() => setAnimate('hidden')}
     >
       <motion.div variants={animationVariants} className="absolute">
-        {surprise}
+        {typeof surprise === 'function'
+          ? surprise(animate === 'revealed')
+          : surprise}
       </motion.div>
       <div className="absolute inset-0 bg-white" />
       <div className="relative">{children}</div>
