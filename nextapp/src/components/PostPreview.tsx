@@ -39,7 +39,7 @@ export function PostPreview({
           Last updated: <time dateTime={lastUpdated}>{lastUpdated}</time>
         </div>
         {tags.map((tag) => (
-          <Chip>{tag}</Chip>
+          <Chip key={tag}>{tag}</Chip>
         ))}
       </div>
       <div>{renderExcerpt(excerpt)}</div>

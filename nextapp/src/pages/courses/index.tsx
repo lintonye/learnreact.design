@@ -1,5 +1,5 @@
 import { Layout } from '@/components/Layout'
-import React from 'react'
+import React, { useState } from 'react'
 import { NextSeo } from 'next-seo'
 import { coursesByReq } from '@/assets/CourseData'
 import { Course } from '@/types'
@@ -13,25 +13,53 @@ function Reveal({
   itemUnder: React.ReactNode
   children: React.ReactNode
 }) {
+  const [animate, setAnimate] = useState<'hidden' | 'revealed'>('hidden')
   return (
-    <motion.div className="border-l border-black pl-8">{children}</motion.div>
+    <motion.div
+      animate={animate}
+      className="relative border-l border-black border-opacity-40 pl-8"
+      onMouseEnter={() => setAnimate('revealed')}
+      onMouseLeave={() => setAnimate('hidden')}
+    >
+      <motion.div
+        variants={{
+          hidden: { x: 0, rotate: 180 },
+          revealed: { x: -80, rotate: 0 },
+        }}
+        className="absolute"
+      >
+        {itemUnder}
+      </motion.div>
+      <div className="absolute inset-0 bg-white" />
+      <div className="relative">{children}</div>
+    </motion.div>
   )
 }
 
+type Props = {
+  nameAs?: 'div' | 'h2' | 'h3' | 'h4'
+  subtitleAs?: 'div' | 'h2' | 'h3' | 'h4'
+} & Course
+
 function CoursePreview({
+  nameAs = 'div',
+  subtitleAs = 'div',
   name,
   subtitle,
   icon,
   length,
   detailLink,
   isNew,
-}: Course) {
+}: Props) {
   return (
     <Reveal itemUnder={icon}>
-      <div className="text-lg font-bold">
-        <Link href={detailLink}>{name}</Link>
-      </div>
-      <div>{subtitle}</div>
+      {React.createElement(
+        nameAs,
+        { className: 'text-lg font-bold' },
+        <Link href={detailLink}>{name}</Link>,
+      )}
+
+      {React.createElement(subtitleAs, {}, subtitle)}
       <div>{length}</div>
     </Reveal>
   )
@@ -56,7 +84,9 @@ export default function AllCoursesPage() {
           {requirements
             .map((r) => coursesByReq(r))
             .flatMap((courses) =>
-              courses.map((c) => <CoursePreview key={c.id} {...c} />),
+              courses.map((c) => (
+                <CoursePreview key={c.id} nameAs="h2" subtitleAs="h3" {...c} />
+              )),
             )}
         </div>
       </main>
