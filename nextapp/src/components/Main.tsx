@@ -6,9 +6,9 @@ export function Main() {
   const postData = getPostDataAtHome()
   return (
     <div>
-      <div>
+      <div className="space-y-8">
         {postData.map(({ categoryTitle, categorySlug, posts }) => (
-          <section key={categorySlug}>
+          <section key={categorySlug} className="space-y-8">
             <h2>{categoryTitle}</h2>
             {posts.map((post) => (
               <PostPreview key={post.slug} {...post} />

@@ -15,7 +15,7 @@ export function Header() {
           </li>
           <li>
             <Menu>
-              <Menu.Button>Tutorials</Menu.Button>
+              <Menu.Button>Posts</Menu.Button>
               <Menu.Items>
                 <Menu.Item className="">
                   <Link href="/design-react">Design x React</Link>

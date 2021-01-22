@@ -1,7 +1,13 @@
+import { Variants } from 'framer-motion'
+
 export type Post = {
   title: string
   date: Date
   excerpt: React.FunctionComponent | string
+  surprise?: {
+    actor: string | React.ReactNode
+    animationVariants: Variants
+  }
   slug: string
   url: string
   tags: string[]

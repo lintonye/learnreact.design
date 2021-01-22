@@ -13,7 +13,12 @@ export function Layout({ children }: Props) {
   const router = useRouter()
   const url = SEOData.siteUrl + router.pathname
   return (
-    <div className="min-h-screen flex flex-col">
+    <div
+      className="min-h-screen flex flex-col"
+      css={{
+        '& p': { lineHeight: 2 },
+      }}
+    >
       <NextSeo
         canonical={url}
         openGraph={{

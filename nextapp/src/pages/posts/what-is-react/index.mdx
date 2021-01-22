@@ -13,6 +13,7 @@ import imgOptimizeSketches from './optimize-sketches.png'
 import imgPlaceholders from './placeholders-in-sketch.png'
 // import img from './.png'
 import imgInspect from './inspect.png'
+import imgSurprise from './surprise.png'
 
 import { DomoAsciiArt } from '@/components/what-is-react/DomoAsciiArt'
 import { IconBinocular } from '@/components/what-is-react/IconBinocular'
@@ -26,11 +27,18 @@ export const meta = {
   description: `React is a JavaScript library for building user interfaces. This is the official definition of React. But what if you are not familiar with JavaScript? What if you are not a developer? Would you still be able to make sense of (and learn) React? My answer is a firm YES. `,
   date: '2021-01-12',
   tags: ['design-react', 'react'],
+  surprise: {
+    actor: imgSurprise,
+    animationVariants: {
+      hidden: { x: 0, rotate: 0 },
+      revealed: { x: -90, rotate: -30 },
+    },
+  },
 }
 
 <!--excerpt-->
 
-"React is a JavaScript library for building user interfaces." This is the official definition of React. But what if you are not familiar with JavaScript? Would you still be able to make sense of (and learn) React? My answer is a firm YES.
+"React is a JavaScript library for building user interfaces." This is the official definition. But what if you are not familiar with JavaScript? Would you still be able to make sense of (and learn) React? My answer is a firm YES.
 
 <!--/excerpt-->
 

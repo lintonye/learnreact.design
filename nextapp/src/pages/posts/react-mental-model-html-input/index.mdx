@@ -1,11 +1,19 @@
 import imgHole4FramesPng from './hole-4-frames.png'
 import InputAndButtons from '@/components/react-mental-model-html-input/InputAndButtons'
 import PandaPunch from '@/components/react-mental-model-html-input/PandaPunch'
+import imgSurprise from './surprise.png'
 
 export const meta = {
   tags: ['react'],
   date: '2020-03-31',
   title: 'React Mental Models: Working With Input',
+  surprise: {
+    actor: <PandaPunch autoPlay />,
+    animationVariants: {
+      hidden: { x: 0, rotate: 0, y: 50 },
+      revealed: { x: -240, rotate: 0, y: 50 },
+    },
+  },
 }
 
 <!--excerpt-->
