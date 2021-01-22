@@ -6,7 +6,7 @@ export function SurpriseReveal({
   children,
   animationVariants = {
     hidden: { x: 0, rotate: 180 },
-    revealed: { x: -90, rotate: 0 },
+    revealed: { x: -120, rotate: 0 },
   },
 }: {
   surprise: React.ReactNode | ((revealEnded: boolean) => React.ReactNode)

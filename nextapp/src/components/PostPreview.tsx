@@ -18,6 +18,7 @@ function renderExcerpt(excerpt: string | FunctionComponent) {
 
 type Props = {
   titleAs?: 'h1' | 'h2' | 'h3' | 'div'
+  showTags?: boolean
 } & Post
 
 export function PostPreview({
@@ -28,6 +29,7 @@ export function PostPreview({
   surprise,
   tags,
   titleAs = 'div',
+  showTags = true,
 }: Props) {
   const lastUpdated = formatISO(date, { representation: 'date' })
   return (
@@ -57,9 +59,7 @@ export function PostPreview({
           <div className="italic">
             Updated: <time dateTime={lastUpdated}>{lastUpdated}</time>
           </div>
-          {tags.map((tag) => (
-            <Chip key={tag}>{tag}</Chip>
-          ))}
+          {showTags && tags.map((tag) => <Chip key={tag}>{tag}</Chip>)}
         </div>
         <div>{renderExcerpt(excerpt)}</div>
         <div className="text-sm font-bold">

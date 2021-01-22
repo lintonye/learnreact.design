@@ -20,14 +20,21 @@ export function CoursePreview({
 }: Props) {
   return (
     <SurpriseReveal surprise={icon}>
-      {React.createElement(
-        nameAs,
-        { className: 'text-lg font-bold' },
-        <Link href={detailLink}>{name}</Link>,
-      )}
+      <div className="space-y-4">
+        <div className="space-x-2 flex items-center">
+          {React.createElement(
+            nameAs,
+            { className: 'text-lg font-bold inline-block' },
+            <Link href={detailLink}>{name}</Link>,
+          )}
+          <div className="text-tiny inline-block border border-gray-800 px-1 uppercase opacity-90">
+            course
+          </div>
+        </div>
 
-      {React.createElement(subtitleAs, {}, subtitle)}
-      <div className="text-sm">{length}</div>
+        {React.createElement(subtitleAs, {}, subtitle)}
+        <div className="text-sm">{length}</div>
+      </div>
     </SurpriseReveal>
   )
 }

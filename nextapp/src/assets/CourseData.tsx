@@ -41,7 +41,7 @@ const makeLengthText = (hours: number, lessons: number) =>
 
 const ALL_COURSES: Course[] = [
   {
-    id: 'prep',
+    id: 'web-basics',
     name: 'Web Basics',
     subtitle: 'HTML + CSS + JS',
     icon: ICONS.prep,
@@ -50,7 +50,7 @@ const ALL_COURSES: Course[] = [
     requirement: 'none',
   },
   {
-    id: 'prototypingReactFramer',
+    id: 'react-framer',
     name: 'Prototyping With React + Framer',
     subtitle: 'Build 15+ real world prototypes',
     icon: ICONS.prototypingReactFramer,
