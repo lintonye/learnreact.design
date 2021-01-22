@@ -4,6 +4,7 @@ import imgSetWhoPng from './setWho.png'
 import imgKnowledgeTreePng from './knowledge-tree.png'
 import videoExercise from './quiz-result.mp4'
 import { KungfuPanda } from '@/components/react-mental-model-cut-holes-in-html-template/KungfuPanda'
+import { CutHoleSurprise } from '@/components/react-mental-model-cut-holes-in-html-template/CutHoleSurprise'
 import { Video } from '@/components/Video'
 // import ConvertKitForm from '@/components/legacy-design-system/ConvertKitForm'
 
@@ -11,6 +12,13 @@ export const meta = {
   tags: ['react'],
   date: '2020-03-23',
   title: 'React Mental Models: Cutting Holes In HTML',
+  surprise: {
+    actor: (revealEnded) => <CutHoleSurprise autoPlay={revealEnded} />,
+    animationVariants: {
+      hidden: { x: 0, rotate: 0, y: 10 },
+      revealed: { x: -150, rotate: 0, y: 10 },
+    },
+  },
 }
 
 <!--excerpt-->
@@ -210,7 +218,7 @@ Alright! I hope you have remembered a few things:
 
 Let me reiterate. React does not work by cutting holes in HTML. But this is a useful mental model when you are just getting started.
 
-The important idea here is that we separate the data from the UI. We almost always work with the data instead of accessing the DOM nodes. We'll dive deeper and see more examples of this idea in the [next post](/2020/03/31/react-mental-models-working-with-input).
+The important idea here is that we separate the data from the UI. We almost always work with the data instead of accessing the DOM nodes. We'll dive deeper and see more examples of this idea in the [next post](/1020/03/31/react-mental-models-working-with-input).
 
 <!-- [next post](/2020/03/19/react-mental-models-data-binding-part-2-2). -->
 

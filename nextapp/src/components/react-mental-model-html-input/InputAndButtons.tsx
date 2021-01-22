@@ -11,9 +11,9 @@ export default function InputAndButtons() {
           placeholder="Write a reply..."
           type="text"
           value={draft}
-          // onChange={e => {
-          //   setDraft(e.target.value);
-          // }}
+          onChange={(e) => {
+            // setDraft(e.target.value);
+          }}
         />
       </div>
       <div className="space-x-1">

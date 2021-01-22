@@ -14,7 +14,8 @@ export function Header() {
             <Link href="/courses">Courses</Link>
           </li>
           <li>
-            <Menu>
+            <Link href="/posts">Posts</Link>
+            {/* <Menu>
               <Menu.Button>Posts</Menu.Button>
               <Menu.Items>
                 <Menu.Item className="">
@@ -30,7 +31,7 @@ export function Header() {
                   <Link href="/framer">Framer</Link>
                 </Menu.Item>
               </Menu.Items>
-            </Menu>
+            </Menu> */}
           </li>
           <li>
             <Link href="/webinars">Webinars</Link>
