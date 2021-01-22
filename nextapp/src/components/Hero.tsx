@@ -1,5 +1,5 @@
 import { jsx } from '@emotion/core'
-import { getFeaturedPost } from '@/featuredPostData'
+import { getFeaturedPost } from '@/assets/featuredPostData'
 import { Link } from '@/components/design-system'
 
 export function Hero() {

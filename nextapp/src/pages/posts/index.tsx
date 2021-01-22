@@ -3,7 +3,7 @@ import { NextSeo } from 'next-seo'
 import getAllPostPreviews from '@/getAllPostPreviews'
 import { PostPreview } from '@/components/PostPreview'
 
-export default function Home() {
+export default function AllPostsPage() {
   const title = 'All Posts'
   const allPosts = getAllPostPreviews()
   return (

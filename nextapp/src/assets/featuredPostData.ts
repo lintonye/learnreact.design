@@ -69,8 +69,16 @@ const postDataAtHome: Category[] = [
 const allPostPreviews = getAllPostPreviews()
 
 function hydratePost(post: PostAtHome): Post {
-  const postPreview = allPostPreviews.find((p) => p.slug === post.slug) || {}
-  return { ...postPreview, ...post }
+  const postPreview = allPostPreviews.find((p) => p.slug === post.slug)
+  return {
+    title: 'title',
+    date: new Date(),
+    excerpt: 'excerpt',
+    url: 'url',
+    tags: [],
+    ...postPreview,
+    ...post,
+  }
 }
 
 export function getPostDataAtHome() {

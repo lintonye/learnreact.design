@@ -20,3 +20,17 @@ export type JsxParentNode = {
 }
 
 export type JsxNode = JsxParentNode | string
+
+export type Requirement = 'none' | 'js' | 'react'
+
+export type Course = {
+  id: string
+  name: string
+  subtitle: string
+  icon: React.ReactNode
+  length: string
+  detailLink: string
+  requirement: Requirement
+  chapters?: any[]
+  isNew?: boolean
+}

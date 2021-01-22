@@ -1,5 +1,5 @@
 import { jsx } from '@emotion/core'
-import { getPostDataAtHome } from '../featuredPostData'
+import { getPostDataAtHome } from '../assets/featuredPostData'
 import { PostPreview } from './PostPreview'
 
 export function Main() {
