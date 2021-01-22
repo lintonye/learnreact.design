@@ -6,9 +6,11 @@ export async function getStaticProps() {
       // remove non-serializable fields
       //   -- "excerpt" since it's a component
       //   -- "date" since it's a Date
-      posts: getAllPostPreviews().map(({ excerpt, date, ...props }) => ({
-        ...props,
-      })),
+      posts: getAllPostPreviews().map(
+        ({ excerpt, date, surprise, ...props }) => ({
+          ...props,
+        }),
+      ),
     },
   }
 }
