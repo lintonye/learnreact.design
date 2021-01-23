@@ -4,13 +4,13 @@ import { SurpriseReveal } from './SurpriseReveal'
 import { Course } from '@/types'
 
 type Props = {
-  nameAs?: 'div' | 'h2' | 'h3' | 'h4'
-  subtitleAs?: 'div' | 'h2' | 'h3' | 'h4'
+  titleAs: 'div' | 'h2' | 'h3' | 'h4'
+  excerptAs: 'div' | 'h2' | 'h3' | 'h4'
 } & Course
 
 export function CoursePreview({
-  nameAs = 'div',
-  subtitleAs = 'div',
+  titleAs = 'div',
+  excerptAs = 'div',
   title: name,
   excerpt: subtitle,
   icon,
@@ -23,7 +23,7 @@ export function CoursePreview({
       <div className="space-y-4">
         <div className="space-x-2 flex items-center">
           {React.createElement(
-            nameAs,
+            titleAs,
             { className: 'text-lg font-bold inline-block' },
             <Link href={detailLink}>{name}</Link>,
           )}
@@ -32,7 +32,7 @@ export function CoursePreview({
           </div>
         </div>
 
-        {React.createElement(subtitleAs, {}, subtitle)}
+        {React.createElement(excerptAs, {}, subtitle)}
         <div className="text-sm">{length}</div>
       </div>
     </SurpriseReveal>

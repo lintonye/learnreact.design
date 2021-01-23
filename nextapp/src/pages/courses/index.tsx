@@ -26,8 +26,8 @@ export default function AllCoursesPage() {
               courses.map((c) => (
                 <CoursePreview
                   key={c.slug}
-                  nameAs="h2"
-                  subtitleAs="h3"
+                  titleAs="h2"
+                  excerptAs="h3"
                   {...c}
                 />
               )),
