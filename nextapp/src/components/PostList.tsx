@@ -31,6 +31,7 @@ export const PostList: FunctionComponent<Props> = ({ tag, posts }) => {
       <div className="prose md:prose-xl max-w-screen-md mt-0 mx-auto leading-6 space-y-8">
         {title && <h1 className="text-xl leading-tight">{title}</h1>}
         {posts.map((post) => (
+          // @ts-ignore
           <PostPreview key={post.slug} {...post} />
         ))}
       </div>
