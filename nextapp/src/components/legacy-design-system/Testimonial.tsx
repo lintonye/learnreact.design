@@ -37,7 +37,7 @@ export function Testimonial({
 }: any) {
   const [photoUrl, setPhotoUrl] = React.useState(null)
   React.useEffect(() => {
-    import(`./assets/student-profile-photos/${photoName}.jpg`).then((module) =>
+    import(`@/assets/student-profile-photos/${photoName}.jpg`).then((module) =>
       setPhotoUrl(module.default),
     )
   }, [photoName])

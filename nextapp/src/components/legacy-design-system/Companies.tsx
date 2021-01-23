@@ -33,7 +33,7 @@ export default function Companies() {
       >
         {companies.map((company) => (
           <LogoImg
-            src={require(`./assets/company-logos/${company}.png`).default}
+            src={require(`@/assets/company-logos/${company}.png`).default}
             key={company}
             m={[2, 2, 4]}
           />
