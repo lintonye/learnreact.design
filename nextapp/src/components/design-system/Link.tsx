@@ -2,17 +2,35 @@ import * as React from 'react'
 import { css } from '@emotion/core'
 import NLink from 'next/link'
 
-type Props = {} & React.AnchorHTMLAttributes<HTMLAnchorElement>
+type Props = {
+  href: string
+  underline: boolean
+} & React.AnchorHTMLAttributes<HTMLAnchorElement>
 
-export function Link({ href, className, ...props }: Props) {
-  const LinkComp: React.FunctionComponent<any> | string =
-    href && href.match(/(https?)|(mailto:).+/) ? 'a' : NLink
+export function Link({
+  href,
+  className,
+  children,
+  underline = true,
+  ...props
+}: Props) {
+  // const LinkComp: React.FunctionComponent<any> | string =
+  // href && href.match(/(https?)|(mailto:).+/) ? 'a' : NLink
   return (
-    <span className={`cursor-pointer hover:underline ` + className}>
-      {React.createElement(LinkComp, {
-        href,
-        ...props,
-      })}
-    </span>
+    <NLink href={href}>
+      <a
+        className={
+          `cursor-pointer ${underline ? 'hover:underline' : ''} ` + className
+        }
+      >
+        {children}
+      </a>
+    </NLink>
+    //   <span classname={`cursor-pointer hover:underline ` + classname}>
+    //     {react.createelement(linkcomp, {
+    //       href,
+    //       ...props,
+    //     })}
+    //   </span>
   )
 }
