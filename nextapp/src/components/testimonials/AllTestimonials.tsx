@@ -2,15 +2,23 @@ import Head from 'next/head'
 import React from 'react'
 import Image from 'next/image'
 
+type Props = {
+  name: string
+  title: string
+  company?: string
+  pictureName: string
+  nameLink?: string
+  children: React.ReactNode
+}
+
 function CustomerQuote({
-  smallFonts,
   name,
   title,
   company,
   pictureName,
   nameLink,
   children,
-}) {
+}: Props) {
   return (
     <div className="">
       <div
@@ -251,7 +259,6 @@ function Quotes() {
       }}
     >
       <CustomerQuote
-        smallFonts
         company="Adidas"
         name="Edoardo Fusaro"
         pictureName="edo"
@@ -262,7 +269,6 @@ function Quotes() {
         started from 0 knowledge about it.
       </CustomerQuote>
       <CustomerQuote
-        smallFonts
         company="Pitch"
         name="Kevin Cannon"
         pictureName="kevinc"
@@ -274,7 +280,6 @@ function Quotes() {
       </CustomerQuote>
 
       <CustomerQuote
-        smallFonts
         name="Ryder Booth"
         title="UX Lead"
         company="Cisco"
@@ -286,7 +291,6 @@ function Quotes() {
         and a good introduction to React.
       </CustomerQuote>
       <CustomerQuote
-        smallFonts
         name="Joshua Ulm"
         title="Group Vice President of Design"
         company="Oracle"
@@ -302,7 +306,6 @@ function Quotes() {
         </p>
       </CustomerQuote>
       <CustomerQuote
-        smallFonts
         name="Mushon Zer-Aviv"
         title="VP Design &amp; UX"
         company="Localize.city"
@@ -315,7 +318,6 @@ function Quotes() {
         <p>Linton has a radical vision, and it’s contagious.</p>
       </CustomerQuote>
       <CustomerQuote
-        smallFonts
         name="Carley Cooper"
         title="Designer"
         company="Architech"
@@ -331,7 +333,6 @@ function Quotes() {
         </p>
       </CustomerQuote>
       <CustomerQuote
-        smallFonts
         name="Nick Hart"
         title="Designer"
         company="Mondo Robot"
@@ -344,7 +345,6 @@ function Quotes() {
         you enjoy React, FramerX, or want to improve your skills!
       </CustomerQuote>
       <CustomerQuote
-        smallFonts
         name="Erik Drouhard"
         title="Senior Visual UX Designer"
         company="Nuance Communications "
@@ -356,7 +356,6 @@ function Quotes() {
         highly recommended!
       </CustomerQuote>
       <CustomerQuote
-        smallFonts
         name="Yin-Ho Chong"
         title="UX Designer"
         company="Thales Digital Factory"
@@ -369,7 +368,6 @@ function Quotes() {
         of our questions.
       </CustomerQuote>
       <CustomerQuote
-        smallFonts
         name="Tony Sciantarelli"
         title="Sr. UX Designer"
         company="Marriott International"
@@ -379,7 +377,6 @@ function Quotes() {
         examples, great explanations, React is my friend now!
       </CustomerQuote>
       <CustomerQuote
-        smallFonts
         name="Heidi Merscher"
         title="UI Designer"
         company="Magma Digital"
@@ -398,7 +395,6 @@ function Quotes() {
         </p>
       </CustomerQuote>
       <CustomerQuote
-        smallFonts
         name="Mustafa Alic"
         title="CTO"
         company="AWARE GmbH (Vienna, Austria)"
@@ -409,7 +405,6 @@ function Quotes() {
         it comes to code and design.
       </CustomerQuote>
       <CustomerQuote
-        smallFonts
         name="Dicky Juwono"
         title="UX designer"
         pictureName="dicky"
@@ -434,7 +429,6 @@ function Quotes() {
         </p>
       </CustomerQuote>
       <CustomerQuote
-        smallFonts
         name="Vince Kodikal"
         title="Product Designer"
         company="IQVIA"
@@ -454,7 +448,6 @@ function Quotes() {
         </p>
       </CustomerQuote>
       <CustomerQuote
-        smallFonts
         name="George Otsubo"
         title="Senior product designer"
         company="ClassPass"
@@ -466,7 +459,6 @@ function Quotes() {
         get into react.
       </CustomerQuote>
       <CustomerQuote
-        smallFonts
         name="Dominik Stec"
         title="Senior Designer"
         pictureName="dominik"
@@ -475,7 +467,6 @@ function Quotes() {
         examples, great explanations, React is my friend now!
       </CustomerQuote>
       <CustomerQuote
-        smallFonts
         name="Charlene Chen"
         title="UX Designer"
         company="Twitch"
@@ -486,7 +477,6 @@ function Quotes() {
         videos show practical examples that helped me tremendously.
       </CustomerQuote>
       <CustomerQuote
-        smallFonts
         name="Kyle Werstein"
         title="Founder"
         company="Verdant Records"
@@ -498,7 +488,6 @@ function Quotes() {
         than ever of building my own products.
       </CustomerQuote>
       <CustomerQuote
-        smallFonts
         name="Pablo Aguilar"
         title="UX Consultant"
         company="Bravo TV, NBC Universal"
@@ -508,7 +497,6 @@ function Quotes() {
         that experience.
       </CustomerQuote>
       <CustomerQuote
-        smallFonts
         name="Patrick Multani"
         title="Product Designer"
         pictureName="patrick"
@@ -519,7 +507,6 @@ function Quotes() {
         community help me learning react.
       </CustomerQuote>
       <CustomerQuote
-        smallFonts
         name="Lachezar Petkov"
         title="UX designer"
         pictureName="lachezar"
@@ -532,7 +519,6 @@ function Quotes() {
         you, Linton!
       </CustomerQuote>
       <CustomerQuote
-        smallFonts
         name="Aida Paul"
         title="Product Designer"
         pictureName="aida"
@@ -541,7 +527,6 @@ function Quotes() {
         understand React. Thank you Linton!
       </CustomerQuote>
       <CustomerQuote
-        smallFonts
         name="Lincoln Mitchell"
         title="Senior UX Architect"
         pictureName="lincoln"
@@ -550,7 +535,6 @@ function Quotes() {
         designers.
       </CustomerQuote>
       <CustomerQuote
-        smallFonts
         name="Anthony Barbato"
         title="Lead Product Designer"
         pictureName="anthony"
@@ -559,7 +543,6 @@ function Quotes() {
         helpful.
       </CustomerQuote>
       <CustomerQuote
-        smallFonts
         name="Kaitlyn Vu"
         nameLink="https://twitter.com/KaitlynVu_"
         title="UX Designer"
@@ -571,7 +554,6 @@ function Quotes() {
         </span>
       </CustomerQuote>
       <CustomerQuote
-        smallFonts
         name="Masood Sadri"
         title="Product Designer"
         pictureName="masood"
