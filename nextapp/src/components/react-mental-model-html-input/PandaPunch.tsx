@@ -11,6 +11,7 @@ export function PandaPunchAuto({ autoPlay = false }: { autoPlay: boolean }) {
         <motion.span
           className="inline-block"
           animate={{ scale: autoPlay ? [1, 1, 2, 1, 2, 1] : 1 }}
+          style={{ scaleX: -1 }}
           transition={{ duration: 1.5 }}
           role="img"
           aria-label="fist"
