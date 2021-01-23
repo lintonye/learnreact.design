@@ -12,11 +12,11 @@ function CustomerQuote({
   children,
 }) {
   return (
-    <div className="flex space-x-1">
-      <div className="font-serif text-lg italic opacity-80" css={{ flex: 3 }}>
-        {children}
-      </div>
-      <div className="text-right space-y-1" css={{ flex: 2 }}>
+    <div className="">
+      <div
+        className="text-right space-y-1 float-right m-2 w-1/3 text-sm"
+        css={{ flex: 2 }}
+      >
         <Image
           src={
             require(`@/assets/student-profile-photos/${pictureName}.jpg`)
@@ -31,6 +31,9 @@ function CustomerQuote({
           {title}
           {company && `, ${company}`}
         </div>
+      </div>
+      <div className="font-serif text-lg italic" css={{ flex: 3 }}>
+        {children}
       </div>
     </div>
   )
