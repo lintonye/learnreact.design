@@ -4,7 +4,7 @@ import NLink from 'next/link'
 
 type Props = {
   href: string
-  underline: boolean
+  underline?: boolean
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>
 
 export function Link({

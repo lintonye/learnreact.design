@@ -41,15 +41,6 @@ const makeLengthText = (hours: number, lessons: number) =>
 
 const ALL_COURSES: Course[] = [
   {
-    slug: 'web-basics',
-    title: 'Web Basics',
-    excerpt: 'HTML + CSS + JS',
-    icon: ICONS.prep,
-    length: '6-week email course',
-    url: '/re4d-prerequisites',
-    requirement: 'none',
-  },
-  {
     slug: 'react-framer',
     title: 'Prototyping With React + Framer',
     excerpt: 'Build 15+ real world prototypes',
@@ -61,6 +52,15 @@ const ALL_COURSES: Course[] = [
     url: '/courses/react-framer',
     requirement: 'none',
     chapters: Chapters.framerx,
+  },
+  {
+    slug: 'web-basics',
+    title: 'Web Basics',
+    excerpt: 'HTML + CSS + JS',
+    icon: ICONS.prep,
+    length: '6-week email course',
+    url: '/courses/web-basics',
+    requirement: 'none',
   },
   {
     slug: 'rmm',

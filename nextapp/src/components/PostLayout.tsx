@@ -216,6 +216,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
     url = currentCanonicalUrl,
     ogImage,
     tocHeadings,
+    sidebar = true,
   } = meta || {}
 
   const [inPostState, dispatch] = useReducer(inPostStateReducer, [])
