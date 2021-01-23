@@ -161,18 +161,11 @@ function WhatYouWillBuild(props: any) {
             borderRadius: 16
           }}
         /> */}
-        <Location>
-          {({ location: { pathname } }) => {
-            const enrollLink = `${pathname}#pricing`
-            return (
-              <Link to={enrollLink} underline={false}>
-                <BoardButton>
-                  <Text textVariant="small">BOARD NOW</Text>
-                </BoardButton>
-              </Link>
-            )
-          }}
-        </Location>
+        <Link to={'#pricing'} underline={false}>
+          <BoardButton>
+            <Text textVariant="small">BOARD NOW</Text>
+          </BoardButton>
+        </Link>
       </Box>
     </GalaxyHole>
   )
