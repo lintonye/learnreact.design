@@ -48,13 +48,10 @@ function processFile(filePath) {
   const readInterface = readline.createInterface({
     input: Readable.from(content),
   })
+  const { thumbnail, video, ...frontMatterRest } = frontMatter
   const meta =
     frontMatter.title &&
-    `export const meta = ${JSON.stringify(
-      { tags: [], ...frontMatter },
-      null,
-      2,
-    )}`
+    `export const meta = ${JSON.stringify(frontMatterRest, null, 2)}`
   const imageImports = new Set()
   const newContent = []
   getAllImageInfo(path.dirname(filePath), readInterface)
@@ -93,11 +90,11 @@ function processFile(filePath) {
               (imageImports.size > 0
                 ? Array.from(imageImports).join('\n') + '\n\n'
                 : '') +
-              (meta ? meta + '\n\n' : '') +
-              `<!--excerpt-->\n${
-                frontMatter.excerpt || ''
-              }\n<!--/excerpt-->\n` +
-              newContent.join('\n')
+              `import { TipLayout } from "@component/TipLayout"`(
+                meta ? meta + '\n\n' : '',
+              ) +
+              `export default TipLayout`
+            newContent.join('\n')
             fs.writeFile(filePath, newFileContent, () => console.log(filePath))
           }
         })
@@ -105,7 +102,7 @@ function processFile(filePath) {
     .catch((e) => console.error(e))
 }
 
-const postRoot = 'src/pages/posts'
+const tipRoot = 'src/pages/tips'
 
 function processAllFiles(dirPath) {
   fs.readdirSync(dirPath).forEach(function (file) {
@@ -115,13 +112,13 @@ function processAllFiles(dirPath) {
       processAllFiles(filepath)
     } else {
       // console.info(filepath + '\n')
-      if (path.extname(filepath) === '.mdx') {
+      if (path.extname(filepath) === '.md') {
         processFile(filepath)
       }
     }
   })
 }
 
-processAllFiles(postRoot)
+processAllFiles(tipRoot)
 
 // processFile(`${postRoot}/what-is-react-native/index.mdx`)
