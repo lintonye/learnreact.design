@@ -1,4 +1,5 @@
 import imgInterviewCalendarPng from './interview-calendar.png'
+import imgSurprise from './react-interviews-surprise.png'
 
 export const meta = {
   tags: ['design-react'],
@@ -6,13 +7,12 @@ export const meta = {
   title: 'React Course for Designers, Anyone?',
   subtitle: 'A report of 10+ interviews with designers',
   redirect_from: ['/2017/05/09/react-for-designers-interviews.html'],
-  excerpt: 'Should designers code? This is an eternal question.',
-  author: {
-    name: 'Linton Ye',
-    twitter: 'lintonye',
-    bio:
-      'Freelance full-stack developer in BC Canada (GMT-8). Android, React Native, Node.js, MongoDB, PostgreSQL. <a href="mailto:linton@jimulabs.com">Contact me.</a>',
-    image: 'linton.jpg',
+  surprise: {
+    actor: imgSurprise,
+    animationVariants: {
+      hidden: { x: 0, rotate: 0 },
+      revealed: { x: -130, rotate: 0 },
+    },
   },
 }
 
