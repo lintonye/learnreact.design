@@ -1,0 +1,59 @@
+---
+date: '2018-10-25'
+title: 'Text input: handle mobile keyboard'
+thumbnail: text-input-android-keyboard.mp4.jpg
+video: text-input-android-keyboard.mp4
+tags: ['Code', 'Code Component', 'Code Overrides', 'Framer X']
+sourceFile: https://www.dropbox.com/s/6stgfww8jsi3qcu/text-input-keypress-mobile.framerx?dl=0
+tweet:
+---
+
+# Overview
+
+This is a follow up of [this text input tip](/tips/text-input-keypress). HT [@BYUUXD](https://twitter.com/BYUUXD).
+
+On Android, the soft keyboard will block the text input like [so](https://twitter.com/BYUUXD/status/1055167612294856704).
+
+This is more of a bug of the Framer Preview app on Android. But as a workaround, we can write code to move the screen up when the text input gains focus.
+
+# `TextInput`
+
+```jsx
+class TextInput extends React.Component {
+  ...
+  render() {
+    return (
+      <input type="text"
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
+      />
+    )
+  }
+}
+```
+
+# `App.ts` (Code override)
+
+Animate `containerTop` on focus and on blur:
+
+```js
+export const InputEvents: Override = () => {
+  return {
+    onFocus() {
+      // Don't move the screen up on iOS because it already moves
+      // the screen for us
+      !iOS && animate.ease(data.containerTop, -200, { duration: 0.2 })
+    },
+    onBlur() {
+      !iOS && animate.ease(data.containerTop, 0, { duration: 0.2 })
+    },
+  }
+}
+```
+
+Determine if it's on iOS:
+
+```js
+// https://stackoverflow.com/a/9039885/3973320
+const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+```
