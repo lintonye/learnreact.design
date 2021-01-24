@@ -34,7 +34,7 @@ export function Header() {
             </Menu> */}
           </li>
           <li>
-            <Link href="/webinars">Webinars</Link>
+            <Link href="/tips">Tips</Link>
           </li>
           {/* <li>
             <a href="/hire-me">Hire Linton</a>
