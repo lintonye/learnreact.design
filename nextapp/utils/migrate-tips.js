@@ -48,11 +48,32 @@ function processFile(filePath) {
   const readInterface = readline.createInterface({
     input: Readable.from(content),
   })
+  const dirName = path.basename(filePath).replace(path.extname(filePath), '')
+  const dirPath = path.join(tipsRoot, dirName)
+  if (!fs.existsSync(dirPath)) fs.mkdirSync(dirPath)
+  const imageImports = new Set()
+
+  // move thumbnail and video; add imports
+  const migrateThumbnail = (filename, varName) => {
+    const newThumbnail = path.join(dirName, filename)
+    frontMatterRest[varName] = varName
+    const oldThumbnailPath = path.join(tipsRoot, 'media', filename)
+    const newThumbnailPath = path.join(tipsRoot, newThumbnail)
+    if (fs.existsSync(oldThumbnailPath) && !fs.existsSync(newThumbnailPath))
+      fs.renameSync(oldThumbnailPath, newThumbnailPath)
+    imageImports.add(`import ${varName} from "${newThumbnail}"`)
+  }
   const { thumbnail, video, ...frontMatterRest } = frontMatter
+  if (thumbnail) migrateThumbnail(thumbnail, 'thumbnailImage')
+  if (video) migrateThumbnail(video, 'thumbnailVideo')
+
   const meta =
     frontMatter.title &&
-    `export const meta = ${JSON.stringify(frontMatterRest, null, 2)}`
-  const imageImports = new Set()
+    `export const meta = ${JSON.stringify(frontMatterRest, null, 2)}`.replace(
+      /"(thumbnail(Image|Video))": "\1"/g,
+      '$1',
+    )
+
   const newContent = []
   getAllImageInfo(path.dirname(filePath), readInterface)
     .then((imageInfos) => {
@@ -90,19 +111,22 @@ function processFile(filePath) {
               (imageImports.size > 0
                 ? Array.from(imageImports).join('\n') + '\n\n'
                 : '') +
-              `import { TipLayout } from "@component/TipLayout"`(
-                meta ? meta + '\n\n' : '',
-              ) +
-              `export default TipLayout`
-            newContent.join('\n')
-            fs.writeFile(filePath, newFileContent, () => console.log(filePath))
+              `import { TipLayout } from "@component/TipLayout"\n\n` +
+              (meta ? meta + '\n\n' : '') +
+              `export default TipLayout\n\n` +
+              newContent.join('\n')
+            const newFilePath = path.join(tipsRoot, dirName, 'index.mdx')
+            fs.writeFile(newFilePath, newFileContent, () => {
+              console.log(newFilePath)
+              fs.unlinkSync(filePath)
+            })
           }
         })
     })
     .catch((e) => console.error(e))
 }
 
-const tipRoot = 'src/pages/tips'
+const tipsRoot = 'src/pages/tips'
 
 function processAllFiles(dirPath) {
   fs.readdirSync(dirPath).forEach(function (file) {
@@ -119,6 +143,6 @@ function processAllFiles(dirPath) {
   })
 }
 
-processAllFiles(tipRoot)
+processAllFiles(tipsRoot)
 
 // processFile(`${postRoot}/what-is-react-native/index.mdx`)

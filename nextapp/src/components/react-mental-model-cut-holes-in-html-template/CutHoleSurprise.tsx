@@ -65,18 +65,30 @@ export function CutHoleSurprise({ autoPlay = false }: { autoPlay: boolean }) {
       <motion.div
         variants={{
           hidden: { opacity: 0 },
-          revealed: { opacity: 1, transition: { delay: 0.9, duration: 0.1 } },
+          revealed: {
+            // opacity: 1,
+            // scale: 0.5,
+            opacity: [1, 1, 0],
+            scale: [0.5, 2.5, 2.5],
+            transition: {
+              delay: 0.9,
+              duration: 0.2,
+              repeat: 1,
+              repeatDelay: 0.1,
+              repeatType: 'loop',
+            },
+          },
         }}
         className="absolute"
         css={{
-          top: 40,
-          left: 0,
+          top: 35,
+          left: -20,
         }}
       >
         <Image
           src={imgFlash}
-          width={121 * scale}
-          height={154 * scale}
+          width={250 * scale}
+          height={220 * scale}
           layout="fixed"
         />
       </motion.div>
