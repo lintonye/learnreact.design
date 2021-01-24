@@ -111,7 +111,7 @@ function processFile(filePath) {
               (imageImports.size > 0
                 ? Array.from(imageImports).join('\n') + '\n\n'
                 : '') +
-              `import { TipLayout } from "@component/TipLayout"\n\n` +
+              `import { TipLayout } from "@/components/TipLayout"\n\n` +
               (meta ? meta + '\n\n' : '') +
               `export default TipLayout\n\n` +
               newContent.join('\n')
