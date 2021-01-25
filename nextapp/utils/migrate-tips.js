@@ -61,7 +61,9 @@ function processFile(filePath) {
     const newThumbnailPath = path.join(tipsRoot, newThumbnail)
     if (fs.existsSync(oldThumbnailPath) && !fs.existsSync(newThumbnailPath))
       fs.renameSync(oldThumbnailPath, newThumbnailPath)
-    imageImports.add(`import ${varName} from "${newThumbnail}"`)
+    imageImports.add(
+      `import ${varName} from "./${path.basename(newThumbnail)}"`,
+    )
   }
   const { thumbnail, video, ...frontMatterRest } = frontMatter
   if (thumbnail) migrateThumbnail(thumbnail, 'thumbnailImage')
@@ -90,12 +92,15 @@ function processFile(filePath) {
           const matchHeading = line.match(headingPattern)
           if (matchImg) {
             const imgAlt = matchImg[1]
-            const imgPath = matchImg[2]
-            const imgVar = fn2var(path.basename(imgPath))
+            const imgOldPath = matchImg[2]
+            const imgFilename = path.basename(imgOldPath)
+            const imgNewPath = path.join(dirPath, imgFilename)
+            fs.renameSync(path.join(tipsRoot, imgOldPath), imgNewPath)
+            const imgVar = fn2var(imgFilename)
             const { width, height } = imageInfos.get(
-              path.dirname(filePath) + '/' + imgPath,
+              path.dirname(filePath) + '/' + imgOldPath,
             )
-            imageImports.add(`import ${imgVar} from "${imgPath}"`)
+            imageImports.add(`import ${imgVar} from "./${imgFilename}"`)
             newContent.push(
               `<img src={${imgVar}} alt={\`${imgAlt}\`} width={${width}} height={${height}} />`,
             )
