@@ -1,0 +1,158 @@
+---
+date: '2019-08-02'
+title: '4.2 onMouseMove'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238582'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- React mouse events
+- Using Framer's API
+- Anonymous Functions
+- `event` properties
+- Coordinate system
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# Mouse Events
+
+Let’s add some action to our summer picture.
+
+Similar to our slider example, we want the different elements to move according to the position of the mouse.
+
+We need the `<Frame>` to inform us when the user moves the mouse. At that point, we’ll run some code to create the desired animations.
+
+## Framer's API
+
+Let's check out Framer's API [documentation](https://www.framer.com/api/frame/) and search for `mouse`. Eventually, we will find **`onMouseOut`**. The other mouse events are in conjunction with `onTap` or `onHoverStart` which aren't what we are looking for.
+
+![framer api](./framerapi.png)
+
+Even if we cannot find the attribute about mouse movement on this page, Frame supports it in another way. Similar to this `onMouseOut` attribute which standard HTML tags support, **we’ll be able to find relevant information in the React documentation itself**.
+
+Let's click on ["Supported React.Element DOM props"](https://reactjs.org/docs/dom-elements.html#all-supported-html-attributes) then ["SyntheticEvent"](https://reactjs.org/docs/events.html)
+
+![menu](./synthetic.png)
+
+and search for "mouse" again. You should find ["Mouse Events"](https://reactjs.org/docs/events.html#mouse-events) then click on that.
+
+![mouse events menu](./mouseevents.png)
+
+These are the mouse attributes that we can use on a `<Frame>`, `<div>`, and other HTML tags. Specifically, these attributes are called **events**, and they follow a certain pattern.
+
+The name always begins with **"on"**. For example, `onDragLeave`, `onDrop`, `onMouseEnter`, `onMouseMove`,`onMouseOver`, etc.
+
+If we use one of these attributes on a tag, we should set its value to be a **function**. When that event happens, our function will be called. For example, when the user moves the mouse, we can create actions such as playing an animation.
+
+## Implementing `onMouseMove`
+
+Back in our code, we can put `onMouseMove` into the root/parent `<Frame>` and input a function.
+
+```jsx
+<Frame
+  size={600}
+  background={null}
+  center
+  onMouseMove={function handleMove() {}}
+>
+  ...
+</Frame>
+```
+
+## Anonymous Functions
+
+If this function is not intended to be reused somewhere else, we can remove its name.
+
+```jsx{2}
+<Frame size={600} background={null} center onMouseMove={
+  function (){
+    // 1. Find mouse position
+    // 2. Create animations
+  }
+}
+>
+  ...
+</Frame>
+```
+
+These kinds of functions are called **anonymous functions**.
+
+## `event` and `info`
+
+If you remember working on the slider, we had an `onDrag` function and we passed `event` and `info` into the function. Let's print out `info` to see if we getting any information.
+
+```jsx
+<Frame
+  size={600}
+  background={null}
+  center
+  onMouseMove={function (event, info) {
+    // 1. Find mouse position
+    console.log(info)
+    // 2. Create animations
+  }}
+>
+  ...
+</Frame>
+```
+
+Now when we move our cursor around, we only get a lot of `undefined` print statements.
+
+![undefined console statements](./undefined.png)
+
+This means `info` isn't useful in our case of `onMouseMove`, so we can remove the `info` parameter.
+
+## `event` Properties
+
+Let's go back to React's mouse event [documentation](https://reactjs.org/docs/events.html#mouse-events).
+
+Below, there are a lot of properties we can implement.
+
+![properties](./properties.png)
+
+In our case, there are only two properties we want: `clientX` and `clientY`. These properties are available in the `event` object. We can access `clientX` and `clientY` like this.
+
+```jsx
+<Frame
+  size={600}
+  background={null}
+  center
+  onMouseMove={function (event) {
+    // 1. Find mouse position
+    console.log(event.clientX, event.clientY)
+    // 2. Create animations
+  }}
+>
+  ...
+</Frame>
+```
+
+Now we get number outputs in our console.
+
+![console number output](./consolenumbers.png)
+
+## Coordinate System
+
+If you observe how the numbers change with your cursor movements, you will notice that they don't follow the traditional coordinate system with **(0,0)** at the bottom left.
+
+If you begin in the **top left** both **x and y will be small**.
+
+Moving to the **top right**, **x will be large** and **y will stay small**.
+
+Moving down to the **bottom right**, **x will stay large** and **y will be large**.
+
+Finally, moving to the **bottom left**, **x will be small** and **y will stay large**.
+
+This coordinate system is hard to intuitively understand at first, but, with enough time, you will get the hang of it!
+
+It might help to think of the position values as the absolute-value offset from the top left corner.
+
+# Conclusion
+
+Now that we have our mouse's x and y position information, we can begin to create animations in our next post!

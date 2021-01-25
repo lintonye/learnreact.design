@@ -1,0 +1,304 @@
+---
+date: '2019-08-21'
+title: '7.4 Floating Action Button Animation'
+video: 'https://school.learnreact.design/courses/629779/lectures/11509516'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- Review of animation
+- `variants` properties
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# Final Result
+
+![FAB animation result](./fab2.gif)
+
+See for yourself! [FAB](https://f89r9.csb.app/).
+
+# FAB Animation
+
+In this and the next post, we’ll build this Floating action button with icons from [Material Design](https://material.io/resources/icons/?icon=share&style=baseline).
+
+As a review of the techniques we’ve learned so far, we’ll also build the staggering animations from scratch.
+
+Since we'll be reviewing past material, I’ll be moving at a faster pace! As a side note, FAB stands for floating action button!
+
+Let's take a look at our stater code.
+
+We have an array of objects here for our smaller buttons.
+
+```jsx
+function App() {
+  const buttons = [
+    {
+      image:
+        'https://tinyfac.es/data/avatars/A7299C8E-CEFC-47D9-939A-3C8CA0EA4D13-200w.jpeg',
+    },
+    {
+      image:
+        'https://tinyfac.es/data/avatars/AEF44435-B547-4B84-A2AE-887DFAEE6DDF-200w.jpeg',
+    },
+    {
+      image:
+        'https://tinyfac.es/data/avatars/2DDDE973-40EC-4004-ABC0-73FD4CD6D042-200w.jpeg',
+    },
+    {
+      image:
+        'https://tinyfac.es/data/avatars/852EC6E1-347C-4187-9D42-DF264CCF17BF-200w.jpeg',
+    },
+  ]
+  return <Frame />
+}
+```
+
+We'll begin by assuming that we have a `Fab` component.
+
+```jsx{3}
+function App() {
+  const buttons = [...]
+  return <Fab buttons={buttons} />
+}
+```
+
+To give our `<Fab>` tag flexibility, we'll add and move the button to the center, we'll add the `center` attribute to `<Fab>`.
+
+```jsx{3}
+function App() {
+  const buttons = [...]
+  return <Fab buttons={buttons} center />
+}
+```
+
+If you remember, we can't just use the `center` attribute, we also have to support it in our `Fab` component.
+
+## `Fab` Component
+
+Let's create `Fab`!
+
+We are going to use object destructuring to extract the properties we want.
+
+```jsx
+function Fab({ buttons, ...props }) {
+  return <Frame {...props}>{/* FAB */}</Frame>
+}
+```
+
+This `<Frame>` is just a container. Therefore, to add a clickable button we'll create another `<Frame>`.
+
+```jsx{5-11}
+function Fab({buttons, ...props}) {
+  return (
+    <Frame {...props}>
+      {/* FAB */}
+      <Frame
+        size={60}
+        borderRadius="50%"
+        backgroundColor="white"
+        shadow="1px 1px 5px rgba(0,0,0,0.5)"
+      />
+    </Frame>
+  )
+}
+```
+
+![circle](./circle.png)
+
+We can get rid of the blue square and have it fit the size of the circle as follows:
+
+```jsx{3}
+function Fab({buttons, ...props}) {
+  return (
+    <Frame size="auto" background={null} {...props}>
+      ...
+    </Frame>
+  )
+}
+```
+
+![centered circle](./centered.png)
+
+## `useCycle`
+
+Our button should have two states: **folded** and **expanded**.
+
+We’ll use `useCycle` to toggle between the values.
+
+```jsx{3,7}
+import * as React from "react"
+import { render } from "react-dom"
+import { Frame, transform, useAnimation, useCycle } from "framer"
+import "./styles.css"
+
+function Fab({buttons, ...props}) {
+  const [mode, cycleMode] = useCycle("folded", "expanded")
+  return (
+    ...
+  )
+}
+```
+
+We’ll set `mode` to the `animate` attribute of the **root** `<Frame>` so that `animate` will propagate to all its children.
+
+```jsx{4}
+function Fab({buttons, ...props}) {
+  const [mode, cycleMode] = useCycle("folded", "expanded")
+  return (
+    <Frame size="auto" background={null} animate={mode} {...props}>
+      ...
+    </Frame>
+  )
+}
+```
+
+## `onTap`
+
+For the actual button, we'll add the `onTap` function and call `cycleMode`.
+
+```jsx{4,11-13}
+function Fab({buttons, ...props}) {
+  const [mode, cycleMode] = useCycle("folded", "expanded")
+  return (
+    <Frame size="auto" background={null} animate={mode} {...props}>
+      {/* FAB */}
+      <Frame
+        size={60}
+        borderRadius="50%"
+        backgroundColor="white"
+        shadow="1px 1px 5px rgba(0,0,0,0.5)"
+        onTap={function(){
+          cycleMode()
+        }}
+      />
+    </Frame>
+  )
+}
+```
+
+## `variants`
+
+We'll now add `variants` for our `folded` and `expanded` modes to display different image icons.
+
+```jsx{6-9}
+<Frame
+  size={60}
+  borderRadius="50%"
+  backgroundColor="white"
+  shadow="1px 1px 5px rgba(0,0,0,0.5)"
+  variants]{{
+    folded:{},
+    expanded:{}
+  }}
+  onTap={function(){
+    cycleMode()
+  }}
+/>
+```
+
+Because `<Frame>` has the `image` prop, we can use it inside variants to change images according to the state.
+
+## SVG Icons
+
+We don't have to use a url path because we have the images downloaded inside our project's public directory.
+
+If you don't have those images, here are the links: [share.svg](https://material.io/resources/icons/?icon=share&style=baseline) and [x.svg](https://material.io/resources/icons/?icon=clear&style=baseline).
+
+```jsx{6-9}
+<Frame
+  size={60}
+  borderRadius="50%"
+  backgroundColor="white"
+  shadow="1px 1px 5px rgba(0,0,0,0.5)"
+  variants={{
+    folded: { image: "/share.svg" },
+    expanded: { image: "/x.svg" }
+  }}
+  onTap={function(){
+    cycleMode()
+  }}
+/>
+```
+
+![icons](./icons.gif)
+
+The icons are a bit too big. To not affect the size of the button, we can add another `<Frame>` inside and move the `variants` attribute inside of the new `<Frame>`.
+
+```jsx
+{
+  /* FAB */
+}
+;<Frame
+  size={60}
+  borderRadius="50%"
+  backgroundColor="white"
+  shadow="1px 1px 5px rgba(0,0,0,0.5)"
+  onTap={function () {
+    cycleMode()
+  }}
+>
+  <Frame
+    size={30}
+    background={null}
+    center
+    variants={{
+      folded: { image: '/share.svg' },
+      expanded: { image: '/x.svg' },
+    }}
+  />
+</Frame>
+```
+
+Note that the button was split into 2 Frames to make the new `<Frame>` a child of the larger one.
+
+![smaller icons](./smallericons.gif)
+
+## Icon animation
+
+Let's add some motion to it.
+
+```jsx{6-7}
+<Frame
+  size={30}
+  background={null}
+  center
+  variants={{
+    folded: { image: "/share.svg", rotate:0 },
+    expanded: { image: "/x.svg", rotate:180 }
+  }}
+/>
+```
+
+![rotating button](./rotate.gif)
+
+However, if we look closely, it seems like the icons are slightly off-center.
+
+We can fix this by adding `x` and `y` attributes to the `variants` properties.
+
+```jsx
+<Frame
+  size={30}
+  background={null}
+  center
+  variants={{
+    folded: { image: '/share.svg', rotate: 0, x: -2, y: 1 },
+    expanded: { image: '/x.svg', rotate: 180, x: 0, y: 0 },
+  }}
+/>
+```
+
+Although this means the icons are also being animated horizontally and vertically, those animations are being masked by the rotation.
+
+![rotating button](./final.gif)
+
+# Conclusion
+
+Building this button from scratch was a good review of some of the earlier topics we covered. Do you remember why we use `variants`? What is `useCycle`?
+
+In the next post, we’ll add the smaller icons when the button is expanded.

@@ -1,0 +1,256 @@
+---
+date: '2019-08-13'
+title: '5.7 Multiple Cards'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238553'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- Creating `Card` component
+- Customizing instances of `Card`
+- Dynamic `style` attribute
+- Template string
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# `Card` component
+
+We’ve got a swipeable card so far. Let’s now make a deck of cards!
+
+As review, we’ll start by extracting the code into a `Card` component so that we can easily reuse it. Do you remember how to do it?
+
+```jsx
+function Card(){
+  return ...
+}
+```
+
+We first create a capitalized function and place a `return` inside. We can either have the tags to be return on the same line as the `return` or the `return` must have parentheses that enclose the tags.
+
+## Moving code into `Card`
+
+Let's copy our big `<Frame/>` tag and move it to our `Card` component.
+
+```jsx{3-19}
+function Card(){
+  return (
+    <Frame
+      center
+      drag="x"
+      x={mv}
+      rotate={rotateMv}
+      opacity={opacityMv}
+      dragConstraints={{ left: -200, right: 200 }}
+      style={style}
+      animate={animControls}
+      onDragEnd={function(_, info) {
+        if (Math.abs(info.point.x) < 150) {
+          animControls.start({ x: 0 })
+        } else {
+          animControls.start({ x: info.point.x < 0 ? -200 : 200 })
+        }
+      }}
+    />
+  )
+}
+```
+
+Lot's of errors will be shown since we also have to move all our required variables: `mv`, `animControls`, `rotateMv`, and `opacityMv`.
+
+```jsx{2-5}
+function Card(){
+  let mv = useMotionValue(0)
+  let animControls = useAnimation()
+  let rotateMv = useTransform(mv, [-200, 200], [-50, 50])
+  let opacityMv = useTransform(mv, [-200, -150, 0, 150, 200], [0, 1, 1, 1, 0])
+  return (
+    ...
+  )
+}
+```
+
+We can now create the `<Card />` tag inside our `App` `div`.
+
+```jsx{4}
+function App() {
+  return (
+    <div className="App">
+      <Card />
+    </div>
+  )
+}
+```
+
+## Adding more cards
+
+The reason for extracting the component is that it gives us the ability for to re-use and create multiple cards.
+Therefore, let's add more Cards!
+
+```jsx{4-8}
+function App() {
+  return (
+    <div className="App">
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+    </div>
+  )
+}
+```
+
+![multiple of the same cards](./multiplecards.gif)
+
+We now have multiple cards behind each other, but we need to display a few different cards, with different images and background colors.
+
+## Customizing cards
+
+Typically, we can add different attributes to each card.
+
+```jsx{4}
+function App() {
+  return (
+    <div className="App">
+      <Card image="https://cdn.glitch.com/071e5391-90f7-476b-b96c-1f51f7106b0c%2Fbird_fat_black_medium.svg?v=1557968629951" color="#FF88AA" />
+      <Card />
+      <Card />
+      <Card />
+    </div>
+  )
+}
+```
+
+However, we got an error here because we haven’t told the `Card` component what to do with these props. As a result, we have to add the `props` parameter to `Card`.
+
+```jsx{1}
+function Card(props){
+  ...
+}
+```
+
+We could use the convenient Frame props such as `image` and `backgroundColor`.
+
+```jsx{3-19}
+function Card(props){
+  return (
+    <Frame
+      ...
+      style={style}
+      image={props.image}
+      backgroundColor={props.backgroundColor}
+    />
+  )
+}
+```
+
+But just for a change and since we’ve already been using the `style` attribute, let’s simply update our `style` attribute.
+
+## Dynamic `style` attribute
+
+Currently, the `style` variable is defined outside, so we need to move it inside the `Card` function so that we could make it dynamic with our `props` parameter.
+
+```jsx{3-12}
+function Card(props){
+  ...
+  const style = {
+    backgroundImage: "url(https://cdn.glitch.com/071e5391-90f7-476b-b96c-1f51f7106b0c%2Fbird_strong_small.svg?v=1560032432704)",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "contain",
+    backgroundPosition: "center",
+    backgroundColor: "#55CCFF",
+    boxShadow: "2px 2px 10px 0 rgba(0,0,0,0.25)",
+    borderRadius: 10,
+    height: 300
+  }
+  return (
+    <Frame
+      ...
+      style={style}
+    />
+  )
+}
+```
+
+We have to move `style` inside `Card` because we can't see things inside a room from outside. Therefore, we have to enter the room.
+We can make `backgroundColor` dynamic quite easily, but image url will take some more effort.
+
+```jsx{8}
+function Card(props){
+  ...
+  const style = {
+    backgroundImage: "url(https://cdn.glitch.com/071e5391-90f7-476b-b96c-1f51f7106b0c%2Fbird_strong_small.svg?v=1560032432704)",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "contain",
+    backgroundPosition: "center",
+    backgroundColor: props.color,
+    boxShadow: "2px 2px 10px 0 rgba(0,0,0,0.25)",
+    borderRadius: 10,
+    height: 300
+  }
+  ...
+}
+```
+
+![color](./color2.png)
+
+For the image, we want to replace the URL in the string, but we have to keep the `url(...)` surrounding our image link. Unfortunately, this is just the format enforced by CSS when setting the background image.
+
+## Making `backgroundImage` dynamic
+
+There are 2 ways we can fix make our url link dynamic.
+
+### 1. String concatenation
+
+```jsx{4}
+function Card(props){
+  ...
+  const style = {
+    backgroundImage: "url("+props.image+")",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "contain",
+    backgroundPosition: "center",
+    backgroundColor: props.color,
+    boxShadow: "2px 2px 10px 0 rgba(0,0,0,0.25)",
+    borderRadius: 10,
+    height: 300
+  }
+  ...
+}
+```
+
+`"url("+props.image+")"` concatenates three strings and we get one final string.
+
+![fat bird, links working](./fat2.png)
+
+### 2. **Template string**
+
+Another, preferred, method is called template string. Instead of quotes surrounding our strings, we use a **backtick** which is the key on the top left of your keyboard. The plus `+` is removed and we surround what we want, `props.image` with `${...}` to make it dynamic.
+
+```jsx{4}
+function Card(props){
+  ...
+  const style = {
+    backgroundImage: `url(${props.image})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "contain",
+    backgroundPosition: "center",
+    backgroundColor: props.color,
+    boxShadow: "2px 2px 10px 0 rgba(0,0,0,0.25)",
+    borderRadius: 10,
+    height: 300
+  }
+  ...
+}
+```
+
+This is similar to using the curly brackets in JSX to make something dynamic, but there is a **dollar sign** in the front. Both methods will execute our code inside and put the result back into the string, but this method looks nicer.
+
+# Conclusion
+
+Now that we have multiple cards that can be customized, in the next post, we'll make our code robust so that it won't be repetitive if we need 100 cards!

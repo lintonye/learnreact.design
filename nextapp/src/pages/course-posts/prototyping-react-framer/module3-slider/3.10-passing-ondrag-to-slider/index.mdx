@@ -1,0 +1,310 @@
+---
+date: '2019-07-31'
+title: '3.10 Passing onDrag to Slider'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238565'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- Two methods to link `Slider`
+- Why the second method is better
+- Passing a function as a `props`  
+  \*Final code at bottom.
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# Linking `Slider` the wrong way
+
+In the last post, we passed the `animationControls` to the `Skinny` component via the `cheekAnimate` attribute. For the `Slider`, we could just do the same thing. Pass the `animationControls` into the room for `Slider`.
+
+```jsx{3}
+<div ...>
+  <Skinny cheekAnimate={animationControls}/>
+  <Slider animate={animationControls}/>
+</div>
+```
+
+## Moving `handleDrag` inside `Slider`
+
+Now we can uncomment `onDrag={handleDrag}` in our `Slider` component and move our `handleDrag` function from `App` into our `Slider` component.
+
+```jsx{2-8,13}
+function Slider() {
+  function handleDrag(event, info) {
+    let newScale = transform(info.point.x, [0, 220], [0.4, 1.5])
+    animationControls.start({
+      scale: newScale,
+      transition: { type: "spring", velocity: 0 }
+    })
+  }
+  return (
+    ...
+      <Frame
+        ...
+        onDrag={handleDrag}
+      />
+    </Frame>
+  )
+}
+```
+
+This won't work yet because we need to add `props` into our `Slider` component since `animationControls` isn't defined.
+
+```jsx{3}
+<div ...>
+  <Skinny cheekAnimate={animationControls}/>
+  <Slider animate={animationControls}/>
+</div>
+```
+
+Although we can't use `animationControls` in our `handleDrag` function, we can replace it with `props.animate` which is technically the same thing.
+
+```jsx{4}
+function Slider(props) {
+  function handleDrag(event, info) {
+    let newScale = transform(info.point.x, [0, 220], [0.4, 1.5])
+    props.animate.start({
+      scale: newScale,
+      transition: { type: "spring", velocity: 0 }
+    })
+  }
+  ...
+}
+```
+
+However, this method is not really good.
+
+If we read and follow this piece of code,
+
+```jsx
+<div ...>
+  <Skinny cheekAnimate={animationControls}/>
+  <Slider animate={animationControls}/>
+</div>
+```
+
+it makes sense to pass `animate` to `Skinny` because it follows the same pattern as `<Frame>`. Furthermore, we are animating Skinny's cheek.
+
+In contrast, this approach doesn’t make much sense for `Slider`. We don’t want to simply animate `Slider`. We want `Slider` to take control of the animation for `Skinny`.
+
+## Changing the name?
+
+You might say, we can change the name of `animate` to
+`animationControls`.
+
+```jsx
+<div ...>
+  <Skinny cheekAnimate={animationControls}/>
+  <Slider animationControls={animationControls}/>
+</div>
+```
+
+However, it still is not robust and does not feel right. For example, what if we wanted `Slider` to control multiple animations? What if we want `Slider` to do something else?
+
+# Linking `Slider` the better way
+
+Instead of passing the `animationControls` as a value into `Slider`'s attributes, we can define `onDrag` beside the `<Slider>` tag.
+
+```jsx
+<div ...>
+  <Skinny cheekAnimate={animationControls}/>
+  <Slider onDrag={}/>
+</div>
+```
+
+## Moving `handleDrag` back inside `App`
+
+Then we move back our `handleDrag` function from inside our `Slider` component back to the `App` component. **Remember to change `props.animate` back to `animationControls`.**
+
+```jsx{5}
+function App(){
+  let animationControls = useAnimation()
+  function handleDrag(event, info) {
+    let newScale = transform(info.point.x, [0, 220],[0.4, 1.5])
+    animationControls.start({
+      scale: newScale,
+      transition:{type: "spring", velocity: 0}
+      })
+  }
+  ...
+}
+```
+
+## Reason behind this method
+
+The idea is that we can then pass the `handleDrag` function, or any function in the future, into the `Slider` component. This is much clearer and flexible than the previous method.
+
+### Method 1
+
+1. We aren't trying to animate `Slider`, so having the `animate` attribute with `Slider` doesn't make a lot of sense.
+
+2. By convention, if an attribute is named `onDrag`, it is read like "do this when the frame is dragged". Therefore, the `onDrag` value is supposed to be a function which means placing `animationControls` as `onDrag`'s value doesn't make much sense.
+
+### Method 2
+
+1. Our slider can be used for a variety of purposes, such as controlling animation, phone volume, screen brightness, etc because our implementation of `handleDrag` is **not** hard-coded in our `Slider` component. The slider can only do what that implementation is bounded to.
+
+2. We "outsource" the `onDrag` behavior with the `onDrag` prop so that the consumer/client decide what it will do.
+
+## Passing `handleDrag` into `onDrag` as a `prop`
+
+```jsx{3}
+<div ...>
+  <Skinny cheekAnimate={animationControls}/>
+  <Slider onDrag={handleDrag}/>
+</div>
+```
+
+Then back in our `Slider` component,
+
+```jsx{6}
+function Slider() {
+  return (
+    ...
+      <Frame
+        ...
+        onDrag={props.onDrag}
+      />
+    </Frame>
+  )
+}
+```
+
+![drag preview](./drag.gif)
+
+This way, we can make the slider to do whatever want, and still keep our code tidy.
+
+Why does this work?
+
+The value of this `onDrag` attribute is a function since `handleDrag` is a function.
+
+```jsx{3}
+<div ...>
+  <Skinny cheekAnimate={animationControls}/>
+  <Slider onDrag={handleDrag}/>
+</div>
+```
+
+If the `handleDrag` function is a machine, we are carrying the machine into the room `Slider`, and moving it inside `Frame`. Then, `Frame` will run this machine when the user drags the slider.
+
+Note that `onDrag` in `<Slider ... />` does not have to be named `onDrag`. We can change it to other names such as `onSlide`, **as long as we update the `Slider` component accordingly.**
+
+```jsx{6}
+function Slider() {
+  return (
+    ...
+      <Frame
+        ...
+        onDrag={props.onSlide}
+      />
+    </Frame>
+  )
+}
+```
+
+# Conclusion
+
+Alright, just to recap, we broke down a big component into two smaller components, `Skinny` and `Slider`. We use `props` to make components to talk to each other.
+
+The key here is that we have this `animationControls` in the `App` component, and we pass it into corresponding children, and that’s how they communicate with each other.
+
+<!-- **TODO:**
+Add a link to final code or file? -->
+
+Raw Code?
+
+```jsx
+import * as React from 'react'
+import { render } from 'react-dom'
+import { Frame, transform, useAnimation } from 'framer'
+import './styles.css'
+
+function Skinny(props) {
+  return (
+    <Frame
+      width={290}
+      height={320}
+      position="relative"
+      background="transparent"
+    >
+      <Frame
+        background="url(https://cdn.glitch.com/071e5391-90f7-476b-b96c-1f51f7106b0c%2Fskinny-portrait.png)"
+        width={290}
+        height={290}
+        borderRadius={150}
+      />
+      {/* Cheek */}
+      <Frame
+        background="url(https://cdn.glitch.com/071e5391-90f7-476b-b96c-1f51f7106b0c%2Fcheek.png)"
+        width={79}
+        height={67}
+        left={155}
+        top={135}
+        animate={props.cheekAnimate}
+      />
+    </Frame>
+  )
+}
+
+function Slider(props) {
+  return (
+    <Frame
+      width={280}
+      height={15}
+      borderRadius={30}
+      backgroundColor="white"
+      position="relative"
+    >
+      <Frame
+        size={60}
+        borderRadius={30}
+        center="y"
+        backgroundColor="white"
+        shadow="0 1px 5px 0 rgba(0, 0, 0, 0.25)"
+        drag="x"
+        dragConstraints={{ left: 0, right: 220 }}
+        dragElastic={false}
+        dragMomentum={false}
+        onDrag={props.onDrag}
+      />
+    </Frame>
+  )
+}
+
+function App() {
+  let animationControls = useAnimation()
+  function handleDrag(event, info) {
+    let newScale = transform(info.point.x, [0, 220], [0.4, 1.5])
+    animationControls.start({
+      scale: newScale,
+      transition: { type: 'spring', velocity: 0 },
+    })
+  }
+  return (
+    <div
+      className="App"
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        flexDirection: 'column',
+      }}
+    >
+      <Skinny cheekAnimate={animationControls} />
+      <Slider onDrag={handleDrag} />
+    </div>
+  )
+}
+
+const rootElement = document.getElementById('root')
+render(<App />, rootElement)
+```
+
+In the next post, we'll add another event depending on how far the slider is dragged using `if` and `else`!

@@ -1,0 +1,67 @@
+---
+date: '2019-07-23'
+title: '1.4 First Impressions of JSX'
+Video: 'https://school.learnreact.design/courses/601139/lectures/10940021'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- Coding Syntax
+- `<Frame>`'s convenient attributes (only works on `<Frame>`)
+- External CSS file to style React code
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# Taking a closer look at our code
+
+Let’s look at what we have here
+
+![code](./closerlook.png)
+
+This definitely does not look like an article from a book. There are only some English words here and there that we can roughly read and understand. For example, this import `React` from `"react"`.
+
+More predominately, there are punctuation and special symbols that might baffle us. Why do we need quotes around that one `"react"`, but not the other `React`?
+
+Fortunately, as we see here, we don't have to start from a completely blank editor! There are always some examples for us to copy and follow.
+
+There are reasons for some of the things you might not understand, but don’t worry! I’ll slowly show you the concepts one at a time and in the end, you’ll understand the logic behind it all.
+
+# Syntax
+
+Syntax involves the set of rules, principles, and processes that govern the structure of certain things. All programming languages such as React have syntax rules and conventions that may seem daunting at first, but once you see the patterns it is incredibly easy.
+
+## Colour Scheme
+
+Also, you have probably have noticed that the code is quite colorful, but you might not know why. The color code/highlighting is to show us that some words differ in function and syntax. In total, the color scheme helps understand the code.
+
+![colour scheme](./colourscheme.png)
+
+## Syntax Errors
+
+![removing letter SyntaxError](./picky.png)
+
+As you saw, we can change the code to see the result on the right. But take a note here, the editor is very picky.
+
+We have to follow the exact format that JavaScript requires. Or else we’ll get errors all over the place. Removing the `i` in `function` — a single mistake — throws a `SyntaxError` that breaks our whole application!
+
+## Case Sensitivity
+
+Even uppercase and lowercase is incredibly important. If we make the `App()` lowercase to `app()`, we get a `ReferenceError`.
+
+![lowercase App ReferenceError](./apperror.png)
+
+# Conclusion
+
+Computers are both smart and dumb, mostly dumb. The language we speak to it must be very precise. One line of code can only mean one thing. Computers do not read between the lines.
+
+Hope I didn’t scare you so far! Correct spelling is perhaps hard enough, and now you want me to be correct in everything all at once?
+
+The good news is that computer languages are also very logical. Once we master a small set of rules and syntax, we’ll be able to read other people’s code or write new code!
+
+The editor also provides us with all sorts of help. The errors you’ve just seen are a form of assistance! So don’t be scared of errors. They are angels in disguise. Fixing errors(bugs) is called **debugging**. Just so you know, more than not, you will be spending more time debugging that writing new code!

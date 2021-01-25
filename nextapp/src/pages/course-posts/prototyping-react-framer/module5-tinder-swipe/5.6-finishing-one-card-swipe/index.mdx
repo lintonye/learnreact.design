@@ -1,0 +1,214 @@
+---
+date: '2019-08-10'
+title: '5.6 Finishing One Card Swipe'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238552'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- Using conditionals to make the card "disappear"
+- Underscore `_` parameter
+- `Math.abs`
+- Ternary operator
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# Finishing our Card Swipe
+
+Let’s complete our swipe prototype.
+
+Currently, our card always bounces back to its original position no matter how far we swipe it.
+
+![bounce back](./bounceback.gif)
+
+We want to change it so that if we swipe the card far enough, it’ll keep moving until it disappears. Otherwise, if we only move it a little bit, it’ll bounce back to the original position.
+
+How can we change the code to make that happen?
+
+Currently, in `onDragEnd`, we always start the animation that moves the `x` offset of the card to `0`.
+
+```jsx
+<Frame
+  ...
+  onDragEnd={function() {
+    animControls.start({ x: 0 })
+  }}
+/>
+```
+
+We need to add a **conditional** here to start a different animation according to how far we have swiped.
+
+How would we determine if the card has been swiped far enough? We’ve done something like this before!
+
+We can get more information about the drag gesture from the parameters of this function. The first parameter is `event`, the second one is `info`.
+
+```jsx
+<Frame
+  ...
+  onDragEnd={function(event, info) {
+    animControls.start({ x: 0 })
+  }}
+/>
+```
+
+We can get how far we’ve dragged the card using the parameter `info`. Therefore, we don't need the `event` parameter.
+
+However, if we simply remove the `event` parameter, our "info" variable will really be equal to `event` because the first parameter is `event` and the second is `info`.
+
+Try switching `info` and `event` while using them., and you'll see that the order of parameters is extremely important.
+
+## Underscore parameter
+
+To solve this, we can change `event` into an **underscore** **`_`** .
+
+```jsx
+<Frame
+  ...
+  onDragEnd={function(_, info) {
+    animControls.start({ x: 0 })
+  }}
+/>
+```
+
+There’s nothing special about this underscore. It’s a parameter as well, but we usually use it as a placeholder for parameters that we don’t care in the function.
+
+Back to `info`, since it's an object, we can get the `x` offset using `info.point.x`. We can now write our `if` statement.
+
+```jsx
+<Frame
+  ...
+  onDragEnd={function(_, info) {
+    if (info.point.x < 150){
+      animControls.start({ x: 0 })
+    } else {
+        animControls.start({x:200})
+    }
+  }}
+/>
+```
+
+However, there is still a problem with this. When we drag to the left, the card still bounces back. This occurs because, on the left, the `x` offset will turn negative.
+
+![right disappear](./right.gif)
+
+How do we account for both directions?
+
+## `Math.abs`
+
+Well, there are many ways. For example, we could add multiple if and else statements, but the simplest method here is to use the **absolute value** function in the **Math library** that comes with JavaScript — `Math.abs`.
+
+```jsx
+<Frame
+  ...
+  onDragEnd={function(_, info) {
+    if (Math.abs(info.point.x) < 150){
+      animControls.start({ x: 0 })
+    } else {
+      animControls.start({x:200})
+    }
+  }}
+/>
+```
+
+The original problem isn't completely fixed yet, but now the card follows the `else` code path. Instead of disappearing on the left side, the card quickly moves to the right side.
+
+![left problem still](./leftproblem.gif)
+
+This occurs because when we move the card to the left enough, the absolute value of the negative value is greater than 150. Therefore, the code in the `else` statement is run.
+
+To fix this, we can add another conditional that tests if the `x` offset is negative or positive.
+
+```jsx{7-11}
+<Frame
+  ...
+  onDragEnd={function(_, info) {
+    if (Math.abs(info.point.x) < 150){
+      animControls.start({ x: 0 })
+    } else {
+      if (info.point.x <0){
+        animControls.start({x:-200})
+      } else {
+        animControls.start({x:200})
+      }
+    }
+  }}
+/>
+```
+
+![left side working](./left.gif)
+
+## Ternary Operator
+
+We can make our code more elegant by using a **ternary operator**. Instead of this nested if-else statement, we can write something like this:
+
+```jsx{7}
+<Frame
+  ...
+  onDragEnd={function(_, info) {
+    if (Math.abs(info.point.x) < 150){
+      animControls.start({ x: 0 })
+    } else {
+      animControls.start({x: info.point.x < 0 ? -200 : 200})
+    }
+  }}
+/>
+```
+
+### Creating a ternary operator
+
+There are **5** main components.
+
+1. Condition
+
+   > The condition is the boolean comparison inside the parentheses of an `if` statement.
+   >
+   > ```jsx
+   > info.point.x < 0 ...
+   > ```
+
+2. Question mark: `?`
+
+   > You can think of `?` as the end of the condition.
+   >
+   > ```jsx
+   > info.point.x < 0 ? ...
+   > ```
+
+3. First value
+
+   > This is the value after the question mark. It will be accessed if the condition is true.
+   >
+   > ```jsx
+   > info.point.x < 0 ? -200 ...
+   > ```
+
+4. Colon: `:`
+
+   > You can think of `:` as the keyword `else`.
+   >
+   > ```jsx
+   > info.point.x < 0 ? ...
+   > ```
+
+5. Second value
+   > This is the value after the colon. It will be accessed if the condition is false.
+   >
+   > ```jsx
+   > info.point.x < 0 ? -200 : 200
+   > ```
+
+In total, a **ternary operator** is a condensed version of an if-else statement.
+
+# Conclusion
+
+We now have finished creating the "Tinder" swipe with one card. Along the way, you learned about rotation, opacity, `useMotionValue`, and `useAnimation`, arrow functions, `_`, `Math.abs`, the ternary operator, and more.
+
+In the following posts, we add more cards to make a final result like this!
+
+![final result](./finalresult.gif)

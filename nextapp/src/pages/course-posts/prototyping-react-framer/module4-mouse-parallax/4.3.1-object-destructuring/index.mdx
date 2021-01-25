@@ -1,0 +1,159 @@
+---
+date: '2019-08-12'
+title: '4.3.1 Object Destructuring'
+video: 'https://school.learnreact.design/courses/629779/lectures/11317183'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- Object destructing
+- Array vs object destructuring
+- Parameter and embedded object destructuring
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# Object Destructuring
+
+Do you remember learning about **array destructuring**?
+
+If not, don't worry about it! Array destructuring is a convenient way to extract elements from an array and put the values into variables, all in **one** line.
+
+We previously used array destructuring in our toggle. In fact, we combined it with **variants**.
+
+```jsx{2}
+function App() {
+  let [mode, cycleMode] = useCycle("off", "on")
+  return (
+    ...
+  )
+}
+```
+
+Now, let me show you another kind of destructuring that involves extracting values for an **object** instead of an array.
+
+In this `onMouseMove` function, we know the `event` parameter is an **object**, and it has at least two properties, `clientX` and `clientY`.
+
+```jsx{3-5}
+<Frame
+  ...
+  onMouseMove={function(event) {
+    let offsetX = event.clientX - window.innerWidth / 2
+    let offsetY = event.clientY - window.innerHeight / 2
+    ...
+  }}
+>
+  ...
+</Frame>
+```
+
+Instead of using dot notation over and over again, we can use object destructuring to define variables.
+
+## Array vs object destructuring
+
+Can you guess how to do it? Is it like this?
+
+```jsx
+let [clientX, clientY] = event
+```
+
+Close! But not quite there yet. For array destructuring, we use **square brackets** since that’s how we define arrays. For objects, we use **curly brackets**!
+
+```jsx
+let { clientX, clientY } = event
+```
+
+We can now remove `event.clientX` and `event.clientY`.
+
+```jsx{2}
+onMouseMove={function(event) {
+  let {clientX, clientY} = event
+  let offsetX = clientX - window.innerWidth / 2
+  let offsetY = clientY - window.innerHeight / 2
+  ...
+}}
+```
+
+## Parameter object destructuring
+
+Even better, we don’t have to define `clientX` and `clientY` here. We can put the destructuring right inside the parameter declaration!
+
+```jsx{1}
+onMouseMove={function({clientX, clientY}) {
+    let offsetX = clientX - window.innerWidth / 2
+    let offsetY = clientY - window.innerHeight / 2
+    ...
+}}
+```
+
+Don’t forget the curly brackets though! When we have the pair of curly brackets, we assume the first parameter is an object and destruct into our choice of variables.
+
+This is why sometimes we see components that have curly brackets inside their parameters.
+For example, checking out this code [here](https://codesandbox.io/s/github/lintonye/prototyping-with-react-framer/tree/4.3.1-slider/app) and scrolling to line **35**, we'll see an example of object destructuring.
+
+```jsx{1}
+function Slider({onSlide}){
+  ...
+}
+```
+
+## Embedded object destructuring
+
+Furthermore, we can apply this idea in an embedded way.
+
+From the same [code](https://codesandbox.io/s/github/lintonye/prototyping-with-react-framer/tree/4.3.1-slider/app) as in the example above, scrolling down to line **64** in `handleDrag`, we know `info` and `point` are objects due to the dot notation.
+
+```jsx{3}
+function handleDrag(event, info) {
+  // change the scale of Skinny’s cheek according to the position of slider knob
+  let newScale = transform(info.point.x, [0, 250], [0.4, 1.5])
+  animationControls.start({
+    scale: newScale,
+    transition: { type: "spring", velocity: 0 }
+  })
+}
+```
+
+Can you guess how we could use object destructuring here?
+
+Since `info` is an object, we can extract its `point` property into a variable.
+
+```jsx{1}
+function handleDrag(event, {point}) {
+  ...
+}
+```
+
+Additionally, because the value of the `point` property is an object as well, we can extract its properties.
+
+We use a **colon** to indicate that we are now dealing with the value. After that, we use another pair of curly brackets and define a new variable such as `posX`. Then, we can simply use `posX` in our references since `posX` was defined as a variable holding the `x` values.
+
+```jsx{1,3}
+function handleDrag(event, { point: { posX } }) {
+  // change the scale of Skinny’s cheek according to the position of slider knob
+  let newScale = transform(posX, [0, 250], [0.4, 1.5])
+  animationControls.start({
+    scale: newScale,
+    transition: { type: "spring", velocity: 0 }
+  })
+}
+```
+
+All in all, you should be more familiar with object destructing! Additionally, the syntax should look fairly intuitive.
+
+If something is an object, we can use how we define objects to "destruct" or take the value out. In our `info.point.x` case, since `point` was also an object, we further "destructed" to get our desired value. If `x` was also an object, we could continue to destruct.
+
+```jsx
+function handleDrag(event, { point: { posX: {xProp} } })
+```
+
+# Conclusion
+
+That's object destructuring! It's a convenient way to extract properties into variables!
+
+In the following post, we'll learn more about the functions we used to create animations: **React Hooks**!

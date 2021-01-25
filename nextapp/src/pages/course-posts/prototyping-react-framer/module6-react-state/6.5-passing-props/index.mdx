@@ -1,0 +1,151 @@
+---
+date: '2019-08-15'
+title: '6.5 Passing Props'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238543'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- Passing individual props
+- Spread operator
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# `RadioGroup` props
+
+![current radio group](./radio.png)
+
+We are almost ready to make the Radio Group functional, but before that, let's move the radio group to the center of the screen.
+
+If our `<RadioGroup>` was a `<Frame>` then we could add the `center` attribute. Obviously, however, we **can't** do this here since `center` is not supported by `RadioGroup`.
+
+```jsx{5}
+function App() {
+  ...
+  return (
+    <div className="App">
+      <RadioGroup center choices={options} />
+    </div>
+  )
+}
+```
+
+However, since our foundation of our `RadioGroup` is comprised of a `<Frame>`, we can add the `center` attribute there.
+
+```jsx{3}
+function RadioGroup(props) {
+  return (
+    <Frame center background={null}>
+      {props.choices.map(choice => (
+        <Radio key={choice}>{choice}</Radio>
+      ))}
+    </Frame>
+  )
+}
+```
+
+## Problem with hardcoding attributes
+
+This certainly works, but it raises an issue. If we set this `center` attribute on the `<Frame>`, every new `<RadioGroup>` will always be centered no matter what. What if we want to have two Radio groups on the page, one centered and one not?
+
+When creating a composnent, we should always think about how it’s going to be used, reused, and what kind of customization it could support.
+
+Instead of giving the base of the `RadioGroup` the `center` attribute, we could add the `center` attribute to the `<RadioGroup>` tag and support it. This way, we can decide whether to center the `<RadioGroup>` or not.
+
+Furthermore, to drive home my point, we might also want to set its position to `relative` or `absolute` in certain cases.
+
+```jsx{5}
+function App() {
+  ...
+  return (
+    <div className="App">
+      <RadioGroup center position="relative" choices={options} />
+    </div>
+  )
+}
+```
+
+We can support these properties this way:
+
+```jsx{3}
+function RadioGroup(props) {
+  return (
+    <Frame center={props.center} position={props.position} background={null}>
+      {props.choices.map(choice => (
+        <Radio key={choice}>{choice}</Radio>
+      ))}
+    </Frame>
+  )
+}
+```
+
+However, repeatedly adding many individual props is a tiring and error-prone process. What if we want to support large number of other attributes?
+
+## Spread Operator
+
+We can use the **spread operator** to support all our properties.
+
+```jsx{3}
+function RadioGroup(props) {
+  return (
+    <Frame background={null} {...props}>
+      {props.choices.map(choice => (
+        <Radio key={choice}>{choice}</Radio>
+      ))}
+    </Frame>
+  )
+}
+```
+
+If we remove `position="relative"` from our `<RadioGroup>` tag, we'll see that our Radio Group is centered like before.
+
+```jsx{5}
+function App() {
+  ...
+  return (
+    <div className="App">
+      <RadioGroup center choices={options} />
+    </div>
+  )
+}
+```
+
+The spread operator, more specifically, is the three dots `...` before an object.
+
+It takes the object, breaks apart its properties, and spreads them; in our case, taking all the properties of the object and using them to set the attributes of our desired tag.
+
+If our `<RadioGroup>` `props` object is equal to this:
+
+```jsx
+props = { center: true, position: “relative” }
+```
+
+It would be equivalent to
+
+```jsx{3}
+function RadioGroup(props) {
+  return (
+    <Frame center={true} position="relative" background={null}>
+      {props.choices.map(choice => (
+        <Radio key={choice}>{choice}</Radio>
+      ))}
+    </Frame>
+  )
+}
+```
+
+By using the spread operator, we can use all the attributes that the `<Frame>` supports on the `<RadioGroup>` tag.
+
+Try experimenting with the attributes!
+
+# Conclusion
+
+There are multiple ways to pass props, but you should know that with the spread operator you can add as many properties as you want.
+
+We'll continue to dive deeper into understanding and using the spread operator in the next post.

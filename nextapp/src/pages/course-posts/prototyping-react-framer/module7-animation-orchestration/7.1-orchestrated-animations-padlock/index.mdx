@@ -1,0 +1,331 @@
+---
+date: '2019-08-19'
+title: '7.1 Orchestrated Animations'
+video: 'https://school.learnreact.design/courses/629779/lectures/11509503'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- SVG's
+- `await` and `async`
+- Creating a padlock animation
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# Orchestrated Animations Intro
+
+Welcome to the Animation Orchestration module!
+
+We’ll learn how to create a sequence of animations, staggered animations, and JavaScript concepts such as **async** and **await**.
+
+Using that knowledge, we'll build multiple animations like these:
+
+## Padlock
+
+![Padlock Animation](./padlock2.gif)
+
+See for yourself! [Padlock Animation](https://gtyux.csb.app/).
+
+## Failed Unlock
+
+![Failed Unlock Animation](./unlockfailed.gif)
+
+See for yourself! [Failed Unlock Animation](https://n52pw.csb.app/).
+
+## Floating Action Button (FAB)
+
+![Floating Action Button](./fab2.gif)
+
+See for yourself! [FAB Animation](https://f89r9.csb.app/).
+
+# Padlock Animation
+
+Here is the link to the starter [code](https://github.com/lintonye/prototyping-with-react-framer/tree/7.1-padlock-animation-starter/app).
+
+```jsx
+function Padlock(props) {
+  return (
+    <Frame background={null} width={100} {...props}>
+      <Frame background={null} left={5}>
+        <Shackle />
+      </Frame>
+      <Frame background={null} top={60}>
+        <Body />
+      </Frame>
+    </Frame>
+  )
+}
+```
+
+We have a `Padlock` component that includes a few frames.
+
+If you remember, the three dots before `props` is the spread operator.
+
+It allows us to pass along props from the `<Padlock>` tag to the `<Frame>`.
+
+Inside, we have a frame that wraps `<Shackle />` and another frame that wraps `<Body />`.
+
+```jsx{2,5}
+<Frame background={null} left={5}>
+  <Shackle />
+</Frame>
+<Frame background={null} top={60}>
+  <Body />
+</Frame>
+```
+
+## SVG
+
+`Shackle` and `body` are simply SVG's, Scalable Vector Graphics, but their properties are written in JSX syntax.
+
+In an SVG file, their properties are not written with JSX format. Therefore, we need to convert properties such as `stroke-linecap` to `strokeLinecap`.
+
+As a result, these SVG's are not those that we can copy directly from design tools. Remember that JSX has a **camel-case** syntax.
+
+## SVG to JSX
+
+To make these SVG-to-JS conversions easier for us, there are many online tools. In particular, there is a free website called [svg2jsx.com](https://svg2jsx.com/).
+
+![svg2jsx website](./svg2jsx.png)
+
+Back in our code,
+
+We currently have `Shackle `and `Body` as separate components.
+
+```jsx{2,5}
+<Frame background={null} left={5}>
+  <Shackle />
+</Frame>
+<Frame background={null} top={60}>
+  <Body />
+</Frame>
+```
+
+In order to add animations, there are each wrapped inside a `<Frame>`. Therefore, it's also straightforward to adjust their positions.
+
+Now when the lock is tapped, we want to do a couple of things: lift up and rotate.
+
+## `onTap`
+
+Let's add the `onTap` property and give it a function value.
+
+```jsx{7-10}
+function Padlock(props) {
+  return (
+    <Frame
+      background={null}
+      width={100}
+      {...props}
+      onTap={function() {
+        //1. Lift up
+        // 2. Rotate
+      }}
+    >
+      ...
+    </Frame>
+  )
+}
+```
+
+How are we going to control the animation of another Frame using `onTap`?
+
+`useAnimation`!
+
+## `useAnimation`
+
+Make sure `useAnimation` is imported.
+
+Then, in `Padlock` we'll call `useAnimation`.
+
+```jsx{2,13}
+function Padlock(props) {
+  let shackleAnim = useAnimation()
+  return (
+    <Frame
+      background={null}
+      width={100}
+      {...props}
+      onTap={function() {
+        //1. Lift up
+        // 2. Rotate
+      }}
+    >
+      <Frame background={null} left={5} animate={shackleAnim}>
+        <Shackle />
+      </Frame>
+      <Frame background={null} top={60}>
+        <Body />
+      </Frame>
+    </Frame>
+  )
+}
+```
+
+## Common Error
+
+Make sure your attributes such as `animate` are written correctly because unlike other errors, we won't get a warning or error if we misspell an attribute.
+
+Your code may look perfect, but your prototype may not work at all!
+
+## Animating `Shackle`
+
+To lift the shackle we'll animate the `y` attribute.
+
+```jsx
+function Padlock(props) {
+  let shackleAnim = useAnimation()
+  return (
+    <Frame
+      background={null}
+      width={100}
+      {...props}
+      onTap={function () {
+        //1. Lift up
+        shackleAnim.start({ y: -30 })
+        // 2. Rotate
+      }}
+    >
+      ...
+    </Frame>
+  )
+}
+```
+
+![shackle lift up](./shackle.gif)
+
+## Rotating `Shackle`
+
+Now, we just have to rotate `Shackle`. However, we have to know what version of `rotate` we want since there is `rotate`, `rotateX`, `rotateY`, and `rotateZ`.
+
+Because we want our shackle to swivel on the Y-axis, we'll choose `rotateY`. Try experimenting with the other rotations to see what they do.
+
+```jsx{12}
+function Padlock(props) {
+  let shackleAnim = useAnimation()
+  return (
+    <Frame
+      background={null}
+      width={100}
+      {...props}
+      onTap={function() {
+        //1. Lift up
+        shackleAnim.start({ y: -30})
+        // 2. Rotate
+        shackleAnim.start({ rotateY: 180 })
+      }}
+    >
+      ...
+    </Frame>
+  )
+}
+```
+
+However, there seems to be a problem with our code.
+
+![rotation](./origin.gif)
+
+The origin of our rotation seems to be off.
+
+To fix this, we can add the `originX` attribute to our `Shackle` `<Frame>`.
+
+```jsx{1}
+<Frame background={null} left={5} animate={shackleAnim} originX={0.41}>
+  <Shackle />
+</Frame>
+```
+
+Despite this, our result is not exactly what we wanted to create.
+
+![bad padlock](./badpadlock.gif)
+
+The shackle is lifted and rotated at the same time, but we want it to lift first and then rotate it afterward like this:
+
+![padlock](./padlock2.gif)
+
+How do we wait for the completion of the first animation before starting the second one?
+
+## `await`
+
+In pseudocode, we want our code to look similar to as follows:
+
+```jsx
+wait for shackleAnim.start({ y: -30}) then run  shackleAnim.start({ rotateY: 180 })
+```
+
+However, there is one word in our pseudocode that can be essentially used to do what we want!
+
+If we turn `wait` to `await`, codesandbox or your code editor should color code `await`.
+
+`await` is a special keyword which will allow the first animation to finish then run the second!
+
+```jsx{7}
+<Frame
+  background={null}
+  width={100}
+  {...props}
+  onTap={function() {
+    //1. Lift up
+    await shackleAnim.start({ y: -30})
+    // 2. Rotate
+    shackleAnim.start({ rotateY: 180 })
+  }}
+>
+```
+
+## `async`
+
+We get a `SyntaxError`, but we can fix this by adding `async` right before our anonymous function.
+
+```jsx{5,7}
+<Frame
+  background={null}
+  width={100}
+  {...props}
+  onTap={async function() {
+    //1. Lift up
+    await shackleAnim.start({ y: -30})
+    // 2. Rotate
+    shackleAnim.start({ rotateY: 180 })
+  }}
+>
+```
+
+Our padlock animation works as expected now!
+
+![padlock](./padlock2.gif)
+
+We call our function an **async function** now. Inside **async functions** we can utilize `await`.
+
+`async` and `await` will also work with arrow functions.
+
+This works for arrow functions as well.
+
+However, this time, we keep the parentheses.
+
+```jsx{5,7}
+<Frame
+  background={null}
+  width={100}
+  {...props}
+  onTap={async () => {
+    //1. Lift up
+    await shackleAnim.start({ y: -30})
+    // 2. Rotate
+    shackleAnim.start({ rotateY: 180 })
+  }}
+>
+```
+
+This will work exactly as before.
+
+# Conclusion
+
+Look how simple that was! We created a seemingly complicated set of animations using a few lines!
+
+In the next post, we'll take a closer look at why our previous method didn't work.

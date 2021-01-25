@@ -1,0 +1,266 @@
+---
+date: '2019-08-04'
+title: '4.6 Converting JSX tags to JS'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238586'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- Making function into child elements
+- `createElement` parameters
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# JSX to JS
+
+Now that we’ve converted all our image Frame tags into JavaScript function calls, lets now work on our other tags.
+
+Before we convert our container Frame into a function call, let’s move our event handler function outside because, otherwise, our code would be too long.
+
+## Parent `<Frame>`
+
+```jsx{4-14,21}
+function App() {
+  ...
+
+  function handleMouseMove(event) {
+    let offsetX = event.clientX - window.innerWidth / 2
+    let offsetY = event.clientY - window.innerHeight / 2
+    // 1. Find mouse position
+    console.log(offsetX, offsetY)
+    // 2. Create animations
+    birdAnim.start({ x: offsetX / 6, y: offsetY / 6 })
+    cloudsAnim.start({ x: offsetX / 8, y: offsetY / 8 })
+    sunAnim.start({ x: offsetX / 10, y: offsetY / 10 })
+    bgAnim.start({ x: offsetX / 14, y: offsetY / 14 })
+  }
+
+  return(
+    <Frame
+      size={600}
+      background={null}
+      center
+      onMouseMove={handleMouseMove}
+    >
+    ...
+  )
+}
+```
+
+Now we can replace our parent `<Frame>` with a similar function call we used for our image Frames.
+
+```jsx
+{
+  React.createElement(Frame, {
+    size: 600,
+    center: true,
+    background: null,
+    onMouseMove: handleMouseMove,
+  })
+}
+```
+
+Since we removed the opening `<Frame>` tag, we need to remove the closing `<Frame>` tag near the bottom. If not, we get a `SyntaxError`.
+
+# Child elements with functions
+
+How do we make sure our image tags are children of our larger parent frame with functions?
+
+It turns out that if we add more parameters when calling `createElement`, the third, fourth, fifth parameter, and so on would be treated as the children.
+
+As a review, the first parameter is the type of tag we want to create and the second is the group of attributes.
+
+## Background `Frame`
+
+Let's move our background `Frame` into the third parameter. We no longer need the curly brackets around our image Frames because we are placing the `Frame` into a function.
+
+```jsx
+//{
+React.createElement(Frame, {
+  size: 500,
+  top: 50,
+  left: 20,
+  background: null,
+  image: 'https://image.flaticon.com/icons/svg/119/119596.svg',
+  animate: bgAnim,
+})
+//}
+```
+
+Removing the curly brackets and moving our code to the third parameter should look like this. **Remember to add a comma before any new parameter!**
+
+```jsx{8, 10-17}
+{React.createElement(
+  Frame,
+  {
+    size: 600,
+    center: true,
+    background: null,
+    onMouseMove: handleMouseMove
+  },
+
+  React.createElement(Frame, {
+    size: 500,
+    top: 50,
+    left: 20,
+    background: null,
+    image: "https://image.flaticon.com/icons/svg/119/119596.svg",
+    animate: bgAnim
+  })
+)}
+```
+
+Let's understand what's going on in our child, background `<Frame>`.
+
+We first call this function `createElement` to create our background, and its return value is an element which will be used as the third parameter of this larger, parent function call.
+
+## Moving our other Frames
+
+Let me move all the other tags into this function call.
+
+```jsx{17-38}
+{React.createElement(
+  Frame,
+  {
+    size: 600,
+    center: true,
+    background: null,
+    onMouseMove: handleMouseMove
+  },
+  React.createElement(Frame, {
+    size: 500,
+    top: 50,
+    left: 20,
+    background: null,
+    image: "https://image.flaticon.com/icons/svg/119/119596.svg",
+    animate: bgAnim
+  }),
+  React.createElement(Frame, {
+    left: 155,
+    top: 15,
+    background: null,
+    image: "https://image.flaticon.com/icons/svg/789/789395.svg",
+    animate: sunAnim
+  }),
+  React.createElement(Frame, {
+    left: 335,
+    top: 55,
+    image: "https://image.flaticon.com/icons/svg/414/414927.svg",
+    background: null,
+    animate: cloudsAnim
+  }),
+  React.createElement(Frame, {
+    left: 35,
+    top: 200,
+    image: "https://image.flaticon.com/icons/svg/789/789392.svg",
+    background: null,
+    animate: birdAnim
+  })
+)}
+```
+
+![working gif](./final.gif)
+
+Everything works just as before.
+
+Going over our structure again, we called `React.createElement` with a `Frame` as the first parameter. The second parameter is an object with a list of all the attributes for the tag. All the following parameters are children in which they also call `createElement`. However, their return value becomes a child of the parent `Frame`.
+
+Finally, let’s convert our `<div>` tag. We now made our parent `Frame` a child of our `<div>` since we placed it into the third parameter of our `<div>` function. Therefore, we also remove the curly brackets that were originally on our parent `Frame`. Make sure you also remove the closing `</div>`.
+
+```jsx
+React.createElement("div", {className:"App"},
+  React.createElement(
+  Frame,
+  {
+    size: 600,
+    center: true,
+    background: null,
+    onMouseMove: handleMouseMove
+  },
+  ...
+)
+```
+
+Because `<div>` is a standard HTML tag, we need to make it a **string**. On the other hand, `Frame` is a custom tag defined in the framer library. We can directly use its name without quotes.
+
+## Final Code
+
+```jsx
+...
+function App() {
+  let birdAnim = useAnimation()
+  let cloudsAnim = useAnimation()
+  let sunAnim = useAnimation()
+  let bgAnim = useAnimation()
+
+  function handleMouseMove(event) {
+    let offsetX = event.clientX - window.innerWidth / 2
+    let offsetY = event.clientY - window.innerHeight / 2
+    // 1. Find mouse position
+    console.log(offsetX, offsetY)
+    // 2. Create animations
+    birdAnim.start({ x: offsetX / 6, y: offsetY / 6 })
+    cloudsAnim.start({ x: offsetX / 8, y: offsetY / 8 })
+    sunAnim.start({ x: offsetX / 10, y: offsetY / 10 })
+    bgAnim.start({ x: offsetX / 14, y: offsetY / 14 })
+  }
+
+  return React.createElement(
+    "div",
+    { className: "App" },
+    React.createElement(
+      Frame,
+      {
+        size: 600,
+        center: true,
+        background: null,
+        onMouseMove: handleMouseMove
+      },
+      React.createElement(Frame, {
+        size: 500,
+        top: 50,
+        left: 20,
+        background: null,
+        image: "https://image.flaticon.com/icons/svg/119/119596.svg",
+        animate: bgAnim
+      }),
+      React.createElement(Frame, {
+        left: 155,
+        top: 15,
+        background: null,
+        image: "https://image.flaticon.com/icons/svg/789/789395.svg",
+        animate: sunAnim
+      }),
+      React.createElement(Frame, {
+        left: 335,
+        top: 55,
+        image: "https://image.flaticon.com/icons/svg/414/414927.svg",
+        background: null,
+        animate: cloudsAnim
+      }),
+      React.createElement(Frame, {
+        left: 35,
+        top: 200,
+        image: "https://image.flaticon.com/icons/svg/789/789392.svg",
+        background: null,
+        animate: birdAnim
+      })
+    )
+  )
+}
+...
+```
+
+# Conclusion
+
+Our code is now JSX free! I hope you can see that it makes total sense to return a tag in JSX because the tag is just a function call in JS. We return the output of the function the same way as any other JavaScript code.
+
+You know what JSX truly is. Every tag is a function call. The group of attributes is just an object, the children of a tag are the remaining parameters. Although we write the code in a form similar to HTML, a tool converts it into plain JavaScript, which is what’s running inside the browser.
+
+We'll begin the next module involving a "Tinder" like swipe animation in the coming post!

@@ -1,0 +1,243 @@
+---
+date: '2019-07-31'
+title: '3.8 React Slider Components'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238563'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+<!-- # **TODO fix code spacing thing** -->
+
+# Overview
+
+What you'll learn:
+
+- Creating React components
+- Returning JSX tags
+- Code tidiness
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# React Components
+
+We’ve got the slider working now, but our code is starting to get long and messy. Let’s clean it up and learn an important concept about React.
+
+I’ve told you that the key difference between JSX and HTML is that in JSX we can define **custom tags**.
+
+The `<Frame>` is a custom tag defined in framer we imported and used.
+
+Now let me show you how to define a custom tag, that is, a React component.
+
+We’ve already done this with the `App` function! `App` is a React component, remember?
+
+**In fact, a React component is just a function.**
+
+Let's write a new React component. It will be just a function, but the name starts with an **uppercase** letter. We can make it a printer that prints out snapshots of the UI.
+
+```jsx
+function Skinny() {
+  return
+}
+```
+
+Remember this picture?
+
+![react doodle](./reactdoodle.png)
+
+Now we have the component here as the printer and React as the person flipping the pages. We are going to learn more about this picture in the modules of react states, but at this point just remember that a React component is a printer that prints out something.
+
+## `<Skinny>` component
+
+Let's see what snapshot of the UI we are going to return from the `Skinny` function. We can copy and remove this portion of our code because this is Skinny.
+
+```jsx
+<Frame width={290} height={320} position="relative" background="transparent">
+  <Frame
+    background="url(https://cdn.glitch.com/071e5391-90f7-476b-b96c-1f51f7106b0c%2Fskinny-portrait.png)"
+    width={290}
+    height={290}
+    borderRadius={150}
+  />
+  {/* Cheek */}
+  <Frame
+    background="url(https://cdn.glitch.com/071e5391-90f7-476b-b96c-1f51f7106b0c%2Fcheek.png)"
+    width={79}
+    height={67}
+    left={155}
+    top={135}
+    animate={animationControls}
+  />
+</Frame>
+```
+
+Instead of all these `<Frame>` tags we can replace it with `<Skinny/>`.
+
+```jsx{2}
+<div ...>
+  <Skinny/>
+  <Frame
+    width={280}
+    height={15}
+    borderRadius={30}
+    backgroundColor="white"
+    position="relative"
+  >
+    ...
+  </Frame>
+...
+</div>
+```
+
+Inside our function `Skinny`, we can paste what we cut.
+
+```jsx
+function Skinny() {
+  return
+  ;<Frame width={290} height={320} position="relative" background="transparent">
+    <Frame
+      background="url(https://cdn.glitch.com/071e5391-90f7-476b-b96c-1f51f7106b0c%2Fskinny-portrait.png)"
+      width={290}
+      height={290}
+      borderRadius={150}
+    />
+    {/* Cheek */}
+    <Frame
+      background="url(https://cdn.glitch.com/071e5391-90f7-476b-b96c-1f51f7106b0c%2Fcheek.png)"
+      width={79}
+      height={67}
+      left={155}
+      top={135}
+      animate={animationControls}
+    />
+  </Frame>
+}
+```
+
+However, we get an error called `Invariant Violation`, which is quite a common source of error. When we are pasting something for the `return`, we don't want the `return` on a separate new line because it will be interpreted as if you want to return nothing. All we have to do is make sure a piece of our code is in-line with the `return`.
+
+```jsx{2}
+function Skinny(){
+  return <Frame
+    width={290}
+    height={320}
+    position="relative"
+    background="transparent"
+  >
+  ...
+}
+```
+
+Unfortunately, we have a new `ReferenceError` now, but let's worry about that later. Right after we save the file, the editor adds a pair of parentheses around what we pasted, so that we can put our tags underneath the `return`. The parentheses mean we are going to return everything inside the brackets.
+
+```jsx{2,10}
+function Skinny(){
+  return(
+    <Frame
+      width={290}
+      height={320}
+      position="relative"
+      background="transparent"
+    >
+    ...
+  )
+}
+```
+
+We still get an error because `animationControls` is not defined in our function `Skinny` nor in the top level, outside the function. However, for now let's just comment `animate={animationControls}` out.
+
+```jsx{10}
+function Skinny(){
+  return (
+    ...
+    <Frame
+      background="url(https://cdn.glitch.com/071e5391-90f7-476b-b96c-1f51f7106b0c%2Fcheek.png)"
+      width={79}
+      height={67}
+      left={155}
+      top={135}
+      // animate={animationControls}
+    />
+    ...
+  )
+}
+```
+
+## `<Slider>` component
+
+Now let’s do the same thing to our Slider! Select, copy, and remove (same as cut) the slider frames. We'll put a single `<Slider>` tag underneath `<Skinny>`.
+
+```jsx{3}
+<div ...>
+  <Skinny />
+  <Slider />
+</div>
+```
+
+Defining our `Slider` function or component,
+
+```jsx
+function Slider() {
+  return (
+    <Frame
+      width={280}
+      height={15}
+      borderRadius={30}
+      backgroundColor="white"
+      position="relative"
+    >
+      <Frame
+        size={60}
+        borderRadius={30}
+        center="y"
+        backgroundColor="white"
+        shadow="0 1px 5px 0 rgba(0, 0, 0, 0.25)"
+        drag="x"
+        dragConstraints={{ left: 0, right: 220 }}
+        dragElastic={false}
+        dragMomentum={false}
+        onDrag={handleDrag}
+      />
+    </Frame>
+  )
+}
+```
+
+The same error for `animationControls` in `Skinny` happens to `handleDrag` in our slider because it isn't defined in this function or the top level. Let's just comment it out as well.
+
+```jsx{14}
+function Slider() {
+  return (
+    ...
+      <Frame
+        size={60}
+        borderRadius={30}
+        center="y"
+        backgroundColor="white"
+        shadow="0 1px 5px 0 rgba(0, 0, 0, 0.25)"
+        drag="x"
+        dragConstraints={{ left: 0, right: 220 }}
+        dragElastic={false}
+        dragMomentum={false}
+        //onDrag={handleDrag}
+      />
+    </Frame>
+  )
+}
+```
+
+Although our slider and our picture are disconnected and don't work, the code looks a lot better.
+
+# Conclusion
+
+It’s very easy to see the structure of our `App` component.
+It consists of a `<div>`, a `<Skinny>` tag and a `<Slider>` tag.
+
+If we want to do something about `Skinny`, we know we can just look at and edit the `Skinny` component, not anywhere else.
+
+This demonstrates an important aspect of working with React. We are always making components. A component is made up of other components that consist of even smaller components.
+
+You want to keep components small. And you want to keep your code tidy. This is a really good habit to have.
+
+In our next post, we'll learn about communicating between two components. In our case, `Skinny` and `Slider`.

@@ -1,0 +1,106 @@
+---
+date: '2019-07-31'
+title: '3.7 Fixing Bugs'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238562'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- Two ways to fix our scale bug
+- `onDragEnd`
+- Review of `transition`
+- Structure of the slider and Skinny animation
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# Scale bug
+
+There’s a bug in our slider code and you might have noticed it!
+
+![skinny slider bug](./skinnybug.gif)
+
+This occurs because whenever we drag the slider, we run `handleDrag` very quickly and frequently.
+
+`handleDrag` quickly starts many animations with different scale values. By default, the Framer library animates the scale with a **spring**. If we start multiple spring animations within a short timeframe, the energy of the spring quickly accumulates. At some point, there will be a big bounce. You can see what happens!
+
+There are **two** ways to fix this issue.
+
+## First solution
+
+We can avoid starting so many animations quickly.
+
+In our `onDrag` attribute, the `handleDrag` function is called whenever we drag the knob. Instead, we can use `onDragEnd`.
+
+```jsx
+//knob
+<Frame
+  ...
+  onDrag={handleDrag}
+/>
+```
+
+to
+
+```jsx
+//knob
+<Frame
+  ...
+  onDragEnd={handleDrag}
+/>
+```
+
+Now the handleDrag function is only called after the drag gesture is completed. That is after the user releases the mouse or finger on a touch screen.
+
+![drag end slider](./250dragend.gif)
+
+Of course, this isn't smooth. If we want to see real-time updates on Skinny’s face, we need the second solution.
+
+## Second Solution
+
+By resetting the starting velocity of the spring, the energy of the spring does not accumulate when we start an animation.
+
+When we start an animation with animationControls, we can configure the animation using `transition`. If you remember the `transition` attribute, what we can put here is exactly the same.
+
+```jsx{7}
+function App(){
+  let animationControls = useAnimation()
+  function handleDrag(event, info) {
+    let newScale = transform(info.point.x, [0, 220],[0.4, 1.5])
+    animationControls.start({
+      scale: newScale,
+      transition:{type: "spring", velocity: 0}
+      })
+  }
+  ...
+}
+```
+
+Also make sure you are using `onDrag` now and not `onDragEnd`.
+
+```jsx
+//knob
+<Frame
+  ...
+  onDrag={handleDrag}
+/>
+```
+
+# Conclusion
+
+Let’s review what exactly is going on here.
+
+We created `animationControls` by calling `useAnimation`. The variable `animationControls` holds the return value of `useAnimation`. We then put `animationControls` into the `animate` attribute of what we want to be animated, in our case is the cheek of Skinny.
+
+This works like a remote control for the animation of the frame. Whenever we call the start function, the animation of the frame will change accordingly.
+
+In our knob frame, we assigned `handleDrag` to the `onDrag` attribute. This `handleDrag` function is called whenever the user drags the knob which will then run the code in the function body.
+
+Now, when the knob moves, we get a new x value from the `info.point.x` object. We then transform it to `newScale` and start a new animation by calling the `start` function in `animationControls`.
+
+In the next post, we'll clean up our code by creating a React component!

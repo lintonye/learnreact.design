@@ -1,0 +1,188 @@
+---
+date: '2019-07-25'
+title: '2.6 Calling Functions and Variables'
+video: 'https://school.learnreact.design/courses/601139/lectures/10785663'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- Calling functions
+- Creating variables with `let` statements
+- Assigning variables and compound assignment
+- Printing function values and `console.log`
+- Embedding Functions as parameters
+- Browser function output
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# Calling Functions and Variables
+
+Now that we’ve got `sandwichMaker`, how do we use this machine to make sandwiches? The technical term to "activate" the function is named **"calling the function"**.
+
+```jsx
+sandwichMaker('🥓')
+```
+
+Inside the parentheses, we put input in and, in this case, it's bacon! However, we aren't doing anything about the output. We are simply leaving the sandwich there. It is kind of like buying a sandwich maker, making a sandwich and throwing the sandwich away. That's a waste!
+
+Instead, we extract the output by storing it into a variable.
+
+```jsx
+let lintonsLunch = sandwichMaker('🥓')
+```
+
+Now, we will get the output of the sandwichMaker and have a "label" on it. This way hopefully nobody will eat my lunch 👀.
+
+The importance of this label is that we can use the output-value later in my code.
+
+Although the sandwich is virtual, and I, unfortunately, can't eat it, we can at least watch and print it. Let’s do that.
+
+```jsx
+let lintonsLunch = sandwichMaker('🥓')
+console.log(lintonsLunch)
+```
+
+![sandwich string in console](./consolesandwich.png)
+
+The console is located at the bottom right of the preview page.
+
+The label we used here — `lintonsLunch` — is called a "variable" in JavaScript and almost every other language.
+
+You can think of it as a labeled bucket that we can put things in.
+
+We define a variable by writing a **`let`**. Followed by the name of the variable, an equals sign, then what we want to put inside the bucket.
+
+```jsx
+let variableName = someValue
+```
+
+In `sandwichMaker`, the `sandwich` is a variable as well since we put a `let` statement before it. We initialized `sandwich` to a string or, more specifically, a piece of bread!
+
+```jsx
+function sandwichMaker(meat) {
+  let sandwich = '🍞'
+  sandwich = sandwich + meat
+  sandwich = sandwich + '🍀'
+  sandwich = sandwich + '🍞'
+  return sandwich
+}
+```
+
+We can replace the value of a variable anytime with an equals sign.
+
+```jsx
+let sandwich = '🍞'
+sandwich = newValue
+sandwich = newNewValue
+```
+
+## Compound Assignment
+
+```jsx
+sandwich = sandwich + meat
+```
+
+This line means that we get what’s currently in the bucket, **concatenate** (adding string) with meat and put the result back into the bucket. It's called a **compound assignment** because a calculation and an assignment is occurring.
+
+### Shorthand Compound Assignment
+
+A simplified method or more complicated, depending on how you look at it is this
+
+```jsx
+sandwich += meat
+```
+
+This process repeats until we get a "full sandwich" (adding the veggies and then the final piece of bread) in the variable.
+
+The variable is the third fundamental concept in JavaScript that you should know, along with objects and functions.
+
+## console.log
+
+Now let me ask you, what’s this console.log? It must be a function because of the pair of parentheses after it, but we didn't define it.
+
+Well, it is a function and although there is a dot here, which I’ll explain later, it is simply another function.
+
+However, it is a bit different than our `sandwichMaker`, since we are not using its return value in any way, but let's try.
+
+```jsx
+let lintonsLunch = sandwichMaker('🥓')
+let output = console.log(lintonsLunch)
+console.log(output)
+```
+
+![console undefined](./consoleundefined.png)
+
+It looks like some functions do not produce any output, but it does show something on the screen. Functions that don't produce any output can even save something to the disk and more.
+
+<!-- **TODO: Find better analogy** -->
+
+## Embedding Functions as Parameters
+
+By the way, we don’t necessarily need to save the output of a function to a variable to then put it inside `console.log`.
+
+```jsx
+console.log(sandwichMaker('🥓'))
+```
+
+We can even actually embed more functions calls like this and still get the same output.
+
+```jsx
+console.log(microwave(sandwichMaker('🥓')))
+```
+
+`sandwichMaker` is first run, the output is put it into `microwave` as input, then the output is fed into `console.log`.
+
+![console heated sandwich](./consoleheated.png)
+
+You can also call functions multiple times.
+
+```jsx
+console.log(microwave(sandwichMaker('🥓')))
+console.log(microwave(sandwichMaker('🥓')))
+console.log(microwave(sandwichMaker('🥓')))
+console.log(microwave(sandwichMaker('🥓')))
+```
+
+Now, we simply get four of the same outputs, and we can change the parameters if need be.
+
+All in all, functions are very cool and flexible machines.
+
+## Browser Function Output
+
+Now that we have a sandwich maker function, how do we show the result on the web page, rather than just in the console?
+
+Let’s say we put it inside a div in `App`. Will we get the same console result?
+
+```jsx
+<div className="App">
+  <div>sandwichMaker("🥓")</div>
+  ...
+</div>
+```
+
+Unfortunately, this doesn't work. I get the literal text inside the `<div>`.
+
+![browser preview of sandwich maker](./sandwichbrowser.png)
+
+To fix this, we can add a pair of curly brackets to make the code dynamic. These curly brackets will treat what’s inside as executable code and try to run it. Here it’ll call this function and put the output on the resulting web page.
+
+```jsx
+<div className="App">
+  <div>{sandwichMaker('🥓')}</div>
+  ...
+</div>
+```
+
+Which results in
+
+![browser preview of sandwich maker](./consolesandwichgood.png)
+
+# Conclusion
+
+Great! You now know how to call a function and what variables are! We'll learn next the different types of variables and how to create them.

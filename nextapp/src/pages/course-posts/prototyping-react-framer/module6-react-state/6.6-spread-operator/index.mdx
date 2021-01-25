@@ -1,0 +1,168 @@
+---
+date: '2019-08-15'
+title: '6.6 True Face of the Spread Operator'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238544'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- Using the spread operator
+- Spread operator syntax
+- Problem and solution to spread operator
+- Object destructuring and reverse three-dot operator
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# Implementing the spread operator
+
+You’ve learned about the **spread operator** which breaks apart an object and uses its properties to set the attributes of a JSX tag.
+
+If we want to write our `RadioGroup` in JavaScript, we use the spread operator in a similar way to JSX.
+
+Since JSX tags are simply JavaScript calls, we can re-write the `<Frame>` of our `RadioGroup` component as follows:
+
+```jsx{3}
+function RadioGroup(){
+  return(
+    React.createElement(Frame, {background: null, ...props}
+    , ...
+    )
+  )
+}
+```
+
+In the attribute parameter of `createElement` we can place the spread operator right inside the curly brackets when we construct an object. Don't forget to use a comma when separating parameters!
+
+All in all, the spread operator takes an object, breaks apart all its properties, and spreads them around in a new object.
+
+To illustrate, let's use the console for our next example.
+
+## Spread operator syntax
+
+Copy and paste this piece of code:
+
+```jsx
+person = { name: 'Linton', age: Infinity }
+```
+
+We are creating an object called `person` which has two properties, `name` and `age`.
+
+After we press return, we can use the `person` object to construct a new object.
+
+Let's type this statement inside our console:
+
+```jsx
+{ hobby: "Lie about his age", ...person }
+```
+
+After we press return again, we'll get a new object with a `hobby` property and all of the `person` object's properties: `name` and `age`.
+
+![hobby properties in console](./hobby2.png)
+
+Furthermore, the parameter position/order of the spread operator, `...person` matters!
+
+For example if we type this into the console,
+
+```jsx
+{ age:0, ...person }
+```
+
+The `person` object's `age` property is overrides `age:0` because the spread operator is last.
+
+Vice versa:
+
+```jsx
+{...person, age:0 }
+```
+
+This time, `age:0` overrides the `person` object's properties.
+
+![age property](./age.png)
+
+Therefore, we can conclude that whatever appears last in parameter order has the final say.
+
+## Object destructuring and Spread operator
+
+The three-dot operator can be used together with object destructuring as well. In fact, it is very common.
+
+```jsx{3}
+function RadioGroup(props) {
+  return (
+    <Frame background={null} {...props}>
+      {props.choices.map(choice => (
+        <Radio key={choice}>{choice}</Radio>
+      ))}
+    </Frame>
+  )
+}
+```
+
+## Problem with using `{...props}`
+
+In our case, we are using `...props` here to forward the `RadioGroup` attributes to the Frame. Although it works, we can pass too many properties to the `<Frame>` tag. For example, when using `...props` we are also passing on `choices` to the `<Frame>`. However, since `choices` is not an attribute supported by Frame, we just don't see it, but to be efficient and clear, how can we choose a property to exclude from being passed on?
+
+### Object destructuring
+
+If you remember, with object destructuring, we can replace `props` in our `RadioGroup` parameter with an object.
+
+```jsx{1,4}
+function RadioGroup({choices}) {
+  return (
+    <Frame background={null} {...props}>
+      {choices.map(choice => (
+        <Radio key={choice}>{choice}</Radio>
+      ))}
+    </Frame>
+  )
+}
+```
+
+This change assumes the parameter to be an object, extracts the `choices` property, and defines a new variable of our choice, in which we named, `choices`.
+
+We can now change `props.choices` to `choices`, but now `...props` is undefined.
+
+## Reverse three-dot operator
+
+How can we capture the rest of the properties?
+
+```jsx{1,3}
+function RadioGroup({choices, ...rest}) {
+  return (
+    <Frame background={null} {...rest}>
+      {choices.map(choice => (
+        <Radio key={choice}>{choice}</Radio>
+      ))}
+    </Frame>
+  )
+}
+```
+
+The `rest` object will have all the properties of the original parameter except the `choices` property.
+
+As a reminder, object destructuring allows us to create new variables. Therefore, we can name them however we like.
+
+```jsx{1,3-4}
+function RadioGroup({optionChoices, ...newProps}) {
+  return (
+    <Frame background={null} {...newProps}>
+      {optionChoices.map(choice => (
+        <Radio key={choice}>{choice}</Radio>
+      ))}
+    </Frame>
+  )
+}
+```
+
+Unlike our previous examples, the three-dot operator is working the opposite way. Instead of breaking apart properties, it is collecting the rest of them and assembling them into a new object.
+
+# Conclusion
+
+Alright, that’s a short summary about the spread operator. It is commonly used in modern JavaScript due to how convenient the spread operator is.
+
+In the next post, we'll add a React State to our `RadioGroup` and make it finally functional!

@@ -1,0 +1,128 @@
+---
+date: '2019-07-24'
+title: '2.2 Drawing a Toggle'
+video: 'https://school.learnreact.design/courses/601139/lectures/10785658'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- What `Frame`'s are
+- Embedding `Frame`'s
+- Changing `Frame` attributes
+- Dynamic properties with curly brackets
+- Two ways to style a `Frame`
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# Toggle Part 2
+
+Now we have a `Frame` which is just a blue square, but it’s not that special. It’s just a `<div>`.
+
+## Inspecting the Frame
+
+![frame inspect](./framediv.png)
+
+Inspecting the element reveals that the `Frame` is a glorified `<div>` that allows us to do some cool tricks.
+
+The toggle we are creating is a circle inside a longer shape.
+
+![toggle button](./togglebutton.png)
+
+Because the `Frame` is just a `<div>`, we can put elements inside. Let’s put another `Frame` inside.
+
+## Embedding Frames
+
+```jsx
+{
+  /* toggle tracker*/
+}
+;<Frame>
+  {/* toggle circle*/}
+  <Frame size={60} borderRadius={30} />
+</Frame>
+```
+
+## Changing Frame Attributes
+
+There should be a circle inside of a larger square now. That larger square will envelop the toggle, so its height should be equal to the circle's diameter (2\*radius), and the width should be around twice the diameter of the circle.
+
+```jsx
+<Frame width={120} height={60}>
+  <Frame size={60} borderRadius={30} />
+</Frame>
+```
+
+Our toggle should now look like a circle inside of a rectangle, to make our toggle curved on both sides, we set a `borderRadius` on the outer container as well.
+
+```jsx
+<Frame width={120} height={60} borderRadius={30}>
+  <Frame size={60} borderRadius={30} />
+</Frame>
+```
+
+![stage 1 of toggle](./togglestage1.png)
+
+Great! That looks like a toggle now.
+
+## Inspecting the Frame
+
+Let’s look closely at how this works. We’ve set the `width`, `height`, `borderRadius` and size attributes of the Frames.
+
+Remember how a `<Frame>`s is just a `<div>`? However, in HTML, a `<div>`doesn't have these attributes. Therefore, if we try to set them on a `<div>`, there would be no effect. Hence, frames are glorified divs. As a result, we can use these and many other additional attributes on a `<Frame>`.
+
+![inspect of stage 1 of toggle](./togglestage1inspect.png)
+
+We see that the frame works by converting the `width`, `height`, and `borderRadius` attributes into inline styles onto the resulting divs.
+
+## Styling the Frame
+
+Can we style frames with inline styles as if they are divs? Yes. However, the format for setting inline styles in JSX is different from that of HTML.
+
+In HTML, we would do something like
+
+```jsx
+<Frame width={120} height={60} borderRadius={30} style="width: 120px">
+  {/*SyntaxError with style="width: 120px"*/}
+  <Frame size={60} borderRadius={30} />
+</Frame>
+```
+
+However, we get a `SyntaxError`.
+
+The correct way involves **two** curly brackets!
+
+```jsx{1}
+<Frame width={120} height={60} borderRadius={30} style={{width: 120}}>
+  <Frame size={60} borderRadius={30}/>
+</Frame>
+
+{/*note the JSX style version doesn't need "px"*/}
+```
+
+Try removing the `width={120}` attribute and the frame will keep its width due to the style! This `style` attribute also works on divs.
+
+```jsx
+<div
+  className="App"
+  style={{ width: 120, background: 'orange', height: 120 }}
+></div>
+```
+
+# Conclusion
+
+Therefore, we have two ways to style a Frame.
+
+1. Style attribute.
+   > It works on divs and Frames because Frames are divs.
+2. Separate attributes such as width, height, borderRadius.
+   > They are more convenient but they only work on Frames. They don’t work on divs.
+
+You can find a list of all supported attributes in Framer’s [documentation](https://www.framer.com/api/frame/#layout).
+
+In the next post, we'll learn about strings and objects that are necessary to create our toggle!

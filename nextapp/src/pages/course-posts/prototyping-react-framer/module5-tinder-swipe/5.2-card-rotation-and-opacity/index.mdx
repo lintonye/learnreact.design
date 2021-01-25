@@ -1,0 +1,186 @@
+---
+date: '2019-08-06'
+title: '5.2 Card Rotation and Opacity'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238548'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- Implementing rotation
+- `useTransform` with `MotionValue`
+- `useTransform` input and output ranges
+- `opacity` with `MotionValue`
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# Rotation using `MotionValue`
+
+Now let’s make this swipe gesture a bit more realistic. We’ll rotate the card counter-clockwise when we drag it to the left and rotate it to the other direction when we drag it to the right.
+
+Replacing `y={mv}` with `rotate={mv}`,
+
+```jsx{5}
+<Frame
+  center
+  drag="x"
+  x={mv}
+  rotate={mv}
+  dragConstraints={{ left: -200, right: 200 }}
+  style={style}
+/>
+```
+
+![rotating card](./rotate.gif)
+
+Perhaps you can invent some new interaction by exploring these attributes!
+
+However, don’t get distracted yet. We want to create the tinder swipe first!
+
+As a result, the card shouldn’t rotate this much.
+
+To do that, we need to convert the x offset range to a smaller range of rotation degrees.
+
+## `transform`
+
+We did something similar to that in our Slider. The function `transform` was used to do this conversion.
+
+Using `transform`, we only need to give it a value, an input range, and an output range.
+
+Unfortunately, the `transform` function cannot be used here. If you check out its [documentation](https://www.framer.com/api/utilities/#transform), the value being transformed must be a number.
+
+![transform function documentation](./input.png)
+
+Scrolling down,
+
+![inputValue must be a number](./value.png)
+
+## `useTransform`
+
+The good news is that the Framer library gives us something similar to `transform` for MotionValues. It’s another hook called `useTransform`.
+
+On the same Framer documentation page, we can click on `useTransform` on the left menu to see its [documentation](https://www.framer.com/api/utilities/#usetransform).
+
+Let's take a look at the second example first. We'll go over the first one later.
+
+![useTransform function](./usetransform.png)
+
+Although the first parameter is called `parent`, we can see that the function takes an input range the gives an output range.
+
+To use `useTransform` we first have to import it.
+
+```jsx{3}
+import * as React from "react"
+import ReactDOM from "react-dom"
+import { Frame, useMotionValue, useTransform } from "framer"
+import "./styles.css"
+```
+
+## Rotating our card
+
+We can then call `useTransform` inside our `App` component. Since the dragging range of the card is between `-200` and `200`, from our `dragConstraints`, we have the input range.
+
+```jsx{3}
+function App() {
+  let mv = useMotionValue(0)
+  let rotateMv = useTransform(mv, [-200, 200], [-50,50])
+  ...
+```
+
+Then instead of `rotate = {mv}`, we replace that with `rotate = {rotateMv}`.
+
+```jsx{5}
+<Frame
+  center
+  drag="x"
+  x={mv}
+  rotate={rotateMv}
+  dragConstraints={{ left: -200, right: 200 }}
+  style={style}
+/>
+```
+
+![less rotation card](./rotatemv.gif)
+
+That works pretty well.
+
+# Card `opacity`
+
+Similarly, we can create another `MotionValue` for the **`opacity`** of the card. This will make the card fade away when we drag it.
+
+```jsx{4}
+function App() {
+  let mv = useMotionValue(0)
+  let rotateMv = useTransform(mv, [-200, 200], [-50,50])
+  let opacityMv = useTransform(mv, [-200, 200], [1, 0])
+  ...
+```
+
+Then in our `<Frame>`,
+
+```jsx{6}
+<Frame
+  center
+  drag="x"
+  x={mv}
+  rotate={rotateMv}
+  opacity={opacityMv}
+  dragConstraints={{ left: -200, right: 200 }}
+  style={style}
+/>
+```
+
+![opacity demo](./opacity1.gif)
+
+However, this isn’t quite what we wanted. The card is supposed to be opaque when it’s sitting in the middle and disappear when we swipe it to the left or the right.
+
+We can solve this by fixing our input and output ranges.
+
+Since the input and output ranges in `useTransform` are arrays, we can put more than just two elements inside. As long as the number of input and output ranges match, Framer will treat them as **keyframes**.
+
+## Adjusting input and output array ranges
+
+When the card is sitting in the middle, its x offset is 0, so let's add `0` to our input range.
+
+```jsx{4}
+function App() {
+  let mv = useMotionValue(0)
+  let rotateMv = useTransform(mv, [-200, 200], [-50,50])
+  let opacityMv = useTransform(mv, [-200, 0, 200], [1, 0])
+  ...
+```
+
+When the x offset is `0` we want the opacity to be 1, so let's move the `1` in our output range to the middle. We can do this by adding a `0` to the output array because we also want our card to fade when we drag it to the left.
+
+```jsx{4}
+function App() {
+  let mv = useMotionValue(0)
+  let rotateMv = useTransform(mv, [-200, 200], [-50,50])
+  let opacityMv = useTransform(mv, [-200, 0, 200], [0, 1, 0])
+  ...
+```
+
+![opacity both sides](./opacity2.gif)
+
+If you think the card disappears too soon, we can insert more "keyframes" to fine-tune the animation.
+
+```jsx{4}
+function App() {
+  let mv = useMotionValue(0)
+  let rotateMv = useTransform(mv, [-200, 200], [-50,50])
+  let opacityMv = useTransform(mv, [-200,-150, 0, 150, 200], [0, 1, 1, 1, 0])
+  ...
+```
+
+![opacity slowed down](./opacityslow.gif)
+
+# Conclusion
+
+This is it! We can build this swipe gesture with the Framer library in just a few lines of code. It’s a lot of fun to play with different attributes and watch how the frames would change. I highly encourage you to try a few more things, and really, unleash your creativity!
+
+In the next post, we'll revisit our summer parallax module and learn how to convert the animation to incorporate `useMotionValue`.

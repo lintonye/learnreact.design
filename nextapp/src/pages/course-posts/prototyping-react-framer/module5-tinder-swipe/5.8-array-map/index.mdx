@@ -1,0 +1,203 @@
+---
+date: '2019-08-13'
+title: '5.8 Array.map'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238554'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- Creating code to work with external data
+- `map` function
+- Accessing object array properties
+- `key` attribute
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# `cards` array and `map`
+
+We now have this `Card` component that we can use over and over again to create multiple cards.
+
+Although this is far more efficient than writing out individual Frames, there will still be a lot of repetition if we have over 100 cards, requiring us to write the `<Card />` tag, `image`, and `color` attributes 100 times.
+
+This is especially true when we work with external data which is usually available as an array. As a result, we need to create many cards according to the content of an array.
+
+Here we have some data. This is an array of 3 objects with properties of `image` and `color`. Let's paste it into `App`.
+
+```jsx
+function App(){
+  const cards = [
+    {
+      image: "https://cdn.glitch.com/071e5391-90f7-476b-b96c-1f51f7106b0c%2Fbird_strong_small.svg?v=1560032432704",
+      color: "#55CCFF"
+    },
+    {
+      image: "https://cdn.glitch.com/071e5391-90f7-476b-b96c-1f51f7106b0c%2Fbird_fat_black_medium.svg?v=1557968629951",
+      color: "#FF88AA"
+    },
+    {
+      image: "https://cdn.glitch.com/071e5391-90f7-476b-b96c-1f51f7106b0c%2Fdesigner.svg?v=1560273527081",
+      color: "#66BB66"
+    }
+  ]
+  ...
+}
+```
+
+We then need to get each element from this array and create a corresponding `<Card />` tag. If you have studied JavaScript or other programming languages, you probably know that we could use a `for` loop or `while` loop to do that, but let me show you a cleaner way, which is more often used in React.
+
+First, let's delete all our `<Card />` tags and replace them with a pair of curly brackets.
+
+```jsx{4-6}
+function App() {
+  ...
+  return (
+    <div className="App">
+      {
+
+      }
+    </div>
+  )
+}
+```
+
+Don’t forget the pair of curly brackets because we are gonna write **executable**, not literal, JavaScript here. For now, follow along, and I'll explain what we are doing later.
+
+```jsx{6}
+function App() {
+  ...
+  return (
+    <div className="App">
+      {
+        cards.map()
+      }
+    </div>
+  )
+}
+```
+
+`map` is a function and we are calling it. The parameter of the `map` function is also a function. We are then going to write an **arrow function** inside.
+
+```jsx
+function App(6) {
+  ...
+  return (
+    <div className="App">
+      {
+        cards.map((card) => <Card />)
+      }
+    </div>
+  )
+}
+```
+
+This arrow function has `card` as its parameter, and it returns a `Card` tag.
+
+What is this `<Card />` tag? Well, if you remember, all JSX tags are JavaScript functions.
+
+`<Card />` is the same as `React.createElement(Card)`.
+
+```jsx
+function App(6) {
+  ...
+  return (
+    <div className="App">
+      {
+        cards.map((card) => React.createElement(Card))
+      }
+    </div>
+  )
+}
+```
+
+Don’t be surprised about this syntax, you already know it! To make our code look nicer though, we'll stick to JSX tags.
+
+```jsx
+function App(6) {
+  ...
+  return (
+    <div className="App">
+      {
+        cards.map((card) => <Card />)
+      }
+    </div>
+  )
+}
+```
+
+If we look at our preview, we have 3 blank cards because we have not set their `image` and `color` attributes yet. Furthermore, you should notice that we have 3 objects in the `cards` array and 3 cards.
+
+![blank cards](./blank.gif)
+
+But what does this `map` function actually do?
+
+The `map` function iterates through all the elements in the array and, for each element, it’ll call the function. Finally, it assembles all the return values into a new array.
+
+So what we get by calling the `map` functions is, in fact, an array of three card tags like this:
+
+```jsx
+;[<Card />, <Card />, <Card />]
+```
+
+We can populate the `image` and `color` attributes of the `<Card />` tag with the parameter `card`.
+
+Each `card` parameter value will have the properties of the elements inside the array. Therefore, we can assign the `<Card />` tag attributes using `card` and dot notation.
+
+```jsx{6}
+function App(6) {
+  ...
+  return (
+    <div className="App">
+      {
+        cards.map((card) => <Card image={card.image} color={card.color}/>)
+      }
+    </div>
+  )
+}
+```
+
+![final result](./finalwarning.gif)
+
+The reason we can use dot notation is because the array elements are objects!
+
+Here is an illustration that may help!
+
+![map illustration](./map2.png)
+
+## Array and `map` warning
+
+However, there is one more thing. We have a warning in the console.
+
+![warning](./warning.png)
+
+We are being warned of a common error when people use arrays and the `map` function in React.
+
+The fix is to add a `key` attribute to the JSX tag. The value needs to be unique inside the array.
+
+For this example, since each card has a unique `image` url, we’ll just use that.
+
+```jsx{6}
+function App(6) {
+  ...
+  return (
+    <div className="App">
+      {
+        cards.map((card) => <Card image={card.image} color={card.color} key={card.image}/>)
+      }
+    </div>
+  )
+}
+```
+
+Now there are no more errors!
+
+# Conclusion
+
+Congrats for making it to here! You should know now how to create the "Tinder" swipe animation in multiple different ways. Although this animation might have looked daunting at the beginning, you can relax knowing that it is quite simple!
+
+In the next post, we'll begin our next module involving creating a radio group by scratch!

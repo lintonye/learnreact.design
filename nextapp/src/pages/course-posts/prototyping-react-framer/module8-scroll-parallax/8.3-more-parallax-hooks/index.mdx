@@ -1,0 +1,159 @@
+---
+date: '2019-08-27'
+title: '8.3 More Parallax Hooks'
+video: 'https://school.learnreact.design/courses/629779/lectures/11509505'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- `useSpeed`
+- `useTrigger`
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# More `use-parallax` Hooks
+
+Similar to the `usePositiveOffset` and `useSticky` hooks, we also have a `useSpeed` hook from my `use-parallax` library.
+
+## `useSpeed`
+
+```jsx{4}
+import * as React from "react"
+import { render } from "react-dom"
+import { Frame, Scroll, useMotionValue, useTransform } from "framer"
+import { usePositiveOffset, useSticky, useSpeed } from "use-parallax"
+import "./styles.css"
+```
+
+Let's replace `useSticky` with `useSpeed`. Instead of having only ranges inside, we'll add another parameter after each range, denoting the scroll speed during this particular range.
+
+```jsx{3}
+function App(){
+  ...
+  const iconY = useSticky(pOffset, [0, 100], 0, [100, 400], -1/2, [400, 800], -1)
+  return (
+    ...
+  )
+}
+```
+
+![usespeed](./usespeed.gif)
+
+Initially, our icon has a speed of `0` in the range of `[0, 100]`. This causes the icon to scroll with the background.
+
+In the next range, our icon moves a half slower than the background.
+
+Finally, our icon is moving against our background at the same speed in the `[400, 800]` which makes it seem like the icon is sticking.
+
+## `useTrigger`
+
+This hook is useful if we want to trigger a certain action upon reaching a certain range.
+
+Let's create an animation for our icon by implementing `useTrigger`.
+
+```jsx{3-4}
+import * as React from "react"
+import { render } from "react-dom"
+import { Frame, Scroll, useMotionValue, useTransform, useAnimation } from "framer"
+import { usePositiveOffset, useSticky, useSpeed, useTrigger } from "use-parallax"
+import "./styles.css"
+```
+
+Remember to import `useAnimation` for this!
+
+```jsx{3,9}
+function App(){
+  ...
+  const anim = useAnimation()
+  return(
+    ...
+    {/* Icon */}
+    <Frame
+    // opacity={iconOpacity}
+      animate={anim}
+      y={iconY}
+      backgroundColor="white"
+      size={200}
+      top={400}
+      borderRadius={iconBorderRadius}
+      center="x"
+      image="/starship.png"
+    />
+  )
+}
+```
+
+We can now call `useTrigger`.
+
+The first parameter is the **positive offset** `pOffset`, the second is the range, and the third is the function we want to call.
+
+```jsx{4}
+function App(){
+  ...
+  const anim = useAnimation()
+  useTrigger(pOffset, [400, 450], function(){})
+  return(
+    ...
+  )
+}
+```
+
+We'll use an arrow function in the third parameter to rotate the icon.
+
+```jsx{4-6}
+function App(){
+  ...
+  const anim = useAnimation()
+  useTrigger(pOffset, [400, 450], direction => {
+      anim.start({rotate:180})
+  })
+  return(
+    ...
+  )
+}
+```
+
+![usetrigger](./usetrigger.gif)
+
+`useTrigger` is only called **once per scrolling direction**. You can verify this by using a `console.log` statement.
+
+Since `direction` can be either negative or positive whether we scroll up or down respectively. We can then play different animations depending on `direction`.
+
+```jsx{4-6}
+function App(){
+  ...
+  const anim = useAnimation()
+  useTrigger(pOffset, [400, 450], direction => {
+      anim.start({rotate: direction < 0 ? 180 : 0})
+  })
+  return(
+    ...
+  )
+}
+```
+
+Our ternary operator here will rotate our icon 180 degrees when scrolling up (direction < 0) and will rotate our icon back to 0 when scrolling down.
+
+![direction](./direction.gif)
+
+All these hooks were built with `useTransform` and some additional math.
+
+To illustrate, `usePositiveOffset` was merely written with `useTransform`, in which we are multiplying the by negative 1.
+
+```jsx
+function usePositiveOffset(offset) {
+  return useTransform(offset, (v) => -v)
+}
+```
+
+# Conclusion
+
+I encourage you to play combine these hooks and see what types of animations and triggers you can make!
+
+I'll walk through assignment 8.2 in the next post.

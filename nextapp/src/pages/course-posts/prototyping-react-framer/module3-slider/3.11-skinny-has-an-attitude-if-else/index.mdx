@@ -1,0 +1,256 @@
+---
+date: '2019-08-12'
+title: '3.11 Skinny has an Attitude: If Else'
+video: 'https://school.learnreact.design/courses/629779/lectures/11324838'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- `if` and `else` statements
+- pseudo code
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# `if` and `else`
+
+We will still use a slider to control the size of Mr. Skinny’s cheek, but this time, Skinny is not just going to sit there and let us make him fat!
+
+We'll make it so that if we make him too fat, he’s going to raise his wings and eyebrows in protest!
+
+![final result](./protest.gif)
+
+## What's new in our code
+
+Back in our starter code, we have the same Skinny as before, but I separated the wings and eyebrows into separate Frames so that we can animate them.
+
+## Wings
+
+```jsx
+{
+  /* Wing far side */
+}
+;<Frame
+  background="url(https://cdn.glitch.c071e5391-90f7-476b-b96c-1f51f7106b0c%2Fwing-far.p"
+  width={84}
+  height={119}
+  left={50}
+  top={50}
+  animate={props.wingAnimation}
+  style={{ transformOrigin: 'bottom right' }}
+  rotate={-80}
+/>
+{
+  /* Wing near side */
+}
+;<Frame
+  background="url(https://cdn.glitch.com/071e5391-90f7-476b-b96c-1f51f7106b0c%2Fwing-near.png)"
+  width={124}
+  height={71}
+  left={-20}
+  top={110}
+  animate={props.wingAnimation}
+  style={{ transformOrigin: 'bottom right' }}
+  rotate={-80}
+/>
+```
+
+## Eyebrows
+
+```jsx
+{
+  /* Eyebrow left */
+}
+;<Frame
+  background="url(https://cdn.glitch.com/071e5391-90f7-476b-b96c-1f51f7106b0c%2Feyebrow-left.png?v=1564936189694)"
+  width={30}
+  height={32}
+  left={190}
+  top={88}
+  animate={props.leftEyebrowAnimation}
+/>
+{
+  /* Eyebrow right */
+}
+;<Frame
+  background="url(https://cdn.glitch.com/071e5391-90f7-476b-b96c-1f51f7106b0c%2Feyebrow-right.png?v=1564936189572)"
+  width={24}
+  height={14}
+  left={223}
+  top={91}
+  animate={props.rightEyebrowAnimation}
+/>
+```
+
+## `App`
+
+In our `App` component, there are added `useAnimation` instances for the our eyebrows and wings and instead of previously passing a defined function `handleDrag` into `onDrag` in `<Slider>`, we pass an anonymous function into `onDrag`.
+
+```jsx
+<Slider
+  onDrag={function (event, info) {
+    const scale = transform(info.point.x, [0, 220], [0.4, 1.5])
+    cheekAnimation.start({
+      scale,
+      transition: { type: 'spring', velocity: 0 },
+    })
+  }}
+/>
+```
+
+Now, when we begin to drag Skinny's cheek, we eventually want to animate the other elements.
+
+If we try to describe what we want to do, it should sound something like this:
+
+**"If dragged too far, then raise the wings and eyebrows"**
+
+However, how do we know if the slider is moved too far?
+
+## `if`
+
+Since we have `info.point.x`, we can use the `if` statement to check if the slider is dragged too far.
+
+In **pseudo code**, which is a method of describing code that can be applied to any language, our code would look something like this:
+
+### Pseudo
+
+```jsx
+if info.point.x > 100
+```
+
+How do we raise Skinny’s wings?
+
+```jsx
+if info.point.x > 100 then wingAnimation.start(...)
+```
+
+From there, we almost have the JavaScript code.
+
+1. Add `()`
+
+```jsx
+if (info.point.x > 100) then wingAnimation.start(...)
+```
+
+2. Remove "then" and add `{}`
+
+```jsx
+if (info.point.x > 100) {wingAnimation.start(...)}
+```
+
+3. Add the body of the function
+
+```jsx{2-5}
+if (info.point.x > 100) {
+  wingAnimation.start({
+    rotate: 70,
+    transition: { type: "spring", velocity: 0 }
+  })
+}
+```
+
+Let's add this piece of code into our `onDrag` function.
+
+```jsx{8-13}
+<Slider
+  onDrag={function(event, info) {
+    const scale = transform(info.point.x, [0, 220], [0.4, 1.5])
+    cheekAnimation.start({
+      scale,
+      transition: { type: "spring", velocity: 0 }
+    })
+    if (info.point.x > 100) {
+      wingAnimation.start({
+        rotate: 70,
+        transition: { type: "spring", velocity: 0 }
+      })
+    }
+  }}
+/>
+```
+
+![wings](./wings.gif)
+
+We can put more than one action inside our `if` statement as well.
+
+```jsx
+if (info.point.x > 100) {
+  wingAnimation.start({
+    rotate: 70,
+    transition: { type: 'spring', velocity: 0 },
+  })
+
+  leftEyebrowAnimation.start({
+    x: -3,
+    y: -6,
+    transition: { type: 'spring', velocity: 0 },
+  })
+
+  rightEyebrowAnimation.start({
+    x: 3,
+    y: -6,
+    transition: { type: 'spring', velocity: 0 },
+  })
+}
+```
+
+![both eyebrows](./eyes.gif)
+
+To understand what is going on, let's take a look at the order of execution of our code. If the first condition is satisfied `info.point.x > 100`, then the code within the curly brackets is run from top to bottom.
+
+However, once we satisfy these conditions and move our slider back, the animations of our wing and eyebrows stay in place! Skinny should not be constantly mad, especially when we make him thin again!
+
+![Skinny wings and eyebrows up](./mad2.png).
+
+We can calm him down by moving his wings and eyebrows back to their original positions.
+
+## `else`
+
+How can we do something when the slider is moved back? We could, of course, use another `if`,
+
+```jsx
+if (info.point.x < 100) {
+  ...
+}
+```
+
+but there’s a cleaner and more efficient way. Instead of another `if` we can use `else` .
+
+```jsx{3}
+if (info.point.x > 100) {
+  ...
+} else {
+
+  wingAnimation.start({
+    rotate: -80,
+    transition: { type: "spring", velocity: 0 }
+  })
+
+  leftEyebrowAnimation.start({
+    x: 0,
+    y: 0,
+    transition: { type: "spring", velocity: 0 }
+  })
+
+  rightEyebrowAnimation.start({
+    x: 0,
+    y: 0,
+    transition: { type: "spring", velocity: 0 }
+  })
+}
+```
+
+Together, this should be our final result!
+
+![final result](./protest.gif)
+
+# Conclusion
+
+These are if-else statements in JavaScript! If we put a condition inside a pair of parentheses, we can do things conditionally. I’m sure that you’ll find it useful very soon.
+
+We'll begin our mouse parallax module in the next post!

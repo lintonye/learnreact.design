@@ -1,0 +1,132 @@
+---
+date: '2019-07-25'
+title: '2.6.1 Let, Const, and Var'
+video: 'https://school.learnreact.design/courses/601139/lectures/11184306'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- Creating different types of variables
+- Why use constants
+- Differences between `let`, `const`, and `var`
+- Parameter variable
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# Variables and Datatypes
+
+## `let`
+
+In the last post, we learned that we can create a variable with the `let` keyword and how a variable is like a labeled bucket which we can put things in.
+
+There are also two other keywords we can use.
+
+## `const`
+
+If you read other people’s code, you might see `const` instead of `let`.
+
+```jsx{2}
+function sandwichMaker(meat){
+  const sandwich = "🍞"
+  sandwich = sandwich+meat
+  sandwich = sandwich+"🍀"
+  sandwich = sandwich+"🍞"
+  return sandwich
+}
+```
+
+This defines a **constant** instead of a reassignable variable.
+
+Similar to variables, a constant is a labeled bucket too. We can use its value by the name. However, unlike a variable, once we put a value into a constant, we cannot change it. That’s why it's called a constant, and why we get errors in these lines.
+
+```jsx{4}
+function sandwichMaker(meat){
+  const sandwich = "🍞"
+  // Error "sandwich is read-only and cannot be reassigned
+  sandwich = sandwich+meat
+  sandwich = sandwich+"🍀"
+  sandwich = sandwich+"🍞"
+  return sandwich
+}
+```
+
+## What's so good about a constant?
+
+You might ask what’s good about a constant if we cannot change its value. Well, just like many things in life, adding some limitations can bring benefits. This barrier can be exactly what we want. It can make the code easier to read and help us avoid mistakes because we would not need to worry about accidental changes to the values.
+
+For example, if you are dealing with a physics game, you might need to add some physical constants such as gravity that we don't want to accidentally change.
+
+## `var`
+
+If you have studied JavaScript before, you probably know there’s another keyword to define variables. It’s `var` instead of `let`
+
+```jsx{2}
+function sandwichMaker(meat){
+  var sandwich = "🍞"
+  sandwich = sandwich+meat
+  sandwich = sandwich+"🍀"
+  sandwich = sandwich+"🍞"
+  return sandwich
+}
+```
+
+## `var` vs `let`
+
+Similar to `let`, this defines a variable `sandwich`. We can use its value by the same name. We can also change the value of the variable with an equal sign. However, there are some subtle differences between the variables defined by `let` and the ones by `var`. But **let’s** not worry about it at the moment.
+
+You can consider `let` as a better way to define variables than `var`. **We’ll always use `let` instead of `var`.**
+
+## Parameter
+
+In this function, the parameter `meat` is, in fact, a variable too.
+
+```jsx{1}
+function sandwichMaker(meat){
+  let sandwich = "🍞"
+  sandwich = sandwich+meat
+  sandwich = sandwich+"🍀"
+  sandwich = sandwich+"🍞"
+  return sandwich
+}
+```
+
+You can think of it as if there’s a hidden `let` statement at the beginning of the function. It initializes the variable with the value we pass in when calling the function.
+
+```jsx{2-3}
+function sandwichMaker(){
+  let meat = "🥓"
+  let sandwich = "🍞"
+  sandwich = sandwich+meat
+  sandwich = sandwich+"🍀"
+  sandwich = sandwich+"🍞"
+  return sandwich
+}
+
+let someVariable = sandwichMaker()
+```
+
+This would essentially be equivalent to
+
+```jsx
+function sandwichMaker(meat) {
+  let sandwich = '🍞'
+  sandwich = sandwich + meat
+  sandwich = sandwich + '🍀'
+  sandwich = sandwich + '🍞'
+  return sandwich
+}
+
+let someVariable = sandwichMaker('🥓')
+```
+
+However, the first method can't change because it doesn't have any input anymore!
+
+# Conclusion
+
+That is `let`, `const`, and `var`! Remember we'll be using `let` instead of `var`! We'll learn about a special function called `onTap` next!

@@ -1,0 +1,133 @@
+---
+date: '2019-07-31'
+title: '3.9 Communication between Two Components'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238564'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- Passing functions into custom tags
+- Custom tag attributes called `props`
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# Component Communication
+
+`Slider` and `Skinny` are disconnected, so let's fix it!
+
+Now, we’ve got `<Skinny>` and `<Slider>` beside each other. We want the `Skinny>` component to know the `Slider` position when we drag it so that we can update `Skinny` accordingly.
+
+This is how we communicate between the two.
+
+Before we extracted Skinny and the slider into individual components, they were both in the same `App` component. It was very similar to being in the same room and talking to each other — very easy.
+
+Now that they are in different rooms, we need to change our code to allow them to communicate.
+
+If we are still using `animationControls`,
+
+```jsx
+function App(){
+  let animationControls = useAnimation()
+  function handleDrag(event, info) {
+    let newScale = transform(info.point.x, [0, 220],[0.4, 1.5])
+    animationControls.start({
+      scale: newScale,
+      transition:{type: "spring", velocity: 0}
+      })
+  }
+  ...
+}
+```
+
+we want to pass it into our `Skinny` room.
+
+## Passing functions into custom tags
+
+```jsx{2}
+<div ...>
+  <Skinny animate={animationControls}/>
+  <Slider />
+</div>
+```
+
+You see, it’s the same format as what we have been doing for other attributes in Frame.
+
+We want to be a little more specific than just animate because we are not animating all of Skinny — only his cheek.
+
+```jsx{2}
+<div ...>
+  <Skinny cheekAnimate={animationControls}/>
+  <Slider />
+</div>
+```
+
+Our slider is still not working because we haven’t told `Skinny` what to do about this `cheekAnimate`. If we hover over "`<Skinny>`", we get an error that tells us that the `Skinny` component does not know about or how to deal with `cheekAnimate`.
+
+## `props`
+
+We can fix our `cheekAnimate` problem in our `Skinny` component. We first add a parameter to `Skinny`.
+
+```jsx{1}
+function Skinny(props) {
+    ...
+}
+```
+
+What is `props`? It’s the parameter of the function and the input of our printer machine `Skinny`. It's called `props` because it is short for properties and is a **React specific term** for the attributes of the custom tag we are defining. All the attributes we set on our `<Frame>` such as `width`, `height`, `position`, `background`, etc are `props`.
+
+This `props` parameter contains the collection of all attributes we use on the tag.
+
+If we have `cheekAnimate`, we'll be able to access the value of the attribute like this.
+
+```jsx{11}
+function Skinny(props){
+  return (
+    ...
+    {/* Cheek */}
+    <Frame
+      background="url(https://cdn.glitch.com/071e5391-90f7-476b-b96c-1f51f7106b0c%2Fcheek.png)"
+      width={79}
+      height={67}
+      left={155}
+      top={135}
+      animate={props.cheekAnimate}
+    />
+  </Frame>
+  )
+}
+```
+
+Again, why are we able to use this dot notation to get the value of `cheekAnimate`?
+
+Because `props` is an object!
+
+If you want, you can use `console.log` to print out `props` to see what it actually is. Remember, `console.log` is a powerful tool to figure out what is going in our code!
+
+For this Frame in `Skinny`,
+
+```jsx{5-8}
+function Skinny(props){
+  return (
+    ...
+    <Frame
+      background="url(https://cdn.glitch.com/071e5391-90f7-476b-b96c-1f51f7106b0c%2Fskinny-portrait.png)"
+      width={290}
+      height={290}
+      borderRadius={150}
+    />
+    ...
+  )
+}
+```
+
+the props would be `width`, `center`, `background`, and `borderRadius`.
+
+# Conclusion
+
+What we have just done solves half of the puzzle. The `Skinny` component now knows about the `animationControls` we created in our `App` component. Next, let’s link up the `Slider` as well.

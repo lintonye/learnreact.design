@@ -1,0 +1,162 @@
+---
+date: '2019-08-01'
+title: '4.1 Mouse Parallax Animation'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238581'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- `image` attribute
+- `background` and `backgroundColor`
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# Final Result
+
+![final slider result](./mousefinalresult2.gif)
+
+See for yourself! [Final mouse parallax](https://pt866.codesandbox.io/).
+
+# Intro to Parallax
+
+Welcome to the mouse parallax module! In this module, we’ll build this mouse parallax effect above.
+You can find examples of this effect on many websites and soon you can make them yourself!
+
+We are going to continue diving deeper into React, and learn a bit more JavaScript. The principles you'll learn will apply to many different prototypes such as this 3D card.
+
+![second parallax example](./secondexample.gif)
+
+See for yourself! [3D Card](https://vrnf3.csb.app/).
+
+However, the actual examples are not that important, what's important are the basic building blocks that you will learn.
+
+<!-- **TODO**
+
+Here is the link to the [starter code](https://github.com/lintonye/prototyping-with-react-framer/tree/4.1-mouse-parallax-starter/app). -->
+
+Here is the raw code:
+
+```jsx
+import * as React from 'react'
+import { render } from 'react-dom'
+import { Frame } from 'framer'
+import './styles.css'
+
+function App() {
+  return (
+    <div className="App">
+      <Frame size={600}>
+        <Frame
+          // bg
+          size={500}
+          top={50}
+          left={20}
+        />
+        <Frame
+          // sun
+          left={155}
+          top={15}
+        />
+        <Frame
+          // cloud
+          left={335}
+          top={55}
+        />
+        <Frame
+          // bird
+          left={35}
+          top={200}
+        />
+      </Frame>
+    </div>
+  )
+}
+
+const rootElement = document.getElementById('root')
+render(<App />, rootElement)
+```
+
+# Getting Started
+
+We’ve got a bunch of squares here. Let’s first populate them with this [background](https://image.flaticon.com/icons/svg/119/119596.svg), [sun](https://image.flaticon.com/icons/svg/789/789395.svg), [cloud](https://image.flaticon.com/icons/svg/414/414927.svg), and [bird](https://image.flaticon.com/icons/svg/789/789392.svg) I found on flaticon.
+
+![squares](./square2.png)
+
+We are going to use a new `<Frame>` attribute called `image`. To use `image`, we set it equal to a quoted URL of the image.
+
+```jsx
+<Frame
+  // bg
+  size={500}
+  top={50}
+  left={20}
+  image="https://image.flaticon.com/icons/svg/119/119596.svg"
+/>
+  <Frame
+  // sun
+  left={155}
+  top={15}
+  image="https://image.flaticon.com/icons/svg/789/789395.svg"
+/>
+<Frame
+  // cloud
+  left={335}
+  top={55}
+  image="https://image.flaticon.com/icons/svg/414/414927.svg"
+/>
+<Frame
+  // bird
+  left={35}
+  top={200}
+  image="https://image.flaticon.com/icons/svg/789/789392.svg"
+/>
+```
+
+Our preview should like this.
+
+![parallax preview with images](./parallaxpreview2.png)
+
+Now, to get rid of the ugly blue background that framer adds by default. We can set its background color to transparent using `backgroundColor="transparent"` or `background={null}`. Just be consistent with your choices. You can also use `background="transparent"` on our parent `<Frame>` but using this on our image frames will remove them.
+
+```jsx
+<Frame
+  // bg
+  size={500}
+  top={50}
+  left={20}
+  background={null}
+  image="https://image.flaticon.com/icons/svg/119/119596.svg"
+/>
+
+//copy and paste whatever you chose to remove the background color to
+//all the other images and the parent frame
+...
+```
+
+Finally, let’s center our parent `<Frame>`
+
+```jsx{4}
+function App() {
+  return (
+  <div className="App">
+    <Frame size={600} background={null} center>
+      ...
+    </Frame>
+  </div>
+  )
+}
+```
+
+We can also use flexbox to center the Frame but don’t forget to make the position of the container Frame **relative** if you do so.
+
+# Conclusion
+
+We learned how to use the `image` attribute and the variations in making a `<Frame>`'s background transparent.
+
+In the next post, we'll learn how to create actions based on our mouse movements.

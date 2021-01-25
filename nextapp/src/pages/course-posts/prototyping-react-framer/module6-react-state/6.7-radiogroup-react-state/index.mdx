@@ -1,0 +1,226 @@
+---
+date: '2019-08-16'
+title: '6.7 RadioGroup React State'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238545'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- Comparing indexes
+- `alert`
+- Creating a functional radio group
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# Functional Radio group
+
+Now, let’s make the radio group functional!
+
+By adding the `selected` attribute to our `<Radio>` inside `RadioGroup` all our radios are selected.
+
+```jsx{5}
+function RadioGroup({ choices, ...props }) {
+  return (
+    <Frame background={null} {...props}>
+      {choices.map(choice => (
+        <Radio selected key={choice}>{choice}</Radio>
+      ))}
+    </Frame>
+  )
+}
+```
+
+![all radios selected](./smallselected.png)
+
+However, we don’t want everything to be selected. We only want one `<Radio>` to be selected at a time and the rest not with the values `true` and `false` respectively. Essentially, we want to have a changing value where `???` is.
+
+```jsx{5}
+function RadioGroup({ choices, ...props }) {
+  return (
+    <Frame background={null} {...props}>
+      {choices.map(choice => (
+        <Radio selected={???} key={choice}>{choice}</Radio>
+      ))}
+    </Frame>
+  )
+}
+```
+
+Let’s decide what these question marks should be.
+
+## Comparing indexes
+
+Since `map` is a function, specifically an arrow function, we can add another parameter.
+
+Our only parameter currently in our arrow function is `choice`, so to add another parameter we have to insert a surrounding pair of parentheses.
+
+```jsx{4}
+function RadioGroup({ choices, ...props }) {
+  return (
+    <Frame background={null} {...props}>
+    {choices.map((choice, index) => (
+        <Radio selected={???} key={choice}>{choice}</Radio>
+      ))}
+    </Frame>
+  )
+}
+```
+
+We are going to use `index` to store the **index** of each element in the `choices` array. If we print out `index`, we’ll see 0, 1, 2 correspond with element 1, 2, 3 and so on.
+
+Our solution involves comparing the selected index to the `choices` element index. Therefore, we need to define a new variable: `selectedIndex`.
+
+```jsx{2,6}
+function RadioGroup({ choices, ...props }) {
+  let selectedIndex = 2
+  return (
+    <Frame background={null} {...props}>
+      {choices.map((choice, index) => (
+        <Radio selected={index===selectedIndex} key={choice}>{choice}</Radio>
+      ))}
+    </Frame>
+  )
+}
+```
+
+We are comparing the `choices` `index` to `selectedIndex` in a boolean comparison that will give us a `true` or `false`. Take note that each `<Radio>` has its own individual `onClick` function and index. Therefore, when we click on a certain Radio, we can compare its index to our `selectedIndex`.
+
+Keep in mind, in JavaScript, if we want to test if two things are equal, we use **three equal signs**.
+
+Since our `selectedIndex = 2`, the **third radio** is `selected` by array conventions.
+
+![radio 3 selected](./smallselected2.png)
+
+## `onClick`
+
+Now, all we need to do is change the value of `selectedIndex` when a Radio is clicked.
+
+Let's add `onClick` to our `<Radio>` tag. To test if `onClick` is being called, we can use the `alert` function which will show a popup dialog, similar to the functionality of `console.log`.
+
+```jsx{6-9}
+<Frame background={null} {...props}>
+  {choices.map((choice, index) => (
+    <Radio
+      selected={index===selectedIndex}
+      key={choice}
+      onClick={function() {
+        // change selectedIndex
+        alert("clicked)
+      }}>
+      {choice}
+    </Radio>
+  ))}
+</Frame>
+```
+
+However, we don’t see a dialog. This means `onClick` does not work yet.
+
+Why?
+
+Because our `Radio` component doesn’t know about `onClick` yet! For `onClick` to be functional, we need to set it on one of the Frames.
+
+## Spread operator
+
+What can we use to add all the properties of `<Radio>` to our `<Frame>`?
+
+The spread operator!
+
+```jsx{8}
+function Radio(props) {
+  return (
+    <Frame
+      position="relative"
+      size="auto"
+      style={{ display: "flex", marginBottom: 10 }}
+      background="null"
+      {...props}
+    >
+    ...
+  )
+}
+```
+
+![alert](./alert.gif)
+
+If we remove the `alert` now and try to change `selectedIndex` like this will it work?
+
+```jsx{6-9}
+<Frame background={null} {...props}>
+  {choices.map((choice, index) => (
+    <Radio
+      selected={index===selectedIndex}
+      key={choice}
+      onClick={function() {
+        // change selectedIndex
+        selectedIndex = 5
+      }}>
+      {choice}
+    </Radio>
+  ))}
+</Frame>
+```
+
+It doesn’t!
+
+## React states
+
+Remember, React components are like printers!
+
+![react doodle](./reactdoodle.png)
+
+We cannot simply change a snapshot if it’s already printed. We have to print a new page.
+
+Our first snapshot looks similar to this:
+
+![snapshot 1](./snapshot1.gif)
+
+If we want to change what is shown in our preview, we have to print out a new page:
+
+![snapshot 2](./snapshot2.gif)
+
+## `useState`
+
+We can utilize `useState` to print a new page.
+
+```jsx{2}
+function RadioGroup({ choices, ...props }) {
+  let [selectedIndex, setSelectedIndex] = React.useState(0)
+  return(
+    ...
+  )
+}
+```
+
+To change `selectedIndex` in our `onClick` function, we just have to call `setSelectedIndex`.
+
+```jsx{6-9}
+<Frame background={null} {...props}>
+  {choices.map((choice, index) => (
+    <Radio
+      selected={index===selectedIndex}
+      key={choice}
+      onClick={function() {
+        // change selectedIndex
+        setSelectedIndex(index)
+      }}>
+      {choice}
+    </Radio>
+  ))}
+</Frame>
+```
+
+![final result](./finalresult.gif)
+
+We now have a fully functional radio group that we built from scratch!
+
+# Conclusion
+
+The radio group module is finished! Along the way we learned how to create a counter and about React snapshots, React States, `useState`, rendering, coding tips, code efficiency, the spread operator, and more!
+
+In the next post, we'll go back to our toggle and truly understand what `useCycle` is.

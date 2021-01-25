@@ -1,0 +1,150 @@
+---
+date: '2019-07-25'
+title: '2.5 Functions'
+video: 'https://school.learnreact.design/courses/601139/lectures/10785659'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- What functions are
+- Defining functions
+- Input and output return-values of functions
+- Case-sensitivity of functions
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# Functions
+
+So far, we’ve been focusing on the JSX code, that is, this piece of code that looks like HTML.
+
+Let’s now zoom out a bit to look at the rest of the code. There’s a word "function" here, which means that what we have here is a function.
+
+```jsx{1}
+function App() {
+  return (
+    <div className="App">
+      <Frame width={120} height={60} borderRadius={30>
+        <Frame size={60} borderRadius={30}/>
+      </Frame>
+    </div>
+  )
+}
+```
+
+The function is another fundamental concept in JavaScript. It describes what our code does.
+
+A function is like a machine. It’s a machine that produces some output when we feed it some input.
+
+![image of a machine](./functionmachine.png)
+
+## Creating Functions
+
+To create a function, we start by writing the word function
+
+```jsx
+function
+```
+
+Followed by the name of the function and a pair of parentheses
+
+```jsx
+function microwave()
+```
+
+Inside this pair of parentheses, we put the input of the function.
+
+```jsx
+function microwave(food)
+```
+
+## Function Inputs
+
+Note this `food` here is a general representation of the input. The input depends on what we feed it when we operate the machine. The technical term for the input is **"parameter"**.
+
+To finish the function definition, we write a **pair of curly brackets** at the end. The space between those curly brackets doesn't matter.
+
+```jsx
+function microwave(food) {}
+```
+
+What’s "inside" and between the curly brackets is called function body. It is the inner working of the function.
+
+## Function Outputs
+
+Now if this `food` is input, where is the output?
+We can define the output by adding a `return` at the last line of the function body.
+
+```jsx
+function microwave(food) {
+  return 'heated ' + food
+}
+```
+
+Because of this `return`, we are outputting some value out of the function often called its **"return value"**.
+
+This means that when we operate this microwave and put some food as into its input, we’ll get `heated food` in return.
+
+Let’s create a slightly more complex function. Let’s create an imaginary machine which makes sandwiches for us.
+
+```jsx
+function sandwichMaker(meat) {}
+```
+
+Inside the function body we can write
+
+```jsx
+function sandwichMaker(meat) {
+  let sandwich = '🍞'
+  sandwich = sandwich + meat
+  sandwich = sandwich + '🍀'
+  sandwich = sandwich + '🍞'
+  return sandwich
+}
+```
+
+Don’t worry about the details here, but you see it’s a list of instructions about how to make a sandwich. These instructions would run from top to bottom.
+
+Finally, when everything is done, the function returns the sandwich to whoever orders it.
+
+In total, our functions have inputs and "recipes" on how to create the output. They then return the output.
+
+The technical term for what we’ve been doing is called
+**"defining a function"**
+
+## Different Types of Functions
+
+Now let me ask you, what’s the input and output of this App function?
+
+```jsx
+function App() {
+  return (
+    <div className="App">
+      <Frame width={120} height={60} borderRadius={30}>
+        <Frame size={60} borderRadius={30} />
+      </Frame>
+    </div>
+  )
+}
+```
+
+Unlike the functions we created, there is nothing inside this pair of parentheses. meaning there is **no input** for this function. The function's output is this group of JSX tags after the `return` — inside the `return`'s pair of curly brackets.
+
+## Capital vs lowercase functions
+
+Have you also noticed that the name of this function `App` starts with a capital letter? Why did I then use lowercase letters for the other functions? More so, in JavaScript, the convention is that function names start lowercase.
+
+## The `App` Function
+
+In contrast to many other functions, the `App` function is a special React component. Therefore, if you see a function whose name starts with an uppercase letter and returns a JSX tag you should know it’s a React component.
+
+# Conclusion
+
+You’ll get to know more about React components later on, for now, it’s useful to realize that `App` is simply a special function with unique requirements.
+
+In the next post, you'll learn how to call functions and how to create variables.

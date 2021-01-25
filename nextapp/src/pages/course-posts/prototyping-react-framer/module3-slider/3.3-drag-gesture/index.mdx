@@ -1,0 +1,132 @@
+---
+date: '2019-07-30'
+title: '3.3 Drag Gesture'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238557'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- Creating a "draggable" element
+- Constraining drag area
+- `drag` bounce
+- `drag` momentum
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# `drag` Attribute
+
+Let’s make the slider real! We’ll now add the drag gesture to the slider. With the Framer library, it turns out to be very easy. We just need one attribute, `drag`. Let's add that to our child frame.
+
+```jsx{8}
+<Frame ...>
+  <Frame
+    size={60}
+    borderRadius={30}
+    center="y"
+    backgroundColor="white"
+    shadow="0 1px 5px 0 rgba(0, 0, 0, 0.25)"
+    drag
+  />
+</Frame>
+```
+
+![dragging](./drag.gif)
+
+We know that `drag` really means `drag=true`. Click here to learn more about Framer's drag [documentation](https://www.framer.com/api/frame/#draggableprops.drag).
+
+We can make our slider drag only horizontally by inputting the value `x` in, much like our `center` attribute.
+
+```jsx{8}
+<Frame ...>
+  <Frame
+    size={60}
+    borderRadius={30}
+    center="y"
+    backgroundColor="white"
+    shadow="0 1px 5px 0 rgba(0, 0, 0, 0.25)"
+    drag="x"
+  />
+</Frame>
+```
+
+![horizontal drag](./xdrag2.gif)
+
+## Constraining Drag
+
+We can use another attribute `dragConstraints` to limit how far along the horizontal axis the slider can go. `dragConstraints` requires an object as its input.
+
+```jsx{9}
+<Frame ...>
+  <Frame
+    size={60}
+    borderRadius={30}
+    center="y"
+    backgroundColor="white"
+    shadow="0 1px 5px 0 rgba(0, 0, 0, 0.25)"
+    drag="x"
+    dragConstraints={{left: 0, right:220}}
+    //right:220 because our parent frame's width is 280 and we must subtract our slider's diameter which is 60
+  />
+</Frame>
+```
+
+![horizontal constrained drag](./constraineddrag2.gif)
+
+## Removing Bounce
+
+Of course its behavior is still a bit strange. We can still drag the slider out of the track, but it’ll bounce back when we release the mouse. We can fix this by adding this attribute `dragElastic={false}`
+
+```jsx{10}
+<Frame ...>
+  <Frame
+    size={60}
+    borderRadius={30}
+    center="y"
+    backgroundColor="white"
+    shadow="0 1px 5px 0 rgba(0, 0, 0, 0.25)"
+    drag="x"
+    dragConstraints={{ left: 0, right:220 }}
+    dragElastic={false}
+  />
+</Frame>
+```
+
+![no bounce horizontal constrained drag](./noelasticdrag.gif)
+
+## Removing Momentum
+
+There’s one more bug. We can grab this knob and throw it towards the other side. To fix this, we add another new attribute `dragMomentum={false}`.
+
+![no momentum](./nomomentum2.gif)
+
+```jsx{11}
+<Frame ...>
+  <Frame
+    size={60}
+    borderRadius={30}
+    center="y"
+    backgroundColor="white"
+    shadow="0 1px 5px 0 rgba(0, 0, 0, 0.25)"
+    drag="x"
+    dragConstraints={{ left: 0, right:220 }}
+    dragElastic={false}
+    dragMomentum={false}
+  />
+</Frame>
+```
+
+Together all the fixes and styling should now look like this.
+
+![final drag](./finaldrag.gif)
+
+# Conclusion
+
+Ok, great! This slider is looking good now! You see, these drag attributes make it very easy to implement dragging gestures. It's like a special power provided by the Framer library. Therefore, these attributes only work on the `<Frame>` tag. There will be no effect if we move these attributes to a `<div>`.
+
+In the next post, we'll learn about a function that activates when the knob is dragged.

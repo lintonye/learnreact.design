@@ -1,0 +1,136 @@
+---
+date: '2019-07-26'
+title: '2.9 Animate Attribute'
+video: 'https://school.learnreact.design/courses/601139/lectures/10785664'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- `animate` attribute
+- Customizing animation
+- What's special with `App`
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# Animation with `animate`
+
+Our toggle kinda works, but it’s not good enough. It immediately appears on the left or right when we click on it. It feels pretty jarring. It’d be nice if we could show some animation to this.
+
+Fortunately, with the framer library, we only need one change to make it so. Instead of our `x={knobX}` attribute we will replace it with `animate={{x:knobX}}`
+
+```jsx{11}
+function App(){
+  let [knobX, cycleKnobX] = useCycle(0, 60)
+  console.log(knobX)
+  return(
+    <div className="App">
+      <div>{sandwichMaker("🥓")}</div>
+      <Frame width={120} height={60} borderRadius={30} onTap={function handleTap(){
+        cycleKnobX()
+      }}>
+        <Frame size={60} borderRadius={30} animate={{x:knobX}}/>
+      </Frame>
+    </div>
+  )
+}
+```
+
+![animated toggle gif](./gifanimatedtoggle2.gif)
+
+However, why do we have double curly brackets and a colon here?
+
+The value of the `animate` attribute is an object! This object has one property called `x`. The value of the `x` property is `knobX` which has to be separated with a colon.
+
+So depending on how many times the user taps on the toggle, we’ll get a different object because of the changing values.
+
+By default when we animate the position of a Frame such as x or y, a **spring** animation will be used. That’s why the knob is a bit bouncy.
+
+## Customizing the animation
+
+We can customize the animation with another attribute called `transition`.
+
+```jsx{2}
+<Frame ...>
+  <Frame size={60} borderRadius={30} animate={{x:knobX}} transition={{duration:0.2}}/>
+</Frame>
+...
+```
+
+The `transition` attribute uses another object. By using the `duration` property we change the spring animation to a **tween** animation.
+
+```jsx
+transition={{duration: 0.2 }}
+```
+
+For more information about what options we can put in the animate or transition attribute, check out the official Framer [documentation](https://www.framer.com/api/frame/#animation). You can find many examples there.
+
+I encourage you to try several things on your code to see the effect of each option.
+
+It's incredibly easy it is to make animations with the framer library.
+
+# What's special with App?
+
+`App` is a React component, and it’s just a function whose name starts with an uppercase letter and returns a group of JSX tags. It’s not very different from other functions we defined earlier such as
+
+```jsx
+function microwave(food) {
+  return 'heated ' + food
+}
+
+function sandwichMaker(meat) {
+  let sandwich = '🍞'
+  sandwich = sandwich + meat
+  sandwich = sandwich + '🍀'
+  sandwich = sandwich + '🍞'
+  return sandwich
+}
+```
+
+We saw their outputs in the console and browser because we called them
+
+```jsx
+console.log(microwave(sandwichMaker("🥓")))
+console.log(microwave(sandwichMaker("🍤")))
+console.log(microwave(sandwichMaker("🍖")))
+
+// later on in App
+<div>{sandwichMaker("🥓")}</div>
+```
+
+If we comment them out — **you can press CTR + / or CMD + / to auto comment** — now we don't see any output and we get some red lines underneath our `microwave` and `sandwichMaker` functions. If we move our cursor there, we see a warning error about how our functions are defined but never used/called.
+
+![never used error](./neverused.png)
+
+If we create a machine but don’t run it, it won’t produce any output. That makes total sense.
+
+But what about our `App` function? We never call it, so why doesn't it have a warning error? Yet, we indeed see its output, which results in this toggle in the browser.
+
+Note that the bottom of our file is not calling `App`.
+
+```jsx
+ReactDOM.render(<App />, rootElement)
+```
+
+`<App />` is not the proper syntax of calling a function — it has to be `App()`.
+
+## Why do we see output if we don't call App?
+
+Well, if we see the output, the function has to be called somewhere. If we didn’t call it ourselves, it must be somebody else.
+
+It’s React that calls this function. Somewhere in React, `App` is called.
+
+# Conclusion
+
+We can visualize what React does with this doodle,
+
+![function of React visualized](./reactdoodle.png)
+
+React components are functions much like machines. They are like printers in which React operates them from time to time, assembles the output, and creates the web page as what we’ve seen.
+
+I like this printer analogy very much because it helped me understand how React works. We’ll revisit this picture in future videos.

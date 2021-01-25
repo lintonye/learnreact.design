@@ -1,0 +1,96 @@
+---
+date: '2019-08-20'
+title: '7.2 start Function'
+video: 'https://school.learnreact.design/courses/629779/lectures/11509509'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- `start` function
+- `Promise`
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# Padlock animation bug
+
+Our padlock animation code works quite well! Although `await` and `async` are relatively new terms and concepts, our code looks fairly straightforward.
+
+As a reminder, if we want to wait for an animation to complete, we can begin the statement of code with `await`.
+
+However, have you wondered why the previous code did not work?
+
+Although code is executed one by one from top to bottom, removing the `await` seems to cause these two lines of animation to run at the same time.
+
+```jsx{6,8}
+<Frame
+  background={null}
+  width={100}
+  onTap={async () => {
+    // 1. lift up
+    shackleAnim.start({ y: -30 })
+    // 2. rotate
+    shackleAnim.start({ rotateY: 180 })
+  }}
+  {...props}
+>
+```
+
+If we add multiple `console.log` statements in `onTap` they will run from top to bottom and certainly not simultaneously.
+
+Therefore, what's going on in our animation `start` functions?
+
+Well, the computer still runs these two lines one by one, top to bottom.
+
+## Simultaneous?
+
+The `start` function handles animation in a special way. It only starts the animation, but it doesn't wait for its completion.
+
+Essentially, the first line of animation begins and after a very short moment, the second animation starts.
+
+Since the the delay between the two is negligibly small, we don't notice it. As a result, we perceive what's going on as simultaneous.
+
+## `start`
+
+We can dig deeper into how the start function works by printing out the result of the function call.
+
+```jsx{6}
+<Frame
+  background={null}
+  width={100}
+  onTap={async () => {
+    // 1. lift up
+    console.log(shackleAnim.start({ y: -30 }))
+    // 2. rotate
+    shackleAnim.start({ rotateY: 180 })
+  }}
+  {...props}
+>
+```
+
+In our console, the start function seems to return a value called **`Promise`**.
+
+![promise console](./promise.png)
+
+## `Promise`
+
+You can think of a `Promise` as a receipt when ordering fast food such as McDonalds!
+
+With it, you can get your food when it’s ready, leave your food at the counter for a bit, or run an errand while the food is being prepared.
+
+Although `promise`, `await`, and `async` seem to be specialized for animations, we can use these terms in many other scenarios. You’ll see more examples in later modules.
+
+I'll "promise" you that if a function returns a `Promise`, by default, it’ll return a result extremely quick.
+
+However, this result is **only** a receipt, not the execution of the animation.
+
+# Conclusion
+
+All in all, you should know that to use `await` you must also use `async` and the start function returns something called a `Promise` which is akin to a food receipt. At this point, `async` is quite an advanced topic, so we'll skip over that for now.
+
+In the next post, we'll create the failed unlock animation!

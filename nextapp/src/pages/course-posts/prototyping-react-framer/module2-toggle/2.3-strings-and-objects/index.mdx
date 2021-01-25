@@ -1,0 +1,129 @@
+---
+date: '2019-07-24'
+title: '2.3 String and Objects'
+video: 'https://school.learnreact.design/courses/601139/lectures/10785662'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- Attributes and properties of JSX
+- Strings, objects
+- `//comments`
+- Creating objects
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# Attributes and Properties of JSX
+
+We now know that we can use this `style` attribute to set the inline style of a `<div>`, or any HTML element.
+
+```jsx{2}
+<div
+  className="App"
+  style={{width: 120, height:120, background:"orange"}}
+>
+  ...
+</div>
+```
+
+If you are confused by these double curly brackets, colons, and commas, you are not alone! This is actually one of the most confusing parts of JSX. But don’t worry, that’s why I’m here.
+
+When you learn enough about JavaScript, you’ll see that everything we write here has some logic behind it. After you understand the logic, and with a little bit of practice it will become your second nature to write code like this. So follow along with me. It’s really not that hard.
+
+## Curly Brackets
+
+If you need a refresh on curly braces in JSX, check out my [blog post](https://learnreact.design/2019/05/10/those-curly-braces-in-jsx) about it! As I mentioned before, these curly brackets in JSX are like flexible placeholders, waiting to be filled with many different things.
+
+## Strings
+
+For attributes, we can put in a number, a quoted text, etc. As a reminder, for a quoted piece of text, there is actually an invisible pair of curly brackets here.
+
+The technical term for any quoted text is **"string"**.
+
+```jsx
+<div
+  className="App"
+  style={{ width: 120, height: 120, background: 'orange' }}
+  // On a new line, you can write a comment with 2 forward slashes like this, in some places, this can cause errors. Be careful!
+>
+  <Frame width={120} height={60} borderRadius={30} style={{ width: 120 }}>
+    <Frame size={60} borderRadius={30} />
+  </Frame>
+</div>
+```
+
+Remember, a comment is code that is not part of the executable code. The computer won’t run it. It’s just there to help us read the code.
+
+## Objects
+
+Inside the **style's first pair** of curly brackets is the third kind of thing that we can put into the placeholder.
+
+```jsx{2}
+<div
+  className="App"
+  style={{width: 120, height:120, background:"orange"}}
+>
+  ...
+</div>
+```
+
+It’s not a number nor a string. It’s called an **object**.
+
+Objects are a very very important concept in JavaScript. Later, you’ll see that almost everything in JavaScript is an object. From now on, I will be referencing objects a lot! Possibly enough to annoy you!
+
+An object is a way to group the descriptions of different properties of something.
+
+```jsx
+<Frame style={{width: 120}}>
+```
+
+What's in this Frame's style attribute? An object! Who would have guessed?
+
+We put these descriptions in a group so that later when we want to style this div, we can just grab this single object as a whole.
+
+## Creating Objects
+
+As another example, let's create an object.
+
+```jsx
+{
+  name
+}
+```
+
+Notice the format here, we start with the name of a property, which is `name` here, and in my div, the name of the properties include `width`, `height`, and `background`.
+
+```jsx
+<div style={{ width: 120, height: 120, background: "orange"}}>
+```
+
+```jsx
+{
+  name: 'Linton'
+}
+```
+
+Continuing on my object, I add a **colon**, followed by the **value** of the property. Here it’s a string, `"Linton"`. Properties can also span multiple lines!
+
+```jsx
+{
+  name: "Linton",
+  age: Infinity
+}
+```
+
+We separate multiple properties with a **comma**.
+
+Infinity is a number in JavaScript!
+
+# Conclusion
+
+In an object, we have a list of named properties. The value of a property can be a string, number, and pretty much anything else. You’ll see other examples later on.
+
+Alright, that’s JavaScript object, a way to group different properties. It’s a list of name-value pairs placed in a pair of curly brackets. That was a tongue-twister!

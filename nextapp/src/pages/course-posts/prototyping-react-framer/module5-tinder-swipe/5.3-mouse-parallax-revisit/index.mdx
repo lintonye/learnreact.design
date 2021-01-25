@@ -1,0 +1,306 @@
+---
+date: '2019-08-06'
+title: '5.3 Mouse Parallax Revisit'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238549'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- Converting `useAnimation` to `useMotionValue`
+- Updating `MotionValue` using the `set` function
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# Converting `useAnimation` to `useMotionValue`
+
+In the previous module, we built this nifty mouse parallax prototype with `useAnimation`.
+
+```jsx
+function App(){
+  let birdAnim = useAnimation()
+  let cloudsAnim = useAnimation()
+  let sunAnim = useAnimation()
+  let bgAnim = useAnimation()
+  return(
+    ...
+  )
+}
+```
+
+When the user moves the mouse, the `onMouseMove` function will be called. Animations start according to the position of the mouse.
+
+```jsx
+<Frame
+  ...
+  onMouseMove={function(event) {
+    let offsetX = event.clientX - window.innerWidth / 2
+    let offsetY = event.clientY - window.innerHeight / 2
+    birdAnim.start({ x: offsetX / 3.5, y: offsetY / 3.5 })
+    cloudsAnim.start({ x: offsetX / 8, y: offsetY / 8 })
+    sunAnim.start({ x: offsetX / 10, y: offsetY / 10 })
+    bgAnim.start({ x: offsetX / 14, y: offsetY / 14 })
+  }}
+>
+```
+
+We create these animations by calling the `useAnimation` hook and then input the corresponding values into the `animate` attribute of corresponding `<Frame>` tags.
+
+```jsx
+<Frame
+  // bg
+  ...
+  animate={bgAnim}
+/>
+<Frame
+  // sun
+  ...
+  animate={sunAnim}
+/>
+<Frame
+  // cloud
+  ...
+  animate={cloudsAnim}
+/>
+<Frame
+  // bird
+  ...
+  animate={birdAnim}
+/>
+```
+
+This method works fine, but we've just learned another way to make animations: `useMotionValue` and `useTransform` hooks.
+
+How are these two approaches different? When do we use a certain method? Can we use `useMotionValue` to build this mouse parallax effect?
+
+Let’s save the first two questions for later and look at the last one first.
+
+**Can we use `useMotionValue` to build this mouse parallax effect?**
+
+The answer is definitely yes. Let’s now convert our code to use `useMotionValue`.
+
+Remember to import `useMotionValue`!
+
+```jsx{3}
+import * as React from "react"
+import ReactDOM from "react-dom"
+import { Frame, useAnimation, useMotionValue } from "framer"
+import "./styles.css"
+```
+
+## `MotionValue` for offsets
+
+`MotionValue` is a container that can hold a number. If we use it to set the attribute of a `<Frame>`, it’ll work as if we put the number inside directly. For example, we can set the `x` offset of a `<Frame>` like this.
+
+If we set the `x` attribute of the bird to a number like 200, it will move the bird to the right.
+
+![bird 200](./bird200.png)
+
+```jsx
+<Frame
+  // bird
+  ...
+  x={200}
+/>
+```
+
+We can also put a `MotionValue` there, such as `birdX`, that is initialized to 200.
+
+```jsx{3,7}
+function App() {
+  ...
+  let birdX = useMotionValue(200)
+  ...
+  <Frame
+    ...
+    x={birdX}
+  >
+  ...
+}
+```
+
+Both methods set the `x` offset to 200 pixels. We can also use `MotionValue` for the `y` offset.
+
+```jsx{3-4,8-9}
+function App() {
+  ...
+  let birdX = useMotionValue(0)
+  let birdY = useMotionValue(0)
+  ...
+  <Frame
+    ...
+    x={birdX}
+    y={birdY}
+  >
+  ...
+}
+```
+
+If the value of `birdX` or `birdY` changes, the `x` and `y` offsets will be updated accordingly.
+
+## Updating `MotionValue`
+
+How do `birdX` and `birdY` update then?
+
+Well, if you remember, in our Tinder swipe example, we have a draggable `<Frame>` and set its `x` attribute to a `MotionValue`. When we drag the card, the `x` offset will be updated and the `MotionValue` will be synced automatically. There is no need for an `onDrag` because we have these special attributes `x` and `drag`.
+
+Looking back at the Framer [documentation](https://www.framer.com/api/frame/#csstransformproperties.x),
+
+![documentation](./x.png)
+
+we can see that the `x` attribute can have a `MotionValue`. All in all, MotionValues handle a lot of heavy-lifting for us.
+
+However, in our parallax effect, Framer does not yet have any special attributes for mouse position. Therefore, we’ll have to update the motion values ourselves.
+
+Fortunately, it’s not difficult at all, and it’s good to learn how the `drag` attribute updates `MotionValue` under the hood.
+
+## Converting bird to implement `useMotionValue`
+
+First, let's comment out `birdAnim.start` and all `birdAnim` references.
+
+```jsx
+<Frame
+  size={550}
+  background={null}
+  center
+  onMouseMove={function(event) {
+  let offsetX = event.clientX - window.innerWidth / 2
+  let offsetY = event.clientY - window.innerHeight / 2
+
+  //birdAnim.start({ x: offsetX / 3.5, y: offsetY / 3.5 })
+
+  cloudsAnim.start({ x: offsetX / 8, y: offsetY / 8 })
+  sunAnim.start({ x: offsetX / 10, y: offsetY / 10 })
+  bgAnim.start({ x: offsetX / 14, y: offsetY / 14 })
+  }}
+>
+...
+<Frame
+  // bird
+  background={null}
+  left={35}
+  top={200}
+  x={birdX}
+  y={birdY}
+  image="https://image.flaticon.com/icons/svg/789/789392.svg"
+  //animate={birdAnim}
+/>
+```
+
+We then call a function called `set` onto `birdX` and `birdY` to replace the `start` function we commented out.
+
+```jsx{10-11}
+<Frame
+  size={550}
+  background={null}
+  center
+  onMouseMove={function(event) {
+  let offsetX = event.clientX - window.innerWidth / 2
+  let offsetY = event.clientY - window.innerHeight / 2
+
+  //birdAnim.start({ x: offsetX / 3.5, y: offsetY / 3.5 })
+  birdX.set(offsetX / 3.5)
+  birdY.set(offsetY / 3.5)
+
+  cloudsAnim.start({ x: offsetX / 8, y: offsetY / 8 })
+  sunAnim.start({ x: offsetX / 10, y: offsetY / 10 })
+  bgAnim.start({ x: offsetX / 14, y: offsetY / 14 })
+  }}
+>
+```
+
+Everything works again!
+
+![final gif](./final.gif)
+
+We can now finish converting our code to MotionValues for the clouds, sun and, background with the same method as the bird.
+
+```jsx
+function App() {
+  let birdX = useMotionValue(0)
+  let birdY = useMotionValue(0)
+
+  let cloudsX = useMotionValue(0)
+  let cloudsY = useMotionValue(0)
+
+  let sunX = useMotionValue(0)
+  let sunY = useMotionValue(0)
+
+  let bgX = useMotionValue(0)
+  let bgY = useMotionValue(0)
+
+  return (
+    <div className="App">
+      <Frame
+        size={550}
+        background={null}
+        center
+        onMouseMove={function (event) {
+          let offsetX = event.clientX - window.innerWidth / 2
+          let offsetY = event.clientY - window.innerHeight / 2
+          birdX.set(offsetX / 3.5)
+          birdY.set(offsetY / 3.5)
+
+          cloudsX.set(offsetX / 8)
+          cloudsY.set(offsetY / 8)
+
+          sunX.set(offsetX / 10)
+          sunY.set(offsetY / 10)
+
+          bgX.set(offsetX / 14)
+          bgY.set(offsetY / 14)
+        }}
+      >
+        <Frame
+          // bg
+          size={500}
+          top={50}
+          left={20}
+          background={null}
+          image="https://image.flaticon.com/icons/svg/119/119596.svg"
+          x={bgX}
+          y={bgY}
+        />
+        <Frame
+          // sun
+          left={155}
+          top={15}
+          background={null}
+          image="https://image.flaticon.com/icons/svg/789/789395.svg"
+          x={sunX}
+          y={sunY}
+        />
+        <Frame
+          // cloud
+          background={null}
+          left={335}
+          top={55}
+          image="https://image.flaticon.com/icons/svg/414/414927.svg"
+          x={cloudsX}
+          y={cloudsY}
+        />
+        <Frame
+          // bird
+          background={null}
+          left={35}
+          top={200}
+          image="https://image.flaticon.com/icons/svg/789/789392.svg"
+          x={birdX}
+          y={birdY}
+        />
+      </Frame>
+    </div>
+  )
+}
+```
+
+# Conclusion
+
+The key here is that when we have an element's `MotionValue`, we call the `set` function to update the value. In fact, this is what occurs when we used attributes such as `drag` in our tinder swipe.
+
+In the next post, we will improve our parallax effect by tiding it up and using arrow functions!

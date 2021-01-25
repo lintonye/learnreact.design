@@ -1,0 +1,219 @@
+---
+date: '2019-08-08'
+title: '5.4 Improving Mouse Parallax'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238550'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- Implementing `useTransform` with `MotionValue`
+- Arrow functions
+- `useSpring`
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# `useTransform` to improve `useMotionValue`
+
+Let’s add some improvements to our code here.
+Remember `useTransform`? We can use it to make our code a little bit tidier.
+
+We’ll start by importing `useTransform` and creating a couple of MotionValues for our mouse position.
+
+```jsx{3,7-8}
+import * as React from "react"
+import ReactDOM from "react-dom"
+import { Frame, useMotionValue, useTransform } from "framer"
+import "./styles.css"
+
+function App() {
+  let mouseX = useMotionValue(0)
+  let mouseY = useMotionValue(0)
+  ...
+}
+```
+
+For `birdX`, instead of creating a `MotionValue` from scratch, we’ll create one that will change along with `mouseX`.
+
+```jsx{5-6}
+function App() {
+  let mouseX = useMotionValue(0)
+  let mouseY = useMotionValue(0)
+
+  let birdX = useTransform(mouseX, [], [])
+  let birdY = useTransform(mouseY, [], [])
+  ...
+}
+```
+
+For the following parameters, we need an input and output range such as the ranges we used in the Tinder Swipe example.
+
+However, this time, let’s try something different. By looking at the `useTransform` [documentation](https://www.framer.com/api/utilities/#usetransform), we can see that there are only **two** parameters when calling `useTransform` in the example on the right. We know that there are only two parameters because there is only **one** comma.
+
+## Arrow Functions
+
+![transform image](./transform.png)
+
+The first parameter is the source `MotionValue` called `parent` in the documentation and the second parameter is something we'll learn about now!
+
+```jsx
+;(value) => value * 2
+```
+
+What is this equal sign and greater-than symbol here?
+
+It turns out that it’s just a function. That statement is equivalent to writing this.
+
+```jsx
+function(value) {
+  return value * 2;
+}
+```
+
+In context,
+
+```jsx
+let birdX = useTransform(mouseX, (value) => value * 2)
+```
+
+vs
+
+```jsx
+let birdX = useTransform(mouseX, function (value) {
+  return value * 2
+})
+```
+
+The only difference is that one is shorter and looks nicer. I hope you know which one that is!
+
+## How `useTransform` works with `MotionValue`
+
+Let’s look at how this version of `useTransform` works.
+
+```jsx
+let birdX = useTransform(mouseX, function (value) {
+  return value * 2
+})
+```
+
+First of all, `useTransform` will create a new `MotionValue` but not from scratch. It uses `mouseX` as a reference, takes out the value from `mouseX`, calls this **anonymous** function, and puts the return value into a new `MotionValue`. To illustrate, if `mouseX` is `100`, `birdX` would be assigned a value of `200`.
+
+Furthermore, whenever the value of `mouseX` changes, the process I just listed would be repeated: the anonymous function is called with the new `mouseX` value and returns the new value into `birdX`.
+
+In our case, we want the return value to be divided by 3.5 and not multiplied by 2.
+
+```jsx
+let birdX = useTransform(mouseX, function (value) {
+  return value / 3.5
+})
+```
+
+## Function => arrow function
+
+As you’ve just seen, we can convert the function to a shorter form in a few steps.
+
+1. Removing `function`
+
+   > ```jsx
+   > let birdX = useTransform(mouseX, (value) => {
+   >   return value / 3.5
+   > })
+   > ```
+   >
+   > Because of this **"=>"** sign that looks like a fat >arrow, these kinds of functions are called **arrow >functions**.
+
+2. Removing `()`
+
+   > When there’s only one parameter, we can ignore the >parentheses.
+   >
+   > ```jsx
+   > let birdX = useTransform(mouseX, (value) => {
+   >   return value / 3.5
+   > })
+   > ```
+
+3. Removing `{}` and the `return` statement
+
+   > When a function **only** has a `return` statement, we >can remove the keyword `return` and the curly brackets.
+   >
+   > ```jsx
+   > let birdX = useTransform(mouseX, (value) => value / 3.5)
+   > ```
+
+Making the same changes to our other variables,
+
+```jsx{2-8}
+let birdX = useTransform(mouseX, value => value / 3.5)
+let birdY = useTransform(mouseY, value => value / 3.5)
+let cloudsX = useTransform(mouseX, value => value / 8)
+let cloudsY = useTransform(mouseY, value => value / 8)
+let sunX = useTransform(mouseX, value => value / 10)
+let sunY = useTransform(mouseY, value => value / 10)
+let bgX = useTransform(mouseX, value => value / 14)
+let bgY = useTransform(mouseY, value => value / 14)
+```
+
+## `MotionValue` animation
+
+Now, inside of `onMouseMove`, we can remove all our `set` functions and replace them with **two lines**!
+
+```jsx{9-10}
+<Frame
+  size={550}
+  background={null}
+  center
+  onMouseMove={function(event) {
+  let offsetX = event.clientX - window.innerWidth / 2
+  let offsetY = event.clientY - window.innerHeight / 2
+
+  mouseX.set(offsetX)
+  mouseY.set(offsetY)
+  }}
+>
+```
+
+However, there’s one more issue. The movement of all these image layers now feels a bit stiff.
+
+![stiff animation](./stiff.gif)
+
+It no longer has that bouncy effect as our previous solution with `useAnimation`.
+
+![bouncy animation](./bounce.gif)
+
+\* Check it out yourself: [Parallax Animation](https://pt866.csb.app/)
+
+This is because, unlike `useAnimation`, `useMotionValue` does not animate with a spring. However, the fix is really simple.
+
+## `useSpring`
+
+If we check out the Framer documentation again, we can find something called [`useSpring`](https://www.framer.com/api/utilities/#usespring).
+
+![use spring documentation](./spring.png)
+
+Therefore, instead of importing and calling `useMotionValue`, we'll import and call `useSpring`.
+
+```jsx{3,7,8}
+import * as React from "react"
+import ReactDOM from "react-dom"
+import { Frame, useSpring, useTransform } from "framer"
+import "./styles.css"
+
+function App() {
+  let mouseX = useSpring(0)
+  let mouseY = useSpring(0)
+  ...
+}
+```
+
+![final result](./final.gif)
+
+We now have our spring animation back.
+
+# Conclusion
+
+Now that we know how to use both `useAnimation`, `useMotionValue` and how to convert animation styles, we'll learn about the differences between the two in the next post while we improve our "Tinder" slider!.

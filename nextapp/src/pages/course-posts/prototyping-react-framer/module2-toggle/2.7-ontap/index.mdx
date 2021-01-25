@@ -1,0 +1,245 @@
+---
+date: '2019-07-25'
+title: '2.7 onTap'
+video: 'https://school.learnreact.design/courses/601139/lectures/10785665'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- Positioning a `Frame`
+- Detecting user click with `onTap`
+- Using `handleTap`
+- Using variables
+- Naming variables
+- Multiple parameters
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# Toggle
+
+Let’s get back to our toggle. What code would we need to write to move the knob when the user taps on it?
+
+## Positioning the Toggle
+
+To move the toggle, we can use the `Frame` attribute `x`. `x={0}` or where it originally was.
+
+```jsx
+<Frame width={120} height={60} borderRadius={30}}>
+  <Frame size={60} borderRadius={30} x={0}/>
+</Frame>
+```
+
+![toggle in first position](./toggle0.png)
+
+To `x={60}`
+
+```jsx
+<Frame width={120} height={60} borderRadius={30}}>
+  <Frame size={60} borderRadius={30} x={60}/>
+</Frame>
+```
+
+![toggle in second position](./toggle1.png)
+
+However, we want to dynamically change the value of the x attribute when the user taps on the toggle.
+
+## Detecting User Click
+
+How do we detect when the user taps on it?
+
+We can use another `<Frame>` attribute called `onTap`. Unlike the other number-valued attributes, the value of `onTap` is something special.
+
+```jsx
+<Frame
+  width={120}
+  height={60}
+  borderRadius={30}
+  onTap={function handleTap() {
+    //body of function handleTap
+    //code to change the value in x={...} on a tap
+  }}
+>
+  <Frame size={60} borderRadius={30} x={60} />
+</Frame>
+```
+
+Here we put the definition of a function inside the pair of curly brackets. This is different from the `<div>{sandwichMaker("🥓")}</div>` function call above which is a function call.
+
+```jsx
+<div className="App">
+  <div>{sandwichMaker('🥓')}</div>
+  <Frame
+    width={120}
+    height={60}
+    borderRadius={30}
+    onTap={function handleTap() {
+      //body of function handleTap
+      //code to change the value in x={...} on a tap
+    }}
+  >
+    <Frame size={60} borderRadius={30} x={60} />
+  </Frame>
+</div>
+```
+
+In `handleTap`, we are just stating the function definition but not calling it yet. It’s like carrying a machine somewhere else to run it at another time.
+
+`handleTap` will run when React detects that the user has tapped on the `<Frame>`.
+
+To make sure it the function works and runs, we put a console.log into the body.
+
+```jsx{4}
+<div className="App">
+  <div>{sandwichMaker("🥓")}</div>
+  <Frame width={120} height={60} borderRadius={30} onTap={function handleTap(){
+    console.log('tapped!')
+  }}>
+      <Frame size={60} borderRadius={30} x={60}/>
+    </Frame>
+</div>
+```
+
+Test it out! Your console should display this!
+
+![tapped console output](./tapped.png)
+
+## Using variables
+
+Since we want `x` to dynamically change, we can't have a static `x={60}` in the `<Frame>`'s attributes. Otherwise, we’d have to manually change our code in the editor when the user taps on the toggle — we obviously can't do that. We want it to automatically work.
+
+That means we need to use a variable here. You know, a labeled bucket that we can fill in different values at different times. First, we initialize the variable then put in in the `x` attribute.
+
+```jsx{2,8}
+function App(){
+  let knobX = 0 //if we change this to 60 the knob will be on the right
+  return(
+    <div className="App">
+      <div>{sandwichMaker("🥓")}</div>
+      <Frame width={120} height={60} borderRadius={30} onTap={function handleTap(){
+        console.log('tapped!')
+      }}>
+        <Frame size={60} borderRadius={30} x={knobX}/>
+      </Frame>
+    </div>
+  )
+}
+```
+
+## Naming variables
+
+This variable could be named anything. I just happen to use `knobX` — remember camelCase! To write clear and robust code, we wouldn't want to simply use the variable `x` or, later, things could get confusing.
+
+```jsx
+<Frame size={60} borderRadius={30} x={x} />
+```
+
+As you can see, this x is the attribute of the Frame tag. And this x is a variable we defined here. Since the variable can be named as anything, we usually want to put some sort of descriptor like "knob".
+
+Note that we can't change the name of the attribute `x` or else we would get an error.
+
+Usually if its a variable, we can change its value this way
+
+```jsx{7}
+function App(){
+  let knobX = 0
+  return(
+    <div className="App">
+      <div>{sandwichMaker("🥓")}</div>
+      <Frame width={120} height={60} borderRadius={30} onTap={function handleTap(){
+        knobX = 60
+      }}>
+        <Frame size={60} borderRadius={30} x={knobX}/>
+      </Frame>
+    </div>
+  )
+}
+```
+
+But in React, this won’t work. I’ll explain why when we learn about the React state. For now, let's just type in what works, it’s more fun if we can see our toggle becomes live, right?
+
+Let's edit our Frame import statement
+
+```jsx{3}
+import React from "react"
+import ReactDOM from "react-dom"
+import { Frame, useCycle } from "framer"
+import "./styles.css"
+```
+
+Now change our `knobX` initialization
+
+```jsx{2,7}
+function App(){
+  let [knobX, cycleKnobX] = useCycle(0, 60)
+  return(
+    <div className="App">
+      <div>{sandwichMaker("🥓")}</div>
+      <Frame width={120} height={60} borderRadius={30} onTap={function handleTap(){
+        cycleKnobX()
+      }}>
+        <Frame size={60} borderRadius={30} x={knobX}/>
+      </Frame>
+    </div>
+  )
+}
+```
+
+![gif of toggle working](./togglegif2.gif)
+
+Don’t be scared by all the alien code I’ve just typed in here! I’ll explain in detail in the next post! However, there is something you should recognize.
+
+`useCycle`
+
+Why can we put a pair of parentheses after it? What are those numbers?
+
+```jsx
+let [knobX, cycleKnobX] = useCycle(0, 60)
+```
+
+`useCycle` is a function! We are calling this function and providing it with two parameters with numbers `0` and `60`!
+
+## Multiple Parameters
+
+We can define a function for multiples like this
+
+```jsx{1}
+function sandwichMaker(meat, veggie) {
+  let sandwich = "🍞"
+  sandwich += meat
+  sandwich = sandwich + veggie
+  sandwich = sandwich + "🍞"
+  return sandwich
+}
+```
+
+The parameters should be separated by a **comma**. Calling it would be exactly like `useCycle`
+
+What about `cycleKnobX`?
+
+```jsx{2}
+<Frame width={120} height={60} borderRadius={30} onTap={function handleTap(){
+  cycleKnobX()
+}}>
+  <Frame size={60} borderRadius={30} x={knobX}/>
+</Frame>
+```
+
+It’s a function too. Unlike `useCycle`, we call it without providing any parameters.
+
+# Conclusion
+
+For `useCycle`, we get its output and use it in some way. In contrast, `cycleKnobX` is like `console.log`. We don’t care about its visual output, but we care about it does behind the scene.
+
+Now, we have seen this `onTap` attribute that we can provide a function with. It will run when React detects that the user taps on the frame. Finally, for the `x` attribute, we can give it a variable so that we can change it later.
+
+We will take a deeper look at these square brackets in the next post.
+
+```jsx
+let [knobX, cycleKnobX] = useCycle(0, 60)
+```

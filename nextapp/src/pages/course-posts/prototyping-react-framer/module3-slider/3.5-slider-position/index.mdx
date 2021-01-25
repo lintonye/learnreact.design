@@ -1,0 +1,116 @@
+---
+date: '2019-07-31'
+title: '3.5 Slider Position'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238559'
+---
+
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
+
+# Overview
+
+What you'll learn:
+
+- `info` parameter
+- Dot notation concerning objects
+- `console` object
+
+<CourseVideoLink to={props.pageContext.frontmatter.video} />
+
+# `onDrag` `info` parameter
+
+To make the slider work properly, we need to change the scale of Skinny’s cheek according to the position of the slider.
+
+If we check out the Framer API [documentation](https://www.framer.com/api/frame/#draghandlers.ondrag),
+there are two parameters for the `onDrag` function — in our case, `handleDrag` — `event` and `info`. The second one, `info`, is what we need.
+
+We can extract the x position of the slider with the info parameter using `info.point.x` as we can see on the right-hand side of the API page.
+
+Before explaining what this dot notation is, let’s just print out `info` in our code to see what it actually is. We first add the 2 parameters to `handleDrag` then `console.log(info)`.
+
+```jsx{2,4}
+function App(){
+  function handleDrag(event, info) {
+    // change scale of Skinny's cheeks according to slider knob position
+    console.log(info)
+  }
+  return (
+    ...
+  )
+}
+```
+
+Now if we start dragging, we'll see a huge amount of objects printed out. This tells us that `info` is an object. If we expand the object in our console (click the small arrow), you can see four properties: `point`, `delta`, `offset`, and `velocity`.
+
+![info object in console](./info.png)
+
+## Dot notation
+
+Further expanding `point` since we can see it as an object as well, it has two properties `x` and `y`. Therefore we can use the dot notation to get specific property values from an object.
+
+```jsx{4}
+function App(){
+  function handleDrag(event, info) {
+    // change scale of Skinny's cheeks according to slider knob position
+    console.log(info.point)
+  }
+  return (
+    ...
+  )
+}
+```
+
+![point object in console](./point.png)
+
+Now `point` objects are printed out in the console. We can then add a `.x` to get our final x position values that we need to update the scale of Skinny's cheek.
+
+```jsx{4}
+function App(){
+  function handleDrag(event, info) {
+    // change scale of Skinny's cheeks according to slider knob position
+    console.log(info.point.x)
+  }
+  return (
+    ...
+  )
+}
+```
+
+![point x in console](./pointx.png)
+
+## `console`
+
+Now, can you explain the `log` behind `console`? Why do we use the dot here?
+
+First of all, `log` is a function and we put a pair of parentheses after it to call it. This is something we’ve seen before.
+
+However, why do we use the dot here? Well, `console` is an object too! And `log` is one of its properties whose value is a function.
+
+To verify this, we can print out the console and check it inside the console.
+
+```jsx{4}
+function App(){
+  function handleDrag(event, info) {
+    // change scale of Skinny's cheeks according to slider knob position
+    console.log(console)
+  }
+  return (
+    ...
+  )
+}
+```
+
+![console object in console](./console.png)
+
+We see that `log` is a property with a function value! In fact, almost everything in JavaScript is an object.
+
+# Conclusion
+
+I mentioned earlier that computer languages are very logical. If some code is written in a certain way and pattern, there must be a reason. Once you understand the logic, it is straightforward to apply it to new code. You don’t need to rely on raw memorization too much.
+
+For example, if there is an object, we can use the dot notation to extract its property value. We can chain the dot notation like in `info.point.x` because up to `x`, the `info.point` property is an object!
+
+When you see some other people’s code, I encourage you to ask yourself questions like what I just did and use `console.log` to understand the underlying logic.
+
+In the next post, we'll can finally have our slider affect Skinny.
