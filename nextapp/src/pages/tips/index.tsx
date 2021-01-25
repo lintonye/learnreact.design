@@ -29,6 +29,7 @@ type TipPreviewProps = {
 function TipPreview({
   title,
   slug,
+  date,
   videoPoster,
   video,
   active,
@@ -48,18 +49,39 @@ function TipPreview({
     >
       <Link href={`/tips/${slug}`}>
         <div>
-          {videoPosterPath && videoPath && (
-            <Video
-              videoUrl={videoPath}
-              posterUrl={videoPosterPath}
-              play={active}
-            />
-          )}
+          <div
+            className="relative"
+            css={{
+              paddingTop: '56.25%',
+              '& > *': {
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                bottom: 0,
+                right: 0,
+              },
+            }}
+          >
+            {videoPosterPath && videoPath ? (
+              <Video
+                videoUrl={videoPath}
+                posterUrl={videoPosterPath}
+                play={active}
+              />
+            ) : (
+              <h2 className="p-4 text-lg bg-green-500 text-white font-semibold">
+                {title}
+              </h2>
+            )}
+          </div>
           {/* {thumbnailImage && (
             <Image src={thumbnailImage} width={100} height={100} />
           )} */}
           <div className="p-4">
-            <h2 className="text-base font-semibold">{title}</h2>
+            {videoPosterPath && videoPath && (
+              <h2 className="text-base font-semibold">{title}</h2>
+            )}
+            {/* <div className="text-sm text-gray-500">{date}</div> */}
           </div>
         </div>
       </Link>
