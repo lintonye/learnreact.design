@@ -68,7 +68,11 @@ function processFile(filePath) {
           const imagePattern = /^!\[(.*)\]\((.*)\)/
           const headingPattern = /^(#+)(\s+.+)$/
           const toDeletePatterns = [/^<a\s+name=".+">\s*<\/a>/]
-          const toDelete = [/^import .+ from .+$/, /^export default .+$/]
+          const toDelete = [
+            /^import .+ from .+$/,
+            /^export default .+$/,
+            /^<CourseVideoLink /,
+          ]
           const matchImg = line.match(imagePattern)
           const matchHeading = line.match(headingPattern)
           if (toDelete.some((pattern) => line.match(pattern))) {
