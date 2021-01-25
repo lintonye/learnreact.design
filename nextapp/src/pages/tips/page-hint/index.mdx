@@ -1,0 +1,65 @@
+import { TipLayout } from '@/components/TipLayout'
+
+export const meta = {
+  date: '2018-12-29',
+  title: 'Page transition hint',
+  tags: ['Code', 'Code Overrides', 'Framer X'],
+  sourceFile:
+    'https://www.dropbox.com/s/r1s6xjyf90xty0c/page-hint.framerx?dl=0',
+  video: 'page-hint.mp4',
+  videoPoster: 'page-hint.mp4.jpg',
+  slug: 'page-hint',
+}
+
+export default TipLayout
+
+## Overview
+
+As an affordance of the page swipe interaction, slightly move the page as if the user dragged the page and then returns to the initial view.
+
+[Requested](https://www.facebook.com/groups/framerjs/permalink/1867222276738168/) by Maximilian Bredow.
+
+## Recipe
+
+### 0. Override `currentPage` prop of `Page`
+
+```jsx
+export const HintPage: Override = () => {
+  ...
+  return {
+    currentPage: data.page
+  };
+};
+```
+
+### 1. Set to the next page and then quickly set it back
+
+```js
+async function hint() {
+  const dummy = Animatable(1)
+  await animate.ease(dummy, 1, { duration: 1 }).finished
+  data.page = 1
+  await animate.ease(dummy, 1, { duration: 0.01 }).finished
+  data.page = 0
+}
+```
+
+### 2. Show the hint when loaded
+
+```js
+export const HintPage: Override = () => {
+  if (hintShown === false) {
+    hint();
+    hintShown = true;
+  }
+  ...
+};
+```
+
+Note: we need this `hintShown` to guard the `hint()` call, otherwise, the animation will be repeated infinitely.
+
+Also see [this tip](/tips/animate-onload).
+
+## Limitation
+
+The animation is a bit jarring. I haven't found a way to slow it down or customize it in any way. Please comment below if you know a better solution!

@@ -1,0 +1,17 @@
+import { TipLayout } from '@/components/TipLayout'
+
+export const meta = {
+  date: '2018-08-10',
+  title: 'How to crop an image?',
+  tags: ['UI', 'Framer X'],
+  tweet: 'https://twitter.com/lintonye/status/1027992511636103168',
+  video: 'crop-image.mp4',
+  videoPoster: 'crop-image.mp4.jpg',
+  slug: 'crop-image',
+}
+
+export default TipLayout
+
+Maybe there are better ways, but the easiest one I've found so far is to draw a frame with target crop rectangle, set its overflow to hidden, and reparent the image into the frame.
+
+There're some issues tho when resizing the cropped image.

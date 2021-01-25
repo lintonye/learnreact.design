@@ -1,0 +1,54 @@
+import { TipLayout } from '@/components/TipLayout'
+
+export const meta = {
+  date: '2018-11-19',
+  title: 'Link to another overlay from an overlay (Attempt 2)',
+  sourceFile:
+    'https://www.dropbox.com/s/irmaz85kvtikw3p/overlay-code-overrides.framerx?dl=0',
+  tags: ['Code', 'Code Override', 'Framer X'],
+  video: 'switch-between-overlays.mp4',
+  videoPoster: 'switch-between-overlays.mp4.jpg',
+  slug: 'switch-overlay-all-manual',
+}
+
+export default TipLayout
+
+## Overview
+
+> I’ve made an overlay link. From that overlay, I want to link to another overlay but stay at the same parent page. So basically open an overlay, click on a link to close the overlay and open another overlay.
+
+Ideally, if we could invoke navigation links in a code override, we could easily implement this. Unfortunately I haven't found any way to do it yet.
+
+This tip simulates the desired effect with animations in code override. See also [this tip](/tips/page-in-overlay/) for another, simpler (but not perfect) approach that uses the Link and Page tool.
+
+## Key steps
+
+1. Link tool is NOT used in this example
+2. All effects are achieved with animation tools in Framer, such as `animate` and `Animatable`
+3. A trick to make it easier to edit the overlay content: make it a design component and put an instance into the main frame
+4. A trick to bring a layer to the front: override `style.zIndex`:
+
+```jsx
+export const BlueOverlay: Override = () => {
+  return {
+    style: {
+      zIndex: data.blueZ
+    }
+  };
+};
+...
+
+data.blueZ = 1; // bring it to the front
+data.blueZ = 0; // move it to the back
+```
+
+## Conclusion
+
+## Pros
+
+- Closer simulation of the expected effect
+- Flexible animation effects - we can customize the animations however we want
+
+## Cons
+
+- Lots of code required

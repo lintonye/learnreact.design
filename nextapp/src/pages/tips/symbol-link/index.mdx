@@ -1,0 +1,28 @@
+import { TipLayout } from '@/components/TipLayout'
+
+export const meta = {
+  date: '2018-10-10',
+  title:
+    "If you work with code components a lot, it's better to create a symbol link to the Framer directory",
+  tags: ['Code', 'Framer X'],
+  tweet: 'https://twitter.com/lintonye/status/1050155473201029120',
+  video: null,
+  videoPoster: null,
+  slug: 'symbol-link',
+}
+
+export default TipLayout
+
+```bash
+ln -s ~/Library/Autosave\ Information/Framer-XXXXX/container /path/to/your/directory
+```
+
+Then, you can open VSCode in command line:
+
+```bash
+code /path/to/your/directory
+```
+
+Or `git init`, or whatever.
+
+<!-- Make sure to check out this [gitignore file](/tips/git-ignore-file). -->
