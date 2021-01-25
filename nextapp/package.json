@@ -13,6 +13,7 @@
     "analyze:browser": "BUNDLE_ANALYZE=browser next build",
     "migrate-blog": "node utils/migrate-blog.js",
     "migrate-tips": "node utils/migrate-tips.js",
+    "migrate-course-posts": "node utils/migrate-course-posts.js",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
