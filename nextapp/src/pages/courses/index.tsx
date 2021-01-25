@@ -3,6 +3,7 @@ import React from 'react'
 import { NextSeo } from 'next-seo'
 import { coursesByReq } from '@/assets/CourseData'
 import { CoursePreview } from '../../components/CoursePreview'
+import { PageTitle } from '@/components/PageTitle'
 
 export default function AllCoursesPage() {
   const title = 'All Courses'
@@ -18,7 +19,7 @@ export default function AllCoursesPage() {
         }}
       />
       <main>
-        <h1 className="m-20 text-center text-4xl font-bold">{title}</h1>
+        <PageTitle>{title}</PageTitle>
         <div className="max-w-screen-sm mx-auto space-y-10 leading-loose">
           {requirements
             .map((r) => coursesByReq(r))

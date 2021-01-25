@@ -1,0 +1,25 @@
+import { TipLayout } from '@/components/TipLayout'
+
+export const meta = {
+  date: '2019-03-29',
+  title: 'Preview 1:1 in any browser window',
+  tags: ['UI', 'Framer'],
+  video: 'preview-1-1.mp4',
+  videoPoster: 'preview-1-1.mp4.jpg',
+  slug: 'preview-1-1',
+}
+
+export default TipLayout
+
+## Overview
+
+HT [@DannyKeane](https://twitter.com/DannyKeane)
+
+By default, Framer X scales the preview content to fit the viewport (either in the preview window or in a [separated browser window](/tips/preview-in-any-browser)). But sometimes we really want to see it 1:1 to get a realistic result, especially when designing a website.
+
+## Steps
+
+1. Create a frame to contain the content to be previewed
+2. Make sure the frame size isn't any of the pre-defined device sizes, or choose "No Device". This is important, or else we can't do Step 4.
+3. Adjust the pins of the content so that it does not change size along with the container
+4. Preview the frame, choose "Canvas -- Responsive"

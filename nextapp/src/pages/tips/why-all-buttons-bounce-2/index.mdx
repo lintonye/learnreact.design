@@ -1,0 +1,76 @@
+import { TipLayout } from '@/components/TipLayout'
+
+export const meta = {
+  date: '2018-11-25',
+  title: 'Why do all buttons bounce? Part 2',
+  tags: ['Code', 'Code Override', 'Code Component', 'Framer'],
+  sourceFile:
+    'https://www.dropbox.com/s/xutzfi1gew3bo4w/all-buttons-bounce-code-component.framerx?dl=0',
+  tweet: null,
+  video: 'all-buttons-bounce.mp4',
+  videoPoster: 'all-buttons-bounce.mp4.jpg',
+  slug: 'why-all-buttons-bounce-2',
+}
+
+export default TipLayout
+
+## Overview
+
+All three buttons are assigned with the same override `Scale`. Why do they all bounce when only one button is clicked?
+
+Solutions:
+
+- [Use different overrides for each of them](/tips/why-all-buttons-bounce-1)
+- Use code component (this tip)
+
+## Why does this happen?
+
+Why? Because all three buttons are associated with the same data source, `data.scale`. When it changes, the `scale` prop of all three buttons are updated accordingly.
+
+We could use [separate code overrides](/tips/why-all-buttons-bounce-1) that associate the buttons with separate data sources. However, it still feels suboptimal -- we'd have to create multiple sets of data and multiple code overrides.
+
+How could we do better? Create a code component!
+
+## Code component
+
+You know what? Things like `animate` and `Animatable` can be used in code components as well. We can pretty much copy the code from Code Override.
+
+- 1. Create a code component and use `Frame` as the root element
+- 2. Copy the declaration of `data` into the component class
+
+```jsx
+export class Button extends React.Component<Props> {
+  ...
+  data = Data({ scale: Animatable(1) });
+  ...
+}
+```
+
+- 3. Copy the `onTap` function into the component class, change to an arrow function, and change `data` to `this.data`:
+
+```jsx
+export class Button extends React.Component<Props> {
+  ...
+  onTap = () => {
+    this.data.scale.set(0.6);
+    animate.spring(this.data.scale, 1);
+  }
+  ...
+}
+```
+
+- 4. Add two props, `onTap` and `scale`, to `Frame`. Note: being able to use props like `onTap` and `scale` is why we need to use `Frame`. `div` won't work.
+
+```jsx
+<Frame
+  onTap={this.onTap}
+  scale={this.data.scale}
+  ...
+/>
+```
+
+- 5. Don't forget to import all related things from `framer`:
+
+```js
+import { Frame, Data, Animatable, animate } from 'framer'
+```

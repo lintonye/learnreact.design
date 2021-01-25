@@ -2,6 +2,7 @@ import { Layout } from '@/components/Layout'
 import { NextSeo } from 'next-seo'
 import getAllPostPreviews from '@/getAllPostPreviews'
 import { PostPreview } from '@/components/PostPreview'
+import { PageTitle } from '../../components/PageTitle'
 
 export default function AllPostsPage() {
   const title = 'All Posts'
@@ -17,7 +18,7 @@ export default function AllPostsPage() {
         }}
       />
       <main>
-        <h1 className="m-20 text-center text-4xl font-bold">{title}</h1>
+        <PageTitle>{title}</PageTitle>
         <div className="max-w-screen-sm mx-auto space-y-10 leading-loose">
           {allPosts.map((p) => (
             // @ts-ignore

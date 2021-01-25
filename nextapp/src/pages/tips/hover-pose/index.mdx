@@ -1,0 +1,29 @@
+import { TipLayout } from '@/components/TipLayout'
+
+export const meta = {
+  date: '2018-10-05',
+  title: 'Make a button/card with on hover state, Method 3: pose',
+  tags: ['Code', 'Code Component', 'Framer'],
+  sourceFile:
+    'https://www.dropbox.com/s/ihf7alj6fq87gpv/hover-pose.framerx?dl=0',
+  tweet: 'https://twitter.com/lintonye/status/1050468340601253888',
+  video: 'hover-pose.mp4',
+  videoPoster: 'hover-pose.mp4.jpg',
+  slug: 'hover-pose',
+}
+
+export default TipLayout
+
+First, `yarn add react-pose`
+
+Then:
+
+```jsx
+const Box = posed.div({
+    hoverable: true,
+    init: {...},
+    hover: {...}
+}
+```
+
+Check out pose for more cool animations: [https://popmotion.io/pose/](https://popmotion.io/pose/)

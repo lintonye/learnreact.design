@@ -1,0 +1,28 @@
+import { TipLayout } from '@/components/TipLayout'
+
+export const meta = {
+  date: '2018-09-14',
+  title: 'Get canvas width/height of a code component',
+  tags: ['Code', 'Code Component', 'Framer'],
+  tweet: 'https://twitter.com/lintonye/status/1040638226065580032',
+  video: null,
+  videoPoster: null,
+  slug: 'width-height-props',
+}
+
+export default TipLayout
+
+Framer passes width/height props to all component instances on the canvas. You can use them to make your own components resizable.
+
+```jsx
+class CodeComp extends React.Component {
+  render() {
+    const { width, height } = this.props
+    return (
+      <Frame width={width} height={height}>
+        ...
+      </Frame>
+    )
+  }
+}
+```

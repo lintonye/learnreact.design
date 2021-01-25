@@ -1,0 +1,53 @@
+import imgSaveAsPng from './save-as.png'
+import imgFramerxFolderPng from './framerx-folder.png'
+import imgFramerfxPng from './framerfx.png'
+
+import { TipLayout } from '@/components/TipLayout'
+
+export const meta = {
+  date: '2019-01-29',
+  title: 'Use git to version control a Framer X file',
+  tags: ['UI', 'Framer'],
+  video: null,
+  videoPoster: null,
+  slug: 'git-integration',
+}
+
+export default TipLayout
+
+## Overview
+
+From V15, Framer X supports a format called "Framer X (Folder)" that saves everything into a folder, not a single (zip) file.
+
+We can use Git to manage the versions inside this folder.
+
+## Steps
+
+### Activate "Save As"
+
+Open the "File" menu, and hold the _Option_ key. We'll get a new "Save As" menu item there:
+
+<img src={imgSaveAsPng} alt={`save as`} width={348} height={364} />
+
+### Pick the "Framer X (Folder)" file format
+
+<img src={imgFramerxFolderPng} alt={`folder format`} width={774} height={529} />
+
+### Use Git
+
+After it's saved, we'll get a new folder with extension `.framerfx`, though it looks like a file in OS X Finder:
+
+<img src={imgFramerfxPng} alt={`framerfx ext`} width={802} height={318} />
+
+Framer X automatically generates a `.gitignore` file inside the folder project.
+
+CD into this folder and use Git to manage the files however you like:
+
+```
+cd ~/Downloads/Untitled.framerfx
+git init
+git add .
+git commit -am 'Initial commit'
+```
+
+And of course, you can put this directory as a subdirectory in your repo, version-controlling the Framer x project along side the rest of your code.
