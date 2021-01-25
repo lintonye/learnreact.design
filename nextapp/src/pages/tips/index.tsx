@@ -8,14 +8,15 @@ import { Video } from '@/components/Video'
 import { useState } from 'react'
 import Image from 'next/image'
 import { Link } from '@/components/design-system'
+import { useImportTipVideoPaths } from '@/components/useImportTipVideoPaths'
 
 type TipMeta = {
   date: string
   title: string
   tags: string[]
   slug: string
-  thumbnailImage?: string
-  thumbnailVideo?: string
+  videoPoster?: string
+  video?: string
 }
 
 type Props = {
@@ -33,12 +34,17 @@ function TipPreview({
   title,
   tags,
   slug,
-  thumbnailImage,
-  thumbnailVideo,
+  videoPoster,
+  video,
   active,
   onMouseEnter,
   onMouseLeave,
 }: TipPreviewProps) {
+  const [videoPath, videoPosterPath] = useImportTipVideoPaths(
+    slug,
+    video,
+    videoPoster,
+  )
   return (
     <article
       onMouseEnter={() => typeof onMouseEnter === 'function' && onMouseEnter()}
@@ -47,10 +53,10 @@ function TipPreview({
     >
       <Link href={`/tips/${slug}`}>
         <div>
-          {thumbnailImage && thumbnailVideo && (
+          {videoPosterPath && videoPath && (
             <Video
-              videoUrl={thumbnailVideo}
-              posterUrl={thumbnailImage}
+              videoUrl={videoPath}
+              posterUrl={videoPosterPath}
               play={active}
             />
           )}
@@ -128,7 +134,12 @@ export function getStaticProps() {
     .keys()
     .map((filename) => {
       const meta = context(filename).meta
-      meta.slug = path.dirname(filename).split(path.separator).pop()
+      meta.slug = path.basename(
+        path.dirname(filename).split(path.separator).pop(),
+      )
+
+      console.log(meta.slug)
+
       return meta
     })
     .sort(compareDates)

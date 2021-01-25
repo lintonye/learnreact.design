@@ -6,6 +6,7 @@ import { MDXWrapper } from './MDXWrapper'
 import { Video } from './Video'
 import Image from 'next/image'
 import { Link } from './design-system'
+import { useImportTipVideoPaths } from './useImportTipVideoPaths'
 
 type LayoutProps = {
   meta: any
@@ -15,8 +16,14 @@ export const TipLayout: FunctionComponent<LayoutProps> = ({
   children,
   meta,
 }) => {
-  const { title, description, thumbnailImage, thumbnailVideo, sourceFile } =
+  const { title, slug, description, videoPoster, video, sourceFile } =
     meta || {}
+
+  const [videoPath, videoPosterPath] = useImportTipVideoPaths(
+    slug,
+    video,
+    videoPoster,
+  )
 
   return (
     <Layout>
@@ -43,11 +50,11 @@ export const TipLayout: FunctionComponent<LayoutProps> = ({
               {title}
             </h1>
           )}
-          {thumbnailVideo ? (
-            <Video videoUrl={thumbnailVideo} posterUrl={thumbnailImage} play />
+          {videoPath && videoPosterPath ? (
+            <Video videoUrl={videoPath} posterUrl={videoPosterPath} play />
           ) : (
-            thumbnailImage && (
-              <Image src={thumbnailImage} width={640} height={360} />
+            videoPosterPath && (
+              <Image src={videoPosterPath} width={640} height={360} />
             )
           )}
 
