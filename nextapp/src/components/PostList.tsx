@@ -5,6 +5,7 @@ import { NextSeo } from 'next-seo'
 import { Tag, Post } from '../types'
 import { PostPreview } from './PostPreview'
 import getAllPostPreviews from '@/getAllPostPreviews'
+import { Layout } from '@/components/Layout'
 
 type Props = {
   tag: Tag
@@ -15,7 +16,7 @@ export const PostList: FunctionComponent<Props> = ({ tag, posts }) => {
   const { title, description, tagSlug: tagSlug } = tag
   const url = `/${tagSlug}`
   return (
-    <>
+    <Layout>
       <NextSeo
         title={title}
         description={description}
@@ -27,13 +28,14 @@ export const PostList: FunctionComponent<Props> = ({ tag, posts }) => {
         }}
         canonical={url}
       />
-      <div className="prose md:prose-xl max-w-screen-md mt-0 mx-auto leading-6">
+      <div className="prose md:prose-xl max-w-screen-md mt-0 mx-auto leading-6 space-y-8">
         {title && <h1 className="text-xl leading-tight">{title}</h1>}
         {posts.map((post) => (
+          // @ts-ignore
           <PostPreview key={post.slug} {...post} />
         ))}
       </div>
-    </>
+    </Layout>
   )
 }
 

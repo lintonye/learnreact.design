@@ -1,17 +1,29 @@
+import imgJackJpg from './jack.jpg'
+import imgGeckoboard1Gif from './geckoboard1.gif'
+import imgGeckoboard2Gif from './geckoboard2.gif'
+import imgSurprise from './harness-surprise.png'
+
 export const meta = {
+  tags: ['design-react'],
+  date: '2018-03-15',
   title: 'Harnessing React Power in Design Prototyping',
   subtitle: 'An interview with Jack Hallahan, a designer who uses React',
-  date: '2018-03-15',
-  tags: ['design-react'],
+  surprise: {
+    actor: imgSurprise,
+    animationVariants: {
+      hidden: { x: 0, rotate: 0 },
+      revealed: { x: -130, rotate: -30 },
+    },
+  },
 }
 
 <!--excerpt-->
 
-Jack's interview
+An interview with Jack Hallahan, a designer who uses React
 
 <!--/excerpt-->
 
-<!-- ![Jack](./jack.jpg) -->
+<img src={imgJackJpg} alt={`Jack`} width={900} height={400} />
 
 In today’s sea of design prototyping tools, React might be an unintuitive choice.
 
@@ -85,11 +97,11 @@ However, what Jack needed to prototype was not a linear user journey.
 
 > The first prototype was used to test the interaction design with users, as well as validating the options available to users – could they create a theme that suited their brand? It's high fidelity because it introduced some new interaction patterns we needed to be confident about, and also _because the outcome is very visual, so a lower fidelity would not have been able to validate as thoroughly_.
 
-![geckoboard1](./geckoboard1.gif)
+<img src={imgGeckoboard1Gif} alt={`geckoboard1`} width={600} height={454} />
 
 > The table widget prototype is high fidelity only in the table visualization. The form on the left is more-or-less unstyled. In fact the table is very similar to the markup and styling used to create the same thing in our production code. The prototype was create to figure out those things in detail – alignment, padding, hover states, font sizes, truncation etc.
 
-![geckoboard2](./geckoboard2.gif)
+<img src={imgGeckoboard2Gif} alt={`geckoboard2`} width={600} height={262} />
 
 ### Why is React the right tool?
 
@@ -125,7 +137,7 @@ High-fidelity prototypes by default
 
 ### [create-react-app](https://github.com/facebook/create-react-app)
 
-<img src="./create-react-app.svg" />{' '}
+<!-- <img src="./create-react-app.svg" style="width: 50%; min-width: 400px" /> -->
 
 > The number one tool that helped me get off the ground with React was Facebook's create-react-app. The startup boilerplate app that is just ready to go, pre-configured, and has lots of great features built in. Before that, it was difficult to find a good template project on Github to start with. I didn't know what was good, what I needed and what I didn't need. Things like Webpack was a complete mystery to me, and still is. So create-react-app was so easy. It had a lot of great things built in and it's just got better at the time.
 
@@ -137,7 +149,7 @@ High-fidelity prototypes by default
 
 ### [Tachyons](http://tachyons.io/) for styling
 
-<img src="./tachyons.svg" />{' '}
+<!-- <img src="./tachyons.svg" style="width: 50%; min-width: 300px" /> -->
 
 > It is this different approach to CSS than what most people use to. It's been called functional CSS or atomic CSS. Basically it's a library of classes that have a very specific purpose like apply one single style.
 
@@ -147,7 +159,7 @@ High-fidelity prototypes by default
 
 ### [React Storybook](https://github.com/storybooks/storybook)
 
-<img src="./storybook.svg" />{' '}
+<!-- <img src="./storybook.svg" style="width: 50%; min-width: 300px;" /> -->
 
 > At Geckoboard we use React Storybook as a component library. It’s a shared resource between design and development. We’re continuing to improve it, but I can already see how Storybook can be a great bridge for designers and front-enders working on a React app. At the moment, when we’ve designed a component we want to reuse, it will be added to Storybook by an engineer. We can then refer to Storybook when designing new interfaces. We can check what components we have that are ready to use, which ones might need changing, and discover if we need to design and build something new.
 

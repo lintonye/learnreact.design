@@ -1,32 +1,57 @@
 import { jsx } from '@emotion/core'
-import React, { useState } from 'react'
+import React, { useState, useReducer, useContext } from 'react'
 import { FunctionComponent } from 'react'
 import { NextSeo } from 'next-seo'
 import { MDXProvider } from '@mdx-js/react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import * as SeoData from '../../next-seo.json'
-import Link from 'next/link'
-import { NavBar } from '@/components/NavBar'
+import { Link } from '@/components/design-system'
+import { FiLink } from 'react-icons/fi'
+import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
-import { InPostMessageContext } from './InPostMessageContext'
+import { Layout } from '@/components/Layout'
+import {
+  InPostStateContext,
+  InPostAction,
+  InPostState,
+} from './InPostStateContext'
+import { IntersectionDetector } from './IntersectionDetector'
+import { ConvertKitForm } from './design-system'
 
 type LayoutProps = {
   meta: any
 }
 
 const components = {
-  h1: (props: any) => <h1 className="text-3xl font-bold my-6" {...props} />,
-  h2: (props: any) => <h2 className="text-2xl font-bold my-4" {...props} />,
-  h3: (props: any) => <h3 className="text-xl font-bold my-3" {...props} />,
-  h4: (props: any) => <h4 className="text-lg font-bold" {...props} />,
+  h1: (props: any) => <h1 className="text-4xl font-bold" {...props} />,
+  h2: withAnchor(
+    withTocNotifier((props: any) => (
+      <h2 {...props} className={'text-3xl font-bold my-3 ' + props.className} />
+    )),
+  ),
+  h3: withAnchor(
+    withTocNotifier((props: any) => (
+      <h3 {...props} className={'text-2xl font-bold my-2 ' + props.className} />
+    )),
+  ),
+  h4: withAnchor((props: any) => (
+    <h4 {...props} className={'text-xl font-bold ' + props.className} />
+  )),
   ul: (props: any) => <ul className="list-outside list-disc ml-5" {...props} />,
   ol: (props: any) => (
     <ol className="list-outside list-decimal ml-5" {...props} />
   ),
+  li: (props: any) => <li className=" leading-loose" {...props} />,
   a: (props: any) => <a className="underline" {...props} />,
-  p: (props: any) => <p className="my-4 leading-relaxed" {...props} />,
+  p: (props: any) => <p className="leading-loose" {...props} />,
   hr: (props: any) => <hr className="my-6" {...props} />,
+  table: (props: any) => (
+    <table className="border-collapse border border-gray-300" {...props} />
+  ),
+  td: (props: any) => <td className="border border-gray-300 p-2" {...props} />,
+  th: (props: any) => <th className="border border-gray-300 p-2" {...props} />,
+  thead: (props: any) => <thead className="bg-gray-100" {...props} />,
   img: (props: any) => (
     <Image
       className="mx-auto max-w-full"
@@ -38,7 +63,7 @@ const components = {
   ),
   blockquote: (props: any) => (
     <blockquote
-      className="pl-3 py-0.5 italic border-l-4 border-gray-300 bg-gray-100"
+      className="px-3 py-2 italic border-l-4 border-gray-300 bg-gray-100"
       {...props}
     />
   ),
@@ -68,8 +93,11 @@ function flatten(children: any) {
   return result
 }
 
-const headings = ['h2', 'h3']
-function visitHeading(children: any, headingProcessorFun: HeadingProcessor) {
+function visitHeading(
+  children: any,
+  headingProcessorFun: HeadingProcessor,
+  headings: string[],
+) {
   visit(children, (c) => {
     if (c.props && headings.includes(c.props.originalType)) {
       const heading = c.props.originalType
@@ -80,20 +108,99 @@ function visitHeading(children: any, headingProcessorFun: HeadingProcessor) {
   })
 }
 
-function createToc(path: string, children: any) {
+function createToc(
+  activeHeadingSlug: string,
+  children: any,
+  headings: string[],
+) {
   const toc: React.ReactElement[] = []
-  visitHeading(children, ({ heading, slug, content }) => {
-    const url = `${path}#${slug}`
-    toc.push(
-      <li
-        key={url}
-        className={(heading === 'h3' ? 'ml-4' : 'ml-0') + ' hover:underline'}
-      >
-        <Link href={url}>{content}</Link>
-      </li>,
+  visitHeading(
+    children,
+    ({ heading, slug, content }) => {
+      const url = `#${slug}`
+      // console.log({ activeHeadingSlug, slug })
+
+      toc.push(
+        <li
+          key={url}
+          className={
+            (heading === 'h3' ? 'ml-4' : 'ml-0') +
+            ' hover:underline ' +
+            (activeHeadingSlug === slug ? ' text-black font-semibold ' : '')
+          }
+        >
+          <Link href={url}>{content}</Link>
+        </li>,
+      )
+    },
+    headings,
+  )
+  return <ul className="space-y-2">{toc}</ul>
+}
+
+function inPostStateReducer(state: InPostState, action: InPostAction) {
+  return { ...state, [action.type]: action.data }
+}
+
+function withAnchor(Comp: FunctionComponent) {
+  return function HeadingWithAnchor({ id, ...props }: any) {
+    return (
+      <div className="relative">
+        <a
+          id={id}
+          href={`#${id}`}
+          className="hover:underline"
+          css={{
+            '&:hover .icon': {
+              opacity: 1,
+            },
+          }}
+        >
+          <FiLink className="absolute top-2 -left-7 opacity-0 icon" size={20} />
+          <Comp {...props} />
+        </a>
+      </div>
     )
-  })
-  return <ul className="space-y-1">{toc}</ul>
+  }
+}
+
+function withTocNotifier(Comp: FunctionComponent) {
+  return function HeadingWithTocNotifier(props: any) {
+    return (
+      <div>
+        <Comp {...props} />
+        <IntersectionDetector
+          onIntersectionChange={({ isIntersecting, dispatch }) => {
+            // isIntersecting && console.log('heading', props.children)
+
+            isIntersecting &&
+              dispatch({ type: 'activeHeadingSlug', data: props.id })
+          }}
+        >
+          <div className="absolute h-16 w-1" />
+        </IntersectionDetector>
+      </div>
+    )
+  }
+}
+
+function Toc({
+  contentChildren,
+  headings = ['h2', 'h3'],
+}: {
+  contentChildren: any
+  headings: string[]
+}) {
+  const [state] = useContext(InPostStateContext)
+  const toc = createToc(state?.activeHeadingSlug, contentChildren, headings)
+  return (
+    <div className="hidden lg:block">
+      <div className="uppercase font-semibold tracking-wider text-gray-800 mb-4">
+        table of contents
+      </div>
+      <div className="text-sm text-gray-600">{toc}</div>
+    </div>
+  )
 }
 
 export const PostLayout: FunctionComponent<LayoutProps> = ({
@@ -108,11 +215,13 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
     titleAppendSiteName = false,
     url = currentCanonicalUrl,
     ogImage,
+    tocHeadings,
+    sidebar = true,
   } = meta || {}
-  const toc = createToc(router.pathname, children)
-  const [inPostMessage, setInPostMessage] = useState('')
+
+  const [inPostState, dispatch] = useReducer(inPostStateReducer, [])
   return (
-    <>
+    <Layout>
       <NextSeo
         title={title}
         description={description}
@@ -125,32 +234,56 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
         }}
         canonical={url}
       />
-      <NavBar />
-      <div className="max-w-screen-sm lg:max-w-screen-md xl:max-w-screen-lg mt-10 mx-auto">
-        {title && (
-          <h1 className="mx-auto font-bold leading-tight text-center text-2xl my-10 max-w-sm sm:text-4xl md:my-16 lg:max-w-2xl lg:my-24 xl:max-w-3xl xl:text-5xl xl:my-36">
-            {title}
-          </h1>
-        )}
-        <InPostMessageContext.Provider
-          value={[inPostMessage, (msg) => setInPostMessage(msg)]}
-        >
-          <div className="flex justify-center space-x-16">
-            <MDXProvider components={components}>
-              <div className="max-w-2xl leading-6">{children}</div>
-            </MDXProvider>
-            <div className="sticky top-20 self-start mt-6">
-              <div className="hidden xl:block">
-                <div className="uppercase font-semibold text-gray-500">
-                  table of contents
+      <InPostStateContext.Provider value={[inPostState, dispatch]}>
+        <MDXProvider components={components}>
+          <div
+            className={
+              'grid gap-y-5 ' //+
+              // 'sm:max-w-screen-sm ' +
+              // 'lg:max-w-screen-md ' +
+              // 'xl:max-w-screen-lg '
+            }
+            css={{
+              gridTemplateColumns: '1fr min(65ch, 100%) 30ch 1fr',
+              '& > *': { gridColumn: 2 },
+            }}
+          >
+            {title && (
+              <h1
+                className={
+                  'font-bold leading-tight text-center text-2xl my-10 justify-self-center ' +
+                  'sm:text-4xl ' +
+                  'md:my-16 ' +
+                  'lg:max-w-2xl lg:my-24 ' +
+                  'xl:max-w-3xl xl:text-5xl xl:my-36 '
+                }
+                css={{
+                  gridColumn: '2/4',
+                }}
+              >
+                {title}
+              </h1>
+            )}
+
+            {/* Sidebar */}
+            <div
+              className="sticky top-20 self-start mt-6 ml-12 justify-self-center space-y-8"
+              css={{ gridColumn: '3/4', gridRow: '2/20' }}
+            >
+              <Toc contentChildren={children} headings={tocHeadings} />
+              <div className="space-y-2 text-sm">
+                <div className="uppercase tracking-wider font-semibold">
+                  Sign up for updates:
                 </div>
-                <div className="text-sm text-gray-500">{toc}</div>
+                <ConvertKitForm formId="465988" />
               </div>
             </div>
+
+            {/* Main content */}
+            {children}
           </div>
-        </InPostMessageContext.Provider>
-      </div>
-      <Footer />
-    </>
+        </MDXProvider>
+      </InPostStateContext.Provider>
+    </Layout>
   )
 }
