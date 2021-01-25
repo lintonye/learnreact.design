@@ -5,7 +5,7 @@ import { Layout } from '@/components/Layout'
 import { MDXWrapper } from './MDXWrapper'
 import { Video } from './Video'
 import Image from 'next/image'
-import { Link } from './design-system'
+import { Chip, Link } from './design-system'
 import { useImportTipVideoPaths } from './useImportTipVideoPaths'
 
 type LayoutProps = {
@@ -16,8 +16,16 @@ export const TipLayout: FunctionComponent<LayoutProps> = ({
   children,
   meta,
 }) => {
-  const { title, slug, description, videoPoster, video, sourceFile } =
-    meta || {}
+  const {
+    title,
+    slug,
+    description,
+    videoPoster,
+    video,
+    sourceFile,
+    tags,
+    date,
+  } = meta || {}
 
   const [videoPath, videoPosterPath] = useImportTipVideoPaths(
     slug,
@@ -37,19 +45,31 @@ export const TipLayout: FunctionComponent<LayoutProps> = ({
             // 'xl:max-w-screen-lg '
           }
         >
-          {title && (
+          <div
+            className={
+              'my-10 flex flex-col justify-center items-center space-y-8 ' +
+              'md:my-16 ' +
+              'lg:max-w-2xl lg:my-24 ' +
+              'xl:max-w-3xl  xl:my-36 '
+            }
+          >
             <h1
               className={
-                'font-bold leading-tight text-center text-2xl my-10 justify-self-center ' +
+                'font-bold leading-tight text-center text-2xl ' +
                 'sm:text-4xl ' +
-                'md:my-16 ' +
-                'lg:max-w-2xl lg:my-24 ' +
-                'xl:max-w-3xl xl:text-5xl xl:my-36 '
+                'xl:text-5xl '
               }
             >
               {title}
             </h1>
-          )}
+            <div className="flex space-x-2 text-sm">
+              {tags.map((tag: string) => (
+                <Chip key="tag">{tag}</Chip>
+              ))}
+              <div className="pl-8">Updated: {date}</div>
+            </div>{' '}
+          </div>
+
           {videoPath && videoPosterPath ? (
             <Video videoUrl={videoPath} posterUrl={videoPosterPath} play />
           ) : (
