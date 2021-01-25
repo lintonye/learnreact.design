@@ -1,0 +1,44 @@
+---
+date: '2018-10-20'
+title: 'Integrate text input: "Press enter" keyboard event'
+thumbnail: text-input-keypress.mp4.jpg
+video: text-input-keypress.mp4
+tags: ['Code', 'Code Component', 'Code Overrides', 'Framer X']
+sourceFile: https://www.dropbox.com/s/z9akwyooszaru7z/text-input-keypress.framerx?dl=0
+tweet:
+---
+
+# Overview
+
+This is the same idea as the ["onChange" example](/tips/simple-text-input).
+
+The text input here is a standard HTML `<input>` which supports [`keypress` event](https://developer.mozilla.org/en-US/docs/Web/Events/keypress). We can wrap this in a code component and expose `onAccept` as a prop. In the code override, we can hook into `onAccept` in the same way as `onTap`, and use the updated text accordingly.
+
+**Note:** Also check out [this post](/2020/03/31/react-mental-models-working-with-input) for general tips on working with `input` in React.
+
+# `TextInput`
+
+```jsx
+class TextInput extends React.Component {
+  ...
+  handleKeyPress = e => {
+    // We pass the new value of the text when calling onAccept
+    if (e.key === "Enter") {
+      const { onAccept } = this.props;
+      onAccept && onAccept(e.target.value);
+    }
+  }
+  render() {
+    return (
+      // Note we need to use "onKeyPress" instead of "onkeypress"
+      // as in HTML.
+      <input type="text" onKeyPress={this.handleKeyPress} />
+    )
+  }
+}
+```
+
+# Notes
+
+- "Enter" is just one of the keys that we can handle in `onKeyPress`, find a list of other keys [here](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values).
+- `onKeyPress` is just one of the supported keyboard events. We can also use `onKeyDown` or `onKeyUp` depending on the use case.

@@ -1,0 +1,50 @@
+---
+date: '2018-11-25'
+title: 'Make a button/card with on hover state, Method 4: react-spring'
+thumbnail: hover-react-spring.mp4.jpg
+video: hover-react-spring.mp4
+tags: ['Code', 'Code Component', 'Framer X']
+sourceFile: https://www.dropbox.com/s/yiebomlvgkdsxe6/hover-react-spring.framerx?dl=0
+---
+
+# Overview
+
+We can use react-spring and React state to implement mouse hover animations.
+
+# Key steps
+
+## 1. Set state `hovered` on mouse over and mouse out
+
+```jsx
+<div
+  onMouseOver={this.setHover}
+  onMouseOut={this.cancelHover}
+  ...
+/>
+
+...
+
+setHover = () => this.setState({ hovered: true });
+cancelHover = () => this.setState({ hovered: false });
+
+```
+
+## 2. Use a `Spring` and set different styles according to `state.hovered`
+
+```jsx
+<Spring
+  to={{
+    transform: `scale(${this.state.hovered ? 1.2 : 1})`,
+    boxShadow: this.state.hovered ? hoverBoxShadow : normalBoxShadow
+  }}
+>
+  {props => (
+    <div
+      style={props}
+      ...
+    />
+  )}
+</Spring>
+```
+
+Check out [react-spring](http://react-spring.surge.sh/spring) for more cool animations.

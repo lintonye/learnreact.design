@@ -1,0 +1,24 @@
+---
+date: '2018-10-23'
+title: 'Ship a code component that points to a local resource (e.g. an image)'
+thumbnail:
+video:
+tags: ['Code', 'Code Component', 'Framer X']
+sourceFile: https://www.dropbox.com/s/hes16n045mmmuz1/local-resources.framerx?dl=0
+---
+
+HT [@onnlucky](https://twitter.com/onnlucky). Context in [this tweet](https://twitter.com/onnlucky/status/1047463917977579520)
+
+Sometimes we want to publish a code component that includes some resources, such as images.
+
+We can do it like so:
+
+1. Put the files into `container/` folder of the Framer X project, i.e. the folder we can open with "File -> Show Project Folder". The files can be inside a sub-folder too, such as `container/images/`
+2. `import { url } from 'framer/resource`
+3. Get the url via `url("relative/path")`. E.g.:
+
+```jsx
+<img src={url('image.png')} />
+```
+
+![local-resources](./media/local-resources.png)

@@ -1,0 +1,15 @@
+---
+date: '2018-10-09'
+title: 'Render Vue.js components'
+thumbnail:
+video:
+tags: ['Code', 'Framer X']
+tweet: https://twitter.com/lintonye/status/1049888967016017920
+---
+
+HT [@CompuIves](https://twitter.com/CompuIves)
+
+Ives: "I render the Vue component inside the React component, then I use the React lifecycle method `componentWillReceiveProps` to pass on the new props to the Vue component."
+
+Code can be found in Ives' [tweet](https://twitter.com/CompuIves/status/1047860688402755584).
+[This library](https://github.com/akxcv/vuera) seems useful as well!

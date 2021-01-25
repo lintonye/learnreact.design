@@ -1,0 +1,102 @@
+---
+date: '2018-11-13'
+title: 'Text input: change text by clicking a button'
+thumbnail: change-input-text-from-outside.mp4.jpg
+video: change-input-text-from-outside.mp4
+tags: ['Code', 'Code Component', 'Code Overrides', 'Framer X']
+sourceFile: https://www.dropbox.com/s/tt26izxrg6ceqw0/text-input-change-text.framerx?dl=0
+tweet:
+---
+
+# Overview
+
+Thanks [Vitaly](https://twitter.com/atKo_O) for requesting this tip.
+
+The requirement is as simple as: change the text of an input by clicking a button/link. There's actually a hidden requirement: the input must remain working, i.e. we should still be able to enter text into it.
+
+**Note:** This is a Framer X tip. If you are looking for a tip on how to work with `input` in React in general, check out [this post](/2020/03/31/react-mental-models-working-with-input) instead.
+
+# Set the text of an input
+
+To set the text of an input, we can assign its `value` prop to `this.props.text`:
+
+```jsx{7}
+class TextInput extends React.Component {
+  ...
+  render() {
+    return (
+      <input
+        type="text"
+        value={this.props.text} />
+    )
+  }
+```
+
+then override this prop:
+
+```jsx
+export const TextInput: Override = () => {
+  return {
+    text: data.inputText,
+  }
+}
+
+export const LearnReact: Override = () => {
+  return {
+    onTap() {
+      data.inputText = 'Learn React'
+    },
+  }
+}
+```
+
+# "Fix" the text input
+
+The above works: if we assign the `LearnReact` override to a frame, we'll be able to change the text of the input to "Learn React" when we click on it. However, we'll soon notice that the text input becomes ready-only -- no matter what key we press, the content of the text input does not change!
+
+This is caused by this sucker:
+
+```jsx{3}
+<input
+  type="text"
+  value={this.props.text} />
+```
+
+It binds the value of the text input with the `text` prop and makes the input a [controlled component](https://reactjs.org/docs/forms.html). The only way to change the content is to give it a new prop.
+
+We'll do so in the `TextInput` code override:
+
+```jsx{4-6}
+export const TextInput: Override = () => {
+  return {
+    text: data.inputText,
+    onChange(text) {
+      data.inputText = text;
+    },
+  }
+}
+```
+
+Remember to declare and process the `onChange` prop in the `TextInput` component, as discussed in [this tip](/tips/simple-text-input):
+
+```jsx
+export class TextInput extends React.Component<Props> {
+  ...
+  handleChange = e => {
+    const { onChange } = this.props;
+    onChange && onChange(e.target.value);
+  };
+
+  render() {
+    return (
+      <Input
+        type="text"
+        onChange={this.handleChange}
+        value={this.props.text}
+      />
+    );
+  }
+}
+```
+
+Note: you may be tempted to use internal state in the `TextInput` component to track the content of the input. Don't! Better to store the state **outside** the `TextInput` as a "single source of truth" and pass the value into the component as a prop. In this case, we use the Code override to store the state (it's in `data.inputText`).
