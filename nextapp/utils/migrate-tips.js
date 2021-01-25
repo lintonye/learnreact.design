@@ -71,6 +71,7 @@ function processFile(filePath) {
 
   frontMatterRest.video = video
   frontMatterRest.videoPoster = thumbnail
+  frontMatterRest.slug = dirName
 
   const meta =
     frontMatter.title &&
