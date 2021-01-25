@@ -1,14 +1,16 @@
----
-date: '2019-07-31'
-title: '3.10 Passing onDrag to Slider'
-video: 'https://school.learnreact.design/courses/629779/lectures/11238565'
----
+import imgDragGif from './drag.gif'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-07-31',
+  title: '3.10 Passing onDrag to Slider',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11238565',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -17,9 +19,7 @@ What you'll learn:
 - Passing a function as a `props`  
   \*Final code at bottom.
 
-<CourseVideoLink to={props.pageContext.frontmatter.video} />
-
-# Linking `Slider` the wrong way
+## Linking `Slider` the wrong way
 
 In the last post, we passed the `animationControls` to the `Skinny` component via the `cheekAnimate` attribute. For the `Slider`, we could just do the same thing. Pass the `animationControls` into the room for `Slider`.
 
@@ -30,7 +30,7 @@ In the last post, we passed the `animationControls` to the `Skinny` component vi
 </div>
 ```
 
-## Moving `handleDrag` inside `Slider`
+### Moving `handleDrag` inside `Slider`
 
 Now we can uncomment `onDrag={handleDrag}` in our `Slider` component and move our `handleDrag` function from `App` into our `Slider` component.
 
@@ -93,7 +93,7 @@ it makes sense to pass `animate` to `Skinny` because it follows the same pattern
 
 In contrast, this approach doesn’t make much sense for `Slider`. We don’t want to simply animate `Slider`. We want `Slider` to take control of the animation for `Skinny`.
 
-## Changing the name?
+### Changing the name?
 
 You might say, we can change the name of `animate` to
 `animationControls`.
@@ -107,7 +107,7 @@ You might say, we can change the name of `animate` to
 
 However, it still is not robust and does not feel right. For example, what if we wanted `Slider` to control multiple animations? What if we want `Slider` to do something else?
 
-# Linking `Slider` the better way
+## Linking `Slider` the better way
 
 Instead of passing the `animationControls` as a value into `Slider`'s attributes, we can define `onDrag` beside the `<Slider>` tag.
 
@@ -118,7 +118,7 @@ Instead of passing the `animationControls` as a value into `Slider`'s attributes
 </div>
 ```
 
-## Moving `handleDrag` back inside `App`
+### Moving `handleDrag` back inside `App`
 
 Then we move back our `handleDrag` function from inside our `Slider` component back to the `App` component. **Remember to change `props.animate` back to `animationControls`.**
 
@@ -136,23 +136,23 @@ function App(){
 }
 ```
 
-## Reason behind this method
+### Reason behind this method
 
 The idea is that we can then pass the `handleDrag` function, or any function in the future, into the `Slider` component. This is much clearer and flexible than the previous method.
 
-### Method 1
+#### Method 1
 
 1. We aren't trying to animate `Slider`, so having the `animate` attribute with `Slider` doesn't make a lot of sense.
 
 2. By convention, if an attribute is named `onDrag`, it is read like "do this when the frame is dragged". Therefore, the `onDrag` value is supposed to be a function which means placing `animationControls` as `onDrag`'s value doesn't make much sense.
 
-### Method 2
+#### Method 2
 
 1. Our slider can be used for a variety of purposes, such as controlling animation, phone volume, screen brightness, etc because our implementation of `handleDrag` is **not** hard-coded in our `Slider` component. The slider can only do what that implementation is bounded to.
 
 2. We "outsource" the `onDrag` behavior with the `onDrag` prop so that the consumer/client decide what it will do.
 
-## Passing `handleDrag` into `onDrag` as a `prop`
+### Passing `handleDrag` into `onDrag` as a `prop`
 
 ```jsx{3}
 <div ...>
@@ -176,7 +176,7 @@ function Slider() {
 }
 ```
 
-![drag preview](./drag.gif)
+<img src={imgDragGif} alt={`drag preview`} width={158} height={200} />
 
 This way, we can make the slider to do whatever want, and still keep our code tidy.
 
@@ -208,7 +208,7 @@ function Slider() {
 }
 ```
 
-# Conclusion
+## Conclusion
 
 Alright, just to recap, we broke down a big component into two smaller components, `Skinny` and `Slider`. We use `props` to make components to talk to each other.
 
@@ -220,9 +220,6 @@ Add a link to final code or file? -->
 Raw Code?
 
 ```jsx
-import * as React from 'react'
-import { render } from 'react-dom'
-import { Frame, transform, useAnimation } from 'framer'
 import './styles.css'
 
 function Skinny(props) {

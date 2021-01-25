@@ -1,33 +1,31 @@
----
-date: '2019-08-27'
-title: '8.3 More Parallax Hooks'
-video: 'https://school.learnreact.design/courses/629779/lectures/11509505'
----
+import imgUsespeedGif from './usespeed.gif'
+import imgUsetriggerGif from './usetrigger.gif'
+import imgDirectionGif from './direction.gif'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-08-27',
+  title: '8.3 More Parallax Hooks',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11509505',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
 - `useSpeed`
 - `useTrigger`
 
-<CourseVideoLink to={props.pageContext.frontmatter.video} />
-
-# More `use-parallax` Hooks
+## More `use-parallax` Hooks
 
 Similar to the `usePositiveOffset` and `useSticky` hooks, we also have a `useSpeed` hook from my `use-parallax` library.
 
-## `useSpeed`
+### `useSpeed`
 
 ```jsx{4}
-import * as React from "react"
-import { render } from "react-dom"
-import { Frame, Scroll, useMotionValue, useTransform } from "framer"
-import { usePositiveOffset, useSticky, useSpeed } from "use-parallax"
 import "./styles.css"
 ```
 
@@ -43,7 +41,7 @@ function App(){
 }
 ```
 
-![usespeed](./usespeed.gif)
+<img src={imgUsespeedGif} alt={`usespeed`} width={217} height={359} />
 
 Initially, our icon has a speed of `0` in the range of `[0, 100]`. This causes the icon to scroll with the background.
 
@@ -51,17 +49,13 @@ In the next range, our icon moves a half slower than the background.
 
 Finally, our icon is moving against our background at the same speed in the `[400, 800]` which makes it seem like the icon is sticking.
 
-## `useTrigger`
+### `useTrigger`
 
 This hook is useful if we want to trigger a certain action upon reaching a certain range.
 
 Let's create an animation for our icon by implementing `useTrigger`.
 
 ```jsx{3-4}
-import * as React from "react"
-import { render } from "react-dom"
-import { Frame, Scroll, useMotionValue, useTransform, useAnimation } from "framer"
-import { usePositiveOffset, useSticky, useSpeed, useTrigger } from "use-parallax"
 import "./styles.css"
 ```
 
@@ -119,7 +113,7 @@ function App(){
 }
 ```
 
-![usetrigger](./usetrigger.gif)
+<img src={imgUsetriggerGif} alt={`usetrigger`} width={217} height={360} />
 
 `useTrigger` is only called **once per scrolling direction**. You can verify this by using a `console.log` statement.
 
@@ -140,7 +134,7 @@ function App(){
 
 Our ternary operator here will rotate our icon 180 degrees when scrolling up (direction < 0) and will rotate our icon back to 0 when scrolling down.
 
-![direction](./direction.gif)
+<img src={imgDirectionGif} alt={`direction`} width={216} height={359} />
 
 All these hooks were built with `useTransform` and some additional math.
 
@@ -152,7 +146,7 @@ function usePositiveOffset(offset) {
 }
 ```
 
-# Conclusion
+## Conclusion
 
 I encourage you to play combine these hooks and see what types of animations and triggers you can make!
 

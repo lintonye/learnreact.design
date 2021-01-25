@@ -1,14 +1,19 @@
----
-date: '2019-07-24'
-title: '2.2 Drawing a Toggle'
-video: 'https://school.learnreact.design/courses/601139/lectures/10785658'
----
+import imgFramedivPng from './framediv.png'
+import imgTogglebuttonPng from './togglebutton.png'
+import imgTogglestage1Png from './togglestage1.png'
+import imgTogglestage1InspectPng from './togglestage1inspect.png'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-07-24',
+  title: '2.2 Drawing a Toggle',
+  video: 'https://school.learnreact.design/courses/601139/lectures/10785658',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -18,25 +23,23 @@ What you'll learn:
 - Dynamic properties with curly brackets
 - Two ways to style a `Frame`
 
-<CourseVideoLink to={props.pageContext.frontmatter.video} />
-
-# Toggle Part 2
+## Toggle Part 2
 
 Now we have a `Frame` which is just a blue square, but it’s not that special. It’s just a `<div>`.
 
-## Inspecting the Frame
+### Inspecting the Frame
 
-![frame inspect](./framediv.png)
+<img src={imgFramedivPng} alt={`frame inspect`} width={1062} height={671} />
 
 Inspecting the element reveals that the `Frame` is a glorified `<div>` that allows us to do some cool tricks.
 
 The toggle we are creating is a circle inside a longer shape.
 
-![toggle button](./togglebutton.png)
+<img src={imgTogglebuttonPng} alt={`toggle button`} width={357} height={188} />
 
 Because the `Frame` is just a `<div>`, we can put elements inside. Let’s put another `Frame` inside.
 
-## Embedding Frames
+### Embedding Frames
 
 ```jsx
 {
@@ -48,7 +51,7 @@ Because the `Frame` is just a `<div>`, we can put elements inside. Let’s put a
 </Frame>
 ```
 
-## Changing Frame Attributes
+### Changing Frame Attributes
 
 There should be a circle inside of a larger square now. That larger square will envelop the toggle, so its height should be equal to the circle's diameter (2\*radius), and the width should be around twice the diameter of the circle.
 
@@ -66,21 +69,31 @@ Our toggle should now look like a circle inside of a rectangle, to make our togg
 </Frame>
 ```
 
-![stage 1 of toggle](./togglestage1.png)
+<img
+  src={imgTogglestage1Png}
+  alt={`stage 1 of toggle`}
+  width={327}
+  height={170}
+/>
 
 Great! That looks like a toggle now.
 
-## Inspecting the Frame
+### Inspecting the Frame
 
 Let’s look closely at how this works. We’ve set the `width`, `height`, `borderRadius` and size attributes of the Frames.
 
 Remember how a `<Frame>`s is just a `<div>`? However, in HTML, a `<div>`doesn't have these attributes. Therefore, if we try to set them on a `<div>`, there would be no effect. Hence, frames are glorified divs. As a result, we can use these and many other additional attributes on a `<Frame>`.
 
-![inspect of stage 1 of toggle](./togglestage1inspect.png)
+<img
+  src={imgTogglestage1InspectPng}
+  alt={`inspect of stage 1 of toggle`}
+  width={620}
+  height={579}
+/>
 
 We see that the frame works by converting the `width`, `height`, and `borderRadius` attributes into inline styles onto the resulting divs.
 
-## Styling the Frame
+### Styling the Frame
 
 Can we style frames with inline styles as if they are divs? Yes. However, the format for setting inline styles in JSX is different from that of HTML.
 
@@ -114,7 +127,7 @@ Try removing the `width={120}` attribute and the frame will keep its width due t
 ></div>
 ```
 
-# Conclusion
+## Conclusion
 
 Therefore, we have two ways to style a Frame.
 

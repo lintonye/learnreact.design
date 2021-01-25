@@ -1,14 +1,20 @@
----
-date: '2019-07-25'
-title: '2.6 Calling Functions and Variables'
-video: 'https://school.learnreact.design/courses/601139/lectures/10785663'
----
+import imgConsolesandwichPng from './consolesandwich.png'
+import imgConsoleundefinedPng from './consoleundefined.png'
+import imgConsoleheatedPng from './consoleheated.png'
+import imgSandwichbrowserPng from './sandwichbrowser.png'
+import imgConsolesandwichgoodPng from './consolesandwichgood.png'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-07-25',
+  title: '2.6 Calling Functions and Variables',
+  video: 'https://school.learnreact.design/courses/601139/lectures/10785663',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -19,9 +25,7 @@ What you'll learn:
 - Embedding Functions as parameters
 - Browser function output
 
-<CourseVideoLink to={props.pageContext.frontmatter.video} />
-
-# Calling Functions and Variables
+## Calling Functions and Variables
 
 Now that we’ve got `sandwichMaker`, how do we use this machine to make sandwiches? The technical term to "activate" the function is named **"calling the function"**.
 
@@ -48,7 +52,12 @@ let lintonsLunch = sandwichMaker('🥓')
 console.log(lintonsLunch)
 ```
 
-![sandwich string in console](./consolesandwich.png)
+<img
+  src={imgConsolesandwichPng}
+  alt={`sandwich string in console`}
+  width={350}
+  height={163}
+/>
 
 The console is located at the bottom right of the preview page.
 
@@ -82,7 +91,7 @@ sandwich = newValue
 sandwich = newNewValue
 ```
 
-## Compound Assignment
+### Compound Assignment
 
 ```jsx
 sandwich = sandwich + meat
@@ -90,7 +99,7 @@ sandwich = sandwich + meat
 
 This line means that we get what’s currently in the bucket, **concatenate** (adding string) with meat and put the result back into the bucket. It's called a **compound assignment** because a calculation and an assignment is occurring.
 
-### Shorthand Compound Assignment
+#### Shorthand Compound Assignment
 
 A simplified method or more complicated, depending on how you look at it is this
 
@@ -102,7 +111,7 @@ This process repeats until we get a "full sandwich" (adding the veggies and then
 
 The variable is the third fundamental concept in JavaScript that you should know, along with objects and functions.
 
-## console.log
+### console.log
 
 Now let me ask you, what’s this console.log? It must be a function because of the pair of parentheses after it, but we didn't define it.
 
@@ -116,13 +125,18 @@ let output = console.log(lintonsLunch)
 console.log(output)
 ```
 
-![console undefined](./consoleundefined.png)
+<img
+  src={imgConsoleundefinedPng}
+  alt={`console undefined`}
+  width={287}
+  height={161}
+/>
 
 It looks like some functions do not produce any output, but it does show something on the screen. Functions that don't produce any output can even save something to the disk and more.
 
 <!-- **TODO: Find better analogy** -->
 
-## Embedding Functions as Parameters
+### Embedding Functions as Parameters
 
 By the way, we don’t necessarily need to save the output of a function to a variable to then put it inside `console.log`.
 
@@ -138,7 +152,12 @@ console.log(microwave(sandwichMaker('🥓')))
 
 `sandwichMaker` is first run, the output is put it into `microwave` as input, then the output is fed into `console.log`.
 
-![console heated sandwich](./consoleheated.png)
+<img
+  src={imgConsoleheatedPng}
+  alt={`console heated sandwich`}
+  width={291}
+  height={126}
+/>
 
 You can also call functions multiple times.
 
@@ -153,7 +172,7 @@ Now, we simply get four of the same outputs, and we can change the parameters if
 
 All in all, functions are very cool and flexible machines.
 
-## Browser Function Output
+### Browser Function Output
 
 Now that we have a sandwich maker function, how do we show the result on the web page, rather than just in the console?
 
@@ -168,7 +187,12 @@ Let’s say we put it inside a div in `App`. Will we get the same console result
 
 Unfortunately, this doesn't work. I get the literal text inside the `<div>`.
 
-![browser preview of sandwich maker](./sandwichbrowser.png)
+<img
+  src={imgSandwichbrowserPng}
+  alt={`browser preview of sandwich maker`}
+  width={919}
+  height={157}
+/>
 
 To fix this, we can add a pair of curly brackets to make the code dynamic. These curly brackets will treat what’s inside as executable code and try to run it. Here it’ll call this function and put the output on the resulting web page.
 
@@ -181,8 +205,13 @@ To fix this, we can add a pair of curly brackets to make the code dynamic. These
 
 Which results in
 
-![browser preview of sandwich maker](./consolesandwichgood.png)
+<img
+  src={imgConsolesandwichgoodPng}
+  alt={`browser preview of sandwich maker`}
+  width={919}
+  height={157}
+/>
 
-# Conclusion
+## Conclusion
 
 Great! You now know how to call a function and what variables are! We'll learn next the different types of variables and how to create them.

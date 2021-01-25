@@ -1,14 +1,19 @@
----
-date: '2019-07-29'
-title: '3.1 Slider Animation'
-video: 'https://school.learnreact.design/courses/629779/lectures/11238555'
----
+import imgSliderfinalresult2Gif from './sliderfinalresult2.gif'
+import imgIosslider2Gif from './iosslider2.gif'
+import imgCenterhoverPng from './centerhover.png'
+import imgCentersliderPng from './centerslider.png'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-07-29',
+  title: '3.1 Slider Animation',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11238555',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -16,15 +21,18 @@ What you'll learn:
 - Creating sliders using frames
 - `center` attribute
 
-<CourseVideoLink to={props.pageContext.frontmatter.video} />
+## Final Result
 
-# Final Result
-
-![final slider result](./sliderfinalresult2.gif)
+<img
+  src={imgSliderfinalresult2Gif}
+  alt={`final slider result`}
+  width={169}
+  height={194}
+/>
 
 See for yourself! [Final toggle](https://c0yrx.codesandbox.io/).
 
-# Intro to Slider
+## Intro to Slider
 
 Welcome to the Slider module! We’ll build this slider component, and will use it to control this picture.
 
@@ -32,13 +40,13 @@ Along the way, we’ll learn more about JavaScript, React and the Framer library
 
 You’ll see that this drag gesture can be applied to several other scenarios. For example, you can build this iOS task-switcher prototype with the same concepts that we use to build the slider.
 
-![iPhone slider](./iosslider2.gif)
+<img src={imgIosslider2Gif} alt={`iPhone slider`} width={120} height={225} />
 
 As I mentioned, I want to teach you the principles. Once you master the basic building blocks and tools, you’d be able to apply them to brand-new interaction ideas.
 
 When you watch these videos and work on assignments, always ask yourself a question, can I use this to build something new?
 
-# Getting Started
+## Getting Started
 
 Alright, let’s get started on the slider by creating a new sandbox.
 
@@ -88,7 +96,12 @@ The `center` attribute is shorthand for
 
 If attributes of these type have no value, that means it is true. Hovering over such attributes can give us more insight into examples and description.
 
-![center hover description](./centerhover.png)
+<img
+  src={imgCenterhoverPng}
+  alt={`center hover description`}
+  width={474}
+  height={313}
+/>
 
 The most important part is this line on the top. It’s a complete and concise definition of the `center` attribute.
 
@@ -108,8 +121,13 @@ We want to center our slider, but if we just use `center`, our knob on our slide
 
 Giving us
 
-![rough slider outline](./centerslider.png)
+<img
+  src={imgCentersliderPng}
+  alt={`rough slider outline`}
+  width={430}
+  height={129}
+/>
 
-# Conclusion
+## Conclusion
 
 Our slider is now vertically centered! In the next post, we'll learn how to style this slider!

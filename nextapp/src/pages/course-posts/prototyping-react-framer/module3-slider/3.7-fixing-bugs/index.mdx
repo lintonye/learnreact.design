@@ -1,14 +1,17 @@
----
-date: '2019-07-31'
-title: '3.7 Fixing Bugs'
-video: 'https://school.learnreact.design/courses/629779/lectures/11238562'
----
+import imgSkinnybugGif from './skinnybug.gif'
+import img250DragendGif from './250dragend.gif'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-07-31',
+  title: '3.7 Fixing Bugs',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11238562',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -17,13 +20,11 @@ What you'll learn:
 - Review of `transition`
 - Structure of the slider and Skinny animation
 
-<CourseVideoLink to={props.pageContext.frontmatter.video} />
-
-# Scale bug
+## Scale bug
 
 There’s a bug in our slider code and you might have noticed it!
 
-![skinny slider bug](./skinnybug.gif)
+<img src={imgSkinnybugGif} alt={`skinny slider bug`} width={210} height={214} />
 
 This occurs because whenever we drag the slider, we run `handleDrag` very quickly and frequently.
 
@@ -31,7 +32,7 @@ This occurs because whenever we drag the slider, we run `handleDrag` very quickl
 
 There are **two** ways to fix this issue.
 
-## First solution
+### First solution
 
 We can avoid starting so many animations quickly.
 
@@ -57,11 +58,11 @@ to
 
 Now the handleDrag function is only called after the drag gesture is completed. That is after the user releases the mouse or finger on a touch screen.
 
-![drag end slider](./250dragend.gif)
+<img src={img250DragendGif} alt={`drag end slider`} width={166} height={200} />
 
 Of course, this isn't smooth. If we want to see real-time updates on Skinny’s face, we need the second solution.
 
-## Second Solution
+### Second Solution
 
 By resetting the starting velocity of the spring, the energy of the spring does not accumulate when we start an animation.
 
@@ -91,7 +92,7 @@ Also make sure you are using `onDrag` now and not `onDragEnd`.
 />
 ```
 
-# Conclusion
+## Conclusion
 
 Let’s review what exactly is going on here.
 

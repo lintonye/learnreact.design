@@ -1,14 +1,19 @@
----
-date: '2019-07-30'
-title: '3.4 onDrag'
-video: 'https://school.learnreact.design/courses/629779/lectures/11238558'
----
+import imgMrskinny2Png from './mrskinny2.png'
+import imgSkinnyandslider2Png from './skinnyandslider2.png'
+import imgSkinnytop2Png from './skinnytop2.png'
+import imgConsolePng from './console.png'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-07-30',
+  title: '3.4 onDrag',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11238558',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -17,17 +22,20 @@ What you'll learn:
 - Common function mistake
 - Output with `handleDrag`
 
-<CourseVideoLink to={props.pageContext.frontmatter.video} />
-
-# Setting up `onDrag`
+## Setting up `onDrag`
 
 We now have a slider that we can drag around its knob, but how do we use it to control something in the UI?
 
-## Skinny
+### Skinny
 
 If you have watched some of my early videos, this is Skinny and he wants to lose weight badly. Now let’s use the slider to make him happy.
 
-![image of mr.skinny](./mrskinny2.png)
+<img
+  src={imgMrskinny2Png}
+  alt={`image of mr.skinny`}
+  width={188}
+  height={189}
+/>
 
 Insert this piece code underneath your `<div>` to embed Skinny in your codesandbox.
 
@@ -55,12 +63,22 @@ Insert this piece code underneath your `<div>` to embed Skinny in your codesandb
 
 Your preview should look like this
 
-![Skinny beside slider](./skinnyandslider2.png)
+<img
+  src={imgSkinnyandslider2Png}
+  alt={`Skinny beside slider`}
+  width={366}
+  height={187}
+/>
 
 Let's move Skinny above the slider. To do that, we add
 `flexDirection: "column"` to the parent `<div>`'s properties since by default `flexDirection` is row. Skinny should now be on top of our slider.
 
-![Skinny on top and slider](./skinnytop2.png)
+<img
+  src={imgSkinnytop2Png}
+  alt={`Skinny on top and slider`}
+  width={185}
+  height={229}
+/>
 
 We have another frame that is Skinny's cheek. By adding the `scale` attribute and changing its values, we can change the size of Skinny's cheek. The `onDrag` attribute can then allow us to use the slider to control the scale of Skinny's cheek.
 
@@ -83,7 +101,7 @@ On the frame for the knob, we can add a new attribute called `onDrag`.
 </Frame>
 ```
 
-## Function inside attribute
+### Function inside attribute
 
 The value inside `onDrag` is a special because it is a function.
 If you forgot how to write a function, no worries! I'll get you caught up in no time.
@@ -121,7 +139,7 @@ Note we are just creating the function here, we are not running it yet.
 
 We are passing the function definition to Frame as a value of the onDrag attribute. It’s like shipping a machine to a different place to have it run by someone else.
 
-## Alternative function inside attribute
+### Alternative function inside attribute
 
 There is another way to write our function, and we will continue with this method. We can move our entire `handleDrag` function to right underneath our function `App`.
 
@@ -155,7 +173,7 @@ Then simply put `handleDrag` the name and not calling `handleDrag()` inside our 
 </Frame>
 ```
 
-## Common function mistake
+### Common function mistake
 
 We can just get the function by its name and use it as the value of the onDrag attribute since we don't want to do this
 
@@ -198,10 +216,15 @@ function App(){
 }
 ```
 
-# Conclusion
+## Conclusion
 
 We'll now get a flood of console logs when we drag the slider!
 
-![console when dragging](./console.png)
+<img
+  src={imgConsolePng}
+  alt={`console when dragging`}
+  width={650}
+  height={322}
+/>
 
 This means the function `handleDrag` is working. In the next post, we'll learn how to access the slider's position to make changes based on that.

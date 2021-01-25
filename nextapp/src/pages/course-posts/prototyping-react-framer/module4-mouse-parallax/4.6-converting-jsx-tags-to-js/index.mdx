@@ -1,29 +1,29 @@
----
-date: '2019-08-04'
-title: '4.6 Converting JSX tags to JS'
-video: 'https://school.learnreact.design/courses/629779/lectures/11238586'
----
+import imgFinalGif from './final.gif'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-08-04',
+  title: '4.6 Converting JSX tags to JS',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11238586',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
 - Making function into child elements
 - `createElement` parameters
 
-<CourseVideoLink to={props.pageContext.frontmatter.video} />
-
-# JSX to JS
+## JSX to JS
 
 Now that we’ve converted all our image Frame tags into JavaScript function calls, lets now work on our other tags.
 
 Before we convert our container Frame into a function call, let’s move our event handler function outside because, otherwise, our code would be too long.
 
-## Parent `<Frame>`
+### Parent `<Frame>`
 
 ```jsx{4-14,21}
 function App() {
@@ -68,7 +68,7 @@ Now we can replace our parent `<Frame>` with a similar function call we used for
 
 Since we removed the opening `<Frame>` tag, we need to remove the closing `<Frame>` tag near the bottom. If not, we get a `SyntaxError`.
 
-# Child elements with functions
+## Child elements with functions
 
 How do we make sure our image tags are children of our larger parent frame with functions?
 
@@ -76,7 +76,7 @@ It turns out that if we add more parameters when calling `createElement`, the th
 
 As a review, the first parameter is the type of tag we want to create and the second is the group of attributes.
 
-## Background `Frame`
+### Background `Frame`
 
 Let's move our background `Frame` into the third parameter. We no longer need the curly brackets around our image Frames because we are placing the `Frame` into a function.
 
@@ -120,7 +120,7 @@ Let's understand what's going on in our child, background `<Frame>`.
 
 We first call this function `createElement` to create our background, and its return value is an element which will be used as the third parameter of this larger, parent function call.
 
-## Moving our other Frames
+### Moving our other Frames
 
 Let me move all the other tags into this function call.
 
@@ -165,7 +165,7 @@ Let me move all the other tags into this function call.
 )}
 ```
 
-![working gif](./final.gif)
+<img src={imgFinalGif} alt={`working gif`} width={180} height={188} />
 
 Everything works just as before.
 
@@ -189,7 +189,7 @@ React.createElement("div", {className:"App"},
 
 Because `<div>` is a standard HTML tag, we need to make it a **string**. On the other hand, `Frame` is a custom tag defined in the framer library. We can directly use its name without quotes.
 
-## Final Code
+### Final Code
 
 ```jsx
 ...
@@ -257,7 +257,7 @@ function App() {
 ...
 ```
 
-# Conclusion
+## Conclusion
 
 Our code is now JSX free! I hope you can see that it makes total sense to return a tag in JSX because the tag is just a function call in JS. We return the output of the function the same way as any other JavaScript code.
 

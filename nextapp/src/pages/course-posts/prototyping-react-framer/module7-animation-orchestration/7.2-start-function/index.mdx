@@ -1,23 +1,23 @@
----
-date: '2019-08-20'
-title: '7.2 start Function'
-video: 'https://school.learnreact.design/courses/629779/lectures/11509509'
----
+import imgPromisePng from './promise.png'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-08-20',
+  title: '7.2 start Function',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11509509',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
 - `start` function
 - `Promise`
 
-<CourseVideoLink to={props.pageContext.frontmatter.video} />
-
-# Padlock animation bug
+## Padlock animation bug
 
 Our padlock animation code works quite well! Although `await` and `async` are relatively new terms and concepts, our code looks fairly straightforward.
 
@@ -47,7 +47,7 @@ Therefore, what's going on in our animation `start` functions?
 
 Well, the computer still runs these two lines one by one, top to bottom.
 
-## Simultaneous?
+### Simultaneous?
 
 The `start` function handles animation in a special way. It only starts the animation, but it doesn't wait for its completion.
 
@@ -55,7 +55,7 @@ Essentially, the first line of animation begins and after a very short moment, t
 
 Since the the delay between the two is negligibly small, we don't notice it. As a result, we perceive what's going on as simultaneous.
 
-## `start`
+### `start`
 
 We can dig deeper into how the start function works by printing out the result of the function call.
 
@@ -75,9 +75,9 @@ We can dig deeper into how the start function works by printing out the result o
 
 In our console, the start function seems to return a value called **`Promise`**.
 
-![promise console](./promise.png)
+<img src={imgPromisePng} alt={`promise console`} width={269} height={111} />
 
-## `Promise`
+### `Promise`
 
 You can think of a `Promise` as a receipt when ordering fast food such as McDonalds!
 
@@ -89,7 +89,7 @@ I'll "promise" you that if a function returns a `Promise`, by default, it’ll r
 
 However, this result is **only** a receipt, not the execution of the animation.
 
-# Conclusion
+## Conclusion
 
 All in all, you should know that to use `await` you must also use `async` and the start function returns something called a `Promise` which is akin to a food receipt. At this point, `async` is quite an advanced topic, so we'll skip over that for now.
 

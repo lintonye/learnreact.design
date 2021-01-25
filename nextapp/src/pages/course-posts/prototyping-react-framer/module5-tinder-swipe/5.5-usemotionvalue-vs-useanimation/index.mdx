@@ -1,23 +1,28 @@
----
-date: '2019-08-08'
-title: '5.5 useMotionValue vs useAnimation'
-video: 'https://school.learnreact.design/courses/629779/lectures/11238551'
----
+import imgReleaseGif from './release.gif'
+import imgBouncereleaseGif from './bouncerelease.gif'
+import imgDisappearGif from './disappear.gif'
+import imgOnlybounceGif from './onlybounce.gif'
+import imgMv0Gif from './mv0.gif'
+import imgTweenGif from './tween.gif'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-08-08',
+  title: '5.5 useMotionValue vs useAnimation',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11238551',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
 - `useTransform` for rotation
 - Understanding when and why to use `useAnimation` or `useMotionValue`
 
-<CourseVideoLink to={props.pageContext.frontmatter.video} />
-
-# `useAnimation` and `useMotionValue`
+## `useAnimation` and `useMotionValue`
 
 We’ve used two different hooks to create animations: `useAnimation` and `useMotionValue`. What’s the difference between them? When do we use one over the other?
 
@@ -31,19 +36,19 @@ It’s interesting and common to combine the two approaches in real world cases.
 
 We’ll explore these questions by making our Tinder swipe card even better.
 
-## Spring effect
+### Spring effect
 
 Currently, when we swipe in either direction and release our mouse, the card stays there.
 
-![card stays put](./release.gif)
+<img src={imgReleaseGif} alt={`card stays put`} width={350} height={246} />
 
 In contrast, the final result should bounce when released.
 
-![bounce back](./bouncerelease.gif)
+<img src={imgBouncereleaseGif} alt={`bounce back`} width={267} height={229} />
 
 Furthermore, if we swipe more to either direction, the card should disappear.
 
-![card disappearing](./disappear.gif)
+<img src={imgDisappearGif} alt={`card disappearing`} width={352} height={246} />
 
 Back in our code, we currently use `MotionValue` and `useTransform` to animate the rotation of the card as we drag it.
 
@@ -56,7 +61,7 @@ function App() {
 }
 ```
 
-## `useMotionValue` or `useAnimation`?
+### `useMotionValue` or `useAnimation`?
 
 `useMotionValue` is a great fit for this scenario since for each `x` location of the card, we can compute the corresponding rotation value. We can use math to work out the rotation value no matter what the `x` offset is.
 
@@ -73,7 +78,7 @@ What do you think we can use?
 />
 ```
 
-## `useMotionValue` or `useAnimation`?
+### `useMotionValue` or `useAnimation`?
 
 Do we use `useAnimation` or `MotionValue` here?
 
@@ -82,9 +87,6 @@ To me, it feels very intuitive to use `useAnimation` here since we can directly 
 Therefore, let's import `useAnimation`.
 
 ```jsx{3,9,24-27}
-import * as React from "react"
-import ReactDOM from "react-dom"
-import { Frame, useMotionValue, useTransform, useAnimation} from "framer"
 import "./styles.css"
 
 ...
@@ -115,9 +117,9 @@ function App(){
 }
 ```
 
-![only bounce](./onlybounce.gif)
+<img src={imgOnlybounceGif} alt={`only bounce`} width={352} height={246} />
 
-## Trying `MotionValue`
+### Trying `MotionValue`
 
 We could also try directly setting the `MotionValue` for `x`.
 
@@ -133,9 +135,9 @@ We could also try directly setting the `MotionValue` for `x`.
 
 But this jagged animation is not what we want.
 
-![reset to 0](./mv0.gif)
+<img src={imgMv0Gif} alt={`reset to 0`} width={352} height={246} />
 
-## Customization of `useAnimation`
+### Customization of `useAnimation`
 
 Let's switch back to `useAnimation`.
 
@@ -153,7 +155,7 @@ We can customize our animation by adding a transition property.
 />
 ```
 
-![tween animation](./tween.gif)
+<img src={imgTweenGif} alt={`tween animation`} width={352} height={246} />
 
 Now, if we release our mouse, we'll get a tween animation instead of a spring, but we would like a spring, so let's change it back.
 
@@ -163,11 +165,11 @@ All this occurs because we created `rotateMv` with `useTransform`, which links `
 
 That’s pretty cool!
 
-# Conclusion
+## Conclusion
 
 Alright, as a recap, `useMotionValue` and `useAnimation` are both helpful tools for creating animations.
 
-## When to use `MotionValue` or `useAnimation`
+### When to use `MotionValue` or `useAnimation`
 
 When we need to link two values together, we use `MotionValue`, and when we want a lot of animation customization we use `useAnimation`.
 

@@ -1,14 +1,17 @@
----
-date: '2019-08-15'
-title: '6.6 True Face of the Spread Operator'
-video: 'https://school.learnreact.design/courses/629779/lectures/11238544'
----
+import imgHobby2Png from './hobby2.png'
+import imgAgePng from './age.png'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-08-15',
+  title: '6.6 True Face of the Spread Operator',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11238544',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -17,9 +20,7 @@ What you'll learn:
 - Problem and solution to spread operator
 - Object destructuring and reverse three-dot operator
 
-<CourseVideoLink to={props.pageContext.frontmatter.video} />
-
-# Implementing the spread operator
+## Implementing the spread operator
 
 You’ve learned about the **spread operator** which breaks apart an object and uses its properties to set the attributes of a JSX tag.
 
@@ -43,7 +44,7 @@ All in all, the spread operator takes an object, breaks apart all its properties
 
 To illustrate, let's use the console for our next example.
 
-## Spread operator syntax
+### Spread operator syntax
 
 Copy and paste this piece of code:
 
@@ -63,7 +64,12 @@ Let's type this statement inside our console:
 
 After we press return again, we'll get a new object with a `hobby` property and all of the `person` object's properties: `name` and `age`.
 
-![hobby properties in console](./hobby2.png)
+<img
+  src={imgHobby2Png}
+  alt={`hobby properties in console`}
+  width={488}
+  height={187}
+/>
 
 Furthermore, the parameter position/order of the spread operator, `...person` matters!
 
@@ -83,11 +89,11 @@ Vice versa:
 
 This time, `age:0` overrides the `person` object's properties.
 
-![age property](./age.png)
+<img src={imgAgePng} alt={`age property`} width={407} height={180} />
 
 Therefore, we can conclude that whatever appears last in parameter order has the final say.
 
-## Object destructuring and Spread operator
+### Object destructuring and Spread operator
 
 The three-dot operator can be used together with object destructuring as well. In fact, it is very common.
 
@@ -103,11 +109,11 @@ function RadioGroup(props) {
 }
 ```
 
-## Problem with using `{...props}`
+### Problem with using `{...props}`
 
 In our case, we are using `...props` here to forward the `RadioGroup` attributes to the Frame. Although it works, we can pass too many properties to the `<Frame>` tag. For example, when using `...props` we are also passing on `choices` to the `<Frame>`. However, since `choices` is not an attribute supported by Frame, we just don't see it, but to be efficient and clear, how can we choose a property to exclude from being passed on?
 
-### Object destructuring
+#### Object destructuring
 
 If you remember, with object destructuring, we can replace `props` in our `RadioGroup` parameter with an object.
 
@@ -127,7 +133,7 @@ This change assumes the parameter to be an object, extracts the `choices` proper
 
 We can now change `props.choices` to `choices`, but now `...props` is undefined.
 
-## Reverse three-dot operator
+### Reverse three-dot operator
 
 How can we capture the rest of the properties?
 
@@ -161,7 +167,7 @@ function RadioGroup({optionChoices, ...newProps}) {
 
 Unlike our previous examples, the three-dot operator is working the opposite way. Instead of breaking apart properties, it is collecting the rest of them and assembling them into a new object.
 
-# Conclusion
+## Conclusion
 
 Alright, that’s a short summary about the spread operator. It is commonly used in modern JavaScript due to how convenient the spread operator is.
 

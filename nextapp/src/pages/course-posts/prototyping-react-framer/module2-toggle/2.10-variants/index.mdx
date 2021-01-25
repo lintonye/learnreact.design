@@ -1,14 +1,17 @@
----
-date: '2019-07-26'
-title: '2.10 Variants'
-video: 'https://school.learnreact.design/courses/601139/lectures/10940024'
----
+import imgToggle3Gif from './toggle3.gif'
+import imgScaletoggle3Gif from './scaletoggle3.gif'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-07-26',
+  title: '2.10 Variants',
+  video: 'https://school.learnreact.design/courses/601139/lectures/10940024',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -16,15 +19,13 @@ What you'll learn:
 - Animating different attributes
 - What are Variants and how to use them
 
-<CourseVideoLink to={props.pageContext.frontmatter.video} />
-
-# Expected Result
+## Expected Result
 
 Our final toggle will utilize **variants** to improve on our `animate` attributes. We can animate different attributes such as `backgroundColor`, `position`, and `scale`.
 
-![final toggle](./toggle3.gif)
+<img src={imgToggle3Gif} alt={`final toggle`} width={159} height={126} />
 
-# `background` Attribute
+## `background` Attribute
 
 Let’s add some final touches to the toggle so when we press the toggle the background color will change. We can use the `background` attribute to set the color.
 
@@ -33,9 +34,6 @@ Here is the [starter code](https://codesandbox.io/s/github/lintonye/prototyping-
 Here is the raw code — with the background attribute — added we have been working on from the last posts:
 
 ```jsx{21}
-import React from "react"
-import ReactDOM from "react-dom"
-import { Frame, useCycle } from "framer"
 import "./styles.css"
 
 function App() {
@@ -75,7 +73,7 @@ ReactDOM.render(<App />, rootElement)
 
 `background="#999"` changes the background color to a gray, but we want the colors to nicely blend and change on a click instead of an immediate change.
 
-## Animation
+### Animation
 
 To start, you can either add the `animate` attribute underneath `background` or add the `animate` attribute and remove the `background` attribute.
 
@@ -129,11 +127,11 @@ Great! This works! However, if there are many things that we want to animate, we
 
 Our code would quickly become long and messy. As a result, there is a better way.
 
-# Variants
+## Variants
 
 Our toggle has two states, off and on. When it’s off, `knobX is 0` and the track is gray. When it’s on, `knobX is 60` and the track is orange.
 
-## Background
+### Background
 
 We can use a new attribute on the frame called **variants**. Let's add this underneath our background animate.
 
@@ -195,11 +193,11 @@ function App() {
 }
 ```
 
-## Knob
+### Knob
 
 Now, let’s make our knob match our mode method. If we do so, we can remove all the knobX references and make our code much clearer!
 
-### Final working code:
+#### Final working code:
 
 ```jsx{2,22-25}
 function App() {
@@ -240,9 +238,9 @@ function App() {
 
 Awesome! Now our code works perfectly!
 
-![toggle working](./toggle3.gif)
+<img src={imgToggle3Gif} alt={`toggle working`} width={159} height={126} />
 
-# Conclusion
+## Conclusion
 
 Can you see the beauty of variants? It puts animations into nice, clear groups and we can activate many animations by a single group name. Therefore, it’s very easy to add new animations.
 
@@ -258,7 +256,7 @@ variants={{
 
 Imagine how much code we would need without the variants attribute!
 
-![scaling toggle](./scaletoggle3.gif)
+<img src={imgScaletoggle3Gif} alt={`scaling toggle`} width={188} height={136} />
 
 One more thing, we can actually remove the animate attribute in our toggle/child frame. It's called a **child** frame because it is inside the outer, **parent** frame.
 

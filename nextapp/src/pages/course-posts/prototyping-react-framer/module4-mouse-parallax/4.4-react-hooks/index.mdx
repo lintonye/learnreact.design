@@ -1,14 +1,18 @@
----
-date: '2019-08-02'
-title: '4.4 React Hooks'
-video: 'https://school.learnreact.design/courses/629779/lectures/11238584'
----
+import imgUtilitiesPng from './utilities.png'
+import imgHookerrorPng from './hookerror.png'
+import imgConditionalPng from './conditional.png'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-08-02',
+  title: '4.4 React Hooks',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11238584',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -16,9 +20,7 @@ What you'll learn:
 - Difference between hooks and functions
 - Restrictions on hooks
 
-<CourseVideoLink to={props.pageContext.frontmatter.video} />
-
-# React Hooks
+## React Hooks
 
 It’s fun to create animations with the `useAnimation` function. However, its name is fairly strange. Why do we call it "useAnimation" and not "createAnimation"?
 
@@ -30,7 +32,7 @@ Do they have anything in common?
 
 Yes, that’s the correct question to ask! They are special functions in React, called **React hooks**.
 
-## Hooks as a relatively new concept in React
+### Hooks as a relatively new concept in React
 
 Hooks were just released in the first half of 2019 but it took the React community by storm. Initially, people were skeptical and debated about it, but soon everybody started using hooks.
 
@@ -38,7 +40,12 @@ The Framer team quickly joined those who embraced hooks. If you were an early us
 
 In the new API, there are several hooks that address different aspects of prototyping. On the API, if you click on "Utilities", you'll see many functions that begin with "use".
 
-![utilities on framer API](./utilities.png)
+<img
+  src={imgUtilitiesPng}
+  alt={`utilities on framer API`}
+  width={167}
+  height={271}
+/>
 
 We’ll study them in later modules.
 
@@ -50,7 +57,7 @@ At this point, let’s just think of hooks as a way for a React component to acc
 
 We learned about the `useAnimation` hook, which allows our component to control animations and the `useCycle` hook which allows us to toggle through different animation states.
 
-## Hooks vs functions
+### Hooks vs functions
 
 Most of the time, hooks are fairly straightforward. Since they are just functions, we can call them in the same way as we call other functions.
 
@@ -60,7 +67,7 @@ However, if hooks are just functions, why is there such a big deal? Why do we ne
 
 There are some special aspects and restrictions when using hooks. The React team wouldn't create these conventions randomly!
 
-## Hook restrictions
+### Hook restrictions
 
 First of all, a hook can only be called from within a React component. To illustrate, if we call it above `App`, we’ll get an `Invariant Violation` error due to an "Invalid hook call".
 
@@ -74,7 +81,7 @@ function App() {
 }
 ```
 
-![hook error](./hookerror.png)
+<img src={imgHookerrorPng} alt={`hook error`} width={779} height={88} />
 
 There’s another kind of React component called `class`. Inside a `class`, we also can't use hooks. Hooks only work inside components that are defined as **functions**.
 
@@ -115,10 +122,15 @@ function App() {
 
 Looking into our problems console,
 
-![conditional error](./conditional.png)
+<img
+  src={imgConditionalPng}
+  alt={`conditional error`}
+  width={799}
+  height={136}
+/>
 
 Stealing a joke from Ryan Florence, "Hooks are great and we love them. But we have to love them unconditionally."
 
-# Conclusion
+## Conclusion
 
 Alright, that’s the gist of what hooks are. Even though it wasn't much, it hopefully should be enough for us to get going. We’ll revisit hooks in a later module.
