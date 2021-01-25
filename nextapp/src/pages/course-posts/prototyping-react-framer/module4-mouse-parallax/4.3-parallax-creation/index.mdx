@@ -1,14 +1,21 @@
----
-date: '2019-08-02'
-title: '4.3 Parallax Animation'
-video: 'https://school.learnreact.design/courses/629779/lectures/11238583'
----
+import imgMousefinalresult2Gif from './mousefinalresult2.gif'
+import imgClientPng from './client.png'
+import imgOffsetPng from './offset.png'
+import imgDrawing2Png from './drawing2.png'
+import imgBird1Gif from './bird1.gif'
+import imgFinal43Gif from './final4.3.gif'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-08-02',
+  title: '4.3 Parallax Animation',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11238583',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -18,21 +25,26 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-# Parallax
+## Parallax
 
 Let’s take a closer look at what we plan to create.
 
-![Parallax Effect](./mousefinalresult2.gif)
+<img
+  src={imgMousefinalresult2Gif}
+  alt={`Parallax Effect`}
+  width={206}
+  height={190}
+/>
 
 Check it out for yourself! [Parallax Effect](https://pt866.codesandbox.io/)
 
-## What is the parallax effect?
+### What is the parallax effect?
 
 When we move the mouse around, we get this parallax effect as if this is a 3D scene. The bird, cloud, sun, and background follow the mouse at different speeds. Therefore, creating the feel of a layered scene at different distances from the viewer.
 
 The offset of the images is relative to the center of the scene. If the mouse is at the center, the offset is zero. If we move the mouse to the left, everything will move to the left as well.
 
-## Offset values
+### Offset values
 
 To create this effect, the very first step is to calculate the offset of the mouse from the center of the scene. Then, we can use those values to create animations.
 
@@ -42,25 +54,25 @@ As we’ve seen in the last post, `clientX` and `clientY` are the offset from th
 
 How then do we convert them into the offsets from the **center**? There’s a bit of math involved!
 
-## Visualization
+### Visualization
 
 If our cursor is where this red arrow is, the red lines represent what `clientX` and `clientY` are.
 
-![client red lines](./client.png)
+<img src={imgClientPng} alt={`client red lines`} width={371} height={338} />
 
 If the red circle represents the center of the scene, the smaller red lines are the offsets we want to calculate.
 
-![offset red lines](./offset.png)
+<img src={imgOffsetPng} alt={`offset red lines`} width={385} height={340} />
 
 We can then use these offset values to create our animations.
 
 Since we are centering everything, the X position of the center is the **half of the window width** and the Y position is **half of the window height**.
 
-![center lines](./drawing2.png)
+<img src={imgDrawing2Png} alt={`center lines`} width={394} height={343} />
 
 Therefore, to get our offsets we just have to subtract half of the window width from `clientX` and subtract half of the window height from `clientY`
 
-## Calculating our offset values
+### Calculating our offset values
 
 After calculating our values let's print them out to see if we are getting what we want!
 
@@ -85,16 +97,15 @@ If we move closer to the center of our scene, and in our console we get values c
 
 With these offset values, we are ready to create animations!
 
-## Creating the parallax effect
+### Creating the parallax effect
 
 Do you remember how to control the animations of other parts in the app with an event handler function? Well, it’s the same as the `handleDrag` function we used in our slider.
 
-### 1. We’ll use the `useAnimation` function to create `animationControls`.
+#### 1. We’ll use the `useAnimation` function to create `animationControls`.
 
 > We have to import `useAnimation` and then define `animationControls`.
 
 ```jsx
-import { Frame, useAnimation } from "framer"
 ...
 function App() {
   let animationControls = useAnimation()
@@ -104,7 +115,7 @@ function App() {
 
 > However, since we have more than one part to animate. We have to call `useAnimation` multiple times. Each call of the function will create an "animationControl" that’s independent from the others. Therefore, lets give better names to our animation controllers.
 
-### 2. Calling `useAnimation` multiple times
+#### 2. Calling `useAnimation` multiple times
 
 ```jsx
 function App() {
@@ -116,7 +127,7 @@ function App() {
 }
 ```
 
-### 3. Using our animation controllers in each animated part
+#### 3. Using our animation controllers in each animated part
 
 ```jsx
 <Frame ...>
@@ -143,7 +154,7 @@ function App() {
 </Frame>
 ```
 
-### 4. Starting the animation!
+#### 4. Starting the animation!
 
 ```jsx{12}
 <Frame
@@ -167,11 +178,11 @@ function App() {
 
 > You should get something like this.
 
-![bird demo](./bird1.gif)
+<img src={imgBird1Gif} alt={`bird demo`} width={200} height={208} />
 
 > Furthermore, since framer animates x and y with a spring by default, we get this nice bouncy effect. However, it's a little fast, so let's divide the values by 6.
 
-### 5. Adjusting Parallax Speed
+#### 5. Adjusting Parallax Speed
 
 ```jsx{12}
 <Frame
@@ -193,7 +204,7 @@ function App() {
 </Frame>
 ```
 
-### 6. Animating the rest of the images
+#### 6. Animating the rest of the images
 
 > Because we want the other images to move at different speeds, we can divide the values differently.
 
@@ -220,10 +231,10 @@ function App() {
 </Frame>
 ```
 
-## Final Result
+### Final Result
 
-![Parallax Effect](./final4.3.gif)
+<img src={imgFinal43Gif} alt={`Parallax Effect`} width={180} height={188} />
 
-# Conclusion
+## Conclusion
 
 We've learned how to create a parallax effect with multiple images! In the next post, we'll learn about object destructuring!

@@ -1,14 +1,23 @@
----
-date: '2019-08-14'
-title: '6.3 Radio Group Creation'
-video: 'https://school.learnreact.design/courses/629779/lectures/11238541'
----
+import imgFinalresultGif from './finalresult.gif'
+import imgWhyPng from './why.png'
+import imgOccurences2Png from './occurences2.png'
+import imgSelectionPng from './selection.png'
+import imgSingleselectPng from './singleselect.png'
+import imgGoodselectionPng from './goodselection.png'
+import imgFinalselectionPng from './finalselection.png'
+import imgResultPng from './result.png'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-08-14',
+  title: '6.3 Radio Group Creation',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11238541',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -17,11 +26,16 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-# Creating the Radio Group
+## Creating the Radio Group
 
 It’s time to build this radio group, now that we have the tools!
 
-![radio final result](./finalresult.gif)
+<img
+  src={imgFinalresultGif}
+  alt={`radio final result`}
+  width={164}
+  height={274}
+/>
 
 As I previously mentioned, this is not an HTML select element. We’ll build this radio group from scratch with only Frames.
 
@@ -60,13 +74,10 @@ function App() {
 We also have to import Frame since `<Frame>` is not defined.
 
 ```jsx{3}
-import * as React from "react"
-import { render } from "react-dom"
-import {Frame} from "framer"
 import "./styles.css"
 ```
 
-## Beginning with the end in mind
+### Beginning with the end in mind
 
 Take note of the order of the things we’ve been doing here. Instead of, first, importing Frame, writing the `RadioGroup` function, and then finally using the `<RadioGroup>` tag, we did it in the reverse order.
 
@@ -76,7 +87,7 @@ For the `RadioGroup` function, we know we need to use a `<Frame>`, so we wrote t
 
 This is a good method to help you think about and organize your code. It's often very beneficial to start "using" your code before "implementing" it. For example, you don't necessarily want to import and implement anything that does not pertain to your work at hand. As a result, this "reverse" method makes you only use what you need.
 
-### _The Seven Habits of Highly Effective People_
+#### _The Seven Habits of Highly Effective People_
 
 If you haven’t read _The Seven Habits of Highly Effective People_ by Stephen Covey, I would highly recommend it.
 
@@ -86,7 +97,7 @@ Not only do I think this principle will help you in many aspects of your life, b
 
 Although I digressed a bit, I hope you find it useful!
 
-## Radio Group
+### Radio Group
 
 Back to our radio group, let's populate it with a few selection options.
 
@@ -114,36 +125,46 @@ function RadioGroup() {
 
 Why does our preview look like this?
 
-![weird frame positioning](./why.png)
+<img src={imgWhyPng} alt={`weird frame positioning`} width={250} height={250} />
 
 Because Frames are absolutely positioned!
 Therefore, we need to add `position="relative"` to all the three frames.
 
-## Text Editor tip: Multi-line editing
+### Text Editor tip: Multi-line editing
 
 Before we fix this, let me show you an editor trick. This works in both CodeSandbox and the built-in editor in Framer X.
 
 If we put the cursor in the middle of some text and press CTR+D or CMD+D you will see every other occurrence highlighted.
 
-![multiple occurrences](./occurences2.png)
+<img
+  src={imgOccurences2Png}
+  alt={`multiple occurrences`}
+  width={244}
+  height={233}
+/>
 
 If you continue to press the same combination, we’ll get multiple cursors which allow us to type in different places.
 
-![multiple selections](./selection.png)
+<img
+  src={imgSelectionPng}
+  alt={`multiple selections`}
+  width={246}
+  height={177}
+/>
 
 However, in this case, we only want to make changes to the start tags.
 
-## 1. Select the unique text alone.
+### 1. Select the unique text alone.
 
-![single select](./singleselect.png)
+<img src={imgSingleselectPng} alt={`single select`} width={246} height={173} />
 
-## 2. Press CTR+D or CMD+D
+### 2. Press CTR+D or CMD+D
 
-![selection](./goodselection.png)
+<img src={imgGoodselectionPng} alt={`selection`} width={246} height={173} />
 
-## 3. Press the right arrow → to align your carets and to deselect the Frames.
+### 3. Press the right arrow → to align your carets and to deselect the Frames.
 
-![selection](./finalselection.png)
+<img src={imgFinalselectionPng} alt={`selection`} width={246} height={173} />
 
 We can now add `position="relative"`.
 
@@ -159,8 +180,13 @@ function RadioGroup(){
 }
 ```
 
-![relative position result](./result.png)
+<img
+  src={imgResultPng}
+  alt={`relative position result`}
+  width={125}
+  height={375}
+/>
 
-# Conclusion
+## Conclusion
 
 Now that we have the foundation of our Radio Group, in the next post, we'll make these look like real radio buttons.

@@ -1,14 +1,18 @@
----
-date: '2019-07-31'
-title: '3.6 Making Skinny Happy'
-video: 'https://school.learnreact.design/courses/629779/lectures/11238560'
----
+import imgConsolescale2Png from './consolescale2.png'
+import imgAnimatePng from './animate.png'
+import imgHappyskinnyGif from './happyskinny.gif'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-07-31',
+  title: '3.6 Making Skinny Happy',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11238560',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -18,7 +22,7 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-# Animating Skinny
+## Animating Skinny
 
 Now that we have the position of the slider knob available as `info.point.x`, we can finally try to make Skinny happy. That is, we want to change the `scale` of Skinny’s cheek according to `info.point.x`.
 
@@ -28,14 +32,11 @@ We can’t directly use the value of `x` as the scale of Skinny’s cheek. Other
 
 When x is 0, we set the scale to 0.4, when x is 220, we set the scale to 1.5, when x is somewhere in-between, the scale should be between 0.4 and 1.5.
 
-## `transform`
+### `transform`
 
 We could work out the math, but the Framer library provides a good utility for this. Back to our import statements, we want to import `transform`.
 
 ```jsx{3}
-import * as React from "react"
-import { render } from "react-dom"
-import { Frame, transform } from "framer"
 import "./styles.css"
 ```
 
@@ -58,11 +59,16 @@ function App(){
 
 Printing both `info.point.x` and `newScale`, separated with a comma, gives us this.
 
-![console x position and scale](./consolescale2.png)
+<img
+  src={imgConsolescale2Png}
+  alt={`console x position and scale`}
+  width={254}
+  height={131}
+/>
 
 Now the question is how to get the scale value out from the handleDrag function and set it to Skinny's cheek Frame.
 
-## `animationControls`
+### `animationControls`
 
 We could directly set the `scale` attribute in that frame to some variable.
 
@@ -110,7 +116,12 @@ But here we’ll use a new thing called `animationControls`.
 
 Looking at the Framer animate [documentation](https://www.framer.com/api/frame/#animationprops.animate)
 
-![animate documentation](./animate.png)
+<img
+  src={imgAnimatePng}
+  alt={`animate documentation`}
+  width={515}
+  height={67}
+/>
 
 the `animate` attribute can have three different controls, **AnimationControls**, **TargetAndTransition** which we used for our toggle, and **VariantLabels** which we also used.
 
@@ -119,9 +130,6 @@ We get an error since `animationControls` is not defined yet.
 We’ll define it this way.
 
 ```jsx{3,7}
-import * as React from "react"
-import { render } from "react-dom"
-import { Frame, transform, useAnimation } from "framer"
 import "./styles.css"
 
 function App(){
@@ -137,7 +145,7 @@ function App(){
 }
 ```
 
-## `useAnimation`
+### `useAnimation`
 
 We import `useAnimation`. Then since `useAnimation` is a function because of the parentheses, we get its return value, and assign it to `animationControls`. Now that there are no errors, we can begin our animation with `animationControls.start({scale: newScale})`.
 
@@ -158,10 +166,10 @@ What’s `animationControls`? And why can we use dot notation?
 
 `animationControls` is an object with a property called `start` whose value is a function which is why we can call it like that. We are also passing an object into the parameter of the `start` function.
 
-# Conclusion
+## Conclusion
 
 If you test your slider now, everything should be working smoothly, and you should have a happy Skinny!
 
-![happy skinny](./happyskinny.gif)
+<img src={imgHappyskinnyGif} alt={`happy skinny`} width={172} height={216} />
 
 In the next post, we'll learn about a very important concept in JavaScript and almost every other programming language, **variable scope**.

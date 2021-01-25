@@ -1,14 +1,21 @@
----
-date: '2019-07-23'
-title: '1.3 Tour of CodeSandbox.io'
-video: 'https://school.learnreact.design/courses/601139/lectures/10940023'
----
+import imgCodesandboxreactPng from './codesandboxreact.png'
+import imgIcon2Png from './icon2.png'
+import imgIconPng from './icon.png'
+import imgForkPng from './fork.png'
+import imgGithubPng from './github.png'
+import imgSigninPng from './signin.png'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-07-23',
+  title: '1.3 Tour of CodeSandbox.io',
+  video: 'https://school.learnreact.design/courses/601139/lectures/10940023',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -17,13 +24,18 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-# CodeSandbox.io
+## CodeSandbox.io
 
 CodeSandbox is a popular online code editor, so we don't have to download anything! In the past, we’d have to do a lot of complicated setup on our computers to get things going, but with CodeSandbox, all we need is a browser!
 
-![codesandbox image](./codesandboxreact.png)
+<img
+  src={imgCodesandboxreactPng}
+  alt={`codesandbox image`}
+  width={1920}
+  height={902}
+/>
 
-## Set Up
+### Set Up
 
 1.  Click create Sandbox on the top right
 
@@ -37,19 +49,19 @@ CodeSandbox is a popular online code editor, so we don't have to download anythi
 
 3.  Done!
 
-## Customization
+### Customization
 
-### Folding the Pane
+#### Folding the Pane
 
 We can click this icon to fold the left pane.
 
-![codesandbox close icon](./icon2.png)
+<img src={imgIcon2Png} alt={`codesandbox close icon`} width={69} height={69} />
 
 Or this icon eventually to fold the pane.
 
-![codesandbox close icon](./icon.png)
+<img src={imgIconPng} alt={`codesandbox close icon`} width={70} height={71} />
 
-## Code Preferences
+### Code Preferences
 
 Now I have the source code on the left, and a preview of the code on the right.
 
@@ -76,9 +88,9 @@ We now have the source code on the left and the resulting web page on the right.
 
 When I make a change, the preview shows it immediately.
 
-## Forking
+### Forking
 
-![fork image](./fork.png)
+<img src={imgForkPng} alt={`fork image`} width={115} height={59} />
 
 Forking is the action of copying a project which allows you to freely experiment and change it without impacting the original project — in a sense, it is like inspecting an element and changing things around!
 
@@ -89,24 +101,24 @@ There are two ways to "fork" a project that isn't yours.
 
 There will be a notification on the bottom right stating "Forked Sandbox!", and you are now working on a copy of your own.
 
-# Github
+## Github
 
 Github is an extension of an open-source version control system called **Git**. Without getting into too many details, Git is an incredibly powerful system that helps solve the problem of having multiple versions of a working project.
 
-![github logo](./github.png)
+<img src={imgGithubPng} alt={`github logo`} width={718} height={266} />
 
 Github is the place where developers store their projects and allow you to use Git in a user-friendly way.
 
-## CodeSandbox.io and Github
+### CodeSandbox.io and Github
 
 To save your projects and forks, you will want to create a GitHub account and sign in. There is a sign-in button located on the very top right.
 
-![github sign in](./signin.png)
+<img src={imgSigninPng} alt={`github sign in`} width={216} height={58} />
 
 This way you’ll be able to save your sandboxes.
 
 You can click a button on the left panel to get a list of sandboxes saved under your account.
 
-# Conclusion
+## Conclusion
 
 Now that you can maneuver around codesandbox, we'll take a look at our code!

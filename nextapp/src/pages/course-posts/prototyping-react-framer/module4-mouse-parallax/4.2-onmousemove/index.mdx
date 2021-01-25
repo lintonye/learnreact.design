@@ -1,14 +1,21 @@
----
-date: '2019-08-02'
-title: '4.2 onMouseMove'
-video: 'https://school.learnreact.design/courses/629779/lectures/11238582'
----
+import imgFramerapiPng from './framerapi.png'
+import imgSyntheticPng from './synthetic.png'
+import imgMouseeventsPng from './mouseevents.png'
+import imgUndefinedPng from './undefined.png'
+import imgPropertiesPng from './properties.png'
+import imgConsolenumbersPng from './consolenumbers.png'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-08-02',
+  title: '4.2 onMouseMove',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11238582',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -20,7 +27,7 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-# Mouse Events
+## Mouse Events
 
 Let’s add some action to our summer picture.
 
@@ -28,21 +35,26 @@ Similar to our slider example, we want the different elements to move according 
 
 We need the `<Frame>` to inform us when the user moves the mouse. At that point, we’ll run some code to create the desired animations.
 
-## Framer's API
+### Framer's API
 
 Let's check out Framer's API [documentation](https://www.framer.com/api/frame/) and search for `mouse`. Eventually, we will find **`onMouseOut`**. The other mouse events are in conjunction with `onTap` or `onHoverStart` which aren't what we are looking for.
 
-![framer api](./framerapi.png)
+<img src={imgFramerapiPng} alt={`framer api`} width={1154} height={245} />
 
 Even if we cannot find the attribute about mouse movement on this page, Frame supports it in another way. Similar to this `onMouseOut` attribute which standard HTML tags support, **we’ll be able to find relevant information in the React documentation itself**.
 
 Let's click on ["Supported React.Element DOM props"](https://reactjs.org/docs/dom-elements.html#all-supported-html-attributes) then ["SyntheticEvent"](https://reactjs.org/docs/events.html)
 
-![menu](./synthetic.png)
+<img src={imgSyntheticPng} alt={`menu`} width={222} height={90} />
 
 and search for "mouse" again. You should find ["Mouse Events"](https://reactjs.org/docs/events.html#mouse-events) then click on that.
 
-![mouse events menu](./mouseevents.png)
+<img
+  src={imgMouseeventsPng}
+  alt={`mouse events menu`}
+  width={801}
+  height={234}
+/>
 
 These are the mouse attributes that we can use on a `<Frame>`, `<div>`, and other HTML tags. Specifically, these attributes are called **events**, and they follow a certain pattern.
 
@@ -50,7 +62,7 @@ The name always begins with **"on"**. For example, `onDragLeave`, `onDrop`, `onM
 
 If we use one of these attributes on a tag, we should set its value to be a **function**. When that event happens, our function will be called. For example, when the user moves the mouse, we can create actions such as playing an animation.
 
-## Implementing `onMouseMove`
+### Implementing `onMouseMove`
 
 Back in our code, we can put `onMouseMove` into the root/parent `<Frame>` and input a function.
 
@@ -65,7 +77,7 @@ Back in our code, we can put `onMouseMove` into the root/parent `<Frame>` and in
 </Frame>
 ```
 
-## Anonymous Functions
+### Anonymous Functions
 
 If this function is not intended to be reused somewhere else, we can remove its name.
 
@@ -83,7 +95,7 @@ If this function is not intended to be reused somewhere else, we can remove its 
 
 These kinds of functions are called **anonymous functions**.
 
-## `event` and `info`
+### `event` and `info`
 
 If you remember working on the slider, we had an `onDrag` function and we passed `event` and `info` into the function. Let's print out `info` to see if we getting any information.
 
@@ -104,17 +116,22 @@ If you remember working on the slider, we had an `onDrag` function and we passed
 
 Now when we move our cursor around, we only get a lot of `undefined` print statements.
 
-![undefined console statements](./undefined.png)
+<img
+  src={imgUndefinedPng}
+  alt={`undefined console statements`}
+  width={281}
+  height={178}
+/>
 
 This means `info` isn't useful in our case of `onMouseMove`, so we can remove the `info` parameter.
 
-## `event` Properties
+### `event` Properties
 
 Let's go back to React's mouse event [documentation](https://reactjs.org/docs/events.html#mouse-events).
 
 Below, there are a lot of properties we can implement.
 
-![properties](./properties.png)
+<img src={imgPropertiesPng} alt={`properties`} width={302} height={366} />
 
 In our case, there are only two properties we want: `clientX` and `clientY`. These properties are available in the `event` object. We can access `clientX` and `clientY` like this.
 
@@ -135,9 +152,14 @@ In our case, there are only two properties we want: `clientX` and `clientY`. The
 
 Now we get number outputs in our console.
 
-![console number output](./consolenumbers.png)
+<img
+  src={imgConsolenumbersPng}
+  alt={`console number output`}
+  width={272}
+  height={215}
+/>
 
-## Coordinate System
+### Coordinate System
 
 If you observe how the numbers change with your cursor movements, you will notice that they don't follow the traditional coordinate system with **(0,0)** at the bottom left.
 
@@ -153,6 +175,6 @@ This coordinate system is hard to intuitively understand at first, but, with eno
 
 It might help to think of the position values as the absolute-value offset from the top left corner.
 
-# Conclusion
+## Conclusion
 
 Now that we have our mouse's x and y position information, we can begin to create animations in our next post!

@@ -1,14 +1,22 @@
----
-date: '2019-08-21'
-title: '7.4 Floating Action Button Animation'
-video: 'https://school.learnreact.design/courses/629779/lectures/11509516'
----
+import imgFab2Gif from './fab2.gif'
+import imgCirclePng from './circle.png'
+import imgCenteredPng from './centered.png'
+import imgIconsGif from './icons.gif'
+import imgSmallericonsGif from './smallericons.gif'
+import imgRotateGif from './rotate.gif'
+import imgFinalGif from './final.gif'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-08-21',
+  title: '7.4 Floating Action Button Animation',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11509516',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -17,13 +25,13 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-# Final Result
+## Final Result
 
-![FAB animation result](./fab2.gif)
+<img src={imgFab2Gif} alt={`FAB animation result`} width={127} height={281} />
 
 See for yourself! [FAB](https://f89r9.csb.app/).
 
-# FAB Animation
+## FAB Animation
 
 In this and the next post, we’ll build this Floating action button with icons from [Material Design](https://material.io/resources/icons/?icon=share&style=baseline).
 
@@ -79,7 +87,7 @@ function App() {
 
 If you remember, we can't just use the `center` attribute, we also have to support it in our `Fab` component.
 
-## `Fab` Component
+### `Fab` Component
 
 Let's create `Fab`!
 
@@ -109,7 +117,7 @@ function Fab({buttons, ...props}) {
 }
 ```
 
-![circle](./circle.png)
+<img src={imgCirclePng} alt={`circle`} width={313} height={313} />
 
 We can get rid of the blue square and have it fit the size of the circle as follows:
 
@@ -123,18 +131,15 @@ function Fab({buttons, ...props}) {
 }
 ```
 
-![centered circle](./centered.png)
+<img src={imgCenteredPng} alt={`centered circle`} width={180} height={180} />
 
-## `useCycle`
+### `useCycle`
 
 Our button should have two states: **folded** and **expanded**.
 
 We’ll use `useCycle` to toggle between the values.
 
 ```jsx{3,7}
-import * as React from "react"
-import { render } from "react-dom"
-import { Frame, transform, useAnimation, useCycle } from "framer"
 import "./styles.css"
 
 function Fab({buttons, ...props}) {
@@ -158,7 +163,7 @@ function Fab({buttons, ...props}) {
 }
 ```
 
-## `onTap`
+### `onTap`
 
 For the actual button, we'll add the `onTap` function and call `cycleMode`.
 
@@ -182,7 +187,7 @@ function Fab({buttons, ...props}) {
 }
 ```
 
-## `variants`
+### `variants`
 
 We'll now add `variants` for our `folded` and `expanded` modes to display different image icons.
 
@@ -204,7 +209,7 @@ We'll now add `variants` for our `folded` and `expanded` modes to display differ
 
 Because `<Frame>` has the `image` prop, we can use it inside variants to change images according to the state.
 
-## SVG Icons
+### SVG Icons
 
 We don't have to use a url path because we have the images downloaded inside our project's public directory.
 
@@ -226,7 +231,7 @@ If you don't have those images, here are the links: [share.svg](https://material
 />
 ```
 
-![icons](./icons.gif)
+<img src={imgIconsGif} alt={`icons`} width={170} height={170} />
 
 The icons are a bit too big. To not affect the size of the button, we can add another `<Frame>` inside and move the `variants` attribute inside of the new `<Frame>`.
 
@@ -257,9 +262,9 @@ The icons are a bit too big. To not affect the size of the button, we can add an
 
 Note that the button was split into 2 Frames to make the new `<Frame>` a child of the larger one.
 
-![smaller icons](./smallericons.gif)
+<img src={imgSmallericonsGif} alt={`smaller icons`} width={174} height={174} />
 
-## Icon animation
+### Icon animation
 
 Let's add some motion to it.
 
@@ -275,7 +280,7 @@ Let's add some motion to it.
 />
 ```
 
-![rotating button](./rotate.gif)
+<img src={imgRotateGif} alt={`rotating button`} width={174} height={174} />
 
 However, if we look closely, it seems like the icons are slightly off-center.
 
@@ -295,9 +300,9 @@ We can fix this by adding `x` and `y` attributes to the `variants` properties.
 
 Although this means the icons are also being animated horizontally and vertically, those animations are being masked by the rotation.
 
-![rotating button](./final.gif)
+<img src={imgFinalGif} alt={`rotating button`} width={172} height={172} />
 
-# Conclusion
+## Conclusion
 
 Building this button from scratch was a good review of some of the earlier topics we covered. Do you remember why we use `variants`? What is `useCycle`?
 

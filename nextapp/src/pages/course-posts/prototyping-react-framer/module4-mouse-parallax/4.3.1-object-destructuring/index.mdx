@@ -1,14 +1,14 @@
----
-date: '2019-08-12'
-title: '4.3.1 Object Destructuring'
-video: 'https://school.learnreact.design/courses/629779/lectures/11317183'
----
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-08-12',
+  title: '4.3.1 Object Destructuring',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11317183',
+}
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+export default CoursePostLayout
 
-# Overview
+## Overview
 
 What you'll learn:
 
@@ -18,7 +18,7 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-# Object Destructuring
+## Object Destructuring
 
 Do you remember learning about **array destructuring**?
 
@@ -54,7 +54,7 @@ In this `onMouseMove` function, we know the `event` parameter is an **object**, 
 
 Instead of using dot notation over and over again, we can use object destructuring to define variables.
 
-## Array vs object destructuring
+### Array vs object destructuring
 
 Can you guess how to do it? Is it like this?
 
@@ -79,7 +79,7 @@ onMouseMove={function(event) {
 }}
 ```
 
-## Parameter object destructuring
+### Parameter object destructuring
 
 Even better, we don’t have to define `clientX` and `clientY` here. We can put the destructuring right inside the parameter declaration!
 
@@ -102,7 +102,7 @@ function Slider({onSlide}){
 }
 ```
 
-## Embedded object destructuring
+### Embedded object destructuring
 
 Furthermore, we can apply this idea in an embedded way.
 
@@ -152,7 +152,7 @@ If something is an object, we can use how we define objects to "destruct" or tak
 function handleDrag(event, { point: { posX: {xProp} } })
 ```
 
-# Conclusion
+## Conclusion
 
 That's object destructuring! It's a convenient way to extract properties into variables!
 

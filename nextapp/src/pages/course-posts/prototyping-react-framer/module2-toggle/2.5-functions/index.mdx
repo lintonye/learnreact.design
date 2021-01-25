@@ -1,14 +1,16 @@
----
-date: '2019-07-25'
-title: '2.5 Functions'
-video: 'https://school.learnreact.design/courses/601139/lectures/10785659'
----
+import imgFunctionmachinePng from './functionmachine.png'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-07-25',
+  title: '2.5 Functions',
+  video: 'https://school.learnreact.design/courses/601139/lectures/10785659',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -19,7 +21,7 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-# Functions
+## Functions
 
 So far, we’ve been focusing on the JSX code, that is, this piece of code that looks like HTML.
 
@@ -41,9 +43,14 @@ The function is another fundamental concept in JavaScript. It describes what our
 
 A function is like a machine. It’s a machine that produces some output when we feed it some input.
 
-![image of a machine](./functionmachine.png)
+<img
+  src={imgFunctionmachinePng}
+  alt={`image of a machine`}
+  width={1190}
+  height={858}
+/>
 
-## Creating Functions
+### Creating Functions
 
 To create a function, we start by writing the word function
 
@@ -63,7 +70,7 @@ Inside this pair of parentheses, we put the input of the function.
 function microwave(food)
 ```
 
-## Function Inputs
+### Function Inputs
 
 Note this `food` here is a general representation of the input. The input depends on what we feed it when we operate the machine. The technical term for the input is **"parameter"**.
 
@@ -75,7 +82,7 @@ function microwave(food) {}
 
 What’s "inside" and between the curly brackets is called function body. It is the inner working of the function.
 
-## Function Outputs
+### Function Outputs
 
 Now if this `food` is input, where is the output?
 We can define the output by adding a `return` at the last line of the function body.
@@ -117,7 +124,7 @@ In total, our functions have inputs and "recipes" on how to create the output. T
 The technical term for what we’ve been doing is called
 **"defining a function"**
 
-## Different Types of Functions
+### Different Types of Functions
 
 Now let me ask you, what’s the input and output of this App function?
 
@@ -135,15 +142,15 @@ function App() {
 
 Unlike the functions we created, there is nothing inside this pair of parentheses. meaning there is **no input** for this function. The function's output is this group of JSX tags after the `return` — inside the `return`'s pair of curly brackets.
 
-## Capital vs lowercase functions
+### Capital vs lowercase functions
 
 Have you also noticed that the name of this function `App` starts with a capital letter? Why did I then use lowercase letters for the other functions? More so, in JavaScript, the convention is that function names start lowercase.
 
-## The `App` Function
+### The `App` Function
 
 In contrast to many other functions, the `App` function is a special React component. Therefore, if you see a function whose name starts with an uppercase letter and returns a JSX tag you should know it’s a React component.
 
-# Conclusion
+## Conclusion
 
 You’ll get to know more about React components later on, for now, it’s useful to realize that `App` is simply a special function with unique requirements.
 

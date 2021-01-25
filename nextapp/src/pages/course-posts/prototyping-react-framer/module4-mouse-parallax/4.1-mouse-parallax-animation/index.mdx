@@ -1,14 +1,19 @@
----
-date: '2019-08-01'
-title: '4.1 Mouse Parallax Animation'
-video: 'https://school.learnreact.design/courses/629779/lectures/11238581'
----
+import imgMousefinalresult2Gif from './mousefinalresult2.gif'
+import imgSecondexampleGif from './secondexample.gif'
+import imgSquare2Png from './square2.png'
+import imgParallaxpreview2Png from './parallaxpreview2.png'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-08-01',
+  title: '4.1 Mouse Parallax Animation',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11238581',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -17,20 +22,30 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-# Final Result
+## Final Result
 
-![final slider result](./mousefinalresult2.gif)
+<img
+  src={imgMousefinalresult2Gif}
+  alt={`final slider result`}
+  width={206}
+  height={190}
+/>
 
 See for yourself! [Final mouse parallax](https://pt866.codesandbox.io/).
 
-# Intro to Parallax
+## Intro to Parallax
 
 Welcome to the mouse parallax module! In this module, we’ll build this mouse parallax effect above.
 You can find examples of this effect on many websites and soon you can make them yourself!
 
 We are going to continue diving deeper into React, and learn a bit more JavaScript. The principles you'll learn will apply to many different prototypes such as this 3D card.
 
-![second parallax example](./secondexample.gif)
+<img
+  src={imgSecondexampleGif}
+  alt={`second parallax example`}
+  width={254}
+  height={156}
+/>
 
 See for yourself! [3D Card](https://vrnf3.csb.app/).
 
@@ -43,9 +58,6 @@ Here is the link to the [starter code](https://github.com/lintonye/prototyping-w
 Here is the raw code:
 
 ```jsx
-import * as React from 'react'
-import { render } from 'react-dom'
-import { Frame } from 'framer'
 import './styles.css'
 
 function App() {
@@ -82,11 +94,11 @@ const rootElement = document.getElementById('root')
 render(<App />, rootElement)
 ```
 
-# Getting Started
+## Getting Started
 
 We’ve got a bunch of squares here. Let’s first populate them with this [background](https://image.flaticon.com/icons/svg/119/119596.svg), [sun](https://image.flaticon.com/icons/svg/789/789395.svg), [cloud](https://image.flaticon.com/icons/svg/414/414927.svg), and [bird](https://image.flaticon.com/icons/svg/789/789392.svg) I found on flaticon.
 
-![squares](./square2.png)
+<img src={imgSquare2Png} alt={`squares`} width={300} height={300} />
 
 We are going to use a new `<Frame>` attribute called `image`. To use `image`, we set it equal to a quoted URL of the image.
 
@@ -120,7 +132,12 @@ We are going to use a new `<Frame>` attribute called `image`. To use `image`, we
 
 Our preview should like this.
 
-![parallax preview with images](./parallaxpreview2.png)
+<img
+  src={imgParallaxpreview2Png}
+  alt={`parallax preview with images`}
+  width={300}
+  height={298}
+/>
 
 Now, to get rid of the ugly blue background that framer adds by default. We can set its background color to transparent using `backgroundColor="transparent"` or `background={null}`. Just be consistent with your choices. You can also use `background="transparent"` on our parent `<Frame>` but using this on our image frames will remove them.
 
@@ -155,7 +172,7 @@ function App() {
 
 We can also use flexbox to center the Frame but don’t forget to make the position of the container Frame **relative** if you do so.
 
-# Conclusion
+## Conclusion
 
 We learned how to use the `image` attribute and the variations in making a `<Frame>`'s background transparent.
 

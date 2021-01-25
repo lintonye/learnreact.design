@@ -1,14 +1,20 @@
----
-date: '2019-08-10'
-title: '5.6 Finishing One Card Swipe'
-video: 'https://school.learnreact.design/courses/629779/lectures/11238552'
----
+import imgBouncebackGif from './bounceback.gif'
+import imgRightGif from './right.gif'
+import imgLeftproblemGif from './leftproblem.gif'
+import imgLeftGif from './left.gif'
+import imgFinalresultGif from './finalresult.gif'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-08-10',
+  title: '5.6 Finishing One Card Swipe',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11238552',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -19,13 +25,13 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-# Finishing our Card Swipe
+## Finishing our Card Swipe
 
 Let’s complete our swipe prototype.
 
 Currently, our card always bounces back to its original position no matter how far we swipe it.
 
-![bounce back](./bounceback.gif)
+<img src={imgBouncebackGif} alt={`bounce back`} width={344} height={246} />
 
 We want to change it so that if we swipe the card far enough, it’ll keep moving until it disappears. Otherwise, if we only move it a little bit, it’ll bounce back to the original position.
 
@@ -63,7 +69,7 @@ However, if we simply remove the `event` parameter, our "info" variable will rea
 
 Try switching `info` and `event` while using them., and you'll see that the order of parameters is extremely important.
 
-## Underscore parameter
+### Underscore parameter
 
 To solve this, we can change `event` into an **underscore** **`_`** .
 
@@ -95,11 +101,11 @@ Back to `info`, since it's an object, we can get the `x` offset using `info.poin
 
 However, there is still a problem with this. When we drag to the left, the card still bounces back. This occurs because, on the left, the `x` offset will turn negative.
 
-![right disappear](./right.gif)
+<img src={imgRightGif} alt={`right disappear`} width={342} height={246} />
 
 How do we account for both directions?
 
-## `Math.abs`
+### `Math.abs`
 
 Well, there are many ways. For example, we could add multiple if and else statements, but the simplest method here is to use the **absolute value** function in the **Math library** that comes with JavaScript — `Math.abs`.
 
@@ -118,7 +124,12 @@ Well, there are many ways. For example, we could add multiple if and else statem
 
 The original problem isn't completely fixed yet, but now the card follows the `else` code path. Instead of disappearing on the left side, the card quickly moves to the right side.
 
-![left problem still](./leftproblem.gif)
+<img
+  src={imgLeftproblemGif}
+  alt={`left problem still`}
+  width={344}
+  height={248}
+/>
 
 This occurs because when we move the card to the left enough, the absolute value of the negative value is greater than 150. Therefore, the code in the `else` statement is run.
 
@@ -141,9 +152,9 @@ To fix this, we can add another conditional that tests if the `x` offset is nega
 />
 ```
 
-![left side working](./left.gif)
+<img src={imgLeftGif} alt={`left side working`} width={344} height={248} />
 
-## Ternary Operator
+### Ternary Operator
 
 We can make our code more elegant by using a **ternary operator**. Instead of this nested if-else statement, we can write something like this:
 
@@ -160,7 +171,7 @@ We can make our code more elegant by using a **ternary operator**. Instead of th
 />
 ```
 
-### Creating a ternary operator
+#### Creating a ternary operator
 
 There are **5** main components.
 
@@ -205,10 +216,10 @@ There are **5** main components.
 
 In total, a **ternary operator** is a condensed version of an if-else statement.
 
-# Conclusion
+## Conclusion
 
 We now have finished creating the "Tinder" swipe with one card. Along the way, you learned about rotation, opacity, `useMotionValue`, and `useAnimation`, arrow functions, `_`, `Math.abs`, the ternary operator, and more.
 
 In the following posts, we add more cards to make a final result like this!
 
-![final result](./finalresult.gif)
+<img src={imgFinalresultGif} alt={`final result`} width={146} height={194} />

@@ -1,14 +1,26 @@
----
-date: '2019-08-20'
-title: '7.3 Failed Unlock Animation'
-video: 'https://school.learnreact.design/courses/629779/lectures/11509504'
----
+import imgUnlockfailedGif from './unlockfailed.gif'
+import img200Png from './200.png'
+import img300Png from './300.png'
+import img400Png from './400.png'
+import imgLeftGif from './left.gif'
+import imgShakeGif from './shake.gif'
+import imgScaleGif from './scale.gif'
+import imgDelayGif from './delay.gif'
+import imgOriginGif from './origin.gif'
+import imgRightGif from './right.gif'
+import imgErrorPng from './error.png'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-08-20',
+  title: '7.3 Failed Unlock Animation',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11509504',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -18,13 +30,18 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-# Final Result
+## Final Result
 
-![final failed unlock result](./unlockfailed.gif)
+<img
+  src={imgUnlockfailedGif}
+  alt={`final failed unlock result`}
+  width={300}
+  height={165}
+/>
 
 See for yourself! [Failed Unlock](https://n52pw.csb.app/).
 
-# Failed Unlock Animation
+## Failed Unlock Animation
 
 This animation happens in three stages.
 
@@ -70,17 +87,17 @@ This combination of attributes is a nice trick to implement our reveal effect.
 
 If we comment out `<Padlock>` and change the Frame's width, we'll see more and more of the text.
 
-### `width={200}`
+#### `width={200}`
 
-![width 200](./200.png)
+<img src={img200Png} alt={`width 200`} width={306} height={55} />
 
-### `width={300}`
+#### `width={300}`
 
-![width 300](./300.png)
+<img src={img300Png} alt={`width 300`} width={306} height={55} />
 
-### `width={400}`
+#### `width={400}`
 
-![width 400](./400.png)
+<img src={img400Png} alt={`width 400`} width={306} height={55} />
 
 Therefore, if we animate the width, we’ll get a smooth reveal effect!
 
@@ -113,7 +130,7 @@ function App() {
 
 We simply need to start the animations at the proper times.
 
-## Shake
+### Shake
 
 Right after our app launches, we want to start the animation.
 
@@ -130,9 +147,9 @@ function App() {
 }
 ```
 
-![lock moving left](./left.gif)
+<img src={imgLeftGif} alt={`lock moving left`} width={271} height={151} />
 
-## Custom transition spring
+### Custom transition spring
 
 To add the shake, we don't have to animate the lock back and forth. Instead, we can customize the animation by defining a spring. By adding certain spring properties, the spring will provide the shake effect.
 
@@ -156,9 +173,9 @@ function App() {
 }
 ```
 
-![shake gif](./shake.gif)
+<img src={imgShakeGif} alt={`shake gif`} width={271} height={151} />
 
-## Scale
+### Scale
 
 After the lock shakes for a bit, we want to shrink it.
 
@@ -174,7 +191,7 @@ function App() {
 }
 ```
 
-![scale lock](./scale.gif)
+<img src={imgScaleGif} alt={`scale lock`} width={271} height={151} />
 
 This scale animation happens a little too early. We can fix this by adding the `delay` property.
 
@@ -190,7 +207,7 @@ function App() {
 }
 ```
 
-![delayed scale](./delay.gif)
+<img src={imgDelayGif} alt={`delayed scale`} width={271} height={150} />
 
 To make room for our text reveal, we'll set the origin of `<Padlock>` to the left, using `originX="left"`.
 
@@ -198,9 +215,9 @@ To make room for our text reveal, we'll set the origin of `<Padlock>` to the lef
 <Padlock animate={lockAnim} left={45} originX="left" />
 ```
 
-![origin at left side](./origin.gif)
+<img src={imgOriginGif} alt={`origin at left side`} width={271} height={150} />
 
-## Text reveal
+### Text reveal
 
 Now, after the lock finishes shrinking, we want to reveal the text.
 
@@ -217,9 +234,14 @@ function App() {
 }
 ```
 
-![text reveal to the right](./right.gif)
+<img
+  src={imgRightGif}
+  alt={`text reveal to the right`}
+  width={300}
+  height={147}
+/>
 
-## Text reveal
+### Text reveal
 
 To play the text animation after the scale and to move our lock and text to the left, we have to utilize `await` and `async`!
 
@@ -248,9 +270,9 @@ async function App() {
 
 However, we get an error!
 
-![error](./error.png)
+<img src={imgErrorPng} alt={`error`} width={738} height={171} />
 
-## `async` functions inside of components
+### `async` functions inside of components
 
 Unfortunately, we cannot make a React component become an `async` function.
 
@@ -300,7 +322,7 @@ return(
 
 Everything seems to be working like before!
 
-## Final touches
+### Final touches
 
 We can improve the animation by moving the lock and the text to the left a bit.
 
@@ -332,9 +354,9 @@ function App() {
 }
 ```
 
-![final result](./unlockfailed.gif)
+<img src={imgUnlockfailedGif} alt={`final result`} width={300} height={165} />
 
-# Conclusion
+## Conclusion
 
 As a recap, to play an animation when our app launches, we write our animation code before the `return` statement in the component function. If we want to use `await` to sequence animations, we need to create an embedded function because the component function is not allowed to be `async`.
 

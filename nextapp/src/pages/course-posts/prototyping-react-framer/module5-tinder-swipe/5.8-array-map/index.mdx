@@ -1,14 +1,19 @@
----
-date: '2019-08-13'
-title: '5.8 Array.map'
-video: 'https://school.learnreact.design/courses/629779/lectures/11238554'
----
+import imgBlankGif from './blank.gif'
+import imgFinalwarningGif from './finalwarning.gif'
+import imgMap2Png from './map2.png'
+import imgWarningPng from './warning.png'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-08-13',
+  title: '5.8 Array.map',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11238554',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -19,7 +24,7 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-# `cards` array and `map`
+## `cards` array and `map`
 
 We now have this `Card` component that we can use over and over again to create multiple cards.
 
@@ -132,7 +137,7 @@ function App(6) {
 
 If we look at our preview, we have 3 blank cards because we have not set their `image` and `color` attributes yet. Furthermore, you should notice that we have 3 objects in the `cards` array and 3 cards.
 
-![blank cards](./blank.gif)
+<img src={imgBlankGif} alt={`blank cards`} width={342} height={246} />
 
 But what does this `map` function actually do?
 
@@ -161,19 +166,19 @@ function App(6) {
 }
 ```
 
-![final result](./finalwarning.gif)
+<img src={imgFinalwarningGif} alt={`final result`} width={364} height={250} />
 
 The reason we can use dot notation is because the array elements are objects!
 
 Here is an illustration that may help!
 
-![map illustration](./map2.png)
+<img src={imgMap2Png} alt={`map illustration`} width={308} height={212} />
 
-## Array and `map` warning
+### Array and `map` warning
 
 However, there is one more thing. We have a warning in the console.
 
-![warning](./warning.png)
+<img src={imgWarningPng} alt={`warning`} width={871} height={214} />
 
 We are being warned of a common error when people use arrays and the `map` function in React.
 
@@ -196,7 +201,7 @@ function App(6) {
 
 Now there are no more errors!
 
-# Conclusion
+## Conclusion
 
 Congrats for making it to here! You should know now how to create the "Tinder" swipe animation in multiple different ways. Although this animation might have looked daunting at the beginning, you can relax knowing that it is quite simple!
 

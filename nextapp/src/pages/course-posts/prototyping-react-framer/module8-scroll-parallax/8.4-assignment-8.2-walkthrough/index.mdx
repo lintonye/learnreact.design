@@ -1,14 +1,21 @@
----
-date: '2019-08-27'
-title: '8.4 Assignment 8.2 Walk-Through'
-video: 'https://school.learnreact.design/courses/629779/lectures/11509508'
----
+import imgApplefinalresultGif from './applefinalresult.gif'
+import imgTitleGif from './title.gif'
+import imgPhoneGif from './phone.gif'
+import imgRighttextGif from './righttext.gif'
+import imgLefttextGif from './lefttext.gif'
+import imgScrollawayGif from './scrollaway.gif'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-08-27',
+  title: '8.4 Assignment 8.2 Walk-Through',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11509508',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -18,15 +25,20 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-# Apple Scroll Effects
+## Apple Scroll Effects
 
 Let me walk you through the solution of assignment 8.2!
 
-![apple scrolling effects](./applefinalresult.gif)
+<img
+  src={imgApplefinalresultGif}
+  alt={`apple scrolling effects`}
+  width={450}
+  height={254}
+/>
 
 Different parts of this page are animated along with the scrolling.
 
-## Title Fade
+### Title Fade
 
 How do we make this title partially fade out?
 
@@ -64,9 +76,9 @@ What's actually happening is a `<Frame>` with a gradient becoming more visible, 
 
 Therefore, we see the gradual background fade when we scroll.
 
-![title fade](./title.gif)
+<img src={imgTitleGif} alt={`title fade`} width={354} height={254} />
 
-## Phone Scale and Stick
+### Phone Scale and Stick
 
 Our phone image has two attributes tied to an offset depending `MotionValue`.
 
@@ -111,9 +123,9 @@ We can adjust the initial and final positions of the phone image with the `left`
 
 Note, we don't animate `left` or `top` for positioning, only `y`, due to performance reasons.
 
-![phone scale](./phone.gif)
+<img src={imgPhoneGif} alt={`phone scale`} width={354} height={253} />
 
-## Right, Feature list Reveal
+### Right, Feature list Reveal
 
 We put each line of the text into a container called `<PagePart>` which is really just a `<Frame>`.
 
@@ -150,7 +162,7 @@ const feature4Opacity = useTransform(pOffsetY, [start, start + gap], [0, 1])
 const feature5Opacity = useTransform(pOffsetY, [start, start + gap], [0, 1])
 ```
 
-## `start` and `gap`
+### `start` and `gap`
 
 Each of them has a different input range, but they all set the opacity from 0 to 1. These `start` and `gap` variables are used to save me from manually calculating the next set of input range values.
 
@@ -171,9 +183,9 @@ const feature5Opacity = useTransform(pOffsetY, [start, start + gap], [0, 1])
 
 After each step, we increase the value of `start` is increased by the value of `gap`, and we continue to use these values as the `opacity` attributes of the feature Frames.
 
-![left text reveal](./righttext.gif)
+<img src={imgRighttextGif} alt={`left text reveal`} width={352} height={254} />
 
-## Left Text Reveal
+### Left Text Reveal
 
 The last effect involves the text to the left of the phone.
 
@@ -209,13 +221,18 @@ Here, we start a different animation according to the value of `direction`. If i
 
 Otherwise, we are scrolling down, we’ll hide the text.
 
-![left text reveal](./lefttext.gif)
+<img src={imgLefttextGif} alt={`left text reveal`} width={255} height={254} />
 
 When we scroll past all the defined ranges. Everything will just scroll along with the page.
 
-![scroll away at same speed](./scrollaway.gif)
+<img
+  src={imgScrollawayGif}
+  alt={`scroll away at same speed`}
+  width={354}
+  height={280}
+/>
 
-# Conclusion
+## Conclusion
 
 Congrats! You made it!
 

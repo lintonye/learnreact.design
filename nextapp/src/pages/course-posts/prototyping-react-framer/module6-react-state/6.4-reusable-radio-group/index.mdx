@@ -1,14 +1,19 @@
----
-date: '2019-08-14'
-title: '6.4 Reusable Radio Group'
-video: 'https://school.learnreact.design/courses/629779/lectures/11238542'
----
+import imgResultPng from './result.png'
+import imgCirclePng from './circle.png'
+import imgSelectedPng from './selected.png'
+import imgFinalchoicesPng from './finalchoices.png'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-08-14',
+  title: '6.4 Reusable Radio Group',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11238542',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -19,7 +24,7 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-# Optimizing the Radio Group
+## Optimizing the Radio Group
 
 The multi-cursor feature in the editor makes it easy for us to update our code in multiple places at once. By definition, it makes it easy for us to repeat ourselves.
 
@@ -41,7 +46,7 @@ Looking at our Frames,
 
 Each one is supposed to be an individual radio button that differs only in what’s inside the `<Frame>` tags. The `<Frame>` tag itself and its attributes are all the same.
 
-## `Radio` component
+### `Radio` component
 
 When we notice this kind of repetition, we should extract our code into a separate component.
 
@@ -69,7 +74,7 @@ function Radio() {
 
 But what do we put inside the `<Frame>` tag?
 
-## `props.children`
+### `props.children`
 
 Here we put the label of the radio as the child of the `<Radio>` tag. Therefore, unlike our previous modules, our value is not an attribute of the tag.
 
@@ -95,9 +100,9 @@ All the children of the tag are available as `props.children`, but don’t forge
 
 Our preview should look like what we had in the beginning:
 
-![result](./result.png)
+<img src={imgResultPng} alt={`result`} width={125} height={375} />
 
-## Radio circle
+### Radio circle
 
 Now, let’s add the circle in front of the label. To save time, we'll paste in some code in the `Radio` component `return`.
 
@@ -126,9 +131,9 @@ function Radio(props){
 
 We still have our original `Radio` `<Frame>`, but there is extra styling and a new `<Frame>` that resembles a white circle.
 
-![circles added](./circle.png)
+<img src={imgCirclePng} alt={`circles added`} width={250} height={250} />
 
-## `selected` attribute
+### `selected` attribute
 
 Next, we want to show a smaller purple circle inside the white circle to indicate if this radio is selected.
 
@@ -144,7 +149,7 @@ To signal if a `<Radio>` is selected, we can add a `selected` attribute.
 
 However, the `Radio` component has to understand what this `selected` means and what to do.
 
-## Purple, selected circle
+### Purple, selected circle
 
 Let's add the small purple circle inside the outer white circle. Note that we have to split up the white circle `<Frame />` into `<Frame></Frame>`.
 
@@ -214,9 +219,9 @@ Do you remember what this is? It's a **ternary operator**! Essentially, a **tern
 
 Our preview should look like this:
 
-![one selected](./selected.png)
+<img src={imgSelectedPng} alt={`one selected`} width={250} height={250} />
 
-## External options with `RadioGroup`
+### External options with `RadioGroup`
 
 Taking another look at our `RadioGroup` component, we have three **hardcoded** options and there are only three vegetables! It’s not very useful. We want to make it reusable so that we could, for example, list different options.
 
@@ -262,7 +267,7 @@ function App() {
 }
 ```
 
-## `map` function
+### `map` function
 
 How do we use `options` to populate our `RadioGroup`? You tell me! We've done it before using `map`!
 
@@ -290,7 +295,7 @@ function RadioGroup(props) {
 
 Remember, this is an **arrow function**!
 
-## `key` attribute
+### `key` attribute
 
 Finally, don't forget to add the `key` prop to avoid console warnings.
 
@@ -308,9 +313,14 @@ function RadioGroup(props) {
 
 Our Radio Group should now look like this:
 
-![final radio group](./finalchoices.png)
+<img
+  src={imgFinalchoicesPng}
+  alt={`final radio group`}
+  width={250}
+  height={339}
+/>
 
-# Conclusion
+## Conclusion
 
 We now have a reusable `RadioGroup`. We can pass whatever options we want as the choices prop, and they’ll be rendered properly as radio buttons.
 

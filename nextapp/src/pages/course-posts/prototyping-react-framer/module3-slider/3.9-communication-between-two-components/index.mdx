@@ -1,14 +1,14 @@
----
-date: '2019-07-31'
-title: '3.9 Communication between Two Components'
-video: 'https://school.learnreact.design/courses/629779/lectures/11238564'
----
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-07-31',
+  title: '3.9 Communication between Two Components',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11238564',
+}
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+export default CoursePostLayout
 
-# Overview
+## Overview
 
 What you'll learn:
 
@@ -17,7 +17,7 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-# Component Communication
+## Component Communication
 
 `Slider` and `Skinny` are disconnected, so let's fix it!
 
@@ -47,7 +47,7 @@ function App(){
 
 we want to pass it into our `Skinny` room.
 
-## Passing functions into custom tags
+### Passing functions into custom tags
 
 ```jsx{2}
 <div ...>
@@ -69,7 +69,7 @@ We want to be a little more specific than just animate because we are not animat
 
 Our slider is still not working because we haven’t told `Skinny` what to do about this `cheekAnimate`. If we hover over "`<Skinny>`", we get an error that tells us that the `Skinny` component does not know about or how to deal with `cheekAnimate`.
 
-## `props`
+### `props`
 
 We can fix our `cheekAnimate` problem in our `Skinny` component. We first add a parameter to `Skinny`.
 
@@ -128,6 +128,6 @@ function Skinny(props){
 
 the props would be `width`, `center`, `background`, and `borderRadius`.
 
-# Conclusion
+## Conclusion
 
 What we have just done solves half of the puzzle. The `Skinny` component now knows about the `animationControls` we created in our `App` component. Next, let’s link up the `Slider` as well.

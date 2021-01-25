@@ -1,14 +1,18 @@
----
-date: '2019-08-06'
-title: '5.3 Mouse Parallax Revisit'
-video: 'https://school.learnreact.design/courses/629779/lectures/11238549'
----
+import imgBird200Png from './bird200.png'
+import imgXPng from './x.png'
+import imgFinalGif from './final.gif'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-08-06',
+  title: '5.3 Mouse Parallax Revisit',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11238549',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -17,7 +21,7 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-# Converting `useAnimation` to `useMotionValue`
+## Converting `useAnimation` to `useMotionValue`
 
 In the previous module, we built this nifty mouse parallax prototype with `useAnimation`.
 
@@ -87,19 +91,16 @@ The answer is definitely yes. Let’s now convert our code to use `useMotionValu
 Remember to import `useMotionValue`!
 
 ```jsx{3}
-import * as React from "react"
-import ReactDOM from "react-dom"
-import { Frame, useAnimation, useMotionValue } from "framer"
 import "./styles.css"
 ```
 
-## `MotionValue` for offsets
+### `MotionValue` for offsets
 
 `MotionValue` is a container that can hold a number. If we use it to set the attribute of a `<Frame>`, it’ll work as if we put the number inside directly. For example, we can set the `x` offset of a `<Frame>` like this.
 
 If we set the `x` attribute of the bird to a number like 200, it will move the bird to the right.
 
-![bird 200](./bird200.png)
+<img src={imgBird200Png} alt={`bird 200`} width={330} height={338} />
 
 ```jsx
 <Frame
@@ -143,7 +144,7 @@ function App() {
 
 If the value of `birdX` or `birdY` changes, the `x` and `y` offsets will be updated accordingly.
 
-## Updating `MotionValue`
+### Updating `MotionValue`
 
 How do `birdX` and `birdY` update then?
 
@@ -151,7 +152,7 @@ Well, if you remember, in our Tinder swipe example, we have a draggable `<Frame>
 
 Looking back at the Framer [documentation](https://www.framer.com/api/frame/#csstransformproperties.x),
 
-![documentation](./x.png)
+<img src={imgXPng} alt={`documentation`} width={507} height={94} />
 
 we can see that the `x` attribute can have a `MotionValue`. All in all, MotionValues handle a lot of heavy-lifting for us.
 
@@ -159,7 +160,7 @@ However, in our parallax effect, Framer does not yet have any special attributes
 
 Fortunately, it’s not difficult at all, and it’s good to learn how the `drag` attribute updates `MotionValue` under the hood.
 
-## Converting bird to implement `useMotionValue`
+### Converting bird to implement `useMotionValue`
 
 First, let's comment out `birdAnim.start` and all `birdAnim` references.
 
@@ -216,7 +217,7 @@ We then call a function called `set` onto `birdX` and `birdY` to replace the `st
 
 Everything works again!
 
-![final gif](./final.gif)
+<img src={imgFinalGif} alt={`final gif`} width={254} height={260} />
 
 We can now finish converting our code to MotionValues for the clouds, sun and, background with the same method as the bird.
 
@@ -299,7 +300,7 @@ function App() {
 }
 ```
 
-# Conclusion
+## Conclusion
 
 The key here is that when we have an element's `MotionValue`, we call the `set` function to update the value. In fact, this is what occurs when we used attributes such as `drag` in our tinder swipe.
 

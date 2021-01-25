@@ -1,14 +1,17 @@
----
-date: '2019-07-24'
-title: '2.4 Too Many Styling Options'
-video: 'https://school.learnreact.design/courses/601139/lectures/10785659'
----
+import imgCssPng from './css.png'
+import imgStylescssPng from './stylescss.png'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-07-24',
+  title: '2.4 Too Many Styling Options',
+  video: 'https://school.learnreact.design/courses/601139/lectures/10785659',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -18,9 +21,9 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-# Styling Options
+## Styling Options
 
-## The `style` attribute, CSS rules, and `<Frame>`'s convenient attributes
+### The `style` attribute, CSS rules, and `<Frame>`'s convenient attributes
 
 As we discussed previously, we can use this `style` attribute to set the inline style of an HTML element, such as a `<div>`, and the value of the `style` attribute must be an object.
 
@@ -90,17 +93,17 @@ Both, however, set the inline style of the resulting div.
 
 Eventually, the style attribute gets converted into CSS.
 
-## Style React code with an external CSS file
+### Style React code with an external CSS file
 
 Not to confuse you, but there’s a third way to style things in React code.
 
 The `className` on the div is equivalent to `class` in HTML. As a result, we can reference that in the `styles.css` file which is imported near the top of the js file.
 
-![code](./css.png)
+<img src={imgCssPng} alt={`code`} width={476} height={235} />
 
 We can edit the `styles.css` file to style the div here by going to the file system on the left and clicking on "styles.css".
 
-![css code](./stylescss.png)
+<img src={imgStylescssPng} alt={`css code`} width={611} height={231} />
 
 If we want to change the background color, we first have to remove `background: "orange"` from the `style` attribute in our JavaScript file.
 
@@ -118,11 +121,11 @@ Since we are now writing real CSS, we must follow CSS format.
 
 Unlike JavaScript, we don’t quote colors, and we need to add a semicolon after each rule.
 
-## Tips
+### Tips
 
 I know this can be error-prone if we have to switch back and forth between different ways of writing the style. Make sure to check the extensions of your files! If it’s CSS, we’ll use CSS format. If it’s JS or TSX as we'll later use, we are writing JavaScript code, we are gonna need to use camel case, quote strings, and so on.
 
-# Conclusion
+## Conclusion
 
 Remember that CSS is the final destination. The style attribute will be eventually converted into CSS. The attributes on Frames such as `width`, `height`, and `borderRadius` are just shortcuts to set the `style` attribute. Moreover, these shortcuts only work for **Framer specific tags**.
 

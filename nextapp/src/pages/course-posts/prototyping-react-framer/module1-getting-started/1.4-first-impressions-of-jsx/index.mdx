@@ -1,14 +1,19 @@
----
-date: '2019-07-23'
-title: '1.4 First Impressions of JSX'
-Video: 'https://school.learnreact.design/courses/601139/lectures/10940021'
----
+import imgCloserlookPng from './closerlook.png'
+import imgColourschemePng from './colourscheme.png'
+import imgPickyPng from './picky.png'
+import imgApperrorPng from './apperror.png'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-07-23',
+  title: '1.4 First Impressions of JSX',
+  Video: 'https://school.learnreact.design/courses/601139/lectures/10940021',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -18,11 +23,11 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-# Taking a closer look at our code
+## Taking a closer look at our code
 
 Let’s look at what we have here
 
-![code](./closerlook.png)
+<img src={imgCloserlookPng} alt={`code`} width={1035} height={683} />
 
 This definitely does not look like an article from a book. There are only some English words here and there that we can roughly read and understand. For example, this import `React` from `"react"`.
 
@@ -32,31 +37,41 @@ Fortunately, as we see here, we don't have to start from a completely blank edit
 
 There are reasons for some of the things you might not understand, but don’t worry! I’ll slowly show you the concepts one at a time and in the end, you’ll understand the logic behind it all.
 
-# Syntax
+## Syntax
 
 Syntax involves the set of rules, principles, and processes that govern the structure of certain things. All programming languages such as React have syntax rules and conventions that may seem daunting at first, but once you see the patterns it is incredibly easy.
 
-## Colour Scheme
+### Colour Scheme
 
 Also, you have probably have noticed that the code is quite colorful, but you might not know why. The color code/highlighting is to show us that some words differ in function and syntax. In total, the color scheme helps understand the code.
 
-![colour scheme](./colourscheme.png)
+<img src={imgColourschemePng} alt={`colour scheme`} width={999} height={656} />
 
-## Syntax Errors
+### Syntax Errors
 
-![removing letter SyntaxError](./picky.png)
+<img
+  src={imgPickyPng}
+  alt={`removing letter SyntaxError`}
+  width={1920}
+  height={756}
+/>
 
 As you saw, we can change the code to see the result on the right. But take a note here, the editor is very picky.
 
 We have to follow the exact format that JavaScript requires. Or else we’ll get errors all over the place. Removing the `i` in `function` — a single mistake — throws a `SyntaxError` that breaks our whole application!
 
-## Case Sensitivity
+### Case Sensitivity
 
 Even uppercase and lowercase is incredibly important. If we make the `App()` lowercase to `app()`, we get a `ReferenceError`.
 
-![lowercase App ReferenceError](./apperror.png)
+<img
+  src={imgApperrorPng}
+  alt={`lowercase App ReferenceError`}
+  width={1584}
+  height={714}
+/>
 
-# Conclusion
+## Conclusion
 
 Computers are both smart and dumb, mostly dumb. The language we speak to it must be very precise. One line of code can only mean one thing. Computers do not read between the lines.
 

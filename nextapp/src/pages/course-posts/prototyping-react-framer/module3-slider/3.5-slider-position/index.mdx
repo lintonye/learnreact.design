@@ -1,14 +1,19 @@
----
-date: '2019-07-31'
-title: '3.5 Slider Position'
-video: 'https://school.learnreact.design/courses/629779/lectures/11238559'
----
+import imgInfoPng from './info.png'
+import imgPointPng from './point.png'
+import imgPointxPng from './pointx.png'
+import imgConsolePng from './console.png'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-07-31',
+  title: '3.5 Slider Position',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11238559',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -18,7 +23,7 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-# `onDrag` `info` parameter
+## `onDrag` `info` parameter
 
 To make the slider work properly, we need to change the scale of Skinny’s cheek according to the position of the slider.
 
@@ -43,9 +48,9 @@ function App(){
 
 Now if we start dragging, we'll see a huge amount of objects printed out. This tells us that `info` is an object. If we expand the object in our console (click the small arrow), you can see four properties: `point`, `delta`, `offset`, and `velocity`.
 
-![info object in console](./info.png)
+<img src={imgInfoPng} alt={`info object in console`} width={662} height={154} />
 
-## Dot notation
+### Dot notation
 
 Further expanding `point` since we can see it as an object as well, it has two properties `x` and `y`. Therefore we can use the dot notation to get specific property values from an object.
 
@@ -61,7 +66,12 @@ function App(){
 }
 ```
 
-![point object in console](./point.png)
+<img
+  src={imgPointPng}
+  alt={`point object in console`}
+  width={379}
+  height={128}
+/>
 
 Now `point` objects are printed out in the console. We can then add a `.x` to get our final x position values that we need to update the scale of Skinny's cheek.
 
@@ -77,9 +87,9 @@ function App(){
 }
 ```
 
-![point x in console](./pointx.png)
+<img src={imgPointxPng} alt={`point x in console`} width={268} height={174} />
 
-## `console`
+### `console`
 
 Now, can you explain the `log` behind `console`? Why do we use the dot here?
 
@@ -101,11 +111,16 @@ function App(){
 }
 ```
 
-![console object in console](./console.png)
+<img
+  src={imgConsolePng}
+  alt={`console object in console`}
+  width={951}
+  height={114}
+/>
 
 We see that `log` is a property with a function value! In fact, almost everything in JavaScript is an object.
 
-# Conclusion
+## Conclusion
 
 I mentioned earlier that computer languages are very logical. If some code is written in a certain way and pattern, there must be a reason. Once you understand the logic, it is straightforward to apply it to new code. You don’t need to rely on raw memorization too much.
 

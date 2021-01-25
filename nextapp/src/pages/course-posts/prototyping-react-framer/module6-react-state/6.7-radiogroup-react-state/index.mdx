@@ -1,14 +1,22 @@
----
-date: '2019-08-16'
-title: '6.7 RadioGroup React State'
-video: 'https://school.learnreact.design/courses/629779/lectures/11238545'
----
+import imgSmallselectedPng from './smallselected.png'
+import imgSmallselected2Png from './smallselected2.png'
+import imgAlertGif from './alert.gif'
+import imgReactdoodlePng from './reactdoodle.png'
+import imgSnapshot1Gif from './snapshot1.gif'
+import imgSnapshot2Gif from './snapshot2.gif'
+import imgFinalresultGif from './finalresult.gif'
 
-import CoursePost from '../../../../../new-components/CoursePost'
-import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
-export default CoursePost
+import { CoursePostLayout } from '@/components/CoursePostLayout'
+export const meta = {
+  tags: [],
+  date: '2019-08-16',
+  title: '6.7 RadioGroup React State',
+  video: 'https://school.learnreact.design/courses/629779/lectures/11238545',
+}
 
-# Overview
+export default CoursePostLayout
+
+## Overview
 
 What you'll learn:
 
@@ -18,7 +26,7 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-# Functional Radio group
+## Functional Radio group
 
 Now, let’s make the radio group functional!
 
@@ -36,7 +44,12 @@ function RadioGroup({ choices, ...props }) {
 }
 ```
 
-![all radios selected](./smallselected.png)
+<img
+  src={imgSmallselectedPng}
+  alt={`all radios selected`}
+  width={135}
+  height={267}
+/>
 
 However, we don’t want everything to be selected. We only want one `<Radio>` to be selected at a time and the rest not with the values `true` and `false` respectively. Essentially, we want to have a changing value where `???` is.
 
@@ -54,7 +67,7 @@ function RadioGroup({ choices, ...props }) {
 
 Let’s decide what these question marks should be.
 
-## Comparing indexes
+### Comparing indexes
 
 Since `map` is a function, specifically an arrow function, we can add another parameter.
 
@@ -95,9 +108,14 @@ Keep in mind, in JavaScript, if we want to test if two things are equal, we use 
 
 Since our `selectedIndex = 2`, the **third radio** is `selected` by array conventions.
 
-![radio 3 selected](./smallselected2.png)
+<img
+  src={imgSmallselected2Png}
+  alt={`radio 3 selected`}
+  width={135}
+  height={267}
+/>
 
-## `onClick`
+### `onClick`
 
 Now, all we need to do is change the value of `selectedIndex` when a Radio is clicked.
 
@@ -125,7 +143,7 @@ Why?
 
 Because our `Radio` component doesn’t know about `onClick` yet! For `onClick` to be functional, we need to set it on one of the Frames.
 
-## Spread operator
+### Spread operator
 
 What can we use to add all the properties of `<Radio>` to our `<Frame>`?
 
@@ -146,7 +164,7 @@ function Radio(props) {
 }
 ```
 
-![alert](./alert.gif)
+<img src={imgAlertGif} alt={`alert`} width={325} height={350} />
 
 If we remove the `alert` now and try to change `selectedIndex` like this will it work?
 
@@ -168,23 +186,23 @@ If we remove the `alert` now and try to change `selectedIndex` like this will it
 
 It doesn’t!
 
-## React states
+### React states
 
 Remember, React components are like printers!
 
-![react doodle](./reactdoodle.png)
+<img src={imgReactdoodlePng} alt={`react doodle`} width={808} height={442} />
 
 We cannot simply change a snapshot if it’s already printed. We have to print a new page.
 
 Our first snapshot looks similar to this:
 
-![snapshot 1](./snapshot1.gif)
+<img src={imgSnapshot1Gif} alt={`snapshot 1`} width={800} height={386} />
 
 If we want to change what is shown in our preview, we have to print out a new page:
 
-![snapshot 2](./snapshot2.gif)
+<img src={imgSnapshot2Gif} alt={`snapshot 2`} width={800} height={391} />
 
-## `useState`
+### `useState`
 
 We can utilize `useState` to print a new page.
 
@@ -215,11 +233,11 @@ To change `selectedIndex` in our `onClick` function, we just have to call `setSe
 </Frame>
 ```
 
-![final result](./finalresult.gif)
+<img src={imgFinalresultGif} alt={`final result`} width={134} height={262} />
 
 We now have a fully functional radio group that we built from scratch!
 
-# Conclusion
+## Conclusion
 
 The radio group module is finished! Along the way we learned how to create a counter and about React snapshots, React States, `useState`, rendering, coding tips, code efficiency, the spread operator, and more!
 
