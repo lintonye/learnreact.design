@@ -3,10 +3,8 @@ import { FunctionComponent } from 'react'
 import { NextSeo } from 'next-seo'
 import { Layout } from '@/components/Layout'
 import { MDXWrapper } from './MDXWrapper'
-import { Video } from './Video'
-import Image from 'next/image'
-import { Chip, Link } from './design-system'
-import { useImportTipVideoPaths } from './useImportTipVideoPaths'
+import { Link } from './design-system'
+import { FiPlayCircle } from 'react-icons/fi'
 
 type LayoutProps = {
   meta: any
@@ -16,22 +14,7 @@ export const CoursePostLayout: FunctionComponent<LayoutProps> = ({
   children,
   meta,
 }) => {
-  const {
-    title,
-    slug,
-    description,
-    videoPoster,
-    video,
-    sourceFile,
-    tags,
-    date,
-  } = meta || {}
-
-  const [videoPath, videoPosterPath] = useImportTipVideoPaths(
-    slug,
-    video,
-    videoPoster,
-  )
+  const { title, description, video } = meta || {}
 
   return (
     <Layout>
@@ -63,33 +46,19 @@ export const CoursePostLayout: FunctionComponent<LayoutProps> = ({
               {title}
             </h1>
             <div className="flex space-x-2 text-sm">
-              {tags.map((tag: string) => (
-                <Chip key="tag">{tag}</Chip>
-              ))}
-              <div className="pl-8">Updated: {date}</div>
-            </div>{' '}
+              {/* <div className="pl-8">Updated: {date}</div> */}
+            </div>
           </div>
 
-          {videoPath && videoPosterPath ? (
-            <Video videoUrl={videoPath} posterUrl={videoPosterPath} play />
-          ) : (
-            videoPosterPath && (
-              <Image src={videoPosterPath} width={640} height={360} />
-            )
-          )}
+          <Link href={video}>
+            <a className="flex space-x-2 items-center hover:text-green-600">
+              <FiPlayCircle className="inline-block opacity-60" size={30} />
+              <div>Watch the video course</div>
+            </a>
+          </Link>
 
           {/* Main content */}
           {children}
-
-          {/* Downloads */}
-          {sourceFile && (
-            <div>
-              <h2 className="text-3xl font-bold my-3 ">Source Code</h2>
-              <Link href={sourceFile}>
-                <a>Check out the complete source code here</a>
-              </Link>
-            </div>
-          )}
         </div>
       </MDXWrapper>
     </Layout>
