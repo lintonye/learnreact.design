@@ -5,6 +5,7 @@ import { Layout } from '@/components/Layout'
 import { MDXWrapper } from './MDXWrapper'
 import { Video } from './Video'
 import Image from 'next/image'
+import { Link } from './design-system'
 
 type LayoutProps = {
   meta: any
@@ -14,7 +15,8 @@ export const TipLayout: FunctionComponent<LayoutProps> = ({
   children,
   meta,
 }) => {
-  const { title, description, thumbnailImage, thumbnailVideo } = meta || {}
+  const { title, description, thumbnailImage, thumbnailVideo, sourceFile } =
+    meta || {}
 
   return (
     <Layout>
@@ -51,6 +53,16 @@ export const TipLayout: FunctionComponent<LayoutProps> = ({
 
           {/* Main content */}
           {children}
+
+          {/* Downloads */}
+          {sourceFile && (
+            <div>
+              <h2 className="text-3xl font-bold my-3 ">Source Code</h2>
+              <Link href={sourceFile}>
+                <a>Check out the complete source code here</a>
+              </Link>
+            </div>
+          )}
         </div>
       </MDXWrapper>
     </Layout>
