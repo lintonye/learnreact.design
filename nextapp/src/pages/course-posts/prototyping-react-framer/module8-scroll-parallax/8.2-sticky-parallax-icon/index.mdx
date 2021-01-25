@@ -1,22 +1,14 @@
-import imgStickyfinalresultGif from './stickyfinalresult.gif'
-import imgIcony1Gif from './icony1.gif'
-import img100Gif from './100.gif'
-import img500Gif from './500.gif'
-import img100Gif from './-100.gif'
-import imgThreenumbersGif from './threenumbers.gif'
-import imgUseparallaxPng from './useparallax.png'
+---
+date: '2019-08-23'
+title: '8.2 Sticky and Parallax Icon'
+video: 'https://school.learnreact.design/courses/629779/lectures/11509517'
+---
 
-import { CoursePostLayout } from '@/components/CoursePostLayout'
-export const meta = {
-  tags: [],
-  date: '2019-08-23',
-  title: '8.2 Sticky and Parallax Icon',
-  video: 'https://school.learnreact.design/courses/629779/lectures/11509517',
-}
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
 
-export default CoursePostLayout
-
-## Overview
+# Overview
 
 What you'll learn:
 
@@ -25,16 +17,11 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-## Sticky and Parallax Effects
+# Sticky and Parallax Effects
 
 We'll now make our icon "sticky" — sticking to a certain position — when it enters a certain range.
 
-<img
-  src={imgStickyfinalresultGif}
-  alt={`Sticky Scroll Effect`}
-  width={219}
-  height={358}
-/>
+![Sticky Scroll Effect](./stickyfinalresult.gif)
 
 See for yourself! [Scroll Effects](https://fsgmd.csb.app/).
 
@@ -75,11 +62,11 @@ Then in our icon `<Frame>`, we'll set `y={iconY}` and comment out `opacity={icon
 />
 ```
 
-<img src={imgIcony1Gif} alt={`sticky icon`} width={216} height={359} />
+![sticky icon](./icony1.gif)
 
 We can play with the `useTransform` numbers to get different effects.
 
-### `[0, 100]`
+## `[0, 100]`
 
 ```jsx{3}
 function App() {
@@ -93,11 +80,11 @@ function App() {
 
 Since `[0, 300]` was the "balance" point so that our icon could stick, a smaller number will cause a net, negative offset to occur. As a result, `[0, 100]` creates a net, negative offset in the direction of scrolling.
 
-<img src={img100Gif} alt={`100 scrolling`} width={219} height={358} />
+![100 scrolling](./100.gif)
 
 Our icon moves slower than the page.
 
-### [0, 500]
+## [0, 500]
 
 ```jsx{3}
 function App() {
@@ -111,9 +98,9 @@ function App() {
 
 We have a net, positive offset. Therefore, our icon will move in the opposite direction we scroll since by scrolling to a negative value, we'll get a positive icon offset.
 
-<img src={img500Gif} alt={`500 scrolling`} width={223} height={267} />
+![500 scrolling](./500.gif)
 
-### `[0, -100]`
+## `[0, -100]`
 
 ```jsx{3}
 function App() {
@@ -127,11 +114,11 @@ function App() {
 
 With `-100`, we have a net negative offset, but this time, the net offset is greater than just our scrolling offset. To illustrate, not only are we scrolling with the icon, but the icon is also giving an additional negative offset. Combined, our icon moves faster than our scroll.
 
-<img src={img100Gif} alt={`-100 scrolling`} width={218} height={360} />
+![-100 scrolling](./-100.gif)
 
 By changing the numbers, we can achieve many different parallax effects.
 
-### `[0, -150, -300], [0, 50, 200]`
+## `[0, -150, -300], [0, 50, 200]`
 
 Furthermore, we can more than two numbers in the array to create some more effects.
 
@@ -145,12 +132,7 @@ function App() {
 }
 ```
 
-<img
-  src={imgThreenumbersGif}
-  alt={`three number scrolling`}
-  width={224}
-  height={358}
-/>
+![three number scrolling](./threenumbers.gif)
 
 Initially, the icon is moving slower than our scroll then the icon sticks and finally moves with the page.
 
@@ -158,22 +140,21 @@ You can play around with the numbers to achieve the effect you are looking for.
 
 However, sometimes we have to use some math to get our correct movement.
 
-### `use-parallax` Library
+## `use-parallax` Library
 
 To make it easier, I wrote a small library that includes a few useful custom hooks.
 
 Let's add my dependency called `use-parallax`.
 
-<img
-  src={imgUseparallaxPng}
-  alt={`use-parallax dependency`}
-  width={728}
-  height={250}
-/>
+![use-parallax dependency](./useparallax.png)
 
 Let's import a hook.
 
 ```jsx{4}
+import * as React from "react"
+import { render } from "react-dom"
+import { Frame, Scroll, useMotionValue, useTransform } from "framer"
+import { usePositiveOffset } from "use-parallax"
 import "./styles.css"
 ```
 
@@ -207,16 +188,15 @@ function App() {
 
 This works just as before:
 
-<img
-  src={imgThreenumbersGif}
-  alt={`three number scrolling`}
-  width={224}
-  height={358}
-/>
+![three number scrolling](./threenumbers.gif)
 
 I created another hook called `useSticky`.
 
 ```jsx{4}
+import * as React from "react"
+import { render } from "react-dom"
+import { Frame, Scroll, useMotionValue, useTransform } from "framer"
+import { usePositiveOffset, useSticky } from "use-parallax"
 import "./styles.css"
 ```
 
@@ -241,7 +221,7 @@ We now have there ranges in which our icon sticks.
 
 Without these custom hooks, it would take some time to re-create these effects. However, I encourage you to try create some of theses effects from scratch as you will gain a deeper understanding of what is happening.
 
-## Conclusion
+# Conclusion
 
 We've now covered how to create a sticky scroll effect and customize a scrolling parallax effect. You should now know the underlying basics behind many of those design effects on popular websites!
 

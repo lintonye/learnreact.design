@@ -1,19 +1,14 @@
-import imgToggle0Png from './toggle0.png'
-import imgToggle1Png from './toggle1.png'
-import imgTappedPng from './tapped.png'
-import imgTogglegif2Gif from './togglegif2.gif'
+---
+date: '2019-07-25'
+title: '2.7 onTap'
+video: 'https://school.learnreact.design/courses/601139/lectures/10785665'
+---
 
-import { CoursePostLayout } from '@/components/CoursePostLayout'
-export const meta = {
-  tags: [],
-  date: '2019-07-25',
-  title: '2.7 onTap',
-  video: 'https://school.learnreact.design/courses/601139/lectures/10785665',
-}
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
 
-export default CoursePostLayout
-
-## Overview
+# Overview
 
 What you'll learn:
 
@@ -26,11 +21,11 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-## Toggle
+# Toggle
 
 Let’s get back to our toggle. What code would we need to write to move the knob when the user taps on it?
 
-### Positioning the Toggle
+## Positioning the Toggle
 
 To move the toggle, we can use the `Frame` attribute `x`. `x={0}` or where it originally was.
 
@@ -40,12 +35,7 @@ To move the toggle, we can use the `Frame` attribute `x`. `x={0}` or where it or
 </Frame>
 ```
 
-<img
-  src={imgToggle0Png}
-  alt={`toggle in first position`}
-  width={156}
-  height={87}
-/>
+![toggle in first position](./toggle0.png)
 
 To `x={60}`
 
@@ -55,16 +45,11 @@ To `x={60}`
 </Frame>
 ```
 
-<img
-  src={imgToggle1Png}
-  alt={`toggle in second position`}
-  width={155}
-  height={82}
-/>
+![toggle in second position](./toggle1.png)
 
 However, we want to dynamically change the value of the x attribute when the user taps on the toggle.
 
-### Detecting User Click
+## Detecting User Click
 
 How do we detect when the user taps on it?
 
@@ -122,14 +107,9 @@ To make sure it the function works and runs, we put a console.log into the body.
 
 Test it out! Your console should display this!
 
-<img
-  src={imgTappedPng}
-  alt={`tapped console output`}
-  width={287}
-  height={128}
-/>
+![tapped console output](./tapped.png)
 
-### Using variables
+## Using variables
 
 Since we want `x` to dynamically change, we can't have a static `x={60}` in the `<Frame>`'s attributes. Otherwise, we’d have to manually change our code in the editor when the user taps on the toggle — we obviously can't do that. We want it to automatically work.
 
@@ -151,7 +131,7 @@ function App(){
 }
 ```
 
-### Naming variables
+## Naming variables
 
 This variable could be named anything. I just happen to use `knobX` — remember camelCase! To write clear and robust code, we wouldn't want to simply use the variable `x` or, later, things could get confusing.
 
@@ -186,6 +166,9 @@ But in React, this won’t work. I’ll explain why when we learn about the Reac
 Let's edit our Frame import statement
 
 ```jsx{3}
+import React from "react"
+import ReactDOM from "react-dom"
+import { Frame, useCycle } from "framer"
 import "./styles.css"
 ```
 
@@ -207,12 +190,7 @@ function App(){
 }
 ```
 
-<img
-  src={imgTogglegif2Gif}
-  alt={`gif of toggle working`}
-  width={206}
-  height={110}
-/>
+![gif of toggle working](./togglegif2.gif)
 
 Don’t be scared by all the alien code I’ve just typed in here! I’ll explain in detail in the next post! However, there is something you should recognize.
 
@@ -226,7 +204,7 @@ let [knobX, cycleKnobX] = useCycle(0, 60)
 
 `useCycle` is a function! We are calling this function and providing it with two parameters with numbers `0` and `60`!
 
-### Multiple Parameters
+## Multiple Parameters
 
 We can define a function for multiples like this
 
@@ -254,7 +232,7 @@ What about `cycleKnobX`?
 
 It’s a function too. Unlike `useCycle`, we call it without providing any parameters.
 
-## Conclusion
+# Conclusion
 
 For `useCycle`, we get its output and use it in some way. In contrast, `cycleKnobX` is like `console.log`. We don’t care about its visual output, but we care about it does behind the scene.
 

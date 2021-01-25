@@ -1,21 +1,14 @@
-import imgApplefinalresultGif from './applefinalresult.gif'
-import imgSimpleexample3Png from './simpleexample3.png'
-import imgScroll2Png from './scroll2.png'
-import imgTop2Png from './top2.png'
-import imgOpacityGif from './opacity.gif'
-import imgRadiusGif from './radius.gif'
+---
+date: '2019-08-22'
+title: '8.1 Scroll Effect Animations'
+video: 'https://school.learnreact.design/courses/629779/lectures/11509514'
+---
 
-import { CoursePostLayout } from '@/components/CoursePostLayout'
-export const meta = {
-  tags: [],
-  date: '2019-08-22',
-  title: '8.1 Scroll Effect Animations',
-  video: 'https://school.learnreact.design/courses/629779/lectures/11509514',
-}
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
 
-export default CoursePostLayout
-
-## Overview
+# Overview
 
 What you'll learn:
 
@@ -25,18 +18,13 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-## Final Result
+# Final Result
 
-<img
-  src={imgApplefinalresultGif}
-  alt={`Scroll Effects`}
-  width={450}
-  height={254}
-/>
+![Scroll Effects](./applefinalresult.gif)
 
 See for yourself! [Scroll Effects](https://o9yeu.csb.app/).
 
-## Scroll Effects Intro
+# Scroll Effects Intro
 
 Welcome to the Scroll Parallax module! We’ll build some cool scrolling effects like the one above!
 
@@ -44,20 +32,18 @@ However, before we make advanced scroll interactions, we'll start with a simple 
 
 In your starter code, you should see this on the left side of the preview.
 
-<img
-  src={imgSimpleexample3Png}
-  alt={`simple example`}
-  width={148}
-  height={266}
-/>
+![simple example](./simpleexample3.png)
 
 We’ll add multiple effects to this icon while we scroll on this page. Note that, the plaid background is there to simply allow us to easily see our scroll-effects progress.
 
-### `Scroll`
+## `Scroll`
 
 First, we’ll import `Scroll` from the Framer library.
 
 ```jsx{3}
+import * as React from "react"
+import { render } from "react-dom"
+import { Frame, Scroll } from "framer"
 import "./styles.css"
 ```
 
@@ -75,7 +61,7 @@ function App() {
 }
 ```
 
-<img src={imgScroll2Png} alt={`scroll`} width={179} height={171} />
+![scroll](./scroll2.png)
 
 As you can see, the scroll will stretch the width of its direct children to 100%.
 
@@ -90,7 +76,7 @@ body {
 }
 ```
 
-### Linking `offset` to `opacity`
+## Linking `offset` to `opacity`
 
 Now let’s say we want to change the opacity of the icon when scrolling the page up. How would you do it?
 
@@ -99,6 +85,9 @@ It might seem daunting, but you should be confident because that you already kno
 To keep track of the scrolling progress, we can use the `useMotionValue` hook.
 
 ```jsx{3}
+import * as React from "react"
+import { render } from "react-dom"
+import { Frame, Scroll, useMotionValue } from "framer"
 import "./styles.css"
 ```
 
@@ -134,7 +123,7 @@ What does the value of `offset` look like when we scroll What do you think we ca
 
 However, we can't simply print out `offset` in `App` because when we load `App`, our `console.log` will be printed before we could scroll.
 
-### `onChange`
+## `onChange`
 
 Therefore, we use `console.log` in conjunction with a function available in `MotionValue` called `onChange`.
 
@@ -148,7 +137,7 @@ function App() {
 }
 ```
 
-<img src={imgTop2Png} alt={`scroll at top`} width={361} height={346} />
+![scroll at top](./top2.png)
 
 When we scroll to the very top, `offset` is equal to `0`. In contrast, when we scroll down, `offset` becomes more and more negative.
 
@@ -156,7 +145,7 @@ Remember to remove the `console.log` function call when we are done "investigati
 
 Although `onChange` was good enough for looking at `offset`, we didn't properly call the `onChange` function. As a result, if we leave it there, the functional call might cause some unpleasant bugs, so let's comment it out for now.
 
-### `useTransform`
+## `useTransform`
 
 We can’t directly use a `MotionValue` to set the opacity of the icon.
 
@@ -167,6 +156,9 @@ We can use the `useTransform` hook to convert our `offset` `MotionValue` into an
 First, we'll import `useTransform`.
 
 ```jsx{3}
+import * as React from "react"
+import { render } from "react-dom"
+import { Frame, Scroll, useMotionValue, useTransform } from "framer"
 import "./styles.css"
 ```
 
@@ -197,11 +189,11 @@ We can now set our `opacity` attribute on our icon `<Frame>`.
 />
 ```
 
-<img src={imgOpacityGif} alt={`opacity of icon`} width={258} height={300} />
+![opacity of icon](./opacity.gif)
 
 The opacity of our icon is now directly mapped to our page-scrolling progress.
 
-### Linking `offset` to `borderRadius`
+## Linking `offset` to `borderRadius`
 
 Similar to `iconOpacity`, we can map `offset` to other, new MotionValues.
 
@@ -231,13 +223,13 @@ Here, we affecting the `borderRadius` of our icon!
 />
 ```
 
-<img src={imgRadiusGif} alt={`radius change`} width={258} height={304} />
+![radius change](./radius.gif)
 
 As long as the prop value accepts a `MotionValue`, we can make it work.
 
 Remember that when you set up the ranges in `useTransform`, the value of the offset is negative. It starts with `0` and when you scroll further, the offset becomes more negative.
 
-## Conclusion
+# Conclusion
 
 This simple opacity animation is used in an incredible amount of websites, and now you know how to create it!
 

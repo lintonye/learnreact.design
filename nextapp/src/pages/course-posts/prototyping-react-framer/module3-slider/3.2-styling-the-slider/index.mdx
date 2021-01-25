@@ -1,18 +1,14 @@
-import imgTopPng from './top.png'
-import imgHeight0Png from './height0.png'
-import imgCenterPng from './center.png'
+---
+date: '2019-07-30'
+title: '3.2 Styling the Slider'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238556'
+---
 
-import { CoursePostLayout } from '@/components/CoursePostLayout'
-export const meta = {
-  tags: [],
-  date: '2019-07-30',
-  title: '3.2 Styling the Slider',
-  video: 'https://school.learnreact.design/courses/629779/lectures/11238556',
-}
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
 
-export default CoursePostLayout
-
-## Overview
+# Overview
 
 What you'll learn:
 
@@ -22,7 +18,7 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-### Background CSS colour
+## Background CSS colour
 
 Now let’s make the slider a bit prettier. First, we’ll change the background color of the entire page. Do you remember how to do it?
 
@@ -42,7 +38,7 @@ Make sure your CSS file is imported as well.
 import './styles.css'
 ```
 
-### Slider colors
+## Slider colors
 
 Next, we’ll make the slider white and add a shadow effect on our slider.
 
@@ -64,7 +60,7 @@ Next, we’ll make the slider white and add a shadow effect on our slider.
 </Frame>
 ```
 
-### CSS vs `center`
+## CSS vs `center`
 
 We can also use a style attribute to do the same thing, but it would take some more typing and the format would be different. You generally want to keep a consistent formatting style for readability.
 
@@ -74,7 +70,7 @@ However, what if we want to layout our UI with the usual ways? We can center the
 
 Let's remove the `center` from the parent `<Frame>`.
 
-### Flexbox
+## Flexbox
 
 We could update the css file again to add flexbox to the `div` because our `div` has identifier `className` here.
 
@@ -95,15 +91,15 @@ But let’s do it with the style attribute as a review. Remember, there is an ob
 
 This makes the slider horizontally centered, but not vertically. Let's inspect our slider to see what's going on.
 
-<img src={imgTopPng} alt={`slider at top`} width={355} height={109} />
+![slider at top](./top.png)
 
 Inspecting
 
-<img src={imgHeight0Png} alt={`inspecting slider`} width={377} height={139} />
+![inspecting slider](./height0.png)
 
 We see that the height of the div is 0 (745 x 0). This is because, by default, frames are positioned **absolutely**.
 
-### Positioning Flexbox
+## Positioning Flexbox
 
 Therefore, we can change the position to **relative** so that it’ll follow the usual box model of web layout.
 
@@ -150,8 +146,8 @@ Inspecting again shows us that the height is now 15px (745 x 15). The `<div>` wr
 </div>
 ```
 
-## Conclusion
+# Conclusion
 
 Now the slider is in the center, we can move on to making the slider "draggable".
 
-<img src={imgCenterPng} alt={`centered slider`} width={367} height={101} />
+![centered slider](./center.png)

@@ -1,21 +1,14 @@
-import imgRemindhtmlPng from './remindhtml.png'
-import imgInputbuttonPng from './inputbutton.png'
-import imgInputbuttonresultPng from './inputbuttonresult.png'
-import imgTypesuggestionPng from './typesuggestion.png'
-import imgClasserrorPng from './classerror.png'
-import imgHtmlelementsPng from './htmlelements.png'
+---
+date: '2019-07-24'
+title: '1.5 JSX: JavaScript eXtension'
+video: 'https://school.learnreact.design/courses/601139/lectures/10940025'
+---
 
-import { CoursePostLayout } from '@/components/CoursePostLayout'
-export const meta = {
-  tags: [],
-  date: '2019-07-24',
-  title: '1.5 JSX: JavaScript eXtension',
-  video: 'https://school.learnreact.design/courses/601139/lectures/10940025',
-}
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
 
-export default CoursePostLayout
-
-## Overview
+# Overview
 
 What you'll learn:
 
@@ -26,31 +19,21 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-## **Similarities** Between JSX and HTML
+# **Similarities** Between JSX and HTML
 
 Now let’s focus on one particular part of the code here.
 
-<img src={imgRemindhtmlPng} alt={`html code`} width={866} height={342} />
+![html code](./remindhtml.png)
 
 You should recognize this highlighted area as HTML!
 
 We’ve got a `div` (block element) here, a `h1` and `h2` (headings). We can keep adding other HTML tags such as an `<input>` and a `<button>`.
 
-<img
-  src={imgInputbuttonPng}
-  alt={`input and button tag`}
-  width={894}
-  height={388}
-/>
+![input and button tag](./inputbutton.png)
 
 Which would correspond to...
 
-<img
-  src={imgInputbuttonresultPng}
-  alt={`input and button preview`}
-  width={507}
-  height={197}
-/>
+![input and button preview](./inputbuttonresult.png)
 
 Like HTML, we can also add attributes to a tag such as putting a type to the input.
 
@@ -58,24 +41,19 @@ Like HTML, we can also add attributes to a tag such as putting a type to the inp
 <input type="password"></input>
 ```
 
-### Intelligent Help
+## Intelligent Help
 
 In CodeSandbox, when I entered `type`, I didn’t have to enter the whole thing, the editor gave me a list to choose from. You can also press CTR+SPACE or CMD+SPACE to show that list of suggestions.
 
-<img
-  src={imgTypesuggestionPng}
-  alt={`type intelligent suggestion`}
-  width={853}
-  height={358}
-/>
+![type intelligent suggestion](./typesuggestion.png)
 
 You can select the suggestion by pressing TAB or clicking with your mouse.
 
 Many of these features help us write code. There are many names for this property, for example, content assist or intellisense. Certain code editors may have specialized features as well.
 
-## **Differences** Between JSX and HTML
+# **Differences** Between JSX and HTML
 
-### `class` vs `className`
+## `class` vs `className`
 
 ```jsx
 <div className="App">...</div>
@@ -85,27 +63,22 @@ On this div tag, there’s an attribute called className. But is that what we ha
 
 It’s supposed to be `class`, right? However, when we change `className` to `class` we get this error in the console (bottom right of the preview page).
 
-<img
-  src={imgClasserrorPng}
-  alt={`className to class error`}
-  width={574}
-  height={144}
-/>
+![className to class error](./classerror.png)
 
 This is one of the many things that confuse beginners learning React. Although there are similarities to HTML, we aren't coding in it. Rather, we are coding in something called JSX which stands for **JavaScript eXtension**.
 
 Like HTML, we use the same formats, angle brackets, attribute names, equal signs, values, open tags, and close tags. We’ve also got the same tags such as `<div>`, `<h1>`, `<input>`, and so on.
 
-<img src={imgHtmlelementsPng} alt={`html elements`} width={853} height={236} />
+![html elements](./htmlelements.png)
 
 But there are quite a few places where JSX is different.
 
 For example, instead of `class`, we must use `className`. Notice the name of `className`, it follows a certain format.
 
-### camelCase
+## camelCase
 
 We have a word that starts with a **lowercase letter** followed by another word which starts with an **uppercase letter**. This is called **camel case**. Every word after the first should start with an uppercase letter such as `classNameDivApp` and so on.
 
-## Conclusion
+# Conclusion
 
 JSX is a special format in React code. It stands for **JavaScript extension** that pretends to be HTML. We’ll go over a few other differences between JSX and HTML in the next post!

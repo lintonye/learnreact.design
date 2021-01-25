@@ -1,19 +1,14 @@
-import imgProtestGif from './protest.gif'
-import imgWingsGif from './wings.gif'
-import imgEyesGif from './eyes.gif'
-import imgMad2Png from './mad2.png'
+---
+date: '2019-08-12'
+title: '3.11 Skinny has an Attitude: If Else'
+video: 'https://school.learnreact.design/courses/629779/lectures/11324838'
+---
 
-import { CoursePostLayout } from '@/components/CoursePostLayout'
-export const meta = {
-  tags: [],
-  date: '2019-08-12',
-  title: '3.11 Skinny has an Attitude: If Else',
-  video: 'https://school.learnreact.design/courses/629779/lectures/11324838',
-}
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
 
-export default CoursePostLayout
-
-## Overview
+# Overview
 
 What you'll learn:
 
@@ -22,19 +17,19 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-## `if` and `else`
+# `if` and `else`
 
 We will still use a slider to control the size of Mr. Skinny’s cheek, but this time, Skinny is not just going to sit there and let us make him fat!
 
 We'll make it so that if we make him too fat, he’s going to raise his wings and eyebrows in protest!
 
-<img src={imgProtestGif} alt={`final result`} width={210} height={280} />
+![final result](./protest.gif)
 
-### What's new in our code
+## What's new in our code
 
 Back in our starter code, we have the same Skinny as before, but I separated the wings and eyebrows into separate Frames so that we can animate them.
 
-### Wings
+## Wings
 
 ```jsx
 {
@@ -65,7 +60,7 @@ Back in our starter code, we have the same Skinny as before, but I separated the
 />
 ```
 
-### Eyebrows
+## Eyebrows
 
 ```jsx
 {
@@ -92,7 +87,7 @@ Back in our starter code, we have the same Skinny as before, but I separated the
 />
 ```
 
-### `App`
+## `App`
 
 In our `App` component, there are added `useAnimation` instances for the our eyebrows and wings and instead of previously passing a defined function `handleDrag` into `onDrag` in `<Slider>`, we pass an anonymous function into `onDrag`.
 
@@ -116,13 +111,13 @@ If we try to describe what we want to do, it should sound something like this:
 
 However, how do we know if the slider is moved too far?
 
-### `if`
+## `if`
 
 Since we have `info.point.x`, we can use the `if` statement to check if the slider is dragged too far.
 
 In **pseudo code**, which is a method of describing code that can be applied to any language, our code would look something like this:
 
-#### Pseudo
+### Pseudo
 
 ```jsx
 if info.point.x > 100
@@ -179,7 +174,7 @@ Let's add this piece of code into our `onDrag` function.
 />
 ```
 
-<img src={imgWingsGif} alt={`wings`} width={210} height={280} />
+![wings](./wings.gif)
 
 We can put more than one action inside our `if` statement as well.
 
@@ -204,22 +199,17 @@ if (info.point.x > 100) {
 }
 ```
 
-<img src={imgEyesGif} alt={`both eyebrows`} width={208} height={280} />
+![both eyebrows](./eyes.gif)
 
 To understand what is going on, let's take a look at the order of execution of our code. If the first condition is satisfied `info.point.x > 100`, then the code within the curly brackets is run from top to bottom.
 
 However, once we satisfy these conditions and move our slider back, the animations of our wing and eyebrows stay in place! Skinny should not be constantly mad, especially when we make him thin again!
 
-<img
-  src={imgMad2Png}
-  alt={`Skinny wings and eyebrows up`}
-  width={208}
-  height={280}
-/>
+![Skinny wings and eyebrows up](./mad2.png).
 
 We can calm him down by moving his wings and eyebrows back to their original positions.
 
-### `else`
+## `else`
 
 How can we do something when the slider is moved back? We could, of course, use another `if`,
 
@@ -257,9 +247,9 @@ if (info.point.x > 100) {
 
 Together, this should be our final result!
 
-<img src={imgProtestGif} alt={`final result`} width={210} height={280} />
+![final result](./protest.gif)
 
-## Conclusion
+# Conclusion
 
 These are if-else statements in JavaScript! If we put a condition inside a pair of parentheses, we can do things conditionally. I’m sure that you’ll find it useful very soon.
 

@@ -1,21 +1,14 @@
-import imgArrayconsolePng from './arrayconsole.png'
-import imgArrayexpandedPng from './arrayexpanded.png'
-import imgArrayconsole2Png from './arrayconsole2.png'
-import imgArrayindexPng from './arrayindex.png'
-import imgResultarrayPng from './resultarray.png'
-import imgToggle120Png from './toggle120.png'
+---
+date: '2019-07-26'
+title: '2.8 Arrays'
+video: 'https://school.learnreact.design/courses/601139/lectures/10785666'
+---
 
-import { CoursePostLayout } from '@/components/CoursePostLayout'
-export const meta = {
-  tags: [],
-  date: '2019-07-26',
-  title: '2.8 Arrays',
-  video: 'https://school.learnreact.design/courses/601139/lectures/10785666',
-}
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
 
-export default CoursePostLayout
-
-## Overview
+# Overview
 
 What you'll learn:
 
@@ -28,7 +21,7 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-## Arrays
+# Arrays
 
 OK, so what’s this?
 
@@ -61,25 +54,25 @@ function App(){
 
 We get a pair of square brackets, a number 0, a comma, and function here.
 
-<img src={imgArrayconsolePng} alt={`console array`} width={280} height={146} />
+![console array](./arrayconsole.png)
 
 The outputted square brackets and content inside is yet another important concept in JavaScript. It’s called an **array**.
 
-### Visualizing Arrays
+## Visualizing Arrays
 
 An array is simply a fancy term for a list of things. We can expand this array by clicking on the **arrow** beside the array.
 
-<img src={imgArrayexpandedPng} alt={`console array`} width={274} height={169} />
+![console array](./arrayexpanded.png)
 
 We can see two elements inside. In this array, we’ve got the number 0 and a function inside.
 
 We can type into the console an array of our own. Let's type this `[10, 20, "hello", 30]` into the console text field at the bottom. We can then expand this and see four elements inside.
 
-<img src={imgArrayconsole2Png} alt={`console array`} width={267} height={176} />
+![console array](./arrayconsole2.png)
 
 The number in the front of our elements, before the colon, is the slot our item is stored in the array. It’s often called the **index**.
 
-### Array Indices
+## Array Indices
 
 Computers count from 0. So the index of the first item is `0` instead of 1. Index `1` for the second item, index `2` for the third item, and so on.
 
@@ -97,12 +90,7 @@ Say we want to get the `"hello"` from our array.
 
 Pressing enter gives us exactly what we want.
 
-<img
-  src={imgArrayindexPng}
-  alt={`array index console`}
-  width={284}
-  height={91}
-/>
+![array index console](./arrayindex.png)
 
 Note that this doesn't remove the element from the array. We are merely accessing the element from it.
 
@@ -133,9 +121,9 @@ function App(){
 
 In our console,
 
-<img src={imgResultarrayPng} alt={`result array`} width={273} height={79} />
+![result array](./resultarray.png)
 
-### Defining Arrays
+## Defining Arrays
 
 An equivalent method, without an array, would go like this,
 
@@ -165,7 +153,7 @@ let [knobX, cycleKnobX] = useCycle(0, 60)
 
 You’ll see many occurrences of arrays in other people's code as well.
 
-### Array Destructuring
+## Array Destructuring
 
 The syntax makes sense. If we know that something is an array, like the return value of `useCycle`, we write a pair of square brackets. By putting in variables into the square brackets, we can get the first item, second item, third item, etc.
 
@@ -187,7 +175,7 @@ Just as when we define a variable, it doesn’t have to be `knobX`.
 
 It’ll work fine as long as we update all references of the variable. However, remember that you want to choose names that correspond to what they do in your code.
 
-## `useCycle`
+# `useCycle`
 
 We can see how this toggle works now by adding a `console.log` of `knobX`.
 
@@ -213,11 +201,11 @@ function App(){
 
 When we click the third time, instead of `x` going back to `0` we have it at `120`.
 
-<img src={imgToggle120Png} alt={`toggle at x=120`} width={237} height={85} />
+![toggle at x=120](./toggle120.png)
 
 That’s why this function is called useCycle. It cycles through the numbers we put in as the input.
 
-## Conclusion
+# Conclusion
 
 The `useCycle` function returns two things in an array, the current value and a function that can be used as a controller. When the cycle function is called, we’ll get the next value in the cycle. That’s how our toggle works.
 

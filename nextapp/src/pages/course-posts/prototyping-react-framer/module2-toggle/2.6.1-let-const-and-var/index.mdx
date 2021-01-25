@@ -1,14 +1,14 @@
-import { CoursePostLayout } from '@/components/CoursePostLayout'
-export const meta = {
-  tags: [],
-  date: '2019-07-25',
-  title: '2.6.1 Let, Const, and Var',
-  video: 'https://school.learnreact.design/courses/601139/lectures/11184306',
-}
+---
+date: '2019-07-25'
+title: '2.6.1 Let, Const, and Var'
+video: 'https://school.learnreact.design/courses/601139/lectures/11184306'
+---
 
-export default CoursePostLayout
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
 
-## Overview
+# Overview
 
 What you'll learn:
 
@@ -19,15 +19,15 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-## Variables and Datatypes
+# Variables and Datatypes
 
-### `let`
+## `let`
 
 In the last post, we learned that we can create a variable with the `let` keyword and how a variable is like a labeled bucket which we can put things in.
 
 There are also two other keywords we can use.
 
-### `const`
+## `const`
 
 If you read other people’s code, you might see `const` instead of `let`.
 
@@ -56,13 +56,13 @@ function sandwichMaker(meat){
 }
 ```
 
-### What's so good about a constant?
+## What's so good about a constant?
 
 You might ask what’s good about a constant if we cannot change its value. Well, just like many things in life, adding some limitations can bring benefits. This barrier can be exactly what we want. It can make the code easier to read and help us avoid mistakes because we would not need to worry about accidental changes to the values.
 
 For example, if you are dealing with a physics game, you might need to add some physical constants such as gravity that we don't want to accidentally change.
 
-### `var`
+## `var`
 
 If you have studied JavaScript before, you probably know there’s another keyword to define variables. It’s `var` instead of `let`
 
@@ -76,13 +76,13 @@ function sandwichMaker(meat){
 }
 ```
 
-### `var` vs `let`
+## `var` vs `let`
 
 Similar to `let`, this defines a variable `sandwich`. We can use its value by the same name. We can also change the value of the variable with an equal sign. However, there are some subtle differences between the variables defined by `let` and the ones by `var`. But **let’s** not worry about it at the moment.
 
 You can consider `let` as a better way to define variables than `var`. **We’ll always use `let` instead of `var`.**
 
-### Parameter
+## Parameter
 
 In this function, the parameter `meat` is, in fact, a variable too.
 
@@ -127,6 +127,6 @@ let someVariable = sandwichMaker('🥓')
 
 However, the first method can't change because it doesn't have any input anymore!
 
-## Conclusion
+# Conclusion
 
 That is `let`, `const`, and `var`! Remember we'll be using `let` instead of `var`! We'll learn about a special function called `onTap` next!

@@ -1,22 +1,14 @@
-import imgPadlock2Gif from './padlock2.gif'
-import imgUnlockfailedGif from './unlockfailed.gif'
-import imgFab2Gif from './fab2.gif'
-import imgSvg2JsxPng from './svg2jsx.png'
-import imgShackleGif from './shackle.gif'
-import imgOriginGif from './origin.gif'
-import imgBadpadlockGif from './badpadlock.gif'
+---
+date: '2019-08-19'
+title: '7.1 Orchestrated Animations'
+video: 'https://school.learnreact.design/courses/629779/lectures/11509503'
+---
 
-import { CoursePostLayout } from '@/components/CoursePostLayout'
-export const meta = {
-  tags: [],
-  date: '2019-08-19',
-  title: '7.1 Orchestrated Animations',
-  video: 'https://school.learnreact.design/courses/629779/lectures/11509503',
-}
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
 
-export default CoursePostLayout
-
-## Overview
+# Overview
 
 What you'll learn:
 
@@ -26,7 +18,7 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-## Orchestrated Animations Intro
+# Orchestrated Animations Intro
 
 Welcome to the Animation Orchestration module!
 
@@ -34,30 +26,25 @@ We’ll learn how to create a sequence of animations, staggered animations, and 
 
 Using that knowledge, we'll build multiple animations like these:
 
-### Padlock
+## Padlock
 
-<img src={imgPadlock2Gif} alt={`Padlock Animation`} width={224} height={190} />
+![Padlock Animation](./padlock2.gif)
 
 See for yourself! [Padlock Animation](https://gtyux.csb.app/).
 
-### Failed Unlock
+## Failed Unlock
 
-<img
-  src={imgUnlockfailedGif}
-  alt={`Failed Unlock Animation`}
-  width={300}
-  height={165}
-/>
+![Failed Unlock Animation](./unlockfailed.gif)
 
 See for yourself! [Failed Unlock Animation](https://n52pw.csb.app/).
 
-### Floating Action Button (FAB)
+## Floating Action Button (FAB)
 
-<img src={imgFab2Gif} alt={`Floating Action Button`} width={127} height={281} />
+![Floating Action Button](./fab2.gif)
 
 See for yourself! [FAB Animation](https://f89r9.csb.app/).
 
-## Padlock Animation
+# Padlock Animation
 
 Here is the link to the starter [code](https://github.com/lintonye/prototyping-with-react-framer/tree/7.1-padlock-animation-starter/app).
 
@@ -93,7 +80,7 @@ Inside, we have a frame that wraps `<Shackle />` and another frame that wraps `<
 </Frame>
 ```
 
-### SVG
+## SVG
 
 `Shackle` and `body` are simply SVG's, Scalable Vector Graphics, but their properties are written in JSX syntax.
 
@@ -101,11 +88,11 @@ In an SVG file, their properties are not written with JSX format. Therefore, we 
 
 As a result, these SVG's are not those that we can copy directly from design tools. Remember that JSX has a **camel-case** syntax.
 
-### SVG to JSX
+## SVG to JSX
 
 To make these SVG-to-JS conversions easier for us, there are many online tools. In particular, there is a free website called [svg2jsx.com](https://svg2jsx.com/).
 
-<img src={imgSvg2JsxPng} alt={`svg2jsx website`} width={800} height={376} />
+![svg2jsx website](./svg2jsx.png)
 
 Back in our code,
 
@@ -124,7 +111,7 @@ In order to add animations, there are each wrapped inside a `<Frame>`. Therefore
 
 Now when the lock is tapped, we want to do a couple of things: lift up and rotate.
 
-### `onTap`
+## `onTap`
 
 Let's add the `onTap` property and give it a function value.
 
@@ -150,7 +137,7 @@ How are we going to control the animation of another Frame using `onTap`?
 
 `useAnimation`!
 
-### `useAnimation`
+## `useAnimation`
 
 Make sure `useAnimation` is imported.
 
@@ -180,13 +167,13 @@ function Padlock(props) {
 }
 ```
 
-### Common Error
+## Common Error
 
 Make sure your attributes such as `animate` are written correctly because unlike other errors, we won't get a warning or error if we misspell an attribute.
 
 Your code may look perfect, but your prototype may not work at all!
 
-### Animating `Shackle`
+## Animating `Shackle`
 
 To lift the shackle we'll animate the `y` attribute.
 
@@ -210,9 +197,9 @@ function Padlock(props) {
 }
 ```
 
-<img src={imgShackleGif} alt={`shackle lift up`} width={224} height={177} />
+![shackle lift up](./shackle.gif)
 
-### Rotating `Shackle`
+## Rotating `Shackle`
 
 Now, we just have to rotate `Shackle`. However, we have to know what version of `rotate` we want since there is `rotate`, `rotateX`, `rotateY`, and `rotateZ`.
 
@@ -241,7 +228,7 @@ function Padlock(props) {
 
 However, there seems to be a problem with our code.
 
-<img src={imgOriginGif} alt={`rotation`} width={257} height={178} />
+![rotation](./origin.gif)
 
 The origin of our rotation seems to be off.
 
@@ -255,15 +242,15 @@ To fix this, we can add the `originX` attribute to our `Shackle` `<Frame>`.
 
 Despite this, our result is not exactly what we wanted to create.
 
-<img src={imgBadpadlockGif} alt={`bad padlock`} width={223} height={177} />
+![bad padlock](./badpadlock.gif)
 
 The shackle is lifted and rotated at the same time, but we want it to lift first and then rotate it afterward like this:
 
-<img src={imgPadlock2Gif} alt={`padlock`} width={224} height={190} />
+![padlock](./padlock2.gif)
 
 How do we wait for the completion of the first animation before starting the second one?
 
-### `await`
+## `await`
 
 In pseudocode, we want our code to look similar to as follows:
 
@@ -291,7 +278,7 @@ If we turn `wait` to `await`, codesandbox or your code editor should color code 
 >
 ```
 
-### `async`
+## `async`
 
 We get a `SyntaxError`, but we can fix this by adding `async` right before our anonymous function.
 
@@ -311,7 +298,7 @@ We get a `SyntaxError`, but we can fix this by adding `async` right before our a
 
 Our padlock animation works as expected now!
 
-<img src={imgPadlock2Gif} alt={`padlock`} width={224} height={190} />
+![padlock](./padlock2.gif)
 
 We call our function an **async function** now. Inside **async functions** we can utilize `await`.
 
@@ -337,7 +324,7 @@ However, this time, we keep the parentheses.
 
 This will work exactly as before.
 
-## Conclusion
+# Conclusion
 
 Look how simple that was! We created a seemingly complicated set of animations using a few lines!
 

@@ -1,19 +1,14 @@
-import imgReplacingtextPng from './replacingtext.png'
-import imgReplacingtextresultPng from './replacingtextresult.png'
-import imgReplacingtextcurlyPng from './replacingtextcurly.png'
-import imgCurlyresultPng from './curlyresult.png'
+---
+date: '2019-07-24'
+title: '1.6 JSX vs HTML Part 2'
+video: 'https://school.learnreact.design/courses/601139/lectures/10940026'
+---
 
-import { CoursePostLayout } from '@/components/CoursePostLayout'
-export const meta = {
-  tags: [],
-  date: '2019-07-24',
-  title: '1.6 JSX vs HTML Part 2',
-  video: 'https://school.learnreact.design/courses/601139/lectures/10940026',
-}
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
 
-export default CoursePostLayout
-
-## Overview
+# Overview
 
 What you'll learn:
 
@@ -24,9 +19,9 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-## JSX vs HTML
+# JSX vs HTML
 
-### Closing Tags
+## Closing Tags
 
 Let’s check out a couple of other places where JSX is different from HTML.
 
@@ -54,46 +49,26 @@ Or use a closing tag it has some children.
 
 **Overall, JSX is stricter than HTML**.
 
-### Literal Text and Curly Brackets
+## Literal Text and Curly Brackets
 
 Furthermore, when we put some text in-between tags, we get the literal text we type.
 
 Replacing text between a tag with `1+2 = 1+2` we will get `1+2 = 1+2` and not what you may have wanted.
 
-<img
-  src={imgReplacingtextPng}
-  alt={`Replacing text with 1+2 = 1+2`}
-  width={730}
-  height={118}
-/>
+![Replacing text with 1+2 = 1+2](./replacingtext.png)
 
 Results in ...
 
-<img
-  src={imgReplacingtextresultPng}
-  alt={`Replacing text result`}
-  width={489}
-  height={152}
-/>
+![Replacing text result](./replacingtextresult.png)
 
 However, if we put a pair of curly brackets around some text
 `1 + 2 = { 1+2 }` it will compute and put the result there instead.
 
-<img
-  src={imgReplacingtextcurlyPng}
-  alt={`Replacing text with curly brackets`}
-  width={719}
-  height={122}
-/>
+![Replacing text with curly brackets](./replacingtextcurly.png)
 
 Results in ...
 
-<img
-  src={imgCurlyresultPng}
-  alt={`Replacing text result`}
-  width={486}
-  height={148}
-/>
+![Replacing text result](./curlyresult.png)
 
 Therefore, we can use the curly brackets as a calculator, not limited to integers.
 
@@ -119,7 +94,7 @@ Moreover, the attribute `"password"` including the quotation marks have invisibl
 
 The value inside is not a number but some text. In JavaScript, when we put quotes around some text, we want the literal text inside.
 
-### String Concatenation
+## String Concatenation
 
 We can do calculations on the text too.
 
@@ -135,7 +110,7 @@ When the value of an attribute is a single-quoted text, we can ignore adding the
 
 The curly bracket is what makes JSX powerful. What we are writing here is not just a static HTML document. It’s a template that we can fill dynamic values in to produce new HTML documents, one after another.
 
-## Conclusion
+# Conclusion
 
 Before moving on, I highly recommend you two read my following two blog posts!
 

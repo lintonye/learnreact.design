@@ -1,18 +1,14 @@
-import imgMultiplecardsGif from './multiplecards.gif'
-import imgColor2Png from './color2.png'
-import imgFat2Png from './fat2.png'
+---
+date: '2019-08-13'
+title: '5.7 Multiple Cards'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238553'
+---
 
-import { CoursePostLayout } from '@/components/CoursePostLayout'
-export const meta = {
-  tags: [],
-  date: '2019-08-13',
-  title: '5.7 Multiple Cards',
-  video: 'https://school.learnreact.design/courses/629779/lectures/11238553',
-}
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
 
-export default CoursePostLayout
-
-## Overview
+# Overview
 
 What you'll learn:
 
@@ -23,7 +19,7 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-## `Card` component
+# `Card` component
 
 We’ve got a swipeable card so far. Let’s now make a deck of cards!
 
@@ -37,7 +33,7 @@ function Card(){
 
 We first create a capitalized function and place a `return` inside. We can either have the tags to be return on the same line as the `return` or the `return` must have parentheses that enclose the tags.
 
-### Moving code into `Card`
+## Moving code into `Card`
 
 Let's copy our big `<Frame/>` tag and move it to our `Card` component.
 
@@ -91,7 +87,7 @@ function App() {
 }
 ```
 
-### Adding more cards
+## Adding more cards
 
 The reason for extracting the component is that it gives us the ability for to re-use and create multiple cards.
 Therefore, let's add more Cards!
@@ -109,16 +105,11 @@ function App() {
 }
 ```
 
-<img
-  src={imgMultiplecardsGif}
-  alt={`multiple of the same cards`}
-  width={342}
-  height={246}
-/>
+![multiple of the same cards](./multiplecards.gif)
 
 We now have multiple cards behind each other, but we need to display a few different cards, with different images and background colors.
 
-### Customizing cards
+## Customizing cards
 
 Typically, we can add different attributes to each card.
 
@@ -160,7 +151,7 @@ function Card(props){
 
 But just for a change and since we’ve already been using the `style` attribute, let’s simply update our `style` attribute.
 
-### Dynamic `style` attribute
+## Dynamic `style` attribute
 
 Currently, the `style` variable is defined outside, so we need to move it inside the `Card` function so that we could make it dynamic with our `props` parameter.
 
@@ -206,15 +197,15 @@ function Card(props){
 }
 ```
 
-<img src={imgColor2Png} alt={`color`} width={146} height={206} />
+![color](./color2.png)
 
 For the image, we want to replace the URL in the string, but we have to keep the `url(...)` surrounding our image link. Unfortunately, this is just the format enforced by CSS when setting the background image.
 
-### Making `backgroundImage` dynamic
+## Making `backgroundImage` dynamic
 
 There are 2 ways we can fix make our url link dynamic.
 
-#### 1. String concatenation
+### 1. String concatenation
 
 ```jsx{4}
 function Card(props){
@@ -235,14 +226,9 @@ function Card(props){
 
 `"url("+props.image+")"` concatenates three strings and we get one final string.
 
-<img
-  src={imgFat2Png}
-  alt={`fat bird, links working`}
-  width={146}
-  height={206}
-/>
+![fat bird, links working](./fat2.png)
 
-#### 2. **Template string**
+### 2. **Template string**
 
 Another, preferred, method is called template string. Instead of quotes surrounding our strings, we use a **backtick** which is the key on the top left of your keyboard. The plus `+` is removed and we surround what we want, `props.image` with `${...}` to make it dynamic.
 
@@ -265,6 +251,6 @@ function Card(props){
 
 This is similar to using the curly brackets in JSX to make something dynamic, but there is a **dollar sign** in the front. Both methods will execute our code inside and put the result back into the string, but this method looks nicer.
 
-## Conclusion
+# Conclusion
 
 Now that we have multiple cards that can be customized, in the next post, we'll make our code robust so that it won't be repetitive if we need 100 cards!

@@ -1,18 +1,16 @@
-import imgReactdoodlePng from './reactdoodle.png'
+---
+date: '2019-07-31'
+title: '3.8 React Slider Components'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238563'
+---
 
-import { CoursePostLayout } from '@/components/CoursePostLayout'
-export const meta = {
-  tags: [],
-  date: '2019-07-31',
-  title: '3.8 React Slider Components',
-  video: 'https://school.learnreact.design/courses/629779/lectures/11238563',
-}
-
-export default CoursePostLayout
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
 
 <!-- # **TODO fix code spacing thing** -->
 
-## Overview
+# Overview
 
 What you'll learn:
 
@@ -22,7 +20,7 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-## React Components
+# React Components
 
 We’ve got the slider working now, but our code is starting to get long and messy. Let’s clean it up and learn an important concept about React.
 
@@ -46,11 +44,11 @@ function Skinny() {
 
 Remember this picture?
 
-<img src={imgReactdoodlePng} alt={`react doodle`} width={808} height={442} />
+![react doodle](./reactdoodle.png)
 
 Now we have the component here as the printer and React as the person flipping the pages. We are going to learn more about this picture in the modules of react states, but at this point just remember that a React component is a printer that prints out something.
 
-### `<Skinny>` component
+## `<Skinny>` component
 
 Let's see what snapshot of the UI we are going to return from the `Skinny` function. We can copy and remove this portion of our code because this is Skinny.
 
@@ -166,7 +164,7 @@ function Skinny(){
 }
 ```
 
-### `<Slider>` component
+## `<Slider>` component
 
 Now let’s do the same thing to our Slider! Select, copy, and remove (same as cut) the slider frames. We'll put a single `<Slider>` tag underneath `<Skinny>`.
 
@@ -231,7 +229,7 @@ function Slider() {
 
 Although our slider and our picture are disconnected and don't work, the code looks a lot better.
 
-## Conclusion
+# Conclusion
 
 It’s very easy to see the structure of our `App` component.
 It consists of a `<div>`, a `<Skinny>` tag and a `<Slider>` tag.

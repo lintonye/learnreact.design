@@ -1,14 +1,14 @@
-import { CoursePostLayout } from '@/components/CoursePostLayout'
-export const meta = {
-  tags: [],
-  date: '2019-07-24',
-  title: '2.3 String and Objects',
-  video: 'https://school.learnreact.design/courses/601139/lectures/10785662',
-}
+---
+date: '2019-07-24'
+title: '2.3 String and Objects'
+video: 'https://school.learnreact.design/courses/601139/lectures/10785662'
+---
 
-export default CoursePostLayout
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
 
-## Overview
+# Overview
 
 What you'll learn:
 
@@ -19,7 +19,7 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-## Attributes and Properties of JSX
+# Attributes and Properties of JSX
 
 We now know that we can use this `style` attribute to set the inline style of a `<div>`, or any HTML element.
 
@@ -36,11 +36,11 @@ If you are confused by these double curly brackets, colons, and commas, you are 
 
 When you learn enough about JavaScript, you’ll see that everything we write here has some logic behind it. After you understand the logic, and with a little bit of practice it will become your second nature to write code like this. So follow along with me. It’s really not that hard.
 
-### Curly Brackets
+## Curly Brackets
 
 If you need a refresh on curly braces in JSX, check out my [blog post](https://learnreact.design/2019/05/10/those-curly-braces-in-jsx) about it! As I mentioned before, these curly brackets in JSX are like flexible placeholders, waiting to be filled with many different things.
 
-### Strings
+## Strings
 
 For attributes, we can put in a number, a quoted text, etc. As a reminder, for a quoted piece of text, there is actually an invisible pair of curly brackets here.
 
@@ -60,7 +60,7 @@ The technical term for any quoted text is **"string"**.
 
 Remember, a comment is code that is not part of the executable code. The computer won’t run it. It’s just there to help us read the code.
 
-### Objects
+## Objects
 
 Inside the **style's first pair** of curly brackets is the third kind of thing that we can put into the placeholder.
 
@@ -87,7 +87,7 @@ What's in this Frame's style attribute? An object! Who would have guessed?
 
 We put these descriptions in a group so that later when we want to style this div, we can just grab this single object as a whole.
 
-### Creating Objects
+## Creating Objects
 
 As another example, let's create an object.
 
@@ -122,7 +122,7 @@ We separate multiple properties with a **comma**.
 
 Infinity is a number in JavaScript!
 
-## Conclusion
+# Conclusion
 
 In an object, we have a list of named properties. The value of a property can be a string, number, and pretty much anything else. You’ll see other examples later on.
 

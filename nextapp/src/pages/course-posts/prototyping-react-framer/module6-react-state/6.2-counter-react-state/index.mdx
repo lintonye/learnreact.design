@@ -1,22 +1,14 @@
-import imgConsolePng from './console.png'
-import imgConsole1Png from './console1.png'
-import imgSetcountGif from './setcount.gif'
-import imgWorkingcountGif from './workingcount.gif'
-import imgFirstdemoGif from './firstdemo.gif'
-import imgSeconddemoGif from './seconddemo.gif'
-import imgThirddemoGif from './thirddemo.gif'
+---
+date: '2019-08-14'
+title: '6.2 React Counter State'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238540'
+---
 
-import { CoursePostLayout } from '@/components/CoursePostLayout'
-export const meta = {
-  tags: [],
-  date: '2019-08-14',
-  title: '6.2 React Counter State',
-  video: 'https://school.learnreact.design/courses/629779/lectures/11238540',
-}
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
 
-export default CoursePostLayout
-
-## Overview
+# Overview
 
 What you'll learn:
 
@@ -27,7 +19,7 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-## React States
+# React States
 
 We only have one page in our flipbook and clicking our button does not produce any new pages, though it does change the value of the `count` variable. Still, the number on the browser preview does not change.
 
@@ -35,7 +27,7 @@ In order to make new pages, we need a special way to tell React to call the `App
 
 **React state** is how we do this.
 
-### `useState`
+## `useState`
 
 In `App`, we can write this:
 
@@ -72,11 +64,11 @@ function App() {
 }
 ```
 
-<img src={imgConsolePng} alt={`console`} width={581} height={162} />
+![console](./console.png)
 
 We see that `count` and `setCount` have a value of `0` and a function respectively.
 
-### Understanding `useState`
+## Understanding `useState`
 
 If we change the `useState` parameter from `0` to `1`,
 
@@ -89,7 +81,7 @@ function App() {
 
 We see that the `count` value has also changed to `1`.
 
-<img src={imgConsole1Png} alt={`console`} width={581} height={162} />
+![console](./console1.png)
 
 Therefore, the parameter of `useState` acts like its initial value.
 
@@ -107,16 +99,11 @@ Because the second element in the array, `setCount`, is a function. Let’s call
 
 Not only is our Count updated, but we also have a new page.
 
-<img
-  src={imgSetcountGif}
-  alt={`count update and new page`}
-  width={292}
-  height={174}
-/>
+![count update and new page](./setcount.gif)
 
 This is exactly what we want. Like other hooks, `useState` gives our component a special ability. In our case, `useState` gives our component a way to actively update the result in the browser.
 
-### React rendering
+## React rendering
 
 `useState` gives us a function. When we call it, `setCount`, it informs React to call the component function. As a result, we get a new snapshot in our flipbook, and the browser content is updated accordingly.
 
@@ -124,7 +111,7 @@ The technical term for this process is **rendering**.
 
 When React calls our component function and puts the result in the browser, we the process **"React renders that component"**. Next time, hopefully, you won’t be surprised when you see these terms in error messages and documents of React.
 
-### Finishing the counter
+## Finishing the counter
 
 Instead of a fixed value in `setCount` we can replace it with `count +1`.
 
@@ -138,31 +125,26 @@ Instead of a fixed value in `setCount` we can replace it with `count +1`.
 </button>
 ```
 
-<img
-  src={imgWorkingcountGif}
-  alt={`working counter`}
-  width={196}
-  height={126}
-/>
+![working counter](./workingcount.gif)
 
-### React snapshot illustrated
+## React snapshot illustrated
 
 As a recap, let’s see what kind of flipbook we’ll get after clicking the button twice.
 
 Initially, we get a new page in our flipbook which is our starting page.
 
-<img src={imgFirstdemoGif} alt={`first demo`} width={800} height={362} />
+![first demo](./firstdemo.gif)
 
 When we click the button once, we get a new page with the only difference being the count is 1 more than the previous.
 
-<img src={imgSeconddemoGif} alt={`second demo`} width={800} height={361} />
+![second demo](./seconddemo.gif)
 
 Pressing the button once more, we'll get a new page and the browser counter updates again.
 
-<img src={imgThirddemoGif} alt={`third demo`} width={800} height={360} />
+![third demo](./thirddemo.gif)
 
 I hope these illustrations help!
 
-## Conclusion
+# Conclusion
 
 Now that you know about React States, we can begin creating our Radio Group.

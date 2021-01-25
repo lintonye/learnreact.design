@@ -1,16 +1,14 @@
-import imgRadioPng from './radio.png'
+---
+date: '2019-08-15'
+title: '6.5 Passing Props'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238543'
+---
 
-import { CoursePostLayout } from '@/components/CoursePostLayout'
-export const meta = {
-  tags: [],
-  date: '2019-08-15',
-  title: '6.5 Passing Props',
-  video: 'https://school.learnreact.design/courses/629779/lectures/11238543',
-}
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
 
-export default CoursePostLayout
-
-## Overview
+# Overview
 
 What you'll learn:
 
@@ -19,9 +17,9 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-## `RadioGroup` props
+# `RadioGroup` props
 
-<img src={imgRadioPng} alt={`current radio group`} width={131} height={261} />
+![current radio group](./radio.png)
 
 We are almost ready to make the Radio Group functional, but before that, let's move the radio group to the center of the screen.
 
@@ -52,7 +50,7 @@ function RadioGroup(props) {
 }
 ```
 
-### Problem with hardcoding attributes
+## Problem with hardcoding attributes
 
 This certainly works, but it raises an issue. If we set this `center` attribute on the `<Frame>`, every new `<RadioGroup>` will always be centered no matter what. What if we want to have two Radio groups on the page, one centered and one not?
 
@@ -89,7 +87,7 @@ function RadioGroup(props) {
 
 However, repeatedly adding many individual props is a tiring and error-prone process. What if we want to support large number of other attributes?
 
-### Spread Operator
+## Spread Operator
 
 We can use the **spread operator** to support all our properties.
 
@@ -146,7 +144,7 @@ By using the spread operator, we can use all the attributes that the `<Frame>` s
 
 Try experimenting with the attributes!
 
-## Conclusion
+# Conclusion
 
 There are multiple ways to pass props, but you should know that with the spread operator you can add as many properties as you want.
 

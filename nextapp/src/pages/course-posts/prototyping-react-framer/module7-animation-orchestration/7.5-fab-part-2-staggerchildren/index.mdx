@@ -1,30 +1,14 @@
-import imgFab2Gif from './fab2.gif'
-import imgOverlapPng from './overlap.png'
-import imgRelativePng from './relative.png'
-import imgImagePng from './image.png'
-import imgCenteredPng from './centered.png'
-import imgBorderPng from './border.png'
-import imgScale3Gif from './scale3.gif'
-import imgStaggerdocPng from './staggerdoc.png'
-import imgStaggerexamplePng from './staggerexample.png'
-import imgStaggerfirstGif from './staggerfirst.gif'
-import imgStaggerbothGif from './staggerboth.gif'
-import imgFabfixedGif from './fabfixed.gif'
-import imgDirectionGif from './direction.gif'
-import imgInitialGif from './initial.gif'
-import imgIntialfixedfinalresultGif from './intialfixedfinalresult.gif'
+---
+date: '2019-08-21'
+title: '7.5 FAB Part 2: staggerChildren'
+video: 'https://school.learnreact.design/courses/629779/lectures/11509519'
+---
 
-import { CoursePostLayout } from '@/components/CoursePostLayout'
-export const meta = {
-  tags: [],
-  date: '2019-08-21',
-  title: '7.5 FAB Part 2: staggerChildren',
-  video: 'https://school.learnreact.design/courses/629779/lectures/11509519',
-}
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
 
-export default CoursePostLayout
-
-## Overview
+# Overview
 
 What you'll learn:
 
@@ -34,13 +18,13 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-## FAB Part 2
+# FAB Part 2
 
 Now, we'll finish our floating action button.
 
 First, let's add these smaller buttons when the FAB is expanded.
 
-<img src={imgFab2Gif} alt={`fab`} width={127} height={281} />
+![fab](./fab2.gif)
 
 See for yourself! [FAB Animation](https://f89r9.csb.app/).
 
@@ -69,7 +53,7 @@ function Fab({ buttons, ...props }) {
 }
 ```
 
-<img src={imgOverlapPng} alt={`overlapping buttons`} width={111} height={111} />
+![overlapping buttons](./overlap.png)
 
 Our buttons are overlapping because Frames are **absolutely positioned** by default.
 
@@ -95,14 +79,9 @@ Let’s change our white button and our smaller ones to **relative** positioning
 </Frame>
 ```
 
-<img
-  src={imgRelativePng}
-  alt={`relative positioning`}
-  width={86}
-  height={234}
-/>
+![relative positioning](./relative.png)
 
-### Adding images
+## Adding images
 
 To populate our buttons, we'll use the `image` attribute.
 
@@ -120,7 +99,7 @@ To populate our buttons, we'll use the `image` attribute.
 </Frame>
 ```
 
-<img src={imgImagePng} alt={`populated buttons`} width={86} height={234} />
+![populated buttons](./image.png)
 
 We now want to add spacing between the buttons and center them. We'll use the `style` attribute to add a margin and `center` to align the buttons. However, if you want, you could also use `flexbox` on the parent `<Frame>` to center the buttons.
 
@@ -135,9 +114,9 @@ We now want to add spacing between the buttons and center them. We'll use the `s
 />
 ```
 
-<img src={imgCenteredPng} alt={`centered buttons`} width={96} height={290} />
+![centered buttons](./centered.png)
 
-### Styling our buttons
+## Styling our buttons
 
 To make our buttons look nicer, we'll add a border and drop subtle drop shadow.
 
@@ -154,12 +133,7 @@ To make our buttons look nicer, we'll add a border and drop subtle drop shadow.
 />
 ```
 
-<img
-  src={imgBorderPng}
-  alt={`border and shadow added`}
-  width={96}
-  height={290}
-/>
+![border and shadow added](./border.png)
 
 Did we miss anything? What should we do if we use the `map` function?
 
@@ -174,7 +148,7 @@ Don’t forget to add the `key` prop to get rid of the warning associated with u
 />
 ```
 
-### Animation
+## Animation
 
 To animate the small buttons, we can use the `variants` prop with `scale` values.
 
@@ -196,31 +170,21 @@ To animate the small buttons, we can use the `variants` prop with `scale` values
 />
 ```
 
-<img src={imgScale3Gif} alt={`scaled buttons`} width={127} height={283} />
+![scaled buttons](./scale3.gif)
 
-### Stagger Effect
+## Stagger Effect
 
 Now it’s time to add some stagger effect.
 
 We can check out Framer's [documentation](https://www.framer.com/api/animation/#orchestration.staggerchildren) to stagger our animation.
 
-### `staggerChildren`
+## `staggerChildren`
 
-<img
-  src={imgStaggerdocPng}
-  alt={`stagger documentation`}
-  width={643}
-  height={254}
-/>
+![stagger documentation](./staggerdoc.png)
 
 The property is called `staggerChildren` and, in the example on the right, we see that `staggerChildren` is set in the `transition` property.
 
-<img
-  src={imgStaggerexamplePng}
-  alt={`stagger example`}
-  width={291}
-  height={248}
-/>
+![stagger example](./staggerexample.png)
 
 `staggerChildren` holds the duration of the delay.
 
@@ -270,18 +234,13 @@ function Fab({ buttons, ...props }) {
 }
 ```
 
-<img
-  src={imgStaggerfirstGif}
-  alt={`stagger animation`}
-  width={127}
-  height={291}
-/>
+![stagger animation](./staggerfirst.gif)
 
 When the mode of the button changes from `expanded` to `folded`, this transition is active and there will be a delay for the animations of all the children of this `<Frame>`.
 
 Since we haven’t defined `staggerChildren` for the `expanded` mode, when the mode does change, all the animations still happen at the same time.
 
-### Expanding stagger
+## Expanding stagger
 
 Let's add a stagger to the `expanded` mode.
 
@@ -304,12 +263,7 @@ function Fab({ buttons, ...props }) {
 }
 ```
 
-<img
-  src={imgStaggerbothGif}
-  alt={`stagger both states`}
-  width={125}
-  height={286}
-/>
+![stagger both states](./staggerboth.gif)
 
 However, now the FAB animation is delayed as well because it is a child of the outer `<Frame>`.
 
@@ -341,11 +295,11 @@ function Fab({ buttons, ...props }) {
 }
 ```
 
-<img src={imgFabfixedGif} alt={`fab fixed`} width={126} height={286} />
+![fab fixed](./fabfixed.gif)
 
 We certainly aren't done yet!
 
-### `staggerDirection`
+## `staggerDirection`
 
 When the FAB is expanded, we want the animation to happen in the opposite direction. This is possible with `staggerDirection`, in which by default is set to `1`.
 
@@ -361,16 +315,11 @@ When the FAB is expanded, we want the animation to happen in the opposite direct
 >
 ```
 
-<img
-  src={imgDirectionGif}
-  alt={`stagger direction fixed`}
-  width={124}
-  height={285}
-/>
+![stagger direction fixed](./direction.gif)
 
 Finally, let’s change our delay duration from `0.5` to `0.05`. It is too slow for real use but useful during our development phase so that we can see what’s going on.
 
-#### **Flashing image in the next sections**
+### **Flashing image in the next sections**
 
 ```jsx{6-7}
 <Frame
@@ -384,13 +333,13 @@ Finally, let’s change our delay duration from `0.5` to `0.05`. It is too slow 
 >
 ```
 
-<img src={imgFab2Gif} alt={`final result`} width={127} height={281} />
+![final result](./fab2.gif)
 
-### Launching bug
+## Launching bug
 
 Lastly, when the app launches, we can see the small buttons appear shortly.
 
-<img src={imgInitialGif} alt={`initial refresh bug`} width={126} height={287} />
+![initial refresh bug](./initial.gif)
 
 We can easily fix this by adding an `initial` prop to the root frame.
 
@@ -408,16 +357,11 @@ return (
 )
 ```
 
-### Final Result
+## Final Result
 
-<img
-  src={imgIntialfixedfinalresultGif}
-  alt={`initial problem fixed, final result`}
-  width={125}
-  height={286}
-/>
+![initial problem fixed, final result](./intialfixedfinalresult.gif)
 
-## Conclusion
+# Conclusion
 
 Good job making it here!
 

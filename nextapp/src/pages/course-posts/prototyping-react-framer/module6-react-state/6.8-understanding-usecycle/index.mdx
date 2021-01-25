@@ -1,17 +1,14 @@
-import imgScaletoggle3Gif from './scaletoggle3.gif'
-import imgConsolePng from './console.png'
+---
+date: '2019-08-16'
+title: '6.8 Understanding useCycle'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238546'
+---
 
-import { CoursePostLayout } from '@/components/CoursePostLayout'
-export const meta = {
-  tags: [],
-  date: '2019-08-16',
-  title: '6.8 Understanding useCycle',
-  video: 'https://school.learnreact.design/courses/629779/lectures/11238546',
-}
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
 
-export default CoursePostLayout
-
-## Overview
+# Overview
 
 What you'll learn:
 
@@ -21,11 +18,11 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-## `useCycle`
+# `useCycle`
 
 Let’s go back to the toggle we built earlier.
 
-<img src={imgScaletoggle3Gif} alt={`scale toggle`} width={188} height={136} />
+![scale toggle](./scaletoggle3.gif)
 
 To make our toggle functional, we implemented the `useCycle` function imported from Framer.
 
@@ -49,9 +46,9 @@ function App() {
 
 It seems like we just get one new page.
 
-<img src={imgConsolePng} alt={`console`} width={265} height={151} />
+![console](./console.png)
 
-### `cycleMode`
+## `cycleMode`
 
 ```jsx{5}
 <div className="App">
@@ -66,7 +63,7 @@ It seems like we just get one new page.
 
 Now, what is going on with the `cycleMode` function? Why do we get a new page in our flipbook when we call it and what gives a component the ability to actively refresh our browser?
 
-### `useCycle` is `useState`
+## `useCycle` is `useState`
 
 Well, `useCycle` is actually `useState` in disguise.
 
@@ -106,7 +103,7 @@ function useCycle2(options){
 }
 ```
 
-### Array logic
+## Array logic
 
 For our cycle, we'll define a new function inside of `useCycle2`. The `cycle` requires us to change our index, and we can do that using `setIndex` from `useState`.
 
@@ -145,9 +142,9 @@ function App() {
 
 Our toggle works just as before.
 
-<img src={imgScaletoggle3Gif} alt={`scale toggle`} width={188} height={136} />
+![scale toggle](./scaletoggle3.gif)
 
-### Understanding `useCycle`
+## Understanding `useCycle`
 
 You know the "true face" behind `useCycle`. All it is, is a custom hook that implements `useState` as its building block.
 
@@ -157,7 +154,7 @@ Being able to build custom hooks with existing hooks is a big feature of React h
 
 Framer’s [hooks](https://www.framer.com/api/utilities/) are a great example. They make it very easy to build prototypes with animations and gestures.
 
-## Conclusion
+# Conclusion
 
 We have now covered a fundamental React hook skill that will help us understand and create new hooks.
 

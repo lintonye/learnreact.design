@@ -1,21 +1,14 @@
-import imgSocialMediaJpg from './social-media.jpg'
-import imgGoogleInspectPng from './google-inspect.png'
-import imgGoogleInspect2Png from './google-inspect2.png'
-import imgGoogleInspect3Png from './google-inspect3.png'
-import imgGooglesearchPng from './googlesearch.png'
-import imgCodesandboxPng from './codesandbox.png'
+---
+date: '2019-07-23'
+title: '1.2 How Does a Website Work?'
+video: 'https://school.learnreact.design/courses/601139/lectures/10940022'
+---
 
-import { CoursePostLayout } from '@/components/CoursePostLayout'
-export const meta = {
-  tags: [],
-  date: '2019-07-23',
-  title: '1.2 How Does a Website Work?',
-  video: 'https://school.learnreact.design/courses/601139/lectures/10940022',
-}
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
 
-export default CoursePostLayout
-
-## Overview
+# Overview
 
 What you'll learn:
 
@@ -25,76 +18,46 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-## Websites
+# Websites
 
 When we visit websites such as Google, Instagram, and countless others we see an aesthetic user interface.
 
-<img src={imgSocialMediaJpg} alt={`social media`} width={1440} height={843} />
+![social media](./social-media.jpg)
 
 But how do they work?
 
-### How websites work
+## How websites work
 
 Take Google for example, this is the HTML code that makes up the page. The browser, in conjunction with other code, creates the appealing design we see.
 
-<img
-  src={imgGoogleInspectPng}
-  alt={`looking at google's html with inspect element`}
-  width={1303}
-  height={917}
-/>
+![looking at google's html with inspect element](./google-inspect.png)
 
 Since web design is all about what the users see, a local copy of the code is downloaded by every user viewing the site. As a result, we can change the code around! Fortunately, this won't affect the millions of other users or else the internet as we know it would be terrible!
 
-### Inspect Element
+## Inspect Element
 
-#### Right click and choose inspect element
+### Right click and choose inspect element
 
-<img
-  src={imgGoogleInspect2Png}
-  alt={`changing google inspect elmement`}
-  width={1307}
-  height={918}
-/>
+![changing google inspect elmement](./google-inspect2.png)
 
 We can also see the JavaScript code on this page.
 
-<img
-  src={imgGoogleInspect3Png}
-  alt={`viewing google's JavaScript`}
-  width={1311}
-  height={918}
-/>
+![viewing google's JavaScript](./google-inspect3.png)
 
 This is what makes the page interactive. By typing in the search box, I'll get a list of suggestions. This is powered by JavaScript.
 
-<img
-  src={imgGooglesearchPng}
-  alt={`google search bar`}
-  width={611}
-  height={488}
-/>
+![google search bar](./googlesearch.png)
 
 However, if that JavaScript code is what the developers write and read, they would be superhuman! In reality, the messy code above is prepared and optimized for web browsers — not for people. The code developers use is far more legible and useable.
 
-<img
-  src={imgGoogleInspect2Png}
-  alt={`changing google inspect elmement`}
-  width={1307}
-  height={918}
-/>
+![changing google inspect elmement](./google-inspect2.png)
 
-## <span>CodeSandbox.io</span>
+# <span>CodeSandbox.io</span>
 
 We will be using codesandbox.io, an online code editor.
 
 The code that developers use is called **source code** and looks more like this.
 
-<img
-  src={imgCodesandboxPng}
-  alt={`legible code developers use`}
-  width={1703}
-  height={949}
-/>
+![legible code developers use](./codesandbox.png)
 
 It's the literal source code, with formating for readability, that the browser sees and interprets. We are going to write this kind of code to instruct the browser for our purposes.

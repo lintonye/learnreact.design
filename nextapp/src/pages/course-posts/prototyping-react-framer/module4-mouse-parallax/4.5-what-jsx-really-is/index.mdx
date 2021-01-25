@@ -1,20 +1,14 @@
-import imgLiteralPng from './literal.png'
-import imgFunctionframe2Png from './functionframe2.png'
-import imgFunction500Png from './function500.png'
-import imgFunctionbackgroundPng from './functionbackground.png'
-import imgFinalGif from './final.gif'
+---
+date: '2019-08-03'
+title: '4.5 What JSX really is'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238585'
+---
 
-import { CoursePostLayout } from '@/components/CoursePostLayout'
-export const meta = {
-  tags: [],
-  date: '2019-08-03',
-  title: '4.5 What JSX really is',
-  video: 'https://school.learnreact.design/courses/629779/lectures/11238585',
-}
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
 
-export default CoursePostLayout
-
-## Overview
+# Overview
 
 What you'll learn:
 
@@ -25,13 +19,13 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-## What is JSX?
+# What is JSX?
 
 So far we’ve built quite a few prototypes with JSX. As you’ve seen, JSX code looks like HTML. We have angle brackets, open and close tags, attributes and so on. However, JSX is far more powerful than HTML. We can define our own custom tags and treat tags as a template to hold dynamic values.
 
 Still, what exactly is JSX? For example, why can we put a bunch of tags after `return` such as in our `Slider`, `Skinny` and `App` components? It's almost as if these groups of tags resemble a number or a string.
 
-### JSX is just JS
+## JSX is just JS
 
 The short answer is that JSX code is just JavaScript. There is nothing incredibly mysterious or fancy. Understanding this is very useful for us to learn more about React.
 
@@ -39,7 +33,7 @@ Let’s dive deeper into what I mean.
 
 First, we are going to completely comment out our background `<Frame>` (CTR + /).
 
-### Converting JSX to JS
+## Converting JSX to JS
 
 ```jsx
 <Frame ...>
@@ -72,16 +66,11 @@ React.createElement(Frame)
 ...
 ```
 
-<img
-  src={imgLiteralPng}
-  alt={`literal text in preview`}
-  width={346}
-  height={220}
-/>
+![literal text in preview](./literal.png)
 
 We will only get the literal text. However, if we add a pair of curly brackets to make it dynamic we get a blue square here — a `<Frame>`.
 
-### Adding curly brackets
+## Adding curly brackets
 
 ```jsx{10}
 {/*<Frame
@@ -97,11 +86,11 @@ We will only get the literal text. However, if we add a pair of curly brackets t
 ...
 ```
 
-<img src={imgFunctionframe2Png} alt={`frame`} width={292} height={214} />
+![frame](./functionframe2.png)
 
 Therefore, this function has the same effect as if we put in a `<Frame>` tag.
 
-### What does this statement mean?
+## What does this statement mean?
 
 ```jsx
 {
@@ -117,7 +106,7 @@ This means if we don’t have all our previous attributes on our background `<Fr
 
 However, what can we do about the attributes?
 
-### Adding attributes
+## Adding attributes
 
 Let’s start with the `size` attribute. We can add attributes to this function `Frame` using more objects.
 
@@ -127,12 +116,7 @@ Let’s start with the `size` attribute. We can add attributes to this function 
 }
 ```
 
-<img
-  src={imgFunction500Png}
-  alt={`function frame size 500`}
-  width={250}
-  height={250}
-/>
+![function frame size 500](./function500.png)
 
 We now get a larger box that resembles our first background `<Frame>`.
 
@@ -151,14 +135,9 @@ Therefore, if we migrate all the attributes to this function `Frame` with **obje
 }
 ```
 
-<img
-  src={imgFunctionbackgroundPng}
-  alt={`function background`}
-  width={263}
-  height={272}
-/>
+![function background](./functionbackground.png)
 
-### Replacing all our JSX image Frames with JS
+## Replacing all our JSX image Frames with JS
 
 ```jsx
 {
@@ -217,8 +196,8 @@ Therefore, if we migrate all the attributes to this function `Frame` with **obje
 
 Everything still works!
 
-<img src={imgFinalGif} alt={`final`} width={180} height={188} />
+![final](./final.gif)
 
-## Conclusion
+# Conclusion
 
 We converted all our JSX tags to plain old JavaScript calls! However, we aren't done yet! In the next post, we'll convert all of our JSX tags to JS.

@@ -1,20 +1,14 @@
-import imgFinalresultGif from './finalresult.gif'
-import imgHorizontalGif from './horizontal.gif'
-import imgConsolePng from './console.png'
-import imgTransform2Png from './transform2.png'
-import imgDiagonalGif from './diagonal.gif'
+---
+date: '2019-08-05'
+title: '5.1 Tinder Swipe Animation'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238547'
+---
 
-import { CoursePostLayout } from '@/components/CoursePostLayout'
-export const meta = {
-  tags: [],
-  date: '2019-08-05',
-  title: '5.1 Tinder Swipe Animation',
-  video: 'https://school.learnreact.design/courses/629779/lectures/11238547',
-}
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
 
-export default CoursePostLayout
-
-## Overview
+# Overview
 
 What you'll learn:
 
@@ -23,18 +17,13 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-## Final Result
+# Final Result
 
-<img
-  src={imgFinalresultGif}
-  alt={`final slider result`}
-  width={146}
-  height={194}
-/>
+![final slider result](./finalresult.gif)
 
 See for yourself! [Tinder Swipe](https://xwu1q.csb.app/).
 
-## Tinder Swipe
+# Tinder Swipe
 
 Welcome to the Tinder Swipe module! We’ll build a swipe gesture and learn a new way to animate things.
 
@@ -44,28 +33,26 @@ Furthermore, you’ll learn more JavaScript involving arrow functions, ternary o
 
 Before we work with multiple cards, we'll start off with a single card swipe.
 
-## One Card Swipe
+# One Card Swipe
 
 Let’s get started! Here is the [starter code](https://github.com/lintonye/prototyping-with-react-framer/tree/5.1-tinder-swipe-starter/app).
 
 Here we’ve got a Frame with some styling and a couple of drag attributes so we can drag the card horizontally.
 
-<img
-  src={imgHorizontalGif}
-  alt={`horizontal card drag`}
-  width={309}
-  height={188}
-/>
+![horizontal card drag](./horizontal.gif)
 
 We also want our card to rotate a little bit when we drag the card.
 
 We could do this with the `useAnimation` hook and start a rotation animation in `onDrag`, but we are gonna do it differently!
 
-### `useMotionValue`
+## `useMotionValue`
 
 We are gonna use a new hook called `useMotionValue`.
 
 ```jsx{3}
+import * as React from "react"
+import ReactDOM from "react-dom"
+import { Frame, useMotionValue } from "framer"
 import "./styles.css"
 ```
 
@@ -94,24 +81,19 @@ function App(){
 
 It looks like we get a large object in our console. Expanding our object, we see a property near the bottom called `current` set to `0`.
 
-<img src={imgConsolePng} alt={`mv in console`} width={852} height={311} />
+![mv in console](./console.png)
 
 If we change our `useMotionValue` parameter to `10`, our current value will be equal to `10`.
 
 If we think about how `useMotionValue` is named, we can deduce that it should hold a value with motion. In fact, the `current` property is the object's value at a particular moment that will most likely change over time.
 
-### `MotionValue`
+## `MotionValue`
 
 The `useMotionValue` object is called `MotionValue`, and it is similar to a container of a numeric value. The parameter when we call the `useMotionValue` hook is `MotionValue`'s initial value.
 
 However, how do we use this function? If we check the Framer's [**transform** documentation](https://www.framer.com/api/frame/#csstransformproperties.x), we’ll see that many attributes of the `Frame` accept `MotionValue`.
 
-<img
-  src={imgTransform2Png}
-  alt={`transform documentation`}
-  width={255}
-  height={319}
-/>
+![transform documentation](./transform2.png)
 
 Let’s set `MotionValue` to the `x` attribute and see what happens.
 
@@ -144,7 +126,7 @@ We can’t tell what the new values are yet, but we can if we add this statement
 />
 ```
 
-### `MotionValue` link
+## `MotionValue` link
 
 Can you see how this works? When we drag the card, its `x` offset changes. Because we set the `x` attribute to `mv`, we established a link between the `x` attribute and the `MotionValue` `mv`.
 
@@ -152,8 +134,8 @@ The `current` value inside `MotionValue` is automatically kept in sync with the 
 
 Now since we set the `y` attribute to `mv` as well, the `y` offset will be updated as the `current` value of `mv` changes. That’s why the card moves diagonally!
 
-<img src={imgDiagonalGif} alt={`diagonal`} width={260} height={314} />
+![diagonal](./diagonal.gif)
 
-## Conclusion
+# Conclusion
 
 That’s pretty cool! Next, we’ll make the card rotate as we drag.

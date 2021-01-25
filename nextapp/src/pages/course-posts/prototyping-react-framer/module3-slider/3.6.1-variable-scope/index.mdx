@@ -1,16 +1,14 @@
-import imgScopeerrorPng from './scopeerror.png'
+---
+date: '2019-07-31'
+title: '3.61 Variable Scope'
+video: 'https://school.learnreact.design/courses/629779/lectures/11238561'
+---
 
-import { CoursePostLayout } from '@/components/CoursePostLayout'
-export const meta = {
-  tags: [],
-  date: '2019-07-31',
-  title: '3.61 Variable Scope',
-  video: 'https://school.learnreact.design/courses/629779/lectures/11238561',
-}
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
 
-export default CoursePostLayout
-
-## Overview
+# Overview
 
 What you'll learn:
 
@@ -20,7 +18,7 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-## Scope
+# Scope
 
 Let’s look at an important concept in JavaScript, scope.
 
@@ -30,7 +28,7 @@ However, if we try to use `animationControls` outside of function App, we get a 
 
 You may say that’s because we were trying to use the variable before it’s created since it’s above the definition, but that's not the case. If we move `animationControls` outside of `App` and at the very bottom of our file, we still get the same error.
 
-<img src={imgScopeerrorPng} alt={`scope error`} width={371} height={84} />
+![scope error](./scopeerror.png)
 
 The reason is that the variable `animationControls` is defined inside the function App. You can imagine `App`'s pair of curly brackets as the walls of a room without windows. If we are not in the room, we cannot see what’s inside. Therefore, we got errors because we were outside the room.
 
@@ -92,17 +90,17 @@ The technical term for the range where a variable is visible is **scope**.
 
 The scope of `sliderWidth` is most of this file below its definition because it was defined outside of `App`.
 
-### Function variables scope
+## Function variables scope
 
 The scope of `newScale` is just inside the handleDrag function.
 
 That’s why we’ll get an error if we try to use `newScale` outside `handleDrag`.
 
-### Function parameters Scope
+## Function parameters Scope
 
 Function parameters are like variables as well, even though we don’t define them with `let`. **Their scope is inside the function.**
 
-## Conclusion
+# Conclusion
 
 Now we know what the scope of variables is. You can think of the pair of curly brackets like the walls of a room. The walls are one-way mirrors. We can see the outside from within a room, but those who are outside won’t see anything inside.
 

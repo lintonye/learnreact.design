@@ -1,18 +1,14 @@
-import imgGifanimatedtoggle2Gif from './gifanimatedtoggle2.gif'
-import imgNeverusedPng from './neverused.png'
-import imgReactdoodlePng from './reactdoodle.png'
+---
+date: '2019-07-26'
+title: '2.9 Animate Attribute'
+video: 'https://school.learnreact.design/courses/601139/lectures/10785664'
+---
 
-import { CoursePostLayout } from '@/components/CoursePostLayout'
-export const meta = {
-  tags: [],
-  date: '2019-07-26',
-  title: '2.9 Animate Attribute',
-  video: 'https://school.learnreact.design/courses/601139/lectures/10785664',
-}
+import CoursePost from '../../../../../new-components/CoursePost'
+import CourseVideoLink from '../../../../../new-components/CourseVideoLink'
+export default CoursePost
 
-export default CoursePostLayout
-
-## Overview
+# Overview
 
 What you'll learn:
 
@@ -22,7 +18,7 @@ What you'll learn:
 
 <CourseVideoLink to={props.pageContext.frontmatter.video} />
 
-## Animation with `animate`
+# Animation with `animate`
 
 Our toggle kinda works, but it’s not good enough. It immediately appears on the left or right when we click on it. It feels pretty jarring. It’d be nice if we could show some animation to this.
 
@@ -45,12 +41,7 @@ function App(){
 }
 ```
 
-<img
-  src={imgGifanimatedtoggle2Gif}
-  alt={`animated toggle gif`}
-  width={206}
-  height={108}
-/>
+![animated toggle gif](./gifanimatedtoggle2.gif)
 
 However, why do we have double curly brackets and a colon here?
 
@@ -60,7 +51,7 @@ So depending on how many times the user taps on the toggle, we’ll get a differ
 
 By default when we animate the position of a Frame such as x or y, a **spring** animation will be used. That’s why the knob is a bit bouncy.
 
-### Customizing the animation
+## Customizing the animation
 
 We can customize the animation with another attribute called `transition`.
 
@@ -83,7 +74,7 @@ I encourage you to try several things on your code to see the effect of each opt
 
 It's incredibly easy it is to make animations with the framer library.
 
-## What's special with App?
+# What's special with App?
 
 `App` is a React component, and it’s just a function whose name starts with an uppercase letter and returns a group of JSX tags. It’s not very different from other functions we defined earlier such as
 
@@ -114,7 +105,7 @@ console.log(microwave(sandwichMaker("🍖")))
 
 If we comment them out — **you can press CTR + / or CMD + / to auto comment** — now we don't see any output and we get some red lines underneath our `microwave` and `sandwichMaker` functions. If we move our cursor there, we see a warning error about how our functions are defined but never used/called.
 
-<img src={imgNeverusedPng} alt={`never used error`} width={625} height={186} />
+![never used error](./neverused.png)
 
 If we create a machine but don’t run it, it won’t produce any output. That makes total sense.
 
@@ -128,22 +119,17 @@ ReactDOM.render(<App />, rootElement)
 
 `<App />` is not the proper syntax of calling a function — it has to be `App()`.
 
-### Why do we see output if we don't call App?
+## Why do we see output if we don't call App?
 
 Well, if we see the output, the function has to be called somewhere. If we didn’t call it ourselves, it must be somebody else.
 
 It’s React that calls this function. Somewhere in React, `App` is called.
 
-## Conclusion
+# Conclusion
 
 We can visualize what React does with this doodle,
 
-<img
-  src={imgReactdoodlePng}
-  alt={`function of React visualized`}
-  width={808}
-  height={442}
-/>
+![function of React visualized](./reactdoodle.png)
 
 React components are functions much like machines. They are like printers in which React operates them from time to time, assembles the output, and creates the web page as what we’ve seen.
 
