@@ -56,25 +56,25 @@ function processFile(filePath) {
   // move thumbnail and video; add imports
   const migrateThumbnail = (filename, varName) => {
     const newThumbnail = path.join(dirName, filename)
-    frontMatterRest[varName] = varName
+    // frontMatterRest[varName] = varName
     const oldThumbnailPath = path.join(tipsRoot, 'media', filename)
     const newThumbnailPath = path.join(tipsRoot, newThumbnail)
     if (fs.existsSync(oldThumbnailPath) && !fs.existsSync(newThumbnailPath))
       fs.renameSync(oldThumbnailPath, newThumbnailPath)
-    imageImports.add(
-      `import ${varName} from "./${path.basename(newThumbnail)}"`,
-    )
+    // imageImports.add(
+    //   `import ${varName} from "./${path.basename(newThumbnail)}"`,
+    // )
   }
   const { thumbnail, video, ...frontMatterRest } = frontMatter
   if (thumbnail) migrateThumbnail(thumbnail, 'thumbnailImage')
   if (video) migrateThumbnail(video, 'thumbnailVideo')
 
+  frontMatterRest.video = video
+  frontMatterRest.videoPoster = thumbnail
+
   const meta =
     frontMatter.title &&
-    `export const meta = ${JSON.stringify(frontMatterRest, null, 2)}`.replace(
-      /"(thumbnail(Image|Video))": "\1"/g,
-      '$1',
-    )
+    `export const meta = ${JSON.stringify(frontMatterRest, null, 2)}`
 
   const newContent = []
   getAllImageInfo(path.dirname(filePath), readInterface)
