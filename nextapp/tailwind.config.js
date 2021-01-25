@@ -10,7 +10,7 @@ module.exports = {
         cursive: ['Dancing Script', 'cursive'],
       },
       fontSize: {
-        tiny: '.5rem',
+        tiny: '.75rem',
       },
     },
   },

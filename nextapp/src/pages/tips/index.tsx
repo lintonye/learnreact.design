@@ -4,7 +4,7 @@ import { PageTitle } from '../../components/PageTitle'
 import { parseISO, compareDesc } from 'date-fns'
 import { Video } from '@/components/Video'
 import { useState } from 'react'
-import { Link } from '@/components/design-system'
+import { Chip, Link } from '@/components/design-system'
 import { useImportTipVideoPaths } from '@/components/useImportTipVideoPaths'
 
 type TipMeta = {
@@ -30,6 +30,7 @@ function TipPreview({
   title,
   slug,
   date,
+  tags,
   videoPoster,
   video,
   active,
@@ -47,7 +48,7 @@ function TipPreview({
       onMouseLeave={() => typeof onMouseLeave === 'function' && onMouseLeave()}
       className="border border-gray-200 cursor-pointer rounded-sm overflow-hidden hover:shadow-lg"
     >
-      <Link href={`/tips/${slug}`}>
+      <Link href={`/tips/${slug}`} underline={false}>
         <div>
           <div
             className="relative"
@@ -77,10 +78,15 @@ function TipPreview({
           {/* {thumbnailImage && (
             <Image src={thumbnailImage} width={100} height={100} />
           )} */}
-          <div className="p-4">
+          <div className="p-4 space-y-4">
             {videoPosterPath && videoPath && (
               <h2 className="text-base font-semibold">{title}</h2>
             )}
+            <div className="text-tiny flex space-x-1">
+              {tags.map((tag) => (
+                <Chip key={tag}>{tag}</Chip>
+              ))}
+            </div>
             {/* <div className="text-sm text-gray-500">{date}</div> */}
           </div>
         </div>
