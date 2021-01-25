@@ -3,6 +3,8 @@ import { FunctionComponent } from 'react'
 import { NextSeo } from 'next-seo'
 import { Layout } from '@/components/Layout'
 import { MDXWrapper } from './MDXWrapper'
+import { Video } from './Video'
+import Image from 'next/image'
 
 type LayoutProps = {
   meta: any
@@ -12,7 +14,7 @@ export const TipLayout: FunctionComponent<LayoutProps> = ({
   children,
   meta,
 }) => {
-  const { title, description } = meta || {}
+  const { title, description, thumbnailImage, thumbnailVideo } = meta || {}
 
   return (
     <Layout>
@@ -39,6 +41,14 @@ export const TipLayout: FunctionComponent<LayoutProps> = ({
               {title}
             </h1>
           )}
+          {thumbnailVideo ? (
+            <Video videoUrl={thumbnailVideo} posterUrl={thumbnailImage} play />
+          ) : (
+            thumbnailImage && (
+              <Image src={thumbnailImage} width={640} height={360} />
+            )
+          )}
+
           {/* Main content */}
           {children}
         </div>
