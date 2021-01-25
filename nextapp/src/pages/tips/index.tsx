@@ -1,12 +1,9 @@
 import { Layout } from '@/components/Layout'
 import { NextSeo } from 'next-seo'
-import getAllPostPreviews from '@/getAllPostPreviews'
-import { PostPreview } from '@/components/PostPreview'
 import { PageTitle } from '../../components/PageTitle'
 import { parseISO, compareDesc } from 'date-fns'
 import { Video } from '@/components/Video'
 import { useState } from 'react'
-import Image from 'next/image'
 import { Link } from '@/components/design-system'
 import { useImportTipVideoPaths } from '@/components/useImportTipVideoPaths'
 
@@ -30,9 +27,7 @@ type TipPreviewProps = {
 } & TipMeta
 
 function TipPreview({
-  date,
   title,
-  tags,
   slug,
   videoPoster,
   video,
@@ -129,17 +124,10 @@ function compareDates(meta1: TipMeta, meta2: TipMeta) {
 
 export function getStaticProps() {
   const context = require.context('.', true, /index\.mdx/)
-  const path = require('path')
   const tips = context
     .keys()
     .map((filename) => {
       const meta = context(filename).meta
-      meta.slug = path.basename(
-        path.dirname(filename).split(path.separator).pop(),
-      )
-
-      console.log(meta.slug)
-
       return meta
     })
     .sort(compareDates)

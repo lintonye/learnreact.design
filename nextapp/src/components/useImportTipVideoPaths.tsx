@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 
 export function useImportTipVideoPaths(
   dirname: string,
-  video: string,
-  videoPoster: string,
+  video?: string,
+  videoPoster?: string,
 ) {
   const [videoPath, setVideoPath] = useState<string>()
   const [videoPosterPath, setVideoPosterPath] = useState<string>()
