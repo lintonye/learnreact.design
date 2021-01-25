@@ -1,0 +1,61 @@
+import thumbnailImage from './animate-onload.mp4.jpg'
+import thumbnailVideo from './animate-onload.mp4'
+
+import { TipLayout } from '@/components/TipLayout'
+
+export const meta = {
+  date: '2018-12-12',
+  title: 'Play an animation on load, not just onTap',
+  tags: ['Code', 'Code Override', 'Framer X'],
+  sourceFile:
+    'https://github.com/lintonye/framer-tips/tree/master/animate-onload.framerfx',
+  tweet: null,
+  thumbnailImage,
+  thumbnailVideo,
+}
+
+export default TipLayout
+
+## Overview
+
+Usually we start an animation when the user taps a button or something, that's why we use `onTap`. But how do we start an animation when the screen is loaded?
+
+## Solution 1
+
+Use the `animate` prop.
+
+```jsx{3}
+export function AnimateOnLoad(props): Override {
+    return {
+        animate: { scale: 1.5 },
+    }
+}
+```
+
+## Solution 2
+
+Use `useAnimation` hook.
+
+```jsx
+import { useAnimation } from 'framer'
+export function AnimateOnLoad2(props): Override {
+  const animControl = useAnimation()
+  animControl.start({ scale: 1.5, rotate: 90 })
+  return {
+    animate: animControl,
+  }
+}
+```
+
+## Delay before the animation starts
+
+Use the `transition` prop:
+
+```jsx{4}
+export function AnimateOnLoad1Delayed(props): Override {
+    return {
+        animate: { scale: 1.5 },
+        transition: { delay: 1 },
+    }
+}
+```
