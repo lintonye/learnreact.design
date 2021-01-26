@@ -31,6 +31,7 @@
     "dotenv-flow": "^3.2.0",
     "emotion": "^10.0.27",
     "emotion-server": "^10.0.27",
+    "firebase": "^8.2.4",
     "framer-motion": "^3.2.1",
     "mdx-prism": "^0.3.1",
     "next": "10.0.3",
