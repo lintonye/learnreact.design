@@ -14,6 +14,7 @@ import Footer from '@/components/courses/react-framer/Footer'
 import { NextSeo } from 'next-seo'
 import { useRouter } from 'next/router'
 import * as SeoData from '@/../next-seo.json'
+import { CourseEvents } from '@/components/CourseEvents'
 
 export default function PrototypingMasterCourse() {
   const [scrollValues, set] = useSpring(() => ({
@@ -54,6 +55,7 @@ export default function PrototypingMasterCourse() {
         <SocialProof />
         <FAQ />
         <Bios bg="primaryBg" cometBg />
+        <CourseEvents />
         <Footer />
       </ScrollContext.Provider>
     </Layout>

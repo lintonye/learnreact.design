@@ -26,7 +26,7 @@ export function BoardButton({ onTap, ...props }: any) {
   const flameVariants = {
     hover: {
       scale: [1.5, 1],
-      transition: { yoyo: Infinity },
+      transition: { repeat: Infinity, repeatType: 'reverse' },
     },
     normal: { scale: 1 },
   }

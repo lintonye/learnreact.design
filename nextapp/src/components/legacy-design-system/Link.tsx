@@ -6,7 +6,7 @@ export default function Link(props: any) {
   return (
     <NLink href={to}>
       <a
-        {...rest}
+        // {...rest}
         className={`cursor-pointer ${
           underline ? 'hover:underline' : ''
         } ${className}`}
