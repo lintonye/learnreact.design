@@ -150,7 +150,7 @@ function compareDates(meta1: TipMeta, meta2: TipMeta) {
   return compareDesc(d1, d2)
 }
 
-export function getStaticProps() {
+export async function getStaticProps() {
   const context = require.context('.', true, /index\.mdx/)
   const tips = context
     .keys()
