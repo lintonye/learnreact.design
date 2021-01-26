@@ -108,6 +108,7 @@ const modules = [
     framer: 'drag, useAnimation, transform',
     video: SliderVideo,
     poster: SliderPoster,
+    link: `${linkPrefix}/module3-slider`,
   },
   {
     type: 'foundation',
@@ -117,6 +118,7 @@ const modules = [
     framer: 'useMotionValue, useTransform, useSpring',
     video: SwipeVideo,
     poster: SwipePoster,
+    link: `${linkPrefix}/module4-tinder-swipe`,
   },
   {
     title: '9 ADVANCED MODULES',
@@ -132,6 +134,7 @@ const modules = [
     framer: 'useMotionValue, useTransform',
     video: Card3dVideo,
     poster: Card3dPoster,
+    link: `${linkPrefix}/module5-mouse-parallax`,
   },
   {
     type: 'advanced',
@@ -141,6 +144,7 @@ const modules = [
     framer: 'the true face of useCycle',
     video: RadioGroupVideo,
     poster: RadioGroupPoster,
+    link: `${linkPrefix}/module6-react-state`,
   },
   {
     type: 'advanced',
@@ -149,6 +153,7 @@ const modules = [
     framer: 'stagger animation, keyframes',
     video: PadlockVideo,
     poster: PadlockPoster,
+    link: `${linkPrefix}/module7-animation-orchestration`,
   },
   {
     type: 'advanced',
@@ -158,6 +163,7 @@ const modules = [
     framer: 'useParallax hooks, useMotionValue',
     video: ScrollParallaxVideo,
     poster: ScrollParallaxPoster,
+    link: `${linkPrefix}/module8-scroll-parallax`,
   },
   {
     type: 'advanced',
