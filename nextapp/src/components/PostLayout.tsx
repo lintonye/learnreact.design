@@ -16,6 +16,7 @@ import {
 import { ConvertKitForm } from './design-system'
 import { MDXWrapper } from './MDXWrapper'
 import { ViewCounter } from './ViewCounter'
+import { Likes } from './Likes'
 
 type LayoutProps = {
   meta: any
@@ -178,6 +179,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
               css={{ gridColumn: '3/4', gridRow: '2/20' }}
             >
               <Toc contentChildren={children} headings={tocHeadings} />
+              <Likes url={router.pathname} />
               <div className="space-y-2 text-sm">
                 <div className="uppercase tracking-wider font-semibold">
                   Sign up for updates:
@@ -190,6 +192,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
             {children}
 
             {/* Additional Info */}
+            <hr />
             <div>Updated: {date}</div>
             <ViewCounter url={router.pathname} />
           </div>

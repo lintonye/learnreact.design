@@ -46,5 +46,5 @@ function useViewCount(url: string) {
 
 export function ViewCounter({ url }: { url: string }) {
   const count = useViewCount(url)
-  return <div>{count}</div>
+  return <div>Visits: {count}</div>
 }
