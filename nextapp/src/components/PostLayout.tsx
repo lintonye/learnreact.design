@@ -15,6 +15,7 @@ import {
 } from './InPostStateContext'
 import { ConvertKitForm } from './design-system'
 import { MDXWrapper } from './MDXWrapper'
+import { ViewCounter } from './ViewCounter'
 
 type LayoutProps = {
   meta: any
@@ -117,12 +118,11 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
   meta,
 }) => {
   const router = useRouter()
-  const currentCanonicalUrl = SeoData.siteUrl + router.pathname
   const {
     title,
+    date,
     description,
     titleAppendSiteName = false,
-    url = currentCanonicalUrl,
     ogImage,
     tocHeadings,
     sidebar = true,
@@ -138,10 +138,8 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
         openGraph={{
           title,
           description,
-          url,
           images: ogImage ? [ogImage] : undefined,
         }}
-        canonical={url}
       />
       <InPostStateContext.Provider value={[inPostState, dispatch]}>
         <MDXWrapper>
@@ -190,6 +188,10 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
 
             {/* Main content */}
             {children}
+
+            {/* Additional Info */}
+            <div>Updated: {date}</div>
+            <ViewCounter url={router.pathname} />
           </div>
         </MDXWrapper>
       </InPostStateContext.Provider>

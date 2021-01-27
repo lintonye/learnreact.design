@@ -130,38 +130,36 @@ export function CourseEvents() {
   const [events, setEvents] = useState<Event[]>([])
   const [shownEvents, addShownEvent] = useShownEvents()
   useEffect(() => {
-    if (firestore) {
-      const eventsRef = firestore.collection('teachableEvents')
-      const unsubscribe = eventsRef
-        // .where("created", ">=", new Date())
-        // .select(
-        //   "id",
-        //   "created",
-        //   "user.name",
-        //   "user.avatar",
-        //   "course",
-        //   "lecture"
-        // )
-        .orderBy('created', 'desc')
-        .limit(2)
-        .onSnapshot((snapshot) => {
-          const formattedEvents = snapshot.docs
-            .map((d) => ({
-              id: d.id,
-              type: d.get('type'),
-              name: d.get('user.name'),
-              avatar: d.get('user.avatar'),
-              created: d.get('created'),
-              course: d.get('course.name'),
-              lecture: d.get('lecture.name'),
-            }))
-            .filter((e) => !shownEvents.includes(e.id))
-            .slice(0, 1) // only show the first one
-          setEvents(formattedEvents)
-          formattedEvents.forEach((e) => addShownEvent(e.id))
-        })
-      return unsubscribe
-    }
+    const eventsRef = firestore.collection('teachableEvents')
+    const unsubscribe = eventsRef
+      // .where("created", ">=", new Date())
+      // .select(
+      //   "id",
+      //   "created",
+      //   "user.name",
+      //   "user.avatar",
+      //   "course",
+      //   "lecture"
+      // )
+      .orderBy('created', 'desc')
+      .limit(2)
+      .onSnapshot((snapshot) => {
+        const formattedEvents = snapshot.docs
+          .map((d) => ({
+            id: d.id,
+            type: d.get('type'),
+            name: d.get('user.name'),
+            avatar: d.get('user.avatar'),
+            created: d.get('created'),
+            course: d.get('course.name'),
+            lecture: d.get('lecture.name'),
+          }))
+          .filter((e) => !shownEvents.includes(e.id))
+          .slice(0, 1) // only show the first one
+        setEvents(formattedEvents)
+        formattedEvents.forEach((e) => addShownEvent(e.id))
+      })
+    return unsubscribe
   }, [firestore, setEvents])
   useEffect(() => {
     events.length > 0 &&

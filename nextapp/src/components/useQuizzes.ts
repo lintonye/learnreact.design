@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { useState, useEffect } from 'react'
-import { useFirestore, useFirebase } from '@/lib/firebase'
+import { useFirestore } from '@/lib/firebase'
 import { useLocalStorage } from '@/lib/useLocalStorage'
 import { nanoid } from 'nanoid'
+import firebase from 'firebase/app'
 
 const COLLECTION_NAME = 'quizResponses'
 export function useQuestionStats(questionId: string) {
@@ -10,22 +11,20 @@ export function useQuestionStats(questionId: string) {
   const firestore = useFirestore()
 
   useEffect(() => {
-    if (firestore) {
-      const choicesRef = firestore.collection(COLLECTION_NAME)
-      const unsubscribe = choicesRef
-        .where('questionId', '==', questionId)
-        // .orderBy("choiceId", "desc")
-        .onSnapshot((snapshot) => {
-          const stats = snapshot.docs.reduce((ss, doc) => {
-            const choiceId: string = doc.get('choiceId')
-            //@ts-ignore
-            ss[choiceId] = ss[choiceId] > 0 ? ss[choiceId] + 1 : 1
-            return ss
-          }, {})
-          setStats(stats)
-        })
-      return unsubscribe
-    }
+    const choicesRef = firebase.firestore().collection(COLLECTION_NAME)
+    const unsubscribe = choicesRef
+      .where('questionId', '==', questionId)
+      // .orderBy("choiceId", "desc")
+      .onSnapshot((snapshot) => {
+        const stats = snapshot.docs.reduce((ss, doc) => {
+          const choiceId: string = doc.get('choiceId')
+          //@ts-ignore
+          ss[choiceId] = ss[choiceId] > 0 ? ss[choiceId] + 1 : 1
+          return ss
+        }, {})
+        setStats(stats)
+      })
+    return unsubscribe
   }, [firestore, setStats])
   return stats
 }
@@ -42,7 +41,6 @@ export function useSubmitQuestion({
   const [personId, setPersonId] = useLocalStorage('personId', userId)
   const [status, setStatus] = useState('initial')
   const [error, setError] = useState(null)
-  const firebase = useFirebase()
   const firestore = useFirestore()
 
   if (personId === null) setPersonId(nanoid())

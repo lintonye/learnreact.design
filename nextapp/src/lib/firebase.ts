@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useMemo } from 'react'
 import { FirebaseFirestore } from '@firebase/firestore-types'
-import { FirebaseApp } from '@firebase/app-types'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 // require("dotenv").config();
 
 const config = {
@@ -14,35 +15,8 @@ const config = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 }
 
-let firebaseAppInstance: FirebaseApp
-const getFirebase = async () => {
-  const firebase = (await import('@firebase/app')).default
-  await import('firebase/firestore')
-  // await import('firebase/auth')
-
-  if (firebaseAppInstance) {
-    return firebaseAppInstance
-  }
-
-  firebaseAppInstance = firebase.initializeApp(config)
-
-  return firebaseAppInstance
-}
-
-export function useFirebase(): FirebaseApp | undefined {
-  const [firebase, setFirebase] = useState<FirebaseApp>()
-  useEffect(() => {
-    async function initFirebase() {
-      const firebase = await getFirebase()
-      setFirebase(firebase)
-    }
-    initFirebase()
-  }, [])
-  return firebase
-}
+firebase.apps.length === 0 && firebase.initializeApp(config)
 
 export function useFirestore(): FirebaseFirestore {
-  const firebase = useFirebase()
-  // @ts-ignore
-  return firebase ? firebase.firestore() : null
+  return useMemo(() => firebase.firestore(), [])
 }

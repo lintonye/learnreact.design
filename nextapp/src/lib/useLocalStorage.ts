@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 // Hook
 export function useLocalStorage<ValueType>(
@@ -23,7 +23,7 @@ export function useLocalStorage<ValueType>(
 
   // Return a wrapped version of useState's setter function that ...
   // ... persists the new value to localStorage.
-  const setValue = (value: ValueType) => {
+  const setValue = useCallback((value: ValueType) => {
     if (typeof window === 'undefined') return
     try {
       // Allow value to be a function so we have same API as useState
@@ -37,7 +37,7 @@ export function useLocalStorage<ValueType>(
       // A more advanced implementation would handle the error case
       console.log(error)
     }
-  }
+  }, [])
 
   return [storedValue, setValue]
 }
