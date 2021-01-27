@@ -30,9 +30,7 @@ export default function CoursePostModulePage({
           {sections &&
             sections.map((section) => (
               <li key={section.slug}>
-                <Link href={section.url}>
-                  <a>{section.name}</a>
-                </Link>
+                <Link href={section.url}>{section.name}</Link>
               </li>
             ))}
         </ul>

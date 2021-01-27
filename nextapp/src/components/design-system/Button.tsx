@@ -18,6 +18,7 @@ export function Button({
   const variantClasses = {
     outline: 'border border-gray-500 disabled:opacity-40',
     dark: 'bg-gray-800 text-white disabled:bg-gray-300',
+    primary: '',
   }
   const sizeClasses = {
     small: ' text-sm ',

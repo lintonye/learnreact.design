@@ -104,7 +104,6 @@ export function QuizStatic({
                       value={ch.id}
                       name={id}
                       checked={choice === ch.id}
-                      sx={{ mr: 2 }}
                       disabled={confirmed}
                       onChange={() =>
                         typeof onPickChoice === 'function' &&
