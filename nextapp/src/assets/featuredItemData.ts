@@ -19,6 +19,8 @@ const featuredItem: ItemAtHome = {
   title: 'What is React?',
   type: 'post',
   slug: 'what-is-react',
+  excerpt:
+    'This is an interactive guide for absolute beginners. The only preprequite is some knowledge of HTML and CSS.',
 }
 
 const itemsAtHome: Category[] = [

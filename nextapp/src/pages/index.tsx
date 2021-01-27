@@ -9,7 +9,7 @@ export default function Home() {
     <Layout>
       <NextSeo canonical={SEOData.siteUrl} />
       <main>
-        <div className="max-w-screen-sm mx-auto min-h-screen">
+        <div className="max-w-screen-lg mx-auto min-h-screen">
           <Hero />
           <Main />
         </div>

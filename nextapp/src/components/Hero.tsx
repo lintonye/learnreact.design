@@ -7,7 +7,7 @@ export function Hero() {
   const { title, excerpt: Excerpt, url } = featuredPost
 
   return (
-    <div className="sm:flex">
+    <div className="md:flex">
       <div className="m-1">
         <h1>
           <span className="text-4xl p-1 sm:text-5xl sm:p-2">React For </span>
@@ -17,7 +17,7 @@ export function Hero() {
             </span>
             <IconPointArrow className="relative -left-2" />
           </div>
-          <span className="font-cursive transform -rotate-6 text-2xl opacity-80 p-3 absolute top-36 right-2 sm:right-1/4 sm:text-4xl md:right-1/3">
+          <span className="font-cursive transform -rotate-6 text-2xl opacity-80 p-3 absolute top-16 left-1/2 sm:text-4xl top-16 sm:right-6  md:right-3">
             and visual learners
           </span>
         </h1>
@@ -27,7 +27,7 @@ export function Hero() {
           Framer, HTML, CSS, JavaScript
         </p>
       </div>
-      <article className="border-l-2 m-2 p-5 relative sm:top-36">
+      <article className="border-l-2 m-2 p-5  relative md:top-36">
         <h2
           className="text-2xl font-bold text italic p-1 text-white"
           css={{
