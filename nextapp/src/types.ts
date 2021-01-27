@@ -40,3 +40,19 @@ export type Course = {
   chapters?: any[]
   isNew?: boolean
 }
+
+export type Question = {
+  id: string
+  revealAnswerOnConfirm: boolean
+  ask: React.ReactNode
+  options: React.ReactNode[]
+  answer: 'A' | 'B' | 'C' | 'D' | 'E'
+  explanation: React.ReactNode
+  lastAnswerTime?: Date
+  reviewDueDate?: Date
+}
+
+export type Quiz = {
+  startTime: number // in seconds. if negative, it's from the end of the video
+  questions: Question[]
+}

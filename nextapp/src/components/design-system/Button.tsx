@@ -4,7 +4,7 @@ import { ButtonHTMLAttributes } from 'react'
 type Props = {
   // children?: React.ReactNode
   // className?: string
-  variant?: 'outline' | 'dark'
+  variant?: 'outline' | 'dark' | 'primary'
   size?: 'small' | 'normal' | 'large'
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
