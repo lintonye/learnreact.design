@@ -4,28 +4,53 @@ import { useFirestore } from '@/lib/firebase'
 import { useLocalStorage } from '@/lib/useLocalStorage'
 import { nanoid } from 'nanoid'
 import firebase from 'firebase/app'
+import {
+  FirebaseFirestore,
+  DocumentReference,
+  DocumentData,
+} from '@firebase/firestore-types'
 
-const COLLECTION_NAME = 'quizResponses'
+type QuizStats = { [key: string]: number }
+
+async function initResponseCounts(db: FirebaseFirestore, questionId: string) {
+  const statsDoc = db.collection(COLLECTION_STATS).doc(questionId)
+  await db.runTransaction(async (transaction) => {
+    if (!(await transaction.get(statsDoc)).exists) {
+      const responsesRef = db
+        .collection(COLLECTION_RESPONSES)
+        .where('questionId', '==', questionId)
+      // TODO queries cannot be in a transaction. Would there be any issues to code this way?
+      // The hope is that this transaction will get re-run if statsDoc is updated by someone else when the query is running.
+      const snapshot = await responsesRef.get()
+      const stats: QuizStats = snapshot.docs.reduce((ss: QuizStats, doc) => {
+        const choiceId: string = doc.get('choiceId')
+        ss[choiceId] = ss[choiceId] > 0 ? ss[choiceId] + 1 : 1
+        return ss
+      }, {})
+      await transaction.set(statsDoc, {
+        ...stats,
+        questionId,
+      })
+    }
+  })
+}
+
+const COLLECTION_RESPONSES = 'quizResponses'
+const COLLECTION_STATS = 'quizResponseStats'
 export function useQuestionStats(questionId: string) {
   const [stats, setStats] = useState<{ [key: string]: number }>()
   const firestore = useFirestore()
 
   useEffect(() => {
-    const choicesRef = firebase.firestore().collection(COLLECTION_NAME)
-    const unsubscribe = choicesRef
-      .where('questionId', '==', questionId)
-      // .orderBy("choiceId", "desc")
-      .onSnapshot((snapshot) => {
-        const stats = snapshot.docs.reduce((ss, doc) => {
-          const choiceId: string = doc.get('choiceId')
-          //@ts-ignore
-          ss[choiceId] = ss[choiceId] > 0 ? ss[choiceId] + 1 : 1
-          return ss
-        }, {})
-        setStats(stats)
-      })
+    const statsRef = firestore.collection(COLLECTION_STATS)
+    initResponseCounts(firestore, questionId)
+    const unsubscribe = statsRef.doc(questionId).onSnapshot((snapshot) => {
+      // @ts-ignore questionId exists in our schema
+      const { questionId: qId, ...stats } = snapshot.data()
+      setStats(stats)
+    })
     return unsubscribe
-  }, [firestore, setStats])
+  }, [firestore, questionId])
   return stats
 }
 
@@ -51,18 +76,46 @@ export function useSubmitQuestion({
       // alert(
       //   "personId=" + personId + ",questionId=" + questionId + ", choice=" + choice
       // );
+      async function updateStats(
+        responseDoc: DocumentReference<DocumentData>,
+        questionId: string,
+      ) {
+        await initResponseCounts(firestore, questionId)
+        const response = await responseDoc.get()
+
+        await firestore.runTransaction(async (t) => {
+          const statsDoc = firestore
+            .collection(COLLECTION_STATS)
+            .doc(questionId)
+          if (response.exists) {
+            // get old choice
+            const oldChoiceId = response.get('choiceId')
+            // old choice - 1
+            t.update(statsDoc, {
+              [oldChoiceId]: firebase.firestore.FieldValue.increment(-1),
+            })
+          }
+          // new choice + 1
+          t.update(statsDoc, {
+            [choiceId]: firebase.firestore.FieldValue.increment(1),
+          })
+        })
+      }
+
       try {
         setStatus('in-progress')
-        const choicesRef = firestore.collection(COLLECTION_NAME)
+        const choicesRef = firestore.collection(COLLECTION_RESPONSES)
         const doc = choicesRef.doc(questionId + personId)
+
+        updateStats(doc, questionId)
+
+        // Update detailed response entries
         const updates = {
           personId,
           questionId,
           choiceId,
           answerId,
-          // @ts-ignore
           lastAnswerTime: firebase.firestore.FieldValue.serverTimestamp(),
-          // @ts-ignore
           reviewCount: firebase.firestore.FieldValue.increment(1),
         }
         if ((await doc.get()).exists) await doc.update(updates)
