@@ -22,6 +22,7 @@ export function Link({
         className={
           `cursor-pointer ${underline ? 'hover:underline' : ''} ` + className
         }
+        {...props}
       >
         {children}
       </a>

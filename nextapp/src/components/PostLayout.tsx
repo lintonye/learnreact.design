@@ -17,6 +17,7 @@ import { ConvertKitForm } from './design-system'
 import { MDXWrapper } from './MDXWrapper'
 import { ViewCounter } from './ViewCounter'
 import { Likes } from './Likes'
+import { DiscussionTwitter } from './DiscussOnTwitter'
 
 type LayoutProps = {
   meta: any
@@ -195,6 +196,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
             <hr />
             <div>Updated: {date}</div>
             <ViewCounter url={router.pathname} />
+            <DiscussionTwitter pageUrl={router.pathname} title={title} />
           </div>
         </MDXWrapper>
       </InPostStateContext.Provider>
