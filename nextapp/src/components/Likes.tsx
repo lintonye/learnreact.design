@@ -1,23 +1,28 @@
 import { useFirestore } from '@/lib/firebase'
 import { useCallback, useEffect, useState } from 'react'
 import firebase from 'firebase/app'
+import { useRef } from 'react'
 
 type IncLikeCount = (delta: number) => void
 
 const COLLECTION_LIKE_COUNTS = 'pageLikeCounts'
 
-function useLikes(url: string): [number, IncLikeCount] {
+function useDebounce<T>(value: T, delay?: number): T {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value)
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedValue(value), delay)
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [value, delay || 500])
+  return debouncedValue
+}
+
+function useLikes(url: string): [number, IncLikeCount, number] {
   const db = useFirestore()
   const [likes, setLikes] = useState(0)
 
-  // Likes count only goes up.
-  // Optimistic update: this make sure the number won't jump back if the user clicks very quickly
-  const setLikesIncOnly = useCallback(
-    (count) => {
-      setLikes((c) => (c < count ? count : c))
-    },
-    [setLikes],
-  )
+  const likesBeforeCommit = useRef(likes)
 
   const urlKey = url.replace(/\//g, '_')
 
@@ -25,7 +30,7 @@ function useLikes(url: string): [number, IncLikeCount] {
     const docRef = db.collection(COLLECTION_LIKE_COUNTS).doc(urlKey)
     const unsubscribe = docRef.onSnapshot((snapshot) => {
       if (snapshot.exists) {
-        setLikesIncOnly(snapshot.get('count'))
+        setLikes(snapshot.get('count'))
       }
     })
     return unsubscribe
@@ -33,44 +38,63 @@ function useLikes(url: string): [number, IncLikeCount] {
 
   const incLikeCount = useCallback(
     (delta: number) => {
-      const docRef = db.collection(COLLECTION_LIKE_COUNTS).doc(urlKey)
       // optimistic update
       setLikes((likes) => likes + delta)
-      // actually update it in the db
-      db.runTransaction(async (t) => {
-        const updates = {
-          url,
-          count: firebase.firestore.FieldValue.increment(delta),
-          lastLiked: firebase.firestore.FieldValue.serverTimestamp(),
-        }
-        const snapshot = await t.get(docRef)
-        let count = delta
-        if (snapshot.exists) {
-          count = snapshot.get('count') + delta
-          await t.update(docRef, updates)
-        } else await t.set(docRef, updates)
-        return count
-      }).then((count) => setLikesIncOnly(count))
     },
     [db, url, urlKey],
   )
-  return [likes, incLikeCount]
+
+  const likesCommitted = useDebounce(likes, 500)
+
+  const delta = likesCommitted - likesBeforeCommit.current
+
+  useEffect(() => {
+    likesBeforeCommit.current = likesCommitted
+  }, [likesCommitted])
+
+  useEffect(() => {
+    // actually update it in the db
+    if (delta !== 0) {
+      const docRef = db.collection(COLLECTION_LIKE_COUNTS).doc(urlKey)
+      console.log('running transaction, delta = ', delta)
+      // db.runTransaction(async (t) => {
+      //   const updates = {
+      //     url,
+      //     count: firebase.firestore.FieldValue.increment(delta),
+      //     lastLiked: firebase.firestore.FieldValue.serverTimestamp(),
+      //   }
+      //   const snapshot = await t.get(docRef)
+      //   if (snapshot.exists) {
+      //     await t.update(docRef, updates)
+      //   } else await t.set(docRef, updates)
+      // })
+    }
+  }, [db, delta])
+
+  return [likes, incLikeCount, likesCommitted]
 }
 
 function LikeButton({ onLike }: { onLike: IncLikeCount }) {
+  const addOneLike = () => typeof onLike === 'function' && onLike(1)
   return (
-    <button onClick={() => typeof onLike === 'function' && onLike(1)}>
+    <div
+      onMouseDown={() => {
+        addOneLike()
+      }}
+      onMouseUp={() => {}}
+    >
       Like
-    </button>
+    </div>
   )
 }
 
 export function Likes({ url }: { url: string }) {
-  const [likeCount, incLikeCount] = useLikes(url)
+  const [likeCount, incLikeCount, likeCountCommitted] = useLikes(url)
   return (
     <div className="space-x-4 flex">
       <LikeButton onLike={(amount: number) => incLikeCount(amount)} />
       <div>{likeCount}</div>
+      <div>committed: {likeCountCommitted}</div>
     </div>
   )
 }
