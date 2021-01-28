@@ -75,14 +75,14 @@ function useLikes(url: string): [number, IncLikeCount, number] {
   return [likes, incLikeCount, likesCommitted]
 }
 
-function LikeButton({ onLike }: { onLike: IncLikeCount }) {
-  const addOneLike = () => typeof onLike === 'function' && onLike(1)
-
+function usePressHoldRepeat(
+  callback: () => void,
+  holdDetectionThreshold = 300,
+  repeatDelay = 100,
+) {
   const [mouseDown, setMouseDown] = useState(false)
   const intervalRef = useRef(0)
   const holdDetectionTimeoutRef = useRef(0)
-  const holdDetectionThreshold = 300
-  const repeatDelay = 100
   useEffect(() => {
     if (!mouseDown) {
       holdDetectionTimeoutRef.current &&
@@ -91,7 +91,7 @@ function LikeButton({ onLike }: { onLike: IncLikeCount }) {
     } else {
       holdDetectionTimeoutRef.current = setTimeout(() => {
         intervalRef.current = setInterval(() => {
-          addOneLike()
+          callback()
         }, repeatDelay)
       }, holdDetectionThreshold)
       return () => {
@@ -100,19 +100,19 @@ function LikeButton({ onLike }: { onLike: IncLikeCount }) {
       }
     }
   }, [mouseDown])
-  return (
-    <div
-      onClick={addOneLike}
-      onMouseDown={() => {
-        setMouseDown(true)
-      }}
-      onMouseUp={() => {
-        setMouseDown(false)
-      }}
-    >
-      Like
-    </div>
-  )
+  return {
+    onClick: callback,
+    onMouseDown: () => setMouseDown(true),
+    onMouseUp: () => setMouseDown(false),
+    onMouseOut: () => setMouseDown(false),
+  }
+}
+
+function LikeButton({ onLike }: { onLike: IncLikeCount }) {
+  const addOneLike = () => typeof onLike === 'function' && onLike(1)
+  const props = usePressHoldRepeat(addOneLike, 300, 100)
+
+  return <div {...props}>Like</div>
 }
 
 export function Likes({ url }: { url: string }) {
