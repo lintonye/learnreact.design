@@ -58,16 +58,16 @@ const itemsAtHome: Category[] = [
       },
     ],
   },
-  {
-    categoryTitle: 'Fundamentals',
-    categorySlug: 'html-css-js',
-    items: [
-      {
-        type: 'course',
-        slug: 'web-basics',
-      },
-    ],
-  },
+  // {
+  //   categoryTitle: 'Fundamentals',
+  //   categorySlug: 'html-css-js',
+  //   items: [
+  //     {
+  //       type: 'course',
+  //       slug: 'web-basics',
+  //     },
+  //   ],
+  // },
 
   {
     categoryTitle: 'Framer',
