@@ -38,3 +38,8 @@ export default function getAllPostPreviews(): Post[] {
     require.context('./pages/posts/?preview', true, /\.mdx$/),
   ).sort((a, b) => compareDesc(a.date, b.date))
 }
+
+export function getPostBySlug(slug: string) {
+  const posts = getAllPostPreviews()
+  return posts.find((p) => p.slug === slug)
+}

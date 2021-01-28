@@ -11,6 +11,7 @@ export type Post = {
   slug: string
   url: string
   tags: string[]
+  related?: string[]
 }
 
 export type Tag = {

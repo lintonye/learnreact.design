@@ -17,8 +17,8 @@ function renderExcerpt(excerpt: string | FunctionComponent) {
 }
 
 type Props = {
-  titleAs: 'h1' | 'h2' | 'h3' | 'div'
-  showTags: boolean
+  titleAs?: 'h1' | 'h2' | 'h3' | 'div'
+  showTags?: boolean
 } & Post
 
 export function PostPreview({

@@ -18,6 +18,8 @@ import { MDXWrapper } from './MDXWrapper'
 import { ViewCounter } from './ViewCounter'
 import { Likes } from './Likes'
 import { DiscussionTwitter } from './DiscussOnTwitter'
+import { PostPreview } from './PostPreview'
+import { getPostBySlug } from '@/getAllPostPreviews'
 
 type LayoutProps = {
   meta: any
@@ -128,6 +130,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
     ogImage,
     tocHeadings,
     sidebar = true,
+    related = [],
   } = meta || {}
 
   const [inPostState, dispatch] = useReducer(inPostStateReducer, [])
@@ -197,6 +200,17 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
             <div>Updated: {date}</div>
             <ViewCounter url={router.pathname} />
             <DiscussionTwitter pageUrl={router.pathname} title={title} />
+
+            {/* Related Posts */}
+            {related.length > 0 && (
+              <div className="space-y-8">
+                <h2 className="text-3xl font-bold my-3">You may also like</h2>
+                {related.map((slug: string) => (
+                  // @ts-ignore
+                  <PostPreview key={slug} {...getPostBySlug(slug)} />
+                ))}
+              </div>
+            )}
           </div>
         </MDXWrapper>
       </InPostStateContext.Provider>
