@@ -1,0 +1,118 @@
+{
+  "redirects": [
+    [
+      {
+        "source": "/2017/05/09/react-course-for-designers-anyone",
+        "destination": "/posts/react-for-designers-interviews"
+      },
+      {
+        "source": "/2017/06/08/what-is-react",
+        "destination": "/posts/what-is-react"
+      },
+      {
+        "source": "/2017/06/20/what-is-react-native",
+        "destination": "/posts/what-is-react-native"
+      },
+      {
+        "source": "/2017/08/16/components-props-and-state",
+        "destination": "/posts/components-props-state"
+      },
+      {
+        "source": "/2018/01/02/react-sketch-app-backstory-and-full-vision",
+        "destination": "/posts/jon-gold-on-react-sketchapp"
+      },
+      {
+        "source": "/2018/01/15/props-and-state-re-explained",
+        "destination": "/posts/props-state-reexplained"
+      },
+      {
+        "source": "/2018/02/14/react-native-vs-cordova-phone-gap-ionic-etc",
+        "destination": "/posts/react-native-vs-cordova"
+      },
+      {
+        "source": "/2018/03/15/harnessing-react-power-in-design-prototyping",
+        "destination": "/posts/harness-react-power"
+      },
+      {
+        "source": "/2018/06/22/framer-x-the-hype-the-powers-the-challenges-and-the-grand-vision",
+        "destination": "/posts/framerx-speculation"
+      },
+      {
+        "source": "/2018/08/07/what-is-redux-a-designers-guide",
+        "destination": "/posts/what-is-redux"
+      },
+      {
+        "source": "/2018/10/12/inside-parallax-my-first-framer-x-component-part-1",
+        "destination": "/posts/inside-parallax-part-1"
+      },
+      {
+        "source": "/2018/10/29/inside-parallax-my-first-framer-x-component-part-2",
+        "destination": "/posts/inside-parallax-part-2"
+      },
+      {
+        "source": "/2019/02/06/prototyping-advanced-scroll-interactions-in-framer-x",
+        "destination": "/posts/prototyping-advanced-scroll-interactions-in-framer"
+      },
+      {
+        "source": "/2020/01/09/busy-designers-guide-to-framer-x-a-4-week-plan",
+        "destination": "/posts/busy-designers-guide-to-framer"
+      },
+      {
+        "source": "/2020/02/08/design-data-tables-with-real-tables-part-1",
+        "destination": "/posts/design-data-tables-part-1"
+      },
+      {
+        "source": "/2020/02/21/design-data-tables-with-real-tables-part-2",
+        "destination": "/posts/design-data-tables-part-2"
+      },
+      {
+        "source": "/2020/03/23/react-mental-models-cutting-holes-in-html",
+        "destination": "/posts/react-mental-model-cut-holes-in-html-template"
+      },
+      {
+        "source": "/2020/03/31/react-mental-models-working-with-input",
+        "destination": "/posts/react-mental-model-html-input"
+      },
+      {
+        "source": "/2020/04/20/react-mental-models-the-true-face-of-jsx",
+        "destination": "/posts/react-mental-model-jsx"
+      },
+      {
+        "source": "/blog",
+        "destination": "/posts"
+      },
+      {
+        "source": "/framer-in-4-weeks/",
+        "destination": "/courses/react-framer"
+      },
+      {
+        "source": "/framer-ui-motion-toggle",
+        "destination": "/courses/react-framer"
+      },
+      {
+        "source": "/framerx-react",
+        "destination": "/courses/react-framer"
+      },
+      {
+        "source": "/motion",
+        "destination": "https://smileyinmotion.com"
+      },
+      {
+        "source": "/prototyping-with-react-framer",
+        "destination": "/courses/react-framer"
+      },
+      {
+        "source": "/re4d-prerequisites",
+        "destination": "/courses/web-basics"
+      },
+      {
+        "source": "/react-101",
+        "destination": "/courses/react-framer"
+      },
+      {
+        "source": "/react-mental-models",
+        "destination": "/courses/react-mental-models"
+      }
+    ]
+  ]
+}
