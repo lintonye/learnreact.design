@@ -160,8 +160,9 @@ export function Likes({ url }: { url: string }) {
           exit={{
             y: -random(60, 120),
             x: random(0, 120),
-            scale: 0,
+            scale: 0.5,
             opacity: 0,
+            transition: { type: 'spring', damping: 7 },
             // y: [-10, -20, -50, -80],
             // x: [5, 10, 40, 80],
             // scale: [1, 0.8, 0.5, 0],
