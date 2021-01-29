@@ -20,6 +20,7 @@ import { Likes } from './Likes'
 import { DiscussionTwitter } from './DiscussOnTwitter'
 import { PostPreview } from './PostPreview'
 import { getPostBySlug } from '@/getAllPostPreviews'
+import { motion } from 'framer-motion'
 
 type LayoutProps = {
   meta: any
@@ -121,6 +122,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
   children,
   meta,
 }) => {
+  const [liked, setLiked] = useState(false)
   const router = useRouter()
   const {
     title,
@@ -179,17 +181,23 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
 
             {/* Sidebar */}
             <div
-              className="sticky top-20 self-start mt-6 ml-12 justify-self-center space-y-8"
+              className="sticky top-4 self-start mt-6 ml-12 justify-self-center space-y-8"
               css={{ gridColumn: '3/4', gridRow: '2/20' }}
             >
               <Toc contentChildren={children} headings={tocHeadings} />
-              <Likes url={router.pathname} />
-              <div className="space-y-2 text-sm">
-                <div className="uppercase tracking-wider font-semibold">
-                  Sign up for updates:
-                </div>
-                <ConvertKitForm formId="465988" />
-              </div>
+              <Likes url={router.pathname} onLike={() => setLiked(true)} />
+              {liked && (
+                <motion.div
+                  className="space-y-2 text-sm"
+                  initial={{ y: -50, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                >
+                  <div className="uppercase tracking-wider font-semibold">
+                    Sign up for updates
+                  </div>
+                  <ConvertKitForm formId="465988" />
+                </motion.div>
+              )}
             </div>
 
             {/* Main content */}

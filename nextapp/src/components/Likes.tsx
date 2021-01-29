@@ -157,7 +157,7 @@ function random(min: number, max: number) {
   return Math.floor((max - min) * Math.random()) + min
 }
 
-export function Likes({ url }: { url: string }) {
+export function Likes({ url, onLike }: { url: string; onLike?: () => void }) {
   const [likes, setLikes, likeCountCommitted] = useLikes(url)
   const [likedByMe, setLikedByMe] = useState(false)
   return (
@@ -167,6 +167,7 @@ export function Likes({ url }: { url: string }) {
         onLike={() => {
           setLikes((c) => c + 1)
           setLikedByMe(true)
+          typeof onLike === 'function' && onLike()
         }}
       />
       <AnimatePresence>
