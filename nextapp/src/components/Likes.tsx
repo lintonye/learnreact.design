@@ -3,7 +3,12 @@ import { useCallback, useEffect, useState } from 'react'
 import firebase from 'firebase/app'
 import { useRef } from 'react'
 
-type IncLikeCount = (delta: number) => void
+type ValueOrFunc<T> = T | ((preValue: T) => T)
+
+type DebouncedStateSetter<T> = (
+  valueOrFun: ValueOrFunc<T>,
+  flush?: boolean,
+) => void
 
 const COLLECTION_LIKE_COUNTS = 'pageLikeCounts'
 
@@ -18,41 +23,55 @@ function useDebounce<T>(value: T, delay?: number): T {
   return debouncedValue
 }
 
-function useLikes(url: string): [number, IncLikeCount, number] {
-  const db = useFirestore()
-  const [likes, setLikes] = useState(0)
+// [immediateValue, valueBeforeDebounce, valueAfterDebounce, setValue2]
+function useDebouncedState<T>(
+  initialValue: T,
+  delay = 500,
+): [T, T, T, DebouncedStateSetter<T>] {
+  const [value, setValue] = useState<T>(initialValue)
+  const valueBeforeDebounceRef = useRef<T>(value)
+  const valueAfterDebounce = useDebounce<T>(value, delay)
+  useEffect(() => {
+    valueBeforeDebounceRef.current = valueAfterDebounce
+  }, [valueAfterDebounce])
+  const setValue2 = useCallback(
+    (valueOrFunc: ValueOrFunc<T>, flush = false) => {
+      if (typeof valueOrFunc === 'function') {
+        setValue((v) => {
+          // @ts-ignore TODO: why it reports error even inside typeof conditional?
+          const newV = valueOrFunc(v)
+          if (flush) valueBeforeDebounceRef.current = newV
+          return newV
+        })
+      } else {
+        setValue(valueOrFunc)
+        if (flush) valueBeforeDebounceRef.current = valueOrFunc
+      }
+    },
+    [setValue, valueBeforeDebounceRef],
+  )
+  return [value, valueBeforeDebounceRef.current, valueAfterDebounce, setValue2]
+}
 
-  const likesBeforeCommit = useRef(likes)
+function useLikes(url: string): [number, DebouncedStateSetter<number>, number] {
+  const [likes, likesBeforeCommit, likesToCommit, setLikes] = useDebouncedState(
+    0,
+  )
 
   const urlKey = url.replace(/\//g, '_')
-
+  const db = useFirestore()
   useEffect(() => {
     const docRef = db.collection(COLLECTION_LIKE_COUNTS).doc(urlKey)
     const unsubscribe = docRef.onSnapshot((snapshot) => {
       if (snapshot.exists) {
         const counts = snapshot.get('count')
-        setLikes(counts)
-        likesBeforeCommit.current = counts
+        setLikes(counts, true)
       }
     })
     return unsubscribe
   }, [db, urlKey])
 
-  const incLikeCount = useCallback(
-    (delta: number) => {
-      setLikes((likes) => likes + delta)
-    },
-    [db, url, urlKey],
-  )
-
-  const likesCommitted = useDebounce(likes, 500)
-
-  const delta = likesCommitted - likesBeforeCommit.current
-
-  useEffect(() => {
-    likesBeforeCommit.current = likesCommitted
-  }, [likesCommitted])
-
+  const delta = likesToCommit - likesBeforeCommit
   useEffect(() => {
     // actually update it in the db
     if (delta !== 0) {
@@ -72,7 +91,7 @@ function useLikes(url: string): [number, IncLikeCount, number] {
     }
   }, [db, delta])
 
-  return [likes, incLikeCount, likesCommitted]
+  return [likes, setLikes, likesToCommit]
 }
 
 function usePressHoldRepeat(
@@ -108,19 +127,19 @@ function usePressHoldRepeat(
   }
 }
 
-function LikeButton({ onLike }: { onLike: IncLikeCount }) {
-  const addOneLike = () => typeof onLike === 'function' && onLike(1)
+function LikeButton({ onLike }: { onLike: () => void }) {
+  const addOneLike = () => typeof onLike === 'function' && onLike()
   const props = usePressHoldRepeat(addOneLike, 300, 100)
 
   return <div {...props}>Like</div>
 }
 
 export function Likes({ url }: { url: string }) {
-  const [likeCount, incLikeCount, likeCountCommitted] = useLikes(url)
+  const [likes, setLikes, likeCountCommitted] = useLikes(url)
   return (
     <div className="space-x-4 flex">
-      <LikeButton onLike={(amount: number) => incLikeCount(amount)} />
-      <div>{likeCount}</div>
+      <LikeButton onLike={() => setLikes((c) => c + 1)} />
+      <div>{likes}</div>
       {/* For debugging only */}
       {/* <div>committed: {likeCountCommitted}</div> */}
     </div>
