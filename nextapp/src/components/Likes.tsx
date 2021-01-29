@@ -2,6 +2,8 @@ import { useFirestore } from '@/lib/firebase'
 import { useCallback, useEffect, useState } from 'react'
 import firebase from 'firebase/app'
 import { useRef } from 'react'
+import { FiHeart } from 'react-icons/fi'
+import { AnimatePresence, motion } from 'framer-motion'
 
 type ValueOrFunc<T> = T | ((preValue: T) => T)
 
@@ -9,8 +11,6 @@ type DebouncedStateSetter<T> = (
   valueOrFun: ValueOrFunc<T>,
   flush?: boolean,
 ) => void
-
-const COLLECTION_LIKE_COUNTS = 'pageLikeCounts'
 
 function useDebounce<T>(value: T, delay?: number): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value)
@@ -52,6 +52,8 @@ function useDebouncedState<T>(
   )
   return [value, valueBeforeDebounceRef.current, valueAfterDebounce, setValue2]
 }
+
+const COLLECTION_LIKE_COUNTS = 'pageLikeCounts'
 
 function useLikes(url: string): [number, DebouncedStateSetter<number>, number] {
   const [likes, likesBeforeCommit, likesToCommit, setLikes] = useDebouncedState(
@@ -131,14 +133,49 @@ function LikeButton({ onLike }: { onLike: () => void }) {
   const addOneLike = () => typeof onLike === 'function' && onLike()
   const props = usePressHoldRepeat(addOneLike, 300, 100)
 
-  return <div {...props}>Like</div>
+  return (
+    <div
+      {...props}
+      className="relative z-10 cursor-pointer text-red-400 hover:text-pink-600"
+    >
+      <FiHeart fill="rgba(239, 68, 68)" size={40} />
+    </div>
+  )
+}
+
+function random(min: number, max: number) {
+  return Math.floor((max - min) * Math.random()) + min
 }
 
 export function Likes({ url }: { url: string }) {
   const [likes, setLikes, likeCountCommitted] = useLikes(url)
   return (
-    <div className="space-x-4 flex">
+    <div className="grid grid-flow-col-dense auto-cols-min gap-x-4 items-center relative">
       <LikeButton onLike={() => setLikes((c) => c + 1)} />
+      <AnimatePresence>
+        <motion.div
+          className="absolute pointer-events-none z-0 left-0 top-0 m-0"
+          key={likes}
+          initial={{ x: 0, y: 0 }}
+          exit={{
+            y: -random(60, 120),
+            x: random(0, 120),
+            scale: 0,
+            opacity: 0,
+            // y: [-10, -20, -50, -80],
+            // x: [5, 10, 40, 80],
+            // scale: [1, 0.8, 0.5, 0],
+            // opacity: [1, 0.8, 0.5, 0],
+            // transition: { duration: 0.3 },
+          }}
+        >
+          <FiHeart
+            fill="rgba(239, 68, 68)"
+            size={40}
+            className="text-red-400"
+          />
+        </motion.div>
+      </AnimatePresence>
       <div>{likes}</div>
       {/* For debugging only */}
       {/* <div>committed: {likeCountCommitted}</div> */}

@@ -2,7 +2,7 @@
   "siteUrl": "https://learnreact.design",
   "title": "React For Designers And Visual Learners",
   "titleTemplate": "%s | LearnReact.design",
-  "description": "Hand-picked resources on design and frontend development: React,Framer,HTML,CSS,JavaScript. React courses tailored for product designers, UX/UI designers",
+  "description": "Tutorials and courses on design and frontend development: React,Framer,HTML,CSS,JavaScript. React courses tailored for product designers, UX/UI designers",
   "favicon": "/favicon.ico",
   "additionalMetaTags": [
     { "property": "author", "content": "Linton Ye" },
