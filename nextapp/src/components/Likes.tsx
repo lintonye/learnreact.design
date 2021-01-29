@@ -161,7 +161,7 @@ export function Likes({ url }: { url: string }) {
   const [likes, setLikes, likeCountCommitted] = useLikes(url)
   const [likedByMe, setLikedByMe] = useState(false)
   return (
-    <div className="grid grid-flow-col-dense auto-cols-min gap-x-4 items-center relative">
+    <div className="grid grid-flow-col-dense auto-cols-min gap-x-4 items-center relative select-none">
       <LikeButton
         filled={likedByMe}
         onLike={() => {
