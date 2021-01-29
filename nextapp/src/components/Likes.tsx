@@ -129,7 +129,13 @@ function usePressHoldRepeat(
   }
 }
 
-function LikeButton({ onLike }: { onLike: () => void }) {
+function LikeButton({
+  onLike,
+  filled = false,
+}: {
+  onLike: () => void
+  filled: boolean
+}) {
   const addOneLike = () => typeof onLike === 'function' && onLike()
   const props = usePressHoldRepeat(addOneLike, 300, 100)
 
@@ -138,7 +144,11 @@ function LikeButton({ onLike }: { onLike: () => void }) {
       {...props}
       className="relative z-10 cursor-pointer text-red-400 hover:text-pink-600"
     >
-      <FiHeart fill="rgba(239, 68, 68)" size={40} />
+      <FiHeart
+        fill={filled ? 'rgba(239, 68, 68)' : 'transparent'}
+        size={40}
+        strokeWidth={1}
+      />
     </div>
   )
 }
@@ -149,9 +159,16 @@ function random(min: number, max: number) {
 
 export function Likes({ url }: { url: string }) {
   const [likes, setLikes, likeCountCommitted] = useLikes(url)
+  const [likedByMe, setLikedByMe] = useState(false)
   return (
     <div className="grid grid-flow-col-dense auto-cols-min gap-x-4 items-center relative">
-      <LikeButton onLike={() => setLikes((c) => c + 1)} />
+      <LikeButton
+        filled={likedByMe}
+        onLike={() => {
+          setLikes((c) => c + 1)
+          setLikedByMe(true)
+        }}
+      />
       <AnimatePresence>
         <motion.div
           className="absolute pointer-events-none z-0 left-0 top-0 m-0"
@@ -171,9 +188,10 @@ export function Likes({ url }: { url: string }) {
           }}
         >
           <FiHeart
-            fill="rgba(239, 68, 68)"
+            fill={likedByMe ? 'rgba(239, 68, 68)' : 'transparent'}
             size={40}
             className="text-red-400"
+            strokeWidth={1}
           />
         </motion.div>
       </AnimatePresence>
