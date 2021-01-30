@@ -104,7 +104,12 @@ function usePressHoldRepeat(
   const [mouseDown, setMouseDown] = useState(false)
   const intervalRef = useRef(0)
   const holdDetectionTimeoutRef = useRef(0)
+  const runCallback = useCallback(
+    () => typeof callback === 'function' && callback(),
+    [callback],
+  )
   useEffect(() => {
+    // console.log('usePressHoldRepeat effect')
     if (!mouseDown) {
       holdDetectionTimeoutRef.current &&
         clearTimeout(holdDetectionTimeoutRef.current)
@@ -112,7 +117,7 @@ function usePressHoldRepeat(
     } else {
       holdDetectionTimeoutRef.current = setTimeout(() => {
         intervalRef.current = setInterval(() => {
-          callback()
+          runCallback()
         }, repeatDelay)
       }, holdDetectionThreshold)
       return () => {
@@ -120,9 +125,9 @@ function usePressHoldRepeat(
         clearTimeout(holdDetectionTimeoutRef.current)
       }
     }
-  }, [mouseDown])
+  }, [mouseDown, runCallback])
   return {
-    onClick: callback,
+    onClick: runCallback,
     onMouseDown: () => setMouseDown(true),
     onMouseUp: () => setMouseDown(false),
     onMouseOut: () => setMouseDown(false),
@@ -136,8 +141,7 @@ function LikeButton({
   onLike: () => void
   filled: boolean
 }) {
-  const addOneLike = () => typeof onLike === 'function' && onLike()
-  const props = usePressHoldRepeat(addOneLike, 300, 100)
+  const props = usePressHoldRepeat(onLike, 300, 100)
 
   return (
     <button
@@ -160,16 +164,14 @@ function random(min: number, max: number) {
 export function Likes({ url, onLike }: { url: string; onLike?: () => void }) {
   const [likes, setLikes, likeCountCommitted] = useLikes(url)
   const [likedByMe, setLikedByMe] = useState(false)
+  const handleOnLike = useCallback(() => {
+    setLikes((c) => c + 1)
+    setLikedByMe(true)
+    typeof onLike === 'function' && onLike()
+  }, [onLike])
   return (
     <div className="grid grid-flow-col-dense auto-cols-min gap-x-4 items-center relative select-none">
-      <LikeButton
-        filled={likedByMe}
-        onLike={() => {
-          setLikes((c) => c + 1)
-          setLikedByMe(true)
-          typeof onLike === 'function' && onLike()
-        }}
-      />
+      <LikeButton filled={likedByMe} onLike={handleOnLike} />
       <AnimatePresence>
         <motion.div
           className="absolute pointer-events-none z-0 left-0 top-0 m-0"
