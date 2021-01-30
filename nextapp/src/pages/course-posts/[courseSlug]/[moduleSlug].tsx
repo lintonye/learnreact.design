@@ -24,7 +24,7 @@ export default function CoursePostModulePage({
   return (
     <Layout>
       {/* <div>{courseSlug}</div> */}
-      <div className="md:max-w-screen-sm mx-auto space-y-10 leading-loose">
+      <div className="w-11/12 max-w-prose mx-auto space-y-10">
         <PageTitle>{moduleSlug}</PageTitle>
         <ul className="text-xl space-y-4">
           {sections &&

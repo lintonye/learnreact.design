@@ -131,8 +131,15 @@ export default function AllTipsPage({ tips }: Props) {
         }}
       />
       <main>
-        <PageTitle>{title}</PageTitle>
-        <div className="md:max-w-screen-lg mx-auto space-y-10 leading-loose">
+        <div
+          className={
+            `w-11/12 mx-auto space-y-10 ` + //
+            // `sm:w-full sm:max-w-screen-sm ` + //
+            // `md:max-w-screen-md ` + //
+            `xl:max-w-screen-xl`
+          }
+        >
+          <PageTitle>{title}</PageTitle>
           {/* {allPosts.map((p) => (
             // @ts-ignore
             <PostPreview key={p.slug} {...p} titleAs="h2" />

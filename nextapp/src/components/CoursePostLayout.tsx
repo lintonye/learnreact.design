@@ -22,7 +22,7 @@ export const CoursePostLayout: FunctionComponent<LayoutProps> = ({
       <MDXWrapper>
         <div
           className={
-            'max-w-screen-sm mx-auto space-y-10 leading-loose ' //+
+            'w-11/12 max-w-prose mx-auto space-y-10  ' //+
             // 'sm:max-w-screen-sm ' +
             // 'lg:max-w-screen-md ' +
             // 'xl:max-w-screen-lg '

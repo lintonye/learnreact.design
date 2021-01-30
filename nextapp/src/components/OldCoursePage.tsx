@@ -121,7 +121,7 @@ export function OldCoursePage({
           <ul className="space-y-8">
             {chapters?.map(({ chapter, lectures }) => (
               <li key={chapter} className="space-y-2">
-                <h3 className="font-semibold">{chapter}</h3>
+                <h3 className="font-bold">{chapter}</h3>
                 <ul className="space-y-2">
                   {lectures.map((lecture: any) => {
                     const { name, link } =

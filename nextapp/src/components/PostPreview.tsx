@@ -1,4 +1,4 @@
-import { jsx } from '@emotion/core'
+import { jsx, css } from '@emotion/core'
 import React from 'react'
 import { Link, Chip } from '@/components/design-system'
 import { FunctionComponent } from 'react'
@@ -55,8 +55,13 @@ export function PostPreview({
           { className: 'text-xl font-bold' },
           <Link href={url}>{title}</Link>,
         )}
-        <div className="text-sm opacity-70 flex space-x-6 items-center">
-          <div className="italic">
+        <div
+          className="text-sm opacity-70 grid items-center gap-x-4"
+          css={css`
+            grid-template-columns: repeat(auto-fit, minmax(50px, max-content));
+          `}
+        >
+          <div className="italic flex-shrink-0 whitespace-nowrap">
             Updated: <time dateTime={lastUpdated}>{lastUpdated}</time>
           </div>
           {showTags && tags.map((tag) => <Chip key={tag}>{tag}</Chip>)}

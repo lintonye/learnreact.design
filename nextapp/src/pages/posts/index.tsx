@@ -19,7 +19,7 @@ export default function AllPostsPage() {
       />
       <main>
         <PageTitle>{title}</PageTitle>
-        <div className="max-w-screen-sm mx-auto space-y-10 leading-loose">
+        <div className="w-11/12 mx-auto space-y-10 sm:w-full sm:max-w-screen-sm">
           {allPosts.map((p) => (
             // @ts-ignore
             <PostPreview key={p.slug} {...p} titleAs="h2" />
