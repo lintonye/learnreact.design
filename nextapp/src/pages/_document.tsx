@@ -49,7 +49,7 @@ class MyDocument extends Document {
             </>
           )}
         </Head>
-        <body>
+        <body className="font-medium">
           <Main />
           <NextScript />
         </body>
