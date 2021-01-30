@@ -1,4 +1,4 @@
-import { jsx } from '@emotion/core'
+import { jsx, css } from '@emotion/core'
 import * as React from 'react'
 import { Button, Input } from './index'
 
@@ -20,7 +20,7 @@ type DesignProps = {
   onValidateEmail?: (e: any) => void
   submissionResult?: string
   loading?: boolean
-  emailEmpty?: boolean
+  emailValid?: boolean
   firstName?: boolean
   subscribeButtonTitle?: string
   customFields?: CustomField[]
@@ -31,11 +31,11 @@ export function ConvertKitFormDesign(props: DesignProps) {
     formId,
     submissionResult,
     loading,
-    emailEmpty,
+    emailValid,
     subscribeButtonTitle,
     successMessage,
     onSubmit,
-    onValidateEmail,
+    // onValidateEmail,
     firstName,
     customFields, //Note: this doesn't work!
     ...rest
@@ -51,12 +51,18 @@ export function ConvertKitFormDesign(props: DesignProps) {
         action={`https://app.convertkit.com/landing_pages/${formId}/subscribe`}
         data-remote="true"
         ref={formRef}
-        // onSubmit={onSubmit}
+        onSubmit={(e) => {
+          e.preventDefault()
+          typeof onSubmit === 'function' && onSubmit(formRef.current)
+        }}
       >
         {submissionResult === 'error' && (
           <p className="text-red-500 text-sm my-1">
             Operation failed. Check your network connection.
           </p>
+        )}
+        {!emailValid && (
+          <p className="text-red-500 text-sm my-1">Invalid email address</p>
         )}
         <input
           type="hidden"
@@ -66,7 +72,10 @@ export function ConvertKitFormDesign(props: DesignProps) {
         <input type="hidden" name="id" value={formId} id="landing_page_id" />
 
         <div
-          className="flex"
+          className="flex flex-wrap"
+          css={css`
+            grid-template-columns: auto;
+          `}
           // css={{
           //   gridTemplateColumns: firstName
           //     ? ['auto', '100px 200px 150px']
@@ -88,7 +97,8 @@ export function ConvertKitFormDesign(props: DesignProps) {
             type="email"
             disabled={loading}
             placeholder="Email address"
-            onChange={onValidateEmail}
+            // onChange={onValidateEmail}
+            className="flex-1"
             required
           />
           {customFields &&
@@ -104,11 +114,12 @@ export function ConvertKitFormDesign(props: DesignProps) {
             ))}
 
           <Button
-            disabled={loading || emailEmpty}
+            disabled={loading}
             variant="primary"
             id="ck_subscribe_button"
+            className="flex-1"
             // variant="small"
-            onClick={() => onSubmit && onSubmit(formRef.current)}
+            // onClick={() => onSubmit && onSubmit(formRef.current)}
           >
             {loading ? 'Working...' : subscribeButtonTitle}
           </Button>
@@ -120,7 +131,12 @@ export function ConvertKitFormDesign(props: DesignProps) {
 
 ConvertKitFormDesign.defaultProps = {
   subscribeButtonTitle: 'Subscribe',
-  successMessage: 'Success! Check your inbox.',
+  successMessage: 'Almost done! Now check your email!',
+}
+
+function isValidEmail(email: string | File | null) {
+  const pattern = /\S+@\S+\.\S+/
+  return typeof email === 'string' && email.match(pattern)
 }
 
 // NOTE: This only works with old version of convertKit forms
@@ -128,7 +144,7 @@ export class ConvertKitForm extends React.Component<Props> {
   state = {
     loading: false,
     submissionResult: 'not-yet',
-    emailEmpty: true,
+    emailValid: true,
   }
   reportError = (e: string) => {
     const { onSubmitError } = this.props
@@ -144,39 +160,43 @@ export class ConvertKitForm extends React.Component<Props> {
   submitForm = async (form: any) => {
     // e.preventDefault();
     const data = new FormData(form)
-    // console.log(data, form.action, "email", data.get("email"));
-    const url = form.action
-    try {
-      this.setState({ loading: true })
-      const response = await fetch(url, {
-        method: 'POST',
-        body: data,
-      })
-      // console.log(url, response);
-      if (response.status !== 200) {
-        this.reportError(response.statusText)
-      } else {
-        this.reportSuccess()
+    if (isValidEmail(data.get('email'))) {
+      // console.log(data, form.action, "email", data.get("email"));
+      const url = form.action
+      try {
+        this.setState({ loading: true })
+        const response = await fetch(url, {
+          method: 'POST',
+          body: data,
+        })
+        // console.log(url, response);
+        if (response.status !== 200) {
+          this.reportError(response.statusText)
+        } else {
+          this.reportSuccess()
+        }
+      } catch (e) {
+        this.reportError(e)
+      } finally {
+        this.setState({ loading: false })
       }
-    } catch (e) {
-      this.reportError(e)
-    } finally {
-      this.setState({ loading: false })
+    } else {
+      this.setState({ emailValid: false })
     }
   }
   validateEmail = (e: any) => {
-    this.setState({ emailEmpty: e.target.value === '' })
+    this.setState({ emailValid: e.target.value === '' })
   }
   render() {
-    const { loading, emailEmpty, submissionResult } = this.state
+    const { loading, emailValid, submissionResult } = this.state
     return (
       <ConvertKitFormDesign
         {...this.props}
         loading={loading}
-        emailEmpty={emailEmpty}
+        emailValid={emailValid}
         submissionResult={submissionResult}
         onSubmit={this.submitForm}
-        onValidateEmail={this.validateEmail}
+        // onValidateEmail={this.validateEmail}
       />
     )
   }

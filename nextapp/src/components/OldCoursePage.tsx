@@ -1,3 +1,4 @@
+import { css, jsx } from '@emotion/core'
 import React from 'react'
 import { Layout } from '@/components/Layout'
 import { PageTitle } from '@/components/PageTitle'
@@ -60,7 +61,21 @@ function Pricing({ course }: { course: Course }) {
         <div className="text-lg font-semibold">{title}</div>
         <div>{length}</div>
         <div className="relative">
-          <div className="line-through text-xl">${price?.original}</div>
+          <div
+            className="text-xl font-normal"
+            css={css`
+              &::after {
+                content: '';
+                border-bottom: 2px solid red;
+                position: absolute;
+                left: 0;
+                top: 50%;
+                width: 100%;
+              }
+            `}
+          >
+            ${price?.original}
+          </div>
           <div className="absolute left-12 -top-2 font-semibold">
             ${price?.current}
           </div>
@@ -89,7 +104,7 @@ export function OldCoursePage({
   return (
     <Layout>
       <NextSeo title={title} description={excerpt} />
-      <main className="max-w-screen-sm mx-auto flex flex-col space-y-16">
+      <main className="w-11/12 max-w-prose mx-auto flex flex-col space-y-16">
         <div>
           <PageTitle subtitle={excerpt}>{title}</PageTitle>
           <div className="aspect-16x9 rounded-sm overflow-hidden">
