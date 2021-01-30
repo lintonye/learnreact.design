@@ -462,24 +462,29 @@ export default function Details() {
           alignItems="center"
           mb={3}
         >
-          <h2>
+          <h2 className="">
             <GalaxyHole
               galaxy={['mobileSmall2', 'small2']}
-              className="inline-block"
+              className="inline-block flex-shrink-0 text-xl font-bold"
             >
-              <Text textVariant="h2" color="white">
-                Save Time!{' '}
-              </Text>
+              <span className="text-white">Save Time! </span>
+              <span
+                className="text-black ml-2"
+                css={{ textShadow: '0 0 4px white, 0 0 4px white' }}
+              >
+                Only learn what’s necessary!
+              </span>
             </GalaxyHole>
-            <Text
+            {/* <Text
               textVariant="h2"
               as="span"
               ml={[0, 3]}
               mt={[-1, 4]}
-              style={{ textShadow: '0 0 1px white, 0 0 2px white' }}
+              style={{ textShadow: '0 0 4px white, 0 0 4px white' }}
+              className="flex-shrink-0"
             >
               Only learn what’s necessary!
-            </Text>
+            </Text> */}
           </h2>
         </Box>
         <Text

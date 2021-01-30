@@ -236,30 +236,36 @@ const galaxies: Galaxies = {
   },
 }
 
-function getResponsiveValue(value: any) {
-  const breakpoints = [500, 800]
-  if (Array.isArray(value)) {
-    if (typeof window !== 'undefined') {
-      for (let i = 0; i < breakpoints.length; i++) {
-        if (window.matchMedia(`(max-width: ${breakpoints[i]}px)`).matches) {
-          return value[Math.min(i, value.length - 1)]
+function useResponsiveValue(value: any) {
+  const [result, setResult] = React.useState(value)
+
+  React.useEffect(() => {
+    function getResponseValue() {
+      const breakpoints = [500, 800]
+      if (Array.isArray(value)) {
+        if (typeof window !== 'undefined') {
+          for (let i = 0; i < breakpoints.length; i++) {
+            if (window.matchMedia(`(max-width: ${breakpoints[i]}px)`).matches) {
+              return value[Math.min(i, value.length - 1)]
+            }
+          }
+          return value[value.length - 1]
+        } else {
+          return value[value.length - 1]
         }
       }
-      return value[value.length - 1]
-    } else {
-      return value[value.length - 1]
     }
-  } else {
-    return value
-  }
+    setResult(getResponseValue())
+  }, [value])
+  return result
 }
 
 export default function GalaxyHole({ galaxy, children, ...props }: any) {
-  const g = getResponsiveValue(galaxy)
-  return (
+  const g = useResponsiveValue(galaxy)
+  return g && galaxies[g] ? (
     <Box {...props} position="relative">
       <Galaxy {...galaxies[g]} name={galaxy} />
       <Box p={galaxies[g].clientAreaPadding}>{children}</Box>
     </Box>
-  )
+  ) : null
 }

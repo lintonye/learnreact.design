@@ -42,7 +42,7 @@ export default function Footer(props: any) {
           <BottomLink label="Home" to="/" />
           <BottomLink label="Courses" to="/courses" />
           <BottomLink label="Posts" to="/posts" />
-          <BottomLink label="Webinars" to="/webinars" />
+          <BottomLink label="Tips" to="/tips" />
           {/* <BottomLink label="Blog" to="/blog" /> */}
         </Box>
         <Image
