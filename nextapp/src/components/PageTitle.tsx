@@ -4,7 +4,7 @@ export function PageTitle({
   subtitle,
 }: {
   children: React.ReactNode
-  subtitle: string
+  subtitle?: string
 }) {
   return (
     <div className="m-20 space-y-4 max-w-screen-md mx-auto">
