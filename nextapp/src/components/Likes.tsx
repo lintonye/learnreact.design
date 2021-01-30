@@ -140,7 +140,7 @@ function LikeButton({
   const props = usePressHoldRepeat(addOneLike, 300, 100)
 
   return (
-    <div
+    <button
       {...props}
       className="relative z-10 cursor-pointer text-red-400 hover:text-pink-600"
     >
@@ -149,7 +149,7 @@ function LikeButton({
         size={40}
         strokeWidth={1}
       />
-    </div>
+    </button>
   )
 }
 
