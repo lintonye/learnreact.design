@@ -3,7 +3,7 @@ import { Box, Testimonial, Companies } from '@/components/legacy-design-system'
 
 export default function SocialProof() {
   return (
-    <Box bg="primaryBg" m={0} pt={6} pb={8} px={4}>
+    <Box bg="primaryBg" m={0} pt={6} pb={8} px={4} className="space-y-8">
       <Testimonial
         company="Pitch"
         name="Kevin Cannon"

@@ -4,7 +4,7 @@ import { ButtonHTMLAttributes } from 'react'
 type Props = {
   // children?: React.ReactNode
   // className?: string
-  variant?: 'outline' | 'dark' | 'primary'
+  variant?: 'outline' | 'primary'
   size?: 'small' | 'normal' | 'large'
 } & ButtonHTMLAttributes<HTMLButtonElement>
 
@@ -17,8 +17,7 @@ export function Button({
 }: Props) {
   const variantClasses = {
     outline: 'border border-gray-500 disabled:opacity-40',
-    dark: 'bg-gray-800 text-white disabled:bg-gray-300',
-    primary: '',
+    primary: 'bg-gray-800 text-white font-semibold disabled:bg-gray-300',
   }
   const sizeClasses = {
     small: ' text-sm ',
@@ -32,7 +31,9 @@ export function Button({
         ' ' +
         variantClasses[variant] +
         ' ' +
-        sizeClasses[size]
+        sizeClasses[size] +
+        ' ' +
+        className
       }
       {...props}
     >

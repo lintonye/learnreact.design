@@ -17,30 +17,30 @@ const r101 = [
         link:
           'https://school.learnreact.design/courses/react-101-for-designers/lectures/4201205',
       },
-      { name: 'React Components And Sketch Symbols', link: '' },
-      { name: 'Coding Exercises', link: '' },
+      { name: 'React Components And Sketch Symbols' },
+      { name: 'Coding Exercises' },
     ],
   },
   {
     chapter: 'Creating Your First Component',
     lectures: [
-      { name: 'The House Component', link: '' },
-      { name: 'JS Premier: ES6 Constants', link: '' },
-      { name: 'JS Premier: Arrow Functions', link: '' },
-      { name: 'JSX', link: '' },
-      { name: 'Magic', link: '' },
-      { name: 'JS Premier: Expressions', link: '' },
-      { name: 'Placeholders in JSX', link: '' },
-      { name: 'Rendering A List', link: '' },
-      { name: 'Conditional Rendering', link: '' },
-      { name: 'Fragments', link: '' },
+      { name: 'The House Component' },
+      { name: 'JS Premier: ES6 Constants' },
+      { name: 'JS Premier: Arrow Functions' },
+      { name: 'JSX' },
+      { name: 'Magic' },
+      { name: 'JS Premier: Expressions' },
+      { name: 'Placeholders in JSX' },
+      { name: 'Rendering A List' },
+      { name: 'Conditional Rendering' },
+      { name: 'Fragments' },
     ],
   },
   {
     chapter: 'Styling Components',
     lectures: [
-      { name: 'JS Premier: Import / Export', link: '' },
-      { name: 'JS Premier: Import Project Resources', link: '' },
+      { name: 'JS Premier: Import / Export' },
+      { name: 'JS Premier: Import Project Resources' },
       {
         name: 'Style Components with CSS',
         link:
@@ -91,10 +91,10 @@ const rn101 = [
   {
     chapter: `Getting Started`,
     lectures: [
-      { name: `Welcome`, link: '' },
-      { name: `Create your first React Native app`, link: '' },
-      { name: `What is React Native?`, link: '' },
-      { name: `What are native apps?`, link: '' },
+      { name: `Welcome` },
+      { name: `Create your first React Native app` },
+      { name: `What is React Native?` },
+      { name: `What are native apps?` },
       {
         name: `Environment Setup and Coding Exercises`,
         link:
@@ -475,7 +475,7 @@ const framerx = [
   {
     chapter: `Getting started`,
     lectures: [
-      { name: `Welcome`, link: '' },
+      { name: `Welcome` },
       {
         name: `What can you do with Framer X?`,
         link:
@@ -553,7 +553,7 @@ const framerx = [
         link:
           'https://school.learnreact.design/courses/framer-x-react/lectures/6236431?preview=logged_in',
       },
-      { name: `Skinny from far away - animate multiple properties`, link: '' },
+      { name: `Skinny from far away - animate multiple properties` },
       {
         name: `Teach Skinny to fly - chain animations`,
         link:
@@ -643,4 +643,4 @@ export const toggle = [
   `Export to CodeSandbox`,
 ]
 
-export default { r101, rn101, framerx }
+export default { 'react-101': r101, 'react-native-101': rn101, framerx }

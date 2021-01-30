@@ -6,6 +6,16 @@
   max-width: 65ch;
 }
 
+.aspect-16x9 {
+  @apply w-full h-0 relative;
+  padding-bottom: 56.25%;
+}
+
+.aspect-16x9 * {
+  position: absolute;
+  @apply inset-0 w-full h-full;
+}
+
 /* Remove Prism's bg color. TODO: there might be better ways! */
 pre[class*='language-'] {
   background-color: #f0f0f5 !important;

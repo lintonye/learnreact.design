@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import React from 'react'
 import Image from 'next/image'
+import { Link } from '../design-system'
 
 type Props = {
   name: string
@@ -8,15 +9,31 @@ type Props = {
   company?: string
   pictureName: string
   nameLink?: string
+  showMore?: boolean
   children: React.ReactNode
 }
 
-function CustomerQuote({
+function QuoteMark(props: any) {
+  return (
+    <svg
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 60 60"
+      {...props}
+    >
+      <path d="M 16 15 C 22.075 15 27 19.925 27 26 C 27 32.075 22.075 37 16 37 C 12.609 37 9.576 35.465 7.558 33.053 C 6.769 32.272 6.023 31.27 5.5 30 C 3.75 25.75 3.55 21.048 4 19 C 4.45 16.952 5.1 13.9 9.5 9.5 C 13.9 5.1 26 4.226 26 5.5 L 26 6 C 26 6 17.528 7.423 16 8 C 14.472 8.577 12.116 9.461 10 12 C 8.113 14.264 8.298 16.698 10.224 16.637 C 11.902 15.599 13.881 15 16 15 Z" />
+      <path d="M 41 15 C 47.075 15 52 19.925 52 26 C 52 32.075 47.075 37 41 37 C 37.609 37 34.576 35.465 32.558 33.053 C 31.769 32.272 31.023 31.27 30.5 30 C 28.75 25.75 28.55 21.048 29 19 C 29.45 16.952 30.1 13.9 34.5 9.5 C 38.9 5.1 51 4.226 51 5.5 L 51 6 C 51 6 42.528 7.423 41 8 C 39.472 8.577 37.116 9.461 35 12 C 33.113 14.264 33.298 16.698 35.224 16.637 C 36.902 15.599 38.881 15 41 15 Z" />
+    </svg>
+  )
+}
+
+export function CustomerQuote({
   name,
   title,
   company,
   pictureName,
   nameLink,
+  showMore = false,
   children,
 }: Props) {
   return (
@@ -39,9 +56,17 @@ function CustomerQuote({
           {title}
           {company && `, ${company}`}
         </div>
+        {showMore && (
+          <div>
+            <Link href="/testimonials">
+              👉 <span className="ml-2">More Testimonials</span>
+            </Link>
+          </div>
+        )}
       </div>
-      <div className="font-serif text-lg italic" css={{ flex: 3 }}>
-        {children}
+      <div className="font-serif text-lg italic relative" css={{ flex: 3 }}>
+        <div className="z-10 relative">{children}</div>
+        <QuoteMark className="w-20 text-gray-200 absolute -top-5 -left-5 z-0" />
       </div>
     </div>
   )
@@ -297,13 +322,11 @@ function Quotes() {
         pictureName="joshua"
       >
         The closer a designer is to the actual customer experience the better.
-        <p>
-          The learnreact.design videos are the perfect intro for designers
-          looking to get a better understanding of React so they can take their
-          designs to the next level. The courses are very easy to follow and
-          give you all the tools you need to jump right in, see results fast,
-          and understand how it all works.
-        </p>
+        The learnreact.design videos are the perfect intro for designers looking
+        to get a better understanding of React so they can take their designs to
+        the next level. The courses are very easy to follow and give you all the
+        tools you need to jump right in, see results fast, and understand how it
+        all works.
       </CustomerQuote>
       <CustomerQuote
         name="Mushon Zer-Aviv"
@@ -325,12 +348,10 @@ function Quotes() {
       >
         Being a designer in the tech industry has opened my world to new tools
         and technologies. Learning React is something I've always wanted to
-        learn and incorporate into my tool set, but I didn't know how.
-        <p>
-          Linton's program is simple to follow, with the content divided in a
-          thoughtful manner. With this training, I feel very well rounded in my
-          technical abilities as a designer today.
-        </p>
+        learn and incorporate into my tool set, but I didn't know how. Linton's
+        program is simple to follow, with the content divided in a thoughtful
+        manner. With this training, I feel very well rounded in my technical
+        abilities as a designer today.
       </CustomerQuote>
       <CustomerQuote
         name="Nick Hart"
@@ -386,13 +407,12 @@ function Quotes() {
         you get the feeling that he's just a nice guy (of course - he's
         Canadian! :) - he doesn't talk down to you in the course or use a bunch
         of needless jargon, and he makes himself available for questions.
-        <p>
-          He's broken React down into bite-size chunks, using fun graphics and
-          animations to illustrate key points (which as visual learners
-          designers will appreciate). The course is well thought out and
-          structured, including exercises in a coding environment that has
-          everything set up for React.
-        </p>
+        <br />
+        He's broken React down into bite-size chunks, using fun graphics and
+        animations to illustrate key points (which as visual learners designers
+        will appreciate). The course is well thought out and structured,
+        including exercises in a coding environment that has everything set up
+        for React.
       </CustomerQuote>
       <CustomerQuote
         name="Mustafa Alic"
@@ -413,20 +433,17 @@ function Quotes() {
         If learning code is your nemesis like me, you should give Linton’s
         online course a shot. It helps me make a smooth painless entry to the
         world of coding.
-        <p>
-          As a UX / UI Designer I need to have understanding on the environment
-          where the final product build, not so that I can code them myself, but
-          so I can figure out the possibility and features that available so
-          that I can design the product better. Being a designer for 30 years
-          and never touch a single code, learning to code is my all time
-          nemesis, until I found Linton’s Learn react online course.
-        </p>
-        <p>
-          To be honest it took me a couple of weeks of hesitation to start my
-          subscription. But after signup I’m so glad that I did. Linton’s
-          teaching really do presented with designer in mind. It helps me passed
-          my mental blocking of learning code.
-        </p>
+        <br />
+        As a UX / UI Designer I need to have understanding on the environment
+        where the final product build, not so that I can code them myself, but
+        so I can figure out the possibility and features that available so that
+        I can design the product better. Being a designer for 30 years and never
+        touch a single code, learning to code is my all time nemesis, until I
+        found Linton’s Learn react online course. To be honest it took me a
+        couple of weeks of hesitation to start my subscription. But after signup
+        I’m so glad that I did. Linton’s teaching really do presented with
+        designer in mind. It helps me passed my mental blocking of learning
+        code.
       </CustomerQuote>
       <CustomerQuote
         name="Vince Kodikal"
@@ -437,15 +454,12 @@ function Quotes() {
         My team at IQVIA was introduced to FramerX as the tool that would bridge
         the gap between designers and the dev team. However, I wasn’t too
         familiar with React and so I began looking for courses that were simple
-        to follow. Most of them required me to have a lot of dev skills.
-        <p>
-          When I found the Framer + React course from Linton, I was really
-          amazed. He explains concepts using simple story analogies and I can
-          follow them easily. He also includes sample files with instructions
-          how to modify them. Plus, he has small tests at the end of each
-          lesson. It was very valuable in gaining knowledge of React and Framer
-          X.
-        </p>
+        to follow. Most of them required me to have a lot of dev skills. When I
+        found the Framer + React course from Linton, I was really amazed. He
+        explains concepts using simple story analogies and I can follow them
+        easily. He also includes sample files with instructions how to modify
+        them. Plus, he has small tests at the end of each lesson. It was very
+        valuable in gaining knowledge of React and Framer X.
       </CustomerQuote>
       <CustomerQuote
         name="George Otsubo"

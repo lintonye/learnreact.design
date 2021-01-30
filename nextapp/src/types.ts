@@ -33,10 +33,16 @@ export type Requirement = 'none' | 'js' | 'react'
 export type Course = {
   slug: string
   title: string
+  youtubeId?: string
   excerpt: string
   icon: React.ReactNode
   length: string
   url: string
+  price?: {
+    original: number
+    current: number
+    purchaseUrl: string
+  }
   requirement: Requirement
   chapters?: any[]
   isNew?: boolean

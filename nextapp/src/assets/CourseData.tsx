@@ -71,7 +71,7 @@ const ALL_COURSES: Course[] = [
     length: `In the making`, //makeLengthText(HOURS.r101, LESSONS.r101),
     url: '/courses/react-mental-models',
     requirement: 'js',
-    chapters: Chapters.r101,
+    chapters: Chapters['react-101'],
   },
   // {
   //   id: "toggle",
@@ -96,26 +96,41 @@ const ALL_COURSES: Course[] = [
     url: 'https://smileyinmotion.com',
     requirement: 'react',
   },
-  // {
-  //   slug: 'r101',
-  //   title: 'React 101',
-  //   excerpt: 'Build web UIs yourself!',
-  //   icon: ICONS.r101,
-  //   length: makeLengthText(HOURS.r101, LESSONS.r101),
-  //   url: '/courses/react-101',
-  //   requirement: 'js',
-  //   chapters: Chapters.r101,
-  // },
-  // {
-  //   slug: 'rn101',
-  //   title: 'React Native 101',
-  //   excerpt: 'Build mobile UIs yourself!',
-  //   icon: ICONS.rn101,
-  //   length: makeLengthText(HOURS.rn101, LESSONS.rn101),
-  //   url: '/courses/react-native-101',
-  //   requirement: 'react',
-  //   chapters: Chapters.rn101,
-  // },
+  {
+    slug: 'react-101',
+    title: 'React 101',
+    youtubeId: '87x_cCpHoAo',
+    excerpt: 'Learn React from the beginning. Style components yourself!',
+    icon: ICONS.r101,
+    length: makeLengthText(HOURS.r101, LESSONS.r101),
+    url: '/courses/react-101',
+    requirement: 'js',
+    chapters: Chapters['react-101'],
+    price: {
+      original: 99,
+      current: 49,
+      purchaseUrl:
+        'https://sso.teachable.com/secure/157508/checkout/707954/react-101-for-designers?coupon_code=Y2021',
+    },
+  },
+  {
+    slug: 'react-native-101',
+    title: 'React Native 101',
+    youtubeId: 'lHA1PoyfcRI',
+    excerpt:
+      'Learn how to style React Native components, implement responsive design, handle user input, create animations',
+    icon: ICONS.rn101,
+    length: makeLengthText(HOURS.rn101, LESSONS.rn101),
+    url: '/courses/react-native-101',
+    requirement: 'react',
+    chapters: Chapters['react-native-101'],
+    price: {
+      original: 139,
+      current: 69,
+      purchaseUrl:
+        'https://sso.teachable.com/secure/157508/checkout/679506/react-native-101-for-designers?coupon_code=Y2021',
+    },
+  },
 ]
 
 export function coursesByReq(reqId: string) {

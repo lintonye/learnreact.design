@@ -105,6 +105,7 @@ export function ConvertKitFormDesign(props: DesignProps) {
 
           <Button
             disabled={loading || emailEmpty}
+            variant="primary"
             id="ck_subscribe_button"
             // variant="small"
             onClick={() => onSubmit && onSubmit(formRef.current)}
