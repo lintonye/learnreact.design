@@ -1,4 +1,4 @@
-import { jsx } from '@emotion/core'
+import { jsx, css } from '@emotion/core'
 import React, { useState, useReducer, useContext } from 'react'
 import { FunctionComponent } from 'react'
 import { NextSeo } from 'next-seo'
@@ -21,6 +21,7 @@ import { DiscussionTwitter } from './DiscussOnTwitter'
 import { PostPreview } from './PostPreview'
 import { getPostBySlug } from '@/getAllPostPreviews'
 import { motion } from 'framer-motion'
+import { lg } from '../lib/media-queries'
 
 type LayoutProps = {
   meta: any
@@ -136,6 +137,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
   } = meta || {}
 
   const [inPostState, dispatch] = useReducer(inPostStateReducer, [])
+
   return (
     <Layout>
       <NextSeo
@@ -152,28 +154,36 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
         <MDXWrapper>
           <div
             className={
-              'grid gap-y-5 ' //+
+              'grid gap-y-5'
+              // 'max-w-screen-sm mx-auto ' +
               // 'sm:max-w-screen-sm ' +
-              // 'lg:max-w-screen-md ' +
+              // 'lg:grid lg:gap-y-5 lg:mx-0 lg:max-w-none' // +
               // 'xl:max-w-screen-lg '
             }
-            css={{
-              gridTemplateColumns: '1fr min(65ch, 100%) 30ch 1fr',
-              '& > *': { gridColumn: 2 },
-            }}
+            css={css`
+              grid-template-columns: 1fr min(65ch, 90%) 1fr;
+              & > * {
+                grid-column: 2;
+              }
+              ${lg} {
+                grid-template-columns: 1fr min(65ch, 100%) 30ch 1fr;
+              }
+            `}
           >
             {title && (
               <h1
                 className={
-                  'font-bold leading-tight text-center text-2xl my-10 justify-self-center ' +
+                  'font-bold leading-tight text-center text-3xl my-10 justify-self-center ' +
                   'sm:text-4xl ' +
-                  'md:my-16 ' +
+                  'md:my-16 max-w-xl ' +
                   'lg:max-w-2xl lg:my-24 ' +
                   'xl:max-w-3xl xl:text-5xl xl:my-36 '
                 }
-                css={{
-                  gridColumn: '2/4',
-                }}
+                css={css`
+                  ${lg} {
+                    grid-column: 2/4 !important;
+                  }
+                `}
               >
                 {title}
               </h1>
@@ -181,8 +191,17 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
 
             {/* Sidebar */}
             <div
-              className="sticky top-4 self-start mt-6 ml-12 justify-self-center space-y-8"
-              css={{ gridColumn: '3/4', gridRow: '2/20' }}
+              className={
+                'hidden sticky top-8 self-start mt-6 ml-12 justify-self-center space-y-8' +
+                ' ' +
+                'lg:block'
+              }
+              css={css`
+                ${lg} {
+                  grid-column: 3/4 !important;
+                  grid-row: 2/20;
+                }
+              `}
             >
               <Toc contentChildren={children} headings={tocHeadings} />
               <Likes url={router.pathname} onLike={() => setLiked(true)} />
