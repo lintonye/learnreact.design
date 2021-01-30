@@ -76,7 +76,7 @@ function useLikes(url: string): [number, DebouncedStateSetter<number>, number] {
   const delta = likesToCommit - likesBeforeCommit
   useEffect(() => {
     // actually update it in the db
-    if (delta !== 0) {
+    if (delta > 0) {
       const docRef = db.collection(COLLECTION_LIKE_COUNTS).doc(urlKey)
       // console.log('running transaction, delta = ', delta)
       db.runTransaction(async (t) => {
