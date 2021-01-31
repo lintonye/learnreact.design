@@ -1,6 +1,7 @@
 import { jsx } from '@emotion/core'
 import { Menu } from '@headlessui/react'
 import { Link } from '@/components/design-system'
+import LogoLight from '@/assets/logo-light.svg'
 
 export function Header() {
   return (
@@ -8,7 +9,11 @@ export function Header() {
       <nav>
         <ul className="flex m-4 space-x-8 text-sm">
           <li>
-            <Link href="/">LearnReact.design</Link>
+            <Link href="/">
+              <div className="p-8 -m-8">
+                <img src={LogoLight} width={20} />
+              </div>
+            </Link>
           </li>
           <li>
             <Link href="/courses">Courses</Link>
