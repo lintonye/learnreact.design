@@ -39,7 +39,8 @@ function useViewportBoundingBox(id: string): [DOMRect | undefined, number] {
         )
         const style = window.getComputedStyle(element)
         if (style.position === 'sticky') {
-          setStickyTop(element.offsetTop)
+          // TODO 80=5rem*16 this should be corrected when a proper method for finding topThreshold is found
+          setStickyTop(element.offsetTop - 80)
         }
       }
     }
@@ -77,8 +78,7 @@ export function Connection({
     return boxRight
       ? boxRight.top +
           boxRight.height / 2 -
-          // TODO 80=5rem*16 this should be corrected when a proper method for finding topThreshold is found
-          (sy > topThreshold - 80 ? topThreshold - 80 : sy)
+          (sy > topThreshold ? topThreshold : sy)
       : 0
   })
   // @ts-ignore Not sure why the line below gives type error
@@ -94,7 +94,9 @@ export function Connection({
       const xr = boxRight.left
       const angle = Math.atan2(yl - yr, xr - xl)
       const d =
-        (30 * Math.sqrt(Math.pow(xr - xl, 2) + Math.pow(yr - yl, 2))) / 300
+        (Math.sign(yl - yr) *
+          Math.sqrt(Math.pow(xr - xl, 2) + Math.pow(yr - yl, 2))) /
+        20
       const dx = d * Math.sin(angle)
       const dy = d * Math.cos(angle)
 
