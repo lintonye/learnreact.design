@@ -1,5 +1,6 @@
 import { Link } from './design-system'
 import * as SEOData from '@/../next-seo.json'
+import { FiTwitter } from 'react-icons/fi'
 
 export function DiscussionTwitter({
   pageUrl,
@@ -12,7 +13,8 @@ export function DiscussionTwitter({
   const authorTwitterId = 'lintonye'
   const author = 'Linton Ye'
   return (
-    <div className="flex space-x-4">
+    <div className="flex space-x-2 items-center">
+      <FiTwitter />
       <Link
         href={`https://twitter.com/share?url=${fullUrl}&text=%E2%80%9C${encodeURI(
           title,

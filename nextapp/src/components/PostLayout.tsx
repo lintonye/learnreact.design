@@ -22,6 +22,7 @@ import { PostPreview } from './PostPreview'
 import { getPostBySlug } from '@/getAllPostPreviews'
 import { motion } from 'framer-motion'
 import { lg } from '../lib/media-queries'
+import { FiCalendar } from 'react-icons/fi'
 
 type LayoutProps = {
   meta: any
@@ -224,7 +225,10 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
 
             {/* Additional Info */}
             <hr />
-            <div>Updated: {date}</div>
+            <div className="flex items-center space-x-2">
+              <FiCalendar />
+              <span>Updated: {date}</span>
+            </div>
             <ViewCounter url={router.pathname} />
             <DiscussionTwitter pageUrl={router.pathname} title={title} />
 

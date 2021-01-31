@@ -2,6 +2,7 @@ import { useFirestore } from '@/lib/firebase'
 import { useLocalStorage } from '@/lib/useLocalStorage'
 import firebase from 'firebase/app'
 import React, { useEffect, useState } from 'react'
+import { FiActivity } from 'react-icons/fi'
 
 /**
  *
@@ -46,5 +47,10 @@ function useViewCount(url: string) {
 
 export function ViewCounter({ url }: { url: string }) {
   const count = useViewCount(url)
-  return <div>Visits: {count}</div>
+  return (
+    <div className="flex items-center space-x-2">
+      <FiActivity />
+      <span>Visits: {count}</span>
+    </div>
+  )
 }
