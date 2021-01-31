@@ -14,7 +14,7 @@ export function Default() {
         formId="123"
       />
       <ConvertKitFormDesign loading formId="123" />
-      <ConvertKitFormDesign emailEmpty formId="123" />
+      <ConvertKitFormDesign emailValid={false} formId="123" />
       <ConvertKitFormDesign submissionResult="success" formId="123" />
       <ConvertKitFormDesign submissionResult="error" formId="123" />
     </div>
