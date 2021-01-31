@@ -71,6 +71,7 @@
     "@types/prismjs": "^1.16.2",
     "@types/react": "^17.0.0",
     "@types/rebass": "3",
+    "@types/resize-observer-browser": "^0.1.5",
     "@types/styled-components": "4",
     "@types/styled-system": "^5.1.10",
     "@types/styled-system__theme-get": "^5.0.1",

@@ -421,7 +421,12 @@ const mockFooterCode: JsxNode = {
   ],
 }
 
-export function DomoHatShopDemo({ className }: { className?: string }) {
+export function DomoHatShopDemo({
+  className,
+  ...props
+}: {
+  className?: string
+}) {
   const [state] = useContext(InPostStateContext)
   const highlightOptions = (state?.highlights || '').split(':')
   const ids = highlightOptions[0] === '' ? [] : highlightOptions[0].split(' ')
@@ -432,6 +437,7 @@ export function DomoHatShopDemo({ className }: { className?: string }) {
     <div
       className={'shadow-lg rounded-sm overflow-hidden ' + className}
       // css={{ maxWidth: 540 }}
+      {...props}
     >
       <DomoHatShop />
       <ComponentHighlighter ids={ids} labelsOnly={labelsOnly} />

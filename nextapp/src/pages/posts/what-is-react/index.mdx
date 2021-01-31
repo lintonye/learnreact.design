@@ -27,6 +27,7 @@ import { DomoHatShopDemo } from '@/components/what-is-react/DomoHatShopDemo'
 import { CodeEditor } from '@/components/what-is-react/CodeEditor'
 import { IntersectionDetector } from '@/components/IntersectionDetector'
 import { FullBleed } from '@/components/FullBleed'
+import { Connection } from '@/components/Connection'
 
 export const meta = {
   title: 'What is React: A Visual Introduction For Beginners',
@@ -266,12 +267,6 @@ Alright. Let's say we want to help Domo build an online hat store 🧢 .
 
 ### Components are composable
 
-<IntersectionDetector onIntersectionChange={({isIntersecting, dispatch}) => {
-    if (isIntersecting) {
-      dispatch({type: "highlights", data: "Header Main Footer:labels-only"})
-    }
-  }}>
-
 We can break the UI into a few parts:
 
 - Header: the header on the top
@@ -285,7 +280,15 @@ We can break the UI into a few parts:
   />
 </div>
 
+<IntersectionDetector onIntersectionChange={({isIntersecting, dispatch}) => {
+    if (isIntersecting) {
+      dispatch({type: "highlights", data: "Header Main Footer:labels-only"})
+    }
+  }}>
+
 This decomposition can be written in code like so:
+
+<div id="connection-decomposition">
 
 ```jsx
 // DomoHatShopHome
@@ -295,6 +298,8 @@ This decomposition can be written in code like so:
   <Footer />
 </div>
 ```
+
+</div>
 
 </IntersectionDetector>
 
@@ -331,6 +336,8 @@ We write the Header component!
 
 Now in this Header component, it includes two custom tags `<SearchBar>` and `<ShoppingCart>`. What's in there?
 
+<div id="connection-searchbar-shoppingcart">
+
 ```jsx
 // SearchBar
 <form>
@@ -347,6 +354,8 @@ Now in this Header component, it includes two custom tags `<SearchBar>` and `<Sh
 </div>
 ```
 
+</div>
+
 Remember the first important property of React components? They are **composable**. This means that we can use components to build other components -- exactly what we have just done.
 
 </IntersectionDetector>
@@ -360,7 +369,7 @@ Remember the first important property of React components? They are **composable
 
 Now here's an exercise for you (open this page in a desktop browser for the best experience):
 
-<div className="bg-indigo-100 px-3 py-3 rounded-md my-5 space-y-5">
+<div id="connection-add-searchbar" className="bg-indigo-100 px-3 py-3 rounded-md my-5 space-y-5">
 
 ✍️ Let's say we want to add the SearchBar into the Footer as well. What would you do? **Edit the code below:**
 
@@ -401,7 +410,7 @@ Did you get two search bars? You get the idea!
 
 "Composable" means being able to create a component using other components as its building blocks. This sounds very similar to how nature works, except for one important difference: in React, once we use a component in another component, it still "attaches" to the original component. When the original changes, all instances update along with it.
 
-<div className="bg-indigo-100 px-3 py-3 rounded-md">
+<div id="connection-change-searchbar" className="bg-indigo-100 px-3 py-3 rounded-md">
 
 ✍️ Change the text on the button in the code of SearchBar below:
 
@@ -443,6 +452,8 @@ Now let's move on to the Main component. Have you choosen a hat for Domo yet? Th
 
 Here's the code for the component DomoWithHat, the widget on the left.
 
+<div id="connection-domowithhat">
+
 ```jsx
 // DomoWithHat
 <div>
@@ -450,6 +461,8 @@ Here's the code for the component DomoWithHat, the widget on the left.
   <Domo />
 </div>
 ```
+
+</div>
 
 <div className="md:hidden my-2">
   <img src={imgHatShopDomoWithHat} alt="Domo's hat shop UI" />
@@ -462,7 +475,21 @@ Remember the other two superpowers of React? **Declarative UI** and **Reactive D
 </IntersectionDetector>
 </div>
 
-<DomoHatShopDemo className="top-20 sticky z-10 mr-8 hidden md:block" />
+<DomoHatShopDemo
+  className="top-20 sticky z-10 mr-8 hidden md:block"
+  id="domo-hat-shop-ui"
+/>
+
+<div className="hidden fixed inset-0 pointer-events-none z-30 md:block">
+  <Connection idLeft="connection-decomposition" idRight="domo-hat-shop-ui" />
+  <Connection
+    idLeft="connection-searchbar-shoppingcart"
+    idRight="domo-hat-shop-ui"
+  />
+  <Connection idLeft="connection-add-searchbar" idRight="domo-hat-shop-ui" />
+  <Connection idLeft="connection-change-searchbar" idRight="domo-hat-shop-ui" />
+  <Connection idLeft="connection-domowithhat" idRight="domo-hat-shop-ui" />
+</div>
 
 </FullBleed>
 
