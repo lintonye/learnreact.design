@@ -77,7 +77,8 @@ export function Connection({
     return boxRight
       ? boxRight.top +
           boxRight.height / 2 -
-          (sy > topThreshold ? topThreshold : sy)
+          // TODO 80=5rem*16 this should be corrected when a proper method for finding topThreshold is found
+          (sy > topThreshold - 80 ? topThreshold - 80 : sy)
       : 0
   })
   // @ts-ignore Not sure why the line below gives type error
