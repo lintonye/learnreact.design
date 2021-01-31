@@ -86,6 +86,26 @@ export function Connection({
     const output = [0, 1, 1, 0]
     return Math.min(transform(yl, input, output), transform(yr, input, output))
   })
+  // @ts-ignore Not sure why the line below gives type error
+  const pathD = useTransform<number, string>([yLeft, yRight], ([yl, yr]) => {
+    if (boxLeft && boxRight) {
+      const xl = boxLeft.right
+      const xr = boxRight.left
+      const angle = Math.atan2(yl - yr, xr - xl)
+      const d =
+        (30 * Math.sqrt(Math.pow(xr - xl, 2) + Math.pow(yr - yl, 2))) / 300
+      const dx = d * Math.sin(angle)
+      const dy = d * Math.cos(angle)
+
+      const xm = (xl + xr) / 2
+      const ym = (yl + yr) / 2
+
+      const xmm = (xl + xm) / 2
+      const ymm = (yl + ym) / 2
+
+      return `M ${xl} ${yl} Q ${xmm + dx} ${ymm + dy},${xm} ${ym} T ${xr} ${yr}`
+    } else return ''
+  })
   return boxLeft && boxRight ? (
     <motion.svg
       className="absolute inset-0 text-blue-400"
@@ -93,13 +113,11 @@ export function Connection({
       style={{ opacity }}
     >
       {/* Line */}
-      <motion.line
-        x1={boxLeft.right}
-        x2={boxRight.left}
-        y1={yLeft}
-        y2={yRight}
+      <motion.path
+        d={pathD}
         stroke="currentColor"
         strokeDasharray="4 4"
+        fill="transparent"
       />
       {/* Outline left */}
       <motion.rect
