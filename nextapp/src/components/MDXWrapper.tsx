@@ -36,7 +36,7 @@ const components = {
   thead: (props: any) => <thead className="bg-gray-100" {...props} />,
   img: (props: any) => (
     <Image
-      className="mx-auto max-w-full"
+      // className="mx-auto max-w-full"
       width={1024}
       height={768}
       layout="responsive"

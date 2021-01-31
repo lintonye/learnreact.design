@@ -13,6 +13,12 @@ import imgOptimizeSketches from './optimize-sketches.png'
 import imgPlaceholders from './placeholders-in-sketch.png'
 // import img from './.png'
 import imgInspect from './inspect.png'
+import imgHatShopChangeSearchBar from './hatshop-change-searchbar.png'
+import imgHatShopComponents from './hatshop-components.png'
+import imgHatShopDomoWithHat from './hatshop-DomoWithHat.png'
+import imgHatShopSearchBarOnFooter from './hatshop-searchBar-on-footer.png'
+import imgHatShop from './hatshop.png'
+
 import imgSurprise from './surprise.png'
 
 import { DomoAsciiArt } from '@/components/what-is-react/DomoAsciiArt'
@@ -99,7 +105,7 @@ Domo works as a model at the prestigious art studio "Web Browser". His job is to
 
 In real life, DOM stands for Document Object Model. It's indeed a model -- a model of the document (aka the web page). It strikes a pose. The browser paints a portrait. The portraits are what we see on a web page: the textboxes, the paragraphs, the images and so on. A developer's job is like that of a director who tells Domo what to wear and what pose to strike. This determines what those portraits look like in the end.
 
-To check out what the DOM looks like, right-click on this very page and choose "Inspect". Can you make sense of what's in the Elements tab?
+To check out what the DOM looks like, if you are using a desktop browser, right-click on this very page and choose "Inspect". Can you make sense of what's in the Elements tab?
 
 <img src={imgInspect} alt="Inspect in Chrome" width={2048} height={1536} />
 
@@ -240,7 +246,7 @@ const ThinkerWithHat = ({ hat }) => (
 
 Notice that we just need to define what we want (a thinker and a hat in a div), and "wire up" the data ("`type = {hat}`"). When the data change (user selects a hat), the UI updates automatically. -->
 
-<FullBleed className="grid grid-cols-2 items-start gap-x-8 my-8 pb-4 bg-indigo-50 z-20 justify-items-start">
+<FullBleed className="md:grid md:grid-cols-2 items-start gap-x-8 my-8 pb-4 bg-indigo-50 z-20 justify-items-start">
 
   <div className="col-start-1 col-end-3 text-3xl font-bold py-12 mb-8 justify-self-stretch text-center bg-indigo-200 text-indigo-900">
 
@@ -248,11 +254,15 @@ Notice that we just need to define what we want (a thinker and a hat in a div), 
 
   </div>
 
-  <div className="max-w-prose justify-self-end ml-8 space-y-5">
+  <div className="max-w-prose justify-self-end space-y-5 w-11/12 mx-auto md:ml-8 md:mx-none">
 
 Now let's review what we have learned so far and get our hands dirty on a few real React components. To make it easy for you to understand, I left out some details in the code (notedly JavaScript). The goal is to let the core ideas shine through without being bogged down by JS syntax. If you are comfortable with reading JavaScript code, feel free to check out the [real source code](https://codesandbox.io/s/domos-hat-shop-4x7n0?file=/src/App.js).
 
 Alright. Let's say we want to help Domo build an online hat store 🧢 .
+
+<div className="md:hidden">
+  <img src={imgHatShop} alt="Domo's hat shop UI" />
+</div>
 
 ### Components are composable
 
@@ -267,6 +277,13 @@ We can break the UI into a few parts:
 - Header: the header on the top
 - Main: the main content area
 - Footer: the footer on the bottom
+
+<div className="my-4 md:hidden">
+  <img
+    src={imgHatShopComponents}
+    alt="Domo's hat shop UI divided into components"
+  />
+</div>
 
 This decomposition can be written in code like so:
 
@@ -341,7 +358,7 @@ Remember the first important property of React components? They are **composable
     }
   }}>
 
-Now here's an exercise for you:
+Now here's an exercise for you (open this page in a desktop browser for the best experience):
 
 <div className="bg-indigo-100 px-3 py-3 rounded-md my-5 space-y-5">
 
@@ -369,7 +386,14 @@ Hints:
 
 </div>
 
-You get the idea!
+Did you get two search bars? You get the idea!
+
+<div className="my-2 md:hidden">
+  <img
+    src={imgHatShopSearchBarOnFooter}
+    alt="Domo's hat shop UI: searchBar on footer"
+  />
+</div>
 
 </IntersectionDetector>
 
@@ -405,7 +429,11 @@ When we change the SearchBar component above, only the Header and Footer change.
 
 ### Declarative & Reactive
 
-Now let's move on to the Main component. Have you choosen a hat for Domo yet? The demo above is not just an image. It's interactive!
+<div className="hidden md:block">
+
+Now let's move on to the Main component. Have you choosen a hat for Domo yet? The demo on the right is not just an image. It's interactive!
+
+</div>
 
 <IntersectionDetector onIntersectionChange={({isIntersecting, dispatch}) => {
     if (isIntersecting) {
@@ -423,6 +451,10 @@ Here's the code for the component DomoWithHat, the widget on the left.
 </div>
 ```
 
+<div className="md:hidden my-2">
+  <img src={imgHatShopDomoWithHat} alt="Domo's hat shop UI" />
+</div>
+
 Note that we just need to define what we want (Domo and a hat in a div), and "wire up" the data ("`type = {hat}`"). When the data change (user selects a hat), the UI updates automatically. We don't need to worry about when and how to update the DOM. We don't even need to keep track of the data. What we need is just to draw a quick sketch, i.e. the code above.
 
 Remember the other two superpowers of React? **Declarative UI** and **Reactive DOM updates**.
@@ -430,7 +462,7 @@ Remember the other two superpowers of React? **Declarative UI** and **Reactive D
 </IntersectionDetector>
 </div>
 
-<DomoHatShopDemo className="top-20 sticky z-10 mr-8" />
+<DomoHatShopDemo className="top-20 sticky z-10 mr-8 hidden md:block" />
 
 </FullBleed>
 
