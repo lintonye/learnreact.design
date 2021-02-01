@@ -134,29 +134,6 @@ function usePressHoldRepeat(
   }
 }
 
-function LikeButton({
-  onLike,
-  filled = false,
-}: {
-  onLike: () => void
-  filled: boolean
-}) {
-  const props = usePressHoldRepeat(onLike, 300, 100)
-
-  return (
-    <button
-      {...props}
-      className="relative z-10 cursor-pointer text-red-400 hover:text-pink-600"
-    >
-      <FiHeart
-        fill={filled ? 'rgba(239, 68, 68)' : 'transparent'}
-        size={40}
-        strokeWidth={1}
-      />
-    </button>
-  )
-}
-
 function random(min: number, max: number) {
   return Math.floor((max - min) * Math.random()) + min
 }
@@ -169,25 +146,47 @@ export function Likes({ url, onLike }: { url: string; onLike?: () => void }) {
     setLikedByMe(true)
     typeof onLike === 'function' && onLike()
   }, [onLike])
+  const props = usePressHoldRepeat(handleOnLike, 300, 100)
+  const [mode, setMode] = useState('default')
   return (
-    <div className="grid grid-flow-col-dense auto-cols-min gap-x-4 items-center relative select-none">
-      <LikeButton filled={likedByMe} onLike={handleOnLike} />
+    <div className="relative">
+      <motion.button
+        className="grid grid-flow-col-dense auto-cols-min gap-x-4 items-center select-none focus:outline-none"
+        onHoverStart={() => setMode('hovered')}
+        onHoverEnd={() => setMode('default')}
+        animate={mode}
+        {...props}
+      >
+        <motion.div
+          variants={{ default: { rotate: 0 }, hovered: { rotate: 10 } }}
+          className=" text-red-400 hover:text-pink-600"
+        >
+          <FiHeart
+            fill={likedByMe ? 'rgba(239, 68, 68)' : 'transparent'}
+            size={40}
+            strokeWidth={1}
+          />
+        </motion.div>
+
+        <div className="text-black">{likes}</div>
+        {/* For debugging only */}
+        {/* <div>committed: {likeCountCommitted}</div> */}
+      </motion.button>
+
+      {/* Floating hearts when pressed */}
       <AnimatePresence>
         <motion.div
           className="absolute pointer-events-none z-0 left-0 top-0 m-0"
           key={likes}
           initial={{ x: 0, y: 0 }}
+          animate={mode}
+          variants={{ default: { rotate: 0 }, hovered: { rotate: 10 } }}
           exit={{
             y: -random(60, 120),
             x: random(0, 120),
             scale: 0.5,
             opacity: 0,
             transition: { type: 'spring', damping: 7 },
-            // y: [-10, -20, -50, -80],
-            // x: [5, 10, 40, 80],
-            // scale: [1, 0.8, 0.5, 0],
-            // opacity: [1, 0.8, 0.5, 0],
-            // transition: { duration: 0.3 },
           }}
         >
           <FiHeart
@@ -198,9 +197,6 @@ export function Likes({ url, onLike }: { url: string; onLike?: () => void }) {
           />
         </motion.div>
       </AnimatePresence>
-      <div>{likes}</div>
-      {/* For debugging only */}
-      {/* <div>committed: {likeCountCommitted}</div> */}
     </div>
   )
 }
