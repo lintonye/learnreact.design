@@ -98,7 +98,7 @@ export function ConvertKitFormDesign(props: DesignProps) {
             disabled={loading}
             placeholder="Email address"
             // onChange={onValidateEmail}
-            className="flex-1"
+            className="flex-1 py-1"
             required
           />
           {customFields &&
