@@ -37,7 +37,7 @@ export function Main() {
           </section>
         ))}
       </div>
-      <div>Sidebar</div>
+      {/* <div>Sidebar</div> */}
     </div>
   )
 }
