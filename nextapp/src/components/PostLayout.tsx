@@ -193,7 +193,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
             {/* Sidebar */}
             <div
               className={
-                'hidden sticky top-8 self-start mt-6 ml-12 justify-self-center space-y-8' +
+                'hidden sticky top-8 self-start mt-6 ml-12 justify-self-start space-y-8' +
                 ' ' +
                 'lg:block'
               }
