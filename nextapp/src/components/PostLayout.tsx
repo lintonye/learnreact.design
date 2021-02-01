@@ -172,13 +172,12 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
             `}
           >
             {title && (
-              <h1
+              <div
                 className={
-                  'font-bold leading-tight text-center text-3xl my-10 justify-self-center ' +
-                  'sm:text-4xl ' +
-                  'md:my-16 max-w-xl ' +
+                  'my-10 justify-self-center flex flex-col justify-center items-center space-y-8 ' +
+                  'md:my-16 md:max-w-xl ' +
                   'lg:max-w-2xl lg:my-24 ' +
-                  'xl:max-w-3xl xl:text-5xl xl:my-36 '
+                  'xl:max-w-3xl xl:my-36 '
                 }
                 css={css`
                   ${lg} {
@@ -186,8 +185,22 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
                   }
                 `}
               >
-                {title}
-              </h1>
+                <h1
+                  className={
+                    'font-bold leading-tight text-center text-3xl ' +
+                    'sm:text-4xl ' +
+                    'xl:text-5xl '
+                  }
+                >
+                  {title}
+                </h1>
+                <div className="flex items-center space-x-2 text-sm text-gray-500">
+                  <FiCalendar />
+                  <span>
+                    Last Updated: <time dateTime={date}>{date}</time>
+                  </span>
+                </div>
+              </div>
             )}
 
             {/* Sidebar */}
@@ -234,10 +247,6 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
 
             {/* Additional Info */}
             <hr />
-            <div className="flex items-center space-x-2">
-              <FiCalendar />
-              <span>Updated: {date}</span>
-            </div>
             <ViewCounter url={router.pathname} />
             <DiscussionTwitter pageUrl={router.pathname} title={title} />
 
