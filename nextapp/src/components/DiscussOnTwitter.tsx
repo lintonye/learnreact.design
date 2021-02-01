@@ -5,16 +5,17 @@ import { FiTwitter } from 'react-icons/fi'
 export function DiscussionTwitter({
   pageUrl,
   title,
+  large = false,
 }: {
   pageUrl: string
   title: string
+  large?: boolean
 }) {
   const fullUrl = SEOData.siteUrl + pageUrl
   const authorTwitterId = 'lintonye'
   const author = 'Linton Ye'
   return (
-    <div className="flex space-x-2 items-center">
-      <FiTwitter />
+    <div>
       <Link
         href={`https://twitter.com/share?url=${fullUrl}&text=%E2%80%9C${encodeURI(
           title,
@@ -23,16 +24,25 @@ export function DiscussionTwitter({
         )}.%20&via=${authorTwitterId}`}
         target="_blank"
       >
-        Discuss on Twitter
+        <div
+          className={`flex ${large ? 'space-x-4' : 'space-x-2'} items-center`}
+        >
+          <FiTwitter
+            {...(large
+              ? { size: 40, strokeWidth: 1, className: 'text-blue-500' }
+              : {})}
+          />
+          <div>Discuss on Twitter</div>
+        </div>
       </Link>
-      <Link
+      {/* <Link
         href={`https://twitter.com/search?q=${encodeURI(
           fullUrl,
         )}&src=typed_query`}
         target="_blank"
       >
         Current discussions
-      </Link>
+      </Link> */}
     </div>
   )
 }

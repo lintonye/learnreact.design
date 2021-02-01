@@ -15,9 +15,9 @@ export function Layout({ children }: Props) {
   return (
     <div
       className="min-h-screen flex flex-col"
-      css={{
-        '& p': { lineHeight: 2 },
-      }}
+      // css={{
+      //   '& p': { lineHeight: 2 },
+      // }}
     >
       <NextSeo
         canonical={url}

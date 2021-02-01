@@ -193,7 +193,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
             {/* Sidebar */}
             <div
               className={
-                'hidden sticky top-8 self-start mt-6 ml-12 justify-self-center space-y-8' +
+                'hidden sticky top-8 self-start mt-6 ml-12 justify-self-start space-y-8' +
                 ' ' +
                 'lg:block'
               }
@@ -205,16 +205,25 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
               `}
             >
               <Toc contentChildren={children} headings={tocHeadings} />
+              <DiscussionTwitter
+                pageUrl={router.pathname}
+                title={title}
+                large
+              />
               <Likes url={router.pathname} onLike={() => setLiked(true)} />
               {liked && (
                 <motion.div
-                  className="space-y-2 text-sm"
+                  className="space-y-3 text-sm"
                   initial={{ y: -50, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                 >
-                  <div className="uppercase tracking-wider font-semibold">
-                    Sign up for updates
+                  <div className="font-bold">
+                    <span className="mr-1">👋</span> Thank you! I'm so thrilled!
                   </div>
+                  <p className="leading-normal">
+                    Want to receive early previews of future posts? Sign up
+                    below!
+                  </p>
                   <ConvertKitForm formId="465988" />
                 </motion.div>
               )}
@@ -232,10 +241,23 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
             <ViewCounter url={router.pathname} />
             <DiscussionTwitter pageUrl={router.pathname} title={title} />
 
+            {/* Sign up form */}
+            <div className="p-8 bg-indigo-100 border border-indigo-400 rounded-sm space-y-4">
+              <p>I hope you find this article useful!</p>
+              <p>
+                One of my 2021 goals is to write more posts that are{' '}
+                <strong>useful</strong>, <strong>interactive</strong> and{' '}
+                <strong>entertaining</strong>. Want to receive early previews of
+                future posts? Sign up below. No spam, unsubscribe anytime.
+              </p>
+
+              <ConvertKitForm formId="208846" />
+            </div>
+
             {/* Related Posts */}
             {related.length > 0 && (
               <div className="space-y-8">
-                <h2 className="text-3xl font-bold my-3">You may also like</h2>
+                <h2 className="text-3xl font-thin my-3">You may also like</h2>
                 {related.map((slug: string) => (
                   // @ts-ignore
                   <PostPreview key={slug} {...getPostBySlug(slug)} />

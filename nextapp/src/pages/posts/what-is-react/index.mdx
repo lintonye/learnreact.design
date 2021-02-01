@@ -28,6 +28,7 @@ import { CodeEditor } from '@/components/what-is-react/CodeEditor'
 import { IntersectionDetector } from '@/components/IntersectionDetector'
 import { FullBleed } from '@/components/FullBleed'
 import { Connection } from '@/components/Connection'
+import { ConvertKitForm } from '@/components/design-system/ConvertKitForm'
 
 export const meta = {
   title: 'What is React: A Visual Introduction For Beginners',
@@ -74,9 +75,22 @@ This article is an introduction to React for beginners. It's the first post you'
 
 This is a bird's-eye view <span className='text-2xl'>🦅</span> but I'll also equip you with a pair of binoculars <IconBinocular size={25} className='inline-block align-bottom'/> . You'll not only see the **big picture** of what makes React special, but also zoom in to get some **hands-on experience** of writing an actual React component. And yes, no JS knowledge required!
 
-Remember: You don't need to be an experienced developer to understand React!
+Remember: You don't need to be an experienced developer to understand the core ideas of React!
 
 Ready to start the journey?
+
+<div className="p-8 bg-yellow-100 border border-yellow-400 rounded-sm space-y-4">
+  <p>
+    Of course, eventually you'd need to write code to use React. That's why I'm building an email course to help you on that. 
+  </p>
+  <p>
+    I believe you'd be able to do useful work with React after a few days of
+    learning, <strong>even if you are new to coding</strong>. If you are interested, sign
+    up and I'll let you know when the course is ready!
+  </p>
+
+  <ConvertKitForm formId="465585" subscribeButtonTitle="Keep Me Posted" />
+</div>
 
 ## A few things about the Web
 
@@ -367,7 +381,7 @@ Remember the first important property of React components? They are **composable
     }
   }}>
 
-Now here's an exercise for you (open this page in a desktop browser for the best experience):
+Now here's an exercise for you<span className="md:hidden"> (open this page in a desktop browser for the best experience)</span>:
 
 <div id="connection-add-searchbar" className="bg-indigo-100 px-3 py-3 rounded-md my-5 space-y-5">
 
