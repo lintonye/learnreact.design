@@ -28,6 +28,7 @@ import { CodeEditor } from '@/components/what-is-react/CodeEditor'
 import { IntersectionDetector } from '@/components/IntersectionDetector'
 import { FullBleed } from '@/components/FullBleed'
 import { Connection } from '@/components/Connection'
+import { ConvertKitForm } from '@/components/design-system/ConvertKitForm'
 
 export const meta = {
   title: 'What is React: A Visual Introduction For Beginners',
@@ -77,6 +78,17 @@ This is a bird's-eye view <span className='text-2xl'>🦅</span> but I'll also e
 Remember: You don't need to be an experienced developer to understand React!
 
 Ready to start the journey?
+
+<div className="p-8 bg-yellow-100 border border-yellow-400 rounded-sm space-y-4">
+  <p>
+    As an extension to this article, I'm building an email course on React. My
+    goal Of course, eventually you'd need to write code. But it doesn't mean you
+    need to learn every aspect of it . Learn enough to be dangerous! If you
+    think this is a good idea, Great move reading this post is a great first
+    step to learn React. I'm also building an email course to .
+  </p>
+  <ConvertKitForm formId="124" subscribeButtonTitle="Keep Me Posted" />
+</div>
 
 ## A few things about the Web
 
@@ -367,7 +379,7 @@ Remember the first important property of React components? They are **composable
     }
   }}>
 
-Now here's an exercise for you (open this page in a desktop browser for the best experience):
+Now here's an exercise for you<span className="md:hidden"> (open this page in a desktop browser for the best experience)</span>:
 
 <div id="connection-add-searchbar" className="bg-indigo-100 px-3 py-3 rounded-md my-5 space-y-5">
 

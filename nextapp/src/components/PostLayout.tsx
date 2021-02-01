@@ -208,13 +208,17 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
               <Likes url={router.pathname} onLike={() => setLiked(true)} />
               {liked && (
                 <motion.div
-                  className="space-y-2 text-sm"
+                  className="space-y-3 text-sm"
                   initial={{ y: -50, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                 >
-                  <div className="uppercase tracking-wider font-semibold">
-                    Sign up for updates
+                  <div className="font-bold">
+                    <span className="mr-1">👋</span> Thank you! I'm so thrilled!
                   </div>
+                  <p className="leading-normal">
+                    Want to receive early previews of future posts? Sign up
+                    below!
+                  </p>
                   <ConvertKitForm formId="465988" />
                 </motion.div>
               )}
