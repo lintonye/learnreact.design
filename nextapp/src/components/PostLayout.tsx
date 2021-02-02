@@ -194,12 +194,14 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
                 >
                   {title}
                 </h1>
-                <div className="flex items-center space-x-2 text-sm text-gray-500">
-                  <FiCalendar />
-                  <span>
-                    Last Updated: <time dateTime={date}>{date}</time>
-                  </span>
-                </div>
+                {date && (
+                  <div className="flex items-center space-x-2 text-sm text-gray-500">
+                    <FiCalendar />
+                    <span>
+                      Last Updated: <time dateTime={date}>{date}</time>
+                    </span>
+                  </div>
+                )}
               </div>
             )}
 
