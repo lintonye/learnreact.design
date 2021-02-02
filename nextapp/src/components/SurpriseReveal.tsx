@@ -17,7 +17,7 @@ export function SurpriseReveal({
   return (
     <motion.div
       animate={animate}
-      className="relative border-l border-black border-opacity-40 pl-8"
+      className="relative border-l border-gray-300 pl-8"
       onMouseEnter={() => setAnimate('revealed')}
       onMouseLeave={() => setAnimate('hidden')}
     >
