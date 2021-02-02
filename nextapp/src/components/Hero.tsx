@@ -34,7 +34,7 @@ export function Hero() {
           titleAs={(props: any) => (
             <h2
               {...props}
-              className="text-2xl font-bold text italic p-1 text-white"
+              className="text-2xl font-bold text italic p-1 text-white -mb-3"
               css={{
                 textShadow:
                   '-1px -1px 0 #000,1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000',
