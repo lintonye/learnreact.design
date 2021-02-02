@@ -8,7 +8,7 @@ export function Main() {
   const postData = getItemsAtHome()
   return (
     <div>
-      <div className="space-y-16">
+      <div className="space-y-16 max-w-prose">
         {postData.map(({ categoryTitle, categorySlug, items }) => (
           <section key={categorySlug} className="space-y-8">
             <h2 className="font-thin text-4xl">{categoryTitle}</h2>
