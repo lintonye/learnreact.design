@@ -12,7 +12,7 @@
     }
   ],
   "twitter": {
-    "cardType": "summary",
+    "cardType": "summary_large_image",
     "handle": "lintonye",
     "site": "lintonye"
   },
@@ -24,7 +24,7 @@
     },
     "images": [
       {
-        "url": "/og.png",
+        "url": "https://learnreact.design/og.png",
         "width": 1280,
         "height": 720
       }

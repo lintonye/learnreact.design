@@ -23,6 +23,7 @@ import { getPostBySlug } from '@/getAllPostPreviews'
 import { motion } from 'framer-motion'
 import { lg } from '../lib/media-queries'
 import { FiCalendar } from 'react-icons/fi'
+import { OpenGraphImages } from 'next-seo/lib/types'
 
 type LayoutProps = {
   meta: any
@@ -131,11 +132,15 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
     date,
     description,
     titleAppendSiteName = false,
-    ogImage,
     tocHeadings,
     sidebar = true,
     related = [],
   } = meta || {}
+
+  const ogImage: OpenGraphImages = {
+    ...meta.ogImage,
+    url: SeoData.siteUrl + meta.ogImage.url,
+  }
 
   const [inPostState, dispatch] = useReducer(inPostStateReducer, [])
 
