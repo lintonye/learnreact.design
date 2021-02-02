@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { jsx } from '@emotion/core'
 import Document, {
   Html,
@@ -14,6 +14,7 @@ class MyDocument extends Document {
     const initialProps = await Document.getInitialProps(ctx)
     return { ...initialProps }
   }
+  linkRef: HTMLLinkElement | null = null
 
   render() {
     return (
@@ -21,10 +22,29 @@ class MyDocument extends Document {
         <Head>
           {/* Custom fonts */}
           <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link
+          {/* <link
             href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,700&display=swap"
             rel="stylesheet"
+          /> */}
+          <link
+            rel="preload"
+            href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,700&display=swap"
+            as="style"
+            ref={(r) => {
+              this.linkRef = r
+            }}
+            onLoad={() => {
+              if (this.linkRef) {
+                this.linkRef.rel = 'stylesheet'
+              }
+            }}
           />
+          <noscript>
+            <link
+              rel="stylesheet"
+              href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,700&display=swap"
+            />
+          </noscript>
           {/* Google Analytics */}
           {process.env.NODE_ENV === 'production' && (
             <>
