@@ -137,10 +137,12 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
     related = [],
   } = meta || {}
 
-  const ogImage: OpenGraphImages = {
-    ...meta.ogImage,
-    url: SeoData.siteUrl + meta.ogImage.url,
-  }
+  const ogImage: OpenGraphImages = meta.ogImage
+    ? {
+        ...meta.ogImage,
+        url: SeoData.siteUrl + meta.ogImage.url,
+      }
+    : meta.ogImage
 
   const [inPostState, dispatch] = useReducer(inPostStateReducer, [])
 
