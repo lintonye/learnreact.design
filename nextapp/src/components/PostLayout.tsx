@@ -237,7 +237,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
                     Want to receive early previews of future posts? Sign up
                     below!
                   </p>
-                  <ConvertKitForm formId="465988" />
+                  <ConvertKitForm formId="2007182" />
                 </motion.div>
               )}
             </div>
@@ -260,7 +260,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
                 future posts? Sign up below. No spam, unsubscribe anytime.
               </p>
 
-              <ConvertKitForm formId="208846" />
+              <ConvertKitForm formId="2007244" />
             </div>
 
             {/* Related Posts */}

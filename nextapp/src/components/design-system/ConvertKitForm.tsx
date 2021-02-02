@@ -47,8 +47,7 @@ export function ConvertKitFormDesign(props: DesignProps) {
   return (
     <div className="">
       <form
-        id="ck_subscribe_form"
-        action={`https://app.convertkit.com/landing_pages/${formId}/subscribe`}
+        action={`https://api.convertkit.com/v3/forms/${formId}/subscribe`}
         data-remote="true"
         ref={formRef}
         onSubmit={(e) => {
@@ -64,13 +63,6 @@ export function ConvertKitFormDesign(props: DesignProps) {
         {!emailValid && (
           <p className="text-red-500 text-sm my-1">Invalid email address</p>
         )}
-        <input
-          type="hidden"
-          value='{"form_style":"naked"}'
-          id="ck_form_options"
-        />
-        <input type="hidden" name="id" value={formId} id="landing_page_id" />
-
         <div
           className="flex flex-wrap"
           css={css`
@@ -84,7 +76,6 @@ export function ConvertKitFormDesign(props: DesignProps) {
         >
           {firstName && (
             <Input
-              id="ck_firstNameField"
               name="first_name"
               type="text"
               disabled={loading}
@@ -92,7 +83,6 @@ export function ConvertKitFormDesign(props: DesignProps) {
             />
           )}
           <Input
-            id="ck_emailField"
             name="email"
             type="email"
             disabled={loading}
@@ -101,7 +91,7 @@ export function ConvertKitFormDesign(props: DesignProps) {
             className="flex-1 py-1"
             required
           />
-          {customFields &&
+          {/* {customFields &&
             customFields.map((cf) => (
               <Input
                 key={`ck_${cf.id}`}
@@ -111,12 +101,11 @@ export function ConvertKitFormDesign(props: DesignProps) {
                 disabled={loading}
                 placeholder={cf.title}
               />
-            ))}
+            ))} */}
 
           <Button
             disabled={loading}
             variant="primary"
-            id="ck_subscribe_button"
             className="flex-1"
             // variant="small"
             // onClick={() => onSubmit && onSubmit(formRef.current)}
@@ -162,12 +151,19 @@ export class ConvertKitForm extends React.Component<Props> {
     const data = new FormData(form)
     if (isValidEmail(data.get('email'))) {
       // console.log(data, form.action, "email", data.get("email"));
+      const key = '_dUwkqZay7-VqiW0HWaWkQ'
       const url = form.action
+      const params = {
+        api_key: key,
+        email: data.get('email'),
+        first_name: data.get('first_email'),
+      }
       try {
         this.setState({ loading: true })
         const response = await fetch(url, {
           method: 'POST',
-          body: data,
+          headers: [['Content-Type', 'application/json; charset=utf-8']],
+          body: JSON.stringify(params),
         })
         // console.log(url, response);
         if (response.status !== 200) {
