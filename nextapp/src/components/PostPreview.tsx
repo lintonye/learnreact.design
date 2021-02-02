@@ -17,7 +17,7 @@ function renderExcerpt(excerpt: string | FunctionComponent) {
 }
 
 type Props = {
-  titleAs?: 'h1' | 'h2' | 'h3' | 'div'
+  titleAs?: 'h1' | 'h2' | 'h3' | 'div' | React.FunctionComponent
   showTags?: boolean
 } & Post
 
@@ -52,6 +52,7 @@ export function PostPreview({
       <article className="space-y-2">
         {React.createElement(
           titleAs,
+          // @ts-ignore Custom component is supported
           { className: 'text-xl font-bold' },
           <Link href={url}>{title}</Link>,
         )}

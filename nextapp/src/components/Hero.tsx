@@ -1,10 +1,10 @@
 import { jsx } from '@emotion/core'
 import { getFeaturedItem } from '@/assets/featuredItemData'
 import { Link } from '@/components/design-system'
+import { PostPreview } from './PostPreview'
 
 export function Hero() {
   const featuredPost = getFeaturedItem()
-  const { title, excerpt: Excerpt, url } = featuredPost
 
   return (
     <div className="my-12 lg:flex">
@@ -27,23 +27,23 @@ export function Hero() {
           Framer, HTML, CSS, JavaScript
         </p>
       </div>
-      <article className="border-l-2 m-2 mt-8 p-5 md:mt-40">
-        <h2
-          className="text-2xl font-bold text italic p-1 text-white"
-          css={{
-            textShadow:
-              '-1px -1px 0 #000,1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000',
-          }}
-        >
-          {title}
-        </h2>
-        <p className="p-1">
-          {typeof Excerpt === 'string' ? Excerpt : <Excerpt />}
-        </p>
-        <div className="text-sm font-bold p-1">
-          <Link href={url}>Read more</Link>
-        </div>
-      </article>
+      <div className="self-end m-2 mt-8 lg:mt-40">
+        {/* @ts-ignore */}
+        <PostPreview
+          showTags={false}
+          titleAs={(props: any) => (
+            <h2
+              {...props}
+              className="text-2xl font-bold text italic p-1 text-white"
+              css={{
+                textShadow:
+                  '-1px -1px 0 #000,1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000',
+              }}
+            />
+          )}
+          {...featuredPost}
+        />
+      </div>
     </div>
   )
 }
