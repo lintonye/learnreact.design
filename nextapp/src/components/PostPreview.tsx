@@ -49,11 +49,11 @@ export function PostPreview({
       }
       animationVariants={surprise?.animationVariants}
     >
-      <article className="space-y-2">
+      <article className="space-y-5 ">
         {React.createElement(
           titleAs,
           // @ts-ignore Custom component is supported
-          { className: 'text-xl font-bold' },
+          { className: 'text-xl font-bold -mb-3' },
           <Link href={url}>{title}</Link>,
         )}
         <div

@@ -251,7 +251,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
             <DiscussionTwitter pageUrl={router.pathname} title={title} />
 
             {/* Sign up form */}
-            <div className="p-8 bg-indigo-100 border border-indigo-400 rounded-sm space-y-4">
+            <div className="my-2 p-8 bg-indigo-100 border border-indigo-400 rounded-sm space-y-4">
               <p>I hope you find this article useful!</p>
               <p>
                 One of my 2021 goals is to write more posts that are{' '}

@@ -20,7 +20,7 @@ export function CoursePreview({
 }: Props) {
   return (
     <SurpriseReveal surprise={icon}>
-      <div className="space-y-4">
+      <div className="space-y-5">
         <div className="space-x-2 flex items-center">
           {React.createElement(
             titleAs,
