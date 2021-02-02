@@ -128,7 +128,9 @@ function usePressHoldRepeat(
   }, [mouseDown, runCallback])
   return {
     onClick: runCallback,
-    onMouseDown: () => setMouseDown(true),
+    onMouseDown: (e: React.MouseEvent) => {
+      if (e.button === 1) setMouseDown(true)
+    },
     onMouseUp: () => setMouseDown(false),
     onMouseOut: () => setMouseDown(false),
   }
@@ -151,7 +153,7 @@ export function Likes({ url, onLike }: { url: string; onLike?: () => void }) {
   return (
     <div className="relative">
       <motion.button
-        className="grid grid-flow-col-dense auto-cols-min gap-x-4 items-center select-none focus:outline-none"
+        className="flex space-x-4 items-center select-none focus:outline-none"
         onHoverStart={() => setMode('hovered')}
         onHoverEnd={() => setMode('default')}
         animate={mode}
