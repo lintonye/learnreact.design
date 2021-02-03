@@ -125,7 +125,7 @@ function usePressHoldRepeat(
         clearTimeout(holdDetectionTimeoutRef.current)
       }
     }
-  }, [mouseDown, runCallback])
+  }, [mouseDown, repeatDelay, runCallback])
   return {
     onClick: runCallback,
     onMouseDown: (e: React.MouseEvent) => {
