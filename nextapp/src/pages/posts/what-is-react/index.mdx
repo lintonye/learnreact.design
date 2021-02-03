@@ -30,6 +30,7 @@ import { FullBleed } from '@/components/FullBleed'
 import { Connection } from '@/components/Connection'
 import { ConvertKitForm } from '@/components/design-system/ConvertKitForm'
 import imgSocialCard from './what-is-react-social-card.png'
+import Image from 'next/image'
 
 export const meta = {
   title: 'What is React: A Visual Introduction For Beginners',
@@ -43,10 +44,10 @@ export const meta = {
     height: 720,
   },
   surprise: {
-    actor: imgSurprise,
+    actor: () => <Image src={imgSurprise} width={145} height={145} />,
     animationVariants: {
-      hidden: { x: 0, rotate: 0, y: 50 },
-      revealed: { x: -90, rotate: -30, y: 50 },
+      hidden: { x: -10, rotate: 0, y: 40 },
+      revealed: { x: -150, rotate: 0, y: 40 },
     },
   },
 }
@@ -488,9 +489,7 @@ Here's the code for the component DomoWithHat, the widget on the left.
   <img src={imgHatShopDomoWithHat} alt="Domo's hat shop UI" />
 </div>
 
-Note that we just need to define what we want (Domo and a hat in a div), and "wire up" the data ("`type = {hat}`"). When the data change (user selects a hat), the UI updates automatically. We don't need to worry about when and how to update the DOM. We don't even need to keep track of the data. What we need is just to draw a quick sketch, i.e. the code above.
-
-Remember the other two superpowers of React? **Declarative UI** and **Reactive DOM updates**.
+Note that we just need to define what we want (Domo and a hat in a div), and "wire up" the data ("`type = {hat}`"). When the data change (user selects a hat), the UI updates automatically. We don't need to worry about when and how to update the DOM. We don't even need to keep track of the data. What we need is just to draw a quick sketch, i.e. the code above. Remember the other two superpowers of React? **Declarative UI** and **Reactive DOM updates**.
 
 </IntersectionDetector>
 </div>
