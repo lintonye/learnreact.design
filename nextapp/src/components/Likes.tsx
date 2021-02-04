@@ -64,13 +64,19 @@ function useLikes(url: string): [number, DebouncedStateSetter<number>, number] {
   const db = useFirestore()
   useEffect(() => {
     const docRef = db.collection(COLLECTION_LIKE_COUNTS).doc(urlKey)
-    const unsubscribe = docRef.onSnapshot((snapshot) => {
+    docRef.get().then((snapshot) => {
       if (snapshot.exists) {
         const counts = snapshot.get('count')
         setLikes(counts, true)
       }
     })
-    return unsubscribe
+    // const unsubscribe = docRef.onSnapshot((snapshot) => {
+    //   if (snapshot.exists) {
+    //     const counts = snapshot.get('count')
+    //     setLikes(counts, true)
+    //   }
+    // })
+    // return unsubscribe
   }, [db, urlKey])
 
   const delta = likesToCommit - likesBeforeCommit
