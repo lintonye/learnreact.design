@@ -9,7 +9,7 @@ import Image from 'next/image'
 
 function renderExcerpt(excerpt: string | FunctionComponent) {
   if (typeof excerpt === 'string') {
-    return excerpt
+    return <p>{excerpt}</p>
   } else {
     const ExcerptComponent = excerpt
     return <ExcerptComponent />
@@ -67,7 +67,7 @@ export function PostPreview({
           </div>
           {showTags && tags.map((tag) => <Chip key={tag}>{tag}</Chip>)}
         </div>
-        <div>{renderExcerpt(excerpt)}</div>
+        {renderExcerpt(excerpt)}
         <div className="text-sm font-bold">
           <Link href={url}>Read more</Link>
         </div>

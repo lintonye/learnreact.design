@@ -51,9 +51,14 @@ const components = {
   ),
 }
 function withAnchor(Comp: FunctionComponent) {
-  return function HeadingWithAnchor({ id, ...props }: any) {
+  return function HeadingWithAnchor({
+    id,
+    children,
+    className,
+    ...props
+  }: any) {
     return (
-      <div className="relative">
+      <Comp {...props} className={className + ' relative'}>
         <a
           id={id}
           href={`#${id}`}
@@ -65,17 +70,17 @@ function withAnchor(Comp: FunctionComponent) {
           }}
         >
           <FiLink className="absolute top-2 -left-7 opacity-0 icon" size={20} />
-          <Comp {...props} />
+          {children}
         </a>
-      </div>
+      </Comp>
     )
   }
 }
 function withTocNotifier(Comp: FunctionComponent) {
-  return function HeadingWithTocNotifier(props: any) {
+  return function HeadingWithTocNotifier({ children, ...props }: any) {
     return (
-      <div>
-        <Comp {...props} />
+      <Comp {...props}>
+        {children}
         <IntersectionDetector
           onIntersectionChange={({ isIntersecting, dispatch }) => {
             // isIntersecting && console.log('heading', props.children)
@@ -85,7 +90,7 @@ function withTocNotifier(Comp: FunctionComponent) {
         >
           <div className="absolute h-16 w-1" />
         </IntersectionDetector>
-      </div>
+      </Comp>
     )
   }
 }
