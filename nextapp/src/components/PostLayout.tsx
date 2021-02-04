@@ -24,6 +24,8 @@ import { motion } from 'framer-motion'
 import { lg } from '../lib/media-queries'
 import { FiCalendar } from 'react-icons/fi'
 import { OpenGraphImages } from 'next-seo/lib/types'
+import imgLinton from '@/assets/linton.jpg'
+import Image from 'next/image'
 
 type LayoutProps = {
   meta: any
@@ -202,11 +204,29 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
                   {title}
                 </h1>
                 {date && (
-                  <div className="flex items-center space-x-2 text-sm text-gray-500">
-                    <FiCalendar />
-                    <span>
-                      Last Updated: <time dateTime={date}>{date}</time>
-                    </span>
+                  <div
+                    className={
+                      'flex flex-wrap items-center space-x-2 text-sm text-gray-500 '
+                      // +' sm:flex-row'
+                    }
+                  >
+                    <div className="flex space-x-2 mr-4 items-center">
+                      <Image
+                        src={imgLinton}
+                        width={30}
+                        height={30}
+                        className="rounded-full"
+                      />
+                      <Link href="https://twitter.com/lintonye" target="_blank">
+                        Linton Ye
+                      </Link>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <FiCalendar />
+                      <span>
+                        Last Updated: <time dateTime={date}>{date}</time>
+                      </span>
+                    </div>
                   </div>
                 )}
               </div>
