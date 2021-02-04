@@ -14,7 +14,7 @@ import { FiActivity } from 'react-icons/fi'
 function useViewCount(url: string) {
   const firestore = useFirestore()
   const [count, setCount] = useState(0)
-  const [visitedUrls, setVisibleUrls] = useLocalStorage('visitedURLs', [])
+  const [visitedUrls, setVisitedUrls] = useLocalStorage('visitedURLs', [])
 
   useEffect(() => {
     const urlKey = url.replace(/\/+/g, '_')
@@ -35,7 +35,7 @@ function useViewCount(url: string) {
           await doc.set(updates)
           setCount(1)
         }
-        setVisibleUrls([...visitedUrls, url])
+        setVisitedUrls([...visitedUrls, url])
       } else {
         setCount(snapshot.get('count'))
       }

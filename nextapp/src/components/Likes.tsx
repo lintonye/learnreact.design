@@ -70,6 +70,10 @@ function useLikes(url: string): [number, DebouncedStateSetter<number>, number] {
         setLikes(counts, true)
       }
     })
+    /**
+     * IMPORTANT! The code below introduces a bug for concurrent users. It'll infinitely cause
+     * the transaction to run!
+     */
     // const unsubscribe = docRef.onSnapshot((snapshot) => {
     //   if (snapshot.exists) {
     //     const counts = snapshot.get('count')
