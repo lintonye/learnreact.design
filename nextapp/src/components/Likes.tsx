@@ -146,14 +146,19 @@ function random(min: number, max: number) {
   return Math.floor((max - min) * Math.random()) + min
 }
 
+const MAX_LIKES = 20
+
 export function Likes({ url, onLike }: { url: string; onLike?: () => void }) {
   const [likes, setLikes, likeCountCommitted] = useLikes(url)
-  const [likedByMe, setLikedByMe] = useState(false)
+  const [likesByMe, setLikesByMe] = useState(0)
+  const enoughLikes = likesByMe >= MAX_LIKES
   const handleOnLike = useCallback(() => {
-    setLikes((c) => c + 1)
-    setLikedByMe(true)
-    typeof onLike === 'function' && onLike()
-  }, [onLike])
+    if (!enoughLikes) {
+      setLikes((c) => c + 1)
+      setLikesByMe((c) => c + 1)
+      typeof onLike === 'function' && onLike()
+    }
+  }, [onLike, enoughLikes])
   const props = usePressHoldRepeat(handleOnLike, 300, 100)
   const [mode, setMode] = useState('default')
   return (
@@ -170,7 +175,7 @@ export function Likes({ url, onLike }: { url: string; onLike?: () => void }) {
           className=" text-red-400 hover:text-pink-600"
         >
           <FiHeart
-            fill={likedByMe ? 'rgba(239, 68, 68)' : 'transparent'}
+            fill={enoughLikes ? 'rgba(239, 68, 68)' : 'transparent'}
             size={40}
             strokeWidth={1}
           />
@@ -198,7 +203,7 @@ export function Likes({ url, onLike }: { url: string; onLike?: () => void }) {
           }}
         >
           <FiHeart
-            fill={likedByMe ? 'rgba(239, 68, 68)' : 'transparent'}
+            fill={enoughLikes ? 'rgba(239, 68, 68)' : 'transparent'}
             size={40}
             className="text-red-400"
             strokeWidth={1}
