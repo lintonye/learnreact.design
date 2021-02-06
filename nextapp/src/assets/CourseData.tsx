@@ -63,6 +63,15 @@ const ALL_COURSES: Course[] = [
   //   requirement: 'none',
   // },
   {
+    slug: 'zero-to-react',
+    title: 'Zero to React in 7 Days',
+    excerpt: 'Learn the basics of HTML, CSS and React with this email course',
+    icon: ICONS.prep,
+    length: '7-day email course',
+    url: '/courses/zero-to-react',
+    requirement: 'none',
+  },
+  {
     slug: 'rmm',
     title: 'React Mental Models',
     excerpt: 'Think in React',
