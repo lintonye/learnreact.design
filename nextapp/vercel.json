@@ -115,6 +115,22 @@
     {
       "source": "/react-mental-models",
       "destination": "/courses/react-mental-models"
+    },
+    {
+      "source": "/re4d-0/",
+      "destination": "/courses/react-framer"
+    },
+    {
+      "source": "/2018/01/02/jon-gold-on-react-sketchapp/",
+      "destination": "/posts/jon-gold-on-react-sketchapp"
+    },
+    {
+      "source": "https://www.learnreact.design/2017/08/16/components-props-state/",
+      "destination": "/posts/components-props-state"
+    },
+    {
+      "source": "/challenge",
+      "destination": "/courses/react-framer"
     }
   ]
 }
