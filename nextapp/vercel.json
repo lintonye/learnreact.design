@@ -77,6 +77,10 @@
       "destination": "/posts/react-mental-model-jsx"
     },
     {
+      "source": "/2019/05/10/those-curly-braces-in-jsx",
+      "destination": "/posts/those-curly-braces-in-jsx"
+    },
+    {
       "source": "/blog",
       "destination": "/posts"
     },
