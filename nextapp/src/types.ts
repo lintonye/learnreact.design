@@ -12,6 +12,7 @@ export type Post = {
   url: string
   tags: string[]
   related?: string[]
+  translations?: { [key: string]: string }
 }
 
 export type Tag = {

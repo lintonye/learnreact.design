@@ -137,6 +137,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
     tocHeadings,
     sidebar = true,
     related = [],
+    translations,
   } = meta || {}
 
   const ogImage: OpenGraphImages = meta.ogImage
@@ -227,6 +228,13 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
                         Last Updated: <time dateTime={date}>{date}</time>
                       </span>
                     </div>
+                  </div>
+                )}
+                {translations && (
+                  <div className="text-sm grid auto-cols-auto grid-flow-col gap-x-4 text-gray-500">
+                    {Object.keys(translations).map((lang) => (
+                      <Link href={translations[lang]}>{lang}</Link>
+                    ))}
                   </div>
                 )}
               </div>
