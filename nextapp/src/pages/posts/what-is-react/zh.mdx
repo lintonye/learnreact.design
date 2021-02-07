@@ -1,0 +1,527 @@
+import imgDomoBorn from './domo-born.png'
+import imgDomoCssArtist from './domo-css-artist.png'
+import imgTalkToDomo from './talk-to-domo.png'
+import imgMultipleDevsTalk from './multiple-devs-talk.png'
+import imgIntroReact from './intro-react.png'
+import imgReactAgent from './react-agent.png'
+import imgBreakIntoComponents from './break-into-components.png'
+import imgComposableIndependent from './composable-independent.png'
+import imgStepByStep from './imperative-step-by-step.png'
+import imgThinker from './declarative-thinker.png'
+import imgFlipbook from './flipbook.png'
+import imgOptimizeSketches from './optimize-sketches.png'
+import imgPlaceholders from './placeholders-in-sketch.png'
+// import img from './.png'
+import imgInspect from './inspect.png'
+import imgHatShopChangeSearchBar from './hatshop-change-searchbar.png'
+import imgHatShopComponents from './hatshop-components.png'
+import imgHatShopDomoWithHat from './hatshop-DomoWithHat.png'
+import imgHatShopSearchBarOnFooter from './hatshop-searchBar-on-footer.png'
+import imgHatShop from './hatshop.png'
+
+import imgSurprise from './surprise.png'
+
+import { DomoAsciiArt } from '@/components/what-is-react/DomoAsciiArt'
+import { IconBinocular } from '@/components/what-is-react/IconBinocular'
+import { DomoHatShopDemo } from '@/components/what-is-react/DomoHatShopDemo'
+import { CodeEditor } from '@/components/what-is-react/CodeEditor'
+import { IntersectionDetector } from '@/components/IntersectionDetector'
+import { FullBleed } from '@/components/FullBleed'
+import { Connection } from '@/components/Connection'
+import { ConvertKitForm } from '@/components/design-system/ConvertKitForm'
+import imgSocialCard from './what-is-react-social-card.png'
+import Image from 'next/image'
+
+export const meta = {
+  title: 'React 到底是什么：写给绝对小白的教程',
+  description: `React is a JavaScript library for building user interfaces. This is the official definition of React. But what if you are not familiar with JavaScript? What if you are not a developer? Would you still be able to make sense of (and learn) React? My answer is a firm YES. `,
+  date: '2021-02-02',
+  tags: ['react'],
+  related: ['what-is-react-native', 'what-is-redux'],
+  ogImage: {
+    url: imgSocialCard,
+    width: 1280,
+    height: 720,
+  },
+  surprise: {
+    actor: () => <Image src={imgSurprise} width={145} height={145} />,
+    animationVariants: {
+      hidden: { x: -10, rotate: 0, y: 40 },
+      revealed: { x: -150, rotate: 0, y: 40 },
+    },
+  },
+}
+
+<!--excerpt-->
+
+"React is a JavaScript library for building user interfaces." This is the official definition. But what if you are not familiar with JavaScript? Would you still be able to make sense of (and learn) React? My answer is a firm YES.
+
+<!--/excerpt-->
+
+<!-- This is a guide for beginners, absolute beginners I mean. So you don't need to know JS to read this post. BUT, the concepts introduced in this article will be useful for you after you learn JavaScript. Understand why needs React in the first place.
+
+React is an important idea. started 2013, unlike many other trendy JS frameworks, the core ideas in React haven't changed since the day one. Makes easier than ever to build UI. Makes design tools possible. Heavily influenced design tools. For the first time in history, the gap between design and development starts to diminish! Look at the tools such as Framer, Modulz.
+
+Figma: design with code in mind - autolayout etc.
+
+React is getting ever popular. Not just developers, For UX designers, many company prefers React experience.
+
+What's this React thing?
+
+Let's get started with something you might have heard many times, the DOM. -->
+
+## 简介
+
+> React 用于构建用户界面的 JavaScript 库。
+
+这是 React 的官方定义。但如果您对 JavaScript 并不熟悉，甚至根本不是一个开发者，您有没有可能理解和学习 React？
+
+我的回答是：当然！这也是我写这篇文章的动因之一。我希望能够回答这些问题：到底 React 是什么？为什么它那么受欢迎？React 解决了什么具体的问题？
+
+本文是写给初学者的 React 简介，这也许是在学习任何 React 具体知识之前您应该读的第一篇文章。我将会用通俗的语言（和插画涂鸦 <span className='text-base'>🌴</span>）来向您讲解 React 的核心概念。不懂 JavaScript？这不是问题！只要您对 HTML 有大致的了解（例如，HTML 标签的格式），您就应该能够阅读这篇文章并从中受益。
+
+这是一幅鸟瞰图 <span className='text-2xl'>🦅</span>，但同时我也会为您装备了一副望远镜 <IconBinocular size={25} className='inline-block align-center'/>。您不仅将看到 React 的概略图，而且还可以放大、放大、看到细节，挽起袖子写一个真正的 React 组件。没错，JS 不是必需的！
+
+记住：要了解 React 的核心思想，您并不需要是一名有经验的程序员！
+
+准备好启航了吗？
+
+<div className="p-8 bg-yellow-100 border border-yellow-400 rounded-sm space-y-4 my-2">
+  <p>
+    当然，要真正使用 React 的话，您还是需要写代码。我正在编写一个 Email 邮件课程来帮助您尽快进入状态。
+  </p>
+  <p>
+    我相信，经过几天的集中学习，您可以掌握足够的技巧来使用 React 做一些有意义的工作，<strong>即使您没有编程经验</strong>。如果有兴趣的话，请输入您的 Email 地址注册。课程编写完成以后，我会第一时间给您通知。
+  </p>
+
+  <ConvertKitForm formId="2007263" subscribeButtonTitle="注册" successMessage="马上就好，请收一下邮件，并确认注册。"/>
+</div>
+
+## Web 二三事
+
+我们从一个您或许听说过很多次的概念出发：DOM。
+
+### DOM 是什么？
+
+当您将一个网站的网址输入浏览器的时候，你的电脑和远方的另一台电脑就开始对话。这台远方的电脑一般被称之为 _服务器_。你的电脑发出请求，向服务器索取某种信息，服务器随即做出应答：
+
+> **你的电脑：** 伙计，这个网站上有啥好东西啊？网址是：learnreact.design
+>
+> **服务器：** 少安毋躁，让我找找。嘀。嘟。
+
+服务器的应答数据主要包括了三个部分：HTML、CSS 和 JavaScript。
+
+HTML lists the content of a web page and describes its structure. How many headings and paragraphs are there? What images should a user see? Are this button and that textbox contained in the same box?
+
+Using this information, the browser creates something called... the DOM!
+
+<img src={imgDomoBorn} alt="Introducing the DOM" />
+
+Wait a second, the DOM is a ... tree? Yup, a tree! Oddly enough, a lot of things in our computer look like a tree. Let's give our tree friend a nickname... hmm what about Domo?
+
+Domo works as a model at the prestigious art studio "Web Browser". His job is to pose in front of the artist who paints a portrait (or perhaps millions of portraits).
+
+<img src={imgDomoCssArtist} alt="Domo at the art studio Web Browser" />
+
+In real life, DOM stands for Document Object Model. It's indeed a model -- a model of the document (aka the web page). It strikes a pose. The browser paints a portrait. The portraits are what we see on a web page: the textboxes, the paragraphs, the images and so on. A developer's job is like that of a director who tells Domo what to wear and what pose to strike. This determines what those portraits look like in the end.
+
+To check out what the DOM looks like, if you are using a desktop browser, right-click on this very page and choose "Inspect". Can you make sense of what's in the Elements tab?
+
+<img src={imgInspect} alt="Inspect in Chrome" width={2048} height={1536} />
+
+<DomoAsciiArt />
+
+### The DOM API
+
+We often want a web page to be dynamic and interactive -- that means its content changes from time to time: adding or removing text here and there, showing a modal, or updating a chart based on some new data coming from the server.
+
+Remember, in order to change what's on a web page, we need to update the DOM. The artist isn't able to paint new portraits until Domo changes to a new pose.
+
+How would we get Domo to change to a new pose?
+
+We just talk to him. He listens. Interestingly, Domo's ears happen to have a name: _DOM API_.
+
+<img src={imgTalkToDomo} alt="A developer works with DOM API" />
+
+To manipulate the DOM, a developer would write code in JavaScript which talks to the DOM API, and in turn, updates the content of the web page.
+
+### The increasing complexity
+
+_Directly_ talking to Domo has been the standard approach of web development for years, especially when the web content was mostly static. A developer would sprinkle some interactivity on top of the static pages by writing small amount of JavaScript code.
+
+However, with the emergence of SPAs (Single Page Application) such as Gmail and Google Maps, people started to expect a lot more. Instead of mostly static web _pages_, they want web _apps_ that are interactive, fast and responsive.
+
+The code required to build web apps becomes increasingly large and complex. It often requires the collaboration of many team members.
+
+The traditional approach stopped working. It becomes chaotic and inefficient to always directly talk to Domo.
+
+<!-- 1. Web apps are getting large and complex. Development of a web app often requires team collaboration
+2. The DOM itself has some issues. It's slow to update the entire DOM for a large page. The behaviors of different browsers have subtle differences.
+3. It's also not efficient to directly talk to Domo. -->
+
+<img
+  src={imgMultipleDevsTalk}
+  alt="Directly working with the DOM API is getting chaotic"
+/>
+
+## The Core Ideas of React
+
+Let me introduce you to the superhero, React:
+
+<img src={imgIntroReact} alt="Introducing React" height={900} />
+
+With React, developers no longer directly talk to Domo. React acts as an agent between a developer and Domo. He smoothens the communication and streamlines the process of portrait creation.
+
+<img
+  src={imgReactAgent}
+  alt="React as an agent between a developer and the DOM"
+/>
+
+React is made up of JavaScript code. It's built in a way that we no longer need to directly work with the DOM API in most cases. Instead, we write simpler code while React handles the conversation with the DOM under the hood.
+
+React has a few superpowers to tackle the ever-growing complexity of web development:
+
+- Components
+- Declarative UI
+- Reactive DOM updates
+
+If these terms sound scary to you, don't be intimidated! As promised, I'll use plain English and doodles to help you make sense of them. Trust me, it's not that hard!
+
+Just read on!
+
+### Components
+
+Components are the flagship feature of React. The core idea is based on a simple strategy: divide-and-conquer. If it's difficult to grok a problem all at once, we break it into smaller problems, solve them one at a time and then combine the results.
+
+<img
+  src={imgBreakIntoComponents}
+  alt="React breaks a problem into components"
+/>
+
+Building an app in React is almost all about working with components: breaking the app into components, finding the best components for the job, fitting one with another, creating new components from existing ones etc.
+
+Nowadays, design tools such as Framer and Figma have components too (and symbols in Sketch). They are a lot like React components, except that the latter are more flexible and powerful. In fact, the inspiration of components in design tools came directly from components in software engineering. Once a component is created, we can create multiple instances of it. We can use it to construct other components. If we change a component, everything that includes this component will be updated automatically.
+
+Components in React have two important properties:
+
+1. Components are _composable_. They are made for reuse. We can make a new component with other components.
+2. Components are _independent_ of each other. If we change the code in one place, other parts don't break.
+
+If this sounds abstract to you, don't worry! I'll show you some examples and explain these properties in details soon.
+
+<!--
+<img
+  src={imgComposableIndependent}
+  alt="React components are composable and independent"
+/> -->
+
+### Declarative UI
+
+#### Imperative vs. declarative
+
+When directly working with the DOM API, we'd have to specify what element to change at the right time, in the right order. This is equivalent to describing to Domo how to position his head, arms and legs step by step, for each and every portrait.
+
+<img src={imgStepByStep} alt="Imperative programming" />
+
+Heck, this sounds tedious and error-prone! Why can't we just tell Domo _what_ we want instead of _how_ to pose? In fact, this is exactly how to build a UI in React. A developer draws a quick sketch of what he or she wants. React explains it to Domo how to pose.
+
+<img src={imgThinker} alt="Declarative programming in React" />
+
+Because the apps we build are dynamic, we often want Domo to change poses fairly quickly. We draw many sketches and hand them to React in a big pile. React stacks these sketches together and flips them like a flipbook. A dynamic UI comes live!
+
+<img src={imgFlipbook} alt="React treats input as a flipbook" />
+
+In tech terms, if the code defines _how_ we want it to be done, it's **imperative**; if it defines _what_ we want, it's **declarative**. The traditional way of directly working with the DOM API is imperative, and the React way is declarative.
+
+Imperative programming emerged from the day when the computers were primitive. People had to instruct them in detail: where to store the numbers, how to multiply etc. But this eventually got unmanageable, people wrote smart software that convert definition of problems into detailed instructions. Declarative programming was born.
+
+#### Virtual DOM
+
+Besides making the life of a developer easier, declarative programming in React also offers opportunities for performance optimization.
+
+When React has all the sketches beforehand, he can sort through them, remove any duplication and make sure that Domo and the artist do as little work as possible.
+
+<img src={imgOptimizeSketches} alt="React diffing with virtual DOM" />
+
+These sketches are called _Virtual DOM_. Virtual DOM is much faster to manipulate than the DOM. Developers work with Virtual DOM most of the time instead of directly managing the DOM. React handles the dirty work of managing the slow DOM.
+
+### Reactive DOM updates
+
+Even cooler, imagine if we can leave placeholders in our sketches to represent different variations of a same pose. This way, when somebody asks for portraits of Domo wearing a different hat, we don't have to talk to React again. We can just sit back and let React change it for us.
+
+<img src={imgPlaceholders} alt="Thinker with a hat: Placeholder in JSX" />
+
+This trick is how React got its name. The UI built with React is **reactive** -- it appears that the DOM "reacts" to any changes to the underlying data. No need to track the data. No need to worry about when to update the DOM. It just gets updated automatically (by React). The idea of reactive UI greatly simplifies UI development.
+
+<!-- Here's the code of the demo above. If you are not familiar with JavaScript, just squint: it's some HTML surrounded by some text and parentheses.
+
+```jsx
+const ThinkerWithHat = ({ hat }) => (
+  <div>
+    <Hat type={hat} />
+    <Thinker />
+  </div>
+)
+```
+
+Notice that we just need to define what we want (a thinker and a hat in a div), and "wire up" the data ("`type = {hat}`"). When the data change (user selects a hat), the UI updates automatically. -->
+
+<FullBleed className="md:grid md:grid-cols-2 items-start gap-x-8 my-8 pb-4 bg-indigo-50 z-20 justify-items-start">
+
+  <div className="col-start-1 col-end-3 text-3xl font-bold py-12 mb-8 justify-self-stretch text-center bg-indigo-200 text-indigo-900">
+
+## Write your first React component
+
+  </div>
+
+  <div className="max-w-prose justify-self-end space-y-5 w-11/12 mx-auto md:ml-8 md:mx-none">
+
+Now let's review what we have learned so far and get our hands dirty on a few real React components. To make it easy for you to understand, I left out some details in the code (notedly JavaScript). The goal is to let the core ideas shine through without being bogged down by JS syntax. If you are comfortable with reading JavaScript code, feel free to check out the [real source code](https://codesandbox.io/s/domos-hat-shop-4x7n0?file=/src/App.js).
+
+Alright. Let's say we want to help Domo build an online hat store 🧢 .
+
+<div className="md:hidden">
+  <img src={imgHatShop} alt="Domo's hat shop UI" />
+</div>
+
+### Components are composable
+
+We can break the UI into a few parts:
+
+- Header: the header on the top
+- Main: the main content area
+- Footer: the footer on the bottom
+
+<div className="my-4 md:hidden">
+  <img
+    src={imgHatShopComponents}
+    alt="Domo's hat shop UI divided into components"
+  />
+</div>
+
+<IntersectionDetector onIntersectionChange={({isIntersecting, dispatch}) => {
+    if (isIntersecting) {
+      dispatch({type: "highlights", data: "Header Main Footer:labels-only"})
+    }
+  }}>
+
+This decomposition can be written in code like so:
+
+<div id="connection-decomposition">
+
+```jsx
+// DomoHatShopHome
+<div>
+  <Header />
+  <Main />
+  <Footer />
+</div>
+```
+
+</div>
+
+</IntersectionDetector>
+
+This looks like HTML, right? Except for those tags that start with capital letters: `<Header>`, `<Content>` and `<Footer>`. They are not standard HTML tags. They are custom tags.
+
+What are these custom tags actually? How would we tell React that the Header consists of a header tag, a bunch of list items and a search bar?
+
+We write the Header component!
+
+```jsx
+// Header
+<header>
+  <nav>
+    <ul>
+      <li>Home</li>
+      <li>
+        <SearchBar />
+      </li>
+      <li>Account</li>
+      <li>Return &amp; Orders</li>
+      <li>
+        <ShoppingCart />
+      </li>
+    </ul>
+  </nav>
+</header>
+```
+
+<IntersectionDetector onIntersectionChange={({isIntersecting, dispatch}) => {
+    if (isIntersecting) {
+      dispatch({type: "highlights", data: "SearchBar ShoppingCart"})
+    }
+  }}>
+
+Now in this Header component, it includes two custom tags `<SearchBar>` and `<ShoppingCart>`. What's in there?
+
+<div id="connection-searchbar-shoppingcart">
+
+```jsx
+// SearchBar
+<form>
+  <input type="string" />
+  <button>Search</button>
+</form>
+
+// ShoppingCart
+<div>
+  <FiShoppingCart size={20} />
+  <div>
+    2
+  </div>
+</div>
+```
+
+</div>
+
+Remember the first important property of React components? They are **composable**. This means that we can use components to build other components -- exactly what we have just done.
+
+</IntersectionDetector>
+
+<IntersectionDetector onIntersectionChange={({isIntersecting, dispatch}) => {
+    if (isIntersecting) {
+      dispatch({type: "highlights", data: ""})
+      document.getElementById("code-editor-updateFooter").focus()
+    }
+  }}>
+
+Now here's an exercise for you<span className="md:hidden"> (open this page in a desktop browser for the best experience)</span>:
+
+<div id="connection-add-searchbar" className="bg-indigo-100 px-3 py-3 rounded-md my-5 space-y-5">
+
+✍️ Let's say we want to add the SearchBar into the Footer as well. What would you do? **Edit the code below:**
+
+<CodeEditor
+  code={`<footer>
+  <div>© 2021 Domo's Hat Shop</div>
+</footer>`}
+  onChange={(jsxJson, dispatch) =>
+    dispatch({ type: 'updateFooter', data: jsxJson })
+  }
+  textareaId="code-editor-updateFooter"
+/>
+
+<div className="text-sm">
+
+Hints:
+
+- Make sure to put tags inside `<footer>`
+- Scroll up to check the code of `Header`
+- Try adding some other tags
+
+</div>
+
+</div>
+
+Did you get two search bars? You get the idea!
+
+<div className="my-2 md:hidden">
+  <img
+    src={imgHatShopSearchBarOnFooter}
+    alt="Domo's hat shop UI: searchBar on footer"
+  />
+</div>
+
+</IntersectionDetector>
+
+### Components are made for reuse
+
+"Composable" means being able to create a component using other components as its building blocks. This sounds very similar to how nature works, except for one important difference: in React, once we use a component in another component, it still "attaches" to the original component. When the original changes, all instances update along with it.
+
+<div id="connection-change-searchbar" className="bg-indigo-100 px-3 py-3 rounded-md">
+
+✍️ Change the text on the button in the code of SearchBar below:
+
+<CodeEditor
+  code={`<form>
+  <input type="string" />
+  <button>Search</button>
+</form>`}
+  onChange={(jsxJson, dispatch) =>
+    dispatch({ type: 'updateSearchBar', data: jsxJson })
+  }
+/>
+
+</div>
+
+What did you see? The SearchBar on both Header and Footer updates. Right? This works very similarly to components in design tools such as Framer and Figma.
+
+React components are made for **reuse**. Once a component is defined, we can use it as a custom tag in other components, as many times as we want. If we change the component, all components that include it will change accordingly.
+
+### Components are independent
+
+Remember? React components are also **independent**. This means if we change one component, other components (that don't include it) still behave the same way as before.
+
+When we change the SearchBar component above, only the Header and Footer change. This may sound very straightforward (perhaps too obvious). But it's a fundamental idea in software engineering and it goes a long way to keep software development manageable.
+
+### Declarative & Reactive
+
+<div className="hidden md:block">
+
+Now let's move on to the Main component. Have you choosen a hat for Domo yet? The demo on the right is not just an image. It's interactive!
+
+</div>
+
+<IntersectionDetector onIntersectionChange={({isIntersecting, dispatch}) => {
+    if (isIntersecting) {
+      dispatch({type: "highlights", data: "DomoWithHat"})
+    }
+  }}>
+
+Here's the code for the component DomoWithHat, the widget on the left.
+
+<div id="connection-domowithhat">
+
+```jsx
+// DomoWithHat
+<div>
+  <Hat type={hat} />
+  <Domo />
+</div>
+```
+
+</div>
+
+<div className="md:hidden my-2">
+  <img src={imgHatShopDomoWithHat} alt="Domo's hat shop UI" />
+</div>
+
+Note that we just need to define what we want (Domo and a hat in a div), and "wire up" the data ("`type = {hat}`"). When the data change (user selects a hat), the UI updates automatically. We don't need to worry about when and how to update the DOM. We don't even need to keep track of the data. What we need is just to draw a quick sketch, i.e. the code above. Remember the other two superpowers of React? **Declarative UI** and **Reactive DOM updates**.
+
+</IntersectionDetector>
+</div>
+
+<DomoHatShopDemo
+  className="top-20 sticky z-10 mr-8 hidden md:block"
+  id="domo-hat-shop-ui"
+/>
+
+<div className="hidden fixed inset-0 pointer-events-none z-30 md:block">
+  <Connection idLeft="connection-decomposition" idRight="domo-hat-shop-ui" />
+  <Connection
+    idLeft="connection-searchbar-shoppingcart"
+    idRight="domo-hat-shop-ui"
+  />
+  <Connection idLeft="connection-add-searchbar" idRight="domo-hat-shop-ui" />
+  <Connection idLeft="connection-change-searchbar" idRight="domo-hat-shop-ui" />
+  <Connection idLeft="connection-domowithhat" idRight="domo-hat-shop-ui" />
+</div>
+
+</FullBleed>
+
+## Conclusion
+
+Congrats! You've finished the first important lesson of React! It's about the big picture: why do we need React at all? Here are the three core ideas that make React powerful: Components, Declarative UI and Reactive DOM updates.
+
+In fact, I bet even some experienced React developers (for example, myself!) are not super clear about these concepts. When I wrote the first version of this article a few years ago, I put focus on the wrong things. Hopefully this revision is more accurate!
+
+Here's a list of terms covered in the post:
+
+- The DOM (Document Object Model)
+- The DOM API
+- React components
+- Components are composable and independent
+- Imperative vs. declarative programming
+- Virtual DOM
+- Reactive DOM updates

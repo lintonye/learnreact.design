@@ -16,7 +16,7 @@ function importAll(r: __WebpackModuleApi.RequireContext) {
   return r
     .keys()
     .map((fileName) => {
-      const pattern = /.*\/([\w-\d]+)\/.+\.mdx$/
+      const pattern = /.*\/([\w-\d]+)\/index\.mdx$/
       const match = fileName.match(pattern)
       const module = r(fileName)
       // console.log({ fileName })
