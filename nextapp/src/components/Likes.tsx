@@ -168,7 +168,7 @@ export function Likes({ url, onLike }: { url: string; onLike?: () => void }) {
   return (
     <div className="relative">
       <motion.button
-        className="flex space-x-4 items-center select-none focus:outline-none"
+        className="flex space-x-4 items-center select-none focus:outline-none relative z-10"
         onHoverStart={() => setMode('hovered')}
         onHoverEnd={() => setMode('default')}
         animate={mode}
@@ -176,7 +176,9 @@ export function Likes({ url, onLike }: { url: string; onLike?: () => void }) {
       >
         <motion.div
           variants={{ default: { rotate: 0 }, hovered: { rotate: 10 } }}
-          className=" text-red-400 hover:text-pink-600"
+          className={` ${
+            likesByMe > 0 ? 'text-red-400' : 'text-gray-400'
+          }  hover:text-pink-600`}
         >
           <FiHeart
             fill={enoughLikes ? 'rgba(239, 68, 68)' : 'transparent'}
@@ -209,7 +211,7 @@ export function Likes({ url, onLike }: { url: string; onLike?: () => void }) {
           <FiHeart
             fill={enoughLikes ? 'rgba(239, 68, 68)' : 'transparent'}
             size={40}
-            className="text-red-400"
+            className={`${likesByMe > 0 ? 'text-red-400' : 'text-gray-400'} `}
             strokeWidth={1}
           />
         </motion.div>
