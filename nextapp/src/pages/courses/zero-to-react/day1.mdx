@@ -10,32 +10,158 @@ export default MdxLayout
 
 ## How does a website work?
 
-Let's get started from the very beginning. Have you ever wondered how a website work? Watch the 2-minute video below:
+When you enter the address of your favorite website into a browser, your computer starts a conversation with another computer far away, commonly referred to as _server_. Typically your computer makes a request for some information and the server responds:
 
-<YoutubeVideo videoId="4cPH7OLJ3fE" />
+> **Your computer:** Yo, what's good about this random site learnreact.design?
+>
+> **The server:** Hang on, let me grab something for you. Beep. Boop.
 
-## HTML, CSS and JavaScript
+The main part of the server's response usually includes three items: HTML, CSS and JavaScript.
 
-As covered in the [what is React article](/posts/what-is-react), when you visit a website, the main part of the server's response includes three items: HTML, CSS and JavaScript
+- **HTML** lists the content of a web page and describes its structure. How many headings and paragraphs are there? What images should a user see? Are this button and that textbox contained in the same box?
+- **CSS** is in charge of the layout and makes the the page pretty. Should these two paragraphs sit side by side? What background color should this page have? What font should be used?
+- **JavaScript** makes a web page dynamic and interactive. What happens when a user clicks this button? Where should the data be fetched from? How would we populate the list with the downloaded data?
 
-- HTML lists the content of a web page and describes its structure. How many headings and paragraphs are there? What images should a user see? Are this button and that textbox contained in the same box?
-- CSS: Layout & Make the the page pretty
-- JavaScript: Adds interactivity
+TODO illustration
 
-Now let's look into how to write HTML and CSS code.
+## What does the "code" look like?
 
-### HTML code format
+To create a website, developers make a soup of HTML, CSS and JavaScript, taking great care to ensure they work harmonously in a user's browser. The primary medium developers work with is _code_, the text that might look scary but is actually designed to be read and written by humans.
+
+TODO: img: Fortunately the code doesn't look like this.
+
+Let's check out what they actually look like.
+
+### HTML tags
+
+Let's say we want to display a paragraph in a browser:
+
+TODO: img: paragraph in browser window
+
+We could write the HTML code like so:
 
 ```html
-<button>Click me</button>
+<p>Hello, I'm a paragraph!</p>
 ```
 
-TODO annotated HTML tag
+The text "Hello, I'm a paragraph!" is self explanatory. But what's that `p` inside `<` and `>` (let's call them _angle brackets_)?
 
-### CSS code format
+`p` stands for paragraph. We put it inside a pair of angle brackets to make it a **_tag_**. An HTML _tag_ tells the browser the _type_ of the content that we want to include.
+
+HTML provides many tags, like a bag of Lego pieces, which we use to assemble into a web page. Here are a few other tags:
+
+- `<h1>`: Level 1 heading, and there are `<h2>`, `<h3>` etc.
+- `<img>`: An image
+- `<button>`: A button
+- `<div>`: A box
+
+### Elements
+
+HTML tags often come in pairs. As above, we have `<p>` which marks the beginning of a paragraph, and `</p>` which marks the end of a paragraph. They are called **_opening tag_** and **_closing tag_** respectively.
+
+The opening tag, closing tag and the content inside are collectively called an **_HTML element_**.
+
+TODO image: tags, content and element
+
+Some elements don't have content and are therefore called **_empty elements_**. For example:
+
+```html
+<hr />
+```
+
+This will create a "horizontal rule", i.e. a horizontal line, on the page. Unlike a paragraph, it doesn't make sense for a line to have any content.
+
+### Attributes
+
+On the opening tag, we can add **_attributes_**, which include extra information about an element. For example:
+
+```html
+<p class="abstract">Hello, I'm a paragraph!</p>
+```
+
+Above, we add a `class` attribute to `p`. `class` is the name of the attribute, and `abstract` is its value. The attribute value is always inside a pair of quotes.
+
+This `class` attribute tells the browser that we want to style the paragraph in a certain way. We'll learn this soon in the CSS section.
+
+We can add more than one attributes to a tag, which are separated by whitespaces, like so:
+
+```html
+<img src="https://TODO" alt="TODO" />
+```
+
+### HTML element anatomy
+
+As a review of what's discussed so far, here's an anatomy of an HTML element:
+
+TODO illustration
+
+### Nesting elements
+
+In the example above, the content of a `p` element is some text. But we can put another element inside an element as its content too. For example:
+
+```html
+<div>
+  <input type="email" placeholder="Your Email" />
+</div>
+```
+
+Here, the `input` element is the content of the `div` element. In fact, this `div` element can be put inside another element too, for example:
+
+```html
+<form>
+  <div>
+    <input type="email" placeholder="Your Email" />
+  </div>
+</form>
+```
+
+Now the `div` element is the content of the `form` element.
+
+Take notice, this idea of repeating things following a pattern logically is very common in coding. The pattern in this example is: since the content of an element can be another element, which can include yet another element as its content, so on and so forth. This embedding structure can go infinitely deep in theory.
+
+```html
+<div>
+  <div>
+    <div>
+      <div>
+        <div>. . .</div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+Finally, it's also valid to mix text and HTML elements as the content:
+
+```html
+<p>Domo is a <strong>tree</strong></p>
+```
+
+This just means that the `p` element has two children, the first child is the text `Domo is a ` and the second is the `strong` element.
+
+The content of an HTML element
+
+```html
+
+```
+
+```html
+
+```
+
+- tags
+- available tags
+- open/close tags
+- tag attributes
+- embedding tags: This kind of "repeating thinking" is very important and can be seen used in many places when writing code.
+- tree: now do you get why Domo is a tree?
+
+### CSS
+
+### JavaScript
 
 ### Interactive example
 
 ## A Tour of CodeSandbox
 
-## The first impression of code
+## The first impression of a React project
