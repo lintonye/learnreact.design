@@ -18,15 +18,15 @@ When you enter the address of your favorite website into a browser, your compute
 
 The main part of the server's response usually includes three items: HTML, CSS and JavaScript.
 
-- **HTML** lists the content of a web page and describes its structure. How many headings and paragraphs are there? What images should a user see? Are this button and that textbox contained in the same box?
-- **CSS** is in charge of the layout and makes the the page pretty. Should these two paragraphs sit side by side? What background color should this page have? What font should be used?
-- **JavaScript** makes a web page dynamic and interactive. What happens when a user clicks this button? Where should the data be fetched from? How would we populate the list with the downloaded data?
+- **HTML** lists the content of a web page and describes its structure -- How many headings and paragraphs are there? What images should a user see? Are this button and that textbox contained in the same box?
+- **CSS** is in charge of the layout and makes the page pretty -- Should these two paragraphs sit side by side? What background color should this page have? What font should be used?
+- **JavaScript** makes a web page dynamic and interactive -- What happens when a user clicks this button? Where should the data be fetched from? How would we populate the list with the downloaded data?
 
 TODO illustration
 
 ## What does the "code" look like?
 
-To create a website, developers make a soup of HTML, CSS and JavaScript, taking great care to ensure they work harmonously in a user's browser. The primary medium developers work with is _code_, the text that might look scary but is actually designed to be read and written by humans.
+To create a website, developers make some HTML, CSS and JavaScript files, taking great care to ensure they work harmonously in a user's browser. The primary medium developers work with is _code_, the text that might look scary but is actually designed to be read and written by humans.
 
 TODO: img: Fortunately the code doesn't look like this.
 
@@ -66,10 +66,18 @@ TODO image: tags, content and element
 Some elements don't have content and are therefore called **_empty elements_**. For example:
 
 ```html
+<hr>
+```
+
+This will create a "horizontal rule", i.e. a horizontal line, on the page. Unlike a paragraph, a line doesn't have any content. That's why the rule element is empty.
+
+Sometimes you might see empty elements with a trailing slash (`/`) which is equivalent to the tag without it, for example:
+
+```html
 <hr />
 ```
 
-This will create a "horizontal rule", i.e. a horizontal line, on the page. Unlike a paragraph, it doesn't make sense for a line to have any content.
+Note: while the trailing slash is optional in HTML, it's required in some other environments (e.g. React). I'll go over this when it's time to learn JSX in React.
 
 ### Attributes
 
@@ -86,12 +94,12 @@ This `class` attribute tells the browser that we want to style the paragraph in 
 We can add more than one attributes to a tag, which are separated by whitespaces, like so:
 
 ```html
-<img src="https://TODO" alt="TODO" />
+<img src="https://TODO" alt="TODO">
 ```
 
 ### HTML element anatomy
 
-As a review of what's discussed so far, here's an anatomy of an HTML element:
+As a recap, here's an anatomy of an HTML element:
 
 TODO illustration
 
@@ -101,7 +109,16 @@ In the example above, the content of a `p` element is some text. But we can put 
 
 ```html
 <div>
-  <input type="email" placeholder="Your Email" />
+  <input type="email" placeholder="Your Email">
+</div>
+```
+
+Or maybe multiple elements inside as the content of the `div`:
+
+```html
+<div>
+  <input type="email" placeholder="Your Email">
+  <input type="password" placeholder="Password">
 </div>
 ```
 
@@ -110,21 +127,47 @@ Here, the `input` element is the content of the `div` element. In fact, this `di
 ```html
 <form>
   <div>
-    <input type="email" placeholder="Your Email" />
+    <input type="email" placeholder="Your Email">
+    <input type="password" placeholder="Password">
   </div>
 </form>
 ```
 
 Now the `div` element is the content of the `form` element.
 
-Take notice, this idea of repeating things following a pattern logically is very common in coding. The pattern in this example is: since the content of an element can be another element, which can include yet another element as its content, so on and so forth. This embedding structure can go infinitely deep in theory.
+It's important to pair the opening and closing tags. We'll get an error if missing a closing tag of a non-empty element, e.g.
+
+```html
+<!-- ❌ missing closing div tag -->
+<div>
+  <input type="email" placeholder="Your Email">
+  <input type="password" placeholder="Password">  
+```
+
+The order of closing tags is also important. We'll get an error
+
+```html
+<!-- ❌ form tag and div tag are interwined -->
+<form>
+  <div>
+    <input type="email" placeholder="Your Email">
+    <input type="password" placeholder="Password">
+  </form>
+</div>
+```
+
+This idea of repeating things following a pattern logically is very common in coding. The pattern in this example is: since the content of an element can be another element, which can include yet another element as its content, so on and so forth. In theory, this embedding structure can go infinitely deep.
 
 ```html
 <div>
   <div>
     <div>
       <div>
-        <div>. . .</div>
+        <div>
+          .
+          .
+          .
+        </div>
       </div>
     </div>
   </div>

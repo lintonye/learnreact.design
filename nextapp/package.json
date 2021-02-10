@@ -103,7 +103,7 @@
     "*.{js,json,md}": [
       "prettier --write"
     ],
-    "src/**/*.{ts,tsx,md,mdx,js}": [
+    "src/**/*.{ts,tsx,md,js}": [
       "prettier --write"
     ]
   },
