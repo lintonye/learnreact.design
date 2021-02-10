@@ -102,7 +102,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,json,md}": [
+    "*.{js,md}": [
       "prettier --write"
     ],
     "src/**/*.{ts,tsx,md,mdx,js}": [
