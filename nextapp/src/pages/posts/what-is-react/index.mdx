@@ -20,6 +20,7 @@ import imgHatShopSearchBarOnFooter from './hatshop-searchBar-on-footer.png'
 import imgHatShop from './hatshop.png'
 
 import imgSurprise from './surprise.png'
+import { Surprise } from '@/components/what-is-react/Surprise'
 
 import { DomoAsciiArt } from '@/components/what-is-react/DomoAsciiArt'
 import { IconBinocular } from '@/components/what-is-react/IconBinocular'
@@ -45,6 +46,7 @@ export const meta = {
   },
   surprise: {
     actor: () => <Image src={imgSurprise} width={145} height={145} />,
+    actor: (revealEnded) => <Surprise play={revealEnded} />,
     animationVariants: {
       hidden: { x: -10, rotate: 0, y: 40 },
       revealed: { x: -150, rotate: 0, y: 40 },
