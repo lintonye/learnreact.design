@@ -281,6 +281,14 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
 
             {/* Sign up form */}
             <div className="my-2 p-8 bg-indigo-100 border border-indigo-400 rounded-sm space-y-4">
+              <div className="float-right">
+                <Image
+                  src={imgLinton}
+                  width={50}
+                  height={50}
+                  className="rounded-full"
+                />
+              </div>
               <p>I hope you find this article useful!</p>
               <p>
                 One of my 2021 goals is to write more posts that are{' '}
