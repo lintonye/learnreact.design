@@ -45,9 +45,11 @@ export function useQuestionStats(questionId: string) {
     const statsRef = firestore.collection(COLLECTION_STATS)
     initResponseCounts(firestore, questionId)
     const unsubscribe = statsRef.doc(questionId).onSnapshot((snapshot) => {
-      // @ts-ignore questionId exists in our schema
-      const { questionId: qId, ...stats } = snapshot.data()
-      setStats(stats)
+      if (snapshot.exists) {
+        // @ts-ignore questionId exists in our schema
+        const { questionId: qId, ...stats } = snapshot.data()
+        setStats(stats)
+      }
     })
     return unsubscribe
   }, [firestore, questionId])

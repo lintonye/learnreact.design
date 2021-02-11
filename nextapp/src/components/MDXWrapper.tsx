@@ -34,14 +34,17 @@ const components = {
   td: (props: any) => <td className="border border-gray-300 p-2" {...props} />,
   th: (props: any) => <th className="border border-gray-300 p-2" {...props} />,
   thead: (props: any) => <thead className="bg-gray-100" {...props} />,
-  img: (props: any) => (
-    <Image
-      // className="mx-auto max-w-full"
-      width={1024}
-      height={768}
-      layout="responsive"
-      {...props}
-    />
+  img: ({ title, ...props }: any) => (
+    <div className="my-4 space-y-2">
+      <Image
+        // className="mx-auto max-w-full"
+        width={1024}
+        height={768}
+        layout="responsive"
+        {...props}
+      />
+      {title && <div className="text-center italic">{title}</div>}
+    </div>
   ),
   blockquote: (props: any) => (
     <blockquote
