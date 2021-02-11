@@ -1,0 +1,69 @@
+export const meta = {
+  title: 'useRef By Example',
+  description: `React is a JavaScript library for building user interfaces. This is the official definition of React. But what if you are not familiar with JavaScript? What if you are not a developer? Would you still be able to make sense of (and learn) React? My answer is a firm YES. `,
+  date: '2021-02-25',
+  tags: ['react'],
+  related: ['what-is-react-native', 'what-is-redux'],
+  ogImage: {
+    // url: imgSocialCard,
+    width: 1280,
+    height: 720,
+  },
+  // surprise: {
+  //   actor: () => <Image src={imgSurprise} width={145} height={145} />,
+  //   animationVariants: {
+  //     hidden: { x: -10, rotate: 0, y: 40 },
+  //     revealed: { x: -150, rotate: 0, y: 40 },
+  //   },
+  // },
+}
+
+<!--excerpt-->
+
+"React is a JavaScript library for building user interfaces." This is the official definition. But what if you are not familiar with JavaScript? Would you still be able to make sense of (and learn) React? My answer is a firm YES.
+
+<!--/excerpt-->
+
+## Introduction
+
+The useRef Hook is ...
+"What is useRef used for?"
+"What is the difference between useRef and createRef?"
+preview of the three examples
+how to use
+
+## The mental model
+
+ref attribute
+
+Class: instance variable
+
+compare with useState: Persist value across re-renders, doesn't trigger re-render
+
+An illustration
+usually use with useEffect
+
+## Example 0: set focus
+
+## Example 1: previous value / state
+
+https://codesandbox.io/s/useref-previous-state-hmthe
+
+## Example 2: stop watch (clear interval)
+
+https://codesandbox.io/s/useref-cancelable-interval-uljky?file=/src/App.js
+
+## Example 3: usePressHoldRepeat
+
+https://codesandbox.io/s/useref-usepressholdrepeat-7megx
+
+## Example 4: useDebouncedState
+
+## Anti-patterns
+
+assign to current in render
+use current in jsx
+
+## Conclusion
+
+Other examples? Let me know
