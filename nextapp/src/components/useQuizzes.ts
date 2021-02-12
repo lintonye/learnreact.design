@@ -109,7 +109,7 @@ export function useSubmitQuestion({
         const choicesRef = firestore.collection(COLLECTION_RESPONSES)
         const doc = choicesRef.doc(questionId + personId)
 
-        updateStats(doc, questionId)
+        await updateStats(doc, questionId)
 
         // Update detailed response entries
         const updates = {
