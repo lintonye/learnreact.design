@@ -1,6 +1,8 @@
 import { MdxLayout } from '@/components/MdxLayout'
 import { YoutubeVideo } from '@/components/YoutubeVideo'
 import imgMatrix from './matrix.png'
+import imgAnatomy from './html-tag-anatomy.png'
+import imgParagraph from './paragraph.png'
 import { Quiz } from '@/components/Quiz'
 
 export const meta = {
@@ -40,7 +42,7 @@ Let's check out what they actually look like.
 
 Let's say we want to display a paragraph in a browser:
 
-TODO: img: paragraph in browser window
+<img src={imgParagraph} alt="Displaying a paragraph in a browser" width={692} height={447}/>
 
 We could write the HTML code like so:
 
@@ -52,20 +54,18 @@ The text "Hello, I'm a paragraph!" is self explanatory. But what's that `p` insi
 
 `p` stands for paragraph. We put it inside a pair of angle brackets to make it a **_tag_**. An HTML _tag_ tells the browser the _type_ of the content that we want to include.
 
-HTML provides many tags, like a bag of Lego pieces, which we use to assemble into a web page. Here are a few other tags:
+HTML provides many tags, like a bag of Lego pieces, which we use to assemble into a web page. There are currently 110+ different tags in HTML. Here are some more examples:
 
-- `<h1>`: Level 1 heading, and there are `<h2>`, `<h3>` etc.
+- `<h1>`, `<h2>`, `<h3>` etc.: Headings
 - `<img>`: An image
 - `<button>`: A button
-- `<div>`: A box
+- `<div>`: A box used for grouping elements. It's often invisible.
 
 ### Elements
 
-HTML tags often come in pairs. As above, we have `<p>` which marks the beginning of a paragraph, and `</p>` which marks the end of a paragraph. They are called **_opening tag_** and **_closing tag_** respectively.
+HTML tags often come in pairs. As above, we have `<p>` which marks the beginning of a paragraph, and `</p>` which marks the end of a paragraph. They are called **_opening tag_** and **_closing tag_** respectively. The opening tag, closing tag and the content inside are collectively called an **_HTML element_**.
 
-The opening tag, closing tag and the content inside are collectively called an **_HTML element_**.
-
-TODO image: tags, content and element
+<!-- TODO image: tags, content and element -->
 
 Some elements don't have content and are therefore called **_empty elements_**. For example:
 
@@ -105,7 +105,7 @@ We can add more than one attributes to a tag, which are separated by whitespaces
 
 As a recap, here's an anatomy of an HTML element:
 
-TODO illustration
+<img src={imgAnatomy} alt="HTML element anatomy" width={1024} height={592}/>
 
 ### Nesting elements
 
@@ -141,7 +141,7 @@ In fact, this `div` element can be put inside another element too, for example:
 
 Now the `div` element is the content of the `form` element.
 
-This idea of repeating things following a pattern logically is very common in coding. The pattern in this example is: since the content of an element can be another element, which can include yet another element as its content, so on and so forth. In theory, this embedding structure can go infinitely deep.
+This idea of repeating things following a pattern logically is very common in coding. The pattern in this example is: the content of an element can be another element, which can include yet another element as its content, so on and so forth. In theory, this embedding structure can go infinitely deep.
 
 ```html
 <div>
@@ -169,7 +169,7 @@ This just means that this `p` has two children, the first child is the text `Dom
 
 ### Paring opening and closing tags
 
-It's important to pair the opening and closing tags. The code is invalid if a closing tag of a non-empty element is missing, e.g.
+It's important to pair the opening and closing tags. The code is invalid if the closing tag of a non-empty element is missing, e.g.
 
 ```html
 <!-- ❌ missing closing div tag -->
@@ -178,7 +178,7 @@ It's important to pair the opening and closing tags. The code is invalid if a cl
   <input type="password" placeholder="Password">  
 ```
 
-The order of closing tags is also important. The code is invalid if the opening tags and closing tags are not matched properly.
+The order of closing tags is also important. The code is invalid if the opening tags and closing tags are not matched properly:
 
 ```html
 <!-- ❌ form tag and div tag are interwined -->
@@ -192,7 +192,7 @@ The order of closing tags is also important. The code is invalid if the opening 
 
 ### Exercise time!
 
-Alright! This is all you need to know about HTML (for now). Indeed there are a LOT of new terms if you are new to HTML. 
+Alright! This is all you need to know about HTML (for now). Here's a list of all the terms mentioned above. Try to recall what they are:
 
 - Opening and closing tags
 - HTML element
@@ -201,6 +201,7 @@ Alright! This is all you need to know about HTML (for now). Indeed there are a L
 - Nesting elements
 - Children and parents
 
+If you find this list daunting, don't worry! With enough practice (which you'll do in the next 7 days), it'll become your second nature to write those HTML tags. Flex your muscles with some quick quizzes first:
 
 **Q1: Is the HTML code below valid?**
 
@@ -215,10 +216,37 @@ Alright! This is all you need to know about HTML (for now). Indeed there are a L
   explanation=""
 />
 
+**Q2: Is the HTML code below valid?**
+
+```html
+<img src="https://somesite.com/cat.jpg" alt="Cat">
+```
+
+<Quiz
+  options={['Yes', 'No. The closing tag is missing.', 'No. The tag needs a trailing slash right before ">"', 'No. Too many attributes']}
+  id="zero-to-react-day1-empty-element"
+  answer="A"
+  explanation="Similar to <hr>, <img> is an empty element. In HTML, the trailing slash is optional."
+/>
+
+**Q3: Which of the following is INCORRECT about nesting HTML elements?**
+
+<Quiz
+  options={['An element can have more than one children.', 'A nesting structure can be as deep as needed.', 'An empty element can still have children.', 'An element can be embeded in another element because its content can be elements.']}
+  id="zero-to-react-day1-nesting"
+  answer="C"
+  explanation="Empty elements, by definition, cannot have children."
+/>
+
 -----
 
-<div className="text-6xl">☕️</div> 
-Sip some coffee, stretch your legs, come back and continue below
+<div className="text-8xl">☕️</div> 
+
+**Sip some coffee**
+
+**Stretch your legs**
+
+**Come back and continue below**
 
 -----
 
@@ -228,8 +256,8 @@ TODO
 ### JavaScript
 TODO
 
-### Interactive example
+<!-- ### Interactive example
 
 ## A Tour of CodeSandbox
 
-## The first impression of a React project
+## The first impression of a React project -->
