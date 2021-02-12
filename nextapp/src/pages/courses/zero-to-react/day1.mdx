@@ -3,6 +3,7 @@ import { YoutubeVideo } from '@/components/YoutubeVideo'
 import imgMatrix from './matrix.png'
 import imgAnatomy from './html-tag-anatomy.png'
 import imgParagraph from './paragraph.png'
+import imgCodingExercise from './day1-coding-exercise.png'
 import { Quiz } from '@/components/Quiz'
 
 export const meta = {
@@ -238,6 +239,30 @@ If you find this list daunting, don't worry! With enough practice (which you'll 
   explanation="Empty elements, by definition, cannot have children."
 />
 
+**Write some code!**
+
+Let's now get our hands dirty and write some HTML code! Build something like the following:
+
+<div className="shadow-lg p-2 border border-gray-200">
+  <img src={imgCodingExercise} width={605} height={477} />
+</div>
+
+Hints:
+
+- Use these tags: `input`, `button`, `p` and `img`
+- The image url is :
+
+```html
+https://learnreact.design/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fdomo-css-artist.cd87d45a513dd11f89f2e854f5ae1a7b.png&w=1920&q=75
+```
+
+- Try using a `label` as the parent of the text `Search` and the `input` element
+- Try using a `form` as the parent of `label` and `button`
+
+**[Open CodePen and start coding!](https://codepen.io/pen/?editors=1000)**
+
+Here's [my version](https://codepen.io/focuser/pen/mdORJZO?editors=1000).
+
 -----
 
 <div className="text-8xl">☕️</div> 
@@ -252,6 +277,8 @@ If you find this list daunting, don't worry! With enough practice (which you'll 
 
 ## CSS
 TODO
+
+- format 
 
 ### JavaScript
 TODO
