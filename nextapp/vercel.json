@@ -85,7 +85,7 @@
       "destination": "/posts"
     },
     {
-      "source": "/framer-in-4-weeks/",
+      "source": "/framer-in-4-weeks",
       "destination": "/courses/react-framer"
     },
     {
