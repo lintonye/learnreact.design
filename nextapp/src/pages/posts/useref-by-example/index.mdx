@@ -1,3 +1,4 @@
+import { ConvertKitForm } from '@/components/design-system'
 export const meta = {
   title: 'useRef By Example',
   description: `React is a JavaScript library for building user interfaces. This is the official definition of React. But what if you are not familiar with JavaScript? What if you are not a developer? Would you still be able to make sense of (and learn) React? My answer is a firm YES. `,
@@ -26,6 +27,14 @@ export const meta = {
 
 ## Introduction
 
+`useRef` is a built-in React hook. What is it used for?
+
+The most common use case of `useRef` is to occasionally access DOM nodes so that we could imperatively run DOM functions, such as set the focus on a textbox.
+
+However, the hidden gem actually lies on how it works under the hood. `useRef` simply persists a value across re-renders.
+
+In this post, I'll show you the mental model of useRef, how it works and why we need it, and how to use it in a real-world example. E.g. the like button.
+
 The useRef Hook is ...
 "What is useRef used for?"
 "What is the difference between useRef and createRef?"
@@ -33,6 +42,14 @@ preview of the three examples
 how to use
 
 ## The mental model
+
+> useRef is like class instance variable for function components.
+
+This single sentence helped me understand it at different levels. But if you are still not sure about what it is, read below.
+
+### The recurring rendering cycles
+
+### Component instance
 
 ref attribute
 
@@ -43,9 +60,39 @@ compare with useState: Persist value across re-renders, doesn't trigger re-rende
 An illustration
 usually use with useEffect
 
-## Example 0: set focus
+<div className="p-8 bg-yellow-100 border border-yellow-400 rounded-sm space-y-4 my-2">
+  <p>
+    I'm working on a book/course that uses similar approach to teach React -- focus on mental models instead of steps and howtos.
+  </p>
+  <p>
+    I believe you'd be able to do useful work with React after a few days of
+    learning, <strong>even if you are new to coding</strong>. If you are interested, sign
+    up and I'll let you know when the course is ready!
+  </p>
+
+  <ConvertKitForm formId="467678" subscribeButtonTitle="Keep Me Posted" />
+</div>
 
 ## Example 1: previous value / state
+
+```jsx
+function Counter() {
+  const [count, setCount] = useState(0)
+  const prevCount = useRef()
+  useEffect(() => {
+    prevCount.current = count
+  })
+
+  return (
+    <div className="App">
+      <h1>
+        Prev:{prevCount.current}, Count: {count}
+      </h1>
+      <button onClick={() => setCount((c) => c + 1)}>+1</button>
+    </div>
+  )
+}
+```
 
 https://codesandbox.io/s/useref-previous-state-hmthe
 
