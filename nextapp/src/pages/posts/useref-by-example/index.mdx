@@ -27,13 +27,37 @@ export const meta = {
 
 ## Introduction
 
-`useRef` is a built-in React hook. What is it used for?
+`useRef` is one of the Hooks that come with React by default. It is also, at least in my experience, one of the most confusing Hooks (perhaps right after `useEffect`). But it's actually a hidden gem. With a good understanding of how it works, it'll become a powerful tool in our arsenal.
 
-The most common use case of `useRef` is to occasionally access DOM nodes so that we could imperatively run DOM functions, such as set the focus on a textbox.
+What's `useRef` used for? There are two use cases:
+
+1. Directly access DOM nodes. This is the most common use cases of `useRef`. We could use it to obtain the underlying DOM nodes to perform imperative operations. We should actually only do this sparsely.
+2. Persist value across re-renders. This is the hidden gem that I'll focus on in this article.
+
+And I'm going to focus on the hidden gem in this article. We are going to use a combination of `useRef`, `useEffect` and `useCallback` to build a like button (click and hold for additional effects):
+
+TODO like button
+
+```jsx
+function Editor() {
+  const textboxRef = useRef()
+  const handleClick = () => {
+    textboxRef.current.setFocus()
+  }
+  return (
+    <div>
+      <input type="text" ref={textboxRef} />
+      <button onClick={handleClick}>Focus</button>
+    </div>
+  )
+}
+```
 
 However, the hidden gem actually lies on how it works under the hood. `useRef` simply persists a value across re-renders.
 
 In this post, I'll show you the mental model of useRef, how it works and why we need it, and how to use it in a real-world example. E.g. the like button.
+
+Click and hold for more entertaining effects
 
 The useRef Hook is ...
 "What is useRef used for?"
