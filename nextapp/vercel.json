@@ -105,6 +105,10 @@
       "destination": "/courses/react-framer"
     },
     {
+      "source": "/prototyping-with-react-framer/showcase",
+      "destination": "/courses/react-framer/showcase"
+    },
+    {
       "source": "/re4d-prerequisites",
       "destination": "/courses/web-basics"
     },
