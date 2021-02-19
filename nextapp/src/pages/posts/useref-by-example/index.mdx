@@ -27,12 +27,12 @@ export const meta = {
 
 ## Introduction
 
-`useRef` is a built-in React Hook. It is, at least in my experience, one of the most confusing Hooks (perhaps right after `useEffect`)(agree? +1 TODO). But it's actually a hidden gem 💎. With a good understanding of how it works, it'll become a powerful tool in our arsenal.
+`useRef` is a built-in React Hook. It is, at least in my experience, one of the most confusing Hooks (perhaps right after `useEffect`)(agree? +1 TODO). But if you spend some time to learn how it works, you'll see that it's actually a hidden gem 💎. It'll become a powerful tool in your arsenal.
 
 What is `useRef` used for? There are two use cases:
 
 1. **Directly access DOM nodes.** When combined with the `ref` attribute, we could use `useRef` to obtain the underlying DOM nodes to perform DOM operations imperatively. In fact, we should only do this sparsely for things like setting focus, measuring DOM nodes or animations. If we use it for everything (in theory we could), we'd lose the benefit of [React's declarative programming paradigm](TODO).
-2. **Persist values across re-renders.** This is what I'm going to focus on in this article.
+2. **Persist a value across re-renders.** This is what I'm going to focus on in this article.
 
 I'll reveal this shiny gem <span className="mr-2">💎</span> for you in three steps: 1) how it works, 2) a couple of simple examples, and finally 3) a real-world example -- the like button below (click and hold for additional fun).
 
@@ -42,9 +42,9 @@ TODO like button
 
 > `useRef` is like class instance variable for function components.
 
-This single sentence is what made `useRef` click for me. If it has the same effect on you, feel free to skip to [the examples section](TODO). Otherwise, if you are not familiar JavaScript classes or class instance variables, read on.
+After a lot of struggle trying to understand `useRef`, I finally saw this single sentence. And it clicked! If you are hearing the clicking sound in your mind right now already, feel free to skip to [the examples section](TODO). Otherwise, if you are not familiar JavaScript classes or class instance variables, read on. This section is for you.
 
-### The recurring rendering cycles
+### The re-rendering time loop
 
 To understand how `useRef` works and why we need it, let's get started with a contrived (but useful) example. Can you build a counter without using the `useState` hook?
 
@@ -69,9 +69,9 @@ function Counter() {
 }
 ```
 
-This doesn't work, even though the value of `count` increases on click. Why? React is oblivious to the change of local variables and, therefore, doesn't know when to update the DOM. We'd need to re-render the component, namely request React to call the component function, to notify React about the change.
+This doesn't work, even though the value of `count` increases on click. Why? React is oblivious to the change of local variables and, therefore, doesn't know when to update the DOM. We'd need to re-render the component, namely request React to call the component function `Counter`, to notify React about the change.
 
-This can be verified by adding a line `console.log('render')` right after `let count = 0`.
+You can verify this by adding a line `console.log('render')` right after `let count = 0`.
 
 OK. Then what if we force the component to render when `count` updates?
 
@@ -106,9 +106,9 @@ This doesn't work either. The count displayed on the page stays zero. Even worse
 
 Why? Every time when the component re-renders, it goes into a time loop. All the local variables in the function will be reset to their original values. That's why `count` is always `0`. That's no surprise, right? They are local variables defined in the function. When the function reruns, the variables are supposed to behave like that!
 
-As straighforward this sounds, sometimes it's easy to forget it (I do it all the time). So remember, in React a component is re-rendered all the time, so all the local variables will go into a time loop, over and over again.
+As straighforward this sounds, sometimes it's easy to forget it (I do it all the time). So remember, a React component is re-rendered all the time, so all the local variables will go into a time loop, over and over again.
 
-Now what if we move the variable out of the component function? It will no longer reset no matter how many times the component is rendered, right?
+Now what if we move the variable out of the component function? It will no longer be affected by the re-rendering time loop, right?
 
 ```jsx
 let count = 0
@@ -132,7 +132,9 @@ function Counter() {
 
 That's correct! It works! Yay!
 
-But wait a second, what if we want to have two counters? Or maybe three?
+### Component instance
+
+But wait a second, what if we want to have two counters?
 
 ```jsx
 function TwoCounters() {
@@ -172,24 +174,68 @@ function Counter() {
 }
 ```
 
-But, but we are still using that `useForceRender` to update the DOM! What's the point o
+But, but we are still using that `useForceRender` to update the DOM! If we comment out `forceRender()`, the counter stops working again! (try it)
 
-Why do we need `useRef`? Why don't we just use `useState`? The answer is that sometimes we don't want to trigger re-render.
+What's the point of `useRef` if it relies on `useState` to work properly? Why don't we just use `useState`?
 
-Whenever a component is re-rendered, it goes into a time loop.
+What's the point of `useRef` if it doesn't trigger a re-render when the value is updated?
 
-A very forgetive person. So we would need a note book (hook) to help him remember important things.
+In fact, being able to persist a value across re-renders without triggering another re-render is exactly why `useRef` is created. Sometimes we just don't want the component to re-render when the value is updated.
 
-### Component instance
+It's now time to look at a better example.
 
-ref attribute
+## Example 1: previous value / state
 
-Class: instance variable
+Let's modify the Counter component. Now we want to display the previous value of the counter whenever the button is clicked. We can do so using a combination of `useState`, `useEffect`, and of course `useRef`.
 
-compare with useState: Persist value across re-renders, doesn't trigger re-render
+```jsx
+function Counter() {
+  const [count, setCount] = useState(0)
+  const prevCount = useRef()
+  useEffect(() => {
+    // This runs every time after Counter is rendered.
+    prevCount.current = count
+  })
 
-An illustration
-usually use with useEffect
+  return (
+    <div className="App">
+      <h1>
+        Prev:{prevCount.current}, Count: {count}
+      </h1>
+      <button onClick={() => setCount((c) => c + 1)}>+1</button>
+    </div>
+  )
+}
+```
+
+Look, when saving the previous state in `useEffect`, we definitely don't want the component to re-render. Otherwise, it'd go into an infinite loop. So, `useRef` to the rescue.
+
+https://codesandbox.io/s/useref-previous-state-hmthe
+
+## Example 2: stop watch (clear interval)
+
+Let's look at a more interesting example. What about a stop watch?
+
+The requirement is that we want to be able to pause and resume the watch.
+
+The watch can be implemented with `setInterval`. But we need to clear the interval when the button is clicked. And create a new interval when the watch is resumed.
+
+https://codesandbox.io/s/useref-cancelable-interval-uljky?file=/src/App.js
+
+## Example 3: usePressHoldRepeat
+
+https://codesandbox.io/s/useref-usepressholdrepeat-7megx
+
+## Example 4: useDebouncedState
+
+## Anti-patterns
+
+assign to current in render
+use current in jsx
+
+## Misc.
+
+"What is the difference between useRef and createRef?"
 
 ### `useRef` vs. `useState`
 
@@ -244,48 +290,6 @@ ref.current = domNode
 ```
 
 This is roughly what's going on. But to understand why we'd need this approach instead of, for example, using a global variable somewhere, let's check out the rendering cycle of React components.
-
-## Example 1: previous value / state
-
-```jsx
-function Counter() {
-  const [count, setCount] = useState(0)
-  const prevCount = useRef()
-  useEffect(() => {
-    prevCount.current = count
-  })
-
-  return (
-    <div className="App">
-      <h1>
-        Prev:{prevCount.current}, Count: {count}
-      </h1>
-      <button onClick={() => setCount((c) => c + 1)}>+1</button>
-    </div>
-  )
-}
-```
-
-https://codesandbox.io/s/useref-previous-state-hmthe
-
-## Example 2: stop watch (clear interval)
-
-https://codesandbox.io/s/useref-cancelable-interval-uljky?file=/src/App.js
-
-## Example 3: usePressHoldRepeat
-
-https://codesandbox.io/s/useref-usepressholdrepeat-7megx
-
-## Example 4: useDebouncedState
-
-## Anti-patterns
-
-assign to current in render
-use current in jsx
-
-## Misc.
-
-"What is the difference between useRef and createRef?"
 
 ## Conclusion
 
