@@ -29,20 +29,24 @@ export const meta = {
 
 `useRef` is a built-in React Hook. It is, at least in my experience, one of the most confusing Hooks (perhaps right after `useEffect`)(agree? +1 TODO). But if you spend some time to learn how it works, you'll see that it's actually a hidden gem 💎. It'll become a powerful tool in your arsenal.
 
-What is `useRef` used for? There are two use cases:
+I'll reveal this shiny gem <span className="mr-2">💎</span> for you in three steps: 1) what is it used for and how it works, 2) a couple of simple examples, and finally 3) a real-world example -- the like button below (click and hold for additional fun).
+
+TODO like button
+
+## What is useRef used for?
+
+There are two use cases:
 
 1. **Directly access DOM nodes.** When combined with the `ref` attribute, we could use `useRef` to obtain the underlying DOM nodes to perform DOM operations imperatively. In fact, we should only do this sparsely for things like setting focus, measuring DOM nodes or animations. If we use it for everything (in theory we could), we'd lose the benefit of [React's declarative programming paradigm](TODO).
 2. **Persist a value across re-renders.** This is what I'm going to focus on in this article.
 
-I'll reveal this shiny gem <span className="mr-2">💎</span> for you in three steps: 1) how it works, 2) a couple of simple examples, and finally 3) a real-world example -- the like button below (click and hold for additional fun).
+## How does useRef work?
 
-TODO like button
-
-## The mental model
+Here's the mental model that works for me:
 
 > `useRef` is like class instance variable for function components.
 
-After a lot of struggle trying to understand `useRef`, I finally saw this single sentence. And it clicked! If you are hearing the clicking sound in your mind right now already, feel free to skip to [the examples section](TODO). Otherwise, if you are not familiar JavaScript classes or class instance variables, read on. This section is for you.
+After a lot of struggle trying to understand `useRef`, I finally saw this single sentence. And it clicked! If you are hearing the same clicking sound in your mind right now already, feel free to skip to [the examples section](TODO). Otherwise, if you are not familiar JavaScript classes or class instance variables, read on. This section is for you.
 
 ### The re-rendering time loop
 
@@ -106,7 +110,7 @@ This doesn't work either. The count displayed on the page stays zero. Even worse
 
 Why? Every time when the component re-renders, it goes into a time loop. All the local variables in the function will be reset to their original values. That's why `count` is always `0`. That's no surprise, right? They are local variables defined in the function. When the function reruns, the variables are supposed to behave like that!
 
-As straighforward this sounds, sometimes it's easy to forget it (I do it all the time). So remember, a React component is re-rendered all the time, so all the local variables will go into a time loop, over and over again.
+As straighforward as this sounds, sometimes it's easy to forget (I do it all the time). So remember, a React component is re-rendered all the time, so all the local variables will go into a time loop, over and over again.
 
 Now what if we move the variable out of the component function? It will no longer be affected by the re-rendering time loop, right?
 
