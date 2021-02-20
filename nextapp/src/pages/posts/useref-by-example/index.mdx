@@ -193,7 +193,7 @@ function Counter() {
   const [count, setCount] = useState(0)
   const prevCount = useRef()
   useEffect(() => {
-    // This runs every time after Counter is rendered.
+    // This runs every time AFTER Counter is rendered.
     prevCount.current = count
   })
 
@@ -208,19 +208,116 @@ function Counter() {
 }
 ```
 
-Look, when saving the previous state in `useEffect`, we definitely don't want the component to re-render. Otherwise, it'd go into an infinite loop. So, `useRef` to the rescue.
+Look, when saving the previous state in `useEffect`, we definitely don't want the component to re-render. Otherwise, it'd go into an infinite loop. So, `useRef` to the rescue!
 
-https://codesandbox.io/s/useref-previous-state-hmthe
+<!-- https://codesandbox.io/s/useref-previous-state-hmthe -->
 
 ## Example 2: stop watch (clear interval)
 
-Let's look at a more interesting example. What about a stop watch?
+Now let's look at a more useful example. What about a stop watch?
 
-The requirement is that we want to be able to pause and resume the watch.
+TODO Stop watch demo
 
-The watch can be implemented with `setInterval`. But we need to clear the interval when the button is clicked. And create a new interval when the watch is resumed.
+We can make the stop watch tick with a combination of `useState`, `useEffect` and `setInterval`:
 
-https://codesandbox.io/s/useref-cancelable-interval-uljky?file=/src/App.js
+```jsx
+function StopWatch() {
+  const [milliSeconds, setMilliSeconds] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setMilliSeconds((ms) => ms + 1)
+    }, 1);
+    return () => clearInterval(interval);
+  }, []);
+
+  return ...
+}
+```
+
+But how do we pause the stop watch?
+
+We can add another state `paused` and clear the interval when `paused` is `true`. Let's give it a try:
+
+```jsx
+function StopWatch() {
+  const [milliSeconds, setMilliSeconds] = useState(0);
+  const [paused, setPaused] = useState(true);
+  useEffect(() => {
+    if (paused) {
+      // 🤔 "interval" isn't defined here
+      clearInterval(interval)
+    } else {
+      const interval = setInterval(() => {
+        setMilliSeconds((ms) => ms + 1)
+      }, 1);
+      return () => clearInterval(interval);
+    }
+    // BTW: Remember to put `paused` in the deps
+  }, [paused]);
+
+  return ...
+}
+```
+
+Did you see the problem? Where should we define that variable `interval`?
+
+If we define `interval` in an outter scope, we'll taste the wrath of the re-rendering time loop -- `interval` will always be `undefined`.
+
+```jsx
+function StopWatch() {
+  const [milliSeconds, setMilliSeconds] = useState(0);
+  const [paused, setPaused] = useState(true);
+  let interval // ❌ interval will always be undefined here
+  useEffect(() => {
+    if (paused) {
+      clearInterval(interval)
+    } else {
+      interval = setInterval(() => {
+        setMilliSeconds((ms) => ms + 1)
+      }, 1);
+      return () => clearInterval(interval);
+    }
+  }, []);
+
+  return ...
+}
+```
+
+We don't want to put it in state either, since it's really not something we would want to display on the UI. It's interval stuff.
+
+Again, `useRef` to the rescue:
+
+```jsx
+function StopWatch() {
+  const [milliSeconds, setMilliSeconds] = useState(0)
+  const [paused, setPaused] = useState(true)
+  // 1. Get the ref that corresponds to the CURRENT INSTANCE of the component
+  const interval = useRef()
+  useEffect(() => {
+    if (paused) {
+      // 2. Access the value via ".current"
+      interval.current && clearInterval(interval.current)
+    } else {
+      // 3. Update the value via ".current" too
+      interval.current = setInterval(() => {
+        setMilliSeconds((ms) => ms + 1)
+      }, 1)
+      return () => clearInterval(interval.current)
+    }
+  }, [paused])
+
+  return (
+    <div className="App">
+      <h1>{format(milliSeconds)}</h1>
+      <button onClick={() => setPaused((c) => !c)}>
+        {milliSeconds === 0 ? 'Start' : paused ? 'Resume' : 'Pause'}
+      </button>
+    </div>
+  )
+}
+```
+
+You can check out a fully working [CodeSandbox here](https://codesandbox.io/s/useref-cancelable-interval-uljky?file=/src/App.js).
 
 ## Example 3: usePressHoldRepeat
 
