@@ -17,8 +17,8 @@ type ArrowProps = {
 function Arrow({ a, b, ...props }: ArrowProps) {
   const [sx, sy, cx, cy, ex, ey, as, ac, ae] = getArrow(a.x, a.y, b.x, b.y, {
     padStart: 10,
-    padEnd: 10,
-    flip: true,
+    padEnd: 20,
+    // flip: true,
     bow: 0,
   })
 
@@ -62,19 +62,25 @@ function useRelativeBox(): [RefObject<any>, DOMRect | null] {
   const ref = useRef<HTMLDivElement>(null)
   const [box, setBox] = useState<DOMRect | null>(null)
   useEffect(() => {
-    const element = ref.current
-    if (element) {
-      const viewportBox = element.getBoundingClientRect()
-      const parentBox = element.parentElement?.getBoundingClientRect()
-      setBox(
-        DOMRectReadOnly.fromRect({
-          x: viewportBox.x - (parentBox?.x || 0),
-          y: viewportBox.y - (parentBox?.y || 0),
-          width: viewportBox.width,
-          height: viewportBox.height,
-        }),
-      )
+    function updateBox() {
+      const element = ref.current
+      if (element) {
+        const viewportBox = element.getBoundingClientRect()
+        const parentBox = element.parentElement?.getBoundingClientRect()
+        setBox(
+          DOMRectReadOnly.fromRect({
+            x: viewportBox.x - (parentBox?.x || 0),
+            y: viewportBox.y - (parentBox?.y || 0),
+            width: viewportBox.width,
+            height: viewportBox.height,
+          }),
+        )
+      }
     }
+    updateBox()
+    const listener = () => updateBox()
+    window.addEventListener('resize', listener)
+    return () => window.removeEventListener('resize', listener)
   }, [])
   return [ref, box]
 }
@@ -94,14 +100,14 @@ export function Demo({
     <div
       className={`relative w-full flex flex-col justify-center items-center`}
     >
-      <div ref={arrowEndRef}>{children}</div>
       {startBox && endBox && (
         <Arrow
-          className="absolute inset-0 text-blue-600"
+          className="absolute inset-0 text-blue-600 pointer-events-none"
           a={{ x: startBox.x, y: startBox.y + startBox.height / 2 }}
           b={{ x: endBox.x + endBox.width / 2, y: endBox.bottom }}
         />
       )}
+      <div ref={arrowEndRef}>{children}</div>
       <div
         ref={arrowStartRef}
         className="mt-10 relative left-20 text-blue-600 text-sm"

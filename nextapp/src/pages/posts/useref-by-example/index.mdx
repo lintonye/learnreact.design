@@ -1,5 +1,6 @@
 import { ConvertKitForm } from '@/components/design-system'
 import { LikeButton } from '@/components/useref-by-example/LikeButton'
+import { StopWatch } from '@/components/useref-by-example/StopWatch'
 import { Demo } from '@/components/Demo'
 import imgTimeLoop from './time-loop.jpeg'
 
@@ -37,12 +38,17 @@ I'll reveal this shiny gem <span className="mr-2">💎</span> for you in four st
 
 1. What is it used for?
 2. How does it work?
-3. A couple of simple examples
-4. A real-world example -- the like button below (click and hold for additional fun).
+3. A couple of contrived examples (but they are really useful for learning)
+4. A couple of real-world examples
 
-<Demo title="Click and hold" className="mx-auto">
-  <LikeButton />
-</Demo>
+<div className="flex flex-col space-y-4 justify-center md:flex-row">
+  <Demo title="Try me">
+    <StopWatch />
+  </Demo>
+  <Demo title="Click and hold">
+    <LikeButton />
+  </Demo>
+</div>
 
 ## What is useRef used for?
 
@@ -261,7 +267,9 @@ Look, when saving the previous state in `useEffect`, we definitely don't want th
 
 Now let's look at a more useful example. How about a stop watch?
 
-TODO Stop watch demo
+<Demo title="Try me">
+  <StopWatch />
+</Demo>
 
 We can make the stop watch tick with a combination of `useState`, `useEffect` and `setInterval`:
 
@@ -368,7 +376,7 @@ You can check out a fully working [CodeSandbox here](https://codesandbox.io/s/us
 
 Let's check out the real thing! Just a reminder, this is what we want to build (remember to click and hold):
 
-<Demo title="Click and hold" className="mx-auto">
+<Demo title="Click and hold">
   <LikeButton />
 </Demo>
 
