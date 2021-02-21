@@ -1,10 +1,12 @@
 import { ConvertKitForm } from '@/components/design-system'
+import imgTimeLoop from './time-loop.jpeg'
+
 export const meta = {
   title: 'useRef By Example',
-  description: `React is a JavaScript library for building user interfaces. This is the official definition of React. But what if you are not familiar with JavaScript? What if you are not a developer? Would you still be able to make sense of (and learn) React? My answer is a firm YES. `,
+  description: `useRef is a built-in React Hook. What is it used for? How does it work? I'll reveal this hidden gem for you with a few real-world examples.`,
   date: '2021-02-25',
   tags: ['react'],
-  related: ['what-is-react-native', 'what-is-redux'],
+  // related: ['what-is-react-native', 'what-is-redux'],
   ogImage: {
     // url: imgSocialCard,
     width: 1280,
@@ -21,24 +23,36 @@ export const meta = {
 
 <!--excerpt-->
 
-"React is a JavaScript library for building user interfaces." This is the official definition. But what if you are not familiar with JavaScript? Would you still be able to make sense of (and learn) React? My answer is a firm YES.
+`useRef` is a built-in React Hook. What is it used for? How does it work? I'll reveal this hidden gem for you with a few real-world examples.
 
 <!--/excerpt-->
 
 ## Introduction
 
-`useRef` is a built-in React Hook. It is, at least in my experience, one of the most confusing Hooks (perhaps right after `useEffect`)(agree? +1 TODO). But if you spend some time to learn how it works, you'll see that it's actually a hidden gem 💎. It'll become a powerful tool in your arsenal.
+`useRef` is a built-in React Hook. It is, at least in my experience, one of the most confusing Hooks (perhaps right after `useEffect`). But if you spend some time to learn how it works, you'll see that it's actually a hidden gem 💎. It'll become a powerful tool in your arsenal.
 
-I'll reveal this shiny gem <span className="mr-2">💎</span> for you in three steps: 1) what is it used for and how it works, 2) a couple of simple examples, and finally 3) a real-world example -- the like button below (click and hold for additional fun).
+I'll reveal this shiny gem <span className="mr-2">💎</span> for you in four steps:
+
+1. What is it used for?
+2. How does it work?
+3. A couple of simple examples
+4. A real-world example -- the like button below (click and hold for additional fun).
 
 TODO like button
 
 ## What is useRef used for?
 
-There are two use cases:
+There are two use cases.
 
-1. **Directly access DOM nodes.** When combined with the `ref` attribute, we could use `useRef` to obtain the underlying DOM nodes to perform DOM operations imperatively. In fact, we should only do this sparsely for things like setting focus, measuring DOM nodes or animations. If we use it for everything (in theory we could), we'd lose the benefit of [React's declarative programming paradigm](TODO).
-2. **Persist a value across re-renders.** This is what I'm going to focus on in this article.
+### Directly access DOM nodes
+
+When combined with the `ref` attribute, we could use `useRef` to obtain the underlying DOM nodes to perform DOM operations imperatively. In fact, this is really an escape hatch. We should only do this sparsely for things that React doesn't provide a declarative API for, such as focus management. If we use it for everything (in theory we could), we'd lose the benefit of [React's declarative programming paradigm](TODO).
+
+### Persist a value across re-renders
+
+This is what I'm going to focus on in this article. Remember? A hidden gem 💎!
+
+Keep reading 👇.
 
 ## How does useRef work?
 
@@ -48,7 +62,7 @@ Here's the mental model that works for me:
 
 After a lot of struggle trying to understand `useRef`, I finally saw this single sentence. And it clicked! If you are hearing the same clicking sound in your mind right now already, feel free to skip to [the examples section](TODO). Otherwise, if you are not familiar JavaScript classes or class instance variables, read on. This section is for you.
 
-### The re-rendering time loop
+### The "re-rendering time loop"
 
 To understand how `useRef` works and why we need it, let's get started with a contrived (but useful) example. Can you build a counter without using the `useState` hook?
 
@@ -73,13 +87,13 @@ function Counter() {
 }
 ```
 
-This doesn't work, even though the value of `count` increases on click. Why? React is oblivious to the change of local variables and, therefore, doesn't know when to update the DOM. We'd need to re-render the component, namely request React to call the component function `Counter`, to notify React about the change.
+This doesn't work, even though the value of `count` increases on click. Why? React is oblivious to the change of local variables and, therefore, doesn't know when to update the DOM. We'd need to re-render the component, namely request React to call the component function `Counter`, to let the change reflected on the screen.
 
-You can verify this by adding a line `console.log('render')` right after `let count = 0`.
+You can verify this by adding a line `console.log('render')` right after `let count = 0`. The component isn't rendered when the user clicks the button.
 
 OK. Then what if we force the component to render when `count` updates?
 
-```jsx
+```jsx{lines=2,10}
 function Counter() {
   const forceRender = useForceRender()
   let count = 0
@@ -108,9 +122,32 @@ function useForceRender() {
 
 This doesn't work either. The count displayed on the page stays zero. Even worse, the count value in the console stopped working too. It's always `1`!
 
-Why? Every time when the component re-renders, it goes into a time loop. All the local variables in the function will be reset to their original values. That's why `count` is always `0`. That's no surprise, right? They are local variables defined in the function. When the function reruns, the variables are supposed to behave like that!
+Why? This is what I call **_re-rendering time loop_**.
+
+<img src={imgTimeLoop} width={787} height={415} alt="Time loop" />
+
+Every time when the component re-renders, it goes into a time loop. All the local variables in the function will be reset to their original values. That's why `count` is always `0`.
+
+That's no surprise, right? They are local variables defined in the function. When the function reruns, the variables are supposed to behave like that!
 
 As straighforward as this sounds, sometimes it's easy to forget (I do it all the time). So remember, a React component is re-rendered all the time, so all the local variables will go into a time loop, over and over again.
+
+<div className="p-8 bg-yellow-100 border border-yellow-400 rounded-sm space-y-4 my-2">
+  <p>
+    BTW: if you like metaphors like this time loop, you want to check out my course: React Mental Models.
+    I use metaphors and illustrations to explain the mental modals of React. For example the "re-rendering time loop" above.
+    
+    I'm working on a book/course that uses similar approach to teach React -- focus on mental models instead of steps and howtos.
+    focus on why, not just how.
+  </p>
+  <p>
+    I believe you'd be able to do useful work with React after a few days of
+    learning, <strong>even if you are new to coding</strong>. If you are interested, sign
+    up and I'll let you know when the course is ready!
+  </p>
+
+  <ConvertKitForm formId="467678" subscribeButtonTitle="Keep Me Posted" />
+</div>
 
 Now what if we move the variable out of the component function? It will no longer be affected by the re-rendering time loop, right?
 
@@ -136,7 +173,7 @@ function Counter() {
 
 That's correct! It works! Yay!
 
-### Component instance
+### Component instances
 
 But wait a second, what if we want to have two counters?
 
@@ -218,7 +255,7 @@ Look, when saving the previous state in `useEffect`, we definitely don't want th
 
 ## Example 2: stop watch (clear interval)
 
-Now let's look at a more useful example. What about a stop watch?
+Now let's look at a more useful example. How about a stop watch?
 
 TODO Stop watch demo
 
@@ -323,38 +360,178 @@ function StopWatch() {
 
 You can check out a fully working [CodeSandbox here](https://codesandbox.io/s/useref-cancelable-interval-uljky?file=/src/App.js).
 
-## Example 3: usePressHoldRepeat
+## Example 3: Press and hold to repeat
 
-https://codesandbox.io/s/useref-usepressholdrepeat-7megx
+Let's check out the real thing! This is what we want to build (remember to click and hold):
 
-## Example 4: useDebouncedState
+TODO like button
+
+We are going to focus on the press-and-hold behavior:
+
+1. When the mouse is down, wait a little bit;
+2. If the mouse is still down after a threshold, say 500 milliseconds, start repeatedly increasing the like count at an interval until the mouse is up;
+<!-- 3. It also need to efficiently connect to the backend. We don't want to flood the server with a ton of requests if a user press and hold for a long time. -->
+
+How would we implement this behavior?
+
+In order to detect the press-and-hold gesture, we can use `setTimeout`. When the mouse is down, kick off the timeout. When the mouse is up, clear the timeout.
+
+How do we set and clear the timeout when the component is rendered and re-rendered, i.e. when the state `mouseDown` changes?
+
+You already know the answer from Example 2, right? `useRef`!
+
+```jsx
+function LikeButton(params) {
+  const [mouseDown, setMouseDown] = useState(false)
+  // 1. Create the ref that track the timeout
+  const holdDetectionTimeoutRef = useRef()
+  useEffect(() => {
+    if (mouseDown) {
+      // 2. Set the value of the ref
+      holdDetectionTimeoutRef.current = setTimeout(() => {
+        // TODO start increasing like count
+      }, 500);
+    } else {
+      // 3. On a new render, clear the timeout with
+      holdDetectionTimeoutRef.current &&
+        clearTimeout(holdDetectionTimeoutRef.current);
+    }
+  }, [mouseDown])
+  // set mouseDown in onMouseDown and onMouseUp
+  return ...
+}
+```
+
+Next, how do we repeatedly increase the like count? `setInterval` is what we need. And of course we'll use another ref to keep track of the interval reference across re-renders.
+
+```jsx
+function LikeButton(params) {
+  const [mouseDown, setMouseDown] = useState(false)
+  const [likes, setLikes] = useState(0)
+  const holdDetectionTimeoutRef = useRef()
+  const intervalRef = useRef(0);
+  useEffect(() => {
+    if (mouseDown) {
+      holdDetectionTimeoutRef.current = setTimeout(() => {
+        // start increasing like count
+        intervalRef.current = setInterval(() => {
+          setLikes(l => l + 1)
+        }, 100);
+      }, 500);
+      // Don't forget to clear both the timeout and interval
+      // in the clean up function of `useEffect`.
+      return () => {
+        holdDetectionTimeoutRef.current && clearTimeout(holdDetectionTimeoutRef.current)
+        intervalRef.current && clearInterval(intervalRef.current)
+      }
+    } else {
+      holdDetectionTimeoutRef.current &&
+        clearTimeout(holdDetectionTimeoutRef.current);
+      intervalRef.current && clearInterval(intervalRef.current);
+    }
+  }, [mouseDown])
+  return ...
+}
+```
+
+Finally, we can extract all the logic into a custom Hook `usePressHoldRepeat`:
+
+```jsx
+function usePressHoldRepeat(
+  callback,
+  holdDetectionThreshold = 300,
+  repeatDelay = 100,
+) {
+  const [mouseDown, setMouseDown] = useState(false)
+  const intervalRef = useRef(0)
+  const holdDetectionTimeoutRef = useRef(0)
+  const runCallback = useCallback(
+    () => typeof callback === 'function' && callback(),
+    [callback],
+  )
+  useEffect(() => {
+    if (mouseDown) {
+      holdDetectionTimeoutRef.current = setTimeout(() => {
+        intervalRef.current = setInterval(() => {
+          runCallback()
+        }, repeatDelay)
+      }, holdDetectionThreshold)
+      return () => {
+        intervalRef.current && clearInterval(intervalRef.current)
+        holdDetectionTimeoutRef.current &&
+          clearTimeout(holdDetectionTimeoutRef.current)
+      }
+    } else {
+      holdDetectionTimeoutRef.current &&
+        clearTimeout(holdDetectionTimeoutRef.current)
+      intervalRef.current && clearInterval(intervalRef.current)
+    }
+  }, [mouseDown, repeatDelay, runCallback, holdDetectionThreshold])
+  return {
+    onClick: runCallback,
+    onMouseDown: (e) => {
+      if (e.button === 0) setMouseDown(true)
+    },
+    onMouseUp: () => setMouseDown(false),
+    onMouseOut: () => setMouseDown(false),
+  }
+}
+```
+
+When using the `usePressHoldRepeat` hook, remember to use `useCallback` to prevent excess renders due to the fact the function might be recreated on each render (time loop).
+
+```jsx
+function LikeButton() {
+  const [likes, setLikes] = useState(0);
+  const addLike = useCallback(() => setLikes((c) => c + 1), []);
+  const props = usePressHoldRepeat(addLike);
+  return ...
+```
+
+Check out the full source code in [this CodeSandbox](https://codesandbox.io/s/useref-usepressholdrepeat-7megx)
+
+<!-- ## useDebouncedState
+Now what about this requirement:
+
+> 3. It also need to efficiently connect to the backend. We don't want to flood the server with a ton of requests if a user press and hold for a long time.
+
+The expected behavior should be:
+1. Send request to the server only at the moment when the mouse is up
+2. However, we still want to see the like count being lively updated when the mouse is down. We don't want to delay the visual effect. -->
 
 ## Anti-patterns
 
-assign to current in render
-use current in jsx
+### Assign to `ref.current` in render
 
-## Misc.
+Remember, updating a ref's value is a side effect. We should put it inside `useEffect` or event handlers. Don't update `current` at the top level of a function component.
 
-"What is the difference between useRef and createRef?"
+```jsx
+function App() {
+  let someRef = useRef()
+  someRef.current = '❌ Updating a ref is a side effect!'
+  useEffect(() => {
+    someRef.current = "✅ This is OK"
+  })
+  const handleClick = () => {
+    someRef.current = "✅ This is OK too"
+  }
+  return ...
+}
+```
 
-### `useRef` vs. `useState`
+### Use `ref.current` in JSX and expect it to be reactive
 
-### `useRef` vs. `createRef`
+We could use `ref.current` in JSX, as you've seen in [Example 1](TODO). However, keep in mind that the value displayed might be stale since updating `ref.current` doesn't trigger a re-render. We need to trigger re-renders in other means, e.g. with `useState`.
 
-<div className="p-8 bg-yellow-100 border border-yellow-400 rounded-sm space-y-4 my-2">
-  <p>
-    I'm working on a book/course that uses similar approach to teach React -- focus on mental models instead of steps and howtos.
-    focus on why, not just how.
-  </p>
-  <p>
-    I believe you'd be able to do useful work with React after a few days of
-    learning, <strong>even if you are new to coding</strong>. If you are interested, sign
-    up and I'll let you know when the course is ready!
-  </p>
+<!-- ### Use ref to obtain/update DOM values
 
-  <ConvertKitForm formId="467678" subscribeButtonTitle="Keep Me Posted" />
-</div>
+We could use ref to obtain the underlying DOM nodes. -->
+
+## Quiz & Related concepts
+
+With the understanding of how `useRef` works, let's look at a few related concepts. I'm going to organize them as quiz questions since I think you'd be able to figure it out with the mental model built after reading this article this far.
+
+Give it a try!
 
 ### `ref` and `useRef`
 
@@ -383,14 +560,53 @@ function Editor() {
 
 But, have you wondered how it works?
 
-From what it looks, `textboxRef` is simply an object with a single property `current`. React receives this object via the `ref` attribute of `input` and mutates it at some point:
+<details className="space-y-4 bg-green-50 border border-green-300 p-4 rounded-sm">
+  <summary className="cursor-pointer">Answer</summary>
+
+React receives the ref via the `ref` attribute of `input` and mutates it at some point, just as what we did in the examples above:
 
 ```jsx
-// Imaginary React code
+// Somewhere in React code
 ref.current = domNode
 ```
 
-This is roughly what's going on. But to understand why we'd need this approach instead of, for example, using a global variable somewhere, let's check out the rendering cycle of React components.
+</details>
+
+### `useRef` vs. `useState`
+
+What is the difference between `useRef` and `useState`? How do they relate to each other?
+
+<details className="space-y-4 bg-green-50 border border-green-300 p-4 rounded-sm">
+  <summary className="cursor-pointer">Answer</summary>
+
+Both `useRef` and `useState` persist a value across rerenders of a component. This means the value doesn’t get reset when the component rerenders, whereas all local variables go into a time loop.
+
+The value tracked by `useState` is updated via calling the setter function, which triggers a rerender of the component. In comparison, the value tracked by `useRef` is updated via direct mutation, which does not trigger a rerender.
+
+</details>
+
+### `useRef` vs. `createRef`
+
+In React, there's another function called `createRef`:
+
+```jsx
+const ref = React.createRef()
+```
+
+What is the difference between `useRef` and `createRef`? I know I didn't cover `createRef` so far in the article, but can you guess from its name?
+
+<details className="space-y-4 bg-green-50 border border-green-300 p-4 rounded-sm">
+  <summary className="cursor-pointer">Answer</summary>
+
+Well. It's called **create**Ref. So every time when it runs, it creates a new ref object.
+
+Hmm... Does that mean `useRef` does NOT create a new ref object every time when it's called?
+
+Exactly! `useRef` only creates a ref object for a particular _component instance_ when it's first rendered. In the following rerenders, it'll just returns the existing ref object associated with that component instance. That's why we can trust it to persist a value across rerenders!
+
+In function components, we should always use `useRef`. `creatRef` is used in class components to create a ref, where we could keep it in a class instance variable (so that it's not created repeatedly when the component rerenders).
+
+</details>
 
 ## Conclusion
 
