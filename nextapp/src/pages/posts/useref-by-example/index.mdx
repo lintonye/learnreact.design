@@ -1,4 +1,5 @@
 import { ConvertKitForm } from '@/components/design-system'
+import { LikeButton } from '@/components/useref-by-example/LikeButton'
 import imgTimeLoop from './time-loop.jpeg'
 
 export const meta = {
@@ -38,7 +39,9 @@ I'll reveal this shiny gem <span className="mr-2">💎</span> for you in four st
 3. A couple of simple examples
 4. A real-world example -- the like button below (click and hold for additional fun).
 
-TODO like button
+<Demo title="Click and hold" className="mx-auto">
+  <LikeButton />
+</Demo>
 
 ## What is useRef used for?
 
@@ -362,9 +365,11 @@ You can check out a fully working [CodeSandbox here](https://codesandbox.io/s/us
 
 ## Example 3: Press and hold to repeat
 
-Let's check out the real thing! This is what we want to build (remember to click and hold):
+Let's check out the real thing! Just a reminder, this is what we want to build (remember to click and hold):
 
-TODO like button
+<Demo title="Click and hold" className="mx-auto">
+  <LikeButton />
+</Demo>
 
 We are going to focus on the press-and-hold behavior:
 
