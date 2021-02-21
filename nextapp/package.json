@@ -42,6 +42,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.1.0",
+    "react-live": "^2.2.3",
     "react-simple-code-editor": "^0.11.0",
     "react-spring": "^8.0.27",
     "react-waypoint": "^9.0.3",

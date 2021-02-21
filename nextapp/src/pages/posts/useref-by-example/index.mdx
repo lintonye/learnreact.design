@@ -1,4 +1,5 @@
 import { ConvertKitForm } from '@/components/design-system'
+import { LiveEditor } from '@/components/LiveEditor'
 import { LikeButton } from '@/components/useref-by-example/LikeButton'
 import { StopWatch } from '@/components/useref-by-example/StopWatch'
 import { Demo } from '@/components/Demo'
@@ -78,8 +79,8 @@ To understand how `useRef` works and why we need it, let's get started with a co
 
 Let's give it a try:
 
-```jsx
-function Counter() {
+<LiveEditor>
+  {`function Counter() {
   let count = 0
   return (
     <div>
@@ -94,8 +95,8 @@ function Counter() {
       </button>
     </div>
   )
-}
-```
+}`}
+</LiveEditor>
 
 This doesn't work, even though the value of `count` increases on click. Why? React is oblivious to the change of local variables and, therefore, doesn't know when to update the DOM. We'd need to re-render the component, namely request React to call the component function `Counter`, to let the change reflected on the screen.
 
