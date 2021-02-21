@@ -34,13 +34,13 @@ export function StopWatch() {
   }, [paused])
 
   return (
-    <div className="bg-blue-800 text-white border border-indigo-900 rounded-xl py-4 px-2 flex flex-col justify-center items-center space-y-4 w-30 shadow-md">
+    <div className="bg-blue-800 text-white border border-indigo-900 rounded-lg py-4 px-2 flex flex-col justify-center items-center space-y-4 w-30 shadow-md">
       <div className="self-stretch bg-blue-100 px-2 text-blue-900 rounded-sm font-mono">
         {format(milliSeconds)}
       </div>
       <button
         onClick={() => setPaused((c) => !c)}
-        className="text-xs bg-gray-900 px-4 py-2 rounded-xl font-bold uppercase outline-none hover:bg-gray-800"
+        className="text-xs bg-gray-900 px-4 py-2 rounded-md font-bold uppercase outline-none hover:bg-gray-800"
       >
         {milliSeconds === 0 ? 'Start' : paused ? 'Resume' : 'Pause'}
       </button>
