@@ -74,15 +74,18 @@ export function LiveEditor({ children }: Props) {
 
   return (
     <LiveProvider code={children} scope={scope} noInline={false}>
-      <div className="grid grid-cols-1 gap-x-2 md:grid-cols-2">
-        <Tab title="Code" className="md:row-span-2">
+      <div className="grid grid-cols-1 gap-x-2 gap-y-2 md:grid-cols-2">
+        <Tab
+          title="Code"
+          className="md:row-span-2 md:col-start-1 md:row-start-1"
+        >
           <ReactLiveEditor />
         </Tab>
-        <LiveError />
-        <Tab title="Preview">
+        <LiveError className="col-start-1 md:col-span-2 bg-red-500 text-white p-4 rounded-sm" />
+        <Tab title="Preview" className="md:row-start-1">
           <LivePreview />
         </Tab>
-        <Tab title="Console" className="h-40">
+        <Tab title="Console" className="h-40 md:row-start-2">
           <Console callbackRef={consoleCallbackRef} />
         </Tab>
       </div>
