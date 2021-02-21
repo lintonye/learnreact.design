@@ -4,7 +4,14 @@ import {
   LiveError,
   LivePreview,
 } from 'react-live'
-import { useState, useMemo } from 'react'
+import {
+  useState,
+  useMemo,
+  useRef,
+  useEffect,
+  RefObject,
+  MutableRefObject,
+} from 'react'
 
 function Tab({
   title,
@@ -23,11 +30,24 @@ function Tab({
   )
 }
 
-function Console({ children }: { children: React.ReactNode }) {
+type ConsoleAPI = {
+  log: (msg: any) => void
+}
+
+function Console({
+  callbackRef,
+}: {
+  callbackRef: MutableRefObject<ConsoleAPI | null>
+}) {
+  const [std, setStd] = useState<React.ReactNode[]>([])
+  useEffect(() => {
+    callbackRef.current = {
+      log: (msg: any) =>
+        setStd((s) => [<div key={s.length}>{msg}</div>, ...s.slice(0, 10)]),
+    }
+  }, [callbackRef])
   return (
-    <div className="overflow-scroll h-full flex flex-col-reverse">
-      {children}
-    </div>
+    <div className="overflow-scroll h-full flex flex-col-reverse">{std}</div>
   )
 }
 
@@ -36,14 +56,16 @@ type Props = {
 }
 
 export function LiveEditor({ children }: Props) {
-  const [std, setStd] = useState<React.ReactNode[]>([])
-
+  const consoleCallbackRef = useRef<ConsoleAPI | null>(null)
   const scope = useMemo(
     () => ({
       console: {
         log: (msg: any) => {
-          console.log(msg)
-          setStd((s) => [...s, <div key={s.length}>{msg}</div>])
+          // We have to move the "std" state into Console component and call it via a ref.
+          // This is because if we keep the state in LiveEditor and set state here, all the components in this tree will rerender (esp. ReactLiveEditor), causing the code to be reevaluated. The end result is that in the counter example, the console output is always 1.
+          // Another potential solution is to use React.memo to memoize some components to prevent rerendering.
+          typeof consoleCallbackRef.current?.log === 'function' &&
+            consoleCallbackRef.current.log(msg)
         },
       },
     }),
@@ -61,7 +83,7 @@ export function LiveEditor({ children }: Props) {
           <LivePreview />
         </Tab>
         <Tab title="Console" className="h-40">
-          <Console>{std}</Console>
+          <Console callbackRef={consoleCallbackRef} />
         </Tab>
       </div>
     </LiveProvider>
