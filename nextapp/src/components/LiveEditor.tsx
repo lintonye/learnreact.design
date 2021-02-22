@@ -209,12 +209,14 @@ function Editor({
   theme,
   editable = false,
   highlightLines = [],
+  onChange,
   ...rest
 }: {
   code: string
   language: string
   theme: PrismTheme
   editable?: boolean
+  onChange?: (code: string) => void
   highlightLines?: number[]
 }) {
   const highlightCode = (code: string) => (
@@ -276,7 +278,10 @@ function Editor({
       value={code}
       padding={10}
       highlight={highlightCode}
-      onValueChange={(c) => setCode(c)}
+      onValueChange={(c) => {
+        setCode(c)
+        typeof onChange === 'function' && onChange(c)
+      }}
       disabled={!editable}
       // @ts-ignore
       style={{
@@ -293,14 +298,15 @@ function Editor({
 function EditorInContext({ highlightLines, props }: any) {
   return (
     <LiveContext.Consumer>
-      {({ code, language, theme, disabled }) => (
+      {/* @ts-ignore */}
+      {({ code, language, theme, disabled, onChange }) => (
         <Editor
           theme={theme}
           code={code}
           language={language}
           editable={!disabled}
           highlightLines={highlightLines}
-          // onChange={onChange}
+          onChange={onChange}
           {...props}
         />
       )}
