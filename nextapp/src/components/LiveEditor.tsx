@@ -135,8 +135,8 @@ function Tab({
 }) {
   return (
     <div className={`flex flex-col ` + className}>
-      <div className="text-sm border-b-2 border-blue-700 border-opacity-50">
-        <span className="px-2 py-1 rounded-t-md bg-blue-700 text-white">
+      <div className="text-tiny border-b-2 border-blue-700 border-opacity-50">
+        <span className="px-2 py-2 rounded-t-md bg-blue-700 text-white">
           {title}
         </span>
       </div>
@@ -170,12 +170,36 @@ function Console({
   )
 }
 
+// 2
+// 2,10,13
+// 1-5
+// 2,5-8,10
+function parseHighlightLines(lines: string) {
+  if (typeof lines !== 'string') return []
+  const toRemove = /[^\d,-]/g
+  lines = lines.replace(toRemove, '')
+  if (lines.length === 0) return []
+
+  const parts = lines.split(',')
+  const output: number[] = []
+  for (let part of parts) {
+    const segs = part.split('-')
+    if (segs.length === 0 || segs.length > 2)
+      throw `Wrong line number format "${part}" in "${lines}"`
+    let start = Number.parseInt(segs[0])
+    let end = segs[1] ? Number.parseInt(segs[1]) : start
+    for (let l = start; l <= end; l++) output.push(l)
+  }
+  return output
+}
+
 type Props = {
   scope: { [key: string]: any }
   showPreview?: boolean
   showConsole?: boolean
   readOnly?: boolean
   render?: string
+  highlightLines?: string
   children: string
 }
 
@@ -184,24 +208,61 @@ function Editor({
   language,
   theme,
   editable = false,
+  highlightLines = [],
   ...rest
 }: {
   code: string
   language: string
   theme: PrismTheme
   editable?: boolean
+  highlightLines?: number[]
 }) {
   const highlightCode = (code: string) => (
     <Highlight Prism={Prism} code={code} language="jsx" theme={theme}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <>
-          {tokens.map((line, i) => (
-            <div {...getLineProps({ line, key: i })}>
-              {line.map((token, key) => (
-                <span {...getTokenProps({ token, key })} />
-              ))}
-            </div>
-          ))}
+          {tokens.map((line, i) => {
+            const { className, ...lineProps } = getLineProps({ line, key: i })
+            return (
+              <div
+                {...lineProps}
+                className={`${className} ${
+                  highlightLines.includes(i + 1) ? 'relative' : ''
+                }`}
+                css={
+                  highlightLines.includes(i + 1)
+                    ? {
+                        // background: 'red',
+                        '&::after': {
+                          position: 'absolute',
+                          content: '""',
+                          left: -10,
+                          right: -10,
+                          borderLeft: '3px solid #05eb46',
+                          top: 0,
+                          bottom: 0,
+                          zIndex: 0,
+                          backgroundColor: 'rgba(150,150,150,0.2)',
+                        },
+                      }
+                    : {}
+                }
+              >
+                {line.map((token, key) => {
+                  const { className, ...tokenProps } = getTokenProps({
+                    token,
+                    key,
+                  })
+                  return (
+                    <span
+                      {...tokenProps}
+                      className={tokenProps + ' relative z-10 '}
+                    />
+                  )
+                })}
+              </div>
+            )
+          })}
         </>
       )}
     </Highlight>
@@ -229,7 +290,7 @@ function Editor({
   )
 }
 
-function EditorInContext(props: any) {
+function EditorInContext({ highlightLines, props }: any) {
   return (
     <LiveContext.Consumer>
       {({ code, language, theme, disabled }) => (
@@ -238,6 +299,7 @@ function EditorInContext(props: any) {
           code={code}
           language={language}
           editable={!disabled}
+          highlightLines={highlightLines}
           // onChange={onChange}
           {...props}
         />
@@ -246,7 +308,13 @@ function EditorInContext(props: any) {
   )
 }
 
-export function CodeViewer({ children }: { children: string }) {
+export function CodeViewer({
+  children,
+  highlightLines = '',
+}: {
+  children: string
+  highlightLines?: string
+}) {
   const code = children.trim()
   return (
     <Tab title="JSX" className="text-xl">
@@ -256,6 +324,7 @@ export function CodeViewer({ children }: { children: string }) {
         theme={vscodeDarkTheme}
         language="jsx"
         editable={false}
+        highlightLines={parseHighlightLines(highlightLines)}
       />
     </Tab>
   )
@@ -267,6 +336,7 @@ export function LiveEditor({
   showPreview = true,
   showConsole = true,
   readOnly = false,
+  highlightLines = '',
   render,
 }: Props) {
   const consoleCallbackRef = useRef<ConsoleAPI | null>(null)
@@ -307,7 +377,9 @@ export function LiveEditor({
             showPreview || showConsole ? 'md:col-end-9' : 'md:col-end-13'
           }  `}
         >
-          <EditorInContext />
+          <EditorInContext
+            highlightLines={parseHighlightLines(highlightLines)}
+          />
         </Tab>
         <LiveError className="col-start-1 md:col-span-12 bg-red-500 text-white p-4 rounded-sm" />
         {showPreview && (

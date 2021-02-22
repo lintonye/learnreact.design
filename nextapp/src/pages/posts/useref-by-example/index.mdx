@@ -84,6 +84,7 @@ Let's give it a try:
   {`
 function Counter() {
   let count = 0
+  // console.log('render')
   return (
     <div className="flex flex-col justify-center items-center m-8">
       <div>{count}</div>
@@ -104,11 +105,12 @@ function Counter() {
 
 This doesn't work, even though the value of `count` increases on click. Why? React is oblivious to the change of local variables and, therefore, doesn't know when to update the DOM. We'd need to re-render the component, namely request React to call the component function `Counter`, to let the change reflected on the screen.
 
-You can verify this by adding a line `console.log('render')` right after `let count = 0`. The component isn't rendered when the user clicks the button.
+You can verify this by uncommenting the line `console.log('render')` right after `let count = 0`. The component isn't rendered when the user clicks the button.
 
 OK. Then what if we force the component to render when `count` updates?
 
 <LiveEditor
+  highlightLines="2,12"
   scope={{
     useForceRender,
   }}
@@ -180,6 +182,7 @@ As straighforward as this sounds, sometimes it's easy to forget (I do it all the
 Now what if we move the variable out of the component function? It will no longer be affected by the re-rendering time loop, right?
 
 <LiveEditor
+  highlightLines="1"
   render="<Counter />"
   scope={{
     useForceRender,
@@ -214,6 +217,7 @@ That's correct! It works! Yay!
 But wait a second, what if we want to have two counters?
 
 <LiveEditor
+  highlightLines="5-6"
   render="<TwoCounters />"
   scope={{
     useForceRender,
@@ -256,6 +260,7 @@ So our counters are still broken. That's because both counters are tied to the s
 Introducing `useRef`!
 
 <LiveEditor
+  highlightLines="13,17,22"
   render="<TwoCounters />"
   scope={{
     useForceRender,
@@ -309,7 +314,7 @@ It's now time to look at a better example.
 
 Let's modify the Counter component. Now we want to display the previous value of the counter whenever the button is clicked. We can do so using a combination of `useState`, `useEffect`, and of course `useRef`.
 
-<LiveEditor>
+<LiveEditor highlightLines="3-7">
   {`
 function Counter() {
   const [count, setCount] = React.useState(0)
@@ -364,7 +369,7 @@ But how do we pause the stop watch?
 
 We can add another state `paused` and clear the interval when `paused` is `true`. Let's give it a try:
 
-<CodeViewer>
+<CodeViewer highlightLines="3,7">
   {`
 function StopWatch() {
   const [milliSeconds, setMilliSeconds] = useState(0);
@@ -390,7 +395,7 @@ Did you see the problem? Where should we define that variable `interval`?
 
 If we define `interval` in an outter scope, we'll taste the wrath of the re-rendering time loop -- `interval` will always be `undefined`.
 
-<CodeViewer>
+<CodeViewer highlightLines="4">
   {`
 function StopWatch() {
   const [milliSeconds, setMilliSeconds] = useState(0);
@@ -415,7 +420,7 @@ We don't want to put it in state either, since it's really not something we woul
 
 Again, `useRef` to the rescue:
 
-<CodeViewer>
+<CodeViewer highlightLines="5,9,12,15">
   {`
 function StopWatch() {
   const [milliSeconds, setMilliSeconds] = useState(0)
@@ -496,7 +501,7 @@ function LikeButton(params) {
 
 Next, how do we repeatedly increase the like count? `setInterval` is what we need. And of course we'll use another ref to keep track of the interval reference across re-renders.
 
-<CodeViewer>
+<CodeViewer highlightLines="10-12,18,23">
   {`
 function LikeButton(params) {
   const [mouseDown, setMouseDown] = useState(false)
