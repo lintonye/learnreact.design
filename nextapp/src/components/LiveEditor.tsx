@@ -13,6 +13,106 @@ import {
   MutableRefObject,
 } from 'react'
 
+const editorTheme = {
+  plain: {
+    color: '#cecece',
+  },
+  styles: [
+    {
+      types: ['prolog', 'comment', 'doctype', 'cdata'],
+      style: {
+        color: '#4a9a51',
+      },
+    },
+    {
+      types: ['property', 'tag', 'boolean', 'number', 'constant', 'symbol'],
+      style: { color: '#0f90c3' },
+    },
+    {
+      types: ['token', 'function'],
+      style: {
+        color: '#cecece',
+      },
+    },
+    {
+      types: ['attr-name', 'string', 'char', 'builtin', 'insterted'],
+      style: {
+        color: '#69c3df',
+      },
+    },
+    {
+      types: ['entity', 'url', 'variable', 'language-css'],
+      style: {
+        color: '#1e749b',
+        backgroundColor: 'transparent',
+      },
+    },
+    {
+      types: ['deleted'],
+      style: {
+        color: 'rgb(255, 85, 85)',
+      },
+    },
+    {
+      types: ['italic'],
+      style: {
+        fontStyle: 'italic',
+      },
+    },
+    {
+      types: ['important', 'bold'],
+      style: {
+        fontWeight: 'bold',
+      },
+    },
+    {
+      types: ['regex', 'important'],
+      style: {
+        color: '#e90',
+      },
+    },
+    {
+      types: ['atrule', 'attr-value', 'keyword'],
+      style: {
+        color: '#0f90c3',
+      },
+    },
+    {
+      types: ['attr-equals'],
+      style: {
+        color: '#cecece',
+      },
+    },
+    {
+      types: ['string'],
+      style: {
+        color: '#dc8974',
+      },
+    },
+    {
+      types: ['operator'],
+      style: {
+        color: '#cecece',
+        backgroundColor: 'transparent',
+      },
+    },
+    {
+      types: ['language-javascript', 'punctuation'],
+      style: {
+        color: '#cecece',
+        backgroundColor: 'transparent',
+      },
+    },
+
+    {
+      types: ['punctuation', 'symbol'],
+      style: {
+        opacity: '0.7',
+      },
+    },
+  ],
+}
+
 function Tab({
   title,
   children,
@@ -24,7 +124,7 @@ function Tab({
 }) {
   return (
     <div className={` ` + className}>
-      <div>{title}</div>
+      <div className="text-sm">{title}</div>
       {children}
     </div>
   )
@@ -73,13 +173,22 @@ export function LiveEditor({ children }: Props) {
   )
 
   return (
-    <LiveProvider code={children} scope={scope} noInline={false}>
+    <LiveProvider
+      code={children}
+      scope={scope}
+      noInline={false}
+      // @ts-ignore
+      theme={editorTheme}
+    >
       <div className="grid grid-cols-1 gap-x-2 gap-y-2 md:grid-cols-2">
         <Tab
           title="Code"
           className="md:row-span-2 md:col-start-1 md:row-start-1"
         >
-          <ReactLiveEditor />
+          <ReactLiveEditor
+            className="text-xl"
+            css={{ backgroundColor: '#1e1e1e' }}
+          />
         </Tab>
         <LiveError className="col-start-1 md:col-span-2 bg-red-500 text-white p-4 rounded-sm" />
         <Tab title="Preview" className="md:row-start-1">
