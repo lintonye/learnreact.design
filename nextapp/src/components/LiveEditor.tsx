@@ -135,12 +135,12 @@ function Tab({
 }) {
   return (
     <div className={`flex flex-col ` + className}>
-      <div className="text-tiny border-b-2 border-blue-700 border-opacity-50">
-        <span className="px-2 py-2 rounded-t-md bg-blue-700 text-white">
+      <div className="text-tiny border-b-2 border-blue-600 border-opacity-70 rounded-sm">
+        <span className="px-2 inline-block rounded-t-md bg-blue-600 text-white">
           {title}
         </span>
       </div>
-      <div className="flex-1 border-l-2 border-r-2 border-b-2  border-opacity-50 border-blue-700">
+      <div className="flex-1 border-l-2 border-r-2 border-b-2 border-opacity-50 border-blue-600 rounded-sm">
         {children}
       </div>
     </div>
