@@ -2,6 +2,7 @@ import { ConvertKitForm } from '@/components/design-system'
 import { LiveEditor } from '@/components/LiveEditor'
 import { LikeButton } from '@/components/useref-by-example/LikeButton'
 import { StopWatch } from '@/components/useref-by-example/StopWatch'
+import { useForceRender } from '@/components/useref-by-example/useForceRender'
 import { Demo } from '@/components/Demo'
 import imgTimeLoop from './time-loop.jpeg'
 
@@ -80,12 +81,14 @@ To understand how `useRef` works and why we need it, let's get started with a co
 Let's give it a try:
 
 <LiveEditor>
-  {`function Counter() {
+  {`
+function Counter() {
   let count = 0
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center m-8">
       <div>{count}</div>
       <button
+        className="bg-purple-700 px-6 text-white rounded-md hover:bg-purple-500"
         onClick={() => {
           count++
           console.log(count)
@@ -95,7 +98,8 @@ Let's give it a try:
       </button>
     </div>
   )
-}`}
+}
+`}
 </LiveEditor>
 
 This doesn't work, even though the value of `count` increases on click. Why? React is oblivious to the change of local variables and, therefore, doesn't know when to update the DOM. We'd need to re-render the component, namely request React to call the component function `Counter`, to let the change reflected on the screen.
@@ -104,14 +108,20 @@ You can verify this by adding a line `console.log('render')` right after `let co
 
 OK. Then what if we force the component to render when `count` updates?
 
-```jsx{lines=2,10}
+<LiveEditor
+  scope={{
+    useForceRender,
+  }}
+>
+  {`
 function Counter() {
   const forceRender = useForceRender()
   let count = 0
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center m-8">
       <div>{count}</div>
       <button
+        className="bg-purple-700 px-6 text-white rounded-md hover:bg-purple-500"
         onClick={() => {
           count++
           console.log(count)
@@ -123,15 +133,22 @@ function Counter() {
     </div>
   )
 }
-
-// I know, I used useState below. Didn't I say the example was contrived? :)
-function useForceRender() {
-  const setC = useState(0)[1]
-  return () => setC((c) => c + 1)
-}
-```
+`}
+</LiveEditor>
 
 This doesn't work either. The count displayed on the page stays zero. Even worse, the count value in the console stopped working too. It's always `1`!
+
+BTW, `useForceRender` above is a custom hook:
+
+<LiveEditor readOnly showPreview={false} showConsole={false}>
+  {`
+// I know, I used useState below. Didn't I say the example was contrived? :)
+function useForceRender() {
+  const setC = React.useState(0)[1]
+  return () => setC((c) => c + 1)
+}
+`}
+</LiveEditor>
 
 Why? This is what I call **_re-rendering time loop_**.
 
@@ -162,14 +179,21 @@ As straighforward as this sounds, sometimes it's easy to forget (I do it all the
 
 Now what if we move the variable out of the component function? It will no longer be affected by the re-rendering time loop, right?
 
-```jsx
+<LiveEditor
+  render="<Counter />"
+  scope={{
+    useForceRender,
+  }}
+>
+  {`
 let count = 0
 function Counter() {
   const forceRender = useForceRender()
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center m-8">
       <div>{count}</div>
       <button
+        className="bg-purple-700 px-6 text-white rounded-md hover:bg-purple-500"
         onClick={() => {
           count++
           forceRender()
@@ -180,7 +204,8 @@ function Counter() {
     </div>
   )
 }
-```
+`}
+</LiveEditor>
 
 That's correct! It works! Yay!
 
@@ -188,7 +213,55 @@ That's correct! It works! Yay!
 
 But wait a second, what if we want to have two counters?
 
-```jsx
+<LiveEditor
+  render="<TwoCounters />"
+  scope={{
+    useForceRender,
+  }}
+>
+  {`
+function TwoCounters() {
+  return (
+    <div>
+      Click both buttons a few times:
+      <Counter />
+      <Counter />
+    </div>
+  )
+}
+//
+let count = 0;
+function Counter() {
+  const forceRender = useForceRender()
+  return (
+    <div className="flex flex-col justify-center items-center m-8">
+      <div>{count}</div>
+      <button
+        className="bg-purple-700 px-6 text-white rounded-md hover:bg-purple-500"
+        onClick={() => {
+          count++
+          forceRender()
+        }}
+      >
+        +1
+      </button>
+    </div>
+  )
+}
+`}
+</LiveEditor>
+
+So our counters are still broken. That's because both counters are tied to the same variable `count`. What we need instead is to have a **_separate_** variable for each **_instance_** of the counter.
+
+Introducing `useRef`!
+
+<LiveEditor
+  render="<TwoCounters />"
+  scope={{
+    useForceRender,
+  }}
+>
+  {`
 function TwoCounters() {
   return (
     <div>
@@ -197,22 +270,17 @@ function TwoCounters() {
     </div>
   )
 }
-```
-
-So looks like our counters break again. That's because both counters are tied to the same variable `count`. What we need instead is to have a **_separate_** variable for each **_instance_** of the counter.
-
-Introducing `useRef`!
-
-```jsx
+//
 function Counter() {
   const forceRender = useForceRender()
   /* 1. Get a "variable" that corresponds to the CURRENT INSTANCE of the component */
-  let count = useRef(0)
+  let count = React.useRef(0)
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center m-8">
       {/* 2. Use the value stored inside the "variable" */}
       <div>{count.current}</div>
       <button
+        className="bg-purple-700 px-6 text-white rounded-md hover:bg-purple-500"
         onClick={() => {
           /* 3. Update the value of the "variable" */
           count.current = count.current + 1
@@ -224,7 +292,8 @@ function Counter() {
     </div>
   )
 }
-```
+`}
+</LiveEditor>
 
 But, but we are still using that `useForceRender` to update the DOM! If we comment out `forceRender()`, the counter stops working again! (try it)
 
@@ -240,25 +309,27 @@ It's now time to look at a better example.
 
 Let's modify the Counter component. Now we want to display the previous value of the counter whenever the button is clicked. We can do so using a combination of `useState`, `useEffect`, and of course `useRef`.
 
-```jsx
+<LiveEditor>
+  {`
 function Counter() {
-  const [count, setCount] = useState(0)
-  const prevCount = useRef()
-  useEffect(() => {
+  const [count, setCount] = React.useState(0)
+  const prevCount = React.useRef(0)
+  React.useEffect(() => {
     // This runs every time AFTER Counter is rendered.
     prevCount.current = count
   })
-
   return (
-    <div className="App">
+    <div className="flex flex-col justify-center items-center m-8">
       <h1>
-        Prev:{prevCount.current}, Count: {count}
+        Prev: {prevCount.current}, Count: {count}
       </h1>
-      <button onClick={() => setCount((c) => c + 1)}>+1</button>
+      <button className="bg-purple-700 px-6 text-white rounded-md hover:bg-purple-500"
+        onClick={() => setCount((c) => c + 1)}>+1</button>
     </div>
   )
 }
-```
+`}
+</LiveEditor>
 
 Look, when saving the previous state in `useEffect`, we definitely don't want the component to re-render. Otherwise, it'd go into an infinite loop. So, `useRef` to the rescue!
 

@@ -123,9 +123,15 @@ function Tab({
   className?: string
 }) {
   return (
-    <div className={` ` + className}>
-      <div className="text-sm">{title}</div>
-      {children}
+    <div className={`flex flex-col ` + className}>
+      <div className="text-sm border-b-2 border-blue-700 border-opacity-50">
+        <span className="px-2 py-1 rounded-t-md bg-blue-700 text-white">
+          {title}
+        </span>
+      </div>
+      <div className="flex-1 border-l-2 border-r-2 border-b-2  border-opacity-50 border-blue-700">
+        {children}
+      </div>
     </div>
   )
 }
@@ -147,18 +153,33 @@ function Console({
     }
   }, [callbackRef])
   return (
-    <div className="overflow-scroll h-full flex flex-col-reverse">{std}</div>
+    <div className="overflow-scroll max-h-full flex flex-col-reverse p-2">
+      {std}
+    </div>
   )
 }
 
 type Props = {
+  scope: { [key: string]: any }
+  showPreview?: boolean
+  showConsole?: boolean
+  readOnly?: boolean
+  render?: string
   children: string
 }
 
-export function LiveEditor({ children }: Props) {
+export function LiveEditor({
+  children,
+  scope: customScope,
+  showPreview = true,
+  showConsole = true,
+  readOnly = false,
+  render,
+}: Props) {
   const consoleCallbackRef = useRef<ConsoleAPI | null>(null)
   const scope = useMemo(
     () => ({
+      ...customScope,
       console: {
         log: (msg: any) => {
           // We have to move the "std" state into Console component and call it via a ref.
@@ -174,29 +195,41 @@ export function LiveEditor({ children }: Props) {
 
   return (
     <LiveProvider
-      code={children}
+      code={children.trim()}
       scope={scope}
-      noInline={false}
+      noInline={typeof render === 'string' ? true : false}
+      transformCode={(c) => {
+        if (typeof render === 'string') {
+          return `${c}\n render(${render})`
+        } else return c
+      }}
       // @ts-ignore
       theme={editorTheme}
     >
-      <div className="grid grid-cols-1 gap-x-2 gap-y-2 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-y-2 gap-x-2 md:grid-cols-12 md:grid-rows-2">
         <Tab
-          title="Code"
-          className="md:row-span-2 md:col-start-1 md:row-start-1"
+          title={'JSX' + (!readOnly ? ' (Editable)' : '')}
+          className={`md:row-span-2 md:col-start-1 md:row-start-1 ${
+            showPreview || showConsole ? 'md:col-end-9' : 'md:col-end-13'
+          }  `}
         >
           <ReactLiveEditor
-            className="text-xl"
+            className="text-lg"
             css={{ backgroundColor: '#1e1e1e' }}
+            readOnly={readOnly}
           />
         </Tab>
-        <LiveError className="col-start-1 md:col-span-2 bg-red-500 text-white p-4 rounded-sm" />
-        <Tab title="Preview" className="md:row-start-1">
-          <LivePreview />
-        </Tab>
-        <Tab title="Console" className="h-40 md:row-start-2">
-          <Console callbackRef={consoleCallbackRef} />
-        </Tab>
+        <LiveError className="col-start-1 md:col-span-12 bg-red-500 text-white p-4 rounded-sm" />
+        {showPreview && (
+          <Tab title="Preview" className="md:row-start-1 md:col-span-4">
+            <LivePreview className="p-2" />
+          </Tab>
+        )}
+        {showConsole && (
+          <Tab title="Console" className="md:row-start-2  md:col-span-4">
+            <Console callbackRef={consoleCallbackRef} />
+          </Tab>
+        )}
       </div>
     </LiveProvider>
   )
