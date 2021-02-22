@@ -160,11 +160,16 @@ function Console({
   useEffect(() => {
     callbackRef.current = {
       log: (msg: any) =>
-        setStd((s) => [<div key={s.length}>{msg}</div>, ...s.slice(0, 10)]),
+        setStd((s) => [
+          <div key={s.length} className={'px-2 border-b border-gray-200'}>
+            {msg}
+          </div>,
+          ...s.slice(0, 10),
+        ]),
     }
   }, [callbackRef])
   return (
-    <div className="overflow-scroll max-h-full flex flex-col-reverse p-2">
+    <div className="overflow-scroll max-h-full flex flex-col-reverse">
       {std}
     </div>
   )
