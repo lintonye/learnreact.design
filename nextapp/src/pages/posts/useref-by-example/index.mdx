@@ -581,13 +581,15 @@ function usePressHoldRepeat(
 
 When using the `usePressHoldRepeat` hook, remember to use `useCallback` to prevent excess renders due to the fact the function might be recreated on each render (time loop).
 
-```jsx
+<CodeViewer>
+  {`
 function LikeButton() {
   const [likes, setLikes] = useState(0);
   const addLike = useCallback(() => setLikes((c) => c + 1), []);
   const props = usePressHoldRepeat(addLike);
   return ...
-```
+`}
+</CodeViewer>
 
 Check out the full source code in [this CodeSandbox](https://codesandbox.io/s/useref-usepressholdrepeat-7megx)
 
