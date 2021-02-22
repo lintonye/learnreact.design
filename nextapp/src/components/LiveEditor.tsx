@@ -3,8 +3,10 @@ import {
   LiveEditor as ReactLiveEditor,
   LiveError,
   LivePreview,
+  LiveContext,
 } from 'react-live'
-import {
+import SimpleEditor from 'react-simple-code-editor'
+import React, {
   useState,
   useMemo,
   useRef,
@@ -12,83 +14,92 @@ import {
   RefObject,
   MutableRefObject,
 } from 'react'
+import Highlight, {
+  defaultProps,
+  Prism,
+  PrismTheme,
+} from 'prism-react-renderer'
+import vsDarkThemeDefault from 'prism-react-renderer/themes/vsDark'
 
-const editorTheme = {
+const vscodeDarkTheme = {
   plain: {
+    ...vsDarkThemeDefault.plain,
     color: '#cecece',
+    backgroundColor: '#1e1e1e',
   },
   styles: [
-    {
-      types: ['prolog', 'comment', 'doctype', 'cdata'],
-      style: {
-        color: '#4a9a51',
-      },
-    },
+    ...vsDarkThemeDefault.styles,
+    // {
+    //   types: ['prolog', 'comment', 'doctype', 'cdata'],
+    //   style: {
+    //     color: '#4a9a51',
+    //   },
+    // },
     {
       types: ['property', 'tag', 'boolean', 'number', 'constant', 'symbol'],
       style: { color: '#0f90c3' },
     },
+    // {
+    //   types: ['token', 'function'],
+    //   style: {
+    //     color: '#cecece',
+    //   },
+    // },
+    // {
+    //   types: ['attr-name', 'string', 'char', 'builtin', 'insterted'],
+    //   style: {
+    //     color: '#69c3df',
+    //   },
+    // },
+    // {
+    //   types: ['entity', 'url', 'variable', 'language-css'],
+    //   style: {
+    //     color: '#1e749b',
+    //     backgroundColor: 'transparent',
+    //   },
+    // },
+    // {
+    //   types: ['deleted'],
+    //   style: {
+    //     color: 'rgb(255, 85, 85)',
+    //   },
+    // },
+    // {
+    //   types: ['italic'],
+    //   style: {
+    //     fontStyle: 'italic',
+    //   },
+    // },
+    // {
+    //   types: ['important', 'bold'],
+    //   style: {
+    //     fontWeight: 'bold',
+    //   },
+    // },
+    // {
+    //   types: ['regex', 'important'],
+    //   style: {
+    //     color: '#e90',
+    //   },
+    // },
     {
-      types: ['token', 'function'],
-      style: {
-        color: '#cecece',
-      },
-    },
-    {
-      types: ['attr-name', 'string', 'char', 'builtin', 'insterted'],
-      style: {
-        color: '#69c3df',
-      },
-    },
-    {
-      types: ['entity', 'url', 'variable', 'language-css'],
-      style: {
-        color: '#1e749b',
-        backgroundColor: 'transparent',
-      },
-    },
-    {
-      types: ['deleted'],
-      style: {
-        color: 'rgb(255, 85, 85)',
-      },
-    },
-    {
-      types: ['italic'],
-      style: {
-        fontStyle: 'italic',
-      },
-    },
-    {
-      types: ['important', 'bold'],
-      style: {
-        fontWeight: 'bold',
-      },
-    },
-    {
-      types: ['regex', 'important'],
-      style: {
-        color: '#e90',
-      },
-    },
-    {
-      types: ['atrule', 'attr-value', 'keyword'],
+      types: ['atrule', 'keyword'],
       style: {
         color: '#0f90c3',
       },
     },
-    {
-      types: ['attr-equals'],
-      style: {
-        color: '#cecece',
-      },
-    },
-    {
-      types: ['string'],
-      style: {
-        color: '#dc8974',
-      },
-    },
+    // {
+    //   types: ['attr-equals'],
+    //   style: {
+    //     color: '#cecece',
+    //   },
+    // },
+    // {
+    //   types: ['string'],
+    //   style: {
+    //     color: '#dc8974',
+    //   },
+    // },
     {
       types: ['operator'],
       style: {
@@ -96,13 +107,13 @@ const editorTheme = {
         backgroundColor: 'transparent',
       },
     },
-    {
-      types: ['language-javascript', 'punctuation'],
-      style: {
-        color: '#cecece',
-        backgroundColor: 'transparent',
-      },
-    },
+    // {
+    //   types: ['language-javascript', 'punctuation'],
+    //   style: {
+    //     color: '#cecece',
+    //     backgroundColor: 'transparent',
+    //   },
+    // },
 
     {
       types: ['punctuation', 'symbol'],
@@ -168,6 +179,73 @@ type Props = {
   children: string
 }
 
+function Editor({
+  code: initialCode,
+  language,
+  theme,
+  disabled = false,
+  ...rest
+}: {
+  code: string
+  language: string
+  theme: PrismTheme
+  disabled?: boolean
+}) {
+  const highlightCode = (code: string) => (
+    <Highlight Prism={Prism} code={code} language="jsx" theme={theme}>
+      {({ className, style, tokens, getLineProps, getTokenProps }) => (
+        <>
+          {tokens.map((line, i) => (
+            <div {...getLineProps({ line, key: i })}>
+              {line.map((token, key) => (
+                <span {...getTokenProps({ token, key })} />
+              ))}
+            </div>
+          ))}
+        </>
+      )}
+    </Highlight>
+  )
+  const baseTheme = theme && typeof theme.plain === 'object' ? theme.plain : {}
+
+  const [code, setCode] = useState(initialCode)
+
+  return (
+    <SimpleEditor
+      value={code}
+      padding={10}
+      highlight={highlightCode}
+      onValueChange={(c) => setCode(c)}
+      disabled={disabled}
+      // @ts-ignore
+      style={{
+        whiteSpace: 'pre',
+        fontFamily: 'monospace',
+        ...baseTheme,
+        // ...style,
+      }}
+      {...rest}
+    />
+  )
+}
+
+function EditorInContext(props: any) {
+  return (
+    <LiveContext.Consumer>
+      {({ code, language, theme, disabled }) => (
+        <Editor
+          theme={theme}
+          code={code}
+          language={language}
+          disabled={disabled}
+          // onChange={onChange}
+          {...props}
+        />
+      )}
+    </LiveContext.Consumer>
+  )
+}
+
 export function LiveEditor({
   children,
   scope: customScope,
@@ -192,10 +270,15 @@ export function LiveEditor({
     }),
     [],
   )
+  const code = children.trim()
 
-  return (
+  return readOnly ? (
+    <Tab title="JSX" className="text-xl">
+      <Editor code={code} theme={vscodeDarkTheme} language="jsx" disabled />
+    </Tab>
+  ) : (
     <LiveProvider
-      code={children.trim()}
+      code={code}
       scope={scope}
       noInline={typeof render === 'string' ? true : false}
       transformCode={(c) => {
@@ -204,20 +287,16 @@ export function LiveEditor({
         } else return c
       }}
       // @ts-ignore
-      theme={editorTheme}
+      theme={vscodeDarkTheme}
     >
       <div className="grid grid-cols-1 gap-y-2 gap-x-2 md:grid-cols-12 md:grid-rows-2">
         <Tab
           title={'JSX' + (!readOnly ? ' (Editable)' : '')}
-          className={`md:row-span-2 md:col-start-1 md:row-start-1 ${
+          className={`text-xl md:row-span-2 md:col-start-1 md:row-start-1 ${
             showPreview || showConsole ? 'md:col-end-9' : 'md:col-end-13'
           }  `}
         >
-          <ReactLiveEditor
-            className="text-lg"
-            css={{ backgroundColor: '#1e1e1e' }}
-            readOnly={readOnly}
-          />
+          <EditorInContext />
         </Tab>
         <LiveError className="col-start-1 md:col-span-12 bg-red-500 text-white p-4 rounded-sm" />
         {showPreview && (
@@ -226,7 +305,11 @@ export function LiveEditor({
           </Tab>
         )}
         {showConsole && (
-          <Tab title="Console" className="md:row-start-2  md:col-span-4">
+          <Tab
+            title="Console"
+            className="md:row-start-2  md:col-span-4"
+            css={{ minHeight: 150 }}
+          >
             <Console callbackRef={consoleCallbackRef} />
           </Tab>
         )}
