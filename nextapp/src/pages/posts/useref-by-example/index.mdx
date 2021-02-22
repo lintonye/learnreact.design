@@ -1,5 +1,5 @@
 import { ConvertKitForm } from '@/components/design-system'
-import { LiveEditor } from '@/components/LiveEditor'
+import { LiveEditor, CodeViewer } from '@/components/LiveEditor'
 import { LikeButton } from '@/components/useref-by-example/LikeButton'
 import { StopWatch } from '@/components/useref-by-example/StopWatch'
 import { useForceRender } from '@/components/useref-by-example/useForceRender'
@@ -140,7 +140,7 @@ This doesn't work either. The count displayed on the page stays zero. Even worse
 
 BTW, `useForceRender` above is a custom hook:
 
-<LiveEditor readOnly showPreview={false} showConsole={false}>
+<CodeViewer>
   {`
 // I know, I used useState below. Didn't I say the example was contrived? :)
 function useForceRender() {
@@ -148,7 +148,7 @@ function useForceRender() {
   return () => setC((c) => c + 1)
 }
 `}
-</LiveEditor>
+</CodeViewer>
 
 Why? This is what I call **_re-rendering time loop_**.
 
@@ -345,7 +345,8 @@ Now let's look at a more useful example. How about a stop watch?
 
 We can make the stop watch tick with a combination of `useState`, `useEffect` and `setInterval`:
 
-```jsx
+<CodeViewer>
+  {`
 function StopWatch() {
   const [milliSeconds, setMilliSeconds] = useState(0);
   useEffect(() => {
@@ -354,16 +355,17 @@ function StopWatch() {
     }, 1);
     return () => clearInterval(interval);
   }, []);
-
   return ...
 }
-```
+`}
+</CodeViewer>
 
 But how do we pause the stop watch?
 
 We can add another state `paused` and clear the interval when `paused` is `true`. Let's give it a try:
 
-```jsx
+<CodeViewer>
+  {`
 function StopWatch() {
   const [milliSeconds, setMilliSeconds] = useState(0);
   const [paused, setPaused] = useState(true);
@@ -377,18 +379,19 @@ function StopWatch() {
       }, 1);
       return () => clearInterval(interval);
     }
-    // BTW: Remember to put `paused` in the deps
+    // BTW: Remember to put "paused" in the deps
   }, [paused]);
-
   return ...
 }
-```
+`}
+</CodeViewer>
 
 Did you see the problem? Where should we define that variable `interval`?
 
 If we define `interval` in an outter scope, we'll taste the wrath of the re-rendering time loop -- `interval` will always be `undefined`.
 
-```jsx
+<CodeViewer>
+  {`
 function StopWatch() {
   const [milliSeconds, setMilliSeconds] = useState(0);
   const [paused, setPaused] = useState(true);
@@ -403,16 +406,17 @@ function StopWatch() {
       return () => clearInterval(interval);
     }
   }, []);
-
   return ...
 }
-```
+`}
+</CodeViewer>
 
 We don't want to put it in state either, since it's really not something we would want to display on the UI. It's interval stuff.
 
 Again, `useRef` to the rescue:
 
-```jsx
+<CodeViewer>
+  {`
 function StopWatch() {
   const [milliSeconds, setMilliSeconds] = useState(0)
   const [paused, setPaused] = useState(true)
@@ -430,7 +434,6 @@ function StopWatch() {
       return () => clearInterval(interval.current)
     }
   }, [paused])
-
   return (
     <div className="App">
       <h1>{format(milliSeconds)}</h1>
@@ -440,7 +443,8 @@ function StopWatch() {
     </div>
   )
 }
-```
+`}
+</CodeViewer>
 
 You can check out a fully working [CodeSandbox here](https://codesandbox.io/s/useref-cancelable-interval-uljky?file=/src/App.js).
 
@@ -466,7 +470,8 @@ How do we set and clear the timeout when the component is rendered and re-render
 
 You already know the answer from Example 2, right? `useRef`!
 
-```jsx
+<CodeViewer>
+  {`
 function LikeButton(params) {
   const [mouseDown, setMouseDown] = useState(false)
   // 1. Create the ref that track the timeout
@@ -486,11 +491,13 @@ function LikeButton(params) {
   // set mouseDown in onMouseDown and onMouseUp
   return ...
 }
-```
+`}
+</CodeViewer>
 
 Next, how do we repeatedly increase the like count? `setInterval` is what we need. And of course we'll use another ref to keep track of the interval reference across re-renders.
 
-```jsx
+<CodeViewer>
+  {`
 function LikeButton(params) {
   const [mouseDown, setMouseDown] = useState(false)
   const [likes, setLikes] = useState(0)
@@ -505,7 +512,7 @@ function LikeButton(params) {
         }, 100);
       }, 500);
       // Don't forget to clear both the timeout and interval
-      // in the clean up function of `useEffect`.
+      // in the clean up function of "useEffect".
       return () => {
         holdDetectionTimeoutRef.current && clearTimeout(holdDetectionTimeoutRef.current)
         intervalRef.current && clearInterval(intervalRef.current)
@@ -518,11 +525,13 @@ function LikeButton(params) {
   }, [mouseDown])
   return ...
 }
-```
+`}
+</CodeViewer>
 
 Finally, we can extract all the logic into a custom Hook `usePressHoldRepeat`:
 
-```jsx
+<CodeViewer>
+  {`
 function usePressHoldRepeat(
   callback,
   holdDetectionThreshold = 300,
@@ -562,7 +571,8 @@ function usePressHoldRepeat(
     onMouseOut: () => setMouseDown(false),
   }
 }
-```
+`}
+</CodeViewer>
 
 When using the `usePressHoldRepeat` hook, remember to use `useCallback` to prevent excess renders due to the fact the function might be recreated on each render (time loop).
 
@@ -591,7 +601,8 @@ The expected behavior should be:
 
 Remember, updating a ref's value is a side effect. We should put it inside `useEffect` or event handlers. Don't update `current` at the top level of a function component.
 
-```jsx
+<CodeViewer>
+  {`
 function App() {
   let someRef = useRef()
   someRef.current = '❌ Updating a ref is a side effect!'
@@ -603,7 +614,8 @@ function App() {
   }
   return ...
 }
-```
+`}
+</CodeViewer>
 
 ### Use `ref.current` in JSX and expect it to be reactive
 
@@ -623,7 +635,8 @@ Give it a try!
 
 As mentioned, we could use the `ref` attribute and `useRef` to obtain the access to underlying DOM nodes, like so:
 
-```jsx
+<CodeViewer>
+  {`
 function Editor() {
   /* 1. Call useRef */
   const textboxRef = useRef()
@@ -642,7 +655,8 @@ function Editor() {
     </div>
   )
 }
-```
+`}
+</CodeViewer>
 
 But, have you wondered how it works?
 
@@ -651,10 +665,12 @@ But, have you wondered how it works?
 
 React receives the ref via the `ref` attribute of `input` and mutates it at some point, just as what we did in the examples above:
 
-```jsx
+<CodeViewer>
+  {`
 // Somewhere in React code
 ref.current = domNode
-```
+`}
+</CodeViewer>
 
 </details>
 
@@ -675,9 +691,11 @@ The value tracked by `useState` is updated via calling the setter function, whic
 
 In React, there's another function called `createRef`:
 
-```jsx
+<CodeViewer>
+  {`
 const ref = React.createRef()
-```
+`}
+</CodeViewer>
 
 What is the difference between `useRef` and `createRef`? I know I didn't cover `createRef` so far in the article, but can you guess from its name?
 

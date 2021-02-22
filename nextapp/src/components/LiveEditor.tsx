@@ -39,12 +39,12 @@ const vscodeDarkTheme = {
       types: ['property', 'tag', 'boolean', 'number', 'constant', 'symbol'],
       style: { color: '#0f90c3' },
     },
-    // {
-    //   types: ['token', 'function'],
-    //   style: {
-    //     color: '#cecece',
-    //   },
-    // },
+    {
+      types: ['token', 'function'],
+      style: {
+        color: '#cecece',
+      },
+    },
     // {
     //   types: ['attr-name', 'string', 'char', 'builtin', 'insterted'],
     //   style: {
@@ -183,13 +183,13 @@ function Editor({
   code: initialCode,
   language,
   theme,
-  disabled = false,
+  editable = false,
   ...rest
 }: {
   code: string
   language: string
   theme: PrismTheme
-  disabled?: boolean
+  editable?: boolean
 }) {
   const highlightCode = (code: string) => (
     <Highlight Prism={Prism} code={code} language="jsx" theme={theme}>
@@ -216,7 +216,7 @@ function Editor({
       padding={10}
       highlight={highlightCode}
       onValueChange={(c) => setCode(c)}
-      disabled={disabled}
+      disabled={!editable}
       // @ts-ignore
       style={{
         whiteSpace: 'pre',
@@ -237,12 +237,27 @@ function EditorInContext(props: any) {
           theme={theme}
           code={code}
           language={language}
-          disabled={disabled}
+          editable={!disabled}
           // onChange={onChange}
           {...props}
         />
       )}
     </LiveContext.Consumer>
+  )
+}
+
+export function CodeViewer({ children }: { children: string }) {
+  const code = children.trim()
+  return (
+    <Tab title="JSX" className="text-xl">
+      <Editor
+        code={code}
+        // @ts-ignore
+        theme={vscodeDarkTheme}
+        language="jsx"
+        editable={false}
+      />
+    </Tab>
   )
 }
 
@@ -272,11 +287,7 @@ export function LiveEditor({
   )
   const code = children.trim()
 
-  return readOnly ? (
-    <Tab title="JSX" className="text-xl">
-      <Editor code={code} theme={vscodeDarkTheme} language="jsx" disabled />
-    </Tab>
-  ) : (
+  return (
     <LiveProvider
       code={code}
       scope={scope}
