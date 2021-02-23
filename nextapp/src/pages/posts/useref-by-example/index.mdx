@@ -60,7 +60,7 @@ There are two use cases.
 
 When combined with the `ref` attribute, we could use `useRef` to obtain the underlying DOM nodes to perform DOM operations imperatively. In fact, this is really an escape hatch. We should only do this sparsely for things that React doesn't provide a declarative API for, such as focus management. If we use it for everything (in theory we could), we'd lose the benefit of [React's declarative programming paradigm](TODO).
 
-### Persist a value across re-renders
+### Persist a value across rerenders
 
 This is what I'm going to focus on in this article. Remember? A hidden gem 💎!
 
@@ -74,7 +74,7 @@ Here's the mental model that works for me:
 
 After a lot of struggle trying to understand `useRef`, I finally saw this single sentence. And it clicked! If you are hearing the same clicking sound in your mind right now already, feel free to skip to [the examples section](TODO). Otherwise, if you are not familiar JavaScript classes or class instance variables, read on. This section is for you.
 
-### The "re-rendering time loop"
+### The "rerendering time loop"
 
 To understand how `useRef` works and why we need it, let's get started with a contrived (but useful) example. Can you build a counter without using the `useState` hook?
 
@@ -103,7 +103,7 @@ function Counter() {
 `}
 </LiveEditor>
 
-This doesn't work, even though the value of `count` increases on click. Why? React is oblivious to the change of local variables and, therefore, doesn't know when to update the DOM. We'd need to re-render the component, namely request React to call the component function `Counter`, to let the change reflected on the screen.
+This doesn't work, even though the value of `count` increases on click. Why? React is oblivious to the change of local variables and, therefore, doesn't know when to update the DOM. We'd need to rerender the component, namely request React to call the component function `Counter`, to let the change reflected on the screen.
 
 You can verify this by uncommenting the line `console.log('render')` right after `let count = 0`. The component isn't rendered when the user clicks the button.
 
@@ -152,34 +152,63 @@ function useForceRender() {
 `}
 </CodeViewer>
 
-Why? This is what I call **_re-rendering time loop_**.
+Why? This is what I call **_rerendering time loop_**.
 
 <img src={imgTimeLoop} width={787} height={415} alt="Time loop" />
 
-Every time when the component re-renders, it goes into a time loop. All the local variables in the function will be reset to their original values. That's why `count` is always `0`.
+Every time when the component rerenders, it goes into a time loop. All the local variables in the function will be reset to their original values. That's why `count` is always `0`.
 
 That's no surprise, right? They are local variables defined in the function. When the function reruns, the variables are supposed to behave like that!
 
-As straighforward as this sounds, sometimes it's easy to forget (I do it all the time). So remember, a React component is re-rendered all the time, so all the local variables will go into a time loop, over and over again.
+As straighforward as this sounds, sometimes it's easy to forget (I do it all the time). So remember, a React component is rerendered all the time, so all the local variables will go into a time loop, over and over again.
 
 <div className="p-8 bg-yellow-100 border border-yellow-400 rounded-sm space-y-4 my-2">
+
+{' '}
+<p>
+  Just like the "rerendering time loop" metaphor used here, I'm working on many
+  others. I want to distill the core concepts of React into digestable, visual
+  pieces that are easy to understand and remember. I call them{' '}
+  <span className="font-bold italic">React Mental Models</span>. They are about
+  how to <em>think</em> in React.
+</p>
+
   <p>
-    BTW: if you like metaphors like this time loop, you want to check out my course: React Mental Models.
-    I use metaphors and illustrations to explain the mental modals of React. For example the "re-rendering time loop" above.
-    
-    I'm working on a book/course that uses similar approach to teach React -- focus on mental models instead of steps and howtos.
-    focus on why, not just how.
+    What I'm striving is to show you not just the "how", but the "why". It's the solid basics you can use to build from -- so that you can confidently teach yourself moving forward.
   </p>
+  
+   {/* <p className="italic">"I can follow tutorials, but I can't apply it to my own projects."</p>
+    
   <p>
-    I believe you'd be able to do useful work with React after a few days of
-    learning, <strong>even if you are new to coding</strong>. If you are interested, sign
-    up and I'll let you know when the course is ready!
+    Is that how you feel when you learn React? You are not alone! Tutorials and hands-on exercises are important. But if they stop at only teaching you the "how" — even though giving you the illusion of mastery — your mind will refuse to retain it for the long term, not to mention applying it.
   </p>
 
-  <ConvertKitForm formId="467678" subscribeButtonTitle="Keep Me Posted" />
+{' '}
+<p>
+  What I'm striving is to show you not just the "how", but the "why". It's the
+  solid basics you can use to build from -- so that you can confidently teach
+  yourself moving forward.
+</p>
+
+{' '}
+<p>
+  I'm working on distilling the core concepts of React into digestable and
+  visual pieces that are easy to understand and remember. Just like the
+  "rerendering time loop" metaphor used here, they are about how to think in
+  React. I call them{' '}
+  <span className="font-bold italic">React Mental Models</span>.
+</p> */}
+
+{' '}
+<p>
+  Want to stay up to date about it? Sign up below! Also read more about{' '}
+  <a href="/courses/react-mental-models">my motivation here</a>.
+</p>
+
+  <ConvertKitForm formId="2061519" subscribeButtonTitle="Keep Me Posted" />
 </div>
 
-Now what if we move the variable out of the component function? It will no longer be affected by the re-rendering time loop, right?
+Now what if we move the variable out of the component function? It will no longer be affected by the rerendering time loop, right?
 
 <LiveEditor
   highlightLines="1"
@@ -304,9 +333,9 @@ But, but we are still using that `useForceRender` to update the DOM! If we comme
 
 What's the point of `useRef` if it relies on `useState` to work properly? Why don't we just use `useState`?
 
-What's the point of `useRef` if it doesn't trigger a re-render when the value is updated?
+What's the point of `useRef` if it doesn't trigger a rerender when the value is updated?
 
-In fact, being able to persist a value across re-renders without triggering another re-render is exactly why `useRef` is created. Sometimes we just don't want the component to re-render when the value is updated.
+In fact, being able to persist a value across rerenders without triggering another rerender is exactly why `useRef` is created. Sometimes we just don't want the component to rerender when the value is updated.
 
 It's now time to look at a better example.
 
@@ -336,7 +365,7 @@ function Counter() {
 `}
 </LiveEditor>
 
-Look, when saving the previous state in `useEffect`, we definitely don't want the component to re-render. Otherwise, it'd go into an infinite loop. So, `useRef` to the rescue!
+Look, when saving the previous state in `useEffect`, we definitely don't want the component to rerender. Otherwise, it'd go into an infinite loop. So, `useRef` to the rescue!
 
 <!-- https://codesandbox.io/s/useref-previous-state-hmthe -->
 
@@ -393,7 +422,7 @@ function StopWatch() {
 
 Did you see the problem? Where should we define that variable `interval`?
 
-If we define `interval` in an outter scope, we'll taste the wrath of the re-rendering time loop -- `interval` will always be `undefined`.
+If we define `interval` in an outter scope, we'll taste the wrath of the rerendering time loop -- `interval` will always be `undefined`.
 
 <CodeViewer highlightLines="4">
   {`
@@ -471,7 +500,7 @@ How would we implement this behavior?
 
 In order to detect the press-and-hold gesture, we can use `setTimeout`. When the mouse is down, kick off the timeout. When the mouse is up, clear the timeout.
 
-How do we set and clear the timeout when the component is rendered and re-rendered, i.e. when the state `mouseDown` changes?
+How do we set and clear the timeout when the component is rendered and rerendered, i.e. when the state `mouseDown` changes?
 
 You already know the answer from Example 2, right? `useRef`!
 
@@ -499,7 +528,7 @@ function LikeButton(params) {
 `}
 </CodeViewer>
 
-Next, how do we repeatedly increase the like count? `setInterval` is what we need. And of course we'll use another ref to keep track of the interval reference across re-renders.
+Next, how do we repeatedly increase the like count? `setInterval` is what we need. And of course we'll use another ref to keep track of the interval reference across rerenders.
 
 <CodeViewer highlightLines="10-12,18,23">
   {`
@@ -628,7 +657,7 @@ function App() {
 
 ### Use `ref.current` in JSX and expect it to be reactive
 
-We could use `ref.current` in JSX, as you've seen in [Example 1](TODO). However, keep in mind that the value displayed might be stale since updating `ref.current` doesn't trigger a re-render. We need to trigger re-renders in other means, e.g. with `useState`.
+We could use `ref.current` in JSX, as you've seen in [Example 1](TODO). However, keep in mind that the value displayed might be stale since updating `ref.current` doesn't trigger a rerender. We need to trigger rerenders in other means, e.g. with `useState`.
 
 <!-- ### Use ref to obtain/update DOM values
 
