@@ -5,6 +5,7 @@ import { StopWatch } from '@/components/useref-by-example/StopWatch'
 import { useForceRender } from '@/components/useref-by-example/useForceRender'
 import { Demo } from '@/components/Demo'
 import imgTimeLoop from './time-loop.jpeg'
+import { FiInfo } from 'react-icons/fi'
 
 export const meta = {
   title: 'useRef By Example',
@@ -50,6 +51,12 @@ I'll reveal this shiny gem <span className="mr-2">💎</span> for you in four st
   <Demo title="Click and hold">
     <LikeButton />
   </Demo>
+</div>
+
+<div className="p-8 bg-yellow-100 border border-yellow-400 rounded-sm space-y-4 my-2">
+
+This article assumes that you are familiar with React basics, as well as how to use the `useState` and `useEffect` hooks.
+
 </div>
 
 ## What is useRef used for?
@@ -164,8 +171,6 @@ As straighforward as this sounds, sometimes it's easy to forget (I do it all the
 
 <div className="p-8 bg-yellow-100 border border-yellow-400 rounded-sm space-y-4 my-2">
 
-{' '}
-
 <p>
   Just like the "rerendering time loop" metaphor used here, I'm working on many
   others. I want to distill the core concepts of React into digestable, visual
@@ -201,8 +206,6 @@ As straighforward as this sounds, sometimes it's easy to forget (I do it all the
   React. I call them{' '}
   <span className="font-bold italic">React Mental Models</span>.
 </p> */}
-
-{' '}
 
 <p>
   Want to stay up to date about it? Sign up below! Also read more about{' '}
