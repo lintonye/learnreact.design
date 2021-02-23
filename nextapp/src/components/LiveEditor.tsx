@@ -149,6 +149,7 @@ function Tab({
 
 type ConsoleAPI = {
   log: (msg: any) => void
+  clear: () => void
 }
 
 function Console({
@@ -166,6 +167,7 @@ function Console({
           </div>,
           ...s.slice(0, 10),
         ]),
+      clear: () => setStd([]),
     }
   }, [callbackRef])
   return (
@@ -300,7 +302,7 @@ function Editor({
   )
 }
 
-function EditorInContext({ highlightLines, props }: any) {
+function EditorInContext({ highlightLines, onValueChange, ...props }: any) {
   return (
     <LiveContext.Consumer>
       {/* @ts-ignore */}
@@ -311,7 +313,10 @@ function EditorInContext({ highlightLines, props }: any) {
           language={language}
           editable={!disabled}
           highlightLines={highlightLines}
-          onChange={onChange}
+          onChange={(c) => {
+            onChange(c)
+            typeof onValueChange === 'function' && onValueChange(c)
+          }}
           {...props}
         />
       )}
@@ -390,6 +395,10 @@ export function LiveEditor({
         >
           <EditorInContext
             highlightLines={parseHighlightLines(highlightLines)}
+            onValueChange={() => {
+              typeof consoleCallbackRef.current?.clear === 'function' &&
+                consoleCallbackRef.current.clear()
+            }}
           />
         </Tab>
         <LiveError className="col-start-1 md:col-span-12 bg-red-500 text-white p-4 rounded-sm" />
