@@ -171,9 +171,7 @@ function Console({
     }
   }, [callbackRef])
   return (
-    <div className="overflow-scroll max-h-full flex flex-col-reverse">
-      {std}
-    </div>
+    <div className="overflow-scroll max-h-64 flex flex-col-reverse">{std}</div>
   )
 }
 
