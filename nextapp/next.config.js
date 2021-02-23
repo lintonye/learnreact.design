@@ -77,7 +77,9 @@ module.exports = withBundleAnalyzer({
             require('remark-slug'),
             require('remark-footnotes'),
             require('remark-code-titles'),
-            require('remark-external-links'),
+            // require('remark-external-links')({
+            //   rel: ['noopener', 'noreferrer'],
+            // }),
           ],
         },
       },
