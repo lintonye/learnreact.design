@@ -403,25 +403,25 @@ function StopWatch() {
 
 But how do we pause the stop watch?
 
-We can add another state `paused` and clear the interval when `paused` is `true`. Let's give it a try:
+We can add another state `ticking` and clear the interval when `ticking` is `false`. Let's give it a try:
 
-<CodeViewer highlightLines="3,7">
+<CodeViewer highlightLines="3,5,12">
   {`
 function StopWatch() {
   const [milliSeconds, setMilliSeconds] = useState(0);
-  const [paused, setPaused] = useState(true);
+  const [ticking, setTicking] = useState(false);
   useEffect(() => {
-    if (paused) {
-      // 🤔 "interval" isn't defined here
-      clearInterval(interval)
-    } else {
+    if (ticking) {
       const interval = setInterval(() => {
         setMilliSeconds((ms) => ms + 1)
       }, 1);
       return () => clearInterval(interval);
+    } else {
+      // 🤔 "interval" isn't defined here
+      clearInterval(interval)
     }
-    // BTW: Remember to put "paused" in the deps
-  }, [paused]);
+    // Remember to put "ticking" in the deps
+  }, [ticking]);
   return ...
 }
 `}
@@ -429,22 +429,22 @@ function StopWatch() {
 
 Did you see the problem? Where should we define that variable `interval`?
 
-If we define `interval` in an outter scope, we'll taste the wrath of the rerendering time loop -- `interval` will always be `undefined`.
+If we define `interval` in the outer scope, we'll taste the wrath of the rerendering time loop -- `interval` will always be `undefined`.
 
 <CodeViewer highlightLines="4">
   {`
 function StopWatch() {
   const [milliSeconds, setMilliSeconds] = useState(0);
-  const [paused, setPaused] = useState(true);
+  const [ticking, setTicking] = useState(false);
   let interval // ❌ interval will always be undefined here
   useEffect(() => {
-    if (paused) {
-      clearInterval(interval)
-    } else {
+    if (ticking) {
       interval = setInterval(() => {
         setMilliSeconds((ms) => ms + 1)
       }, 1);
       return () => clearInterval(interval);
+    } else {
+      clearInterval(interval)
     }
   }, []);
   return ...
@@ -460,26 +460,26 @@ Again, `useRef` to the rescue:
   {`
 function StopWatch() {
   const [milliSeconds, setMilliSeconds] = useState(0)
-  const [paused, setPaused] = useState(true)
-  // 1. Get the ref that corresponds to the CURRENT INSTANCE of the component
+  const [ticking, setTicking] = useState(false)
+  // 1. Get the ref for the CURRENT INSTANCE of the component
   const interval = useRef()
   useEffect(() => {
-    if (paused) {
-      // 2. Access the value via ".current"
-      interval.current && clearInterval(interval.current)
-    } else {
-      // 3. Update the value via ".current" too
+    if (ticking) {
+      // 2. Update the value via ".current"
       interval.current = setInterval(() => {
         setMilliSeconds((ms) => ms + 1)
       }, 1)
       return () => clearInterval(interval.current)
+    } else {
+      // 3. Access the value via ".current"
+      interval.current && clearInterval(interval.current)
     }
-  }, [paused])
+  }, [ticking])
   return (
     <div className="App">
       <h1>{format(milliSeconds)}</h1>
-      <button onClick={() => setPaused((c) => !c)}>
-        {milliSeconds === 0 ? 'Start' : paused ? 'Resume' : 'Pause'}
+      <button onClick={() => setTicking((c) => !c)}>
+        {milliSeconds === 0 ? 'Start' : ticking ? 'Pause' : 'Resume'}
       </button>
     </div>
   )

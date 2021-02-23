@@ -22,16 +22,16 @@ const format = (ms: number) => {
 
 export function StopWatch() {
   const [milliSeconds, setMilliSeconds] = useState(0)
-  const [paused, setPaused] = useState(true)
+  const [ticking, setTicking] = useState(false)
   const interval = useRef<number>()
   useEffect(() => {
-    if (!paused) {
+    if (ticking) {
       interval.current = setInterval(() => setMilliSeconds((ms) => ms + 1), 1)
       return () => clearInterval(interval.current)
     } else if (interval.current) {
       clearInterval(interval.current)
     }
-  }, [paused])
+  }, [ticking])
 
   return (
     <div className="bg-blue-800 text-white border border-indigo-900 rounded-lg py-4 px-2 flex flex-col justify-center items-center space-y-4 w-30 shadow-md">
@@ -39,10 +39,10 @@ export function StopWatch() {
         {format(milliSeconds)}
       </div>
       <button
-        onClick={() => setPaused((c) => !c)}
+        onClick={() => setTicking((c) => !c)}
         className="text-xs bg-gray-900 px-4 py-2 rounded-md font-bold uppercase outline-none hover:bg-gray-800"
       >
-        {milliSeconds === 0 ? 'Start' : paused ? 'Resume' : 'Pause'}
+        {milliSeconds === 0 ? 'Start' : ticking ? 'Pause' : 'Resume'}
       </button>
     </div>
   )
