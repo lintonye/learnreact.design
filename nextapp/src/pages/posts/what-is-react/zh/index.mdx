@@ -123,33 +123,31 @@ Domo 在一间名为”Web 浏览器“的艺术工作室里做人体模特（�
 
 <img src={imgDomoCssArtist} alt="Domo at the art studio Web Browser" />
 
-DOM 是 Document Object Model 的缩写。
+DOM 是 Document Object Model 的缩写。从某种意义上说，它确实是一个模特，或者说是模型，是网页文档的模型。当 DOM 摆出一个姿势时，浏览器就开始写生。这些所谓的写生画就是我们在网页上所看到的内容：文本框、段落、图片等等。程序员的职责就是告诉 Domo 如何穿戴和如何摆姿势。这就决定了网页上最终显示什么内容。
 
-In real life, DOM stands for Document Object Model. It's indeed a model -- a model of the document (aka the web page). It strikes a pose. The browser paints a portrait. The portraits are what we see on a web page: the textboxes, the paragraphs, the images and so on. A developer's job is like that of a director who tells Domo what to wear and what pose to strike. This determines what those portraits look like in the end.
-
-To check out what the DOM looks like, if you are using a desktop browser, right-click on this very page and choose "Inspect". Can you make sense of what's in the Elements tab?
+如果你正在使用桌面电脑的浏览器（如 Chrome）看这篇文章，在页面上右击鼠标、选择“Inspect”，就可以在 Element 标签页里看到 DOM 的真实模样。
 
 <img src={imgInspect} alt="Inspect in Chrome" width={2048} height={1536} />
 
 <DomoAsciiArt />
 
-### The DOM API
+### DOM 的 API
 
-We often want a web page to be dynamic and interactive -- that means its content changes from time to time: adding or removing text here and there, showing a modal, or updating a chart based on some new data coming from the server.
+我们经常希望一个网页是动态和交互式的，也就是说，网页的内容不时发生变化。一会在这里加点文字，一会又显示一个对话框，一会又根据从服务器下载的数据更新图表。
 
-Remember, in order to change what's on a web page, we need to update the DOM. The artist isn't able to paint new portraits until Domo changes to a new pose.
+记住，任何时候如果想网页内容发生变化，我们都需要更改 DOM。Domo 如果不改变姿势，浏览器里的画家就不可能画出新的作品。
 
-How would we get Domo to change to a new pose?
+那么，怎样才能让 Domo 改变姿势呢？
 
-We just talk to him. He listens. Interestingly, Domo's ears happen to have a name: _DOM API_.
+我们直接告诉他就行了，他会听的。有意思的是，Domo 的耳朵还有一个专属的名字：API。
 
 <img src={imgTalkToDomo} alt="A developer works with DOM API" />
 
-To manipulate the DOM, a developer would write code in JavaScript which talks to the DOM API, and in turn, updates the content of the web page.
+程序员们使用 JavaScript 书写代码来向 DOM API 下达命令，于是，网页内容便随着 DOM 的更改而发生变化。
 
-### The increasing complexity
+### 越来越复杂的 web 开发
 
-_Directly_ talking to Domo has been the standard approach of web development for years, especially when the web content was mostly static. A developer would sprinkle some interactivity on top of the static pages by writing small amount of JavaScript code.
+多年来，直接与 DOM 对话一直是 web 开发的标准方法，特别是当大多数 web 内容是静态的时候。程序员们典型的做法是，在静态页面的基础上写一些 JavaScript 代码让页面更交互一点点。
 
 However, with the emergence of SPAs (Single Page Application) such as Gmail and Google Maps, people started to expect a lot more. Instead of mostly static web _pages_, they want web _apps_ that are interactive, fast and responsive.
 
