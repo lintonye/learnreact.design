@@ -9,7 +9,7 @@ import imgTimeLoop from './time-loop.jpeg'
 export const meta = {
   title: 'useRef By Example',
   description: `useRef is a built-in React Hook. What is it used for? How does it work? I'll reveal this hidden gem for you with a few real-world examples.`,
-  date: '2021-02-25',
+  date: '2021-03-01',
   tags: ['react'],
   // related: ['what-is-react-native', 'what-is-redux'],
   ogImage: {
@@ -58,7 +58,7 @@ There are two use cases.
 
 ### Directly access DOM nodes
 
-When combined with the `ref` attribute, we could use `useRef` to obtain the underlying DOM nodes to perform DOM operations imperatively. In fact, this is really an escape hatch. We should only do this sparsely for things that React doesn't provide a declarative API for, such as focus management. If we use it for everything (in theory we could), we'd lose the benefit of [React's declarative programming paradigm](TODO).
+When combined with the `ref` attribute, we could use `useRef` to obtain the underlying DOM nodes to perform DOM operations imperatively. In fact, this is really an escape hatch. We should only do this sparsely for things that React doesn't provide a declarative API for, such as focus management. If we use it for everything (in theory we could), we'd lose the benefit of [React's declarative programming paradigm](/posts/what-is-react#declarative-ui).
 
 ### Persist a value across rerenders
 
@@ -72,7 +72,7 @@ Here's the mental model that works for me:
 
 > `useRef` is like class instance variable for function components.
 
-After a lot of struggle trying to understand `useRef`, I finally saw this single sentence. And it clicked! If you are hearing the same clicking sound in your mind right now already, feel free to skip to [the examples section](TODO). Otherwise, if you are not familiar JavaScript classes or class instance variables, read on. This section is for you.
+After a lot of struggle trying to understand `useRef`, I finally saw this single sentence. And it clicked! If you are hearing the same clicking sound in your mind right now already, feel free to skip to [the examples section](#example-1-previous-value--state). Otherwise, if you are not familiar JavaScript classes or class instance variables, read on. This section is for you.
 
 ### The "rerendering time loop"
 
@@ -165,6 +165,7 @@ As straighforward as this sounds, sometimes it's easy to forget (I do it all the
 <div className="p-8 bg-yellow-100 border border-yellow-400 rounded-sm space-y-4 my-2">
 
 {' '}
+
 <p>
   Just like the "rerendering time loop" metaphor used here, I'm working on many
   others. I want to distill the core concepts of React into digestable, visual
@@ -184,6 +185,7 @@ As straighforward as this sounds, sometimes it's easy to forget (I do it all the
   </p>
 
 {' '}
+
 <p>
   What I'm striving is to show you not just the "how", but the "why". It's the
   solid basics you can use to build from -- so that you can confidently teach
@@ -191,6 +193,7 @@ As straighforward as this sounds, sometimes it's easy to forget (I do it all the
 </p>
 
 {' '}
+
 <p>
   I'm working on distilling the core concepts of React into digestable and
   visual pieces that are easy to understand and remember. Just like the
@@ -200,6 +203,7 @@ As straighforward as this sounds, sometimes it's easy to forget (I do it all the
 </p> */}
 
 {' '}
+
 <p>
   Want to stay up to date about it? Sign up below! Also read more about{' '}
   <a href="/courses/react-mental-models">my motivation here</a>.
@@ -657,7 +661,7 @@ function App() {
 
 ### Use `ref.current` in JSX and expect it to be reactive
 
-We could use `ref.current` in JSX, as you've seen in [Example 1](TODO). However, keep in mind that the value displayed might be stale since updating `ref.current` doesn't trigger a rerender. We need to trigger rerenders in other means, e.g. with `useState`.
+We could use `ref.current` in JSX, as you've seen in [Example 1](#example-1-previous-value--state). However, keep in mind that the value displayed might be stale since updating `ref.current` doesn't trigger a rerender. We need to trigger rerenders in other means, e.g. with `useState`.
 
 <!-- ### Use ref to obtain/update DOM values
 
@@ -752,5 +756,14 @@ In function components, we should always use `useRef`. `creatRef` is used in cla
 
 ## Conclusion
 
-When combined with `useEffect`, `useState` and `useCallback`, `useRef` turns out to be a powerful tool.
-Other examples? Let me know
+There are two use cases of `useRef`:
+
+1. Directly access DOM nodes to perform DOM operations imperatively
+2. Persist a value across rerenders, throughout the full lifetime of a component instance
+
+The second use is particularly powerful when combined with `useEffect`, `useState` and `useCallback`. In this post, we used it in two real-world scenarios:
+
+1. Preserve previous state
+2. Preserve the reference of a timeout or interval so that we can clear them at a later time (in another render round)
+
+Do you have other examples of `useRef` in your projects? [Let me know](https://twitter.com/lintonye)!
