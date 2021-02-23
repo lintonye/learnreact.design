@@ -79,7 +79,7 @@ Here's the mental model that works for me:
 
 > `useRef` is like class instance variable for function components.
 
-After a lot of struggle trying to understand `useRef`, I finally saw this single sentence. And it clicked! If you are hearing the same clicking sound in your mind right now already, feel free to skip to [the examples section](#example-1-previous-value--state). Otherwise, if you are not familiar JavaScript classes or class instance variables, read on. This section is for you.
+After a lot of struggle trying to understand `useRef`, I finally saw this single sentence. And it clicked! If you are hearing the same clicking sound in your mind right now already, feel free to skip to [the examples section](#example-1-previous-value--state). Otherwise, if you are not familiar with JavaScript classes or class instance variables, read on. This section is for you.
 
 ### The "rerendering time loop"
 
@@ -98,8 +98,8 @@ function Counter() {
       <button
         className="bg-purple-700 px-6 text-white rounded-md hover:bg-purple-500"
         onClick={() => {
-          count++
           console.log(count)
+          count++
         }}
       >
         +1
@@ -132,8 +132,8 @@ function Counter() {
       <button
         className="bg-purple-700 px-6 text-white rounded-md hover:bg-purple-500"
         onClick={() => {
-          count++
           console.log(count)
+          count++
           forceRender()
         }}
       >
@@ -145,7 +145,7 @@ function Counter() {
 `}
 </LiveEditor>
 
-This doesn't work either. The count displayed on the page stays zero. Even worse, the count value in the console stopped working too. It's always `1`!
+This doesn't work either. The count displayed on the page stays zero. Even worse, the count value in the console stopped working too. It's always `0`!
 
 BTW, `useForceRender` above is a custom hook:
 
