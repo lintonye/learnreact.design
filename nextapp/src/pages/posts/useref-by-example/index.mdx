@@ -167,14 +167,14 @@ Every time when the component rerenders, it goes into a time loop. All the local
 
 That's no surprise, right? They are local variables defined in the function. When the function reruns, the variables are supposed to behave like that!
 
-As straighforward as this sounds, sometimes it's easy to forget (I do it all the time). So remember, a React component is rerendered all the time, so all the local variables will go into a time loop, over and over again.
+As straighforward as this sounds, sometimes it's easy to forget (I do it all the time). So remember, since a React component is rerendered all the time, all the local variables will go into a time loop, over and over again.
 
 <div className="p-8 bg-yellow-100 border border-yellow-400 rounded-sm space-y-4 my-2">
 
 <p>
   Just like the "rerendering time loop" metaphor used here, I'm working on many
-  others. I want to distill the core concepts of React into digestable, visual
-  pieces that are easy to understand and remember. I call them{' '}
+  others. My goal is to distill the core concepts of React into digestable,
+  visual pieces that are easy to understand and remember. I call them{' '}
   <span className="font-bold italic">React Mental Models</span>. They are about
   how to <em>think</em> in React.
 </p>
@@ -208,14 +208,16 @@ As straighforward as this sounds, sometimes it's easy to forget (I do it all the
 </p> */}
 
 <p>
-  Want to stay up to date about it? Sign up below! Also read more about{' '}
+  Want to stay up to date? Sign up below! Also read more about{' '}
   <a href="/courses/react-mental-models">my motivation here</a>.
 </p>
 
   <ConvertKitForm formId="2061519" subscribeButtonTitle="Keep Me Posted" />
 </div>
 
-Now what if we move the variable out of the component function? It will no longer be affected by the rerendering time loop, right?
+So, we need a solution that survives this "rerendering time loop". We want to preserve the value no matter how many times the component is rendered. If we update `count` to `42`, at the next render it should still be `42`, not the initial value `0`.
+
+Let's try the first approach: what if we move the variable out of the component function? It will no longer be affected by the rerendering time loop, right?
 
 <LiveEditor
   highlightLines="1"
@@ -291,7 +293,14 @@ function Counter() {
 `}
 </LiveEditor>
 
-So our counters are still broken. That's because both counters are tied to the same variable `count`. What we need instead is to have a **_separate_** variable for each **_instance_** of the counter.
+So our counters are still broken. Did you try it in the preview window? The two counters are tied together. Clicking one button changes the other counter too!
+
+That's because both counters are tied to the same variable `count`. What we need instead is to have a **_separate_** variable for each **_instance_** of the counter.
+
+So the requirements are:
+
+1. Persist a value across rerenders
+2. Persist the value per component instance, throughout the full lifetime of that instance
 
 Introducing `useRef`!
 
@@ -342,7 +351,7 @@ What's the point of `useRef` if it relies on `useState` to work properly? Why do
 
 What's the point of `useRef` if it doesn't trigger a rerender when the value is updated?
 
-In fact, being able to persist a value across rerenders without triggering another rerender is exactly why `useRef` is created. Sometimes we just don't want the component to rerender when the value is updated.
+In fact, being able to persist a value across rerenders _without_ triggering another rerender is exactly why `useRef` is created. Sometimes we just don't want the component to rerender when the value is updated.
 
 It's now time to look at a better example.
 
@@ -350,12 +359,19 @@ It's now time to look at a better example.
 
 Let's modify the Counter component. Now we want to display the previous value of the counter whenever the button is clicked. We can do so using a combination of `useState`, `useEffect`, and of course `useRef`.
 
-<LiveEditor highlightLines="3-7">
+<LiveEditor
+  highlightLines="3-7"
+  scope={{
+    useState: React.useState,
+    useEffect: React.useEffect,
+    useRef: React.useRef,
+  }}
+>
   {`
 function Counter() {
-  const [count, setCount] = React.useState(0)
-  const prevCount = React.useRef(0)
-  React.useEffect(() => {
+  const [count, setCount] = useState(0)
+  const prevCount = useRef(0)
+  useEffect(() => {
     // This runs every time AFTER Counter is rendered.
     prevCount.current = count
   })
