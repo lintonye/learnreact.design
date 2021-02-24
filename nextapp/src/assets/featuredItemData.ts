@@ -25,6 +25,16 @@ const featuredItem: ItemAtHome = {
 
 const itemsAtHome: Category[] = [
   {
+    categoryTitle: 'Latest',
+    categorySlug: 'latest',
+    items: [
+      {
+        type: 'post',
+        slug: 'useref-by-example',
+      },
+    ],
+  },
+  {
     categoryTitle: 'React Tutorials',
     categorySlug: 'react',
     items: [

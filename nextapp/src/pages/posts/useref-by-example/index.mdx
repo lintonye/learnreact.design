@@ -3,6 +3,7 @@ import { LiveEditor, CodeViewer } from '@/components/LiveEditor'
 import { LikeButton } from '@/components/useref-by-example/LikeButton'
 import { StopWatch } from '@/components/useref-by-example/StopWatch'
 import { useForceRender } from '@/components/useref-by-example/useForceRender'
+import { UseRefSurprise } from '@/components/useref-by-example/UseRefSurprise'
 import { Demo } from '@/components/Demo'
 import imgTimeLoop from './time-loop.jpeg'
 import { FiInfo } from 'react-icons/fi'
@@ -22,13 +23,13 @@ export const meta = {
     width: 1280,
     height: 720,
   },
-  // surprise: {
-  //   actor: () => <Image src={imgSurprise} width={145} height={145} />,
-  //   animationVariants: {
-  //     hidden: { x: -10, rotate: 0, y: 40 },
-  //     revealed: { x: -150, rotate: 0, y: 40 },
-  //   },
-  // },
+  surprise: {
+    actor: (revealEnded) => <UseRefSurprise autoPlay={revealEnded} />,
+    animationVariants: {
+      hidden: { x: 0, rotate: 0, y: 60 },
+      revealed: { x: -100, rotate: 0, y: 60 },
+    },
+  },
 }
 
 <!--excerpt-->
