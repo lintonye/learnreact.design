@@ -147,13 +147,13 @@ DOM 是 Document Object Model 的缩写。从某种意义上说，它确实是�
 
 ### 越来越复杂的 web 开发
 
-多年来，直接与 DOM 对话一直是 web 开发的标准方法，特别是当大多数 web 内容是静态的时候。程序员们典型的做法是，在静态页面的基础上写一些 JavaScript 代码让页面更交互一点点。
+多年来，直接与 DOM 对话一直是 web 开发的标准方法，特别是当大多数 web 内容是静态的时候。程序员们典型的做法是，在静态页面的基础上写一些 JavaScript 代码在页面上加一点点交互特性。
 
-However, with the emergence of SPAs (Single Page Application) such as Gmail and Google Maps, people started to expect a lot more. Instead of mostly static web _pages_, they want web _apps_ that are interactive, fast and responsive.
+然而，当众多的 SPA （Single Page Application）出现后，例如，Gmail 和 Google 地图，用户开始对 web 能做的事有了更高的期望。他们不再只满足于大多数情况下都是静态的 web _页面_，他们更希望看到的是 web _应用_：交互性强、速度快捷、响应迅速。
 
-The code required to build web apps becomes increasingly large and complex. It often requires the collaboration of many team members.
+为了开发满足这些条件的 web 应用，代码变得越来越复杂，而且通常需要多人协作。
 
-The traditional approach stopped working. It becomes chaotic and inefficient to always directly talk to Domo.
+Web 开发的传统方法开始逐渐失效，与 DOM 直接对话显得低效而繁琐。
 
 <!-- 1. Web apps are getting large and complex. Development of a web app often requires team collaboration
 2. The DOM itself has some issues. It's slow to update the entire DOM for a large page. The behaviors of different browsers have subtle differences.
@@ -164,32 +164,34 @@ The traditional approach stopped working. It becomes chaotic and inefficient to 
   alt="Directly working with the DOM API is getting chaotic"
 />
 
-## The Core Ideas of React
+## React 的核心思想
 
-Let me introduce you to the superhero, React:
+先生们、女士们，让我们隆重欢迎一位超级英雄出场，那就是 React！
 
 <img src={imgIntroReact} alt="Introducing React" height={900} />
 
-With React, developers no longer directly talk to Domo. React acts as an agent between a developer and Domo. He smoothens the communication and streamlines the process of portrait creation.
+在 React 的帮助下，程序员们不再直接与 Domo 对话。React 充当起了程序员的代言人。他将程序员与 Domo 之间的沟通变得无比顺畅，将写生的过程管理得井井有条。
 
 <img
   src={imgReactAgent}
   alt="React as an agent between a developer and the DOM"
 />
 
-React is made up of JavaScript code. It's built in a way that we no longer need to directly work with the DOM API in most cases. Instead, we write simpler code while React handles the conversation with the DOM under the hood.
+React 是由 JavaScript 开发而成，它的设计目标之一是让我们在大多数情况下不再需要直接操作 DOM API。取而代之  的是，我们只需要编写相对简单的代码，而 React 将其翻译为 DOM 理解的语言。
 
-React has a few superpowers to tackle the ever-growing complexity of web development:
+React 具有完美处理与日俱增的 web 开发复杂度的超能力，归纳起来有三条：
 
-- Components
-- Declarative UI
-- Reactive DOM updates
+- 组件（Component）
+- 声明式界面编程（Declarative UI）
+- 应激式 DOM 更新机制（Reactive DOM updates）
 
-If these terms sound scary to you, don't be intimidated! As promised, I'll use plain English and doodles to help you make sense of them. Trust me, it's not that hard!
+如果这几个名词对你来说听起来像天书，别担心！我会用简单的语言和插画来帮你理解。相信我，并不是那么难。
 
-Just read on!
+继续往下读吧！
 
-### Components
+### 组件
+
+组件是 React 的旗舰功能。其核心思想基于一个简单的策略：分而治之。如果一个问题作为一个整体很难理解透彻和解决，我们就把它分拆为多个小问题，各个击破，最后再将结果综合起来。
 
 Components are the flagship feature of React. The core idea is based on a simple strategy: divide-and-conquer. If it's difficult to grok a problem all at once, we break it into smaller problems, solve them one at a time and then combine the results.
 
