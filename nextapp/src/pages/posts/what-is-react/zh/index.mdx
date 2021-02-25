@@ -193,23 +193,23 @@ React 具有完美处理与日俱增的 web 开发复杂度的超能力，归纳
 
 组件是 React 的旗舰功能。其核心思想基于一个简单的策略：分而治之。如果一个问题作为一个整体很难理解透彻和解决，我们就把它分拆为多个小问题，各个击破，最后再将结果综合起来。
 
-Components are the flagship feature of React. The core idea is based on a simple strategy: divide-and-conquer. If it's difficult to grok a problem all at once, we break it into smaller problems, solve them one at a time and then combine the results.
-
 <img
   src={imgBreakIntoComponents}
   alt="React breaks a problem into components"
 />
 
-Building an app in React is almost all about working with components: breaking the app into components, finding the best components for the job, fitting one with another, creating new components from existing ones etc.
+使用 React 写程序的时候，几乎所有的时候都是跟组件打交道：将整个应用分割为组件、寻找最合适的组件、将不同组件拼装起来、在原有组件基础上制作新组件，如此等等。
 
-Nowadays, design tools such as Framer and Figma have components too (and symbols in Sketch). They are a lot like React components, except that the latter are more flexible and powerful. In fact, the inspiration of components in design tools came directly from components in software engineering. Once a component is created, we can create multiple instances of it. We can use it to construct other components. If we change a component, everything that includes this component will be updated automatically.
+现今的设计工具也支持组件功能，例如 Framer 和 Figma，再如 Sketch 中的 symbol。这些组件与 React 中的组件属于同一个概念，只不过后者更加灵活和功能强大。事实上，这些工具中组件的设计灵感直接来自于软件工程中的组件概念。
 
-Components in React have two important properties:
+一旦一个组件创建完成，我们可以多次使用它（创建组件实例）。我们可以用这个组件创建另外的组件。当一个组件发生变动时，包含这个组件的所有其他组件也会自动发生相应变化。
 
-1. Components are _composable_. They are made for reuse. We can make a new component with other components.
-2. Components are _independent_ of each other. If we change the code in one place, other parts don't break.
+React 组件有两条重要的属性：
 
-If this sounds abstract to you, don't worry! I'll show you some examples and explain these properties in details soon.
+1. 组件是*可组合的*（composable）。组件的目的在于重用，我们可以使用现有组件创建新组件。
+2. 一个组件*独立于*其它组件（independent）。当修改一个组件时，其他组件不会受到不良影响。
+
+如果以上听起来太抽象，不要担心。我马上会使用一些例子为您详细解释。
 
 <!--
 <img
@@ -217,15 +217,15 @@ If this sounds abstract to you, don't worry! I'll show you some examples and exp
   alt="React components are composable and independent"
 /> -->
 
-### Declarative UI
+### 声明式用户界面（Declarative UI）
 
-#### Imperative vs. declarative
+#### 命令式与声明式
 
-When directly working with the DOM API, we'd have to specify what element to change at the right time, in the right order. This is equivalent to describing to Domo how to position his head, arms and legs step by step, for each and every portrait.
+当直接操作 DOM API 时，我们需要明确写出在具体什么时候、以何种顺序来修改哪个元素。这种操作就像手把手、一步一步地指导 Domo 该怎么摆姿势：头该怎么偏、手摆哪儿、脚怎么站。
 
 <img src={imgStepByStep} alt="Imperative programming" />
 
-Heck, this sounds tedious and error-prone! Why can't we just tell Domo _what_ we want instead of _how_ to pose? In fact, this is exactly how to build a UI in React. A developer draws a quick sketch of what he or she wants. React explains it to Domo how to pose.
+嗨，这听起来是不是繁琐又容易出错？为什么我们不能直接告诉 Domo 我们想要*什么*，而不是*怎么*做？使用 React 写程序就是这个思路！程序员画一个简图描述所期待的结果，React 代劳向 Domo 解释怎么摆姿势。
 
 <img src={imgThinker} alt="Declarative programming in React" />
 
