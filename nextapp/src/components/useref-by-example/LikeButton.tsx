@@ -40,6 +40,8 @@ function usePressHoldRepeat(
     },
     onMouseUp: () => setMouseDown(false),
     onMouseOut: () => setMouseDown(false),
+    onTouchStart: () => setMouseDown(true),
+    onTouchEnd: () => setMouseDown(false),
   }
 }
 
