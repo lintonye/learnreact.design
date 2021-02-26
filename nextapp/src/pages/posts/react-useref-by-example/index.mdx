@@ -386,9 +386,9 @@ function Counter() {
   })
   return (
     <div className="flex flex-col justify-center items-center m-8">
-      <h1>
+      <div>
         Prev: {prevCount.current}, Count: {count}
-      </h1>
+      </div>
       <button className="bg-purple-700 px-6 text-white rounded-md hover:bg-purple-500"
         onClick={() => setCount((c) => c + 1)}>+1</button>
     </div>
