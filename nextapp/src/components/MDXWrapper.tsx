@@ -4,6 +4,7 @@ import { MDXProvider } from '@mdx-js/react'
 import Image from 'next/image'
 import { FiLink } from 'react-icons/fi'
 import { IntersectionDetector } from './IntersectionDetector'
+import { Link } from '@/components/design-system'
 
 const components = {
   h1: (props: any) => <h1 className="text-4xl font-bold" {...props} />,
@@ -25,7 +26,15 @@ const components = {
     <ol className="list-outside list-decimal ml-5" {...props} />
   ),
   li: (props: any) => <li className=" leading-loose" {...props} />,
-  a: (props: any) => <a className="underline" {...props} />,
+  a: (props: any) => (
+    <Link
+      underline
+      {...props}
+      {...(/https?:\/\//.exec(props.href)
+        ? { target: '_blank', rel: 'noopener noreferrer' }
+        : {})}
+    />
+  ),
   p: (props: any) => <p className="leading-loose" {...props} />,
   hr: (props: any) => <hr className="my-6" {...props} />,
   table: (props: any) => (

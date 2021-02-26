@@ -5,13 +5,15 @@ import NLink from 'next/link'
 type Props = {
   href: string
   underline?: boolean
+  underlineHover?: boolean
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>
 
 export function Link({
   href,
   className,
   children,
-  underline = true,
+  underline = false,
+  underlineHover = true,
   ...props
 }: Props) {
   // const LinkComp: React.FunctionComponent<any> | string =
@@ -19,9 +21,9 @@ export function Link({
   return (
     <NLink href={href}>
       <a
-        className={
-          `cursor-pointer ${underline ? 'hover:underline' : ''} ` + className
-        }
+        className={`cursor-pointer ${underline ? 'underline' : ''} ${
+          underlineHover ? 'hover:underline' : ''
+        } ${className || ''}`}
         {...props}
       >
         {children}
