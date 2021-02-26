@@ -20,6 +20,7 @@ import Highlight, {
   PrismTheme,
 } from 'prism-react-renderer'
 import vsDarkThemeDefault from 'prism-react-renderer/themes/vsDark'
+import { useForceRender } from './useref-by-example/useForceRender'
 
 const vscodeDarkTheme = {
   plain: {
@@ -128,17 +129,24 @@ function Tab({
   title,
   children,
   className,
+  actions = [],
 }: {
   title: string
   children: React.ReactNode
   className?: string
+  actions?: React.ReactNode[]
 }) {
   return (
     <div className={`flex flex-col ` + className}>
-      <div className="text-tiny border-b-2 border-blue-600 border-opacity-70 rounded-sm">
+      <div className="flex justify-between text-tiny border-b-2 border-blue-600 border-opacity-70 rounded-sm">
         <span className="px-2 inline-block rounded-t-md bg-blue-600 text-white">
           {title}
         </span>
+        <div>
+          {actions.map((a, i) => (
+            <div key={i}>{a}</div>
+          ))}
+        </div>
       </div>
       <div className="flex-1 border-l-2 border-r-2 border-b-2 border-opacity-50 border-blue-600 rounded-sm">
         {children}
@@ -209,7 +217,7 @@ type Props = {
 }
 
 function Editor({
-  code: initialCode,
+  code, //: initialCode,
   language,
   theme,
   editable = false,
@@ -276,7 +284,7 @@ function Editor({
   )
   const baseTheme = theme && typeof theme.plain === 'object' ? theme.plain : {}
 
-  const [code, setCode] = useState(initialCode)
+  // const [code, setCode] = useState(initialCode)
 
   return (
     <SimpleEditor
@@ -284,7 +292,7 @@ function Editor({
       padding={10}
       highlight={highlightCode}
       onValueChange={(c) => {
-        setCode(c)
+        // setCode(c)
         typeof onChange === 'function' && onChange(c)
       }}
       disabled={!editable}
@@ -365,11 +373,20 @@ export function LiveEditor({
           typeof consoleCallbackRef.current?.log === 'function' &&
             consoleCallbackRef.current.log(msg)
         },
+        clear: () => {
+          typeof consoleCallbackRef.current?.clear === 'function' &&
+            consoleCallbackRef.current.clear()
+        },
       },
     }),
     [],
   )
-  const code = children.trim()
+  const initialCode = children.trim()
+  const [code, setCode] = useState(initialCode)
+
+  useEffect(() => {
+    scope.console.clear()
+  }, [code])
 
   return (
     <LiveProvider
@@ -390,12 +407,22 @@ export function LiveEditor({
           className={`text-xl md:row-span-2 md:col-start-1 md:row-start-1 ${
             showPreview || showConsole ? 'md:col-end-9' : 'md:col-end-13'
           }  `}
+          actions={[
+            <button
+              className="text-tiny"
+              onClick={() => {
+                if (confirm('Do you want to reset the editor?'))
+                  setCode(initialCode)
+              }}
+            >
+              RESET
+            </button>,
+          ]}
         >
           <EditorInContext
             highlightLines={parseHighlightLines(highlightLines)}
-            onValueChange={() => {
-              typeof consoleCallbackRef.current?.clear === 'function' &&
-                consoleCallbackRef.current.clear()
+            onValueChange={(c: string) => {
+              setCode(c)
             }}
           />
         </Tab>
