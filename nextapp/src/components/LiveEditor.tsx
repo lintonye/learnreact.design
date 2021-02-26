@@ -21,6 +21,7 @@ import Highlight, {
 } from 'prism-react-renderer'
 import vsDarkThemeDefault from 'prism-react-renderer/themes/vsDark'
 import { useForceRender } from './useref-by-example/useForceRender'
+import { FiRefreshCw } from 'react-icons/fi'
 
 const vscodeDarkTheme = {
   plain: {
@@ -409,13 +410,18 @@ export function LiveEditor({
           }  `}
           actions={[
             <button
-              className="text-tiny"
+              className="text-tiny text-indigo-700 hover:text-indigo-400"
               onClick={() => {
-                if (confirm('Do you want to reset the editor?'))
+                if (
+                  confirm(
+                    'Do you want to reset the editor? All your edits will be lost.',
+                  )
+                )
                   setCode(initialCode)
               }}
+              title="Reset the editor"
             >
-              RESET
+              <FiRefreshCw />
             </button>,
           ]}
         >
