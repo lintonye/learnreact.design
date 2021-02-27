@@ -5,6 +5,7 @@ import { StopWatch } from '@/components/useref-by-example/StopWatch'
 import { useForceRender } from '@/components/useref-by-example/useForceRender'
 import { UseRefSurprise } from '@/components/useref-by-example/UseRefSurprise'
 import { Demo } from '@/components/Demo'
+import { Reactions } from '@/components/Reactions'
 import imgTimeLoop from './time-loop.jpeg'
 import imgSocialCard from './useref-social-card.png'
 import { FiInfo } from 'react-icons/fi'
@@ -176,52 +177,42 @@ That's no surprise, right? They are local variables defined in the function. Whe
 As straighforward as this sounds, sometimes it's easy to forget (I do it all the time). So remember, since a React component is rerendered all the time, all the local variables will go into a time loop, over and over again.
 
 <div className="p-8 bg-yellow-100 border border-yellow-400 rounded-sm space-y-4 my-2">
-  {/* <p>
-    Does this "rerendering time loop" metaphor make sense to you? 
-  </p> */}
-
-<p>
-  Just like the "rerendering time loop" metaphor used here, I'm working on many
-  others. My goal is to distill the core concepts of React into digestable,
-  visual pieces that are easy to understand and remember. I call them{' '}
-  <span className="font-bold italic">React Mental Models</span>. They are about
-  how to <em>think</em> in React.
-</p>
-
-  <p>
-    What I'm striving is to show you not just the <em><strong>how</strong></em>, but the <em><strong>why</strong></em>. It's the solid basics you can use to build from -- so that you can confidently teach yourself moving forward.
-  </p>
-  
-   {/* <p className="italic">"I can follow tutorials, but I can't apply it to my own projects."</p>
-    
-  <p>
-    Is that how you feel when you learn React? You are not alone! Tutorials and hands-on exercises are important. But if they stop at only teaching you the "how" — even though giving you the illusion of mastery — your mind will refuse to retain it for the long term, not to mention applying it.
-  </p>
-
-{' '}
-
-<p>
-  What I'm striving is to show you not just the "how", but the "why". It's the
-  solid basics you can use to build from -- so that you can confidently teach
-  yourself moving forward.
-</p>
-
-{' '}
-
-<p>
-  I'm working on distilling the core concepts of React into digestable and
-  visual pieces that are easy to understand and remember. Just like the
-  "rerendering time loop" metaphor used here, they are about how to think in
-  React. I call them{' '}
-  <span className="font-bold italic">React Mental Models</span>.
-</p> */}
-
-<p>
-  Want to stay up to date? Sign up below! Also read more about{' '}
-  <a href="/courses/react-mental-models">my motivation here</a>.
-</p>
-
-  <ConvertKitForm formId="2061519" subscribeButtonTitle="Keep Me Posted" />
+  Does this "rerendering time loop" metaphor make sense to you?
+  <Reactions
+    id="time-loop"
+    revealAfterReaction={
+      <>
+        <p>
+          Thanks for your feedback! Just like the "rerendering time loop"
+          metaphor used here, I'm working on many others. My goal is to distill
+          the core concepts of React into digestable, visual pieces that are
+          easy to understand and remember. I call them{' '}
+          <span className="font-bold italic">React Mental Models</span>. They
+          are about how to <em>think</em> in React.
+        </p>
+        <p>
+          What I'm striving is to show you not just the{' '}
+          <em>
+            <strong>how</strong>
+          </em>
+          , but the{' '}
+          <em>
+            <strong>why</strong>
+          </em>
+          . It's the solid basics you can use to build from -- so that you can
+          confidently teach yourself moving forward.
+        </p>
+        <p>
+          Want to stay up to date? Sign up below! Also read more about{' '}
+          <a href="/courses/react-mental-models">my motivation here</a>.
+        </p>
+        <ConvertKitForm
+          formId="2061519"
+          subscribeButtonTitle="Keep Me Posted"
+        />
+      </>
+    }
+  />
 </div>
 
 So, we need a solution that survives this "rerendering time loop". We want to preserve the value no matter how many times the component is rendered. If we update `count` to `42`, at the next render it should still be `42`, not the initial value `0`.
