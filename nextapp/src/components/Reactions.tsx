@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { FiSmile } from 'react-icons/fi'
 import produce from 'immer'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const reactionEmojis: { [key: string]: string } = {
   up1: '👍',
@@ -107,7 +108,7 @@ export function Reactions({
           .map((reaction) => (
             <div
               key={reaction}
-              className={`space-x-1 rounded-sm flex items-center -ml-2 px-2 py-0 cursor-pointer ${
+              className={`space-x-1 relative overflow-hidden rounded-sm flex items-center -ml-2 px-2 py-0 cursor-pointer ${
                 myReaction == reaction
                   ? 'bg-yellow-200 text-yellow-800'
                   : 'text-yellow-800 '
@@ -116,10 +117,20 @@ export function Reactions({
                 setReaction(myReaction === reaction ? null : reaction)
               }}
             >
-              <div>{reactionEmojis[reaction]}</div>
-              <div className="text-tiny inline-block">
-                {reactions[reaction] || 0}
-              </div>
+              <div className="mr-6">{reactionEmojis[reaction]}</div>
+              <AnimatePresence>
+                {myReaction && (
+                  <motion.div
+                    key={reactions[reaction] || 0}
+                    initial={{ y: -20 }}
+                    animate={{ y: 0 }}
+                    exit={{ y: 20 }}
+                    className="text-tiny inline-block absolute left-7"
+                  >
+                    {reactions[reaction] || 0}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           ))}
       </div>
