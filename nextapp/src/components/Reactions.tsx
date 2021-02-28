@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { FiSmile } from 'react-icons/fi'
 import produce from 'immer'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useUserId } from './useUserId'
+import { useLocalStorage } from '@/lib/useLocalStorage'
+import { useFirestore } from '@/lib/firebase'
+import firebase from 'firebase/app'
 
 const reactionEmojis: { [key: string]: string } = {
   up1: '👍',
@@ -24,34 +28,63 @@ type ReactionOps = {
   setReaction: (reaction: string | null) => void
 }
 
-const updateCounts = (
-  counts: ReactionCounts,
-  oldReaction: string | null,
-  reaction: string | null,
-) => {
-  if (oldReaction && typeof counts[oldReaction] === 'number')
-    counts[oldReaction]--
-  if (reaction) {
-    if (typeof counts[reaction] !== 'number') counts[reaction] = 0
-    counts[reaction]++
-  }
-}
-
 function useReactions(id: string): ReactionOps {
-  const [myReaction, setMyReaction] = useState<string | null>(null)
+  const [myReaction, setMyReaction] = useLocalStorage(`reaction-${id}`, null)
+
   const [reactions, setReactions] = useState({
     // up1: 40,
     // up2: 100,
     // down1: 2,
   })
-  const setReaction = (reaction: string | null) => {
-    //TODO
-    setMyReaction(reaction)
-    setReactions(
-      produce((rs) => {
-        updateCounts(rs, myReaction, reaction)
-      }),
-    )
+  const firestore = useFirestore()
+  const collectionName = 'reactions'
+  useEffect(() => {
+    const collection = firestore.collection(collectionName)
+    const doc = collection.doc(id)
+    const sub = doc.onSnapshot((snapshot) => {
+      setReactions(snapshot.data()?.counts || {})
+    })
+    return sub
+  }, [id])
+  const setReaction = async (reaction: string | null) => {
+    const oldReaction = myReaction
+    const collection = firestore.collection(collectionName)
+    const doc = collection.doc(id)
+    const countDelta = (prefix = '') => ({
+      ...(oldReaction !== null
+        ? {
+            [`${prefix}${oldReaction}`]: firebase.firestore.FieldValue.increment(
+              -1,
+            ),
+          }
+        : {}),
+      ...(reaction !== null
+        ? {
+            [`${prefix}${reaction}`]: firebase.firestore.FieldValue.increment(
+              1,
+            ),
+          }
+        : {}),
+    })
+    // console.log('setReaction', { oldReaction, reaction, delta: countDelta })
+    try {
+      if ((await doc.get()).exists) {
+        await doc.update({
+          id,
+          updated: firebase.firestore.FieldValue.serverTimestamp(),
+          ...countDelta('counts.'),
+        })
+      } else {
+        await doc.set({
+          id,
+          updated: firebase.firestore.FieldValue.serverTimestamp(),
+          counts: countDelta(),
+        })
+      }
+      setMyReaction(reaction)
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   return { reactions, myReaction, setReaction }
@@ -108,10 +141,8 @@ export function Reactions({
           .map((reaction) => (
             <div
               key={reaction}
-              className={`space-x-1 relative overflow-hidden rounded-sm flex items-center -ml-2 px-2 py-0 cursor-pointer ${
-                myReaction == reaction
-                  ? 'bg-yellow-200 text-yellow-800'
-                  : 'text-yellow-800 '
+              className={`space-x-1 text-yellow-800 relative overflow-hidden rounded-sm flex items-center -ml-2 px-2 py-0 cursor-pointer ${
+                myReaction === reaction ? 'bg-yellow-200' : ''
               }`}
               onClick={() => {
                 setReaction(myReaction === reaction ? null : reaction)

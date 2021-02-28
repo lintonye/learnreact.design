@@ -1,14 +1,13 @@
 import * as React from 'react'
 import { useState, useEffect } from 'react'
 import { useFirestore } from '@/lib/firebase'
-import { useLocalStorage } from '@/lib/useLocalStorage'
-import { nanoid } from 'nanoid'
 import firebase from 'firebase/app'
 import {
   FirebaseFirestore,
   DocumentReference,
   DocumentData,
 } from '@firebase/firestore-types'
+import { useUserId } from './useUserId'
 
 type QuizStats = { [key: string]: number }
 
@@ -63,14 +62,11 @@ export function useSubmitQuestion({
   answerId: string
   userId?: string
 }) {
-  const [personId, setPersonId] = useLocalStorage('personId', userId)
+  const personId = useUserId(userId)
   const [status, setStatus] = useState('initial')
   const [error, setError] = useState(null)
   const firestore = useFirestore()
 
-  if (personId === null) setPersonId(nanoid())
-  // force to use uid if it exists
-  if (userId && personId !== userId) setPersonId(userId)
   const submitQuestion = React.useCallback(
     async (choiceId) => {
       // alert(
