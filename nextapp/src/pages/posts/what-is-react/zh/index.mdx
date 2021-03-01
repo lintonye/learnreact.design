@@ -33,7 +33,7 @@ import imgSocialCard from './what-is-react-social-card.png'
 import Image from 'next/image'
 
 export const meta = {
-  title: 'React 到底是什么：写给绝对小白的图解教程',
+  title: 'React 是什么东东：给绝对小白的图解教程',
   description: `React is a JavaScript library for building user interfaces. This is the official definition of React. But what if you are not familiar with JavaScript? What if you are not a developer? Would you still be able to make sense of (and learn) React? My answer is a firm YES. `,
   date: '2021-02-02',
   tags: ['react'],
@@ -72,26 +72,26 @@ Let's get started with something you might have heard many times, the DOM. -->
 
 ## 简介
 
-> React 用于构建用户界面的 JavaScript 库。
+React 到底是什么？为什么它那么受欢迎？它到底解决了什么问题？
 
-这是 React 的官方定义。但如果您对 JavaScript 并不熟悉，甚至根本不是一个开发者，您有没有可能理解和学习 React？
+> React 是一个用于构建用户界面的 JavaScript 库。
 
-我的回答是：当然！这也是我写这篇文章的动因之一。我希望能够回答这些问题：到底 React 是什么？为什么它那么受欢迎？React 解决了什么具体的问题？
+JavaScript？库？不是说好了这是给绝对小白的教程吗？
 
-本文是写给初学者的 React 简介，这也许是在学习任何 React 具体知识之前您应该读的第一篇文章。我将会用通俗的语言（和插画涂鸦 <span className='text-base'>🌴</span>）来向您讲解 React 的核心概念。不懂 JavaScript？这不是问题！只要您对 HTML 有大致的了解（例如，HTML 标签的格式），您就应该能够阅读这篇文章并从中受益。
+好吧，那只是官方定义。我会用另一种方式来为你讲解 React。很负责任地告诉你，只要你对 HTML 有大致的了解（例如，HTML 标签的格式），你应该就能看懂这篇文章。不懂 JavaScript？完全没问题！
 
-这是一幅鸟瞰图 <span className='text-2xl'>🦅</span>，但同时我也会为您装备了一副望远镜 <IconBinocular size={25} className='inline-block align-center'/>。您不仅将看到 React 的概略图，而且还可以放大、放大、看到细节，挽起袖子写一个真正的 React 组件。没错，JS 不是必需的！
+本文是写给初学者的 React 简介，这也许是在学习任何 React 具体知识之前你应该读的第一篇文章。我将会用通俗的语言（和插画涂鸦 <span className='text-base'>🌴</span>）来向你讲解 React 的核心概念。
 
-记住：要了解 React 的核心思想，您并不需要是一名有经验的程序员！
+这是一幅鸟瞰图 <span className='text-2xl'>🦅</span>，但同时我也会为你装备了一副望远镜 <IconBinocular size={25} className='inline-block align-center'/>。你不仅将看到 React 的概略图，而且还可以放大、放大、看到细节，挽起袖子写一个真正的 React 组件。没错，JS 不是必需的！
 
 准备好启航了吗？
 
 <div className="p-8 bg-yellow-100 border border-yellow-400 rounded-sm space-y-4 my-2">
   <p>
-    当然，要真正使用 React 的话，您还是需要写代码。我正在编写一个 Email 邮件课程来帮助您尽快进入状态。
+    当然，要真正使用 React 的话，你还是需要写代码。我正在编写一个 Email 邮件课程来帮助你尽快进入状态。
   </p>
   <p>
-    我相信，经过几天的集中学习，您可以掌握足够的技巧来使用 React 做一些有意义的工作，<strong>即使您没有编程经验</strong>。如果有兴趣的话，请输入您的 Email 地址注册。课程编写完成以后，我会第一时间给您通知。
+    我相信，经过几天的集中学习，你可以掌握足够的技巧来使用 React 做一些有意义的工作，<strong>即使你没有编程经验</strong>。如果有兴趣的话，请输入你的 Email 地址注册。课程编写完成以后，我会第一时间给你通知。
   </p>
 
   <ConvertKitForm formId="2007263" subscribeButtonTitle="注册" successMessage="马上就好，请收一下邮件，并确认注册。"/>
@@ -99,11 +99,11 @@ Let's get started with something you might have heard many times, the DOM. -->
 
 ## Web 二三事
 
-我们从一个您或许听说过很多次的概念出发：DOM。
+我们从一个你或许听说过很多次的概念出发：DOM。
 
 ### DOM 是什么？
 
-当您将一个网站的网址输入浏览器的时候，你的电脑和远方的另一台电脑就开始对话。这台远方的电脑一般被称之为 _服务器_。你的电脑发出请求，向服务器索取某种信息，服务器随即做出应答：
+当你将一个网站的网址输入浏览器的时候，你的电脑和远方的另一台电脑就开始对话。这台远方的电脑一般被称之为 _服务器_。你的电脑发出请求，向服务器索取某种信息，服务器随即做出应答：
 
 > **你的电脑：** 伙计，这个网站上有啥好东西啊？网址是：learnreact.design
 >
@@ -209,7 +209,7 @@ React 组件有两条重要的属性：
 1. 组件是*可组合的*（composable）。组件的目的在于重用，我们可以使用现有组件创建新组件。
 2. 一个组件*独立于*其它组件（independent）。当修改一个组件时，其他组件不会受到不良影响。
 
-如果以上听起来太抽象，不要担心。我马上会使用一些例子为您详细解释。
+如果以上听起来太抽象，不要担心。我马上会使用一些例子为你详细解释。
 
 <!--
 <img
