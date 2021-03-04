@@ -74,23 +74,25 @@ Let's get started with something you might have heard many times, the DOM. -->
 
 React 到底是什么？为什么它那么受欢迎？它到底解决了什么问题？
 
-> React 是一个用于构建用户界面的 JavaScript 库。
+> 答案：React 是一个用于构建用户界面的、 声明式、组件化的 JavaScript 库。
 
-JavaScript？库？不是说好了这是给绝对小白的教程吗？
+JavaScript 库？声明式？组件化？不是说好了这是给绝对小白的教程吗？
 
-好吧，上面那行字是从官方网站拷过来的。接下来，让我用另一种方式为你讲解 React。很负责任地告诉你，只要对 HTML 有大致的了解（例如，HTML 标签的格式），你应该就能看懂这篇文章、理解 React 的核心概念。不懂 JavaScript？完全没问题！
+好吧，上面那行字是从官方网站拷过来拼凑的。接下来，让我用另一种方式为你讲解 React。很负责任地说，只要你对 HTML 有大致的了解（例如，HTML 标签的格式），应该就能看懂这篇文章、理解 React 的核心概念。不懂 JavaScript？完全没问题！
 
-具体什么方式呢？先放几个表情符提示一下：
+具体什么方式呢？先放几个表情符卖个关子：
 
-🌴 🦅 <IconBinocular size={20} className='inline-block align-center'/>
+<div className="text-2xl">🌴</div>
+<div className="text-2xl">🦅</div>
+<IconBinocular size={25} className="inline-block align-center" />
 
-我将带你高屋建瓴地看到 React 的概略图，而且还可以拉近、放大、看到细节，挽起袖子写一个真正的 React 组件。没错，JS 不是必需的！
+来，跟我一起到高处俯瞰 React 的全貌，然后拿起望远镜，拉近、放大、观察细节，挽起袖子写一个真正的 React 组件。没错，不懂 JS 也照样可以写！
 
-准备好了吗？
+准备好启程了吗？
 
 <div className="p-8 bg-yellow-100 border border-yellow-400 rounded-sm space-y-4 my-2">
   <p>
-    当然，要真正使用 React 的话，你还是需要写代码的。我正在编写一个 Email 邮件课程来帮助你尽快进入状态。
+    当然，要真正使用 React 的话，还是需要写 JavaScript 代码的。我正在编写一个 Email 邮件课程来帮助你尽快进入状态。
   </p>
   <p>
     我相信，经过几天的集中学习，你可以掌握足够的技巧来使用 React 做一些有意义的工作，<strong>即使你没有编程经验</strong>。如果有兴趣的话，请输入你的 Email 地址注册。课程编写完成以后，我会第一时间给你通知。
@@ -101,7 +103,7 @@ JavaScript？库？不是说好了这是给绝对小白的教程吗？
 
 ## Web 二三事
 
-来吧，我们从一个你或许听说过很多次的概念出发：DOM。
+第一站，我们先从一个你或许听说过很多次的概念说起：DOM。
 
 ### DOM 是什么？
 
@@ -109,13 +111,13 @@ JavaScript？库？不是说好了这是给绝对小白的教程吗？
 
 > **你的电脑：** 伙计，这个网站靠不靠谱啊？网址是：learnreact.design
 >
-> **服务器：** 少安毋躁，让我找找。嘀。嘟。
+> **服务器：** 少安毋躁，让我查查。嘀。嘟。
 
 服务器的应答数据主要包括了三个部分：HTML、CSS 和 JavaScript。
 
 HTML 列举出一个网页的内容并描述其结构。例如，页面上有多少个标题和段落？给用户显示什么图片？这个按钮和那个文本输入框是不是应该放到同一个容器里？
 
-利用 HTML 里的信息，浏览器将会创建一个叫做 DOM 的东西。
+利用 HTML 里的信息，浏览器将会创建一个叫做 DOM 的家伙。
 
 <img src={imgDomoBorn} alt="Introducing the DOM" />
 
@@ -135,7 +137,7 @@ DOM 是 Document Object Model 的缩写。从某种意义上说，它确实是�
 
 ### DOM 的 API
 
-我们经常希望一个网页是动态和交互式的，也就是说，网页的内容不时发生变化。一会在这里加点文字，一会又显示一个对话框，一会又根据从服务器下载的数据更新图表。
+我们经常希望一个网页是动态和交互式的，也就是说，网页的内容会不时发生变化。一会儿在这里加点文字，一会儿又显示一个对话框，一会儿又根据从服务器下载的数据更新图表。
 
 记住，任何时候如果希望网页内容发生变化，我们都需要更改 DOM。Domo 如果不改变姿势，浏览器里的画家就不可能画出新的作品。
 
@@ -149,13 +151,11 @@ DOM 是 Document Object Model 的缩写。从某种意义上说，它确实是�
 
 ### 越来越复杂的 web 开发
 
-多年来，直接与 DOM 对话一直是 web 开发的标准方法，特别是当大多数 web 内容是静态页面的时候。程序员们典型的做法是，在静态页面的基础上点缀一些 JavaScript 代码，在页面上加一点点交互。
+多年来，直接与 DOM 对话一直是 web 开发的标准方法，特别是当大多数 web 内容是静态页面的时候。程序员们典型的做法是，在静态页面的基础上加一点点 JavaScript 代码来点缀一些交互效果。
 
 然而，当众多的 SPA （Single Page Application）出现后，例如，Gmail 和 Google 地图，用户们开始对 web 有了更高的期望。他们不再只满足于大多数情况下都是静态的 web _页面_，他们更希望看到的是交互性强、响应迅速的 web _应用_。
 
-为了开发满足这些条件的 web 应用，代码变得越来越复杂，而且通常需要多人协作。
-
-Web 开发的传统方法开始逐渐失效，与 DOM 直接对话显得低效而繁琐。
+为了开发满足这些条件的 web 应用，代码变得越来越复杂，与 DOM 直接对话这种方式越来越显得低效而繁琐，Web 开发的传统方法越来越显得捉襟见肘。人们开始寻找更高效、更便捷的开发方法。
 
 <!-- 1. Web apps are getting large and complex. Development of a web app often requires team collaboration
 2. The DOM itself has some issues. It's slow to update the entire DOM for a large page. The behaviors of different browsers have subtle differences.
@@ -168,7 +168,7 @@ Web 开发的传统方法开始逐渐失效，与 DOM 直接对话显得低效�
 
 ## React 的核心思想
 
-先生们、女士们，让我们隆重欢迎一位超级英雄出场，那就是 React！
+女士们、先生们，让我们隆重欢迎 React 出场！
 
 <img src={imgIntroReact} alt="Introducing React" height={900} />
 
@@ -187,7 +187,7 @@ React 的超能力归纳起来有三条，完美地处理了与日俱增的 web 
 - 声明式界面编程（Declarative UI）
 - 应激式 DOM 更新机制（Reactive DOM updates）
 
-如果这几个名词听起来像天书，别担心！我会用简单的语言和插画来帮你理解。相信我，并不是那么难。
+如果这几个名词听起来像天书，别担心！我会用简单的语言和插画来帮你理解。没有想象的那么难，相信我没错的。
 
 继续往下读吧！
 
@@ -200,18 +200,18 @@ React 的超能力归纳起来有三条，完美地处理了与日俱增的 web 
   alt="React breaks a problem into components"
 />
 
-使用 React 写程序的时候，几乎所有的时候都是跟组件打交道：将整个应用分割为组件、寻找最合适的组件、将不同组件拼装起来、在原有组件基础上制作新组件，如此等等。
+使用 React 写程序的时候，几乎所有的时间都是在跟组件打交道：将整个应用分割为组件、寻找最合适的组件、将不同组件拼装起来、在原有组件基础上制作新组件，如此等等。
 
 现今的设计工具也支持组件功能，例如 Framer 和 Figma，再如 Sketch 中的 symbol。这些组件与 React 中的组件属于同一个概念，只不过后者更加灵活和功能强大。事实上，这些工具中组件的设计灵感直接来自于软件工程中的组件概念。
 
-一旦一个组件创建完成，我们可以多次使用它（创建组件实例）。我们可以用这个组件创建另外的组件。当一个组件发生变动时，包含这个组件的所有其他组件也会自动发生相应变化。
+一旦一个组件创建完成，我们可以多次使用它（创建组件实例），可以用这个组件创建另外的组件。当一个组件发生变动时，包含这个组件的所有其他组件也会自动发生相应变化。
 
 React 组件有两条重要的属性：
 
 1. 组件是*可组合的*（composable）。组件的目的在于重用，我们可以使用现有组件创建新组件。
 2. 一个组件*独立于*其它组件（independent）。当修改一个组件时，其他组件不会受到不良影响。
 
-如果以上听起来太抽象，不要担心。我马上会使用一些例子为你详细解释。
+太抽象？别担心，等会看了例子你就明白了。
 
 <!--
 <img
@@ -223,27 +223,27 @@ React 组件有两条重要的属性：
 
 #### 命令式与声明式
 
-当直接操作 DOM API 时，我们需要明确写出在具体什么时候、以何种顺序来修改哪个元素。这种操作就像手把手、一步一步地指导 Domo 该怎么摆姿势：头该怎么偏、手摆哪儿、脚怎么站。
+当直接操作 DOM API 时，我们需要明确写出在具体什么时刻、以何种顺序来修改哪个元素。这种操作就像手把手、一步一步地指导 Domo 该怎么摆姿势：头该怎么偏、手摆哪儿、脚怎么站。
 
 <img src={imgStepByStep} alt="Imperative programming" />
 
-嗨，这听起来是不是繁琐又容易出错？为什么我们不能直接告诉 Domo 我们想要*什么*，而不是*怎么*做？使用 React 写程序就是这个思路！程序员画一个简图描述所期待的结果，React 代劳向 Domo 解释怎么摆姿势。
+这听起来是不是繁琐又容易出错？为什么我们不能直接告诉 Domo 我们想要*什么*，而不是*怎么*做？使用 React 写程序就是这个思路！程序员画一个简图描述所期待的结果，React 代劳向 Domo 解释怎么摆姿势。
 
 <img src={imgThinker} alt="Declarative programming in React" />
 
-因为我们编写的应用是动态的，我们经常希望 Domo 很快速地变换姿势。于是我们就一次性画很多简图并一堆一堆地拿给 React。React 将这些简图摞成一叠，像看手翻书一样手指一翻，一个动态的用户界面就跃然眼前！
+因为我们编写的应用是动态的，我们经常希望 Domo 很快速地变换姿势。于是我们就一次性画很多简图拿给 React。React 将这些简图摞成一叠，像看手翻书一样手指一翻，一个动态的用户界面就跃然眼前了！
 
 <img src={imgFlipbook} alt="React treats input as a flipbook" />
 
 用技术术语来讲，如果一段代码定义的是如何做一件事的步骤，我们称之为**命令式**；相反，如果定义的是我们所预期的最终结果，它就是**声明式**。直接操作 DOM API 的传统 web 开发方式是命令式，而 React 是声明式。
 
-命令式编程发源于计算机还很原始的早期，那时，人们不得不逐字逐句地指示计算机：在哪儿存储数字，如何做乘法等等。但这种编程方式很快变得难以管理，于是人们编写了软件将问题的定义翻译成为具体的指令。声明式编程便诞生了。
+命令式编程发源于计算机还很原始的早期，那时，人们不得不逐字逐句地指示计算机：在哪儿存储数字，如何做乘法等等。但这种编程方式很快变得难以管理，于是，人们编写了软件将问题的定义自动翻译成为具体的指令，大家便可以更多地关注问题本身。声明式编程便应运而生了。
 
 #### 虚拟 DOM（Virtual DOM）
 
-除了让程序员们更轻松，声明式的 React 还提供了优化性能的机会。
+除了让程序员们更轻松，声明式的 React 还提供了性能优化的机会。
 
-当 React 事先拿到了所有的简图，他可以将其整理归类、删除重复部分，以此保证 Domo 和艺术家只做最少的事、节省大量的时间。
+当 React 事先拿到了所有的简图，他可以将其整理归类、删除重复部分，以此保证 Domo 和艺术家只做最少的事，节省了大量的时间。
 
 <img src={imgOptimizeSketches} alt="React diffing with virtual DOM" />
 
@@ -255,7 +255,7 @@ React 组件有两条重要的属性：
 
 <img src={imgPlaceholders} alt="Thinker with a hat: Placeholder in JSX" />
 
-React 因此而得名。使用 React 编写的 UI 是**应激式（reactive）**的：看起来 DOM 是自发地随着数据的变化而变化。我们并不需要手动跟踪数据的变化，也不需要担心合适去更改 DOM。DOM 会自动更新的（实质上是 React 代劳）。应激式界面这个点子极大地简化了用户界面开发工作。
+React 因此而得名。使用 React 编写的 UI 是**应激式（reactive）**的：看起来 DOM 是自发地随着数据的变化而变化。我们并不需要手动跟踪数据的变化，也不需要担心何时去更改 DOM。DOM 会自动更新的（实质上是 React 代劳）。应激式界面这个点子极大地简化了用户界面的开发工作。
 
 <!-- Here's the code of the demo above. If you are not familiar with JavaScript, just squint: it's some HTML surrounded by some text and parentheses.
 
@@ -280,7 +280,7 @@ Notice that we just need to define what we want (a thinker and a hat in a div), 
 
   <div className="max-w-prose justify-self-end space-y-5 w-11/12 mx-auto md:ml-8 md:mx-none">
 
-现在，让我们来复习一下刚刚学到的知识并且使用一个真实的 React 组件来练练手。为了让你能够轻松理解，我在代码里省略了一些细节，例如 JavaScript。这样做的目标是为了突出核心概念，而不至于让其淹没在 JavaScript 的语法细节中。如果你读 JavaScript 代码完全没问题，不妨看看[真实的源代码](https://codesandbox.io/s/domos-hat-shop-4x7n0?file=/src/App.js)。
+现在，让我们来复习一下刚刚学到的知识，并且写一个真实的 React 组件来练练手。为了让你能够轻松理解，我在代码里省略了一些细节，例如 JavaScript。这样做的目标是为了突出核心概念，而不至于让其淹没在 JavaScript 的语法细节中。如果你熟悉 JavaScript，不妨看看[真实的源代码](https://codesandbox.io/s/domos-hat-shop-4x7n0?file=/src/App.js)。
 
 好了，让我们帮 Domo 写一个在线帽子店 🧢 。
 
@@ -357,7 +357,7 @@ Notice that we just need to define what we want (a thinker and a hat in a div), 
     }
   }}>
 
-Header 组件包括另外两个自定义标签：`<SearchBar>`和 `<ShoppingCart>`。它们又包含些什么呢？
+Header 组件包括另外两个自定义标签：`<SearchBar>`和 `<ShoppingCart>`。它们又包含些什么呢？看代码。
 
 <div id="connection-searchbar-shoppingcart">
 
@@ -379,7 +379,7 @@ Header 组件包括另外两个自定义标签：`<SearchBar>`和 `<ShoppingCart
 
 </div>
 
-还记得吗？React 组件的第一个重要性质：它们是**可组合的**。这代表了我们可以使用组件来创建新的组件，这恰恰就是我们刚刚做的事。
+还记得吗？React 组件的第一个重要性质：它们是**可组合的**。这代表了组件可以用来创建新的组件，这恰恰就是我们刚刚做的事。
 
 </IntersectionDetector>
 
@@ -408,17 +408,17 @@ Header 组件包括另外两个自定义标签：`<SearchBar>`和 `<ShoppingCart
 
 <div className="text-sm">
 
-提示：
+温馨提示：
 
 - 记得把标签都放到`<footer>`里
 - 如果忘记了格式，不妨看看前面的`Header`代码
-- 试试看加入一些你所知道的其它标签
+- 试试看加入一些你所知道的其它 HTML 标签
 
 </div>
 
 </div>
 
-是不是看到了两个搜索框？这就对了！
+你是不是看到了两个搜索框？这就对了！
 
 <div className="my-2 md:hidden">
   <img
@@ -429,9 +429,9 @@ Header 组件包括另外两个自定义标签：`<SearchBar>`和 `<ShoppingCart
 
 </IntersectionDetector>
 
-### 组件的目的是重用
+### 组件为重用而生
 
-所谓的组件可组合也就是说可以用已有组件拼装出新组件，这跟我们所处的自然界的工作方式很相似。不过在 React 的世界有一个很重要的不同点：当我们在一个组件里使用另外一个组件的时候，那个组件跟原先的组件仍然相互联系。当原来的组件发生变化时，它的所有实例将随之改变。
+所谓的组件可组合是指可以用已有组件拼装出新组件，这跟我们所处的自然界的工作方式很相似。不过在 React 世界有一个很重要的细节：当我们在一个组件里使用另外一个组件的时候，那个组件跟原先的组件仍然相互联系。当原来的组件发生变化时，它的所有实例将随之改变。
 
 <div id="connection-change-searchbar" className="bg-indigo-100 px-3 py-3 rounded-md">
 
@@ -463,7 +463,7 @@ React 组件是**可重用的**。一个组件定义好以后，我们可以用�
 
 <div className="hidden md:block">
 
-最后再来看看 Main 组件。你给 Domo 选好帽子了吗？你看到的这个例子不是一个图片而已，而是可交互的。
+最后再来看看 Main 组件。你给 Domo 选好帽子了吗？
 
 </div>
 
@@ -491,7 +491,7 @@ React 组件是**可重用的**。一个组件定义好以后，我们可以用�
   <img src={imgHatShopDomoWithHat} alt="Domo's hat shop UI" />
 </div>
 
-请注意，我们只需要定义我们想要什么（一个 div，包含了 Domo 和一顶帽子），然后把数据“绑定”好（`type = {hat}`）。 当数据发生变化时（用户选择了一顶帽子），界面就会随之自动更改。我们不需要担心如何去修改 DOM 以及修改的时机。我们也不需要去跟踪数据何时发生变化。我们只需要画一个简图就够了，也就是上面的代码。这就是 React 的另外两个超能力：**声明式用户界面**和**应激式 DOM 更改**。
+请注意，我们只需要定义我们想要什么（一个 div，包含了 Domo 和一顶帽子），然后把数据“绑定”好（`type = {hat}`）。 当数据发生变化时（用户选择了一顶帽子），界面就会随之自动更改。我们不需要担心如何去修改 DOM 以及修改的时机，也不需要去跟踪数据何时发生变化。我们只需要画一个简图就够了，也就是上面的代码。这就是 React 的另外两个超能力：**声明式用户界面**和**应激式 DOM 更改**。
 
 </IntersectionDetector>
 </div>
