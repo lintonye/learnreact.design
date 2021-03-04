@@ -80,13 +80,13 @@ JavaScript 库？声明式？组件化？不是说好了这是给绝对小白的
 
 好吧，上面那行字是从官方网站拷过来拼凑的。接下来，让我用另一种方式为你讲解 React。很负责任地说，只要你对 HTML 有大致的了解（例如，HTML 标签的格式），应该就能看懂这篇文章、理解 React 的核心概念。不懂 JavaScript？完全没问题！
 
-具体什么方式呢？先放几个表情符卖个关子：
+具体什么方式呢？先卖个关子放几个表情符：
 
 <div className="text-2xl">🌴</div>
-<div className="text-2xl">🦅</div>
+<div className="text-2xl">✈️</div>
 <IconBinocular size={25} className="inline-block align-center" />
 
-来，跟我一起到高处俯瞰 React 的全貌，然后拿起望远镜，拉近、放大、观察细节，挽起袖子写一个真正的 React 组件。没错，不懂 JS 也照样可以写！
+来，跟我一起到高处俯瞰 React 的全貌，然后拿起望远镜，拉近、放大、观察细节，挽起袖子写一个真正的 React 组件。没错，不懂 JavaScript 也照样写！
 
 准备好启程了吗？
 
@@ -121,13 +121,13 @@ HTML 列举出一个网页的内容并描述其结构。例如，页面上有多
 
 <img src={imgDomoBorn} alt="Introducing the DOM" />
 
-嗯？等等，DOM 是一棵树？回答正确，就是一棵树！我们电脑里有很多东西都看起来像一棵树，我知道这听起来有点奇怪。我们给这位大树朋友起个外号吧，叫 Domo 如何？
+嗯？等等，DOM 是一棵树？回答正确，就是一棵树！我们电脑里有很多东西都看起来像一棵树，我知道这听起来有点奇怪。我们给这位大树朋友起个名字吧，叫“朵模”如何？
 
-Domo 在一间名为”Web 浏览器“的艺术工作室里做人体模特（哦，不对，是树体模特）。跟其他的模特一样，Domo 的工作就是摆出各种姿势，让画家给他画一副“树”体写生。
+朵模在一间名为”Web 浏览器“的艺术工作室里做人体模特（哦，不对，是树体模特）。跟其他的模特一样，朵模的工作是摆出各种姿势，让画家给他画一副“树”体写生。
 
-<img src={imgDomoCssArtist} alt="Domo at the art studio Web Browser" />
+<img src={imgDomoCssArtist} alt="朵模at the art studio Web Browser" />
 
-DOM 是 Document Object Model 的缩写。从某种意义上说，它确实是一个模特，更确切地说是模型、网页文档的模型。当 DOM 摆出一个姿势时，浏览器就开始写生。这些所谓的写生画就是我们在网页上所看到的内容：文本框、段落、图片等等。程序员的职责就是告诉 Domo 如何穿戴和如何摆姿势。这就决定了网页上最终显示什么内容。
+DOM 是 Document Object Model 的缩写。从某种意义上说，它确实是一个模特，更确切地说是模型、网页文档的模型。当 DOM 摆出一个姿势时，浏览器就开始写生。这些所谓的写生画就是我们在网页上所看到的内容：文本框、段落、图片等等。程序员的职责就是告诉朵模如何穿戴和如何摆姿势。这就决定了网页上最终显示什么内容。
 
 如果你正在使用桌面电脑的浏览器（如 Chrome）看这篇文章，在页面上右击鼠标、选择“Inspect”，就可以在 Element 标签页里看到 DOM 的真实模样。
 
@@ -141,7 +141,7 @@ DOM 是 Document Object Model 的缩写。从某种意义上说，它确实是�
 
 记住，任何时候如果希望网页内容发生变化，我们都需要更改 DOM。Domo 如果不改变姿势，浏览器里的画家就不可能画出新的作品。
 
-那么，怎样才能让 Domo 改变姿势呢？
+那么，怎样才能让朵模改变姿势呢？
 
 我们直接告诉他就行了，他会听的。有意思的是，Domo 的耳朵还有一个专属的名字：API。
 
@@ -159,7 +159,7 @@ DOM 是 Document Object Model 的缩写。从某种意义上说，它确实是�
 
 <!-- 1. Web apps are getting large and complex. Development of a web app often requires team collaboration
 2. The DOM itself has some issues. It's slow to update the entire DOM for a large page. The behaviors of different browsers have subtle differences.
-3. It's also not efficient to directly talk to Domo. -->
+3. It's also not efficient to directly talk to朵模. -->
 
 <img
   src={imgMultipleDevsTalk}
@@ -172,14 +172,14 @@ DOM 是 Document Object Model 的缩写。从某种意义上说，它确实是�
 
 <img src={imgIntroReact} alt="Introducing React" height={900} />
 
-在 React 的帮助下，程序员们不再直接与 Domo 对话。React 充当起了程序员的代言人。他让程序员与 Domo 之间的沟通变得无比顺畅，将写生的过程管理得井井有条。
+在 React 的帮助下，程序员们不再直接与朵模对话。React 充当起了程序员的代言人。他让程序员与朵模之间的沟通变得无比顺畅，将写生的过程管理得井井有条。
 
 <img
   src={imgReactAgent}
   alt="React as an agent between a developer and the DOM"
 />
 
-React 是由 JavaScript 开发而成，它的设计目标之一是让我们在大多数情况下不再需要直接操作 DOM API。取而代之的是，我们只需要编写相对简单的代码，而 React 将其翻译为 DOM 理解的语言。
+React 由 JavaScript 开发而成，它的设计目标之一是让我们在大多数情况下不再需要直接操作 DOM API。取而代之的是，我们只需要编写相对简单的代码，而 React 将其翻译为 DOM 理解的语言。
 
 React 的超能力归纳起来有三条，完美地处理了与日俱增的 web 开发复杂度：
 
@@ -209,7 +209,7 @@ React 的超能力归纳起来有三条，完美地处理了与日俱增的 web 
 React 组件有两条重要的属性：
 
 1. 组件是*可组合的*（composable）。组件的目的在于重用，我们可以使用现有组件创建新组件。
-2. 一个组件*独立于*其它组件（independent）。当修改一个组件时，其他组件不会受到不良影响。
+2. 一个组件*独立于*其它组件（independent）。当修改一个组件时，不相干的组件不会受到干扰。
 
 太抽象？别担心，等会看了例子你就明白了。
 
@@ -223,15 +223,15 @@ React 组件有两条重要的属性：
 
 #### 命令式与声明式
 
-当直接操作 DOM API 时，我们需要明确写出在具体什么时刻、以何种顺序来修改哪个元素。这种操作就像手把手、一步一步地指导 Domo 该怎么摆姿势：头该怎么偏、手摆哪儿、脚怎么站。
+当直接操作 DOM API 时，我们需要明确写出在具体什么时刻、以何种顺序来修改哪个元素。这种操作就像手把手、一步一步地指导朵模该怎么摆姿势：头该怎么偏、手摆哪儿、脚怎么站。
 
 <img src={imgStepByStep} alt="Imperative programming" />
 
-这听起来是不是繁琐又容易出错？为什么我们不能直接告诉 Domo 我们想要*什么*，而不是*怎么*做？使用 React 写程序就是这个思路！程序员画一个简图描述所期待的结果，React 代劳向 Domo 解释怎么摆姿势。
+这听起来是不是繁琐又容易出错？为什么我们不能直接告诉朵模我们想要*什么*，而不是*怎么*做？使用 React 写程序就是这个思路！程序员画一个简图描述所期待的结果，React 代劳向朵模解释怎么摆姿势。
 
 <img src={imgThinker} alt="Declarative programming in React" />
 
-因为我们编写的应用是动态的，我们经常希望 Domo 很快速地变换姿势。于是我们就一次性画很多简图拿给 React。React 将这些简图摞成一叠，像看手翻书一样手指一翻，一个动态的用户界面就跃然眼前了！
+因为我们编写的应用是动态的，我们经常希望朵模很快速地变换姿势。于是我们就一次性画很多简图拿给 React。React 将这些简图摞成一叠，像看手翻书一样手指一翻，一个动态的用户界面就跃然眼前了！
 
 <img src={imgFlipbook} alt="React treats input as a flipbook" />
 
@@ -243,7 +243,7 @@ React 组件有两条重要的属性：
 
 除了让程序员们更轻松，声明式的 React 还提供了性能优化的机会。
 
-当 React 事先拿到了所有的简图，他可以将其整理归类、删除重复部分，以此保证 Domo 和艺术家只做最少的事，节省了大量的时间。
+当 React 事先拿到了所有的简图，他可以将其整理归类、删除重复部分，以此保证朵模和艺术家只做最少的事，节省了大量的时间。
 
 <img src={imgOptimizeSketches} alt="React diffing with virtual DOM" />
 
@@ -251,7 +251,7 @@ React 组件有两条重要的属性：
 
 ### 应激式 DOM 更新（Reactive DOM updates）
 
-更酷炫的是，想像一下如果我们能在简图里留下一些占位空白来代表同一个姿势的变体。这样的话，当有人索要 Domo 戴不同帽子的写生画时，我们就不需要再次跟 React 沟通，只需要坐下来看着 React 为我们更换了。
+更酷炫的是，想像一下如果我们能在简图里留下一些占位空白来代表同一个姿势的变体。这样的话，当有人索要朵模戴不同帽子的写生画时，我们就不需要再次跟 React 沟通，只需要坐下来看着 React 为我们更换了。
 
 <img src={imgPlaceholders} alt="Thinker with a hat: Placeholder in JSX" />
 
@@ -274,7 +274,7 @@ Notice that we just need to define what we want (a thinker and a hat in a div), 
 
   <div className="col-start-1 col-end-3 text-3xl font-bold py-12 mb-8 justify-self-stretch text-center bg-indigo-200 text-indigo-900">
 
-## 你人生中第一个 React 组件
+## 也许是你人生中第一个 React 组件
 
   </div>
 
@@ -282,10 +282,10 @@ Notice that we just need to define what we want (a thinker and a hat in a div), 
 
 现在，让我们来复习一下刚刚学到的知识，并且写一个真实的 React 组件来练练手。为了让你能够轻松理解，我在代码里省略了一些细节，例如 JavaScript。这样做的目标是为了突出核心概念，而不至于让其淹没在 JavaScript 的语法细节中。如果你熟悉 JavaScript，不妨看看[真实的源代码](https://codesandbox.io/s/domos-hat-shop-4x7n0?file=/src/App.js)。
 
-好了，让我们帮 Domo 写一个在线帽子店 🧢 。
+好了，让我们帮朵模写一个在线帽子店 🧢 。
 
 <div className="md:hidden">
-  <img src={imgHatShop} alt="Domo's hat shop UI" />
+  <img src={imgHatShop} alt="朵模's hat shop UI" />
 </div>
 
 ### 组件的可组合特性
@@ -299,7 +299,7 @@ Notice that we just need to define what we want (a thinker and a hat in a div), 
 <div className="my-4 md:hidden">
   <img
     src={imgHatShopComponents}
-    alt="Domo's hat shop UI divided into components"
+    alt="朵模's hat shop UI divided into components"
   />
 </div>
 
@@ -463,7 +463,7 @@ React 组件是**可重用的**。一个组件定义好以后，我们可以用�
 
 <div className="hidden md:block">
 
-最后再来看看 Main 组件。你给 Domo 选好帽子了吗？
+最后再来看看 Main 组件。你给朵模选好帽子了吗？
 
 </div>
 
@@ -491,7 +491,7 @@ React 组件是**可重用的**。一个组件定义好以后，我们可以用�
   <img src={imgHatShopDomoWithHat} alt="Domo's hat shop UI" />
 </div>
 
-请注意，我们只需要定义我们想要什么（一个 div，包含了 Domo 和一顶帽子），然后把数据“绑定”好（`type = {hat}`）。 当数据发生变化时（用户选择了一顶帽子），界面就会随之自动更改。我们不需要担心如何去修改 DOM 以及修改的时机，也不需要去跟踪数据何时发生变化。我们只需要画一个简图就够了，也就是上面的代码。这就是 React 的另外两个超能力：**声明式用户界面**和**应激式 DOM 更改**。
+请注意，我们只需要定义我们想要什么（一个 div，包含了朵模和一顶帽子），然后把数据“绑定”好（`type = {hat}`）。 当数据发生变化时（用户选择了一顶帽子），界面就会随之自动更改。我们不需要担心如何去修改 DOM 以及修改的时机，也不需要去跟踪数据何时发生变化。我们只需要画一个简图就够了，也就是上面的代码。这就是 React 的另外两个超能力：**声明式用户界面**和**应激式 DOM 更改**。
 
 </IntersectionDetector>
 </div>
