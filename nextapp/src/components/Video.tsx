@@ -1,15 +1,12 @@
 import * as React from 'react'
 
-export function Video({
-  play = true,
-  videoUrl,
-  posterUrl,
-  ...props
-}: {
+type Props = {
   play: boolean
   videoUrl: string
   posterUrl: string
-}) {
+} & React.HTMLProps<HTMLVideoElement>
+
+export function Video({ play = true, videoUrl, posterUrl, ...props }: Props) {
   const videoRef = React.useRef<HTMLVideoElement>(null)
   React.useEffect(() => {
     const videoElement = videoRef.current

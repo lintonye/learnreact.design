@@ -71,7 +71,13 @@ export const TipLayout: FunctionComponent<LayoutProps> = ({
           </div>
 
           {videoPath && videoPosterPath ? (
-            <Video videoUrl={videoPath} posterUrl={videoPosterPath} play />
+            <Video
+              videoUrl={videoPath}
+              posterUrl={videoPosterPath}
+              play
+              width={640}
+              height={360}
+            />
           ) : (
             videoPosterPath && (
               <Image src={videoPosterPath} width={640} height={360} />
