@@ -14,6 +14,7 @@ export function CutHoleSurprise({ autoPlay = false }: { autoPlay: boolean }) {
       className="relative"
       initial="hidden"
       animate={autoPlay ? 'revealed' : 'hidden'}
+      aria-label="Metaphor animation: a person behind a cardboard hole taking pictures"
     >
       <motion.div
         variants={{
@@ -31,6 +32,7 @@ export function CutHoleSurprise({ autoPlay = false }: { autoPlay: boolean }) {
           width={409 * scale}
           height={333 * scale}
           layout="fixed"
+          alt="Person behind the cardboard"
         />
       </motion.div>
 
@@ -39,6 +41,7 @@ export function CutHoleSurprise({ autoPlay = false }: { autoPlay: boolean }) {
         width={361 * scale}
         height={486 * scale}
         layout="fixed"
+        alt="cardboard with a hole"
       />
 
       {/* Camera man */}
@@ -58,6 +61,7 @@ export function CutHoleSurprise({ autoPlay = false }: { autoPlay: boolean }) {
           width={279 * scale}
           height={402 * scale}
           layout="fixed"
+          alt="camera man"
         />
       </motion.div>
 
@@ -90,6 +94,7 @@ export function CutHoleSurprise({ autoPlay = false }: { autoPlay: boolean }) {
           width={250 * scale}
           height={220 * scale}
           layout="fixed"
+          alt="flash"
         />
       </motion.div>
     </motion.div>

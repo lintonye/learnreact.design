@@ -39,6 +39,7 @@ export function PostPreview({
         (typeof surprise.actor === 'string' ? (
           <Image
             src={surprise.actor}
+            alt="Post preview image"
             width={100}
             height={100}
             layout="intrinsic"

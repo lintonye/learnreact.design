@@ -26,6 +26,7 @@ export function DiscussionTwitter({
           author,
         )}.%20&via=${authorTwitterId}`}
         target="_blank"
+        rel="noopener"
       >
         <motion.div
           className={`flex ${large ? 'space-x-4' : 'space-x-2'} items-center`}

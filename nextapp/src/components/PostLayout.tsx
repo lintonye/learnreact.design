@@ -214,11 +214,16 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
                     <div className="flex space-x-2 mr-4 items-center">
                       <Image
                         src={imgLinton}
+                        alt="Linton's profile photo"
                         width={30}
                         height={30}
                         className="rounded-full"
                       />
-                      <Link href="https://twitter.com/lintonye" target="_blank">
+                      <Link
+                        href="https://twitter.com/lintonye"
+                        target="_blank"
+                        rel="noopener"
+                      >
                         Linton Ye
                       </Link>
                     </div>
@@ -292,6 +297,7 @@ export const PostLayout: FunctionComponent<LayoutProps> = ({
               <div className="float-right">
                 <Image
                   src={imgLinton}
+                  alt="Linton's profile photo"
                   width={50}
                   height={50}
                   className="rounded-full"

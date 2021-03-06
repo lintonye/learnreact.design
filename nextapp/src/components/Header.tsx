@@ -11,7 +11,7 @@ export function Header() {
           <li>
             <Link href="/">
               <div className="p-8 -m-8">
-                <img src={LogoLight} width={20} />
+                <img src={LogoLight} width={20} alt="learnreact.design logo" />
               </div>
             </Link>
           </li>
