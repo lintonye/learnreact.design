@@ -13,7 +13,7 @@ import { FiInfo } from 'react-icons/fi'
 export const meta = {
   title: 'React useRef By Example: What It Is, Why We Need It',
   description: `useRef is a built-in React Hook. What is it used for? How does it work? I'll reveal this hidden gem for you with a few real-world examples.`,
-  date: '2021-03-01',
+  date: '2021-03-05',
   tags: ['react'],
   related: [
     'react-mental-model-cut-holes-in-html-template',
@@ -42,14 +42,18 @@ export const meta = {
 
 ## Introduction
 
-`useRef` is a built-in React Hook. However, it's one of the most confusing Hooks (at least in my experience). But if you spend some time to learn how it works, you'll see that it's actually a hidden gem 💎, a powerful tool in your arsenal.
+`useRef` is a built-in Hook of React. Perhaps you have used it to access DOM nodes (If not, don't worry. I'll cover it in this post).
 
-I'll reveal this shiny gem <span className="mr-2">💎</span> for you in four steps:
+But do you know that it can do way more?
 
-1. What is it used for?
-2. The mental model
-3. A couple of contrived examples (but they are really helpful for learning)
-4. A couple of real-world examples
+This is a deep dive into `useRef`. We'll study this little Hook in an example-driven approach:
+
+- What is it used for?
+- Its mental model
+- Simple examples
+- More practical examples
+
+Along the way, we'll build a stop watch and a like button (yes, exactly the same like button on this blog, feel free to steal the code):
 
 <div className="flex flex-col space-y-4 justify-center md:flex-row">
   <Demo title="Try me">
@@ -62,7 +66,9 @@ I'll reveal this shiny gem <span className="mr-2">💎</span> for you in four st
 
 <div className="p-8 bg-yellow-100 border border-yellow-400 rounded-sm space-y-4 my-2">
 
-This article assumes that you are familiar with React basics, as well as how to use the `useState` and `useEffect` hooks.
+**Intended audience**
+
+This article assumes that you are familiar with [React](/posts/components-props-state) [basics](/posts/react-mental-model-cut-holes-in-html-template), as well as how to use the `useState` and `useEffect` hooks.
 
 </div>
 
@@ -76,7 +82,7 @@ When combined with the `ref` attribute, we could use `useRef` to obtain the unde
 
 ### Persist a value across rerenders
 
-This is what I'm going to focus on in this article. Remember? A hidden gem 💎!
+This is what I'm going to focus on in this article.
 
 Keep reading 👇.
 
