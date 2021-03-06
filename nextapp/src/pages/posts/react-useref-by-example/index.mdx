@@ -42,13 +42,13 @@ export const meta = {
 
 ## Introduction
 
-`useRef` is a built-in Hook of React. Perhaps you have used it to access DOM nodes (If not, don't worry. I'll cover it in this post).
+`useRef` is a built-in Hook of React. Perhaps you have used it to access DOM nodes (If not, don't worry. It's [covered](#ref-and-useref) in this post).
 
-But do you know that it can do way more?
+**But do you know it can do way more?** It's a hidden gem 💎. Trust me, it can become a powerful tool in your arsenal.
 
 This is a deep dive into `useRef`. We'll study this little Hook in an example-driven approach:
 
-- What is it used for?
+- What it is used for
 - Its mental model
 - Simple examples
 - More practical examples
@@ -164,7 +164,7 @@ BTW, `useForceRender` above is a custom hook:
 
 <CodeViewer>
   {`
-// I know, I used useState below. Didn't I say the example was contrived? :)
+// I know, I broke my own rule of not using useState, but trust me, it's all for your good. :)
 function useForceRender() {
   const setC = React.useState(0)[1]
   return () => setC((c) => c + 1)
