@@ -461,9 +461,11 @@ React 组件是**可重用的**。一个组件定义好以后，我们可以用�
 
 ### 声明式和响应式
 
-<div className="hidden md:block">
+最后再来看看 React 的另外两个绝招：**声明式用户界面**和**响应式 DOM 更改**。
 
-最后再来看看 Main 组件。你给朵模选好帽子了吗？
+<div className="hidden md:block space-y-4">
+
+你给朵模选好帽子了吗？还没有的话，试试看点击右边表格中任意一顶帽子，朵模头上戴的帽子会随之更改，看到了吗？
 
 </div>
 
@@ -473,7 +475,15 @@ React 组件是**可重用的**。一个组件定义好以后，我们可以用�
     }
   }}>
 
-如下是界面上左边 DomoWithHat 组件的代码：
+<div className="space-y-4">
+
+<div className="md:hidden my-2">
+  <img src={imgHatShopDomoWithHat} alt="Domo's hat shop UI" />
+</div>
+
+在这个界面里，点击右边表格将更改“选定的帽子”这项数据，因为我们事先已经将 DomoWithHat 与该数据关联，朵模头上戴的帽子就会自动更改。还记得吧？这就是 React 的**响应式 DOM 更改**。
+
+如下是 DomoWithHat 组件的代码：
 
 <div id="connection-domowithhat">
 
@@ -487,11 +497,9 @@ React 组件是**可重用的**。一个组件定义好以后，我们可以用�
 
 </div>
 
-<div className="md:hidden my-2">
-  <img src={imgHatShopDomoWithHat} alt="Domo's hat shop UI" />
-</div>
+在代码里，我们只需要定义想要的最终结果（一个 div，包含了朵模和一顶帽子），然后把数据关联好（`type = {hat}`）。 当数据`hat`发生变化时（用户在表格里选择了一顶帽子），界面就会随之自动更改。我们不需要担心如何去修改 DOM 以及修改的时机，也不需要去跟踪数据何时发生变化。我们只需要“画”一个简图就够了，也就是上面的代码。这就是 React 的**声明式用户界面**外加**响应式 DOM 更改**，两者相辅相成。
 
-请注意，我们只需要定义我们想要什么（一个 div，包含了朵模和一顶帽子），然后把数据“绑定”好（`type = {hat}`）。 当数据发生变化时（用户选择了一顶帽子），界面就会随之自动更改。我们不需要担心如何去修改 DOM 以及修改的时机，也不需要去跟踪数据何时发生变化。我们只需要画一个简图就够了，也就是上面的代码。这就是 React 的另外两个超能力：**声明式用户界面**和**响应式 DOM 更改**。
+</div>
 
 </IntersectionDetector>
 </div>
