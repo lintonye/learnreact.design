@@ -12,7 +12,7 @@ import { FiInfo } from 'react-icons/fi'
 
 export const meta = {
   title: 'React useRef Hook By Example: A Complete Guide',
-  description: `The React.useRef Hook is used for referencing DOM nodes as well as persisting a value across rerenders. This is an interactive guide to useRef with real-world examples.`,
+  description: `The React.useRef Hook is used for referencing DOM nodes and persisting a mutalbe value across rerenders. This is an interactive guide to useRef with real-world examples.`,
   date: '2021-03-07',
   tags: ['react'],
   related: [
@@ -52,7 +52,7 @@ This is a deep dive into `useRef`. With an example-driven approach, this article
 - Its mental model
 - Simple examples
 - More practical examples
-- A couple of anti-patterns
+- Anti-patterns
 - Related concepts
   - `ref` and `useRef`
   - `useRef` vs. `useState`
@@ -400,15 +400,15 @@ Look, when saving the previous state in `useEffect`, we definitely don't want th
 
 <!-- https://codesandbox.io/s/useref-previous-state-hmthe -->
 
-## Example 2: stop watch (clear interval)
+## Example 2: stopwatch (clear interval)
 
-Now let's look at a more useful example. How about a stop watch?
+Now let's look at a more useful example. How about a stopwatch?
 
 <Demo title="Try me">
   <StopWatch />
 </Demo>
 
-We can make the stop watch tick with a combination of `useState`, `useEffect` and `setInterval`:
+We can make the stopwatch tick with a combination of `useState`, `useEffect` and `setInterval`:
 
 <CodeViewer>
   {`
@@ -425,7 +425,7 @@ function StopWatch() {
 `}
 </CodeViewer>
 
-But how do we pause the stop watch?
+But how do we pause the stopwatch?
 
 We can add another state `ticking` and clear the interval when `ticking` is `false`. Let's give it a try:
 
