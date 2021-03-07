@@ -261,7 +261,9 @@ Even cooler, imagine if we can leave placeholders in our sketches to represent d
 
 <img src={imgPlaceholders} alt="Thinker with a hat: Placeholder in JSX" />
 
-This trick is how React got its name. The UI built with React is **reactive** -- it appears that the DOM "reacts" to any changes to the underlying data. No need to track the data. No need to worry about when to update the DOM. It just gets updated automatically (by React). The idea of reactive UI greatly simplifies UI development.
+The hat here is the data that determine the dynamic content of the UI. We just need to associate UI elements with their corresponding data. When the data change, React automatically updates the related DOM elements for us. It appears that the DOM "reacts" to any changes to the underlying data. No need to track the data. No need to worry about when to update the DOM. It just gets updated automatically (by React).
+
+This trick is how React got its name. The UI built with React is **reactive**. The idea of reactive UI greatly simplifies UI development.
 
 <!-- Here's the code of the demo above. If you are not familiar with JavaScript, just squint: it's some HTML surrounded by some text and parentheses.
 
@@ -467,9 +469,11 @@ When we change the SearchBar component above, only the Header and Footer change.
 
 ### Declarative & Reactive
 
+Now let's move on to the other two superpowers of React: **declarative UI** and **reactive DOM updates**.
+
 <div className="hidden md:block">
 
-Now let's move on to the Main component. Have you choosen a hat for Domo yet? The demo on the right is not just an image. It's interactive!
+Have you choosen a hat for Domo yet? If not, just click one of the hats in the table. The hat on Domo's head will change, right?
 
 </div>
 
@@ -479,7 +483,15 @@ Now let's move on to the Main component. Have you choosen a hat for Domo yet? Th
     }
   }}>
 
-Here's the code for the component DomoWithHat, the widget on the left.
+<div className="space-y-4">
+
+<div className="md:hidden my-2">
+  <img src={imgHatShopDomoWithHat} alt="Domo's hat shop UI" />
+</div>
+
+In this UI, clicking an item in the table would update the data "selected hat". Because we have associated `DomoWithHat` with "selected hat", the hat on Domo would automatically change. Remember? **Reactive DOM updates**.
+
+Here's the code for the component `DomoWithHat`.
 
 <div id="connection-domowithhat">
 
@@ -493,11 +505,9 @@ Here's the code for the component DomoWithHat, the widget on the left.
 
 </div>
 
-<div className="md:hidden my-2">
-  <img src={imgHatShopDomoWithHat} alt="Domo's hat shop UI" />
-</div>
+In the code above, we just need to define what we want (Domo and a hat in a div), and "wire up" the data ("`type = {hat}`"). When the data item `hat` changes (user selects a hat), the UI updates automatically. We don't need to worry about when and how to update the DOM. We don't even need to keep track of the data. What we need is just to draw a quick sketch, i.e. the code above. Here we go, the other two superpowers of React: **Declarative UI**, plus **Reactive DOM updates**.
 
-Note that we just need to define what we want (Domo and a hat in a div), and "wire up" the data ("`type = {hat}`"). When the data change (user selects a hat), the UI updates automatically. We don't need to worry about when and how to update the DOM. We don't even need to keep track of the data. What we need is just to draw a quick sketch, i.e. the code above. Remember the other two superpowers of React? **Declarative UI** and **Reactive DOM updates**.
+</div>
 
 </IntersectionDetector>
 </div>
