@@ -11,9 +11,9 @@ import imgSocialCard from './useref-social-card.png'
 import { FiInfo } from 'react-icons/fi'
 
 export const meta = {
-  title: 'React useRef By Example: What It Is, Why We Need It',
-  description: `useRef is a built-in React Hook. What is it used for? How does it work? I'll reveal this hidden gem for you with a few real-world examples.`,
-  date: '2021-03-05',
+  title: 'React useRef Hook By Example: A Complete Guide',
+  description: `The React.useRef Hook is used for referencing DOM nodes as well as persisting a value across rerenders. This is an interactive guide to useRef with real-world examples.`,
+  date: '2021-03-07',
   tags: ['react'],
   related: [
     'react-mental-model-cut-holes-in-html-template',
@@ -46,14 +46,19 @@ export const meta = {
 
 **But do you know it can do way more?** It's a hidden gem 💎. Trust me, it can become a powerful tool in your arsenal.
 
-This is a deep dive into `useRef`. We'll study this little Hook in an example-driven approach:
+This is a deep dive into `useRef`. With an example-driven approach, this article covers:
 
 - What it is used for
 - Its mental model
 - Simple examples
 - More practical examples
+- A couple of anti-patterns
+- Related concepts
+  - `ref` and `useRef`
+  - `useRef` vs. `useState`
+  - `useRef` vs. `createRef`
 
-Along the way, we'll build a stop watch and a like button (yes, exactly the same like button on this blog, feel free to steal the code):
+Along the way, we'll build a stopwatch and a like button (yes, exactly the same like button on this blog, feel free to steal the code):
 
 <div className="flex flex-col space-y-4 justify-center md:flex-row">
   <Demo title="Try me">
@@ -80,7 +85,7 @@ There are two use cases.
 
 When combined with the `ref` attribute, we could use `useRef` to obtain the underlying DOM nodes to perform DOM operations imperatively. In fact, this is really an escape hatch. We should only do this sparsely for things that React doesn't provide a declarative API for, such as focus management. If we use it for everything (in theory we could), we'd lose the benefit of [React's declarative programming paradigm](/posts/what-is-react#declarative-ui).
 
-### Persist a value across rerenders
+### Persist a mutable value across rerenders
 
 This is what I'm going to focus on in this article.
 
