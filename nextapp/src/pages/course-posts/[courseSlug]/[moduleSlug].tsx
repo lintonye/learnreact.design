@@ -22,12 +22,11 @@ export default function CoursePostModulePage({
   //   debugger
   //   console.log({ moduleSlug, courseSlug, sections, rest })
   // }
+  const url = `${SEOData.siteUrl}/course-posts/${courseSlug}/${moduleSlug}`
 
   return (
     <Layout>
-      <NextSeo
-        canonical={`${SEOData.siteUrl}/course-posts/${courseSlug}/${moduleSlug}`}
-      />
+      <NextSeo canonical={url} openGraph={{ url }} />
       {/* <div>{courseSlug}</div> */}
       <div className="w-11/12 max-w-prose mx-auto space-y-10">
         <PageTitle>{moduleSlug}</PageTitle>

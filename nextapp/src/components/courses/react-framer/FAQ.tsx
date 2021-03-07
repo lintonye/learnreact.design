@@ -47,10 +47,7 @@ export default function FAQ() {
         It's a React course, Framer course and JavaScript course, all in one!
         It's a linear learning process that guides you from zero coding
         experience to being able to build stunning prototypes. Try the{' '}
-        <Link to="/prototyping-with-react-framer#pricing">
-          Satellite course
-        </Link>
-        !
+        <Link to="#pricing">Satellite course</Link>!
       </Question>
       {/* <Question title="What if I don't have a Framer license yet?">
         No worries. You can download a free 14-day trial of Framer X. If you
