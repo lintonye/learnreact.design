@@ -46,7 +46,16 @@ export default function CoursePostModulePage({
 
 export async function getStaticPaths() {
   return {
-    paths: [],
+    paths: [
+      'module8-scroll-parallax',
+      'module1-getting-started',
+      'module2-toggle',
+      `module3-slider`,
+      `module4-tinder-swipe`,
+      `module5-mouse-parallax`,
+      `module6-react-state`,
+      `module7-animation-orchestration`,
+    ].map((p) => `/course-posts/prototyping-react-framer/${p}`),
     fallback: true,
   }
 }
