@@ -3,6 +3,8 @@ import { Layout } from '@/components/Layout'
 import { GetStaticPathsContext } from 'next'
 import { Link } from '@/components/design-system'
 import { PageTitle } from '@/components/PageTitle'
+import { NextSeo } from 'next-seo'
+import * as SEOData from '@/../next-seo.json'
 
 type Props = {
   courseSlug: string
@@ -16,13 +18,16 @@ export default function CoursePostModulePage({
   sections,
   ...rest
 }: Props) {
-  if (!sections) {
-    debugger
-    console.log({ moduleSlug, courseSlug, sections, rest })
-  }
+  // if (!sections) {
+  //   debugger
+  //   console.log({ moduleSlug, courseSlug, sections, rest })
+  // }
 
   return (
     <Layout>
+      <NextSeo
+        canonical={`${SEOData.siteUrl}/course-posts/${courseSlug}/${moduleSlug}`}
+      />
       {/* <div>{courseSlug}</div> */}
       <div className="w-11/12 max-w-prose mx-auto space-y-10">
         <PageTitle>{moduleSlug}</PageTitle>
