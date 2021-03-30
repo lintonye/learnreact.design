@@ -1,0 +1,66 @@
+import { ConvertKitForm } from '@/components/design-system'
+import { LiveEditor, CodeViewer } from '@/components/LiveEditor'
+import { useForceRender } from '@/components/useref-by-example/useForceRender'
+// import { UseRefSurprise } from '@/components/useref-by-example/UseRefSurprise'
+// import { Demo } from '@/components/Demo'
+import { Reactions } from '@/components/Reactions'
+import { NoticeBox } from '@/components/NoticeBox'
+// import imgTimeLoop from './time-loop.jpeg'
+// import imgSocialCard from './useref-social-card.png'
+import { FiInfo } from 'react-icons/fi'
+
+export const meta = {
+  title: `"this" Is Weird: Understanding JavaScript's "this" Keyword`,
+  description: `The React.useRef Hook is used for referencing DOM nodes and persisting a mutalbe value across rerenders. This is an interactive guide to useRef with real-world examples.`,
+  date: '2021-04-10',
+  tags: ['javascript'],
+  related: [
+    'react-mental-model-cut-holes-in-html-template',
+    'react-mental-model-html-input',
+    'react-mental-model-jsx',
+  ],
+  ogImage: {
+    // url: imgSocialCard,
+    width: 1280,
+    height: 720,
+  },
+  // surprise: {
+  //   actor: (revealEnded) => <UseRefSurprise autoPlay={revealEnded} />,
+  //   animationVariants: {
+  //     hidden: { x: 0, rotate: 0, y: 60 },
+  //     revealed: { x: -100, rotate: 0, y: 60 },
+  //   },
+  // },
+}
+
+<!--excerpt-->
+
+`useRef` is a built-in React Hook. What is it used for? How does it work? I'll reveal this hidden gem for you with a few real-world examples.
+
+<!--/excerpt-->
+
+The `this` keyword in JavaScript behaves differently than similar constructs in other languages. The behavior is often very surprising especially if you are familiar with `this` in Java, or `self` in Python or Ruby.
+
+Take this React class component as an example:
+
+```jsx
+class MyComponent {
+  constructor() {
+    this.state = { count: 0 }
+  }
+  handleClick() {
+    this.setState({ count: count + 1 })
+  }
+  render() {
+    return <button onClick={handleClick}>{count}</button>
+  }
+}
+```
+
+This code looks completely fine, right? Except that there will be a runtime error when the user clicks on the button.
+
+<NoticeBox title='Intended audience'>
+
+This article assumes that you are familiar with [React](/posts/components-props-state) [basics](/posts/react-mental-model-cut-holes-in-html-template), as well as how to use the `useState` and `useEffect` hooks.
+
+</NoticeBox>
