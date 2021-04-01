@@ -35,13 +35,13 @@ export const meta = {
 
 <!--excerpt-->
 
-`useRef` is a built-in React Hook. What is it used for? How does it work? I'll reveal this hidden gem for you with a few real-world examples.
+The `this` keyword in JavaScript behaves differently than similar constructs in other languages.
 
 <!--/excerpt-->
 
-The `this` keyword in JavaScript behaves differently than similar constructs in other languages. The behavior is often very surprising especially if you are familiar with `this` in Java, or `self` in Python or Ruby.
+The `this` keyword is a fundamental concept in JavaScript. However its behavior is different from smiliar constructs in other languages. The behavior is often very surprising especially if you are familiar with `this` in Java, or `self` in Python or Ruby [^1].
 
-Take this React class component as an example:
+Take this React class component[^2] as an example:
 
 ```jsx
 class MyComponent {
@@ -52,15 +52,46 @@ class MyComponent {
     this.setState({ count: count + 1 })
   }
   render() {
-    return <button onClick={handleClick}>{count}</button>
+    return <button onClick={this.handleClick}>{count}</button>
   }
 }
 ```
 
-This code looks completely fine, right? Except that there will be a runtime error when the user clicks on the button.
+The code looks alright, right? But if you click the button, you'll get an error:
+
+```
+setState is not a function TODO accurate error message
+```
+
+Isn't `handleClick` a method of class `MyComponent`? Why is the value of `this` is `undefined`? Isn't it supposed to be the current class instance?
+
+**_This is weird!_**
+
+In this post, let's take a quick tour of how `this` works in JavaScript, and most importantly, why does it work that way (TODO should we cover this?)!
+
+[^1]: My own story here. I've been struggled with `this` in JavaScript for so long. That's precisely because I've been working as a Java developer for a few years. You don't know what you don't know.
+[^2]: I know, these days we don't write that many class components in React anymore. But it's still useful to understand class components since you'll typically see them in legacy code. Not everyone has the time to rewrite all class components as function components.
 
 <NoticeBox title='Intended audience'>
 
 This article assumes that you are familiar with [React](/posts/components-props-state) [basics](/posts/react-mental-model-cut-holes-in-html-template), as well as how to use the `useState` and `useEffect` hooks.
 
 </NoticeBox>
+
+## `this` is determined at runtime
+
+---
+
+```jsx
+class MyComponent {
+  constructor() {
+    this.state = { count: 0 }
+  }
+  handleClick = () => {
+    this.setState({ count: count + 1 })
+  }
+  render() {
+    return <button onClick={handleClick}>{count}</button>
+  }
+}
+```
