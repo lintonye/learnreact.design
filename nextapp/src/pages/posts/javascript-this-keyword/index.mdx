@@ -39,7 +39,7 @@ The `this` keyword in JavaScript behaves differently than similar constructs in 
 
 <!--/excerpt-->
 
-The `this` keyword is a fundamental concept in JavaScript. However its behavior is different from smiliar constructs in other languages. The behavior is often very surprising especially if you are familiar with `this` in Java, or `self` in Python or Ruby [^1].
+The `this` keyword is a fundamental concept in JavaScript. However its behavior may appear very strange, especially if you are familiar with similar constructs in other languages, for example `this` in Java, or `self` in Python or Ruby [^1].
 
 Take this React class component[^2] as an example:
 
@@ -57,9 +57,9 @@ class MyComponent {
 }
 ```
 
-The code looks alright, right? But if you click the button, you'll get an error:
+The code looks fine, right? But if you click the button, you'll get an error:
 
-```
+```html
 setState is not a function TODO accurate error message
 ```
 
@@ -67,7 +67,7 @@ Isn't `handleClick` a method of class `MyComponent`? Why is the value of `this` 
 
 **_This is weird!_**
 
-In this post, let's take a quick tour of how `this` works in JavaScript, and most importantly, why does it work that way (TODO should we cover this?)!
+In this post, let's take a quick tour of how `this` works in JavaScript, and more importantly, why it works that way (TODO should we cover this?)!
 
 [^1]: My own story here. I've been struggled with `this` in JavaScript for so long. That's precisely because I've been working as a Java developer for a few years. You don't know what you don't know.
 [^2]: I know, these days we don't write that many class components in React anymore. But it's still useful to understand class components since you'll typically see them in legacy code. Not everyone has the time to rewrite all class components as function components.
@@ -78,7 +78,121 @@ This article assumes that you are familiar with [React](/posts/components-props-
 
 </NoticeBox>
 
+## `this` is not just for classes
+
+In languages such as Java, the `this` keyword only makes sense inside a class. But in JavaScript, we can use it pretty much everywhere:
+
+```jsx
+// Use `this` at the top level
+console.log(this)
+```
+
+Now open the JavaScript console and type in the code above, what did you get?
+
+When used at the top level, the value of `this` is the Window object (in fact it's not always the case, but I'll cover it [later](TODO)). Because JavaScript can run in environments other than a web browser, there's a special keyword, `globalThis`, that points to Window or another value depending on the environment.
+
+We can also use the `this` keyword in a function, like so:
+
+```jsx
+function printThis() {
+  console.log(this)
+}
+```
+
+What would it print out if we call this function? The current instance of ... the function? The Window object?
+
+The answer is: _we don't know yet!_
+
+> The value of `this` inside a function depends on _how_ the function is called.
+
+Isn't `this` weird? This is where most confusions come from. Keep reading.
+
 ## `this` is determined at runtime
+
+Try the code below in the console:
+
+```jsx
+function printThis() {
+  console.log(this)
+}
+
+printThis()
+```
+
+What did you get? The Window object again, right?
+
+Now try the code below:
+
+```jsx
+// define the function as a property of obj
+let obj = {
+  printThis: function () {
+    console.log(this)
+  },
+}
+
+obj.printThis()
+```
+
+We get the object where the function is defined! Hmm, `this` is interesting.
+
+But it totally makes sense, right? It allows the function to easily access the properties of the object, like so:
+
+```jsx
+let car = {
+  make: 'Tesla',
+  model: '3',
+  print: function () {
+    console.log(`Make: ${this.make}, Model: ${this.model}`)
+  },
+}
+car.print()
+```
+
+```html
+Make: Tesla, Model: 3
+```
+
+But that's not the end of the story! What if assign the function to a variable and call it, like so:
+
+```jsx
+let print = car.print
+print()
+```
+
+We'll get:
+
+```html
+Make: undefined, Model: undefined
+```
+
+So the function forgets about the object where it's defined? `this` is weird!
+
+As I said,
+
+> The value of `this` inside a function depends on _how_ the function is called.
+
+Now a quick quiz, what do you think the following code will print?
+
+```jsx
+let truck = {
+  make: 'Tesla',
+  model: 'Cybertruck',
+}
+
+function print() {
+  console.log(`Make: ${this.make}, Model: ${this.model}`)
+}
+
+truck.print = print
+truck.print()
+```
+
+TODO quiz
+
+The value of `this` inside a function depends on _how_ the function is called, NOT _where_ the function is defined.
+
+Isn't `this` weird?
 
 ---
 
