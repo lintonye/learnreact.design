@@ -40,7 +40,7 @@ The `this` keyword in JavaScript behaves differently than similar constructs in 
 
 <!--/excerpt-->
 
-The `this` keyword is a fundamental concept in JavaScript. However its behavior may appear very strange, especially if you are familiar with similar constructs in other languages, for example `this` in Java, or `self` in Python or Ruby [^1].
+The `this` keyword is a fundamental concept in JavaScript. However its behavior may appear very strange, especially if you are familiar with similar constructs in other languages, for example `this` in Java, or `self` in Python [^1].
 
 Take this React class component [^2] as an example:
 
@@ -65,7 +65,15 @@ This code displays a counter on a button. It looks fine, right? But if you click
 TypeError: Cannot read property 'count' of undefined
 ```
 
-Why? Isn't `handleClick` a method of class `MyComponent`? Why is the value of `this` `undefined`? Isn't it supposed to be the current class instance?
+This means that the value of `this.state` in `handleClick` is `undefined`. But why? Didn't we just set it to `{ count: 0 }` in the constructor?
+
+Now if you add `console.log(this)` to `handleClick`, you'll see the value of `this` is:
+
+```html
+Window {...}
+```
+
+Why? Isn't `this` supposed to be the current class instance? Isn't `handleClick` an instance method of the class?
 
 **_This is weird!_**
 
@@ -76,7 +84,7 @@ In this post, let's take a quick tour of how `this` works in JavaScript.
 
 <NoticeBox title='Intended audience'>
 
-This article assumes basic understanding of JavaScript. You'll also find it useful if you are familiar with other languages such as Java, Python or Ruby.
+This article assumes basic understanding of JavaScript. You'll also find it useful if you are familiar with other languages such as Java or Python.
 
 </NoticeBox>
 
@@ -129,7 +137,9 @@ function printThis() {
 printThis()
 ```
 
-In this code, we get the default value of `this`, the `Window` object (in fact the default value could be `undefined`, but I'll cover it [later](TODO)).
+In this code, we get the default value of `this`, the `Window` object [^4].
+
+[^4]: The default value of `this` can also be `undefined` or other values in [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this#function_context).
 
 Now try the code below:
 
@@ -185,18 +195,18 @@ As I said,
 
 > The value of `this` inside a function depends on **how** the function is called.
 
-Because we call the `print` function without a receiving object, the value of `this` is `Window`, the default value. It doesn't have properties `make` and `model`.
+Because we call the `print` function without a receiving object -- even though the function is defined inside the car object -- the value of `this` is `Window`, the default value. It doesn't have properties `make` and `model`.
 
 Now a quick quiz, what do you think will the following code print?
 
 ```jsx
+function print() {
+  console.log(`Make: ${this.make}, Model: ${this.model}`)
+}
+
 let truck = {
   make: 'Tesla',
   model: 'Cybertruck',
-}
-
-function print() {
-  console.log(`Make: ${this.make}, Model: ${this.model}`)
 }
 
 truck.print = print
@@ -205,8 +215,8 @@ truck.print()
 
 <Quiz
   options={[
-    'Make: Tesla, Model: Cybertruck',
     'Make: undefined, Model: undefined',
+    'Make: Tesla, Model: Cybertruck',
     'Make: Tesla, Model: undefined',
     'None of the above',
   ]}
@@ -259,40 +269,12 @@ console.log(car)
 
 In fact, `class` in JavaScript is just syntax sugar. Under the hood, it's just a function.
 
-### Strict mode
-
-As I mentioned, the default value of `this` isn't always the `Window` object. That's because of the so-called "strict mode".
-
-```jsx
-function printThis() {
-  // force strict mode
-  'use strict'
-  console.log(this)
-}
-
-printThis()
-```
-
-This code will print out `undefined` since in strict mode, the default value of `this` is `undefined`.
-
-We used `"use strict"` to explicitly turn on strict mode. But in some cases, the strict mode is on by default, for example, in a `class`:
-
-```jsx
-class Car {
-  print() {
-    // always in strict mode
-  }
-}
-```
-
 ## More ways to change `this` at runtime
 
 So far, I've shown you that the value of `this` depends on how a function is called:
 
 - Did we call the function with a receiving object? i.e. `obj.print()` or just `print()`?
 - Did we call the function with the `new` keyword?
-
-There's also a strict mode that affects the default value of `this`.
 
 But that's actually not the full picture! It turns out that we can change the value of `this` in a function to whatever we want -- we don't even need to use a receiving object.
 
@@ -330,7 +312,7 @@ The output is:
 Object { msg: "I can be whatever object you want!"}
 ```
 
-`bind` is useful when we don't have control over how a function is called, for example, when passing the function as a callback.
+`bind` is useful when we don't have control over how a function is called, for example, when passing the function as a callback. More on that a bit later.
 
 ### `bind` always wins
 
@@ -346,7 +328,7 @@ let boundFun = printThis.bind(`I'm bound! You can't change my "this"!`!)
 boundFun.call('haha')
 // Output: I'm bound! You can't change my "this"!
 
-boundFun.call('lala')
+boundFun.apply('lala')
 // Output: I'm bound! You can't change my "this"!
 
 let obj = {}
@@ -371,16 +353,16 @@ button.addEventListener('click', function () {
   // `this` is a reference to the element clicked on
   colours.forEach(function () {
     // Inside callback function 2
-    // `this` is the default value, `Window` or `undefined` in strict mode
+    // `this` is the default value, `Window`
   })
 })
 ```
 
 ### `this` and `that`
 
-If we want to use the value of `this` inside the second callback function, we'd have to store its value to a variable in the outer function.
+In the code above, if we want to use the value of `this` inside the second callback function, we'd have to store its value to a variable in the outer function.
 
-This actually becomes a pattern:
+This actually becomes a common pattern:
 
 ```jsx
 button.addEventListener('click', function () {
@@ -448,7 +430,7 @@ In the code above, the output is always `Window` since the arrow function is def
 
 You might be wondering about the `new` keyword. Will it change the value of `this`?
 
-The answer is NO! You can't even call an arrow function with `new`.
+The answer is NO! In fact, you can't even call an arrow function with `new`.
 
 ```jsx
 let arrowFun = () => {
@@ -488,18 +470,19 @@ car.print()
 
 ## Back to React class components
 
-Let's get back to the class component example I showed you at the beginning. Do you now understand why we'll get an error when the user clicks the button? Why does the value of `this` is `undefined` inside `handleClick`?
+Let's get back to the class component example I showed you at the beginning. Do you now understand why we'll get an error when the user clicks the button? Why does the value of `this` is `Window` instead of the instance object inside `handleClick`?
 
 ```jsx
-class MyComponent {
+class MyComponent extends React.Component {
   constructor() {
+    super()
     this.state = { count: 0 }
   }
   handleClick() {
-    this.setState({ count: count + 1 })
+    this.setState({ count: this.state.count + 1 })
   }
   render() {
-    return <button onClick={this.handleClick}>{count}</button>
+    return <button onClick={this.handleClick}>{this.state.count}</button>
   }
 }
 ```
@@ -508,10 +491,9 @@ Which of the following is NOT the cause of the error?
 
 <Quiz
   options={[
-    'The code inside classes is in strict mode.',
     'The function "handleClick" is passed into button and is called without a receiving object.',
-    'The default value of "this" inside handleClick is "undefined".',
-    'The value of "this" is set to "undefined" after the user clicks the button.',
+    'The default value of "this" inside handleClick is "Window".',
+    'The value of "this" is always "Window" inside a class.',
   ]}
   id="js-this-class-component"
   mb={6}
@@ -521,7 +503,7 @@ Which of the following is NOT the cause of the error?
 
 How would we fix the error in the aforementioned class component? How would we make sure the value of `this` in `handleClick` is the current class instance instead of `undefined`? In another word, is there a way to set the value of `this` explicitly?
 
-So, the fix for our class component would be:
+The answer is `bind`:
 
 ```jsx
 class MyComponent extends React.Component {
@@ -562,7 +544,7 @@ class MyComponent extends React.Component {
 
 ## Recap
 
-Alright, the above is how `this` works in JavaScript. Does it still feel weird to you? IMO it feels much better if we understand the rules behind. Here's a recap:
+Alright, the above is how `this` works in JavaScript. Does it still feel weird to you? IMO it feels much better if we understand the rules under the hood. Here's a recap:
 
 - `this` is not just for classes. It can be used globally, in a function or in a class.
 - In "normal" functions, the value of `this` depends on **how** it's called at runtime.
@@ -570,3 +552,5 @@ Alright, the above is how `this` works in JavaScript. Does it still feel weird t
 - In arrow functions, `this` is quite the opposite. The value of `this` depends on **where** the function is defined.
   - The value of `this` CANNOT be changed at runtime.
 - In a React class component, we can use `bind` or an arrow function to ensure the value of `this` to be the class instance object. This makes the behavior of `this` more consistent with that of other languages.
+
+To learn more, check out [this MDN article](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) and [this StackOverflow answer](https://stackoverflow.com/a/3127440/3973320) (1300+ upvotes!).
