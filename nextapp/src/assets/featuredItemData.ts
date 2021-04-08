@@ -30,6 +30,10 @@ const itemsAtHome: Category[] = [
     items: [
       {
         type: 'post',
+        slug: 'javascript-this-keyword',
+      },
+      {
+        type: 'post',
         slug: 'react-useref-by-example',
       },
     ],

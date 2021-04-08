@@ -1,0 +1,556 @@
+import { ConvertKitForm } from '@/components/design-system'
+import { LiveEditor, CodeViewer } from '@/components/LiveEditor'
+import { useForceRender } from '@/components/useref-by-example/useForceRender'
+// import { UseRefSurprise } from '@/components/useref-by-example/UseRefSurprise'
+// import { Demo } from '@/components/Demo'
+import { Reactions } from '@/components/Reactions'
+import { NoticeBox } from '@/components/NoticeBox'
+// import imgTimeLoop from './time-loop.jpeg'
+// import imgSocialCard from './useref-social-card.png'
+import { FiInfo } from 'react-icons/fi'
+import { Quiz } from '@/components/Quiz'
+
+export const meta = {
+  title: `"this" Is Weird: Understanding JavaScript "this" Keyword`,
+  description: `The React.useRef Hook is used for referencing DOM nodes and persisting a mutalbe value across rerenders. This is an interactive guide to useRef with real-world examples.`,
+  date: '2021-04-10',
+  tags: ['javascript'],
+  related: [
+    'react-mental-model-cut-holes-in-html-template',
+    'react-mental-model-html-input',
+    'react-mental-model-jsx',
+  ],
+  ogImage: {
+    // url: imgSocialCard,
+    width: 1280,
+    height: 720,
+  },
+  // surprise: {
+  //   actor: (revealEnded) => <UseRefSurprise autoPlay={revealEnded} />,
+  //   animationVariants: {
+  //     hidden: { x: 0, rotate: 0, y: 60 },
+  //     revealed: { x: -100, rotate: 0, y: 60 },
+  //   },
+  // },
+}
+
+<!--excerpt-->
+
+The `this` keyword in JavaScript behaves differently than similar constructs in other languages.
+
+<!--/excerpt-->
+
+The `this` keyword is a fundamental concept in JavaScript. However its behavior may appear very strange, especially if you are familiar with similar constructs in other languages, for example `this` in Java, or `self` in Python [^1].
+
+Take this React class component [^2] as an example:
+
+```jsx
+class MyComponent extends React.Component {
+  constructor() {
+    super()
+    this.state = { count: 0 }
+  }
+  handleClick() {
+    this.setState({ count: this.state.count + 1 })
+  }
+  render() {
+    return <button onClick={this.handleClick}>{this.state.count}</button>
+  }
+}
+```
+
+This code displays a counter on a button. It looks fine, right? But if you click the button, you'll get an error (try it in [this sandbox](https://codesandbox.io/s/eager-mendeleev-9511y?file=/src/App.js)):
+
+```html
+TypeError: Cannot read property 'count' of undefined
+```
+
+This means that the value of `this.state` in `handleClick` is `undefined`. But why? Didn't we just set it to `{ count: 0 }` in the constructor?
+
+Now if you add `console.log(this)` to `handleClick`, you'll see the value of `this` is:
+
+```html
+Window {...}
+```
+
+Why? Isn't `this` supposed to be the current class instance? Isn't `handleClick` an instance method of the class?
+
+**_This is weird!_**
+
+In this post, let's take a quick tour of how `this` works in JavaScript.
+
+[^1]: My own story here. I've been struggled with `this` in JavaScript for so long. That's precisely because of my experience in Java -- I've had a wrong mental model since the beginning.
+[^2]: I know, these days we don't write that many class components in React anymore. But it's still useful to understand them since you'll typically see them in legacy code. Not everyone has the time to rewrite all class components as function components.
+
+<NoticeBox title='Intended audience'>
+
+This article assumes basic understanding of JavaScript. You'll also find it useful if you are familiar with other languages such as Java or Python.
+
+</NoticeBox>
+
+## `this` is not just for classes
+
+In languages such as Java, the `this` keyword only makes sense inside a class. But in JavaScript, we can use it pretty much everywhere:
+
+```jsx
+// Use `this` at the top level, aka global context
+console.log(this)
+```
+
+Now open the JavaScript console and type in the code above, what did you get?
+
+When used at the top level, also known as the global context, the value of `this` is the `Window` object. It's the default value of `this` [^3].
+
+[^3]: Because JavaScript can run in environments other than a web browser, there's a special keyword, `globalThis` that points to `Window` or another value depending on the environment.
+
+We can also use the `this` keyword in a function, like so:
+
+```jsx
+function printThis() {
+  console.log(this)
+}
+```
+
+What would it print out if we call this function? The current instance of ... the function? The `Window` object?
+
+The short answer is: _we don't know yet!_
+
+The longer answer is:
+
+> The value of `this` inside a function depends on **how** the function is called.
+
+Isn't `this` weird? This is where most confusions come from.
+
+Keep reading 👇.
+
+## `this` is determined at runtime
+
+### Calling a function with a receiving object
+
+Try the code below in the console:
+
+```jsx
+function printThis() {
+  console.log(this)
+}
+
+printThis()
+```
+
+In this code, we get the default value of `this`, the `Window` object [^4].
+
+[^4]: The default value of `this` can also be `undefined` or other values in [strict mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this#function_context).
+
+Now try the code below:
+
+```jsx
+// define the function as a property of obj
+let obj = {
+  printThis: function () {
+    console.log(this)
+  },
+}
+
+obj.printThis()
+```
+
+We get the object where the function is defined! Hmm, `this` is interesting.
+
+But it totally makes sense, right? It allows the function to easily access the properties of the object, like so:
+
+```jsx
+let car = {
+  make: 'Tesla',
+  model: '3',
+  print: function () {
+    console.log(`Make: ${this.make}, Model: ${this.model}`)
+  },
+}
+car.print()
+```
+
+We'll get:
+
+```html
+Make: Tesla, Model: 3
+```
+
+But that's not the end of the story! What if we assign the function to a variable and call it like so:
+
+```jsx
+let print = car.print
+// call the function without the receiving object
+print()
+```
+
+We'll get:
+
+```html
+Make: undefined, Model: undefined
+```
+
+Hmm... Does the function forget about the object where it's defined? `this` is weird!
+
+As I said,
+
+> The value of `this` inside a function depends on **how** the function is called.
+
+Because we call the `print` function without a receiving object -- even though the function is defined inside the car object -- the value of `this` is `Window`, the default value. It doesn't have properties `make` and `model`.
+
+Now a quick quiz, what do you think will the following code print?
+
+```jsx
+function print() {
+  console.log(`Make: ${this.make}, Model: ${this.model}`)
+}
+
+let truck = {
+  make: 'Tesla',
+  model: 'Cybertruck',
+}
+
+truck.print = print
+truck.print()
+```
+
+<Quiz
+  options={[
+    'Make: undefined, Model: undefined',
+    'Make: Tesla, Model: Cybertruck',
+    'Make: Tesla, Model: undefined',
+    'None of the above',
+  ]}
+  id="js-this-truck-print"
+  mb={6}
+  answer="B"
+  explanation='Since the function is called with the receiving object "truck", the value of "this" inside the function is truck.'
+/>
+
+---
+
+The value of `this` inside a function depends on _how_ the function is called, NOT _where_ the function is defined.
+
+Isn't `this` weird?
+
+### The `new` keyword
+
+We could also call a function with the `new` keyword:
+
+```jsx
+function Car(make, model) {
+  this.make = make
+  this.model = model
+}
+let car = new Car('Tesla', '3')
+console.log(car)
+```
+
+We'll get:
+
+```html
+Car {make: "Tesla", model: "3"}
+```
+
+When calling a function with the `new` keyword, we'll get a new object. The value of `this` inside that function equals to the new object.
+
+The following code is equivalent but in the class format:
+
+```jsx
+class Car {
+  constructor(make, model) {
+    // `this` is the new object
+    this.make = make
+    this.model = model
+  }
+}
+let car = new Car('Tesla', '3')
+console.log(car)
+```
+
+In fact, `class` in JavaScript is just syntax sugar. Under the hood, it's just a function.
+
+## More ways to change `this` at runtime
+
+So far, I've shown you that the value of `this` depends on how a function is called:
+
+- Did we call the function with a receiving object? i.e. `obj.print()` or just `print()`?
+- Did we call the function with the `new` keyword?
+
+But that's actually not the full picture! It turns out that we can change the value of `this` in a function to whatever we want -- we don't even need to use a receiving object.
+
+### `call` and `apply`
+
+We can call any function using `call` or `apply` to specify the value of `this`:
+
+```jsx
+function anyFunction() {
+  console.log(this)
+}
+
+anyFunction.call({ msg: 'whatever' })
+// Output: Object { msg: "whatever" }
+
+anyFunction.apply({ msg: 'whatever' })
+// Output: Object { msg: "whatever" }
+```
+
+### `bind`
+
+The `bind` method returns a function, which we can call in the same way as the original function. But we can rest assure that the value of `this` is always what we want.
+
+```jsx
+function printThis() {
+  console.log(this)
+}
+let print = printThis.bind({ msg: 'I can be whatever object you want!' })
+print()
+```
+
+The output is:
+
+```html
+Object { msg: "I can be whatever object you want!"}
+```
+
+`bind` is useful when we don't have control over how a function is called, for example, when passing the function as a callback. More on that a bit later.
+
+### `bind` always wins
+
+It's worth noting that as long as a function is bound, `this` inside the function remains the bound value. It can no longer be changed via `call` or `apply` or even a receiving object.
+
+```jsx
+function printThis() {
+  console.log(this)
+}
+
+let boundFun = printThis.bind(`I'm bound! You can't change my "this"!`!)
+
+boundFun.call('haha')
+// Output: I'm bound! You can't change my "this"!
+
+boundFun.apply('lala')
+// Output: I'm bound! You can't change my "this"!
+
+let obj = {}
+obj.printThis = boundFun
+obj.printThis()
+// Output: I'm bound! You can't change my "this"!
+```
+
+## `this` in callback functions
+
+In JavaScript we can pass around a function as any other values. The function is usually called _callback function_, since we don't call it directly ourselves, it'd be called _back_ by other part of the code a bit later.
+
+Since we don't have control on how a callback function is called -- it could be called directly, or via `call` or `apply` -- we can't assume the value of `this` inside a callback function. It could be anything, really.
+
+In the code below, the value of `this` is different in each callback function:
+
+```jsx
+let colours = ['red', 'green', 'blue']
+let button = document.getElementById('button')
+button.addEventListener('click', function () {
+  // Inside callback function 1: event handler
+  // `this` is a reference to the element clicked on
+  colours.forEach(function () {
+    // Inside callback function 2
+    // `this` is the default value, `Window`
+  })
+})
+```
+
+### `this` and `that`
+
+In the code above, if we want to use the value of `this` inside the second callback function, we'd have to store its value to a variable in the outer function.
+
+This actually becomes a common pattern:
+
+```jsx
+button.addEventListener('click', function () {
+  let that = this
+  colours.forEach(function () {
+    console.log(that)
+    // Output: button
+  })
+})
+```
+
+## `this` in arrow functions
+
+ES6 introduces arrow functions which allow us to use a simpler syntax to define a function, i.e. the arrow `=>` instead of the `function` keyword:
+
+```jsx
+let fun = () => {
+  console.log("I'm in an arrow function!")
+}
+```
+
+What's the value of `this` inside an arrow function? Is it the same story as in a "normal" function?
+
+No! In an arrow function, the behavior of `this` is the complete opposite!
+
+> In an arrow function, the value of `this` depends on **where** the function is defined, NOT how the function is called!
+
+The value of `this` in an arrow function is the same as in the enclosing block of the function. So, we no longer need the this-that dance in arrow functions:
+
+```jsx
+button.addEventListener('click', function () {
+  // let that = this // ==> No longer need it!
+  console.log(this)
+  // Output: button
+  colours.forEach(() => {
+    // In an arrow function, `this` equals to the value of `this` in the outer scope
+    console.log(this)
+    // Output: button
+  })
+})
+```
+
+### `this` in arrow functions can't be changed
+
+Again, the value of `this` in an arrow function depends on **where** the function is defined. Therefore, it cannot be changed at runtime!
+
+This means that none of `bind`, `call` or `apply` has any effect on arrow functions. The provided `this` value simply gets ignored.
+
+```jsx
+let arrowFun = () => {
+  console.log(this)
+}
+
+arrowFun.call('Change this!')
+// Output: Window
+arrowFun.apply('Change this!')
+// Output: Window
+
+let boundArrowFun = arrowFun.bind('Change!')
+boundArrowFun()
+// Output: Window
+```
+
+In the code above, the output is always `Window` since the arrow function is defined in the global context where `this` gets the default value, `Window`.
+
+You might be wondering about the `new` keyword. Will it change the value of `this`?
+
+The answer is NO! In fact, you can't even call an arrow function with `new`.
+
+```jsx
+let arrowFun = () => {
+  console.log(this)
+}
+new arrowFun()
+// Uncaught TypeError: arrowFun is not a constructor
+```
+
+### Quiz
+
+Now what about a quick quiz? What's the output of the code below?
+
+```jsx
+let car = {
+  make: 'Tesla',
+  model: '3',
+  print: () => {
+    console.log(`Make: ${this.make}, Model: ${this.model}`)
+  },
+}
+car.print()
+```
+
+<Quiz
+  options={[
+    'Make: undefined, Model: undefined',
+    'Make: Tesla, Model: 3',
+    'Make: Tesla, Model: undefined',
+    'TypeError',
+  ]}
+  id="js-this-car-arrow-function"
+  mb={6}
+  answer="A"
+  explanation='Since the arrow function is defined in global context, "this" will get the default value "Window" which does not have those properties.'
+/>
+
+## Back to React class components
+
+Let's get back to the class component example I showed you at the beginning. Do you now understand why we'll get an error when the user clicks the button? Why does the value of `this` is `Window` instead of the instance object inside `handleClick`?
+
+```jsx
+class MyComponent extends React.Component {
+  constructor() {
+    super()
+    this.state = { count: 0 }
+  }
+  handleClick() {
+    this.setState({ count: this.state.count + 1 })
+  }
+  render() {
+    return <button onClick={this.handleClick}>{this.state.count}</button>
+  }
+}
+```
+
+Which of the following is NOT the cause of the error?
+
+<Quiz
+  options={[
+    'The function "handleClick" is passed into button and is called without a receiving object.',
+    'The default value of "this" inside handleClick is "Window".',
+    'The value of "this" is always "Window" inside a class.',
+  ]}
+  id="js-this-class-component"
+  mb={6}
+  answer="D"
+  explanation=""
+/>
+
+How would we fix the error in the aforementioned class component? How would we make sure the value of `this` in `handleClick` is the current class instance instead of `undefined`? In another word, is there a way to set the value of `this` explicitly?
+
+The answer is `bind`:
+
+```jsx
+class MyComponent extends React.Component {
+  constructor() {
+    super()
+    this.state = { count: 0 }
+    // `this` in the constructor is always the new object just created.
+    this.handleClick = this.handleClick.bind(this)
+  }
+  handleClick() {
+    this.setState({ count: count + 1 })
+  }
+  render() {
+    return <button onClick={this.handleClick}>{this.state.count}</button>
+  }
+}
+```
+
+Another, IMO cleaner solution is to use an arrow function:
+
+```jsx
+class MyComponent extends React.Component {
+  constructor() {
+    super()
+    this.state = { count: 0 }
+  }
+  // Define handleClick as an arrow function
+  handleClick = () => {
+    // `this` equals to that of the enclosing block.
+    // In this case, it's the instance object.
+    this.setState({ count: this.state.count + 1 })
+  }
+  render() {
+    return <button onClick={this.handleClick}>{this.state.count}</button>
+  }
+}
+```
+
+## Recap
+
+Alright, the above is how `this` works in JavaScript. Does it still feel weird to you? IMO it feels much better if we understand the rules under the hood. Here's a recap:
+
+- `this` is not just for classes. It can be used globally, in a function or in a class.
+- In "normal" functions, the value of `this` depends on **how** it's called at runtime.
+  - We can change the value of `this` with `call`, `apply` or `bind`.
+- In arrow functions, `this` is quite the opposite. The value of `this` depends on **where** the function is defined.
+  - The value of `this` CANNOT be changed at runtime.
+- In a React class component, we can use `bind` or an arrow function to ensure the value of `this` to be the class instance object. This makes the behavior of `this` more consistent with that of other languages.
+
+To learn more, check out [this MDN article](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) and [this StackOverflow answer](https://stackoverflow.com/a/3127440/3973320) (1300+ upvotes!).

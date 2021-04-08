@@ -75,7 +75,7 @@ module.exports = withBundleAnalyzer({
           rehypePlugins: [require('mdx-prism')],
           remarkPlugins: [
             require('remark-slug'),
-            require('remark-footnotes'),
+            // require('remark-footnotes'),
             require('remark-code-titles'),
             // require('remark-external-links')({
             //   rel: ['noopener', 'noreferrer'],
