@@ -1,0 +1,86 @@
+import { TipLayout } from '@/components/TipLayout'
+
+export const meta = {
+  date: '2021-04-19',
+  title: 'Commenting In JavaScript And React',
+  tags: ['JavaScript', 'JSX', 'Code'],
+  // sourceFile: 'https://www.dropbox.com/s/hes16n045mmmuz1/local-resources.framerx?dl=0',
+  video: null,
+  videoPoster: null,
+  slug: 'commenting-in-javascript-react',
+}
+
+export default TipLayout
+
+## Commenting in JavaScript
+
+There are two types of comments in JavaScript:
+
+1. Single-line comments
+2. Multiple-line comments
+
+Single line comment are created with two forward slashes (`/`). JavaScript treats the rest of the line after the slashes as comment.
+
+```jsx
+// ✅ This is a line comment
+// ✅ Each line should start with double slashes
+let thisCode = 'not a comment'
+
+let thisCode = 'not a comment' // ✅ this is comment too
+
+let thisCode = // ❌ this comments out the rest of the lin  // 'not a comment'
+```
+
+Multi-line comments are created with `/*` and `*/` which serve as brackets. Everything in between is treated as comments, including line breaks.
+
+```jsx
+/*
+ ✅ This is block comment. Everything between is treated as comments. 
+ It works for multiple lines.
+*/
+let thisCode = 'not a comment'
+
+let thisCode /* ✅ this is comment too */ = 'not a comment'
+```
+
+## Commenting in JSX
+
+Sometimes people are confused by how to comment out a portion of the code inside an JSX expression. We can make a comment **_inside_** JSX like so:
+
+```jsx
+function App() {
+  return (
+    <div>
+      {/* ✅ This is a comment */}
+      <div>This is not comment.</div>
+    </div>
+  )
+}
+```
+
+We can also comment out the entire JSX expression:
+
+```jsx
+function App() {
+  return (
+    // <div>
+    //   <div>This is not comment.</div>
+    // </div>
+  )
+}
+```
+
+Why? Because JSX is just syntax sugar. A JSX tag is foundamentally just a JavaScript expression. What's inside the curly braces (`{}`) is JavaScript code too. That's why we can use the block comment `/* */` there.
+
+However, single-line comments don't work inside JSX. Do you know why?
+
+```jsx
+function App() {
+  return (
+    <div>
+      {// ❌ Line comments don't work in JSX }
+      <div>This is not comment.</div>
+    </div>
+  )
+}
+```
