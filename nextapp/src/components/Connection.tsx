@@ -6,20 +6,7 @@ import {
   useTransform,
   useViewportScroll,
 } from 'framer-motion'
-
-function useViewportDimension() {
-  const [dim, setDim] = useState({ width: 0, height: 0 })
-  useEffect(() => {
-    function updateDim() {
-      setDim({ width: window.innerWidth, height: window.innerHeight })
-    }
-    updateDim()
-    const listener = () => updateDim()
-    window.addEventListener('resize', listener)
-    return () => window.removeEventListener('resize', listener)
-  }, [])
-  return dim
-}
+import { useViewportDimension } from './useViewportDimension'
 
 function useViewportBoundingBox(id: string): [DOMRect | undefined, number] {
   const [boundingBox, setBoundingBox] = useState<DOMRect>()
