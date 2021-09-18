@@ -1,14 +1,17 @@
-import bgPng from './map-bg.png'
 import {
   motion,
   useMotionTemplate,
   useMotionValue,
   animate,
   AnimatePresence,
+  useAnimation,
 } from 'framer-motion'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useViewportDimension } from '@/components/useViewportDimension'
+import spaceShipPng from './images/inside-spaceship.png'
+import reactStarPng from './images/react-star.png'
+import bgPng from './images/map-bg.png'
 import inkPng from './images/ink.png'
 import modelPng1_1 from './images/1.1.png'
 import modelPng1_2 from './images/1.2.png'
@@ -57,12 +60,14 @@ const sections = [
 const sectionTransitionDuration = 1
 
 function usePreloadImages() {
-  const [loaded, setLoaded] = useState(false)
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     const allImages = [
-      ...sections.map((section) => section.modelImage),
+      spaceShipPng,
+      reactStarPng,
       bgPng,
       inkPng,
+      ...sections.map((section) => section.modelImage),
     ]
     const loaded = new Set()
     for (let imgUrl of allImages) {
@@ -70,19 +75,18 @@ function usePreloadImages() {
       img.src = imgUrl
       img.onload = () => {
         loaded.add(imgUrl)
-        if (loaded.size === allImages.length) setLoaded(true)
+        if (loaded.size > 6) setLoading(false)
       }
     }
   }, [])
-  return loaded
+  return loading
 }
 
-export function BookPreview() {
+function MentalModelMap() {
   const x = useMotionValue(0)
   const y = useMotionValue(0)
   const [sectionIndex, setSectionIndex] = useState(0)
   const { width: vw, height: vh } = useViewportDimension()
-  const isLoaded = usePreloadImages()
 
   useEffect(() => {
     const { x: centerX, y: centerY } = sections[sectionIndex]
@@ -98,76 +102,162 @@ export function BookPreview() {
   }, [sectionIndex])
 
   return (
+    <>
+      <motion.div
+        className="bg-no-repeat absolute left-0 top-0"
+        style={{
+          backgroundImage: `url(${bgPng})`,
+          backgroundSize: `${100}%`,
+          width: bgFactor * vw,
+          height: (bgFactor * vw * bgHeight) / bgWidth,
+          x,
+          y,
+          // backgroundPosition,
+          // backgroundOrigin: 'border-box',
+        }}
+      >
+        {sections.slice(0, sectionIndex + 1).map((section, i) => (
+          <motion.img
+            key={section.id}
+            src={inkPng}
+            className="absolute left-0 top-0"
+            initial={{ opacity: 0, scale: 5 }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              transition: { delay: sectionTransitionDuration },
+            }}
+            style={{
+              width: 100,
+              x: (section.x * bgFactor * vw) / bgWidth,
+              y: (section.y * bgFactor * vw) / bgWidth,
+            }}
+            width={184}
+            height={197}
+          />
+        ))}
+      </motion.div>
+      <input
+        className="relative"
+        type="number"
+        autoFocus
+        min={0}
+        max={sections.length - 1}
+        value={sectionIndex}
+        onChange={(e) => setSectionIndex(e.target.valueAsNumber || 0)}
+      />
+      <motion.div
+        className="absolute m-auto inset-0 border-8 border-gray-700 rounded-lg shadow-xl"
+        style={{
+          width: 600,
+          height: 500,
+          transformOrigin: 'center bottom',
+        }}
+        key={sectionIndex}
+        initial={{ scale: 0, opacity: 1 }}
+        animate={{
+          scale: 1,
+          opacity: 1,
+          transition: { delay: sectionTransitionDuration + 0.3 },
+        }}
+        exit={{ scale: 0, opacity: 1 }}
+      >
+        <Image
+          src={sections[sectionIndex].modelImage}
+          width={600}
+          height={500}
+        />
+      </motion.div>
+    </>
+  )
+}
+
+function Beginning() {
+  const container = useAnimation()
+  const spaceship = useAnimation()
+  const star = useAnimation()
+  const map = useAnimation()
+  const [journeyStarted, setJourneyStarted] = useState(false)
+  const { width: vw, height: vh } = useViewportDimension()
+  useEffect(() => {
+    async function animateIt() {
+      await star.start({ opacity: 1, transition: { delay: 0.5, duration: 1 } })
+      await spaceship.start({
+        opacity: 1,
+        transition: { delay: 0.5, duration: 1.5 },
+      })
+      await container.start({ scale: 16, transition: { duration: 5 } })
+      container.start({ opacity: 0 })
+      await map.start({ opacity: 1 })
+      await map.start({ scale: bgFactor })
+    }
+    if (journeyStarted) animateIt()
+  }, [journeyStarted])
+  return (
+    <motion.div
+      className="h-full relative"
+      style={{
+        backgroundColor: '#131532',
+        originX: '75.8%',
+        originY: `${vw / 3.12}px`,
+      }}
+      animate={container}
+    >
+      <AnimatePresence>
+        {!journeyStarted ? (
+          <motion.div
+            key="initial"
+            className="flex flex-col justify-center items-center h-full gap-8 text-gray-100"
+            exit={{ opacity: 0 }}
+          >
+            <motion.h1 className="text-5xl">坐标 React 星</motion.h1>
+            <motion.h2 className="text-2xl">
+              一本伪装成小说的 React 开发指南
+            </motion.h2>
+            <motion.button
+              className="rounded-3xl border-2 border-gray-100 px-8 py-2 text-2xl hover:border-blue-400 hover:text-blue-400"
+              onClick={() => setJourneyStarted(true)}
+            >
+              起 航
+            </motion.button>
+          </motion.div>
+        ) : (
+          <>
+            <motion.img
+              src={reactStarPng}
+              className="absolute top-0 left-0 w-full"
+              initial={{ opacity: 0 }}
+              animate={star}
+            />
+            <motion.img
+              src={spaceShipPng}
+              className="absolute top-0 left-0 w-full"
+              initial={{ opacity: 0 }}
+              animate={spaceship}
+            />
+            <motion.img
+              src={bgPng}
+              className="absolute top-0 left-0 w-full origin-top-left"
+              initial={{ opacity: 0 }}
+              animate={map}
+            />
+          </>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  )
+}
+
+export function BookPreview() {
+  const isLoading = usePreloadImages()
+  return (
     <div className="h-screen w-screen overflow-hidden relative">
-      {!isLoaded ? (
+      {isLoading ? (
         <div>Loading...</div>
       ) : (
         <>
-          <motion.div
-            className="bg-no-repeat absolute left-0 top-0"
-            style={{
-              backgroundImage: `url(${bgPng})`,
-              backgroundSize: `${100}%`,
-              width: bgFactor * vw,
-              height: (bgFactor * vw * bgHeight) / bgWidth,
-              x,
-              y,
-              // backgroundPosition,
-              // backgroundOrigin: 'border-box',
-            }}
-          >
-            {sections.slice(0, sectionIndex + 1).map((section, i) => (
-              <motion.img
-                key={section.id}
-                src={inkPng}
-                className="absolute left-0 top-0"
-                initial={{ opacity: 0, scale: 5 }}
-                animate={{
-                  opacity: 1,
-                  scale: 1,
-                  transition: { delay: sectionTransitionDuration },
-                }}
-                style={{
-                  width: 100,
-                  x: (section.x * bgFactor * vw) / bgWidth,
-                  y: (section.y * bgFactor * vw) / bgWidth,
-                }}
-                width={184}
-                height={197}
-              />
-            ))}
-          </motion.div>
-          <input
-            className="relative"
-            type="number"
-            autoFocus
-            min={0}
-            max={sections.length - 1}
-            value={sectionIndex}
-            onChange={(e) => setSectionIndex(e.target.valueAsNumber || 0)}
-          />
-          <motion.div
-            className="absolute m-auto inset-0 border-8 border-gray-700 rounded-lg shadow-xl"
-            style={{
-              width: 600,
-              height: 500,
-              transformOrigin: 'center bottom',
-            }}
-            key={sectionIndex}
-            initial={{ scale: 0, opacity: 1 }}
-            animate={{
-              scale: 1,
-              opacity: 1,
-              transition: { delay: sectionTransitionDuration + 0.3 },
-            }}
-            exit={{ scale: 0, opacity: 1 }}
-          >
-            <Image
-              src={sections[sectionIndex].modelImage}
-              width={600}
-              height={500}
-            />
-          </motion.div>
+          <Beginning />
+          {/* <MentalModelMap /> */}
         </>
       )}
     </div>
