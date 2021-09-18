@@ -36,7 +36,7 @@ import useSound from 'use-sound'
 
 const bgWidth = 2372
 const bgHeight = 2000
-const bgFactor = 4
+const bgFactor = 3
 const sections = [
   { id: '1.1', modelImage: modelPng1_1, x: 62, y: 238 },
   { id: '1.2', modelImage: modelPng1_2, x: 583, y: 22 },
@@ -188,8 +188,8 @@ function Paths({ animatePathIndex, ...props }: PathsProps) {
           }
           transition={{ duration: sectionTransitionDuration - 0.2 }}
           strokeWidth="8"
-          strokeLinejoin="round"
           strokeLinecap="round"
+          style={{ opacity: animatePathIndex >= i + 1 ? 1 : 0 }}
           {...path}
         />
       ))}
@@ -312,9 +312,9 @@ function Beginning({
         opacity: 1,
         transition: { delay: 0.5, duration: 1.5 },
       })
-      await container.start({ scale: 16, transition: { duration: 5 } })
-      container.start({ opacity: 0, transition: { duration: 1.5 } })
-      await map.start({ opacity: 1, transition: { duration: 1.5 } })
+      container.start({ scale: 16, transition: { duration: 2 } })
+      container.start({ opacity: 0, transition: { duration: 1.5, delay: 1 } })
+      await map.start({ opacity: 1, transition: { duration: 1.5, delay: 1 } })
       await map.start({ scale: bgFactor, transition: { duration: 1.5 } })
       typeof onAnimationEnd === 'function' && onAnimationEnd()
     }
