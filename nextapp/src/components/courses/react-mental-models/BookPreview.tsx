@@ -88,10 +88,6 @@ type PathsProps = {
 } & React.SVGProps<SVGSVGElement>
 
 function Paths({ animatePathIndex, ...props }: PathsProps) {
-  const activeAnimate = {
-    pathLength: 1,
-    transition: { duration: sectionTransitionDuration - 0.2 },
-  }
   const paths = [
     {
       d:
@@ -186,8 +182,11 @@ function Paths({ animatePathIndex, ...props }: PathsProps) {
       {paths.map((path, i) => (
         <motion.path
           key={i}
-          initial={{ pathLength: -1 }}
-          animate={animatePathIndex >= i + 1 ? activeAnimate : {}}
+          initial={{ pathLength: 0 }}
+          animate={
+            animatePathIndex >= i + 1 ? { pathLength: 1 } : { pathLength: 0 }
+          }
+          transition={{ duration: sectionTransitionDuration - 0.2 }}
           strokeWidth="8"
           strokeLinejoin="round"
           strokeLinecap="round"
