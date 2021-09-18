@@ -32,6 +32,7 @@ import modelPng3_5 from './images/3.5.png'
 import modelPng3_6 from './images/3.6.png'
 import modelPng3_7 from './images/3.7.png'
 import modelPng3_8 from './images/3.8.png'
+import useSound from 'use-sound'
 
 const bgWidth = 2372
 const bgHeight = 2000
@@ -172,15 +173,23 @@ function MentalModelMap() {
   )
 }
 
-function Beginning({ onAnimationEnd }) {
+function Beginning({
+  onAnimationEnd,
+  onAnimationStart,
+}: {
+  onAnimationStart: () => void
+  onAnimationEnd: () => void
+}) {
   const container = useAnimation()
   const spaceship = useAnimation()
   const star = useAnimation()
   const map = useAnimation()
   const [journeyStarted, setJourneyStarted] = useState(false)
   const { width: vw, height: vh } = useViewportDimension()
+
   useEffect(() => {
     async function animateIt() {
+      typeof onAnimationStart === 'function' && onAnimationStart()
       await star.start({ opacity: 1, transition: { delay: 0.5, duration: 1 } })
       await spaceship.start({
         opacity: 1,
@@ -256,6 +265,7 @@ function Beginning({ onAnimationEnd }) {
 export function BookPreview() {
   const isLoading = usePreloadImages()
   const [showBeginning, setShowBeginning] = useState(true)
+  const [playBgMusic] = useSound('/bgmusic.mp3')
   return (
     <div className="h-screen w-screen overflow-hidden relative">
       <AnimatePresence>
@@ -263,7 +273,10 @@ export function BookPreview() {
           <div>Loading...</div>
         ) : showBeginning ? (
           <motion.div className="h-full" exit={{ opacity: 0 }}>
-            <Beginning onAnimationEnd={() => setShowBeginning(false)} />
+            <Beginning
+              onAnimationEnd={() => setShowBeginning(false)}
+              onAnimationStart={() => playBgMusic()}
+            />
           </motion.div>
         ) : (
           <MentalModelMap />
