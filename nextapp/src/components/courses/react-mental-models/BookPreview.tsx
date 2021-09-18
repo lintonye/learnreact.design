@@ -11,7 +11,7 @@ import React, { useEffect, useState } from 'react'
 import { useViewportDimension } from '@/components/useViewportDimension'
 import spaceShipPng from './images/inside-spaceship.png'
 import reactStarPng from './images/react-star.png'
-import bgPng from './images/map-bg.png'
+import mapBgPng from './images/map-bg.png'
 import inkPng from './images/ink.png'
 import modelPng1_1 from './images/1.1.png'
 import modelPng1_2 from './images/1.2.png'
@@ -65,7 +65,7 @@ function usePreloadImages() {
     const allImages = [
       spaceShipPng,
       reactStarPng,
-      bgPng,
+      mapBgPng,
       inkPng,
       ...sections.map((section) => section.modelImage),
     ]
@@ -106,7 +106,7 @@ function MentalModelMap() {
       <motion.div
         className="bg-no-repeat absolute left-0 top-0"
         style={{
-          backgroundImage: `url(${bgPng})`,
+          backgroundImage: `url(${mapBgPng})`,
           backgroundSize: `${100}%`,
           width: bgFactor * vw,
           height: (bgFactor * vw * bgHeight) / bgWidth,
@@ -172,7 +172,7 @@ function MentalModelMap() {
   )
 }
 
-function Beginning() {
+function Beginning({ onAnimationEnd }) {
   const container = useAnimation()
   const spaceship = useAnimation()
   const star = useAnimation()
@@ -187,21 +187,17 @@ function Beginning() {
         transition: { delay: 0.5, duration: 1.5 },
       })
       await container.start({ scale: 16, transition: { duration: 5 } })
-      container.start({ opacity: 0 })
-      await map.start({ opacity: 1 })
-      await map.start({ scale: bgFactor })
+      container.start({ opacity: 0, transition: { duration: 1.5 } })
+      await map.start({ opacity: 1, transition: { duration: 1.5 } })
+      await map.start({ scale: bgFactor, transition: { duration: 1.5 } })
+      typeof onAnimationEnd === 'function' && onAnimationEnd()
     }
     if (journeyStarted) animateIt()
   }, [journeyStarted])
   return (
     <motion.div
       className="h-full relative"
-      style={{
-        backgroundColor: '#131532',
-        originX: '75.8%',
-        originY: `${vw / 3.12}px`,
-      }}
-      animate={container}
+      style={{ backgroundColor: '#131532' }}
     >
       <AnimatePresence>
         {!journeyStarted ? (
@@ -223,20 +219,29 @@ function Beginning() {
           </motion.div>
         ) : (
           <>
+            <motion.div
+              className="h-full relative"
+              style={{
+                originX: '75.8%',
+                originY: `${vw / 3.12}px`,
+              }}
+              animate={container}
+            >
+              <motion.img
+                src={reactStarPng}
+                className="absolute top-0 left-0 w-full"
+                initial={{ opacity: 0 }}
+                animate={star}
+              />
+              <motion.img
+                src={spaceShipPng}
+                className="absolute top-0 left-0 w-full"
+                initial={{ opacity: 0 }}
+                animate={spaceship}
+              />
+            </motion.div>
             <motion.img
-              src={reactStarPng}
-              className="absolute top-0 left-0 w-full"
-              initial={{ opacity: 0 }}
-              animate={star}
-            />
-            <motion.img
-              src={spaceShipPng}
-              className="absolute top-0 left-0 w-full"
-              initial={{ opacity: 0 }}
-              animate={spaceship}
-            />
-            <motion.img
-              src={bgPng}
+              src={mapBgPng}
               className="absolute top-0 left-0 w-full origin-top-left"
               initial={{ opacity: 0 }}
               animate={map}
@@ -250,16 +255,20 @@ function Beginning() {
 
 export function BookPreview() {
   const isLoading = usePreloadImages()
+  const [showBeginning, setShowBeginning] = useState(true)
   return (
     <div className="h-screen w-screen overflow-hidden relative">
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        <>
-          <Beginning />
-          {/* <MentalModelMap /> */}
-        </>
-      )}
+      <AnimatePresence>
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : showBeginning ? (
+          <motion.div className="h-full" exit={{ opacity: 0 }}>
+            <Beginning onAnimationEnd={() => setShowBeginning(false)} />
+          </motion.div>
+        ) : (
+          <MentalModelMap />
+        )}
+      </AnimatePresence>
     </div>
   )
 }
