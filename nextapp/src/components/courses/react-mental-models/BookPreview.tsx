@@ -13,187 +13,112 @@ import spaceShipPng from './images/inside-spaceship.png'
 import reactStarPng from './images/react-star.png'
 import mapBgPng from './images/map-bg.png'
 import inkPng from './images/ink.png'
-import modelPng1_1 from './images/1.1.png'
-import modelPng1_2 from './images/1.2.png'
-import modelPng1_4 from './images/1.4.png'
-import modelPng1_5 from './images/1.5.png'
-import modelPng1_6 from './images/1.6.png'
-import modelPng1_7 from './images/1.7.png'
-import modelPng2_1 from './images/2.1.png'
-import modelPng2_2 from './images/2.2.png'
-import modelPng2_3 from './images/2.3.png'
-import modelPng2_4 from './images/2.4.png'
-import modelPng2_5 from './images/2.5.png'
-import modelPng2_6 from './images/2.6.png'
-import modelPng3_2 from './images/3.2.png'
-import modelPng3_3 from './images/3.3.png'
-import modelPng3_4 from './images/3.4.png'
-import modelPng3_5 from './images/3.5.png'
-import modelPng3_6 from './images/3.6.png'
-import modelPng3_7 from './images/3.7.png'
-import modelPng3_8 from './images/3.8.png'
+
 import useSound from 'use-sound'
 
 const bgWidth = 2372
 const bgHeight = 2000
 const bgFactor = 3
-const sections = [
+const sectionCoords = [
   {
     id: '1.1',
-    modelImage: modelPng1_1,
     x: 62,
     y: 238,
-    title: '墙上的洞',
-    subtitle: 'HTML 上凿洞，动态数据露脸',
   },
   {
     id: '1.2',
-    modelImage: modelPng1_2,
     x: 583,
     y: 22,
-    title: '仪式之二',
-    subtitle: '声明式与响应式界面编程',
   },
   {
     id: '1.4',
-    modelImage: modelPng1_4,
     x: 533,
     y: 312,
-    title: '拍照墙的伪装',
-    subtitle: 'JSX 是伪装成 HTML 的 JS',
   },
   {
     id: '1.5',
-    modelImage: modelPng1_5,
     x: 500,
     y: 621,
-    title: '手翻书',
-    subtitle: '一次组件渲染、一页手翻书',
   },
   {
     id: '1.6',
-    modelImage: modelPng1_6,
     x: 375,
     y: 657,
-    title: '诱饵',
-    subtitle: 'JSX 中大括号内应放表达式',
   },
   {
     id: '1.7',
-    modelImage: modelPng1_7,
     x: 840,
     y: 867,
-    title: '不能修葺的房子',
-    subtitle: 'React 数据的不可变约定',
   },
   {
     id: '2.1',
-    modelImage: modelPng2_1,
     x: 1221,
     y: 717,
-    title: '组件的模块化思维',
-    subtitle: '分而治之、模块组合、代码重用',
   },
   {
     id: '2.2',
-    modelImage: modelPng2_2,
     x: 1406,
     y: 600,
-    title: '组件的组合',
-    subtitle: '组件灵活的组合方式',
   },
   {
     id: '2.3',
-    modelImage: modelPng2_3,
     x: 1834,
     y: 461,
-    title: '周而复始的面试',
-    subtitle: '组件内的时间循环',
   },
   {
     id: '2.4',
-    modelImage: modelPng2_4,
     x: 1842,
     y: 270,
-    title: '传送工程师的接力',
-    subtitle: '组件间的单向数据流',
   },
   {
     id: '2.5',
-    modelImage: modelPng2_5,
     x: 1955,
     y: 311,
-    title: '单向电梯',
-    subtitle: 'Context：数据直达目的地',
   },
   {
     id: '2.6',
-    modelImage: modelPng2_6,
     x: 1937,
     y: 262,
-    title: '便携式虫洞',
-    subtitle: '用回调函数从下往上传递数据',
   },
   {
     id: '3.2',
-    modelImage: modelPng3_2,
     x: 1920,
     y: 1502,
-    title: '遭遇胡克船长',
-    subtitle: 'Hook 为组件“勾”回新功能',
   },
   {
     id: '3.3',
-    modelImage: modelPng3_3,
     x: 1885,
     y: 1663,
-    title: '风向急变',
-    subtitle: 'Hook 保存组件内部数据',
   },
   {
     id: '3.4',
-    modelImage: modelPng3_4,
     x: 1732,
     y: 1642,
-    title: '尤日伊费克特大副',
-    subtitle: 'useEffect 与生命周期回调方法',
   },
   {
     id: '3.5',
-    modelImage: modelPng3_5,
     x: 1153,
     y: 1523,
-    title: '大副的真正职责',
-    subtitle: '使用 useEffect 管理组件副作用',
   },
   {
     id: '3.6',
-    modelImage: modelPng3_6,
     x: 1013,
     y: 1565,
-    title: '戒律清规',
-    subtitle: 'Hook 的两条使用规则',
   },
   {
     id: '3.7',
-    modelImage: modelPng3_7,
     x: 869,
     y: 1502,
-    title: '条件扔钩',
-    subtitle: '既不违规，又有条件地调用 Hook',
   },
   {
     id: '3.8',
-    modelImage: modelPng3_8,
     x: 621,
     y: 1681,
-    title: '铁钩特勤编队',
-    subtitle: '自定义 Hook，重用状态逻辑',
   },
 ]
 const sectionTransitionDuration = 2
 
-function usePreloadImages() {
+function usePreloadImages(sections) {
   const [loading, setLoading] = useState(true)
   useEffect(() => {
     const allImages = [
@@ -330,14 +255,14 @@ function Paths({ animatePathIndex, ...props }: PathsProps) {
   )
 }
 
-function MentalModelMap() {
+function MentalModelMap({ sections }) {
   const x = useMotionValue(0)
   const y = useMotionValue(0)
   const [sectionIndex, setSectionIndex] = useState(0)
   const { width: vw, height: vh } = useViewportDimension()
 
   useEffect(() => {
-    const { x: centerX, y: centerY } = sections[sectionIndex]
+    const { x: centerX, y: centerY } = sectionCoords[sectionIndex]
     const height = (vw * bgHeight) / bgWidth
     const toX = (centerX / bgWidth) * vw * bgFactor - vw / 2
     const toY = (centerY / bgHeight) * height * bgFactor - height / 2
@@ -381,8 +306,8 @@ function MentalModelMap() {
               }}
               style={{
                 width: 100,
-                x: (section.x * bgFactor * vw) / bgWidth,
-                y: (section.y * bgFactor * vw) / bgWidth,
+                x: (sectionCoords[i].x * bgFactor * vw) / bgWidth,
+                y: (sectionCoords[i].y * bgFactor * vw) / bgWidth,
               }}
               width={184}
               height={197}
@@ -427,11 +352,11 @@ function MentalModelMap() {
 }
 
 function Beginning({
+  title,
+  subtitle,
+  startButtonText,
   onAnimationEnd,
   onAnimationStart,
-}: {
-  onAnimationStart: () => void
-  onAnimationEnd: () => void
 }) {
   const container = useAnimation()
   const spaceship = useAnimation()
@@ -468,15 +393,13 @@ function Beginning({
             className="flex flex-col justify-center items-center h-full gap-8 text-gray-100"
             exit={{ opacity: 0 }}
           >
-            <motion.h1 className="text-5xl">坐标 React 星</motion.h1>
-            <motion.h2 className="text-2xl">
-              一本伪装成小说的 React 开发指南
-            </motion.h2>
+            <motion.h1 className="text-5xl">{title}</motion.h1>
+            <motion.h2 className="text-2xl">{subtitle}</motion.h2>
             <motion.button
               className="rounded-3xl border-2 border-gray-100 px-8 py-2 text-2xl hover:border-blue-400 hover:text-blue-400"
               onClick={() => setJourneyStarted(true)}
             >
-              起 航
+              {startButtonText}
             </motion.button>
           </motion.div>
         ) : (
@@ -515,8 +438,8 @@ function Beginning({
   )
 }
 
-export function BookPreview() {
-  const isLoading = usePreloadImages()
+export function BookPreview({ sections, title, subtitle, startButtonText }) {
+  const isLoading = usePreloadImages(sections)
   const [showBeginning, setShowBeginning] = useState(true)
   const [playBgMusic] = useSound('/bgmusic.mp3')
   return (
@@ -527,12 +450,15 @@ export function BookPreview() {
         ) : showBeginning ? (
           <motion.div className="h-full" exit={{ opacity: 0 }}>
             <Beginning
+              title={title}
+              subtitle={subtitle}
+              startButtonText={startButtonText}
               onAnimationEnd={() => setShowBeginning(false)}
               onAnimationStart={() => playBgMusic()}
             />
           </motion.div>
         ) : (
-          <MentalModelMap />
+          <MentalModelMap sections={sections} />
         )}
       </AnimatePresence>
     </div>
