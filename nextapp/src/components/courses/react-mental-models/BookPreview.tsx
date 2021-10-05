@@ -38,25 +38,158 @@ const bgWidth = 2372
 const bgHeight = 2000
 const bgFactor = 3
 const sections = [
-  { id: '1.1', modelImage: modelPng1_1, x: 62, y: 238 },
-  { id: '1.2', modelImage: modelPng1_2, x: 583, y: 22 },
-  { id: '1.4', modelImage: modelPng1_4, x: 533, y: 312 },
-  { id: '1.5', modelImage: modelPng1_5, x: 500, y: 621 },
-  { id: '1.6', modelImage: modelPng1_6, x: 375, y: 657 },
-  { id: '1.7', modelImage: modelPng1_7, x: 840, y: 867 },
-  { id: '2.1', modelImage: modelPng2_1, x: 1221, y: 717 },
-  { id: '2.2', modelImage: modelPng2_2, x: 1406, y: 600 },
-  { id: '2.3', modelImage: modelPng2_3, x: 1834, y: 461 },
-  { id: '2.4', modelImage: modelPng2_4, x: 1842, y: 270 },
-  { id: '2.5', modelImage: modelPng2_5, x: 1955, y: 311 },
-  { id: '2.6', modelImage: modelPng2_6, x: 1937, y: 262 },
-  { id: '3.2', modelImage: modelPng3_2, x: 1920, y: 1502 },
-  { id: '3.3', modelImage: modelPng3_3, x: 1885, y: 1663 },
-  { id: '3.4', modelImage: modelPng3_4, x: 1732, y: 1642 },
-  { id: '3.5', modelImage: modelPng3_5, x: 1153, y: 1523 },
-  { id: '3.6', modelImage: modelPng3_6, x: 1013, y: 1565 },
-  { id: '3.7', modelImage: modelPng3_7, x: 869, y: 1502 },
-  { id: '3.8', modelImage: modelPng3_8, x: 621, y: 1681 },
+  {
+    id: '1.1',
+    modelImage: modelPng1_1,
+    x: 62,
+    y: 238,
+    title: '墙上的洞',
+    subtitle: 'HTML 上凿洞，动态数据露脸',
+  },
+  {
+    id: '1.2',
+    modelImage: modelPng1_2,
+    x: 583,
+    y: 22,
+    title: '仪式之二',
+    subtitle: '声明式与响应式界面编程',
+  },
+  {
+    id: '1.4',
+    modelImage: modelPng1_4,
+    x: 533,
+    y: 312,
+    title: '拍照墙的伪装',
+    subtitle: 'JSX 是伪装成 HTML 的 JS',
+  },
+  {
+    id: '1.5',
+    modelImage: modelPng1_5,
+    x: 500,
+    y: 621,
+    title: '手翻书',
+    subtitle: '一次组件渲染、一页手翻书',
+  },
+  {
+    id: '1.6',
+    modelImage: modelPng1_6,
+    x: 375,
+    y: 657,
+    title: '诱饵',
+    subtitle: 'JSX 中大括号内应放表达式',
+  },
+  {
+    id: '1.7',
+    modelImage: modelPng1_7,
+    x: 840,
+    y: 867,
+    title: '不能修葺的房子',
+    subtitle: 'React 数据的不可变约定',
+  },
+  {
+    id: '2.1',
+    modelImage: modelPng2_1,
+    x: 1221,
+    y: 717,
+    title: '组件的模块化思维',
+    subtitle: '分而治之、模块组合、代码重用',
+  },
+  {
+    id: '2.2',
+    modelImage: modelPng2_2,
+    x: 1406,
+    y: 600,
+    title: '组件的组合',
+    subtitle: '组件灵活的组合方式',
+  },
+  {
+    id: '2.3',
+    modelImage: modelPng2_3,
+    x: 1834,
+    y: 461,
+    title: '周而复始的面试',
+    subtitle: '组件内的时间循环',
+  },
+  {
+    id: '2.4',
+    modelImage: modelPng2_4,
+    x: 1842,
+    y: 270,
+    title: '传送工程师的接力',
+    subtitle: '组件间的单向数据流',
+  },
+  {
+    id: '2.5',
+    modelImage: modelPng2_5,
+    x: 1955,
+    y: 311,
+    title: '单向电梯',
+    subtitle: 'Context：数据直达目的地',
+  },
+  {
+    id: '2.6',
+    modelImage: modelPng2_6,
+    x: 1937,
+    y: 262,
+    title: '便携式虫洞',
+    subtitle: '用回调函数从下往上传递数据',
+  },
+  {
+    id: '3.2',
+    modelImage: modelPng3_2,
+    x: 1920,
+    y: 1502,
+    title: '遭遇胡克船长',
+    subtitle: 'Hook 为组件“勾”回新功能',
+  },
+  {
+    id: '3.3',
+    modelImage: modelPng3_3,
+    x: 1885,
+    y: 1663,
+    title: '风向急变',
+    subtitle: 'Hook 保存组件内部数据',
+  },
+  {
+    id: '3.4',
+    modelImage: modelPng3_4,
+    x: 1732,
+    y: 1642,
+    title: '尤日伊费克特大副',
+    subtitle: 'useEffect 与生命周期回调方法',
+  },
+  {
+    id: '3.5',
+    modelImage: modelPng3_5,
+    x: 1153,
+    y: 1523,
+    title: '大副的真正职责',
+    subtitle: '使用 useEffect 管理组件副作用',
+  },
+  {
+    id: '3.6',
+    modelImage: modelPng3_6,
+    x: 1013,
+    y: 1565,
+    title: '戒律清规',
+    subtitle: 'Hook 的两条使用规则',
+  },
+  {
+    id: '3.7',
+    modelImage: modelPng3_7,
+    x: 869,
+    y: 1502,
+    title: '条件扔钩',
+    subtitle: '既不违规，又有条件地调用 Hook',
+  },
+  {
+    id: '3.8',
+    modelImage: modelPng3_8,
+    x: 621,
+    y: 1681,
+    title: '铁钩特勤编队',
+    subtitle: '自定义 Hook，重用状态逻辑',
+  },
 ]
 const sectionTransitionDuration = 2
 
@@ -216,6 +349,8 @@ function MentalModelMap() {
     })
   }, [sectionIndex])
 
+  const activeSection = sections[sectionIndex]
+
   return (
     <>
       <motion.div
@@ -280,11 +415,12 @@ function MentalModelMap() {
         }}
         exit={{ scale: 0, opacity: 1 }}
       >
-        <Image
-          src={sections[sectionIndex].modelImage}
-          width={600}
-          height={500}
-        />
+        <h2 className="bg-gray-700 text-white text-xl p-2 flex gap-2">
+          <span className="text-yellow-200">{activeSection.id}</span>
+          <span>{activeSection.title}: </span>
+          <span>{activeSection.subtitle}</span>
+        </h2>
+        <Image src={activeSection.modelImage} width={600} height={500} />
       </motion.div>
     </>
   )
