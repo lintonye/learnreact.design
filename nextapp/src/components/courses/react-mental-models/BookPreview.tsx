@@ -120,6 +120,7 @@ const sectionTransitionDuration = 2
 
 function usePreloadImages(sections) {
   const [loading, setLoading] = useState(true)
+  const [imgDims, setImgDims] = useState({})
   useEffect(() => {
     const allImages = [
       spaceShipPng,
@@ -134,11 +135,15 @@ function usePreloadImages(sections) {
       img.src = imgUrl
       img.onload = () => {
         loaded.add(imgUrl)
+        setImgDims((prev) => ({
+          ...prev,
+          [imgUrl]: { width: img.width, height: img.height },
+        }))
         if (loaded.size > 6) setLoading(false)
       }
     }
   }, [])
-  return loading
+  return [loading, imgDims]
 }
 
 type PathsProps = {
@@ -255,7 +260,7 @@ function Paths({ animatePathIndex, ...props }: PathsProps) {
   )
 }
 
-function MentalModelMap({ sections }) {
+function MentalModelMap({ sections, imageDims }) {
   const x = useMotionValue(0)
   const y = useMotionValue(0)
   const [sectionIndex, setSectionIndex] = useState(0)
@@ -275,6 +280,21 @@ function MentalModelMap({ sections }) {
   }, [sectionIndex])
 
   const activeSection = sections[sectionIndex]
+  const activeImgDim = imageDims[activeSection.modelImage] || {
+    width: 600,
+    height: 500,
+  }
+
+  let modelImageContainerWidth = Math.min(800, vw * 0.8)
+  let modelImageContainerHeight =
+    activeImgDim.height * (modelImageContainerWidth / activeImgDim.width) + 55
+
+  if (modelImageContainerHeight > vh) {
+    modelImageContainerHeight = vh * 0.9
+    modelImageContainerWidth =
+      (modelImageContainerHeight * activeImgDim.width) / activeImgDim.height -
+      25
+  }
 
   return (
     <>
@@ -327,9 +347,10 @@ function MentalModelMap({ sections }) {
       <motion.div
         className="absolute m-auto inset-0 border-8 border-gray-700 rounded-lg shadow-xl"
         style={{
-          width: 600,
-          height: 500,
+          width: modelImageContainerWidth,
+          height: modelImageContainerHeight,
           transformOrigin: 'center bottom',
+          maxHeight: '90%',
         }}
         key={sectionIndex}
         initial={{ scale: 0, opacity: 1 }}
@@ -345,7 +366,7 @@ function MentalModelMap({ sections }) {
           <span>{activeSection.title}: </span>
           <span>{activeSection.subtitle}</span>
         </h2>
-        <Image src={activeSection.modelImage} width={600} height={500} />
+        <img src={activeSection.modelImage} />
       </motion.div>
     </>
   )
@@ -439,7 +460,7 @@ function Beginning({
 }
 
 export function BookPreview({ sections, title, subtitle, startButtonText }) {
-  const isLoading = usePreloadImages(sections)
+  const [isLoading, imgDims] = usePreloadImages(sections)
   const [showBeginning, setShowBeginning] = useState(true)
   const [playBgMusic] = useSound('/bgmusic.mp3')
   return (
@@ -458,7 +479,7 @@ export function BookPreview({ sections, title, subtitle, startButtonText }) {
             />
           </motion.div>
         ) : (
-          <MentalModelMap sections={sections} />
+          <MentalModelMap sections={sections} imageDims={imgDims} />
         )}
       </AnimatePresence>
     </div>
