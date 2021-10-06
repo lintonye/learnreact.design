@@ -89,7 +89,7 @@ const sections = [
     modelImage: modelPng2_3,
     x: 1834,
     y: 461,
-    title: 'Revolving interview',
+    title: 'Recurring interview',
     subtitle: 'The time loop inside components',
   },
   {
