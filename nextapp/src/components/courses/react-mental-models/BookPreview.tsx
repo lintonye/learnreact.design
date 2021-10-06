@@ -467,7 +467,7 @@ export function BookPreview({ sections, title, subtitle, startButtonText }) {
     <div className="h-screen w-screen overflow-hidden relative">
       <AnimatePresence>
         {isLoading ? (
-          <div>Loading...</div>
+          <div className="m-10">Loading...</div>
         ) : showBeginning ? (
           <motion.div className="h-full" exit={{ opacity: 0 }}>
             <Beginning
