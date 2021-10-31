@@ -242,17 +242,18 @@ function useResponsiveValue(value: any) {
   React.useEffect(() => {
     function getResponseValue() {
       const breakpoints = [500, 800]
-      if (Array.isArray(value)) {
-        if (typeof window !== 'undefined') {
-          for (let i = 0; i < breakpoints.length; i++) {
-            if (window.matchMedia(`(max-width: ${breakpoints[i]}px)`).matches) {
-              return value[Math.min(i, value.length - 1)]
-            }
+      if (!Array.isArray(value)) {
+        value = [value]
+      }
+      if (typeof window !== 'undefined') {
+        for (let i = 0; i < breakpoints.length; i++) {
+          if (window.matchMedia(`(max-width: ${breakpoints[i]}px)`).matches) {
+            return value[Math.min(i, value.length - 1)]
           }
-          return value[value.length - 1]
-        } else {
-          return value[value.length - 1]
         }
+        return value[value.length - 1]
+      } else {
+        return value[value.length - 1]
       }
     }
     setResult(getResponseValue())

@@ -58,7 +58,7 @@ export default function StudentWorks() {
       >
         <Location>
           {({ location: { pathname } }) => (
-            <Link to={`${pathname}/showcase`}>
+            <Link to={`/courses/react-framer/showcase`}>
               <Text as="h3" textVariant="small" textAlign="center" mt={'4px'}>
                 <strong>MORE SHOWCASES</strong>
               </Text>
