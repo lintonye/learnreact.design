@@ -5,23 +5,26 @@ import Ch1 from './chapter1.png'
 import Ch2 from './chapter2.png'
 import Ch3 from './chapter3.png'
 import Ch4 from './chapter4.png'
+import Star from './React_star.png'
 import Image from 'next/image'
 import { FiAlignCenter } from 'react-icons/fi'
 
 export default function BookHome() {
   return (
     <Layout>
-      
-         <div className='bg-gradient-to-b from-indigo-900 p-8'>
-      <h1 className='text-4xl p-1  text-white text-center sm:text-5xl sm:p-2'>坐标 React 星</h1>
+      <div className="mx-auto min-h-screen ">
+      <div className='bg-gradient-to-b from-gray-900 p-8'>
+      <div className='flex'>
+      <Image src={Star} width={104} height={100} /> 
+      <h1 className='font-extrabold text-4xl p-1  text-white text-center sm:text-5xl sm:p-2'>坐标 React 星</h1></div>
       <h2 className='text-2xl p-1 m-2 text-white text-center sm:text-3xl sm:p-2'>React 开发核心思维模型</h2>
       <Image src={Cover} width={192} height={260} />
-      <p className='text-center text-gray-500 text-sm'>
+      <p className='text-center text-gray-500'>
         一本探索元宇宙世界的React力作 <br></br>
 一本伪装成科幻小说的前端开发宝典<br></br>
 一本带你建立React思维模型的编程秘籍 </p>
 </div>
-      <p className='p-8'>本书通过一个奇幻故事的外壳讲解 React 开发必备的核心思维模型，即如何用 React 的独特方式思考 和解决问题。故事主角用“脑机”进入“Web 宇宙”，登陆“React 星”。通过体验各种离奇见闻，由浅入深地介绍 React 开发的核心知识点，例如声明式和响应式编程、不可变约定、单向数据流、组件组合的运 用、组件渲染特性、Hook 的基本原理和常见模式、组件构架设计和 State 管理，等等。
+      <p className='p-8 font-normal'>本书通过一个奇幻故事的外壳讲解 React 开发必备的核心思维模型，即如何用 React 的独特方式思考 和解决问题。故事主角用“脑机”进入“Web 宇宙”，登陆“React 星”。通过体验各种离奇见闻，由浅入深地介绍 React 开发的核心知识点，例如声明式和响应式编程、不可变约定、单向数据流、组件组合的运 用、组件渲染特性、Hook 的基本原理和常见模式、组件构架设计和 State 管理，等等。
 
 “让读者在娱乐中学习”，这是作者的初衷。为了帮助读者理解和记忆，本书为每一个思维模型都配 备了生动有趣的故事桥段和漫画插图。本书强调揭示各个概念的本质，不光展示“如何做”，更注重解释 “为什么”，并辅以实例操作，旨在打开一扇门——鼓励读者深挖基础知识，增强自行推演结论、进一步学习实战知识的能力。
 
@@ -66,7 +69,7 @@ export default function BookHome() {
           </p>
         </li>
       </ul>
-       
+      </div>
     </Layout>
   )
 }
