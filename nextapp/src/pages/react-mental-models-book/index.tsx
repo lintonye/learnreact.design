@@ -159,7 +159,6 @@ export default function BookHome() {
           </div>
         </div>
       </div>
-      <div className="w-0 h-0 border-l-8 border-r-8 border-b-8 border-l-white border-r-white border-b-black"></div>
     </Layout>
   )
 }
