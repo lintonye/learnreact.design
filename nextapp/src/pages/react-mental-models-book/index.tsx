@@ -12,7 +12,7 @@ import { FiAlignCenter } from 'react-icons/fi'
 export default function BookHome() {
   return (
     <Layout>
-      <div className="p-8 bg-gradient-to-b from-black via-gray-700">
+      <div className="p-8 -mb-6 bg-gradient-to-b from-black via-gray-800 ">
         <div className="flex flex-col items-center md:flex-row md:justify-center">
           <Image src={Star} width={108} height={100} objectFit={'contain'} />
 
@@ -26,7 +26,7 @@ export default function BookHome() {
           </div>
         </div>
 
-        <p className="text-center text-gray-600 font-normal text-sm p-3">
+        <p className="text-center text-gray-700 font-normal text-sm p-4">
           一本探索元宇宙世界的React力作 <br></br>
           一本伪装成科幻小说的前端开发宝典<br></br>
           一本带你建立React思维模型的编程秘籍
@@ -42,8 +42,8 @@ export default function BookHome() {
             objectFit={'contain'}
           />
         </div>
-        <div className="md:w-2/3">
-          <p className="p-4 font-normal m-2">
+        <div className="md:w-2/3 md:ml-1">
+          <p className="p-4 font-normal m-2 ">
             本书通过一个奇幻故事的外壳讲解 React
             开发必备的核心思维模型，即如何用 React
             的独特方式思考和解决问题。故事主角用“脑机”进入“Web
@@ -56,7 +56,7 @@ export default function BookHome() {
           </p>
           <div className="flex justify-center md:justify-start ">
             <a href="https://item.jd.com/13651890.html" target="_blank">
-              <button className="rounded-full bg-yellow-200 w-48 h-12 text-xl m-4 tracking-widest ">
+              <button className="rounded-full bg-gradient-to-b from-yellow-200 to-yellow-300 w-48 h-12 text-xl m-4 mt-0 tracking-widest ">
                 购买纸质书
               </button>
             </a>
@@ -64,10 +64,10 @@ export default function BookHome() {
         </div>
       </div>
 
-      <h1 className="text-4xl p-8 mt-16 text-center">书中代码</h1>
+      <h1 className="text-4xl mt-24 text-center ">书中代码</h1>
 
-      <div className="flex flex-wrap flex-col gap-y-4 md:flex-row md:justify-center md:gap-x-32 lg:flex-row lg:justify-evenly lg:gap-x-4">
-        <div className="min-w-min">
+      <div className="flex flex-wrap flex-col gap-y-4 md:flex-row md:justify-center md:gap-x-32 lg:flex-row lg:gap-x-10 lg:justify-center ">
+        <div className="min-w-min mt-8">
           <div>
             <div className="flex justify-center">
               <Image src={Ch1} width={184} height={192} />
@@ -80,14 +80,14 @@ export default function BookHome() {
               href="https://codesandbox.io/s/react-mental-models-book-chapter1-pl524"
               target="_blank"
             >
-              <button className="text-white rounded-full bg-blue-900 w-48 h-12 text-xl m-4 tracking-widest">
+              <button className="text-white rounded-full bg-gradient-to-b from-blue-800 to-indigo-900 w-48 h-12 text-xl m-4 tracking-widest">
                 查看代码
               </button>
             </a>
           </div>
         </div>
 
-        <div className="min-w-min">
+        <div className="min-w-min mt-8">
           <div>
             <div className="flex justify-center">
               <Image src={Ch2} width={184} height={192} />
@@ -100,14 +100,14 @@ export default function BookHome() {
               href="https://codesandbox.io/s/react-book-chapter-2-order-system-8eutc"
               target="_blank"
             >
-              <button className="text-white rounded-full bg-blue-900 w-48 h-12 text-xl m-4 tracking-widest">
+              <button className="text-white rounded-full bg-gradient-to-b from-blue-800 to-indigo-900 w-48 h-12 text-xl m-4 tracking-widest">
                 查看代码
               </button>
             </a>
           </div>
         </div>
 
-        <div className="min-w-min">
+        <div className="min-w-min mt-8">
           <div>
             <div className="flex justify-center">
               <Image src={Ch3} width={184} height={192} />
@@ -120,14 +120,14 @@ export default function BookHome() {
               href="https://codesandbox.io/s/react-mental-modesl-book-chapter3-ebnry"
               target="_blank"
             >
-              <button className="text-white rounded-full bg-blue-900 w-48 h-12 text-xl m-4 tracking-widest">
+              <button className="text-white rounded-full bg-gradient-to-b from-blue-800 to-indigo-900 w-48 h-12 text-xl m-4 tracking-widest">
                 查看代码
               </button>
             </a>
           </div>
         </div>
 
-        <div className="min-w-min">
+        <div className="min-w-min mt-8">
           <div>
             <div className="flex justify-center">
               <Image src={Ch4} width={184} height={192} />
@@ -137,12 +137,12 @@ export default function BookHome() {
           </div>
           <div className="flex justify-center">
             <a href="https://github.com/lintonye/github-jobs3" target="_blank">
-              <button className="text-white rounded-full bg-blue-900 w-48 h-12 text-xl m-4 mb-0 tracking-widest">
+              <button className="text-white rounded-full bg-gradient-to-b from-blue-800 to-indigo-900 w-48 h-12 text-xl m-4 mb-0 tracking-widest">
                 查看代码
               </button>
             </a>
           </div>
-          <div>
+          <div className="mb-8">
             <p className="text-center text-gray-600 font-normal text-sm p-3">
               <span className="text-2xl">↑</span>
               <br></br>
