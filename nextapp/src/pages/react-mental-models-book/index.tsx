@@ -12,48 +12,48 @@ import { FiAlignCenter } from 'react-icons/fi'
 export default function BookHome() {
   return (
     <Layout>
-      <div className="p-8 -mb-6 bg-gradient-to-b from-black via-gray-800 ">
+      <div className="p-8 -mb-6 bg-gradient-to-b from-black via-blue-100">
         <div className="flex flex-col items-center md:flex-row md:justify-center">
           <Image src={Star} width={108} height={100} objectFit={'contain'} />
 
-          <div className="m-auto md:m-0 md:p-4">
-            <h1 className="font-extrabold text-center text-4xl p-1 text-white md:text-6xl md-left ">
+          <div className="m-2 md:m-0 md:p-4">
+            <h1 className="font-extrabold text-center text-4xl p-1 text-white md:text-6xl md:text-left md:p-2 ">
               坐标 React 星
             </h1>
-            <h1 className="text-center text-xl p-1 text-white  md:text-3xl md:text-left ">
+            <h1 className="text-center text-xl p-1 text-white  md:text-3xl md:text-left md:p-2">
               React 开发核心思维模型
             </h1>
           </div>
         </div>
-      </div>
 
-      <div className="m-auto max-w-screen-lg md:flex md:justify-center">
-        <div className="flex justify-center md:p-4">
-          <Image
-            src={Cover}
-            width={591 * 0.55}
-            height={797 * 0.55}
-            objectFit={'contain'}
-          />
-        </div>
-        <div className="md:w-2/3 m-2 md:ml-1">
-          <p className="p-4 font-normal  ">
-            本书通过一个奇幻故事的外壳讲解 React
-            开发必备的核心思维模型，即如何用 React
-            的独特方式思考和解决问题。故事主角用“脑机”进入“Web
-            宇宙”，登陆“React星”。通过体验各种离奇见闻，由浅入深地介绍 React
-            开发的核心知识点，例如声明式和响应式编程、不可变约定、单向数据流、组件组合的运用、组件渲染特性、Hook
-            的基本原理和常见模式、组件构架设计和
-            State管理，等等。“让读者在娱乐中学习”，这是作者的初衷。为了帮助读者理解和记忆，本书为每一个思维模型都配备了生动有趣的故事桥段和漫画插图。本书强调揭示各个概念的本质，不光展示“如何做”，更注重解释“为什么”，并辅以实例操作，旨在打开一扇门——鼓励读者深挖基础知识，增强自行推演结论、进一步学习实战知识的能力。
-            本书主要适合对
-            HTML、CSS、JavaScript、DOM有一定了解的前端开发者、设计师和高校学生等阅读。
-          </p>
-          <div className="flex justify-center md:justify-start ">
-            <a href="https://item.jd.com/13651890.html" target="_blank">
-              <button className="rounded-full bg-gradient-to-b from-yellow-200 to-yellow-300 w-48 h-12 text-xl m-4 mt-0 tracking-widest ">
-                购买纸质书
-              </button>
-            </a>
+        <div className="m-auto max-w-screen-lg md:flex md:justify-center">
+          <div className="flex justify-center items-start md:p-4">
+            <Image
+              src={Cover}
+              width={591 * 0.55}
+              height={797 * 0.55}
+              objectFit={'contain'}
+            />
+          </div>
+          <div className="md:w-4/5 m-2 md:ml-1">
+            <p className="p-4 font-normal text-gray-800 leading-10 ">
+              本书通过一个奇幻故事的外壳讲解 React
+              开发必备的核心思维模型，即如何用 React
+              的独特方式思考和解决问题。故事主角用“脑机”进入“Web
+              宇宙”，登陆“React星”。通过体验各种离奇见闻，由浅入深地介绍 React
+              开发的核心知识点，例如声明式和响应式编程、不可变约定、单向数据流、组件组合的运用、组件渲染特性、Hook
+              的基本原理和常见模式、组件构架设计和
+              State管理，等等。“让读者在娱乐中学习”，这是作者的初衷。为了帮助读者理解和记忆，本书为每一个思维模型都配备了生动有趣的故事桥段和漫画插图。本书强调揭示各个概念的本质，不光展示“如何做”，更注重解释“为什么”，并辅以实例操作，旨在打开一扇门——鼓励读者深挖基础知识，增强自行推演结论、进一步学习实战知识的能力。
+              本书主要适合对
+              HTML、CSS、JavaScript、DOM有一定了解的前端开发者、设计师和高校学生等阅读。
+            </p>
+            <div className="flex justify-center md:justify-start ">
+              <a href="https://item.jd.com/13651890.html" target="_blank">
+                <button className="rounded-full bg-gradient-to-b from-yellow-200 to-yellow-300 w-48 h-12 text-xl m-4 mt-0 tracking-widest ">
+                  购买纸质书
+                </button>
+              </a>
+            </div>
           </div>
         </div>
       </div>
