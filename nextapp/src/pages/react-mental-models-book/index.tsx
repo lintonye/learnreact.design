@@ -26,7 +26,7 @@ export default function BookHome() {
           </div>
         </div>
 
-        <p className="text-center text-gray-700 font-normal text-sm p-4">
+        <p className="text-center text-gray-900 font-normal text-sm p-4">
           一本探索元宇宙世界的React力作 <br></br>
           一本伪装成科幻小说的前端开发宝典<br></br>
           一本带你建立React思维模型的编程秘籍
