@@ -17,24 +17,18 @@ export default function BookHome() {
           <Image src={Star} width={108} height={100} objectFit={'contain'} />
 
           <div className="m-auto md:m-0 md:p-4">
-            <h1 className="font-extrabold text-center text-5xl p-1 text-white md:text-6xl md-left ">
+            <h1 className="font-extrabold text-center text-4xl p-1 text-white md:text-6xl md-left ">
               坐标 React 星
             </h1>
-            <h1 className="text-center text-2xl p-1 text-white  md:text-3xl md:text-left ">
+            <h1 className="text-center text-xl p-1 text-white  md:text-3xl md:text-left ">
               React 开发核心思维模型
             </h1>
           </div>
         </div>
-
-        <p className="text-center text-gray-900 font-normal text-sm p-4">
-          一本探索元宇宙世界的React力作 <br></br>
-          一本伪装成科幻小说的前端开发宝典<br></br>
-          一本带你建立React思维模型的编程秘籍
-        </p>
       </div>
 
       <div className="m-auto max-w-screen-lg md:flex md:justify-center">
-        <div className="flex justify-center pl-4 items-start">
+        <div className="flex justify-center md:p-4">
           <Image
             src={Cover}
             width={591 * 0.55}
@@ -42,8 +36,8 @@ export default function BookHome() {
             objectFit={'contain'}
           />
         </div>
-        <div className="md:w-2/3 md:ml-1">
-          <p className="p-4 font-normal m-2 ">
+        <div className="md:w-2/3 m-2 md:ml-1">
+          <p className="p-4 font-normal  ">
             本书通过一个奇幻故事的外壳讲解 React
             开发必备的核心思维模型，即如何用 React
             的独特方式思考和解决问题。故事主角用“脑机”进入“Web
@@ -64,10 +58,10 @@ export default function BookHome() {
         </div>
       </div>
 
-      <h1 className="text-4xl mt-24 text-center ">书中代码</h1>
+      <h1 className="text-4xl mt-16 mb-0 text-center ">书中代码</h1>
 
       <div className="flex flex-wrap flex-col gap-y-4 md:flex-row md:justify-center md:gap-x-32 lg:flex-row lg:gap-x-10 lg:justify-center ">
-        <div className="min-w-min mt-8">
+        <div className="min-w-min mt-0">
           <div>
             <div className="flex justify-center">
               <Image src={Ch1} width={184} height={192} />
@@ -87,7 +81,7 @@ export default function BookHome() {
           </div>
         </div>
 
-        <div className="min-w-min mt-8">
+        <div className="min-w-min mt-0">
           <div>
             <div className="flex justify-center">
               <Image src={Ch2} width={184} height={192} />
@@ -107,7 +101,7 @@ export default function BookHome() {
           </div>
         </div>
 
-        <div className="min-w-min mt-8">
+        <div className="min-w-min mt-0">
           <div>
             <div className="flex justify-center">
               <Image src={Ch3} width={184} height={192} />
@@ -127,7 +121,7 @@ export default function BookHome() {
           </div>
         </div>
 
-        <div className="min-w-min mt-8">
+        <div className="min-w-min mt-0">
           <div>
             <div className="flex justify-center">
               <Image src={Ch4} width={184} height={192} />
