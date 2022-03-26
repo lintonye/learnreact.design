@@ -12,31 +12,28 @@ import { FiAlignCenter } from 'react-icons/fi'
 export default function BookHome() {
   return (
     <Layout>
-      <div className="p-8 bg-gradient-to-b from-gray-900">
-        <div className="flex justify-center sm:flex-col sm:items-center md:flex-row md:justify-center">
-          <div className="flex justify-center ">
-            <Image src={Star} width={145} height={136} />
-          </div>
-          <div className="m-auto">
-            <h1 className="font-extrabold text-4xl p-1 text-center  text-white sm:text-5xl sm:p-2 lg:text-7xl lg:p-4">
+      <div className="p-8 bg-gradient-to-b from-black via-gray-700">
+        <div className="flex flex-col items-center md:flex-row md:justify-center">
+          <Image src={Star} width={108} height={100} objectFit={'contain'} />
+
+          <div className="m-auto md:m-0 md:p-4">
+            <h1 className="font-extrabold text-center text-5xl p-1 text-white md:text-6xl md-left ">
               坐标 React 星
             </h1>
-            <h1 className="text-xl p-1 m-2 text-white text-center sm:text-2xl sm:p-2 lg:text-4xl lg:p-4">
+            <h1 className="text-center text-2xl p-1 text-white  md:text-3xl md:text-left ">
               React 开发核心思维模型
             </h1>
           </div>
         </div>
 
-        <div>
-          <p className="text-center text-gray-600 font-normal text-sm p-3">
-            一本探索元宇宙世界的React力作 <br></br>
-            一本伪装成科幻小说的前端开发宝典<br></br>
-            一本带你建立React思维模型的编程秘籍
-          </p>
-        </div>
+        <p className="text-center text-gray-600 font-normal text-sm p-3">
+          一本探索元宇宙世界的React力作 <br></br>
+          一本伪装成科幻小说的前端开发宝典<br></br>
+          一本带你建立React思维模型的编程秘籍
+        </p>
       </div>
 
-      <div className="md:flex md:justify-center">
+      <div className="m-auto max-w-screen-lg md:flex md:justify-center">
         <div className="flex justify-center pl-4 items-start">
           <Image
             src={Cover}
@@ -46,7 +43,7 @@ export default function BookHome() {
           />
         </div>
         <div className="md:w-2/3">
-          <p className="p-4 font-normal">
+          <p className="p-4 font-normal m-2">
             本书通过一个奇幻故事的外壳讲解 React
             开发必备的核心思维模型，即如何用 React
             的独特方式思考和解决问题。故事主角用“脑机”进入“Web
@@ -58,9 +55,11 @@ export default function BookHome() {
             HTML、CSS、JavaScript、DOM有一定了解的前端开发者、设计师和高校学生等阅读。
           </p>
           <div className="flex justify-center md:justify-start ">
-            <button className="rounded-full bg-yellow-200 w-48 h-12 text-xl m-4 tracking-widest ">
-              购买纸质书
-            </button>
+            <a href="https://item.jd.com/13651890.html" target="_blank">
+              <button className="rounded-full bg-yellow-200 w-48 h-12 text-xl m-4 tracking-widest ">
+                购买纸质书
+              </button>
+            </a>
           </div>
         </div>
       </div>
@@ -160,6 +159,7 @@ export default function BookHome() {
           </div>
         </div>
       </div>
+      <div className="w-0 h-0 border-l-8 border-r-8 border-b-8 border-l-white border-r-white border-b-black"></div>
     </Layout>
   )
 }
