@@ -13,7 +13,7 @@ export default function BookHome() {
   return (
     <Layout>
       <div className="p-8 -mb-6 bg-gradient-to-b from-black via-blue-100">
-        <div className="flex flex-col items-center md:flex-row md:justify-center">
+        <div className="flex flex-col items-center md:flex-row md:justify-center ">
           <Image src={Star} width={108} height={100} objectFit={'contain'} />
 
           <div className="m-2 md:m-0 md:p-4">
@@ -26,14 +26,21 @@ export default function BookHome() {
           </div>
         </div>
 
-        <div className="m-auto max-w-screen-lg md:flex md:justify-center">
-          <div className="flex justify-center items-start md:p-4">
+        <div className="m-auto max-w-screen-lg md:flex md:justify-center md:items-start">
+          <div className="flex flex-col justify-center items-center md:p-4">
             <Image
               src={Cover}
               width={591 * 0.55}
               height={797 * 0.55}
               objectFit={'contain'}
             />
+            <div className="mt-4 ">
+              <a href="https://item.jd.com/13651890.html" target="_blank">
+                <button className="rounded-full bg-gradient-to-b from-yellow-200 to-yellow-300 w-48 h-12 text-xl m-4 mt-0 tracking-widest ">
+                  购买纸质书
+                </button>
+              </a>
+            </div>
           </div>
           <div className="md:w-4/5 m-2 md:ml-1">
             <p className="p-4 font-normal text-gray-800 leading-10 ">
@@ -47,13 +54,6 @@ export default function BookHome() {
               本书主要适合对
               HTML、CSS、JavaScript、DOM有一定了解的前端开发者、设计师和高校学生等阅读。
             </p>
-            <div className="flex justify-center md:justify-start ">
-              <a href="https://item.jd.com/13651890.html" target="_blank">
-                <button className="rounded-full bg-gradient-to-b from-yellow-200 to-yellow-300 w-48 h-12 text-xl m-4 mt-0 tracking-widest ">
-                  购买纸质书
-                </button>
-              </a>
-            </div>
           </div>
         </div>
       </div>
