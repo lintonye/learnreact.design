@@ -9,7 +9,7 @@ import Star from './star.png'
 import Image from 'next/image'
 import { FiAlignCenter } from 'react-icons/fi'
 
-export default function BookHome() {
+export function BookHome({ children }) {
   return (
     <Layout>
       <div className="p-8 -mb-6 bg-gradient-to-b from-black via-blue-100">
@@ -20,9 +20,9 @@ export default function BookHome() {
             <h1 className="font-extrabold text-center text-4xl p-1 text-white md:text-6xl md:text-left md:p-2 ">
               坐标 React 星
             </h1>
-            <h1 className="text-center text-xl p-1 text-white  md:text-3xl md:text-left md:p-2">
+            <h2 className="text-center text-xl p-1 text-white  md:text-3xl md:text-left md:p-2">
               React 开发核心思维模型
-            </h1>
+            </h2>
           </div>
         </div>
 
@@ -58,7 +58,7 @@ export default function BookHome() {
         </div>
       </div>
 
-      <h1 className="text-4xl mt-16 mb-0 text-center ">书中代码</h1>
+      <h2 className="text-4xl mt-16 mb-0 text-center ">书中代码</h2>
 
       <div className="flex flex-wrap flex-col gap-y-4 md:flex-row md:justify-center md:gap-x-32 lg:flex-row lg:gap-x-10 lg:justify-center ">
         <div className="min-w-min mt-0">
@@ -152,6 +152,11 @@ export default function BookHome() {
             </p>
           </div>
         </div>
+      </div>
+
+      <h2 className="text-4xl mt-16 mb-0 text-center ">勘误</h2>
+      <div className="max-w-2xl mx-auto px-3 flex flex-col gap-4">
+        {children}
       </div>
     </Layout>
   )

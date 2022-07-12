@@ -1,0 +1,83 @@
+import { BookHome } from './book-home'
+
+export default BookHome
+
+### 第 7 页
+
+代码中的表情符印刷时缺失，应为如下内容：
+
+```tsx
+function App() {
+  let who = '🧐'
+  return <div>💪{who}👊</div>
+}
+```
+
+```tsx
+function App() {
+  let who = '🧐'
+  return (
+    <div>
+      <div>💪{who}👊</div>
+      <button
+        onClick={function () {
+          // TODO 将 who 设置为👨
+        }}
+      >
+        艾伦
+      </button>
+    </div>
+  )
+}
+```
+
+### 第 3 章章首页
+
+括号内文字内容应为：“（覆盖 useMemo、useCallback、useState、useReducer 和 useRef）”
+
+### 第 120 页
+
+此页的代码应为如下内容：
+
+```tsx
+function latitudeReducer(state, action) {
+  switch (action.type) {
+    case '朝南航行':
+      return {...state, latitude: state.latitude - action.step }
+    case '朝北航行':
+      return {...state, latitude: state.latitude + action.step }
+    ...
+    default:
+      throw new Error()
+  }
+}
+```
+
+### 第 135 页
+
+两处代码的 `input` 都应该包含 `placeholder` 属性：
+
+```tsx
+function App() {
+  let [query, setQuery] = useState(query)
+  useEffect(() => {
+    document.title = `查询条件：${query}`
+    fetch(`http://some-api.com/search=${query}`).then(doSomething)
+  }, [query])
+  return <input value={query} placeholder="查询条件" />
+}
+```
+
+```tsx
+function App({ title }) {
+  let [query, setQuery] = useState(query)
+  // 幻想中的声明式副作用 API
+  return {
+    effects: {
+      'document.title': `查询条件：${query}`,
+      fetchData: `https://someapi.com/search=${query}`,
+    },
+    dom: <input value={query} placeholder="查询条件" />,
+  }
+}
+```
