@@ -9,7 +9,7 @@ import Star from './star.png'
 import Image from 'next/image'
 import { FiAlignCenter } from 'react-icons/fi'
 
-export function BookHome({ children }) {
+export const BookHome: React.FC = ({ children }) => {
   return (
     <Layout>
       <div className="p-8 -mb-6 bg-gradient-to-b from-black via-blue-100">
